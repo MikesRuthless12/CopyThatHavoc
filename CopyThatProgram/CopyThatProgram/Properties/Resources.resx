@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="100P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\100P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="99P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\99P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="1P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="54P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\54P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="77P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\77P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="84P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\84P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icons8-file-401" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-file-401.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="18P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\18P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="73P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\73P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="45P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\45P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="16P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\16P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="35P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\35P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="94P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\94P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="83P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\83P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="31P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\31P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="41P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\41P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="62P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\62P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="88P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\88P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icons8-file-40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-file-40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="66P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\66P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="85P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\85P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="91P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\91P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="81P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\81P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="72P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\72P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="39P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\39P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="98P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\98P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="40P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\40P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="48P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\48P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="76P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\76P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="50P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\50P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="24P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\24P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="11P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\11P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="2P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="57P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\57P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="70P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\70P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="89P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\89P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="6P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\6P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="67P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\67P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="34P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\34P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="30P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\30P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="20P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\20P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="53P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\53P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="63P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\63P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="97P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\97P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="28P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\28P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="49P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\49P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="79P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\79P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="25P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\25P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="42P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\42P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="21P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\21P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="46P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\46P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="38P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\38P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="7P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\7P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="14P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\14P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="37P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\37P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="19P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\19P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="52P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\52P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="33P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\33P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="92P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\92P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="56P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\56P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="75P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\75P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Copy That Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Copy That Logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="29P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\29P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="90P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\90P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Havoc Sofrware on Fire" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Havoc Sofrware on Fire.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="17P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\17P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CopyThatIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CopyThatIcon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="86P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\86P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="71P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\71P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="47P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\47P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="59P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\59P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="68P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\68P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="96P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\96P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="22P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\22P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="80P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\80P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="26P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\26P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="32P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\32P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="55P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\55P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="64P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\64P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="87P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\87P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="4P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="93P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\93P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="69P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\69P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="36P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\36P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="9P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\9P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="51P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\51P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="12P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\12P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="8P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\8P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="43P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\43P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CopyThatLogoTurningGIF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CopyThatLogoTurningGIF.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="74P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\74P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="95P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\95P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="58P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\58P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="82P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\82P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="13P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\13P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="27P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\27P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="60P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\60P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="23P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\23P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="44P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\44P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="65P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\65P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="5P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\5P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="61P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\61P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="78P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\78P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="10P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\10P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="3P" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3P.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HavocSoftwareGIF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HavocSoftwareGIF.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

@@ -1,0 +1,795 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmdHomePage.Text" xml:space="preserve">
+    <value>- Inicio</value>
+  </data>
+  <data name="cmdMultithread.Text" xml:space="preserve">
+    <value>- Multi-hilo</value>
+  </data>
+  <data name="cmdExclusions.Text" xml:space="preserve">
+    <value>- Permitidos / Excluidos</value>
+  </data>
+  <data name="cmdSkipPage.Text" xml:space="preserve">
+    <value>- Archivos Omitidos</value>
+  </data>
+  <data name="cmdSettingsPage.Text" xml:space="preserve">
+    <value>- Configuración</value>
+  </data>
+  <data name="cmdAboutPage.Text" xml:space="preserve">
+    <value>- Acerca de</value>
+  </data>
+  <data name="cmdCopyHistory.Text" xml:space="preserve">
+    <value>- Historial</value>
+  </data>
+  <data name="addFileButton.Text" xml:space="preserve">
+    <value>Agregar Archivos</value>
+  </data>
+  <data name="removeFileButton.Text" xml:space="preserve">
+    <value>Quitar Archivo</value>
+  </data>
+  <data name="clearFileListButton.Text" xml:space="preserve">
+    <value>Limpiar Lista</value>
+  </data>
+  <data name="startButton.Text" xml:space="preserve">
+    <value>Iniciar</value>
+  </data>
+  <data name="pauseResumeButton.Text" xml:space="preserve">
+    <value>Pausar</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="skipButton.Text" xml:space="preserve">
+    <value>Omitir</value>
+  </data>
+  <data name="pauseResumeMultiButton.Text" xml:space="preserve">
+    <value>Pausar</value>
+  </data>
+  <data name="cancelMultiButton.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="fileCountOnLabel.Text" xml:space="preserve">
+    <value>Cantidad de Archivos:</value>
+  </data>
+  <data name="fileProcessedLabel.Text" xml:space="preserve">
+    <value>Archivo Procesado:</value>
+  </data>
+  <data name="totalCopiedProgressLabel.Text" xml:space="preserve">
+    <value>Total C/M/E:</value>
+  </data>
+  <data name="speedLabel.Text" xml:space="preserve">
+    <value>Velocidad:</value>
+  </data>
+  <data name="elapsedAndTargetTimeLabel.Text" xml:space="preserve">
+    <value>Tiempo Transcurrido / Estimado:</value>
+  </data>
+  <data name="totalHDSpaceLeftLabel.Text" xml:space="preserve">
+    <value>Espacio en Disco:</value>
+  </data>
+  <data name="filePathLabel.Text" xml:space="preserve">
+    <value>Sin Archivo Seleccionado</value>
+  </data>
+  <data name="fromFilesDirLabel.Text" xml:space="preserve">
+    <value>Seleccione Archivos o Carpeta</value>
+  </data>
+  <data name="targetDirLabel.Text" xml:space="preserve">
+    <value>Seleccione Carpeta de Destino</value>
+  </data>
+  <data name="fileTotalProgressLabel.Text" xml:space="preserve">
+    <value>0.00 %</value>
+  </data>
+  <data name="totalProgressLabel.Text" xml:space="preserve">
+    <value>0.00 %</value>
+  </data>
+  <data name="fileCountMultiLabel.Text" xml:space="preserve">
+    <value>Cantidad de Archivos:</value>
+  </data>
+  <data name="totalTimeMultiLabel.Text" xml:space="preserve">
+    <value>Tiempo Transcurrido / Estimado:</value>
+  </data>
+  <data name="speedMultiLabel.Text" xml:space="preserve">
+    <value>Velocidad:</value>
+  </data>
+  <data name="totalCMDMultiLabel.Text" xml:space="preserve">
+    <value>Total C/M/E:</value>
+  </data>
+  <data name="totalSpaceMultiLabel.Text" xml:space="preserve">
+    <value>Espacio Usado:</value>
+  </data>
+  <data name="copyMoveDeleteComboBox.Items" xml:space="preserve">
+    <value>Copiar Archivos
+Mover Archivos
+Eliminar de Forma Segura</value>
+  </data>
+  <data name="onFinishComboBox.Items" xml:space="preserve">
+    <value>No Hacer Nada
+Cerrar Sesión
+Apagar PC
+Reiniciar PC
+Reiniciar Copy That
+Cerrar Copy That</value>
+  </data>
+  <data name="overwriteIfNewerCheckBox.Text" xml:space="preserve">
+    <value>Sobrescribir Si es Sás Reciente</value>
+  </data>
+  <data name="overwriteAllCheckBox.Text" xml:space="preserve">
+    <value>Sobrescribir Todo</value>
+  </data>
+  <data name="doNotOverwriteCheckBox.Text" xml:space="preserve">
+    <value>No Sobrescribir</value>
+  </data>
+  <data name="keepDirStructCheckBox.Text" xml:space="preserve">
+    <value>Mantener Estructura de Carpetas</value>
+  </data>
+  <data name="keepEmptyFoldersCheckBox.Text" xml:space="preserve">
+    <value>Mantener Carpetas Vacías</value>
+  </data>
+  <data name="createCustomDirCheckBox.Text" xml:space="preserve">
+    <value>Crear Carpeta Personalizada Antes</value>
+  </data>
+  <data name="copyFilesDirsCheckBox.Text" xml:space="preserve">
+    <value>Copiar Solo Archivos</value>
+  </data>
+  <data name="keepOnlyFilesCheckBox.Text" xml:space="preserve">
+    <value>Conservar Solo Archivos</value>
+  </data>
+  <data name="multithreadCheckBox.Text" xml:space="preserve">
+    <value>Multi-Tilo</value>
+  </data>
+  <data name="alwaysOnTopCheckBox.Text" xml:space="preserve">
+    <value>Siempre Visible</value>
+  </data>
+  <data name="confirmDragDropCheckBox.Text" xml:space="preserve">
+    <value>Confirmar Arrastrar y Soltar</value>
+  </data>
+  <data name="minimizeSystemTrayCheckBox.Text" xml:space="preserve">
+    <value>Minimizar a la Bandeja</value>
+  </data>
+  <data name="contextMenuCheckBox.Text" xml:space="preserve">
+    <value>Añadir al Menú Contextual</value>
+  </data>
+  <data name="onFinishCheckBox.Text" xml:space="preserve">
+    <value>Al Finalizar</value>
+  </data>
+  <data name="onAddFilesCheckBox.Text" xml:space="preserve">
+    <value>Al Agregar Archivos</value>
+  </data>
+  <data name="onCancelCheckBox.Text" xml:space="preserve">
+    <value>Al Cancelar</value>
+  </data>
+  <data name="onErrorCheckBox.Text" xml:space="preserve">
+    <value>Al Producirse un Error</value>
+  </data>
+  <data name="updateAutoCheckBox.Text" xml:space="preserve">
+    <value>Buscar Actualizaciones Automáticamente</value>
+  </data>
+  <data name="updateBetaCheckBox.Text" xml:space="preserve">
+    <value>Incluir Versiones Beta</value>
+  </data>
+  <data name="updateManuallyCheckBox.Text" xml:space="preserve">
+    <value>Buscar Actualizaciones Manualmente</value>
+  </data>
+  <data name="restartCheckBox.Text" xml:space="preserve">
+    <value>Reiniciar al Error</value>
+  </data>
+  <data name="closeProgramCheckBox.Text" xml:space="preserve">
+    <value>Cerrar al Error</value>
+  </data>
+  <data name="startWithWindowsCheckBox.Text" xml:space="preserve">
+    <value>Iniciar con Windows</value>
+  </data>
+  <data name="saveAutoCheckBox.Text" xml:space="preserve">
+    <value>Guardar Configuración Automáticamente</value>
+  </data>
+  <data name="logFileCheckBox.Text" xml:space="preserve">
+    <value>Crear Archivo de Registro</value>
+  </data>
+  <data name="underMBCheckBox.Text" xml:space="preserve">
+    <value>Menos de MB</value>
+  </data>
+  <data name="overMBCheckBox.Text" xml:space="preserve">
+    <value>Más de MB</value>
+  </data>
+  <data name="fullPathsCheckBox.Text" xml:space="preserve">
+    <value>Rutas Completas</value>
+  </data>
+  <data name="onlyNamesCheckBox.Text" xml:space="preserve">
+    <value>Solo Nombres</value>
+  </data>
+  <data name="zipSeparateCheckBox.Text" xml:space="preserve">
+    <value>Comprimir por Separado</value>
+  </data>
+  <data name="zipTogetherCheckBox.Text" xml:space="preserve">
+    <value>Comprimir Todo Junto</value>
+  </data>
+  <data name="emailNamesCheckBox.Text" xml:space="preserve">
+    <value>Solo Nombres en Email</value>
+  </data>
+  <data name="emailPathsCheckBox.Text" xml:space="preserve">
+    <value>Rutas Completas en Email</value>
+  </data>
+  <data name="verifyCheckBox.Text" xml:space="preserve">
+    <value>Verificar Eespués de Transferir</value>
+  </data>
+  <data name="autoScrollCheckBox.Text" xml:space="preserve">
+    <value>Desplazamiento Automático</value>
+  </data>
+  <data name="defaultSettingsButton.Text" xml:space="preserve">
+    <value>Restaurar Predeterminados</value>
+  </data>
+  <data name="recSettingsButton.Text" xml:space="preserve">
+    <value>Recomendados</value>
+  </data>
+  <data name="retentionLabel.Text" xml:space="preserve">
+    <value>Días para Conservar Registros:</value>
+  </data>
+  <data name="clearSettingsButton.Text" xml:space="preserve">
+    <value>Limpiar Configuración</value>
+  </data>
+  <data name="saveSettingsButton.Text" xml:space="preserve">
+    <value>Guardar Configuración</value>
+  </data>
+  <data name="errorOccursLabel.Text" xml:space="preserve">
+    <value>Cuando Ocurra un Error:</value>
+  </data>
+  <data name="secureDeleteLabel.Text" xml:space="preserve">
+    <value>Pases de Eliminación Segura:</value>
+  </data>
+  <data name="registerButton.Text" xml:space="preserve">
+    <value>Registrar Serie</value>
+  </data>
+  <data name="serialNumberLabel.Text" xml:space="preserve">
+    <value>Ingresar nº de Serie:</value>
+  </data>
+  <data name="appLocationLabel.Text" xml:space="preserve">
+    <value>Ubicación de la Aplicación (Clic Abajo):</value>
+  </data>
+  <data name="whenEmailingLabel.Text" xml:space="preserve">
+    <value>Al Enviar Lista por email:</value>
+  </data>
+  <data name="emailGroupBox.Text" xml:space="preserve">
+    <value>Configuración de Email (Pro)</value>
+  </data>
+  <data name="zipSettingsLabel.Text" xml:space="preserve">
+    <value>Configuración de Zip Antes de C/M:</value>
+  </data>
+  <data name="exportListLabel.Text" xml:space="preserve">
+    <value>Configuración de Exportar Lista:</value>
+  </data>
+  <data name="setBufferLabel.Text" xml:space="preserve">
+    <value>Tamaño del Búfer:</value>
+  </data>
+  <data name="cmOnlyIfLabel.Text" xml:space="preserve">
+    <value>C/M Solo Si:</value>
+  </data>
+  <data name="setMBUmderLabel.Text" xml:space="preserve">
+    <value>C/M Si es Menor de:</value>
+  </data>
+  <data name="setMBGBOverLabel.Text" xml:space="preserve">
+    <value>C/M Si es Mayor de:</value>
+  </data>
+  <data name="exportFileListLabel.Text" xml:space="preserve">
+    <value>Exportar lista de Archivos:</value>
+  </data>
+  <data name="skinsLabel.Text" xml:space="preserve">
+    <value>Temas:</value>
+  </data>
+  <data name="languageLabel.Text" xml:space="preserve">
+    <value>Idioma:</value>
+  </data>
+  <data name="pasteLabel.Text" xml:space="preserve">
+    <value>Pegar:</value>
+  </data>
+  <data name="dragDropLabel.Text" xml:space="preserve">
+    <value>Arrastrar y Soltar:</value>
+  </data>
+  <data name="settingsWindowLabel.Text" xml:space="preserve">
+    <value>Ventana:</value>
+  </data>
+  <data name="fontsLabel.Text" xml:space="preserve">
+    <value>Tamaño de Fuente:</value>
+  </data>
+  <data name="checkForUpdatesButton.Text" xml:space="preserve">
+    <value>Buscar Actualizaciones</value>
+  </data>
+  <data name="addAllowedButton.Text" xml:space="preserve">
+    <value>Agregar Ext.</value>
+  </data>
+  <data name="removeAllowedButton.Text" xml:space="preserve">
+    <value>Quitar ext.</value>
+  </data>
+  <data name="clearAllowedButton.Text" xml:space="preserve">
+    <value>Limpiar Lista</value>
+  </data>
+  <data name="allowedLabel.Text" xml:space="preserve">
+    <value>Extensiones Permitidas:</value>
+  </data>
+  <data name="addExcludedButton.Text" xml:space="preserve">
+    <value>Agregar Ext.</value>
+  </data>
+  <data name="removeExcludedButton.Text" xml:space="preserve">
+    <value>Quitar Ext.</value>
+  </data>
+  <data name="clearExcludedButton.Text" xml:space="preserve">
+    <value>Limpiar Lista</value>
+  </data>
+  <data name="excludedLabel.Text" xml:space="preserve">
+    <value>Extensiones Excluidas:</value>
+  </data>
+  <data name="cloneButton.Text" xml:space="preserve">
+    <value>Re-escanear &amp; Clonar</value>
+  </data>
+  <data name="totalHistoryLabel.Text" xml:space="preserve">
+    <value>Total de Elementos en Historial: 0</value>
+  </data>
+  <data name="deleteEntryButton.Text" xml:space="preserve">
+    <value>Eliminar Entrada</value>
+  </data>
+  <data name="clearHistoryButton.Text" xml:space="preserve">
+    <value>Limpiar Historial</value>
+  </data>
+  <data name="goToInExplorerButton.Text" xml:space="preserve">
+    <value>Abrir Archivo en Explorador</value>
+  </data>
+  <data name="totalSkippedLabel.Text" xml:space="preserve">
+    <value>Total de Archivos Omitidos: 0</value>
+  </data>
+  <data name="clearSkippedListButton.Text" xml:space="preserve">
+    <value>Limpiar Lista Omitida</value>
+  </data>
+  <data name="fileNameLabel1.Text" xml:space="preserve">
+    <value>Nombre:</value>
+  </data>
+  <data name="fileNameLabel2.Text" xml:space="preserve">
+    <value>Nombre:</value>
+  </data>
+  <data name="fileNameLabel3.Text" xml:space="preserve">
+    <value>Nombre:</value>
+  </data>
+  <data name="fileNameLabel4.Text" xml:space="preserve">
+    <value>Nombre:</value>
+  </data>
+  <data name="filesNameLabel1.Text" xml:space="preserve">
+    <value>Nada</value>
+  </data>
+  <data name="filesNameLabel2.Text" xml:space="preserve">
+    <value>Nada</value>
+  </data>
+  <data name="filesNameLabel3.Text" xml:space="preserve">
+    <value>Nada</value>
+  </data>
+  <data name="filesNameLabel4.Text" xml:space="preserve">
+    <value>Nada</value>
+  </data>
+  <data name="totalProgressMultiLabel.Text" xml:space="preserve">
+    <value>Progreso Total General:</value>
+  </data>
+  <data name="onFinishMultiLabel.Text" xml:space="preserve">
+    <value>Al Finalizar:</value>
+  </data>
+  <data name="fileNameLabel.Text" xml:space="preserve">
+    <value>Archivo:</value>
+  </data>
+  <data name="fromLabel.Text" xml:space="preserve">
+    <value>Desde:</value>
+  </data>
+  <data name="targetLabel.Text" xml:space="preserve">
+    <value>Destino(s):</value>
+  </data>
+  <data name="fileOptionsLabel.Text" xml:space="preserve">
+    <value>Opciones de Archivo para Procesamiento y Después: ||</value>
+  </data>
+  <data name="onFinishLabel.Text" xml:space="preserve">
+    <value>Al Finalizar:</value>
+  </data>
+  <data name="cmdLabel.Text" xml:space="preserve">
+    <value>C/M/E:</value>
+  </data>
+  <data name="searchFileFolderLabel.Text" xml:space="preserve">
+    <value>Buscar Archivo/Carpeta:</value>
+  </data>
+  <data name="clearTextButton.Text" xml:space="preserve">
+    <value>Limpiar Texto</value>
+  </data>
+  <data name="fileUpLabel.Text" xml:space="preserve">
+    <value>Subir Archivo/Carp.:</value>
+  </data>
+  <data name="fileDownLabel.Text" xml:space="preserve">
+    <value>Bajar aAchivo/Carp.:</value>
+  </data>
+  <data name="moveTopLabel.Text" xml:space="preserve">
+    <value>Al Principio:</value>
+  </data>
+  <data name="moveBottomLabel.Text" xml:space="preserve">
+    <value>Al Final:</value>
+  </data>
+  <data name="overallProgressLabel.Text" xml:space="preserve">
+    <value>Progreso Total General:</value>
+  </data>
+  <data name="filesDataGridView.Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="filesDataGridView.Path" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="filesDataGridView.Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="filesDataGridView.Size" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="filesDataGridView.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="dataGridView2.Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dataGridView2.Path" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="dataGridView2.Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="dataGridView2.Size" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="dataGridView2.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="dataGridView1.Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dataGridView1.Path" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="dataGridView1.Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="dataGridView1.Size" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="dataGridView1.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="skippedDataGridView.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="skippedDataGridView.FileName" xml:space="preserve">
+    <value>Nombre de Archivo</value>
+  </data>
+  <data name="skippedDataGridView.FileSize" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="skippedDataGridView.SourceFilePath" xml:space="preserve">
+    <value>Ruta Origen</value>
+  </data>
+  <data name="skippedDataGridView.DestinationFilePath" xml:space="preserve">
+    <value>Ruta Destino</value>
+  </data>
+  <data name="copyHistoryDGV.Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="copyHistoryDGV.Operation" xml:space="preserve">
+    <value>Operación</value>
+  </data>
+  <data name="copyHistoryDGV.Source" xml:space="preserve">
+    <value>Origen</value>
+  </data>
+  <data name="copyHistoryDGV.Destination" xml:space="preserve">
+    <value>Destino</value>
+  </data>
+  <data name="copyHistoryDGV.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="aboutCTLabel.Text" xml:space="preserve">
+    <value>Copy That v1.0 By: Havoc
+Hecho con Visual Studio 2022 Community
+C# .NET 8.0 Framework
+Iniciado: Nov. 2023
+Versión: 1.0</value>
+  </data>
+  <data name="exportButton.Text" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="setUpEmailButton.Text" xml:space="preserve">
+    <value>Configurar Email</value>
+  </data>
+  <data name="skinsComboBox.Items" xml:space="preserve">
+    <value>Modo Oscuro
+Modo Medio
+Modo Claro
+_________________
+Color Personalizado</value>
+  </data>
+  <data name="languageComboBox.Items" xml:space="preserve">
+    <value>Inglés
+Español
+Alemán
+Francés</value>
+  </data>
+  <data name="filesDataGridView.Header.Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="filesDataGridView.Header.Path" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="filesDataGridView.Header.Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="filesDataGridView.Header.Size" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="filesDataGridView.Header.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="dataGridView1.Header.Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dataGridView1.Header.Path" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="dataGridView1.Header.Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="dataGridView1.Header.Size" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="dataGridView1.Header.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="dataGridView2.Header.Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dataGridView2.Header.Path" xml:space="preserve">
+    <value>Ruta</value>
+  </data>
+  <data name="dataGridView2.Header.Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="dataGridView2.Header.Size" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="dataGridView2.Header.Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="skippedDataGridView.Header.StatusColumn.HeaderText" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="skippedDataGridView.Header.FileNameColumn.HeaderText" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="skippedDataGridView.Header.FileSizeColumn.HeaderText" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="skippedDataGridView.Header.SourceFilePathColumn.HeaderText" xml:space="preserve">
+    <value>Ruta Origen</value>
+  </data>
+  <data name="skippedDataGridView.Header.DestinationFilePathColumn.HeaderText" xml:space="preserve">
+    <value>Ruta Destino</value>
+  </data>
+  <data name="priorityLabel.Text" xml:space="preserve">
+    <value>Prioridad del Programa</value>
+  </data>
+  <data name="opacityLabel.Text" xml:space="preserve">
+    <value>Opacidad</value>
+  </data>
+  <data name="windowGroupBox.Text" xml:space="preserve">
+    <value>Configuración de Ventana</value>
+  </data>
+  <data name="skinsLanguageGoupBox.Text" xml:space="preserve">
+    <value>Configuración de Temas y Idioma</value>
+  </data>
+  <data name="soundsGroupBox.Text" xml:space="preserve">
+    <value>Configuración de Sonidos</value>
+  </data>
+  <data name="performanceGroupBox.Text" xml:space="preserve">
+    <value>Configuración de Rendimiento</value>
+  </data>
+  <data name="fileDirSettingsGroupBox.Text" xml:space="preserve">
+    <value>Configuración de Archivos y Carpetas</value>
+  </data>
+  <data name="otherSettingsGroupBox.Text" xml:space="preserve">
+    <value>Configuración de Otros Ajustes</value>
+  </data>
+  <data name="bufferNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Tamaño del Búfer (KB)</value>
+  </data>
+  <data name="setMBGBOverNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Límite Superior (MB)</value>
+  </data>
+  <data name="securePassesNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Pases de Eliminación Segura</value>
+  </data>
+  <data name="btnGoToInExplorer.Text" xml:space="preserve">
+    <value>Abrir en Explorador</value>
+  </data>
+  <data name="btnClearSkippedList.Text" xml:space="preserve">
+    <value>Limpiar Lista Omitidos</value>
+  </data>
+  <data name="updateGroupBox.Text" xml:space="preserve">
+    <value> Buscar Configuración</value>
+  </data>
+  <data name="setUpSMSButton.Text" xml:space="preserve">
+    <value>Configurar SMS</value>
+  </data>
+  <data name="fontNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Tamaño de fuente</value>
+  </data>
+  <data name="cmdTotals.Text" xml:space="preserve">
+    <value>- Totales Acumulados</value>
+  </data>
+  <data name="leaveEmptyFoldersCheckBox.Text" xml:space="preserve">
+    <value>Dejar Carpetas Vacías</value>
+  </data>
+  <data name="titleTotalsLabel.Text" xml:space="preserve">
+    <value>Totales Acumulados Para Todas las Estadísticas</value>
+  </data>
+  <data name="totalCopyOperationsTitleLabel.Text" xml:space="preserve">
+    <value>Total de Operaciones de Copiado</value>
+  </data>
+  <data name="totalMoveOperationsTitleLabel.Text" xml:space="preserve">
+    <value>Total de Operaciones de Movimiento:</value>
+  </data>
+  <data name="totalDeleteOperationsTItleLabel.Text" xml:space="preserve">
+    <value>Total de Operaciones de Borrado Seguro:</value>
+  </data>
+  <data name="fileOverAllProgressLabel.Text" xml:space="preserve">
+    <value>Progreso Total del Archivo:</value>
+  </data>
+  <data name="totalFilesConsideredTitleLabel.Text" xml:space="preserve">
+    <value>Total de Archivos Considerados:</value>
+  </data>
+  <data name="totalFilesMovedTitleLabel.Text" xml:space="preserve">
+    <value>Archivos Movidos:</value>
+  </data>
+  <data name="totalFilesCopiedTitleLabel.Text" xml:space="preserve">
+    <value>Archivos Copiados:</value>
+  </data>
+  <data name="totalFilesDeletedTitleLabel.Text" xml:space="preserve">
+    <value>Archivos Eliminados de Forma Segura:</value>
+  </data>
+  <data name="totalFilesFailedTitleLabel.Text" xml:space="preserve">
+    <value>Archivos Fallidos:</value>
+  </data>
+  <data name="totalFilesSkippedTitleLabel.Text" xml:space="preserve">
+    <value>Archivos Omitidos:</value>
+  </data>
+  <data name="totalBytesProcessedTitleLabel.Text" xml:space="preserve">
+    <value>Total de Bytes Procesados:</value>
+  </data>
+  <data name="totalBytesToProcessTitleLabel.Text" xml:space="preserve">
+    <value>Total de Bytes por Procesar (Est):</value>
+  </data>
+  <data name="logDaysNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Días de Retención de Registros</value>
+  </data>
+  <data name="setMBGBUnderNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Límite Inferior (MB)</value>
+  </data>
+  <data name="totalTargetTimeTitleLabel.Text" xml:space="preserve">
+    <value>Tiempo Total Objetivo:</value>
+  </data>
+  <data name="totalElapsedTimeTitleLabel.Text" xml:space="preserve">
+    <value>Tiempo Total Transcurrido:</value>
+  </data>
+  <data name="resetTotalsButton.Text" xml:space="preserve">
+    <value>Restablecer Todos los Totales en Ejecución</value>
+  </data>
+</root>
