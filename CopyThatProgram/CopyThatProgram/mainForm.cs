@@ -2,6 +2,7 @@
 using CopyThatProgram.Models;
 using CustomControls;
 using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Vml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Win32;
@@ -23,6 +24,7 @@ using System.Reflection;
 using System.Runtime.InteropServices; // Provides a collection of services for interacting with COM objects, native APIs, and other system components.
 using System.Runtime.Versioning; // Contains attributes for specifying the target operating system version.
 using System.Security; // Provides the underlying structure of the Common Language Runtime (CLR) security system.
+using System.Security.Cryptography;
 using System.Text; // Contains classes for character encodings (e.g., ASCII, UTF-8).
 using System.Text.Json; // Provides functionality to serialize objects to and deserialize objects from JSON.
 using System.Threading.Tasks.Dataflow; // Offers a library for creating dataflow pipelines, useful for asynchronous data processing.
@@ -883,6 +885,18 @@ namespace CopyThatProgram
 
             // Initializes the combo boxes for post-copy actions and file operations.
             InitializeComponent();              // Initializes the visual components of the form.
+
+
+
+            _slots = new[]
+            {
+            new Slot(1, progressBarMutli1, filesNameLabel1),
+            new Slot(2, progressBarMutli2, filesNameLabel2),
+            new Slot(3, progressBarMutli3, filesNameLabel3),
+            new Slot(4, progressBarMutli4, filesNameLabel4)
+            };
+
+
             InitializeDefaultSettings();        // Sets up default values for application settings if they don't exist.
             ConfigureApplicationSettings();     // A method placeholder (not shown) for configuring app settings.
             CheckForIllegalCrossThreadCalls = false; // Allows background workers to update the UI directly (Note: Not a best practice, but common for simplicity in some projects).
@@ -1200,11 +1214,22 @@ namespace CopyThatProgram
                     "Exit Program",
                     "Shut Down"
                 });
+
+
             }
             else if (selectedLanguage == "Spanish" || selectedLanguage == "Español")
             {
                 copyMoveDeleteComboBox.Items.AddRange(new[] { "Copiar archivos", "Mover archivos", "Borrado seguro" });
                 onFinishComboBox.Items.AddRange(new string[]
+                {
+                        "No hacer nada",
+                        "Suspender",
+                        "Cerrar sesión",
+                        "Salir del programa",
+                        "Apagar"
+                });
+
+                onFinishMultiComboBox.Items.AddRange(new string[]
                 {
                         "No hacer nada",
                         "Suspender",
@@ -1534,6 +1559,15 @@ namespace CopyThatProgram
     "Exit Program",
     "Shut Down"
             });
+
+            onFinishMultiComboBox.Items.AddRange(new string[]
+{
+    "Do Nothing",
+    "Sleep",
+    "Log Off",
+    "Exit Program",
+    "Shut Down"
+});
         }
 
         /// <summary>
@@ -1705,6 +1739,7 @@ namespace CopyThatProgram
             // Resume UI layout updates and re-enable controls after the scan is complete.
             filesDataGridView.ResumeLayout();
             EnableAllControls(this);
+            if (onAddFilesCheckBox.Checked) PlayRes(Properties.Resources.OnAddFiles);
         }
 
         /// <summary>
@@ -2436,9 +2471,17 @@ namespace CopyThatProgram
     {"German",  "Deutsch"}
         };
 
+
+
+
+
+
         // ==================== MAIN FORM LOAD ====================
         private void MainForm_Load(object sender, EventArgs e)
         {
+            _multiThreadUiTimer.Interval = 500; // update UI every 0.5s
+            _multiThreadUiTimer.Tick += UpdateMultiThreadUiTimer_Tick;
+
             _isUpdatingLanguage = true;
             _isLoadingForm = true;
 
@@ -2522,6 +2565,7 @@ namespace CopyThatProgram
                 InitializeOperationComboBox();
 
                 if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
                 if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
 
                 TranslateGridHeaders();
@@ -2544,6 +2588,32 @@ namespace CopyThatProgram
                 skinsComboBox.SelectedIndexChanged += skinsComboBox_SelectedIndexChanged;
             }
         }
+
+        private static string FormatTime(double seconds)
+        {
+            if (seconds < 60)
+                return $"{seconds:F0}s";
+            if (seconds < 3600)
+                return $"{seconds / 60:F1}m";
+            return $"{seconds / 3600:F1}h";
+        }
+
+        private static string FormatSpeed(double bytesPerSec)
+        {
+            const double KB = 1024.0;
+            const double MB = KB * 1024.0;
+            const double GB = MB * 1024.0;
+
+            if (bytesPerSec >= GB)
+                return $"{bytesPerSec / GB:F2} GB/s";
+            if (bytesPerSec >= MB)
+                return $"{bytesPerSec / MB:F2} MB/s";
+            if (bytesPerSec >= KB)
+                return $"{bytesPerSec / KB:F2} KB/s";
+            return $"{bytesPerSec:F0} B/s";
+        }
+
+
 
         // ==================== MAIN FORM SHOWN ====================
         private void MainForm_Shown(object sender, EventArgs e)
@@ -4224,11 +4294,11 @@ namespace CopyThatProgram
         {
             if (onFinishMultiComboBox.SelectedIndex == -1) // Checks if the multi-select combo box has no selection.
             {
-                onFinishMultiComboBox.SelectedItem = "Do Nothing"; // Sets a default value.
+                onFinishMultiComboBox.SelectedIndex = 0; // Sets a default value.
             }
             if (onFinishComboBox.SelectedIndex == -1) // Checks if the single-select combo box has no selection.
             {
-                onFinishComboBox.SelectedItem = "Do Nothing"; // Sets a default value.
+                onFinishComboBox.SelectedIndex = 0;// Sets a default value.
             }
             onFinishMultiComboBox.Text = onFinishComboBox.Text; // Synchronizes the text of the two combo boxes.
         }
@@ -4264,13 +4334,11 @@ namespace CopyThatProgram
         {
             try
             {
-                // Guard: ignore changes during language switching, setup, or form loading
                 if (_isUpdatingLanguage || _isLoadingForm) return;
                 if (skinsComboBox.SelectedItem == null) return;
 
                 string selectedDisplay = skinsComboBox.SelectedItem.ToString();
 
-                // Handle separator selection
                 if (selectedDisplay == "_________________")
                 {
                     string savedKey = CopyThatProgram.Properties.Settings.Default.Skin ?? "Light Mode";
@@ -4319,56 +4387,7 @@ namespace CopyThatProgram
         }
 
 
-        private void PickCustomColor()
-        {
-            using (ColorDialog colorDialog = new ColorDialog())
-            {
-                // Set current colors as defaults
-                colorDialog.Color = this.BackColor;
-                colorDialog.AllowFullOpen = true;
-                colorDialog.FullOpen = true;
 
-                if (colorDialog.ShowDialog() == DialogResult.OK)
-                {
-                    Color selectedColor = colorDialog.Color;
-
-                    // Determine text color based on background brightness
-                    Color textColor = GetContrastingTextColor(selectedColor);
-
-                    // Apply the custom colors immediately
-                    ApplySkin("Custom Color", textColor, selectedColor);
-
-                    // Save the custom color settings
-                    CopyThatProgram.Properties.Settings.Default.Skin = "Custom Color";
-                    CopyThatProgram.Properties.Settings.Default.CustomBackColor = selectedColor;
-                    CopyThatProgram.Properties.Settings.Default.CustomForeColor = textColor;
-                    CopyThatProgram.Properties.Settings.Default.skinsIndex = skinsComboBox.SelectedIndex;
-
-                    // Always save custom colors immediately (regardless of auto-save setting)
-                    CopyThatProgram.Properties.Settings.Default.Save();
-
-                    System.Diagnostics.Debug.WriteLine($"Saved Custom Color - Fore: {textColor}, Back: {selectedColor}");
-                }
-                else
-                {
-                    // User cancelled - restore previous skin selection
-                    string savedKey = CopyThatProgram.Properties.Settings.Default.Skin ?? "Light Mode";
-                    SelectSkinInCombo(savedKey);
-                }
-            }
-        }
-
-        // Helper method to determine text color based on background brightness
-        private Color GetContrastingTextColor(Color backgroundColor)
-        {
-            // Calculate perceived brightness using the luminance formula
-            double brightness = (0.299 * backgroundColor.R +
-                                0.587 * backgroundColor.G +
-                                0.114 * backgroundColor.B) / 255;
-
-            // If background is bright, use black text; if dark, use white text
-            return brightness > 0.5 ? Color.Black : Color.White;
-        }
         /// <summary>
         /// Recursively changes the foreground color of a control and all its child controls.
         /// </summary>
@@ -7224,10 +7243,10 @@ namespace CopyThatProgram
                 titleLabel.Text = proVersion ? "Copy That v1.0 Pro By: Havoc - Settings" : "Copy That v1.0 By: Havoc - Settings";
 
 
-               //ApplyThemeSettings();
+                //ApplyThemeSettings();
 
-                // Sets the back color of directional labels to transparent.
-                nLabel.BackColor = System.Drawing.Color.Transparent;
+                // Sets the back color of directional labels to transparent.
+                nLabel.BackColor = System.Drawing.Color.Transparent;
                 neLabel.BackColor = System.Drawing.Color.Transparent;
                 eLabel.BackColor = System.Drawing.Color.Transparent;
                 seLabel.BackColor = System.Drawing.Color.Transparent;
@@ -8304,6 +8323,51 @@ namespace CopyThatProgram
             return null;
         }
 
+
+
+        private async Task<FileStream> RetryOpenAsync(
+        string path,
+        FileMode mode,
+        FileAccess access,
+        FileShare share,
+        int bufferSize,
+        FileOptions options)
+        {
+            // Constants for the retry logic.
+            const int MAX_RETRIES = 5;
+            const int RETRY_DELAY_MS = 100;
+
+            // Loop a maximum number of times to attempt to open the file.
+            for (int i = 0; i <= MAX_RETRIES; i++)
+            {
+                try
+                {
+                    // Attempt to create and return a new FileStream with all parameters.
+                    return new FileStream(path, mode, access, share, bufferSize, options);
+                }
+                // Catch IOException and retry after an ASYNCHRONOUS delay.
+                catch (IOException) when (i < MAX_RETRIES)
+                {
+                    // ✅ Use await Task.Delay() instead of Thread.Sleep()
+                    await Task.Delay(RETRY_DELAY_MS * (i + 1));
+                }
+                // Catch UnauthorizedAccessException and handle the error.
+                catch (UnauthorizedAccessException ex)
+                {
+                    // Call a method to handle the file error.
+                    HandleErrorFile(
+                        new FileInfoWrapper { FileName = System.IO.Path.GetFileName(path), FilePath = System.IO.Path.GetFullPath(path) },
+                        $"Access denied: {ex.Message}",
+                        path);
+                    // Increment the total failed files counter and return null.
+                    Interlocked.Increment(ref _totalFilesFailed);
+                    return null;
+                }
+            }
+            // Return null if all retries fail.
+            return null;
+        }
+
         /// <summary>
         /// Determines whether a file should be overwritten based on user preferences and file timestamps.
         /// </summary>
@@ -8658,83 +8722,521 @@ namespace CopyThatProgram
         /// <param name="files">The list of files to process</param>
         /// <param name="targetPaths">The target directory paths for copying</param>
         /// <returns>A task representing the asynchronous operation</returns>
+        /// 
+
+        private readonly System.Windows.Forms.Timer _multiThreadUiTimer = new System.Windows.Forms.Timer();
+
+
+        #region ----------  multi-thread copy with per-slot objects  ----------
+
+        private record Slot(int Id,
+                            ModernCircularProgressBar Bar,
+                            Label NameLabel);
+
+        private Slot[] _slots;
+
         public async Task ProcessFilesMultiThreaded(List<FileInfoWrapper> files, string[] targetPaths)
         {
-            // Restarts the stopwatch to time the operation
-            _stopwatch.Restart();
-
-            // Disposes of the previous cancellation token source and creates a new one
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
-            // Gets the cancellation token from the new source
-            var token = _cancellationTokenSource.Token;
-
-            // Checks if there are any bytes to process; if not, updates the progress label and returns
-            if (_totalBytesToProcess <= 0)
+            try
             {
-                //Invoke(() => multiThreadTotalProgressLabel.Text = "0.00 %");
-                return;
-            }
+                _stopwatch.Restart();
 
-            // Disables controls on the UI to prevent user interaction during the operation
-            ToggleControlsForOperation(false);
+                _cancellationTokenSource?.Dispose();
+                _cancellationTokenSource = new CancellationTokenSource();
+                var token = _cancellationTokenSource.Token;
 
-            // Creates a semaphore to limit the number of concurrent write operations to 4
-            using var writeSlots = new SemaphoreSlim(4, 4);
+                if (files == null || files.Count == 0) return;
 
-            // Stores the source root path
-            string sourceRoot = _currentSourceRootPath;
+                ToggleControlsForOperation(false);
+                _multiThreadUiTimer.Start();
 
-            // Iterates through the list of files to process, filtering for directories
-            foreach (var dir in files.Where(f => f.IsDirectory))
-            {
-                // Computes the destination path for the directory
-                string destDir = ComputeDestinationPath(dir.FilePath, true, targetPaths[0], sourceRoot);
-                // If a valid destination path exists, it creates the directory
-                if (!string.IsNullOrEmpty(destDir)) Directory.CreateDirectory(destDir);
-            }
+                using var writeSlots = new SemaphoreSlim(4, 4);
 
-            // Creates a list of file-related "jobs" for processing, excluding directories
-            var todo = files
-                       .Where(f => !f.IsDirectory)
-                       .Select(f => new
-                       {
-                           Item = f,
-                           Src = f.FilePath,
-                           Dest = ComputeDestinationPath(f.FilePath, false, targetPaths[0], sourceRoot)
-                       })
-                       .Where(x => !string.IsNullOrEmpty(x.Dest))
-                       .ToList();
+                string sourceRoot = _currentSourceRootPath;
+                string targetBase = targetPaths[0];
 
-            // Sets the total file count for progress tracking
-            _grandTotalFileCount = todo.Count;
-            // Calculates the total bytes to be processed by summing the lengths of all files
-            _totalBytesToProcess = todo.Sum(x => new FileInfo(x.Src).Length);
-
-            // Uses Parallel.ForEachAsync to process files concurrently
-            await Parallel.ForEachAsync(todo,
-                // Configures parallel options, including the cancellation token and max degree of parallelism
-                new ParallelOptions { CancellationToken = token, MaxDegreeOfParallelism = Environment.ProcessorCount },
-                async (job, ct) =>
+                // ---- pre-create directories ----
+                foreach (var dir in files.Where(f => f.IsDirectory))
                 {
-                    // Waits for a semaphore slot to become available before starting a file copy
-                    await writeSlots.WaitAsync(ct);
-                    // Determines the index of the available slot for UI updates
-                    int slotIndex = 4 - writeSlots.CurrentCount - 1;
-                    try
+                    string destDir = ComputeDestinationPath(dir.FilePath, true, targetBase, sourceRoot);
+                    if (!string.IsNullOrEmpty(destDir)) Directory.CreateDirectory(destDir);
+                }
+
+                // ---- build work queue ----
+                var todo = files
+                    .Where(f => !f.IsDirectory)
+                    .Select(f => new
                     {
-                        // Calls the async file copy method for the current job
-                        await CopyFileWithSlotAsync(job.Item, job.Src, job.Dest, slotIndex, ct);
-                    }
-                    finally
+                        Item = f,
+                        Src = f.FilePath,
+                        Dest = ComputeDestinationPath(f.FilePath, false, targetBase, sourceRoot)
+                    })
+                    .Where(x => !string.IsNullOrEmpty(x.Dest))
+                    .ToList();
+
+                _grandTotalFileCount = todo.Count;
+                _totalBytesToProcess = todo.Sum(x => new FileInfo(x.Src).Length);
+                _totalBytesProcessed = 0;
+                _multiThreadProcessedFiles = 0;
+                _totalFilesSkipped = 0;
+                _totalFilesFailed = 0;
+
+                // SLOT-QUEUE: 4 slots that get recycled
+                var slotQ = new System.Collections.Concurrent.ConcurrentQueue<Slot>();
+                foreach (var s in _slots) slotQ.Enqueue(s);
+
+                await Parallel.ForEachAsync(todo,
+                    new ParallelOptions
                     {
-                        // Releases the semaphore slot once the operation is complete (or fails)
-                        writeSlots.Release();
-                    }
+                        CancellationToken = token,
+                        MaxDegreeOfParallelism = 4
+                    },
+                    async (job, ct) =>
+                    {
+                        // 1.  pick next free slot (will be returned later)
+                        slotQ.TryDequeue(out Slot slot);
+
+                        // 2.  acquire semaphore
+                        await writeSlots.WaitAsync(ct);
+
+                        try
+                        {
+                            // 3.  show which file we are about to copy
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Copying…", job.Src));
+
+                            // 4.  do the copy
+                            await CopyFileWithSlotAsync(slot.Id, job.Src, job.Dest, token);
+
+                            // 5.  success
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Done", job.Src));
+                            Interlocked.Increment(ref _totalFilesCopied);
+                        }
+                        catch (OperationCanceledException)
+                        {
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Canceled", job.Src));
+                            Interlocked.Increment(ref _totalFilesSkipped);
+                        }
+                        catch (Exception ex)
+                        {
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Failed", $"{job.Src} — {ex.Message}"));
+                            Interlocked.Increment(ref _totalFilesFailed);
+                        }
+                        finally
+                        {
+                            writeSlots.Release();   // always release semaphore
+                            slotQ.Enqueue(slot);    // always return slot to pool
+                        }
+                    });
+
+                _multiThreadUiTimer.Stop();
+                _stopwatch.Stop();
+
+                Invoke(() =>
+                {
+                    progressBarMultiThreadTotal.Value = 0;
+                    progressBarMultiThreadTotal.Text = "0.00%";
+                    fileCountMultiLabel.Text = "Files Processed: 0 Out of 0";
+                    speedMultiLabel.Text = "Speed: 0 B/s";
+                    totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes";
+                    totalTimeMultiLabel.Text = "Elapsed / Target Time: 00:00:00 / 00:00:00";
+                    totalSpaceMultiLabel.Text = "Total Space Used: 0 Bytes / 0 Bytes";
+
+                    foreach (var s in _slots) UpdateMultiSlotStatus(s.Id, "Idle", string.Empty);
+
+                    ToggleControlsForOperation(true);
+                    ClearAllSelections();
                 });
 
-            // Invokes a method on the UI thread to clear all selections in the file list
-            Invoke(ClearAllSelections);
+                //_copyWorker_RunWorkerCompleted(this,
+                //new RunWorkerCompletedEventArgs("Multi-threaded copy complete", null, false));
+            }
+            catch (OperationCanceledException)
+            {
+                _multiThreadUiTimer.Stop();
+                Invoke(() => { speedMultiLabel.Text = "Operation canceled."; ToggleControlsForOperation(true); });
+                //_copyWorker_RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(null, null, true));
+            }
+            catch (Exception ex)
+            {
+                _multiThreadUiTimer.Stop();
+                Invoke(() => { speedMultiLabel.Text = $"Error: {ex.Message}"; ToggleControlsForOperation(true); });
+                //_copyWorker_RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(null, ex, false));
+            }
+        }
+        #endregion
+
+        private void ApplySkin(string skinName, Color foreColor, Color backColor)
+        {
+            try
+            {
+                // Apply to form
+                this.BackColor = backColor;
+                this.ForeColor = foreColor;
+
+                // Apply to all controls recursively
+                ApplyColorsToControls(this.Controls, foreColor, backColor);
+
+                // ✅ Apply contrasting color to ModernCircularProgressBars (passing backColor)
+                ApplyProgressBarColors(backColor);
+
+                System.Diagnostics.Debug.WriteLine($"Applied skin: {skinName}, ForeColor: {foreColor}, BackColor: {backColor}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in ApplySkin: {ex.Message}");
+                throw;
+            }
+        }
+
+        // ✅ NEW: Apply colors specifically to ModernCircularProgressBars
+        private void ApplyProgressBarColors(Color backgroundColor)
+        {
+            try
+            {
+                // Get the contrasting color based on the background
+                Color contrastingColor = GetContrastingTextColor(backgroundColor);
+
+                // Create gradient colors for the progress arc based on contrasting color
+                Color progressStart = Color.FromArgb(200, contrastingColor);
+                Color progressEnd = Color.FromArgb(200, contrastingColor);
+
+                System.Diagnostics.Debug.WriteLine($"Applying progress bar colors - Background: {backgroundColor}, Contrasting: {contrastingColor}");
+
+                // Apply to single-threaded progress bars (if they exist)
+                if (this.Controls.Find("fileProgressBar", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar fileBar)
+                {
+                    fileBar.ForeColor = contrastingColor;
+                    fileBar.ProgressStartColor = progressStart;
+                    fileBar.ProgressEndColor = progressEnd;
+                    fileBar.Invalidate(); // Force redraw
+                    System.Diagnostics.Debug.WriteLine($"Applied to fileProgressBar - ForeColor: {fileBar.ForeColor}");
+                }
+
+                if (this.Controls.Find("totalProgressBar", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar totalBar)
+                {
+                    totalBar.ForeColor = contrastingColor;
+                    totalBar.ProgressStartColor = progressStart;
+                    totalBar.ProgressEndColor = progressEnd;
+                    totalBar.Invalidate(); // Force redraw
+                    System.Diagnostics.Debug.WriteLine($"Applied to totalProgressBar - ForeColor: {totalBar.ForeColor}");
+                }
+
+                // ✅ Apply contrasting color to multithreaded progress bars (text AND arc)
+                if (progressBarMutli1 != null)
+                {
+                    progressBarMutli1.ForeColor = contrastingColor;
+                    progressBarMutli1.ProgressStartColor = progressStart;
+                    progressBarMutli1.ProgressEndColor = progressEnd;
+                    progressBarMutli1.Invalidate(); // Force redraw
+                }
+                if (progressBarMutli2 != null)
+                {
+                    progressBarMutli2.ForeColor = contrastingColor;
+                    progressBarMutli2.ProgressStartColor = progressStart;
+                    progressBarMutli2.ProgressEndColor = progressEnd;
+                    progressBarMutli2.Invalidate(); // Force redraw
+                }
+                if (progressBarMutli3 != null)
+                {
+                    progressBarMutli3.ForeColor = contrastingColor;
+                    progressBarMutli3.ProgressStartColor = progressStart;
+                    progressBarMutli3.ProgressEndColor = progressEnd;
+                    progressBarMutli3.Invalidate(); // Force redraw
+                }
+                if (progressBarMutli4 != null)
+                {
+                    progressBarMutli4.ForeColor = contrastingColor;
+                    progressBarMutli4.ProgressStartColor = progressStart;
+                    progressBarMutli4.ProgressEndColor = progressEnd;
+                    progressBarMutli4.Invalidate(); // Force redraw
+                }
+                if (progressBarMultiThreadTotal != null)
+                {
+                    progressBarMultiThreadTotal.ForeColor = contrastingColor;
+                    progressBarMultiThreadTotal.ProgressStartColor = progressStart;
+                    progressBarMultiThreadTotal.ProgressEndColor = progressEnd;
+                    progressBarMultiThreadTotal.Invalidate(); // Force redraw
+                }
+
+                System.Diagnostics.Debug.WriteLine($"Applied contrasting progress bar colors: {contrastingColor} for background: {backgroundColor}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error applying progress bar colors: {ex.Message}");
+            }
+        }
+
+        // Recursive helper to apply colors to all controls
+        private void ApplyColorsToControls(System.Windows.Forms.Control.ControlCollection controls, Color foreColor, Color backColor)
+        {
+            foreach (System.Windows.Forms.Control control in controls)
+            {
+                // Skip certain control types that shouldn't inherit colors
+                if (control is Button || control is TextBox || control is ComboBox)
+                {
+                    // These typically maintain their own appearance
+                    continue;
+                }
+
+                // Apply colors
+                control.ForeColor = foreColor;
+                control.BackColor = backColor;
+
+                // Recursively apply to child controls
+                if (control.HasChildren)
+                {
+                    ApplyColorsToControls(control.Controls, foreColor, backColor);
+                }
+            }
+        }
+
+
+        private void PickCustomColor()
+        {
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                colorDialog.Color = this.BackColor;
+                colorDialog.AllowFullOpen = true;
+                colorDialog.FullOpen = true;
+
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Color selectedColor = colorDialog.Color;
+                    Color textColor = GetContrastingTextColor(selectedColor);
+
+                    ApplySkin("Custom Color", textColor, selectedColor);
+
+                    CopyThatProgram.Properties.Settings.Default.Skin = "Custom Color";
+                    CopyThatProgram.Properties.Settings.Default.CustomBackColor = selectedColor;
+                    CopyThatProgram.Properties.Settings.Default.CustomForeColor = textColor;
+                    CopyThatProgram.Properties.Settings.Default.skinsIndex = skinsComboBox.SelectedIndex;
+
+                    CopyThatProgram.Properties.Settings.Default.Save();
+
+                    System.Diagnostics.Debug.WriteLine($"Saved Custom Color - Fore: {textColor}, Back: {selectedColor}");
+                }
+                else
+                {
+                    string savedKey = CopyThatProgram.Properties.Settings.Default.Skin ?? "Light Mode";
+                    SelectSkinInCombo(savedKey);
+                }
+            }
+        }
+
+        private Color GetContrastingTextColor(Color backgroundColor)
+        {
+            double brightness = (0.299 * backgroundColor.R +
+                                0.587 * backgroundColor.G +
+                                0.114 * backgroundColor.B) / 255;
+
+            return brightness > 0.5 ? Color.Black : Color.White;
+        }
+
+
+
+        private void UpdateMultiThreadUiTimer_Tick(object? sender, EventArgs e)
+        {
+            if (_totalBytesToProcess == 0) return;
+
+            double totalPct = (_totalBytesProcessed / (double)_totalBytesToProcess) * 100.0;
+            double elapsedSec = _stopwatch.Elapsed.TotalSeconds;
+            double bytesPerSec = elapsedSec > 0 ? _totalBytesProcessed / elapsedSec : 0;
+            double remainingSec = bytesPerSec > 0
+                ? (_totalBytesToProcess - _totalBytesProcessed) / bytesPerSec
+                : 0;
+
+            TimeSpan elapsed = TimeSpan.FromSeconds(elapsedSec);
+            TimeSpan target = TimeSpan.FromSeconds(elapsedSec + remainingSec);
+
+            progressBarMultiThreadTotal.Value = Math.Min((int)(totalPct * 100), 10000);
+            progressBarMultiThreadTotal.Text = $"{totalPct:F2}%";
+
+            fileCountMultiLabel.Text = $"Files Processed: {_multiThreadProcessedFiles:N0} Out of {_grandTotalFileCount:N0}";
+            totalCMDMultiLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
+            speedMultiLabel.Text = $"Speed: {FormatSpeed(bytesPerSec)}";
+
+            totalTimeMultiLabel.Text = $"Elapsed / Target Time: {elapsed:hh\\:mm\\:ss} / {target:hh\\:mm\\:ss}";
+        }
+
+
+        private async Task CopyFileWithSlotAsync(
+            int slotIndex,
+            string sourceFile,
+            string destinationFile,
+            CancellationToken token)
+        {
+            try
+            {
+                Directory.CreateDirectory(System.IO.Path.GetDirectoryName(destinationFile)!);
+
+                var srcInfo = new FileInfo(sourceFile);
+                long totalBytes = srcInfo.Length;
+
+                if (File.Exists(destinationFile))
+                {
+                    var dstInfo = new FileInfo(destinationFile);
+
+                    if (_doNotOverwrite)
+                    {
+                        Invoke(() => UpdateMultiSlotStatus(slotIndex, "Skipped (exists)", sourceFile));
+                        Interlocked.Increment(ref _totalFilesSkipped);
+                        string reason = "File exists and 'Do Not Overwrite' is selected.";
+                        var skippedItem = new FileInfoWrapper { FileName = srcInfo.Name, BytesRaw = totalBytes, FilePath = sourceFile };
+                        HandleSkippedFile(skippedItem, reason, destinationFile);
+                        return;
+                    }
+                    if (_overwriteIfNewer && srcInfo.LastWriteTime <= dstInfo.LastWriteTime)
+                    {
+                        Invoke(() => UpdateMultiSlotStatus(slotIndex, "Skipped (not newer)", sourceFile));
+                        Interlocked.Increment(ref _totalFilesSkipped);
+                        string reason = "Destination file is newer or the same age.";
+                        var skippedItem = new FileInfoWrapper { FileName = srcInfo.Name, BytesRaw = totalBytes, FilePath = sourceFile };
+                        HandleSkippedFile(skippedItem, reason, destinationFile);
+                        return;
+                    }
+                    File.Delete(destinationFile);
+                }
+
+                int bufferBytes = (int)(bufferNumUpDown.Value * 1024);
+                byte[] buffer = new byte[bufferBytes];
+                long bytesCopied = 0;
+
+                var sw = Stopwatch.StartNew();
+                long lastBytes = 0;
+                double lastUpdateTime = 0;
+
+                await using var src = await RetryOpenAsync(
+                    sourceFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite,
+                    bufferBytes, FileOptions.SequentialScan);
+                if (src == null) return;
+
+                await using var dst = await RetryOpenAsync(
+                    destinationFile, FileMode.CreateNew, FileAccess.Write, FileShare.None,
+                    bufferBytes, FileOptions.SequentialScan);
+                if (dst == null) return;
+
+                while (true)
+                {
+                    token.ThrowIfCancellationRequested();
+                    _pauseEvent.WaitOne();
+
+                    int bytesRead = await src.ReadAsync(buffer.AsMemory(0, buffer.Length), token);
+                    if (bytesRead == 0)
+                        break;
+
+                    await dst.WriteAsync(buffer.AsMemory(0, bytesRead), token);
+
+                    bytesCopied += bytesRead;
+                    Interlocked.Add(ref _totalBytesProcessed, bytesRead);
+
+                    double pct = totalBytes > 0 ? (bytesCopied / (double)totalBytes) * 100 : 100;
+
+                    double currentTime = sw.Elapsed.TotalSeconds;
+                    double deltaTime = currentTime - lastUpdateTime;
+
+                    if (deltaTime < 0.1)
+                        continue;
+
+                    double bytesThisInterval = bytesCopied - lastBytes;
+                    double speedBytesPerSec = deltaTime > 0 ? bytesThisInterval / deltaTime : 0;
+                    double speedMBps = speedBytesPerSec / (1024 * 1024);
+
+                    double remainingBytes = totalBytes - bytesCopied;
+                    double etaSeconds = speedBytesPerSec > 0 ? remainingBytes / speedBytesPerSec : 0;
+
+                    lastBytes = bytesCopied;
+                    lastUpdateTime = currentTime;
+
+                    string currentFileName = System.IO.Path.GetFileName(sourceFile);
+                    string processedStr = FormatBytes(bytesCopied);
+                    string totalStr = FormatBytes(totalBytes);
+                    string speedStr = $"{speedMBps:F2} MB/Sec";
+
+                    string etaStr;
+                    if (etaSeconds > 3600)
+                        etaStr = $"{etaSeconds / 3600:F1} hr";
+                    else if (etaSeconds > 60)
+                        etaStr = $"{etaSeconds / 60:F1} min";
+                    else
+                        etaStr = $"{etaSeconds:F1} sec";
+
+                    string displayText = $"File: {currentFileName} || Processed: {processedStr} / {totalStr} || Speed: {speedStr} || ETA: {etaStr}";
+
+                    Invoke(() =>
+                    {
+                        UpdateMultiSlotProgress(slotIndex, pct, sourceFile);
+                        UpdateMultiSlotLabel(slotIndex, displayText);
+                    });
+                }
+
+                sw.Stop();
+                Interlocked.Increment(ref _multiThreadProcessedFiles);
+                Interlocked.Increment(ref _totalFilesCopied); // ✅ Track copied files
+                Invoke(() => UpdateMultiSlotStatus(slotIndex, "Done", sourceFile));
+            }
+            catch (OperationCanceledException)
+            {
+                Invoke(() => UpdateMultiSlotStatus(slotIndex, "Canceled", sourceFile));
+                Interlocked.Increment(ref _totalFilesSkipped);
+            }
+            catch (Exception ex)
+            {
+                Invoke(() => UpdateMultiSlotStatus(slotIndex, "Failed", $"{sourceFile}\n{ex.Message}"));
+                Interlocked.Increment(ref _totalFilesFailed);
+            }
+        }
+
+        private void UpdateMultiSlotLabel(int slot, string text)
+        {
+            Label label = slot switch
+            {
+                1 => filesNameLabel1,
+                2 => filesNameLabel2,
+                3 => filesNameLabel3,
+                4 => filesNameLabel4,
+                _ => filesNameLabel1
+            };
+
+            label.Text = text;
+        }
+
+        private void UpdateMultiSlotProgress(int slot, double percent, string fileName)
+        {
+            CustomControls.ModernCircularProgressBar bar = slot switch
+            {
+                1 => progressBarMutli1,
+                2 => progressBarMutli2,
+                3 => progressBarMutli3,
+                4 => progressBarMutli4,
+                _ => progressBarMutli1
+            };
+
+            Label fileLabel = slot switch
+            {
+                1 => filesNameLabel1,
+                2 => filesNameLabel2,
+                3 => filesNameLabel3,
+                4 => filesNameLabel4,
+                _ => filesNameLabel1
+            };
+
+            bar.Value = Math.Min((int)(percent * 100), 10000);
+            bar.Text = $"{percent:F2}%";
+        }
+
+        private void UpdateMultiSlotStatus(int slot, string status, string file)
+        {
+            Label label = slot switch
+            {
+                1 => filesNameLabel1,
+                2 => filesNameLabel2,
+                3 => filesNameLabel3,
+                4 => filesNameLabel4,
+                _ => filesNameLabel1
+            };
+
+            string fileName = string.IsNullOrEmpty(file) ? "" : System.IO.Path.GetFileName(file);
+            label.Text = string.IsNullOrEmpty(fileName) ? status : $"{fileName} — {status}";
         }
 
         /// <summary>
@@ -8820,12 +9322,21 @@ namespace CopyThatProgram
                 {
                     if (!Directory.Exists(dirPath))
                     {
-                        Directory.CreateDirectory(dirPath);
+                        Directory.CreateDirectory(dirPath);          // <<-- folder now exists
+
+                        // --- update UI -------------------------------------------------
                         Invoke(() =>
                         {
                             fromFilesDirLabel.Text = dirPath;
                             statusLabel.Text = $"Creating folder – {System.IO.Path.GetFileName(dirPath)}";
+
+                            // find the *directory* item that owns this path
+                            var dirItem = _fileList.FirstOrDefault(d => d.IsDirectory &&
+                                                                       d.FilePath.Equals(dirPath, StringComparison.OrdinalIgnoreCase));
+                            if (dirItem != null)
+                                UpdateFileStatus(dirItem, "Folder Created...");
                         });
+                        // ----------------------------------------------------------------
                     }
                 }
                 catch (Exception ex)
@@ -8891,7 +9402,7 @@ namespace CopyThatProgram
                 if (copied)
                 {
                     Interlocked.Increment(ref _totalFilesCopied);
-                    Invoke(() => UpdateFileStatus(item, "Copied"));
+                    Invoke(() => UpdateFileStatus(item, "File Copied..."));
                 }
                 else
                 {
@@ -9207,6 +9718,58 @@ namespace CopyThatProgram
             catch (OperationCanceledException) { e.Cancel = true; }
         }
 
+
+
+
+
+
+
+        // ADD THIS HELPER
+        [System.Runtime.InteropServices.DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes,
+                                                   ref SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
+
+        private struct SHFILEINFO
+        {
+            public IntPtr hIcon;
+            public int iIcon;
+            public uint dwAttributes;
+            [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst = 260)]
+            public string szDisplayName;
+            [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst = 80)]
+            public string szTypeName;
+        }
+
+        private const uint SHGFI_ICON = 0x100;
+        private const uint SHGFI_SMALLICON = 0x0;
+
+
+        // ADD THIS SMALL WRAPPER
+        private void SetFileIcon(string filePath)
+        {
+            if (multithreadCheckBox.Checked) return;          // ignore in multi-thread
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+            {
+                fileIconPicBox.Image = null;                  // blank when no file
+                return;
+            }
+
+            SHFILEINFO shfi = new SHFILEINFO();
+            SHGetFileInfo(filePath, 0, ref shfi, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi),
+                          SHGFI_ICON | SHGFI_SMALLICON);
+
+            if (shfi.hIcon != IntPtr.Zero)
+            {
+                using (System.Drawing.Icon ico = System.Drawing.Icon.FromHandle(shfi.hIcon))
+                    fileIconPicBox.Image = ico.ToBitmap();
+                // release native handle to avoid leak
+                DestroyIcon(shfi.hIcon);
+            }
+        }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool DestroyIcon(IntPtr hIcon);
+
         /// <summary>
         /// Asynchronously copies a single file with detailed progress reporting, UI updates, and performance monitoring.
         /// Handles extended length paths, progress throttling, and real-time statistics display.
@@ -9217,31 +9780,60 @@ namespace CopyThatProgram
         /// <param name="targetBase">The base target directory where the file should be copied</param>
         /// <returns>A task representing the asynchronous file copy operation</returns>
         private async Task CopyFileWithProgress(FileInfoWrapper item,
-                                                long fileSize,
-                                                long fileBytesDone,
-                                                string targetBase)
-        { 
+                                                     long fileSize,
+                                                     long fileBytesDone,
+                                                     string targetBase)
+        {
             string srcPath = ToExtendedLengthPath(item.FilePath);
             string dstPath = ToExtendedLengthPath(
                 ComputeDestinationPath(item.FilePath, false, targetBase, _currentSourceRootPath));
             if (string.IsNullOrEmpty(dstPath)) return;
 
+            if (File.Exists(dstPath))
+            {
+                var srcInfo = new FileInfo(srcPath);
+                var dstInfo = new FileInfo(dstPath);
+
+                if (_doNotOverwrite)
+                {
+                    string reason = "File exists and 'Do Not Overwrite' is selected.";
+                    Invoke(() => UpdateFileStatus(item, "Skipped (exists)"));
+                    Interlocked.Increment(ref _totalFilesSkipped);
+                    HandleSkippedFile(item, reason, dstPath);
+                    return;
+                }
+                if (_overwriteIfNewer && srcInfo.LastWriteTime <= dstInfo.LastWriteTime)
+                {
+                    string reason = "Destination file is newer or the same age.";
+                    Invoke(() => UpdateFileStatus(item, "Skipped (not newer)"));
+                    Interlocked.Increment(ref _totalFilesSkipped);
+                    HandleSkippedFile(item, reason, dstPath);
+                    return;
+                }
+                File.Delete(dstPath);
+            }
+
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(dstPath)!);
 
             int bufferBytes = (int)(bufferNumUpDown.Value * 1024);
             byte[] buffer = new byte[bufferBytes];
-
             long lastTick = Environment.TickCount64;
 
-            await using var src = new FileStream(srcPath, FileMode.Open, FileAccess.Read,
+            // ✅ Use RetryOpenAsync and check for null
+            await using var src = await RetryOpenAsync(srcPath, FileMode.Open, FileAccess.Read,
                                                  FileShare.ReadWrite, bufferBytes,
                                                  FileOptions.SequentialScan);
-            await using var dst = new FileStream(dstPath, FileMode.Create, FileAccess.Write,
+            if (src == null) return; // Error was handled by RetryOpenAsync
+
+            // ✅ Use RetryOpenAsync and check for null
+            await using var dst = await RetryOpenAsync(dstPath, FileMode.CreateNew, FileAccess.Write,
                                                  FileShare.None, bufferBytes,
                                                  FileOptions.SequentialScan);
+            if (dst == null) return; // Error was handled by RetryOpenAsync
 
             while (true)
             {
+                SetFileIcon(item.FilePath);
                 _pauseEvent.WaitOne();
                 _cancelDialogEvent.WaitOne();
 
@@ -9252,9 +9844,6 @@ namespace CopyThatProgram
                 fileBytesDone += read;
                 _totalBytesProcessed += read;
 
-                long now = Environment.TickCount64;
-                lastTick = now;
-
                 double filePct = fileSize > 0 ? fileBytesDone * 100.0 / fileSize : 100.0;
                 double overallPct = _totalBytesToProcess > 0
                                     ? _totalBytesProcessed * 100.0 / _totalBytesToProcess
@@ -9264,40 +9853,11 @@ namespace CopyThatProgram
                 {
                     fileProgressBar.Value = Math.Min((int)(filePct * 100), 10_000);
                     totalProgressBar.Value = Math.Min((int)(overallPct * 100), 10_000);
-
-                    UpdateFileStatus(item,
-                        $"Pct: {filePct:0.00}% || Files Left: {_grandTotalFileCount - _processedFiles:N0}");
-                    filesDataGridView.InvalidateRow(_fileList.IndexOf(item));
-
-                    fileProcessedLabel.Text =
-                        $"File Processed: {FormatBytes(fileBytesDone)} / {FormatBytes(fileSize)}";
-                    totalCopiedProgressLabel.Text =
-                        $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
-
-                    long elapsedMs = _copyStopwatch.ElapsedMilliseconds;
-                    double speed = elapsedMs > 0
-                                   ? _totalBytesProcessed / 1_048_576.0 / (elapsedMs / 1000.0)
-                                   : 0.0;
-                    speedLabel.Text = $"Speed: {speed:F2} MB/Sec.";
-
-                    double remainSec = speed > 0
-                                       ? (_totalBytesToProcess - _totalBytesProcessed)
-                                         / 1_048_576.0 / speed
-                                       : 0;
-                    elapsedAndTargetTimeLabel.Text =
-                        $"Elapsed / Target: {_copyStopwatch.Elapsed:hh\\:mm\\:ss} / " +
-                        $"{(TimeSpan.FromSeconds(remainSec) + _copyStopwatch.Elapsed):hh\\:mm\\:ss}";
-
-                    DriveInfo drive = new DriveInfo(System.IO.Path.GetPathRoot(targetBase)!);
-                    long used = drive.TotalSize - drive.AvailableFreeSpace;
-                    totalHDSpaceLeftLabel.Text =
-                        $"Total Space Used ({drive.Name.TrimEnd('\\')}): " +
-                        $"{FormatBytes(used)} / {FormatBytes(drive.TotalSize)}";
+                    UpdateFileStatus(item, $"{filePct:F2}% done");
                 });
             }
-
-            await dst.FlushAsync();
         }
+
 
 
 
@@ -10026,14 +10586,25 @@ namespace CopyThatProgram
                 );
             }
         }
-
-
-
+        void PlayRes(System.IO.Stream wavStream)   // accept any Stream
+        {
+            if (wavStream == null) return;
+            try
+            {
+                using var ms = new System.IO.MemoryStream();
+                wavStream.CopyTo(ms);          // copy resource stream
+                ms.Position = 0;
+                using var sp = new System.Media.SoundPlayer(ms);
+                sp.Play();
+            }
+            catch { }
+        }
         private void _copyWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs isCancelled)
         {
+            bool isMultiThreaded = multithreadCheckBox.Checked;
+
             UpdateRunningTotals(FileOperation.Copy, _isCanceled);
 
-            // Save totals using the TotalsManager
             TotalsManager.SaveTotals(
                 _totalCopyOps, _totalMoveOps, _totalDeleteOps, _totalCancelledOps, _totalCompletedOps,
                 _grandFilesConsidered, _grandFilesCopied, _grandFilesMoved, _grandFilesDeleted, _grandFilesSkipped, _grandFilesFailed,
@@ -10041,7 +10612,6 @@ namespace CopyThatProgram
                 _grandElapsedTime, _grandTargetTime
             );
 
-            // Load updated totals into labels AND update reset button state
             TotalsManager.LoadTotalsIntoLabels(
                 totalCopyOperationsLabel, totalMoveOperationsLabel, totalDeleteOperationsLabel,
                 totalCancelledOperationsLabel, totalCompletedOperationsLabel,
@@ -10049,21 +10619,19 @@ namespace CopyThatProgram
                 totalFilesDeletedLabel, totalFilesSkippedLabel, totalFilesFailedLabel,
                 totalBytesProcessedLabel, totalBytesToProcessLabel,
                 totalElapsedTimeLabel, totalTargetTimeLabel,
-                resetTotalsButton // Pass the button reference
+                resetTotalsButton
             );
+
             allowTabChanges = true;
-            // Checks for skipped files.
+
             if (_skippedFilesList.Any())
             {
-                // Invokes UI thread to set tab.
                 if (InvokeRequired)
                     Invoke(new Action(() => tabControl1.SelectedIndex = 2));
-                // Directly sets tab.
                 else
                     tabControl1.SelectedIndex = 2;
             }
 
-            // Ensures UI updates on the main thread.
             Invoke((Delegate)(() =>
             {
                 fileProgressBar.Value = 0;
@@ -10072,50 +10640,42 @@ namespace CopyThatProgram
                 fileProgressBar.Text = "0.00%";
                 fileProgressBar.Value = fileProgressBar.Minimum;
                 totalProgressBar.Value = totalProgressBar.Minimum;
+
+                if (isMultiThreaded)
+                {
+                    progressBarMultiThreadTotal.Value = 0;
+                    progressBarMultiThreadTotal.Text = "0.00%";
+                }
             }));
 
-            // Checks for errors.
-            if (isCancelled.Error != null)
+          
+
+            if (isCancelled.Error != null)        
             {
-                status = "Cancelled";
-                // Stops stopwatch and update timer.
+                status = "Error";
                 _stopwatch.Stop();
                 _updateTimer.Stop();
-                // Resets elapsed time label.
                 elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
-                // Shows error message box.
                 MessageBox.Show($"Copy operation completed with errors: {isCancelled.Error.Message}", "Copy Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Logs the error.
                 LogError($"Copy Worker Error: {isCancelled.Error}");
-                // Invokes method to show stats and reset UI.
-                Invoke(() =>
-                {
-                    ShowOperationStatisticsSummary(false);
-                    ResetProgressUIAndVariables();
-                });
-                // Stops stopwatch and timer again.
-                _stopwatch.Stop();
-                _updateTimer.Stop();
+                if (onErrorCheckBox.Checked) PlayRes(Properties.Resources.OnError);
+                Invoke(() => { ShowOperationStatisticsSummary(isMultiThreaded); ResetProgressUIAndVariables(); });
             }
-            // Checks for cancellation.
-            else if (isCancelled.Cancelled)
+            else if (isCancelled.Cancelled)      
             {
                 status = "Cancelled";
-                // Stops stopwatch and timer.
                 _stopwatch.Stop();
                 _updateTimer.Stop();
-                // Resets elapsed time label.
                 elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
-                // Shows cancellation message.
                 MessageBox.Show("Copy operation cancelled by user.", "Operation Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Shows stats and resets UI.
-                ShowOperationStatisticsSummary(false);
+                if (onCancelCheckBox.Checked) PlayRes(Properties.Resources.OnCancel);
+                ShowOperationStatisticsSummary(isMultiThreaded);
                 ResetProgressUIAndVariables();
             }
-            // If successful.
-            else
+            else                                  
             {
-                // Ensures UI updates on the main thread.
+                status = "Completed";
+                if (onFinishCheckBox.Checked) PlayRes(Properties.Resources.OnFinish);
                 Invoke((Delegate)(() =>
                 {
                     fileProgressBar.Value = 0;
@@ -10124,59 +10684,44 @@ namespace CopyThatProgram
                     fileProgressBar.Text = "0.00%";
                     fileProgressBar.Value = fileProgressBar.Minimum;
                     totalProgressBar.Value = totalProgressBar.Minimum;
+
+                    if (isMultiThreaded)
+                    {
+                        progressBarMultiThreadTotal.Value = 0;
+                        progressBarMultiThreadTotal.Text = "0.00%";
+                    }
                 }));
-                status = "Completed";
-                // Invokes method to show stats and reset UI.
-                Invoke(() =>
-                {
-                    ShowOperationStatisticsSummary(false);
-                    ResetProgressUIAndVariables();
-                });
-                // Stops stopwatch and timer.
+                Invoke(() => { ShowOperationStatisticsSummary(isMultiThreaded); ResetProgressUIAndVariables(); });
                 _stopwatch.Stop();
                 _updateTimer.Stop();
-                // Resets elapsed time label.
                 elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
             }
 
-            // Updates drive space information.
             UpdateDriveSpaceInfo();
 
-            // Sets the application icon.
             using (var ms = new System.IO.MemoryStream(Properties.Resources.CopyThatIcon))
             {
                 this.Icon = new System.Drawing.Icon(ms);
             }
 
-            // Stops the operation timer.
             _operationTimer?.Stop();
-            // Unblocks paused threads.
             _pauseEvent.Set();
-            // Updates the notify icon text.
+
             if (proVersion)
             {
                 if (minimizeSystemTrayCheckBox.Checked)
-                {
                     notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc || Double-Click To Open";
-                }
                 else
-                {
                     notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc";
-                }
             }
             else
             {
                 if (minimizeSystemTrayCheckBox.Checked)
-                {
                     notifyIcon1.Text = "Copy That v1.0 By: Havoc || Double-Click To Open";
-                }
                 else
-                {
                     notifyIcon1.Text = "Copy That v1.0 By: Havoc";
-                }
             }
 
-            // Ensures UI updates on the main thread.
             Invoke((Delegate)(() =>
             {
                 fileProgressBar.Value = 0;
@@ -10186,39 +10731,33 @@ namespace CopyThatProgram
                 fileProgressBar.Value = fileProgressBar.Minimum;
                 totalProgressBar.Value = totalProgressBar.Minimum;
             }));
-            // Resets pause/resume button text.
+
             pauseResumeMultiButton.Text = "Pause";
 
-            // Enables and disables buttons.
             startButton.Enabled = true;
             pauseResumeMultiButton.Enabled = false;
             cancelMultiButton.Enabled = false;
 
-            // Resets progress labels.
             totalProgressBar.Text = "0.00%";
             fileProgressBar.Text = "0.00%";
 
-            // Resets progress bars.
             totalProgressBar.Value = 0;
             fileProgressBar.Value = 0;
-            // Resets status labels.
+
             fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
             totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / 0 Bytes";
             speedLabel.Text = "Speed: N/A";
 
-            // Resets internal state variables.
             _totalBytesProcessed = 0;
             _totalBytesToProcess = 0;
-            // Disposes the cancellation token source.
+
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = null;
 
-            // Sets the enabled state of various buttons.
             cancelButton.Enabled = false;
             pauseResumeButton.Enabled = false;
             skipButton.Enabled = false;
 
-            // Re-enables a large number of UI controls.
             copyMoveDeleteComboBox.Enabled = true;
             addFileButton.Enabled = true;
             removeFileButton.Enabled = true;
@@ -10244,12 +10783,9 @@ namespace CopyThatProgram
             copyFilesDirsCheckBox.Enabled = true;
             createCustomDirCheckBox.Enabled = true;
 
-            // Resets UI and variables.
             ResetProgressUIAndVariables();
-            // Stops the update timer.
             _updateTimer.Stop();
 
-            // Updates drive space information.
             UpdateDriveSpaceInfo();
 
             ShowAllTabs();
@@ -10490,152 +11026,7 @@ namespace CopyThatProgram
             directories.Add(targetBase);
         }
 
-        /// <summary>
-        /// Asynchronously copies a single file with progress reporting, retry logic, and cancellation support.
-        /// </summary>
-        /// <param name="fileItem">The file item wrapper containing file metadata</param>
-        /// <param name="sourceFile">The full path to the source file</param>
-        /// <param name="destFile">The full path to the destination file</param>
-        /// <param name="slotIndex">The index of the progress slot for UI updates</param>
-        /// <param name="token">Cancellation token to support operation cancellation</param>
-        /// <returns>A task representing the asynchronous copy operation</returns>
-        private async Task CopyFileWithSlotAsync(FileInfoWrapper fileItem,
-                                             string sourceFile,
-                                             string destFile,
-                                             int slotIndex,
-                                             CancellationToken token)
-        {
-            // Sets maximum number of retries.
-            const int maxRetries = 2;
-            // Initializes retry counter.
-            int retries = 0;
-            // Flag to track success.
-            bool success = false;
 
-            // Gets the progress bar, percent label, and file name label for the current slot.
-            var pb = GetProgressBar(slotIndex);
-            var nameLbl = GetFileNameLabel(slotIndex);
-
-            // Gets the size of the file to be copied.
-            long fileSize = new FileInfo(sourceFile).Length;
-
-            // Invokes UI updates for the start of the copy operation.
-            Invoke(() =>
-            {
-                nameLbl.Text = System.IO.Path.GetFileName(sourceFile);
-                pb.Value = 0;
-            });
-
-            // Loops while retries are within the limit and cancellation is not requested.
-            while (retries <= maxRetries && !token.IsCancellationRequested)
-            {
-                try
-                {
-                    // Creates the destination directory if it doesn't exist.
-                    Directory.CreateDirectory(System.IO.Path.GetDirectoryName(destFile));
-
-                    // Determines the buffer size in kilobytes.
-                    int BUF_KB = (int)(bufferNumUpDown.Value * 1024);
-                    // Creates the buffer array.
-                    byte[] buffer = new byte[BUF_KB];
-
-                    // Opens the source and destination file streams asynchronously.
-                    await using var src = new FileStream(sourceFile, FileMode.Open, FileAccess.Read,
-                                                         FileShare.ReadWrite, BUF_KB, FileOptions.SequentialScan);
-                    await using var dst = new FileStream(destFile, FileMode.Create, FileAccess.Write,
-                                                         FileShare.None, BUF_KB, FileOptions.SequentialScan);
-
-                    // Initializes a counter for bytes read for the current file.
-                    long bytesThisFile = 0;
-                    // Initializes variable for bytes read in each read operation.
-                    int read;
-
-                    // Reads from the source stream asynchronously.
-                    while ((read = await src.ReadAsync(buffer, token)) > 0)
-                    {
-                        // Waits for the pause event to be set, blocking if paused.
-                        _pauseEvent.WaitOne();
-                        // Waits for the cancel dialog event to be set.
-                        _cancelDialogEvent.WaitOne();
-
-                        // Writes the buffer to the destination stream.
-                        await dst.WriteAsync(buffer.AsMemory(0, read), token);
-                        // Adds the number of bytes read to the counter for the current file.
-                        bytesThisFile += read;
-
-                        // Calculates the percentage of the current file copied.
-                        double filePct = bytesThisFile * 100.0 / fileSize;
-                        // Invokes UI updates for file progress.
-                        Invoke(() =>
-                        {
-                            // Updates the file progress bar value.
-                            pb.Value = Math.Min(10000, (int)(filePct * 100));
-                        });
-
-                        // Atomically adds the bytes read to the total processed bytes counter.
-                        Interlocked.Add(ref _totalBytesProcessed, read);
-                        // Atomically increments the multi-threaded processed files counter.
-                        Interlocked.Increment(ref _multiThreadProcessedFiles);
-
-                        // Invokes UI updates for overall progress.
-                        Invoke(() =>
-                        {
-                            // Updates the label showing the number of files processed.
-                            fileCountMultiLabel.Text =
-                                $"Files Processed: {_multiThreadProcessedFiles:N0} / {_grandTotalFileCount:N0}";
-
-                            // Calculates the overall percentage.
-                            double overallPct = _totalBytesProcessed * 100.0 / _totalBytesToProcess;
-                            // Updates the multi-threaded overall progress label.
-                            //multiThreadTotalProgressLabel.Text = overallPct.ToString("0.00") + "%";
-                            // Updates the overall progress UI.
-                            UpdateOverallMultiThreadProgressUI();
-                        });
-                    }
-
-                    // Sets the success flag to true.
-                    success = true;
-                    // Exits the loop.
-                    break;
-                }
-                // Catches an OperationCanceledException and re-throws it.
-                catch (OperationCanceledException) { throw; }
-                // Catches any other exception and retries if the retry count is not exceeded.
-                catch when (retries < maxRetries)
-                {
-                    // Increments the retry counter.
-                    retries++;
-                    // Invokes UI update for the file status.
-                    Invoke(() => UpdateFileStatus(fileItem, $"Failed: Try #{retries}"));
-                    // Delays for a short period before retrying.
-                    await Task.Delay(50, token);
-                }
-                // Catches any other exception and handles the error.
-                catch (Exception ex)
-                {
-                    // Logs the failed file.
-                    HandleErrorFile(fileItem, $"Copy failed: {ex.Message}", destFile);
-                    // Atomically increments the total files failed counter.
-                    Interlocked.Increment(ref _totalFilesFailed);
-                    // Exits the loop.
-                    break;
-                }
-            }
-
-            // If the copy was successful.
-            if (success)
-            {
-                // Atomically increments the total files copied counter.
-                Interlocked.Increment(ref _totalFilesCopied);
-
-                // Invokes UI updates for successful completion.
-                Invoke(() =>
-                {
-                    // Updates the file status.
-                    UpdateFileStatus(fileItem, "Copied");
-                });
-            }
-        }
 
         /// <summary>
         /// Gets the progress bar control for the specified slot index.
@@ -10705,110 +11096,8 @@ namespace CopyThatProgram
             fileProgressBar.Text = $"{(fileProgress10k / 100.0):F2}%";
         }
 
-        /// <summary>
-        /// Processes a single file by copying or moving it from a source to a destination.
-        /// This method handles progress reporting, cancellation checks, and pausing.
-        /// </summary>
-        /// <param name="sourceFile">The full path of the source file.</param>
-        /// <param name="destinationFile">The full path of the destination file.</param>
-        /// <param name="operationType">The type of file operation to perform (Copy or Move).</param>
-        private void ProcessSingleFile(string sourceFile, string destinationFile, FileOperation operationType)
-        {
-            // Gets the destination directory name.
-            string destDir = System.IO.Path.GetDirectoryName(destinationFile);
-            // Creates the destination directory if it doesn't exist.
-            if (!Directory.Exists(destDir))
-                Directory.CreateDirectory(destDir);
 
-            // Creates a FileInfo object for the source file.
-            FileInfo fi = new FileInfo(sourceFile);
-            // Gets the size of the file.
-            long fileSize = fi.Length;
 
-            // Reports initial progress (0%) for the file.
-            ReportFileProgress(0, fi.Name, 0, fileSize);
-
-            // Gets the buffer size from the UI control.
-            int bufferSize = (int)bufferNumUpDown.Value * 1024;
-            // Creates the buffer array.
-            byte[] buffer = new byte[bufferSize];
-
-            // Initializes counter for bytes read for this file.
-            long bytesThisFile = 0;
-
-            try
-            {
-                // Opens file streams for the source and destination files.
-                using FileStream src = new FileStream(sourceFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                using FileStream dst = new FileStream(destinationFile, FileMode.Create, FileAccess.Write, FileShare.Read);
-
-                // Initializes a variable to hold the number of bytes read.
-                int read;
-                // Reads from the source stream into the buffer.
-                while ((read = src.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    // Checks if cancellation is pending. If so, throws an exception.
-                    if (_copyWorker.CancellationPending)
-                        throw new OperationCanceledException("Cancelled by user");
-                    // Waits indefinitely for the pause event to be set.
-                    _pauseEvent.WaitOne(Timeout.Infinite);
-
-                    // Writes the buffer to the destination stream.
-                    dst.Write(buffer, 0, read);
-                    // Adds the number of bytes read to the counter for the current file.
-                    bytesThisFile += read;
-
-                    // Atomically adds the bytes read to the total processed bytes counter.
-                    Interlocked.Add(ref _totalBytesProcessed, read);
-
-                    // Calculates the file progress as an integer from 0 to 10000.
-                    int filePct10k = fileSize > 0
-                        ? (int)Math.Round(bytesThisFile / (double)fileSize * 10000)
-                        : 0;
-                    // Reports the file progress.
-                    ReportFileProgress(filePct10k, fi.Name, bytesThisFile, fileSize);
-
-                    // Calculates the overall progress.
-                    int overallPct10k = _totalBytesToProcess > 0
-                        ? (int)Math.Round(_totalBytesProcessed / (double)_totalBytesToProcess * 10000)
-                        : 0;
-                    // Clamps the overall percentage to 10000.
-                    overallPct10k = Math.Min(overallPct10k, 10000);
-                    // Reports overall progress to the background worker.
-                    _copyWorker.ReportProgress(overallPct10k, null);
-                }
-
-                // Reports 100% progress for the file.
-                ReportFileProgress(10000, fi.Name, fileSize, fileSize);
-
-                // If the operation is a 'Move', deletes the source file.
-                if (operationType == FileOperation.Move)
-                {
-                    try { File.Delete(sourceFile); }
-                    // Catches exceptions during deletion and logs them.
-                    catch (Exception ex)
-                    {
-                        LogError($"Could not delete source after move: {ex.Message}", sourceFile, destinationFile);
-                    }
-                }
-
-                // Atomically increments the processed files counter.
-                Interlocked.Increment(ref _processedFiles);
-            }
-            // Catches an operation canceled exception and re-throws it.
-            catch (OperationCanceledException)
-            {
-                throw;
-            }
-            // Catches any other exception.
-            catch (Exception ex)
-            {
-                // Atomically adds the remaining bytes of the failed file to the processed bytes count.
-                Interlocked.Add(ref _totalBytesProcessed, fileSize - bytesThisFile);
-                // Throws a new exception with a descriptive message.
-                throw new Exception($"Failed to process {sourceFile}: {ex.Message}", ex);
-            }
-        }
 
         /// <summary>
         /// Securely deletes a file by overwriting its contents with random data for a specified number of passes before final deletion.
@@ -13806,10 +14095,14 @@ namespace CopyThatProgram
                 searchTextBox.PlaceholderText = "Ingrese el nombre del archivo o carpeta a buscar...";
 
                 onFinishComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.Clear();
                 onFinishComboBox.Items.AddRange(new[]{ "No hacer nada", "Suspender", "Cerrar sesión",
                                       "Salir del programa", "Apagar" });
-                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
 
+                onFinishMultiComboBox.Items.AddRange(new[]{ "No hacer nada", "Suspender", "Cerrar sesión",
+                                      "Salir del programa", "Apagar" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
                 copyMoveDeleteComboBox.Items.Clear();
                 copyMoveDeleteComboBox.Items.AddRange(new[] { "Copiar archivos", "Mover archivos", "Borrado seguro" });
                 if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
@@ -13862,6 +14155,10 @@ namespace CopyThatProgram
                 onFinishComboBox.Items.AddRange(new[] { "Do Nothing", "Sleep", "Log Off", "Exit Program", "Shut Down" });
                 if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
 
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Do Nothing", "Sleep", "Log Off", "Exit Program", "Shut Down" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
                 copyMoveDeleteComboBox.Items.Clear();
                 copyMoveDeleteComboBox.Items.AddRange(new[] { "Copy Files", "Move Files", "Secure Delete" });
                 if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
@@ -13909,7 +14206,7 @@ namespace CopyThatProgram
         /// <summary>
         /// Applies a visual skin theme by its English key name.
         /// </summary>
-      
+
         private void rollUpLabel_MouseEnter(object sender, EventArgs e)
         {
             // This event handler is triggered when the mouse pointer enters the area of the 'rollUpLabel'.
@@ -14185,8 +14482,8 @@ namespace CopyThatProgram
             }
 
             // Debug output (remove these after testing)
-           // MessageBox.Show(skinsComboBox.SelectedItem.ToString());
-           // MessageBox.Show(languageComboBox.SelectedItem.ToString());
+            // MessageBox.Show(skinsComboBox.SelectedItem.ToString());
+            // MessageBox.Show(languageComboBox.SelectedItem.ToString());
 
             // Convert the display name back to the key we really want to store
             string skinKey = ToEn(skinsComboBox.SelectedItem.ToString());
@@ -14207,7 +14504,7 @@ namespace CopyThatProgram
 
                 // Debug output
                 System.Diagnostics.Debug.WriteLine($"[EXIT] Saving Custom Color - Fore: {this.ForeColor}, Back: {this.BackColor}");
-               // MessageBox.Show($"Saving: Back={this.BackColor}, Fore={this.ForeColor}");
+                // MessageBox.Show($"Saving: Back={this.BackColor}, Fore={this.ForeColor}");
 
                 // ALWAYS save custom colors immediately, regardless of auto-save setting
                 Properties.Settings.Default.Save();
@@ -14287,6 +14584,26 @@ namespace CopyThatProgram
             toolStripSkipped.Text = "About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.";
         }
 
+
+        private readonly List<string> _sourcePaths = new();
+
+        private void AddSourceFolder(string fullPath)
+        {
+            // 1. Duplication check
+            if (_sourcePaths.Any(p => p.Equals(fullPath, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("This source folder has already been added.",
+                                "Duplicate folder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            _sourcePaths.Add(fullPath);
+
+            fromFilesDirLabel.Text = string.Join(", ",
+                _sourcePaths.Select(p => System.IO.Path.GetFileName(p))); 
+
+            UpdateDriveSpaceInfo();
+        }
         private async void sourceDirectoryLabel_Click(object sender, EventArgs e)
         {
             filesDataGridView.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
@@ -14300,7 +14617,6 @@ namespace CopyThatProgram
                 if (folderDialog.ShowDialog() == DialogResult.OK)
                 {
                     string sourceDir = folderDialog.SelectedPath;
-
                     if (!string.IsNullOrEmpty(targetDirLabel.Text) &&
                        targetPaths.Any(tp => string.Equals(tp, sourceDir, StringComparison.OrdinalIgnoreCase)))
                     {
@@ -14319,6 +14635,7 @@ namespace CopyThatProgram
                     else
                     {
                         _sourceDirectories.Add(folderDialog.SelectedPath);
+                        AddSourceFolder(sourceDir);
                     }
 
 

@@ -488,7 +488,7 @@ Close Copy That</value>
     <value>File:</value>
   </data>
   <data name="fromLabel.Text" xml:space="preserve">
-    <value>From:</value>
+    <value>Source(s):</value>
   </data>
   <data name="targetLabel.Text" xml:space="preserve">
     <value>Target(s):</value>

@@ -239,6 +239,14 @@ namespace CustomControls
                 BeginInvoke((MethodInvoker)(() => Invalidate(invalidateChildren: false)));
         }
 
+
+        protected override void OnForeColorChanged(EventArgs e)
+        {
+            base.OnForeColorChanged(e);
+            _textBrush?.Dispose();
+            _textBrush = new SolidBrush(ForeColor);
+            InvalidateNonChildren();
+        }
         #endregion
     }
 }

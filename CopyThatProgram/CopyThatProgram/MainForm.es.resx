@@ -488,7 +488,7 @@ Cerrar Copy That</value>
     <value>Archivo:</value>
   </data>
   <data name="fromLabel.Text" xml:space="preserve">
-    <value>Desde:</value>
+    <value>Origen(es):</value>
   </data>
   <data name="targetLabel.Text" xml:space="preserve">
     <value>Destino(s):</value>
@@ -777,12 +777,6 @@ Francés</value>
   <data name="totalBytesToProcessTitleLabel.Text" xml:space="preserve">
     <value>Total de Bytes por Procesar (Est):</value>
   </data>
-  <data name="logDaysNumUpDown.AccessibleName" xml:space="preserve">
-    <value>Días de Retención de Registros</value>
-  </data>
-  <data name="setMBGBUnderNumUpDown.AccessibleName" xml:space="preserve">
-    <value>Límite Inferior (MB)</value>
-  </data>
   <data name="totalTargetTimeTitleLabel.Text" xml:space="preserve">
     <value>Tiempo Total Objetivo:</value>
   </data>
@@ -791,5 +785,11 @@ Francés</value>
   </data>
   <data name="resetTotalsButton.Text" xml:space="preserve">
     <value>Restablecer Todos los Totales en Ejecución</value>
+  </data>
+  <data name="logDaysNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Días de Retención de Registros</value>
+  </data>
+  <data name="setMBGBUnderNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Límite Inferior (MB)</value>
   </data>
 </root>
