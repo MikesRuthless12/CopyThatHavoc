@@ -932,7 +932,7 @@ namespace CopyThatProgram
             GetMyAppsName();
             //SyncStartupSetting();
 
-            this.Shown += MainForm_Shown; // Add this line
+            this.Shown += MainForm_Shown;
         }
 
         /// <summary>
@@ -2425,21 +2425,18 @@ namespace CopyThatProgram
         }
 
 
-        private void InitializeLanguageComboBox(string language)
-        {
-            // you already had this – keep it as-is, but **do not** re-attach the event here
-            languageComboBox.Items.Clear();
-            languageComboBox.Items.AddRange(language switch
-            {
-                "Spanish" => new[] { "Español", "Francés", "Deutsch", "Inglés" },
-                "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol" },
-                "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch" },
-                _ => new[] { "English", "French", "German", "Spanish" }
-            });
-            languageComboBox.SelectedItem = LangKeyToDisplay.TryGetValue(language, out var d) ? d : language;
-        }
-        private bool _isLoadingForm = false; // Add this field at the class level
+        private bool _isLoadingForm = false;
 
+        private static readonly Dictionary<string, string> LangKeyToDisplay =
+            new(StringComparer.OrdinalIgnoreCase)
+        {
+    {"English", "English"},
+    {"Spanish", "Español"},
+    {"French",  "Français"},
+    {"German",  "Deutsch"}
+        };
+
+        // ==================== MAIN FORM LOAD ====================
         private void MainForm_Load(object sender, EventArgs e)
         {
             _isUpdatingLanguage = true;
@@ -2482,13 +2479,13 @@ namespace CopyThatProgram
                 tabControl1.Selecting += TabControl1_Selecting;
                 InitializeResetButton();
                 TotalsManager.LoadTotalsIntoLabels(
-               totalCopyOperationsLabel, totalMoveOperationsLabel, totalDeleteOperationsLabel,
-               totalCancelledOperationsLabel, totalCompletedOperationsLabel,
-               totalFilesConsideredLabel, totalFilesCopiedLabel, totalFilesMovedLabel,
-               totalFilesDeletedLabel, totalFilesSkippedLabel, totalFilesFailedLabel,
-               totalBytesProcessedLabel, totalBytesToProcessLabel,
-               totalElapsedTimeLabel, totalTargetTimeLabel,
-               resetTotalsButton);
+                    totalCopyOperationsLabel, totalMoveOperationsLabel, totalDeleteOperationsLabel,
+                    totalCancelledOperationsLabel, totalCompletedOperationsLabel,
+                    totalFilesConsideredLabel, totalFilesCopiedLabel, totalFilesMovedLabel,
+                    totalFilesDeletedLabel, totalFilesSkippedLabel, totalFilesFailedLabel,
+                    totalBytesProcessedLabel, totalBytesToProcessLabel,
+                    totalElapsedTimeLabel, totalTargetTimeLabel,
+                    resetTotalsButton);
                 CleanupOldVersions();
                 WireHoverLabels();
 
@@ -2541,15 +2538,17 @@ namespace CopyThatProgram
             finally
             {
                 _isUpdatingLanguage = false;
+                _isLoadingForm = false; // CRITICAL: Set to false here!
 
                 languageComboBox.SelectedIndexChanged += languageComboBox_SelectedIndexChanged;
                 skinsComboBox.SelectedIndexChanged += skinsComboBox_SelectedIndexChanged;
             }
         }
 
+        // ==================== MAIN FORM SHOWN ====================
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            // Apply skin colors AFTER the form is fully shown and designer has finished
+            // Apply skin colors AFTER the form is fully shown
             string savedSkinKey = Properties.Settings.Default.Skin ?? "Light Mode";
 
             if (savedSkinKey == "Custom Color")
@@ -2557,8 +2556,8 @@ namespace CopyThatProgram
                 var savedBack = Properties.Settings.Default.CustomBackColor;
                 var savedFore = Properties.Settings.Default.CustomForeColor;
 
-                // Validate custom colors
-                if (savedBack.A != 0 && !(savedBack.R == 0 && savedBack.G == 0 && savedBack.B == 0))
+                // Validate custom colors (check if alpha is non-zero)
+                if (savedBack.A != 0 && savedFore.A != 0)
                 {
                     ApplySkin("Custom Color", savedFore, savedBack);
                     System.Diagnostics.Debug.WriteLine($"[SHOWN] Applied Custom Color - Back: {savedBack}, Fore: {savedFore}");
@@ -2581,6 +2580,187 @@ namespace CopyThatProgram
                 System.Diagnostics.Debug.WriteLine($"[SHOWN] Applied skin: {savedSkinKey}");
             }
         }
+
+        // ==================== INITIALIZE LANGUAGE COMBOBOX ====================
+        private void InitializeLanguageComboBox(string language)
+        {
+            languageComboBox.Items.Clear();
+            languageComboBox.Items.AddRange(language switch
+            {
+                "Spanish" => new[] { "Inglés", "Francés", "Deutsch", "Español" },  // FIXED: Match pattern
+                "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol" },
+                "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch" },
+                _ => new[] { "English", "French", "German", "Spanish" }
+            });
+            languageComboBox.SelectedItem = LangKeyToDisplay.TryGetValue(language, out var d) ? d : language;
+        }
+
+        // ==================== APPLY SKIN ====================
+        private void ApplySkin(string englishKey, Color? foreColor = null, Color? backColor = null)
+        {
+            // FIXED: Guard against both flags
+            if (_isUpdatingLanguage || _isLoadingForm) return;
+
+            try
+            {
+                this.SuspendLayout();
+
+                // Determine the colors to use
+                Color fg;
+                Color bg;
+
+                switch (englishKey)
+                {
+                    case "Dark Mode":
+                        fg = foreColor ?? Color.White;
+                        bg = backColor ?? Color.Black;
+                        break;
+
+                    case "Medium Mode":
+                        fg = foreColor ?? Color.Black;
+                        bg = backColor ?? Color.Gainsboro;
+                        break;
+
+                    case "Light Mode":
+                        fg = foreColor ?? Color.Black;
+                        bg = backColor ?? Color.White;
+                        break;
+
+                    case "Custom Color":
+                        // For custom color, use provided colors or load from settings
+                        if (foreColor.HasValue && backColor.HasValue)
+                        {
+                            fg = foreColor.Value;
+                            bg = backColor.Value;
+                        }
+                        else
+                        {
+                            // Load saved custom colors if not provided
+                            fg = CopyThatProgram.Properties.Settings.Default.CustomForeColor;
+                            bg = CopyThatProgram.Properties.Settings.Default.CustomBackColor;
+                        }
+                        break;
+
+                    default:
+                        fg = foreColor ?? Color.Black;
+                        bg = backColor ?? Color.White;
+                        break;
+                }
+
+                // Apply to form
+                this.BackColor = bg;
+                this.ForeColor = fg;
+
+                // Apply to all child controls
+                foreach (System.Windows.Forms.Control ctrl in this.Controls)
+                    ApplyColorsToControl(ctrl, fg, bg);
+
+                // Update title bar
+                string displayName = ToDisplay(englishKey);
+                this.Text = $"Copy That v1.0 - {displayName}";
+
+                this.ResumeLayout(true);
+                this.Refresh();
+
+                System.Diagnostics.Debug.WriteLine($"[ApplySkin] Applied '{englishKey}' - ForeColor: {fg}, BackColor: {bg}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error applying skin '{englishKey}': {ex.Message}");
+            }
+        }
+
+        // ==================== HELPER METHODS ====================
+        private void UpdateSkinsComboBoxItems(string languageKey)
+        {
+            skinsComboBox.Items.Clear();
+
+            switch (languageKey)
+            {
+                case "Spanish":
+                    skinsComboBox.Items.AddRange(new[] { "Modo Claro", "Modo Medio", "Modo Oscuro", "_________________", "Color Personalizado" });
+                    break;
+                case "French":
+                    skinsComboBox.Items.AddRange(new[] { "Mode Clair", "Mode Moyen", "Mode Sombre", "_________________", "Couleur Personnalisée" });
+                    break;
+                case "German":
+                    skinsComboBox.Items.AddRange(new[] { "Heller Modus", "Mittlerer Modus", "Dunkler Modus", "_________________", "Benutzerdefinierte Farbe" });
+                    break;
+                default: // English
+                    skinsComboBox.Items.AddRange(new[] { "Light Mode", "Medium Mode", "Dark Mode", "_________________", "Custom Color" });
+                    break;
+            }
+        }
+
+        private void SelectSkinInCombo(string englishKey)
+        {
+            if (skinsComboBox == null || skinsComboBox.Items.Count == 0) return;
+
+            string localizedDisplay = ToDisplay(englishKey);
+            int index = skinsComboBox.Items.IndexOf(localizedDisplay);
+
+            if (index != -1)
+            {
+                skinsComboBox.SelectedIndex = index;
+            }
+            else
+            {
+                // Fallback: try English key directly
+                index = skinsComboBox.Items.IndexOf(englishKey);
+                if (index != -1)
+                {
+                    skinsComboBox.SelectedIndex = index;
+                }
+                else
+                {
+                    // Last resort: default to first item
+                    skinsComboBox.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private string ToDisplay(string englishKey)
+        {
+            if (!SkinLocalized.TryGetValue(englishKey, out var translations))
+                return englishKey;
+
+            string currentLang = languageComboBox.SelectedItem?.ToString() ?? "English";
+
+            return currentLang switch
+            {
+                "Español" or "Spanish" => translations.Spanish,
+                "Français" or "French" => translations.French,
+                "Deutsch" or "German" => translations.German,
+                _ => englishKey
+            };
+        }
+
+        private string ToEn(string display) => display switch
+        {
+            "Modo Claro" or "Mode Clair" or "Heller Modus" => "Light Mode",
+            "Modo Medio" or "Mode Moyen" or "Mittlerer Modus" => "Medium Mode",
+            "Modo Oscuro" or "Mode Sombre" or "Dunkler Modus" => "Dark Mode",
+            "Color Personalizado" or "Couleur Personnalisée" or "Benutzerdefinierte Farbe" => "Custom Color",
+            _ => display
+        };
+
+        private void ApplyColorsToControl(System.Windows.Forms.Control ctrl, Color fore, Color back)
+        {
+            ctrl.ForeColor = fore;
+            ctrl.BackColor = back;
+
+            foreach (System.Windows.Forms.Control child in ctrl.Controls)
+                ApplyColorsToControl(child, fore, back);
+        }
+
+        private static readonly Dictionary<string, (string Spanish, string French, string German)> SkinLocalized =
+            new(StringComparer.OrdinalIgnoreCase)
+        {
+    { "Light Mode", ("Modo Claro", "Mode Clair", "Heller Modus") },
+    { "Medium Mode", ("Modo Medio", "Mode Moyen", "Mittlerer Modus") },
+    { "Dark Mode", ("Modo Oscuro", "Mode Sombre", "Dunkler Modus") },
+    { "Custom Color", ("Color Personalizado", "Couleur Personnalisée", "Benutzerdefinierte Farbe") }
+        };
 
         /// <summary>
         /// Translates the header text of the DataGridView columns using a resource manager.
@@ -4090,16 +4270,11 @@ namespace CopyThatProgram
 
                 string selectedDisplay = skinsComboBox.SelectedItem.ToString();
 
-                // Rest of your existing code...
+                // Handle separator selection
                 if (selectedDisplay == "_________________")
                 {
                     string savedKey = CopyThatProgram.Properties.Settings.Default.Skin ?? "Light Mode";
-                    string display = ToDisplay(savedKey);
-                    int index = skinsComboBox.Items.IndexOf(display);
-                    if (index != -1)
-                        skinsComboBox.SelectedIndex = index;
-                    else
-                        skinsComboBox.SelectedIndex = 0;
+                    SelectSkinInCombo(savedKey);
                     return;
                 }
 
@@ -13479,19 +13654,10 @@ namespace CopyThatProgram
         private string _savedSkinName;
         int skinNum = 0;
 
-        private static readonly Dictionary<string, string> LangKeyToDisplay =
-            new(StringComparer.OrdinalIgnoreCase)
-        {
-    {"English", "English"},
-    {"Spanish", "Español"},
-    {"French",  "Français"},
-    {"German",  "Deutsch"}
-        };
-
 
         private void languageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_isUpdatingLanguage) return; // prevent recursion
+            if (_isUpdatingLanguage || _isLoadingForm) return; // Guard against recursion and initial load
             _isUpdatingLanguage = true;
 
             try
@@ -13585,77 +13751,6 @@ namespace CopyThatProgram
             }
         }
 
-        private void UpdateSkinsComboBoxItems(string languageKey)
-        {
-            skinsComboBox.Items.Clear();
-
-            switch (languageKey)
-            {
-                case "Spanish":
-                    skinsComboBox.Items.AddRange(new[] { "Modo Claro", "Modo Medio", "Modo Oscuro", "_________________", "Color Personalizado" });
-                    break;
-                case "French":
-                    skinsComboBox.Items.AddRange(new[] { "Mode Clair", "Mode Moyen", "Mode Sombre", "_________________", "Couleur Personnalisée" });
-                    break;
-                case "German":
-                    skinsComboBox.Items.AddRange(new[] { "Heller Modus", "Mittlerer Modus", "Dunkler Modus", "_________________", "Benutzerdefinierte Farbe" });
-                    break;
-                default: // English
-                    skinsComboBox.Items.AddRange(new[] { "Light Mode", "Medium Mode", "Dark Mode", "_________________", "Custom Color" });
-                    break;
-            }
-        }
-
-        private void SelectSkinInCombo(string englishKey)
-        {
-            if (skinsComboBox == null || skinsComboBox.Items.Count == 0) return;
-
-            string localizedDisplay = ToDisplay(englishKey);   // English -> current language
-            int index = skinsComboBox.Items.IndexOf(localizedDisplay);
-
-            if (index != -1)
-            {
-                skinsComboBox.SelectedIndex = index;
-            }
-            else
-            {
-                // Fallback: try English key directly
-                index = skinsComboBox.Items.IndexOf(englishKey);
-                if (index != -1)
-                {
-                    skinsComboBox.SelectedIndex = index;
-                }
-                else
-                {
-                    // Last resort: default to first item
-                    skinsComboBox.SelectedIndex = 0;
-                }
-            }
-        }
-        private string ToDisplay(string englishKey)
-        {
-            if (!SkinLocalized.TryGetValue(englishKey, out var translations))
-                return englishKey;
-
-            string currentLang = languageComboBox.SelectedItem?.ToString() ?? "English";
-
-            return currentLang switch
-            {
-                "Español" or "Spanish" => translations.Spanish,
-                "Français" or "French" => translations.French,
-                "Deutsch" or "German" => translations.German,
-                _ => englishKey
-            };
-        }
-
-        private string ToEn(string display) => display switch
-        {
-            "Modo Claro" or "Mode Clair" or "Heller Modus" => "Light Mode",
-            "Modo Medio" or "Mode Moyen" or "Mittlerer Modus" => "Medium Mode",
-            "Modo Oscuro" or "Mode Sombre" or "Dunkler Modus" => "Dark Mode",
-            "Color Personalizado" or "Couleur Personnalisée" or "Benutzerdefinierte Farbe" => "Custom Color",
-            _ => display   // already English or unknown
-        };
 
 
 
@@ -13814,109 +13909,7 @@ namespace CopyThatProgram
         /// <summary>
         /// Applies a visual skin theme by its English key name.
         /// </summary>
-        private void ApplySkin(string englishKey, Color? foreColor = null, Color? backColor = null)
-        {
-            if (_isUpdatingLanguage) return; // Prevent skin changes during language updates
-
-            try
-            {
-                this.SuspendLayout();
-
-                // Determine the colors to use
-                Color fg;
-                Color bg;
-
-                switch (englishKey)
-                {
-                    case "Dark Mode":
-                        fg = foreColor ?? Color.White;
-                        bg = backColor ?? Color.Black;
-                        break;
-
-                    case "Medium Mode":
-                        fg = foreColor ?? Color.Black;
-                        bg = backColor ?? Color.Gainsboro;
-                        break;
-
-                    case "Light Mode":
-                        fg = foreColor ?? Color.Black;
-                        bg = backColor ?? Color.White;
-                        break;
-
-                    case "Custom Color":
-                        // For custom color, use provided colors or load from settings
-                        if (foreColor.HasValue && backColor.HasValue)
-                        {
-                            fg = foreColor.Value;
-                            bg = backColor.Value;
-                        }
-                        else
-                        {
-                            // Load saved custom colors if not provided
-                            fg = CopyThatProgram.Properties.Settings.Default.CustomForeColor;
-                            bg = CopyThatProgram.Properties.Settings.Default.CustomBackColor;
-                        }
-                        break;
-
-                    default:
-                        fg = foreColor ?? Color.Black;
-                        bg = backColor ?? Color.White;
-                        break;
-                }
-
-                // Apply to form
-                this.BackColor = bg;
-                this.ForeColor = fg;
-
-                // Apply to all child controls
-                foreach (System.Windows.Forms.Control ctrl in this.Controls)
-                    ApplyColorsToControl(ctrl, fg, bg);
-
-                // Update title bar
-                string displayName = ToDisplay(englishKey);
-                this.Text = $"Copy That v1.0 - {displayName}";
-
-                this.ResumeLayout(true);
-                this.Refresh(); // Force immediate visual update
-
-                System.Diagnostics.Debug.WriteLine($"[ApplySkin] Applied '{englishKey}' - ForeColor: {fg}, BackColor: {bg}");
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error applying skin '{englishKey}': {ex.Message}");
-            }
-        }
-
-
-        /// <summary>
-        /// Recursively applies foreground/background colors to a control and its children.
-        /// </summary>
-        private void ApplyColorsToControl(System.Windows.Forms.Control ctrl, Color fore, Color back)
-        {
-            ctrl.ForeColor = fore;
-            ctrl.BackColor = back;
-
-            foreach (System.Windows.Forms.Control child in ctrl.Controls)
-                ApplyColorsToControl(child, fore, back);
-        }
-
-
-        
-
-
-        /// <summary>
-        /// Unified multilingual map of all skin display names.
-        /// Keys are in English; values hold localized equivalents.
-        /// </summary>
-        private static readonly Dictionary<string, (string Spanish, string French, string German)> SkinLocalized =
-            new(StringComparer.OrdinalIgnoreCase)
-        {
-    { "Light Mode", ("Modo Claro", "Mode Clair", "Heller Modus") },
-    { "Medium Mode", ("Modo Medio", "Mode Moyen", "Mittlerer Modus") },
-    { "Dark Mode", ("Modo Oscuro", "Mode Sombre", "Dunkler Modus") },
-    { "Custom Color", ("Color Personalizado", "Couleur Personnalisée", "Benutzerdefinierte Farbe") }
-        };
-
+      
         private void rollUpLabel_MouseEnter(object sender, EventArgs e)
         {
             // This event handler is triggered when the mouse pointer enters the area of the 'rollUpLabel'.
@@ -14192,8 +14185,8 @@ namespace CopyThatProgram
             }
 
             // Debug output (remove these after testing)
-            MessageBox.Show(skinsComboBox.SelectedItem.ToString());
-            MessageBox.Show(languageComboBox.SelectedItem.ToString());
+           // MessageBox.Show(skinsComboBox.SelectedItem.ToString());
+           // MessageBox.Show(languageComboBox.SelectedItem.ToString());
 
             // Convert the display name back to the key we really want to store
             string skinKey = ToEn(skinsComboBox.SelectedItem.ToString());
@@ -14214,7 +14207,7 @@ namespace CopyThatProgram
 
                 // Debug output
                 System.Diagnostics.Debug.WriteLine($"[EXIT] Saving Custom Color - Fore: {this.ForeColor}, Back: {this.BackColor}");
-                MessageBox.Show($"Saving: Back={this.BackColor}, Fore={this.ForeColor}");
+               // MessageBox.Show($"Saving: Back={this.BackColor}, Fore={this.ForeColor}");
 
                 // ALWAYS save custom colors immediately, regardless of auto-save setting
                 Properties.Settings.Default.Save();
