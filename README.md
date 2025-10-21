@@ -24,7 +24,7 @@ The default Windows Explorer copy-and-paste functionality often lacks visibility
 
 ## Installation
 
-1. Download the latest release from the [Releases(https://github.com/MikesRuthless12/CopyThat/releases)] page.
+1. Download the latest release from the [Releases(https://github.com/MikesRuthless12/CopyThatHavoc/releases)] page.
 2. Extract the files to a directory of your choice.
 3. Run the `CopyThat.exe` file to get started.
 
@@ -44,7 +44,7 @@ If you're interested in contributing, here are the steps to set up the developme
 
 1. Clone the repository:
    ```bash
-   git clone (https://github.com/MikesRuthless12/CopyThat.git)
+   git clone (https://github.com/MikesRuthless12/CopyThatHavoc.git)
 2. Open the solution file in Visual Studio 2022 or later.
 3. Build the project to ensure all dependencies are restored.
 4. Start coding!
