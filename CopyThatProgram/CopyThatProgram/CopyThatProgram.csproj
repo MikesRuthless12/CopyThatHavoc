@@ -74,6 +74,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ModernProgress\ModernProgress.csproj" />
+    <ProjectReference Include="..\MyControlsLibrary\MyControlsLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

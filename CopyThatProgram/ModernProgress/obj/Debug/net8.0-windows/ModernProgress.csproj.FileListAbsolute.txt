@@ -1,0 +1,11 @@
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\bin\Debug\net8.0-windows\ModernProgress.deps.json
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\bin\Debug\net8.0-windows\ModernProgress.dll
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\bin\Debug\net8.0-windows\ModernProgress.pdb
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\ModernProgress.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\ModernProgress.AssemblyInfoInputs.cache
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\ModernProgress.AssemblyInfo.cs
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\ModernProgress.csproj.CoreCompileInputs.cache
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\ModernProgress.dll
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\refint\ModernProgress.dll
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\ModernProgress.pdb
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\ModernProgress\obj\Debug\net8.0-windows\ref\ModernProgress.dll

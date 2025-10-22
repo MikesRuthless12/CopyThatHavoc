@@ -49,6 +49,7 @@ namespace CopyThatProgram
         private int _totalFileCount = 0; // Holds the total number of files in the source directory.
         private int _processedFiles = 0; // Counts the number of files that have been processed (copied, moved, or deleted).
         private int _totalFilesCopied = 0; // Total count of files successfully copied.
+        private int _totalFilesCopiedMulti = 0; // Total count of files successfully copied.
         private int _totalFilesMoved = 0; // Total count of files successfully moved.
         private int _totalFilesDeleted = 0; // Total count of files successfully deleted.
         private int _totalFilesSkipped = 0; // Total count of files skipped during an operation.
@@ -307,8 +308,8 @@ namespace CopyThatProgram
         }
 
 
-        //private CustomControls.ModernCircularProgressBar fileProgressBar;
-        //private CustomControls.ModernCircularProgressBar totalProgressBar;
+        //private CustomControls.ModernCircularProgressBar modernFile;
+        //private CustomControls.ModernCircularProgressBar modernTotal;
         public class ControlStateManager
         {
             // A dictionary to store the original `Enabled` state of each control.
@@ -890,10 +891,10 @@ namespace CopyThatProgram
 
             _slots = new[]
             {
-            new Slot(1, progressBarMutli1, filesNameLabel1),
-            new Slot(2, progressBarMutli2, filesNameLabel2),
-            new Slot(3, progressBarMutli3, filesNameLabel3),
-            new Slot(4, progressBarMutli4, filesNameLabel4)
+            new Slot(1, progressBarMulti1, filesNameLabel1),
+            new Slot(2, progressBarMulti2, filesNameLabel2),
+            new Slot(3, progressBarMulti3, filesNameLabel3),
+            new Slot(4, progressBarMulti4, filesNameLabel4)
             };
 
 
@@ -991,7 +992,7 @@ namespace CopyThatProgram
 
             // Performance Settings
             bufferNumUpDown.Minimum = 100;
-            bufferNumUpDown.Maximum = 1024;
+            bufferNumUpDown.Maximum = 2048;
             bufferNumUpDown.Value = CopyThatProgram.Properties.Settings.Default.BufferSize;
 
             overMBCheckBox.Checked = CopyThatProgram.Properties.Settings.Default.CopyFilesOver;
@@ -1065,19 +1066,19 @@ namespace CopyThatProgram
                 });
             }
 
-            // Configures dataGridView2 if its columns have not been set up.
-            if (dataGridView2.Columns.Count == 0)
-            {
-                dataGridView2.Columns.AddRange(new DataGridViewColumn[]
-                {
-                 new DataGridViewTextBoxColumn { DataPropertyName = "FileName", HeaderText = "File's Name", Width = 200 },
-                 new DataGridViewTextBoxColumn { DataPropertyName = "FilePath", HeaderText = "File/Dir(s) Path", Width = 300 },
-                 new DataGridViewTextBoxColumn { DataPropertyName = "ItemType", HeaderText = "Type", Width = 80 },
-                 new DataGridViewTextBoxColumn { DataPropertyName = "FileSize", HeaderText = "File's Size", Width = 100 },
-                 new DataGridViewTextBoxColumn { DataPropertyName = "Status", HeaderText = "Status", Width = 100 },
-                 new DataGridViewTextBoxColumn { DataPropertyName = "BytesRaw", HeaderText = "BytesRaw", Visible = false }
-                });
-            }
+            //// Configures dataGridView2 if its columns have not been set up.
+            //if (dataGridView2.Columns.Count == 0)
+            //{
+            //    dataGridView2.Columns.AddRange(new DataGridViewColumn[]
+            //    {
+            //     new DataGridViewTextBoxColumn { DataPropertyName = "FileName", HeaderText = "File's Name", Width = 200 },
+            //     new DataGridViewTextBoxColumn { DataPropertyName = "FilePath", HeaderText = "File/Dir(s) Path", Width = 300 },
+            //     new DataGridViewTextBoxColumn { DataPropertyName = "ItemType", HeaderText = "Type", Width = 80 },
+            //     new DataGridViewTextBoxColumn { DataPropertyName = "FileSize", HeaderText = "File's Size", Width = 100 },
+            //     new DataGridViewTextBoxColumn { DataPropertyName = "Status", HeaderText = "Status", Width = 100 },
+            //     new DataGridViewTextBoxColumn { DataPropertyName = "BytesRaw", HeaderText = "BytesRaw", Visible = false }
+            //    });
+            //}
         }
 
         /// <summary>
@@ -1263,13 +1264,13 @@ namespace CopyThatProgram
             filesDataGridView.AllowUserToAddRows = false; // Prevents the user from adding new rows.
 
             // Set the maximum value for all progress bars to 10000 for finer granularity.
-            fileProgressBar.Maximum = 10000;
-            totalProgressBar.Maximum = 10000;
-            progressBarMutli1.Maximum = 10000;
-            progressBarMutli2.Maximum = 10000;
-            progressBarMutli3.Maximum = 10000;
-            progressBarMutli4.Maximum = 10000;
-            progressBarMultiThreadTotal.Maximum = 10000;
+            modernFile.Maximum = 10000;
+            modernTotal.Maximum = 10000;
+            progressBarMulti1.Maximum = 10000;
+            progressBarMulti2.Maximum = 10000;
+            progressBarMulti3.Maximum = 10000;
+            progressBarMulti4.Maximum = 10000;
+            progressBarMultiTotal.Maximum = 10000;
             multithreadCheckBox.Checked = true;
             keepDirStructCheckBox.Checked = true;
         }
@@ -1288,12 +1289,12 @@ namespace CopyThatProgram
             }
 
             _processedFiles = 0;
-            fileProgressBar.Value = 0;
-            totalProgressBar.Value = 0;
+            modernFile.Value = 0;
+            modernTotal.Value = 0;
 
 
-            fileProgressBar.Text = "0.00%";
-            totalProgressBar.Text = "0.00%";
+            modernFile.Text = "0.00%";
+            modernTotal.Text = "0.00%";
 
             // Reset the total progress label and bar.
             fileProcessedLabel.Text = "File Processed: 0 Bytes / 0 Bytes";
@@ -1304,25 +1305,32 @@ namespace CopyThatProgram
             _totalBytesToProcess = 0;
 
             // Reset all multithreaded progress bars and labels.
-            progressBarMutli1.Value = 0;
-            progressBarMutli1.Text = "0.00%";
-            progressBarMutli2.Value = 0;
-            progressBarMutli2.Text = "0.00%";
-            progressBarMutli3.Value = 0;
-            progressBarMutli3.Text = "0.00%";
-            progressBarMutli4.Value = 0;
-            progressBarMutli4.Text = "0.00%";
-            progressBarMultiThreadTotal.Value = 0;
-            progressBarMultiThreadTotal.Text = "0.00%";
+            progressBarMulti1.Value = 0;
+            progressBarMulti1.Text = "0.00%";
+            progressBarMulti2.Value = 0;
+            progressBarMulti2.Text = "0.00%";
+            progressBarMulti3.Value = 0;
+            progressBarMulti3.Text = "0.00%";
+            progressBarMulti4.Value = 0;
+            progressBarMulti4.Text = "0.00%";
+            progressBarMultiTotal.Value = 0;
+            progressBarMultiTotal.Text = "0.00%";
             //multiThreadTotalProgressLabel.Text = "0.00%";
 
             // Reset the path labels to their default text.
-            filePathLabel.Text = "Nothing";
-            fromFilesDirLabel.Text = "Select Files / Directory";
-            targetDirLabel.Text = "Select Target Directory";
+            fileCountOnLabel.Text = "File Count: 0 Out of 0"; // Resets the file count UI label.
+            totalCopiedProgressLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets the progress UI label.
+            fromFilesDirLabel.Text = "Select Files/Directory"; // Resets the source directory UI label.
+            targetDirLabel.Text = "Select Target Directory"; // Resets the target directory UI label.
+            fileCountMultiLabel.Text = "File Count: 0 Out of 0"; // Resets a multi-file count UI label.
+            totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets a multi-file progress UI label.
+            filePathLabel.Text = "Nothing"; // Resets the file path UI label.
             _fileList.Clear();
             _sourceDirectories.Clear();
             _currentTargetPaths.Clear();
+            _targetDirectories.Clear();
+            _sourcePaths.Clear();
+            targetPaths.Clear();
 
         }
         /// <summary>
@@ -2183,9 +2191,9 @@ namespace CopyThatProgram
             // Creates a new Progress object with an action to be executed when progress is reported.
             progress = new Progress<ProgressReport>(report =>
             {
-                totalProgressBar.Value = report.PercentComplete;
+                modernTotal.Value = report.PercentComplete;
                 // Forces the progress bar to repaint itself.
-                totalProgressBar.Refresh();
+                modernTotal.Refresh();
 
                 // Updates the text of the file path label.
                 fromFilesDirLabel.Text = report.CurrentFile;
@@ -2544,8 +2552,8 @@ namespace CopyThatProgram
                                              : "Copy That v1.0 - File/Directory Tool - Home";
 
                 overwriteOption = "Overwrite Type - If Newer";
-                fileProgressBar.Value = 0;
-                totalProgressBar.Value = 0;
+                modernFile.Value = 0;
+                modernTotal.Value = 0;
                 startButton.Enabled = true;
                 pauseResumeButton.Enabled = false;
                 cancelButton.Enabled = false;
@@ -2840,7 +2848,7 @@ namespace CopyThatProgram
             // Creates a new resource manager.
             var rm = new ComponentResourceManager(typeof(mainForm));
             // Iterates through several DataGridViews.
-            foreach (var grid in new[] { filesDataGridView, dataGridView1, dataGridView2 })
+            foreach (var grid in new[] { filesDataGridView, dataGridView1})
             {
                 // Iterates through each column in the current DataGridView.
                 foreach (DataGridViewColumn col in grid.Columns)
@@ -3061,11 +3069,11 @@ namespace CopyThatProgram
                 return;
             }
 
-            totalProgressBar.Value = progress.PercentComplete;
-            totalProgressBar.Refresh();
+            modernTotal.Value = progress.PercentComplete;
+            modernTotal.Refresh();
 
-            totalProgressBar.Text = $"{progress.PercentComplete}%";
-            totalProgressBar.Refresh();
+            modernTotal.Text = $"{progress.PercentComplete}%";
+            modernTotal.Refresh();
             // Updates the text of the `speedLabel`.
             speedLabel.Text = $"Speed: {progress.Speed:0.00} MB/s";
 
@@ -3585,6 +3593,7 @@ namespace CopyThatProgram
             _multiThreadProcessedFiles = _processedFiles = 0;
             _totalFilesCopied = _totalFilesMoved = _totalFilesDeleted = 0;
             _totalFilesSkipped = _totalFilesFailed = 0;
+            _totalFilesCopiedMulti = 0;
             // Clears the list of skipped files.
             _skippedFilesList.Clear();
             // Resets the flag to finish the current file and quit.
@@ -4273,8 +4282,8 @@ namespace CopyThatProgram
             _sourceDirectories.Clear(); // Clears the list of source directories.
             _targetDirectories.Clear(); // Clears the list of target directories.
             targetPaths.Clear(); // Clears the list of target paths.
-
-            _grandTotalFileCount = 0; // Resets the total file count.
+            _sourcePaths.Clear(); // Clears the list of source paths.
+            _grandTotalFileCount = 0; // Resets the total file count.
             _totalFolders = 0; // Resets the total folders count.
             _totalBytesToProcess = 0; // Resets the total bytes to process.
             _totalBytesProcessed = 0; // Resets the processed bytes.
@@ -4285,7 +4294,7 @@ namespace CopyThatProgram
             fileCountOnLabel.Text = "File Count: 0 Out of 0"; // Resets the file count UI label.
             totalCopiedProgressLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets the progress UI label.
             fromFilesDirLabel.Text = "Select Files/Directory"; // Resets the source directory UI label.
-            targetDirLabel.Text = "Select Directory"; // Resets the target directory UI label.
+            targetDirLabel.Text = "Select Target Directory"; // Resets the target directory UI label.
             fileCountMultiLabel.Text = "File Count: 0 Out of 0"; // Resets a multi-file count UI label.
             totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets a multi-file progress UI label.
             filePathLabel.Text = "Nothing"; // Resets the file path UI label.
@@ -7703,7 +7712,7 @@ namespace CopyThatProgram
             // Update the file count label with the number of processed files out of the grand total.
             fileCountOnLabel.Text = $"File Count: {_processedFiles:N0} Out of " + _grandTotalFileCount.ToString("N0") + "";
             // Update the label showing total bytes copied, moved, or deleted.
-            totalCopiedProgressLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
+            //totalCopiedProgressLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
         }
 
         /// <summary>
@@ -7725,17 +7734,13 @@ namespace CopyThatProgram
                 return;
             }
 
-            fileProgressBar.Value = Math.Min((int)(pct10k * 100), fileProgressBar.Maximum);
-            fileProgressBar.Refresh();
+            modernFile.Value = Math.Min((int)(pct10k * 100), modernFile.Maximum);
+            modernFile.Refresh();
 
             // Update the label with the percentage of the current file processed.
-            fileProgressBar.Text = $"{pct10k / 100.0:F2}%";
-            fileProgressBar.Refresh();
+            modernFile.Text = $"{pct10k / 100.0:F2}%";
+            modernFile.Refresh();
 
-            // Update the label with the bytes processed for the current file.
-            fileProcessedLabel.Text =
-            $"File Processed: {FormatBytes(bytesDone)} / {FormatBytes(bytesTotal)}";
-            fileProcessedLabel.Refresh();
         }
 
         private void _copyWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -7744,7 +7749,7 @@ namespace CopyThatProgram
             if (e.UserState is ProgressInfo pi)
             {
                 // Ensure the total progress value doesn't exceed the maximum.
-                pi.TotalProgress = Math.Min(pi.TotalProgress, totalProgressBar.Maximum);
+                pi.TotalProgress = Math.Min(pi.TotalProgress, modernTotal.Maximum);
 
                 // Update the UI based on the progress information.
                 UpdateUI(pi);
@@ -7754,13 +7759,13 @@ namespace CopyThatProgram
             else
             {
                 // If not a ProgressInfo object, use the progress percentage.
-                int pct = Math.Min(e.ProgressPercentage, totalProgressBar.Maximum);
+                int pct = Math.Min(e.ProgressPercentage, modernTotal.Maximum);
 
-                totalProgressBar.Value = pct;
-                totalProgressBar.Refresh();
+                modernTotal.Value = pct;
+                modernTotal.Refresh();
 
-                totalProgressBar.Text = $"{(pct / 100.0):F2}%";
-                totalProgressBar.Refresh();
+                modernTotal.Text = $"{(pct / 100.0):F2}%";
+                modernTotal.Refresh();
             }
         }
 
@@ -8593,64 +8598,64 @@ namespace CopyThatProgram
         /// Marks a file as currently being copied by adding it to the copying indices list and updating UI selection.
         /// </summary>
         /// <param name="index">The index of the file in the file list</param>
-        private void MarkFileAsCopying(int index)
-        {
-            // Use Invoke to ensure UI updates are on the correct thread.
-            Invoke(() =>
-            {
-                // Add the file index to the list of currently copying files.
-                _currentlyCopyingIndices.Add(index);
-                // Update the DataGridView selection to highlight the file.
-                UpdateDataGridViewSelection();
-            });
-        }
+        //private void MarkFileAsCopying(int index)
+        //{
+        //    // Use Invoke to ensure UI updates are on the correct thread.
+        //    Invoke(() =>
+        //    {
+        //        // Add the file index to the list of currently copying files.
+        //        _currentlyCopyingIndices.Add(index);
+        //        // Update the DataGridView selection to highlight the file.
+        //        //UpdateDataGridViewSelection();
+        //    });
+        //}
 
         /// <summary>
         /// Marks a file as completed copying by removing it from the copying indices list and updating UI selection.
         /// </summary>
         /// <param name="index">The index of the file in the file list</param>
-        private void MarkFileAsCopied(int index)
-        {
-            // Use Invoke to ensure UI updates are on the correct thread.
-            Invoke(() =>
-            {
-                // Remove the file index from the list of currently copying files.
-                _currentlyCopyingIndices.Remove(index);
-                // Unselect the row in the DataGridView.
-                if (index >= 0 && index < dataGridView2.Rows.Count)
-                    dataGridView2.Rows[index].Selected = false;
-                // Update the DataGridView selection.
-                UpdateDataGridViewSelection();
-            });
-        }
+        //private void MarkFileAsCopied(int index)
+        //{
+        //    // Use Invoke to ensure UI updates are on the correct thread.
+        //    Invoke(() =>
+        //    {
+        //        // Remove the file index from the list of currently copying files.
+        //        _currentlyCopyingIndices.Remove(index);
+        //        // Unselect the row in the DataGridView.
+        //        if (index >= 0 && index < dataGridView2.Rows.Count)
+        //            dataGridView2.Rows[index].Selected = false;
+        //        // Update the DataGridView selection.
+        //        UpdateDataGridViewSelection();
+        //    });
+        //}
 
         /// <summary>
         /// Clears all file selection states in the UI by emptying the copying indices list and deselecting all rows.
         /// </summary>
-        private void ClearAllSelections()
-        {
-            // Use Invoke to ensure UI updates are on the correct thread.
-            Invoke(() =>
-            {
-                // Clear the list of copying indices and clear all selections in the DataGridView.
-                _currentlyCopyingIndices.Clear();
-                dataGridView2.ClearSelection();
-            });
-        }
+        //private void ClearAllSelections()
+        //{
+        //    // Use Invoke to ensure UI updates are on the correct thread.
+        //    Invoke(() =>
+        //    {
+        //        // Clear the list of copying indices and clear all selections in the DataGridView.
+        //        _currentlyCopyingIndices.Clear();
+        //        dataGridView2.ClearSelection();
+        //    });
+        //}
 
         /// <summary>
         /// Updates the DataGridView selection to highlight all files currently being copied.
         /// </summary>
-        private void UpdateDataGridViewSelection()
-        {
-            // Clear previous selections and highlight rows based on the current copying indices list.
-            dataGridView2.ClearSelection();
-            foreach (int idx in _currentlyCopyingIndices)
-            {
-                if (idx >= 0 && idx < dataGridView2.Rows.Count)
-                    dataGridView2.Rows[idx].Selected = true;
-            }
-        }
+        //private void UpdateDataGridViewSelection()
+        //{
+        //    // Clear previous selections and highlight rows based on the current copying indices list.
+        //    dataGridView2.ClearSelection();
+        //    foreach (int idx in _currentlyCopyingIndices)
+        //    {
+        //        if (idx >= 0 && idx < dataGridView2.Rows.Count)
+        //            dataGridView2.Rows[idx].Selected = true;
+        //    }
+        //}
 
         /// <summary>
         /// Marks a file as currently being copied in single-file mode by adding it to the single-file copying list.
@@ -8809,7 +8814,8 @@ namespace CopyThatProgram
 
                             // 5.  success
                             Invoke(() => UpdateMultiSlotStatus(slot.Id, "Done", job.Src));
-                            Interlocked.Increment(ref _totalFilesCopied);
+                            Interlocked.Increment(ref _totalFilesCopiedMulti);
+                            System.Threading.Interlocked.Increment(ref _processedFiles);
                         }
                         catch (OperationCanceledException)
                         {
@@ -8820,6 +8826,7 @@ namespace CopyThatProgram
                         {
                             Invoke(() => UpdateMultiSlotStatus(slot.Id, "Failed", $"{job.Src} — {ex.Message}"));
                             Interlocked.Increment(ref _totalFilesFailed);
+                            System.Threading.Interlocked.Increment(ref _processedFiles);
                         }
                         finally
                         {
@@ -8833,8 +8840,8 @@ namespace CopyThatProgram
 
                 Invoke(() =>
                 {
-                    progressBarMultiThreadTotal.Value = 0;
-                    progressBarMultiThreadTotal.Text = "0.00%";
+                    progressBarMultiTotal.Value = 0;
+                    progressBarMultiTotal.Text = "0.00%";
                     fileCountMultiLabel.Text = "Files Processed: 0 Out of 0";
                     speedMultiLabel.Text = "Speed: 0 B/s";
                     totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes";
@@ -8844,7 +8851,7 @@ namespace CopyThatProgram
                     foreach (var s in _slots) UpdateMultiSlotStatus(s.Id, "Idle", string.Empty);
 
                     ToggleControlsForOperation(true);
-                    ClearAllSelections();
+                    //ClearAllSelections();
                 });
 
                 //_copyWorker_RunWorkerCompleted(this,
@@ -8861,6 +8868,7 @@ namespace CopyThatProgram
                 _multiThreadUiTimer.Stop();
                 Invoke(() => { speedMultiLabel.Text = $"Error: {ex.Message}"; ToggleControlsForOperation(true); });
                 //_copyWorker_RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(null, ex, false));
+
             }
         }
         #endregion
@@ -8903,59 +8911,59 @@ namespace CopyThatProgram
                 System.Diagnostics.Debug.WriteLine($"Applying progress bar colors - Background: {backgroundColor}, Contrasting: {contrastingColor}");
 
                 // Apply to single-threaded progress bars (if they exist)
-                if (this.Controls.Find("fileProgressBar", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar fileBar)
+                if (this.Controls.Find("modernFile", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar fileBar)
                 {
                     fileBar.ForeColor = contrastingColor;
                     fileBar.ProgressStartColor = progressStart;
                     fileBar.ProgressEndColor = progressEnd;
                     fileBar.Invalidate(); // Force redraw
-                    System.Diagnostics.Debug.WriteLine($"Applied to fileProgressBar - ForeColor: {fileBar.ForeColor}");
+                    System.Diagnostics.Debug.WriteLine($"Applied to modernFile - ForeColor: {fileBar.ForeColor}");
                 }
 
-                if (this.Controls.Find("totalProgressBar", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar totalBar)
+                if (this.Controls.Find("modernTotal", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar totalBar)
                 {
                     totalBar.ForeColor = contrastingColor;
                     totalBar.ProgressStartColor = progressStart;
                     totalBar.ProgressEndColor = progressEnd;
                     totalBar.Invalidate(); // Force redraw
-                    System.Diagnostics.Debug.WriteLine($"Applied to totalProgressBar - ForeColor: {totalBar.ForeColor}");
+                    System.Diagnostics.Debug.WriteLine($"Applied to modernTotal - ForeColor: {totalBar.ForeColor}");
                 }
 
                 // ✅ Apply contrasting color to multithreaded progress bars (text AND arc)
-                if (progressBarMutli1 != null)
+                if (progressBarMulti1 != null)
                 {
-                    progressBarMutli1.ForeColor = contrastingColor;
-                    progressBarMutli1.ProgressStartColor = progressStart;
-                    progressBarMutli1.ProgressEndColor = progressEnd;
-                    progressBarMutli1.Invalidate(); // Force redraw
+                    progressBarMulti1.ForeColor = contrastingColor;
+                    progressBarMulti1.ProgressStartColor = progressStart;
+                    progressBarMulti1.ProgressEndColor = progressEnd;
+                    progressBarMulti1.Invalidate(); // Force redraw
                 }
-                if (progressBarMutli2 != null)
+                if (progressBarMulti2 != null)
                 {
-                    progressBarMutli2.ForeColor = contrastingColor;
-                    progressBarMutli2.ProgressStartColor = progressStart;
-                    progressBarMutli2.ProgressEndColor = progressEnd;
-                    progressBarMutli2.Invalidate(); // Force redraw
+                    progressBarMulti2.ForeColor = contrastingColor;
+                    progressBarMulti2.ProgressStartColor = progressStart;
+                    progressBarMulti2.ProgressEndColor = progressEnd;
+                    progressBarMulti2.Invalidate(); // Force redraw
                 }
-                if (progressBarMutli3 != null)
+                if (progressBarMulti3 != null)
                 {
-                    progressBarMutli3.ForeColor = contrastingColor;
-                    progressBarMutli3.ProgressStartColor = progressStart;
-                    progressBarMutli3.ProgressEndColor = progressEnd;
-                    progressBarMutli3.Invalidate(); // Force redraw
+                    progressBarMulti3.ForeColor = contrastingColor;
+                    progressBarMulti3.ProgressStartColor = progressStart;
+                    progressBarMulti3.ProgressEndColor = progressEnd;
+                    progressBarMulti3.Invalidate(); // Force redraw
                 }
-                if (progressBarMutli4 != null)
+                if (progressBarMulti4 != null)
                 {
-                    progressBarMutli4.ForeColor = contrastingColor;
-                    progressBarMutli4.ProgressStartColor = progressStart;
-                    progressBarMutli4.ProgressEndColor = progressEnd;
-                    progressBarMutli4.Invalidate(); // Force redraw
+                    progressBarMulti4.ForeColor = contrastingColor;
+                    progressBarMulti4.ProgressStartColor = progressStart;
+                    progressBarMulti4.ProgressEndColor = progressEnd;
+                    progressBarMulti4.Invalidate(); // Force redraw
                 }
-                if (progressBarMultiThreadTotal != null)
+                if (progressBarMultiTotal != null)
                 {
-                    progressBarMultiThreadTotal.ForeColor = contrastingColor;
-                    progressBarMultiThreadTotal.ProgressStartColor = progressStart;
-                    progressBarMultiThreadTotal.ProgressEndColor = progressEnd;
-                    progressBarMultiThreadTotal.Invalidate(); // Force redraw
+                    progressBarMultiTotal.ForeColor = contrastingColor;
+                    progressBarMultiTotal.ProgressStartColor = progressStart;
+                    progressBarMultiTotal.ProgressEndColor = progressEnd;
+                    progressBarMultiTotal.Invalidate(); // Force redraw
                 }
 
                 System.Diagnostics.Debug.WriteLine($"Applied contrasting progress bar colors: {contrastingColor} for background: {backgroundColor}");
@@ -9048,8 +9056,8 @@ namespace CopyThatProgram
             TimeSpan elapsed = TimeSpan.FromSeconds(elapsedSec);
             TimeSpan target = TimeSpan.FromSeconds(elapsedSec + remainingSec);
 
-            progressBarMultiThreadTotal.Value = Math.Min((int)(totalPct * 100), 10000);
-            progressBarMultiThreadTotal.Text = $"{totalPct:F2}%";
+            progressBarMultiTotal.Value = Math.Min((int)(totalPct * 100), 10000);
+            progressBarMultiTotal.Text = $"{totalPct:F2}%";
 
             fileCountMultiLabel.Text = $"Files Processed: {_multiThreadProcessedFiles:N0} Out of {_grandTotalFileCount:N0}";
             totalCMDMultiLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
@@ -9154,11 +9162,11 @@ namespace CopyThatProgram
 
                     string etaStr;
                     if (etaSeconds > 3600)
-                        etaStr = $"{etaSeconds / 3600:F1} hr";
+                        etaStr = $"{etaSeconds / 3600:F1} Hr(s).";
                     else if (etaSeconds > 60)
-                        etaStr = $"{etaSeconds / 60:F1} min";
+                        etaStr = $"{etaSeconds / 60:F1} Min(s).";
                     else
-                        etaStr = $"{etaSeconds:F1} sec";
+                        etaStr = $"{etaSeconds:F1} Sec(s).";
 
                     string displayText = $"File: {currentFileName} || Processed: {processedStr} / {totalStr} || Speed: {speedStr} || ETA: {etaStr}";
 
@@ -9171,7 +9179,6 @@ namespace CopyThatProgram
 
                 sw.Stop();
                 Interlocked.Increment(ref _multiThreadProcessedFiles);
-                Interlocked.Increment(ref _totalFilesCopied); // ✅ Track copied files
                 Invoke(() => UpdateMultiSlotStatus(slotIndex, "Done", sourceFile));
             }
             catch (OperationCanceledException)
@@ -9202,13 +9209,13 @@ namespace CopyThatProgram
 
         private void UpdateMultiSlotProgress(int slot, double percent, string fileName)
         {
-            CustomControls.ModernCircularProgressBar bar = slot switch
+             CustomControls.ModernCircularProgressBar bar = slot switch
             {
-                1 => progressBarMutli1,
-                2 => progressBarMutli2,
-                3 => progressBarMutli3,
-                4 => progressBarMutli4,
-                _ => progressBarMutli1
+                1 => progressBarMulti1,
+                2 => progressBarMulti2,
+                3 => progressBarMulti3,
+                4 => progressBarMulti4,
+                _ => progressBarMulti1
             };
 
             Label fileLabel = slot switch
@@ -9313,6 +9320,7 @@ namespace CopyThatProgram
             }
 
             var sortedDirs = finalDirs.OrderBy(d => d.Length).ToList();
+            // Around line where you create directories
             foreach (string dirPath in sortedDirs)
             {
                 _pauseEvent.WaitOne();
@@ -9322,21 +9330,28 @@ namespace CopyThatProgram
                 {
                     if (!Directory.Exists(dirPath))
                     {
-                        Directory.CreateDirectory(dirPath);          // <<-- folder now exists
+                        Directory.CreateDirectory(dirPath);
 
-                        // --- update UI -------------------------------------------------
-                        Invoke(() =>
+                        Invoke((System.Windows.Forms.MethodInvoker)(() =>
                         {
                             fromFilesDirLabel.Text = dirPath;
                             statusLabel.Text = $"Creating folder – {System.IO.Path.GetFileName(dirPath)}";
 
-                            // find the *directory* item that owns this path
-                            var dirItem = _fileList.FirstOrDefault(d => d.IsDirectory &&
-                                                                       d.FilePath.Equals(dirPath, StringComparison.OrdinalIgnoreCase));
+                            var dirItem = _fileList.FirstOrDefault(d =>
+                                d.IsDirectory && d.FilePath.Equals(dirPath, StringComparison.OrdinalIgnoreCase));
+
                             if (dirItem != null)
+                            {
                                 UpdateFileStatus(dirItem, "Folder Created...");
-                        });
-                        // ----------------------------------------------------------------
+                            }
+                            else
+                            {
+                                // ✅ Debug: show what went wrong
+                                MessageBox.Show($"Directory not found in _fileList:\n{dirPath}");
+                            }
+
+                            _bindingSource.ResetBindings(false); // ✅ Force refresh
+                        }));
                     }
                 }
                 catch (Exception ex)
@@ -9368,12 +9383,19 @@ namespace CopyThatProgram
 
                 Invoke(() =>
                 {
-
                     filePathLabel.Text = item.FilePath;
                     fromFilesDirLabel.Text = System.IO.Path.GetDirectoryName(item.FilePath);
+
+                    // NEW: show the target directory
+                    string targetDir = System.IO.Path.GetDirectoryName(
+                        ComputeDestinationPath(item.FilePath, false, targetBase, _currentSourceRootPath)
+                    );
+                    targetDirLabel.Text = targetDir;
+
                     statusLabel.Text = $"Copying – {System.IO.Path.GetFileName(item.FilePath)}";
                     SelectCurrentFileInGrid(gridIndex);
                 });
+
 
                 bool copied = false;
                 Exception lastEx = null;
@@ -9433,12 +9455,12 @@ namespace CopyThatProgram
                         if (string.IsNullOrWhiteSpace(targetBase))
                             continue;
 
-                        ResetAllFileStatuses();
+                        //ResetAllFileStatuses();
 
                         // --- Update header labels for this target ---
                         Invoke(() =>
                         {
-                            fromFilesDirLabel.Text = $"Target: {targetBase}";
+                            //fromFilesDirLabel.Text = $"Target: {targetBase}";
                             statusLabel.Text = $"Starting copy to {targetBase}";
                         });
 
@@ -9453,8 +9475,8 @@ namespace CopyThatProgram
                     Invoke(() =>
                     {
                         statusLabel.Text = bw.CancellationPending ? "Cancelled" : "All targets complete";
-                        totalProgressBar.Value = totalProgressBar.Maximum;
-                        totalProgressBar.Text = "100.00%";
+                        modernTotal.Value = modernTotal.Maximum;
+                        modernTotal.Text = "100.00%";
                     });
 
                 })(worker).GetAwaiter().GetResult();
@@ -9506,7 +9528,7 @@ namespace CopyThatProgram
                                                                 targetBase, _currentSourceRootPath);
                         // Creates the directory and updates the UI status
                         Directory.CreateDirectory(dstDir);
-                        Invoke(() => UpdateFileStatus(dirItem, "Folder Created"));
+                        Invoke(() => UpdateFileStatus(dirItem, "Folder Created..."));
                     }
 
                     // Loops through each file to be moved
@@ -9579,10 +9601,10 @@ namespace CopyThatProgram
                     // Updates the UI to show 100% completion
                     Invoke((Delegate)(() =>
                     {
-                        fileProgressBar.Value = fileProgressBar.Maximum;
-                        fileProgressBar.Text = "100.00%";
-                        totalProgressBar.Value = totalProgressBar.Maximum;
-                        totalProgressBar.Text = "100.00%";
+                        modernFile.Value = modernFile.Maximum;
+                        modernFile.Text = "100.00%";
+                        modernTotal.Value = modernTotal.Maximum;
+                        modernTotal.Text = "100.00%";
                     }));
                     // Ensures the async method runs synchronously
                 })(worker).GetAwaiter().GetResult();
@@ -9706,10 +9728,10 @@ namespace CopyThatProgram
                     // Updates the UI to show 100% completion
                     Invoke((Delegate)(() =>
                     {
-                        fileProgressBar.Value = fileProgressBar.Maximum;
-                        fileProgressBar.Text = "100.00%";
-                        totalProgressBar.Value = totalProgressBar.Maximum;
-                        totalProgressBar.Text = "100.00%";
+                        modernFile.Value = modernFile.Maximum;
+                        modernFile.Text = "100.00%";
+                        modernTotal.Value = modernTotal.Maximum;
+                        modernTotal.Text = "100.00%";
                     }));
                     // Ensures the async method runs synchronously
                 })(worker).GetAwaiter().GetResult();
@@ -9849,10 +9871,17 @@ namespace CopyThatProgram
                                     ? _totalBytesProcessed * 100.0 / _totalBytesToProcess
                                     : 100.0;
 
+                // Update the label with the bytes processed for the current file.
+                fileProcessedLabel.Text =
+                $"File Processed: {FormatBytes(fileBytesDone)} / {FormatBytes(fileSize)}";
+                fileProcessedLabel.Refresh();
+
+                UpdateFileCountLabels();
+
                 Invoke(() =>
                 {
-                    fileProgressBar.Value = Math.Min((int)(filePct * 100), 10_000);
-                    totalProgressBar.Value = Math.Min((int)(overallPct * 100), 10_000);
+                    modernFile.Value = Math.Min((int)(filePct * 100), 10_000);
+                    modernTotal.Value = Math.Min((int)(overallPct * 100), 10_000);
                     UpdateFileStatus(item, $"{filePct:F2}% done");
                 });
             }
@@ -9879,13 +9908,13 @@ namespace CopyThatProgram
             Invoke((Delegate)(() =>
             {
 
-                fileProgressBar.Value = fileProgressBar.Maximum;
+                modernFile.Value = modernFile.Maximum;
                 // Updates the file progress label to "100.00%".
-                fileProgressBar.Text = "100.00%";
+                modernFile.Text = "100.00%";
                 // Sets the total progress bar to its maximum value.
-                totalProgressBar.Value = totalProgressBar.Maximum;
+                modernTotal.Value = modernTotal.Maximum;
                 // Updates the total progress label to "100.00%".
-                totalProgressBar.Text = "100.00%";
+                modernTotal.Text = "100.00%";
             }));
 
             // Checks if the background worker completed with an error.
@@ -9973,12 +10002,12 @@ namespace CopyThatProgram
             cancelMultiButton.Enabled = false;
 
 
-            totalProgressBar.Text = "0.00%";
-            fileProgressBar.Text = "0.00%";
+            modernTotal.Text = "0.00%";
+            modernFile.Text = "0.00%";
 
 
-            totalProgressBar.Value = 0;
-            fileProgressBar.Value = 0;
+            modernTotal.Value = 0;
+            modernFile.Value = 0;
             // Resets various progress-related labels.
             fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
             totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / 0 Bytes";
@@ -10048,17 +10077,17 @@ namespace CopyThatProgram
             Invoke((Delegate)(() =>
             {
 
-                fileProgressBar.Value = fileProgressBar.Maximum;
+                modernFile.Value = modernFile.Maximum;
 
                 // Sets file progress label to "100.00%".
 
-                fileProgressBar.Text = "100.00%";
+                modernFile.Text = "100.00%";
 
                 // Sets total progress bar to 100%.
-                totalProgressBar.Value = totalProgressBar.Maximum;
+                modernTotal.Value = modernTotal.Maximum;
                 // Sets total progress label to "100.00%".
 
-                totalProgressBar.Text = "100.00%";
+                modernTotal.Text = "100.00%";
             }));
 
             // Checks for errors during deletion.
@@ -10143,11 +10172,11 @@ namespace CopyThatProgram
             cancelMultiButton.Enabled = false;
 
             // Resets progress labels.
-            totalProgressBar.Text = "0.00%";
-            fileProgressBar.Text = "0.00%";
+            modernTotal.Text = "0.00%";
+            modernFile.Text = "0.00%";
 
-            totalProgressBar.Value = 0;
-            fileProgressBar.Value = 0;
+            modernTotal.Value = 0;
+            modernFile.Value = 0;
             // Resets status labels.
             fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
             totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / 0 Bytes";
@@ -10634,17 +10663,17 @@ namespace CopyThatProgram
 
             Invoke((Delegate)(() =>
             {
-                fileProgressBar.Value = 0;
-                totalProgressBar.Value = 0;
-                totalProgressBar.Text = "0.00%";
-                fileProgressBar.Text = "0.00%";
-                fileProgressBar.Value = fileProgressBar.Minimum;
-                totalProgressBar.Value = totalProgressBar.Minimum;
+                modernFile.Value = 0;
+                modernTotal.Value = 0;
+                modernTotal.Text = "0.00%";
+                modernFile.Text = "0.00%";
+                modernFile.Value = modernFile.Minimum;
+                modernTotal.Value = modernTotal.Minimum;
 
                 if (isMultiThreaded)
                 {
-                    progressBarMultiThreadTotal.Value = 0;
-                    progressBarMultiThreadTotal.Text = "0.00%";
+                    progressBarMultiTotal.Value = 0;
+                    progressBarMultiTotal.Text = "0.00%";
                 }
             }));
 
@@ -10678,17 +10707,17 @@ namespace CopyThatProgram
                 if (onFinishCheckBox.Checked) PlayRes(Properties.Resources.OnFinish);
                 Invoke((Delegate)(() =>
                 {
-                    fileProgressBar.Value = 0;
-                    totalProgressBar.Value = 0;
-                    totalProgressBar.Text = "0.00%";
-                    fileProgressBar.Text = "0.00%";
-                    fileProgressBar.Value = fileProgressBar.Minimum;
-                    totalProgressBar.Value = totalProgressBar.Minimum;
+                    modernFile.Value = 0;
+                    modernTotal.Value = 0;
+                    modernTotal.Text = "0.00%";
+                    modernFile.Text = "0.00%";
+                    modernFile.Value = modernFile.Minimum;
+                    modernTotal.Value = modernTotal.Minimum;
 
                     if (isMultiThreaded)
                     {
-                        progressBarMultiThreadTotal.Value = 0;
-                        progressBarMultiThreadTotal.Text = "0.00%";
+                        progressBarMultiTotal.Value = 0;
+                        progressBarMultiTotal.Text = "0.00%";
                     }
                 }));
                 Invoke(() => { ShowOperationStatisticsSummary(isMultiThreaded); ResetProgressUIAndVariables(); });
@@ -10724,12 +10753,12 @@ namespace CopyThatProgram
 
             Invoke((Delegate)(() =>
             {
-                fileProgressBar.Value = 0;
-                totalProgressBar.Value = 0;
-                totalProgressBar.Text = "0.00%";
-                fileProgressBar.Text = "0.00%";
-                fileProgressBar.Value = fileProgressBar.Minimum;
-                totalProgressBar.Value = totalProgressBar.Minimum;
+                modernFile.Value = 0;
+                modernTotal.Value = 0;
+                modernTotal.Text = "0.00%";
+                modernFile.Text = "0.00%";
+                modernFile.Value = modernFile.Minimum;
+                modernTotal.Value = modernTotal.Minimum;
             }));
 
             pauseResumeMultiButton.Text = "Pause";
@@ -10738,11 +10767,11 @@ namespace CopyThatProgram
             pauseResumeMultiButton.Enabled = false;
             cancelMultiButton.Enabled = false;
 
-            totalProgressBar.Text = "0.00%";
-            fileProgressBar.Text = "0.00%";
+            modernTotal.Text = "0.00%";
+            modernFile.Text = "0.00%";
 
-            totalProgressBar.Value = 0;
-            fileProgressBar.Value = 0;
+            modernTotal.Value = 0;
+            modernFile.Value = 0;
 
             fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
             totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / 0 Bytes";
@@ -11033,13 +11062,13 @@ namespace CopyThatProgram
         /// </summary>
         /// <param name="index">The slot index (0-3)</param>
         /// <returns>The corresponding ModernCircularProgressBar control</returns>
-        private ModernCircularProgressBar GetProgressBar(int index) => index switch
+        private CustomControls.ModernCircularProgressBar GetProgressBar(int index) => index switch
         {
             // Returns the correct progress bar based on the index.
-            0 => progressBarMutli1,
-            1 => progressBarMutli2,
-            2 => progressBarMutli3,
-            3 => progressBarMutli4,
+            0 => progressBarMulti1,
+            1 => progressBarMulti2,
+            2 => progressBarMulti3,
+            3 => progressBarMulti4,
             // Throws an exception for an out-of-range index.
             _ => throw new ArgumentOutOfRangeException()
         };
@@ -11090,10 +11119,10 @@ namespace CopyThatProgram
             // Checks if an Invoke is required to run on the UI thread.
             if (InvokeRequired) { Invoke(new Action(() => ReportFileProgress(fileProgress10k, fileName))); return; }
 
-            fileProgressBar.Value = Math.Min(fileProgress10k, fileProgressBar.Maximum);
+            modernFile.Value = Math.Min(fileProgress10k, modernFile.Maximum);
             // Updates the file path label with the file name.
             filePathLabel.Text = fileName;
-            fileProgressBar.Text = $"{(fileProgress10k / 100.0):F2}%";
+            modernFile.Text = $"{(fileProgress10k / 100.0):F2}%";
         }
 
 
@@ -11281,10 +11310,10 @@ namespace CopyThatProgram
             // Uses a switch statement to update the value of a specific progress bar based on the thread index.
             switch (index)
             {
-                case 0: progressBarMutli1.Value = value; break;
-                case 1: progressBarMutli2.Value = value; break;
-                case 2: progressBarMutli3.Value = value; break;
-                case 3: progressBarMutli4.Value = value; break;
+                case 0: progressBarMulti1.Value = value; break;
+                case 1: progressBarMulti2.Value = value; break;
+                case 2: progressBarMulti3.Value = value; break;
+                case 3: progressBarMulti4.Value = value; break;
             }
         }
 
@@ -11312,14 +11341,14 @@ namespace CopyThatProgram
             // Updates the progress bar value, with a check to avoid exceptions.
             try
             {
-                progressBarMultiThreadTotal.Value = progressBarValue;
+                progressBarMultiTotal.Value = progressBarValue;
             }
             catch
             {
                 // If an exception occurs, checks the value and updates again.
-                if (progressBarMultiThreadTotal.Value != progressBarValue)
+                if (progressBarMultiTotal.Value != progressBarValue)
                 {
-                    progressBarMultiThreadTotal.Value = progressBarValue;
+                    progressBarMultiTotal.Value = progressBarValue;
                 }
             }
 
@@ -11367,13 +11396,13 @@ namespace CopyThatProgram
             //totalPCTMultiLabel4.Text = "0.00%";
 
             // Resets the value of all individual progress bars to 0.
-            progressBarMutli1.Value = 0;
-            progressBarMutli2.Value = 0;
-            progressBarMutli3.Value = 0;
-            progressBarMutli4.Value = 0;
+            progressBarMulti1.Value = 0;
+            progressBarMulti2.Value = 0;
+            progressBarMulti3.Value = 0;
+            progressBarMulti4.Value = 0;
 
             // Resets the overall progress bar and label.
-            progressBarMultiThreadTotal.Value = 0;
+            progressBarMultiTotal.Value = 0;
             //multiThreadTotalProgressLabel.Text = "0.00%";
             // Resets the source directory label.
             fromFilesDirLabel.Text = "Current Source: None";
@@ -11407,10 +11436,10 @@ namespace CopyThatProgram
 
                 // Creates a message string summarizing the multi-threaded operation results.
                 string message = $"- {operationName} Operation Summary ({status}) -\n\n" +
-                                     $"Files Copied: {_totalFilesCopied}\n" +
-                                     $"Files Skipped: {_totalFilesSkipped}\n" +
-                                     $"Files Failed: {_totalFilesFailed}\n" +
-                                     $"Total Files Processed: {_processedFiles} / {_grandTotalFileCount:N0}\n" +
+                                     $"Files Copied: {_totalFilesCopiedMulti:N0}\n" +
+                                     $"Files Skipped: {_totalFilesSkipped:N0}\n" +
+                                     $"Files Failed: {_totalFilesFailed:N0}\n" +
+                                     $"Total Files Processed: {_processedFiles:N0} / {_grandTotalFileCount:N0}\n" +
                                      $"Total Bytes Processed: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_grandBytesToProcess)}";
 
                 // Determines the message box icon based on the status.
@@ -11430,10 +11459,10 @@ namespace CopyThatProgram
 
                 // Creates a message string summarizing the single-threaded operation results.
                 string message = $"- {operationName} Operation Summary ({status}) -\n\n" +
-                                                 $"Files Copied: {_totalFilesCopied}\n" +
-                                                 $"Files Skipped: {_totalFilesSkipped}\n" +
-                                                 $"Files Failed: {_totalFilesFailed}\n" +
-                                                 $"Total Files Processed: {_processedFiles} / {_grandTotalFileCount:N0}\n" +
+                                                 $"Files Copied: {_totalFilesCopied:N0}\n" +
+                                                 $"Files Skipped: {_totalFilesSkipped:N0}\n" +
+                                                 $"Files Failed: {_totalFilesFailed:N0}\n" +
+                                                 $"Total Files Processed: {_processedFiles:N0} / {_grandTotalFileCount:N0}\n" +
                                                  $"Total Bytes Processed: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_grandBytesToProcess)}";
 
                 // Determines the message box icon based on the status.
@@ -11633,9 +11662,9 @@ namespace CopyThatProgram
             int pct = _totalBytesToProcess > 0
                 ? (int)Math.Round(_totalBytesProcessed / (double)_totalBytesToProcess * 10000)
                 : 0;
-            totalProgressBar.Value = Math.Min(pct, 10000);
+            modernTotal.Value = Math.Min(pct, 10000);
 
-            totalProgressBar.Text = $"{pct / 100.0:F2}%";
+            modernTotal.Text = $"{pct / 100.0:F2}%";
         }
 
         /// <summary>
@@ -11652,11 +11681,11 @@ namespace CopyThatProgram
                 return;
             }
 
-            totalProgressBar.Value = pi.TotalProgress;
-            totalProgressBar.Refresh();
+            modernTotal.Value = pi.TotalProgress;
+            modernTotal.Refresh();
 
-            totalProgressBar.Text = $"{(pi.TotalProgress / 100.0):F2}%";
-            totalProgressBar.Refresh();
+            modernTotal.Text = $"{(pi.TotalProgress / 100.0):F2}%";
+            modernTotal.Refresh();
             // Sets the text of the file path label to the current file name.
             filePathLabel.Text = $"{pi.CurrentFileName}";
         }
@@ -11695,10 +11724,10 @@ namespace CopyThatProgram
 
             // Resets both file and total progress bars to 0.
 
-            fileProgressBar.Value = 0;
-            totalProgressBar.Value = 0;
-            fileProgressBar.Text = "0.00%";
-            totalProgressBar.Text = "0.00%";
+            modernFile.Value = 0;
+            modernTotal.Value = 0;
+            modernFile.Text = "0.00%";
+            modernTotal.Text = "0.00%";
         }
 
         /// <summary>
@@ -11919,21 +11948,22 @@ namespace CopyThatProgram
         }
         private void btnPauseResumeMulti_Click(object sender, EventArgs e)
         {
-            // Checks if the pause event has a signal. `WaitOne(0)` checks without blocking.
-            if (_pauseEvent.WaitOne(0))
-            {
-                // Resets the event, effectively pausing the operation.
-                _pauseEvent.Reset();
-                // Changes the button text to "Resume".
-                pauseResumeMultiButton.Text = "Resume";
-            }
-            else
-            {
-                // Sets the event, effectively resuming the operation.
-                _pauseEvent.Set();
-                // Changes the button text to "Pause".
-                pauseResumeMultiButton.Text = "Pause";
-            }
+            _isPaused = !_isPaused; // Toggles the boolean state of the _isPaused variable.
+
+            if (_isPaused) // Checks if the application is now in a paused state.
+            {
+                _pauseEvent.Reset(); // Resets the pause event, effectively blocking a waiting thread.
+                pauseResumeMultiButton.Text = "Resume"; // Changes the button's text to "Resume".
+
+                _multiThreadUiTimer.Stop(); // Calls the helper method to stop the timer.
+            }
+            else // If the application is not paused (it's resuming).
+            {
+                _pauseEvent.Set(); // Sets the pause event, allowing a blocked thread to continue.
+                pauseResumeMultiButton.Text = "Pause"; // Changes the button's text to "Pause".
+
+                _multiThreadUiTimer.Start(); // Calls the helper method to start the timer.
+            }
         }
         private void cancelMultiButton_Click(object sender, EventArgs e)
         {
@@ -11979,33 +12009,33 @@ namespace CopyThatProgram
             {
                 case 0:
                     // Sets the value of the first progress bar, ensuring it doesn't exceed 10000.
-                    progressBarMutli1.Value = Math.Min(progress, 10000);
+                    progressBarMulti1.Value = Math.Min(progress, 10000);
                     // Updates the percentage label for the first thread.
-                    progressBarMutli1.Text = $"{(progress / 100.0):F2}%";
+                    progressBarMulti1.Text = $"{(progress / 100.0):F2}%";
                     // Updates the file name label for the first thread.
                     filesNameLabel1.Text = fileName;
                     break;
                 case 1:
                     // Sets the value of the second progress bar.
-                    progressBarMutli2.Value = Math.Min(progress, 10000);
+                    progressBarMulti2.Value = Math.Min(progress, 10000);
                     // Updates the percentage label for the second thread.
-                    progressBarMutli2.Text = $"{(progress / 100.0):F2}%";
+                    progressBarMulti2.Text = $"{(progress / 100.0):F2}%";
                     // Updates the file name label for the second thread.
                     filesNameLabel2.Text = fileName;
                     break;
                 case 2:
                     // Sets the value of the third progress bar.
-                    progressBarMutli3.Value = Math.Min(progress, 10000);
+                    progressBarMulti3.Value = Math.Min(progress, 10000);
                     // Updates the percentage label for the third thread.
-                    progressBarMutli3.Text = $"{(progress / 100.0):F2}%";
+                    progressBarMulti3.Text = $"{(progress / 100.0):F2}%";
                     // Updates the file name label for the third thread.
                     filesNameLabel3.Text = fileName;
                     break;
                 case 3:
                     // Sets the value of the fourth progress bar.
-                    progressBarMutli4.Value = Math.Min(progress, 10000);
+                    progressBarMulti4.Value = Math.Min(progress, 10000);
                     // Updates the percentage label for the fourth thread.
-                    progressBarMutli4.Text = $"{(progress / 100.0):F2}%";
+                    progressBarMulti4.Text = $"{(progress / 100.0):F2}%";
                     // Updates the file name label for the fourth thread.
                     filesNameLabel4.Text = fileName;
                     break;
@@ -12065,16 +12095,16 @@ namespace CopyThatProgram
             base.OnLoad(e);
 
             // Sets the maximum value for various progress bars to 10000 for a granular progress display.
-            progressBarMutli1.Maximum = 10000;
-            progressBarMutli2.Maximum = 10000;
-            progressBarMutli3.Maximum = 10000;
-            progressBarMutli4.Maximum = 10000;
-            progressBarMultiThreadTotal.Maximum = 10000;
+            progressBarMulti1.Maximum = 10000;
+            progressBarMulti2.Maximum = 10000;
+            progressBarMulti3.Maximum = 10000;
+            progressBarMulti4.Maximum = 10000;
+            progressBarMultiTotal.Maximum = 10000;
 
-            totalProgressBar.Minimum = 0;
-            totalProgressBar.Maximum = 10000;
-            fileProgressBar.Minimum = 0;
-            fileProgressBar.Maximum = 10000;
+            modernTotal.Minimum = 0;
+            modernTotal.Maximum = 10000;
+            modernFile.Minimum = 0;
+            modernFile.Maximum = 10000;
             // Sets the initial text for the pause/resume buttons.
             pauseResumeButton.Text = "Pause";
             pauseResumeMultiButton.Text = "Pause";
@@ -12718,9 +12748,9 @@ namespace CopyThatProgram
             statusLabel.Text = "Overwrite If Newer: This checkbox determines whether to overwrite files only if the source file is newer than the destination file.";
         }
 
-        private void fileProgressBar_MouseEnter(object sender, EventArgs e)
+        private void modernFile_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the status label to describe the 'fileProgressBar' control.
+            // Sets the status label to describe the 'modernFile' control.
             statusLabel.Text = "File Progress Bar: This progress bar shows the progress of the current file being processed in the operation.";
         }
 
@@ -12730,9 +12760,9 @@ namespace CopyThatProgram
             statusLabel.Text = "File Progress Label: This label shows the percentage of progress for the current file being processed in the operation.";
         }
 
-        private void totalProgressBar_MouseEnter(object sender, EventArgs e)
+        private void modernTotal_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the status label to describe the 'totalProgressBar' control.
+            // Sets the status label to describe the 'modernTotal' control.
             statusLabel.Text = "Total Progress Bar: This progress bar shows the overall progress of the operation across all files being processed.";
         }
 
@@ -12850,7 +12880,7 @@ namespace CopyThatProgram
             toolStripMulti.Text = "Total Percentage Multi Label 4: This label shows the percentage of progress for the file being processed by thread 4.";
         }
 
-        private void progressBarMultiThreadTotal_MouseEnter(object sender, EventArgs e)
+        private void progressBarMultiTotal_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
             toolStripMulti.Text = "Progress Bar Multi-Thread Total: This progress bar shows the overall progress of the multi-threaded operation across all threads.";
@@ -14068,11 +14098,11 @@ namespace CopyThatProgram
                 dataGridView1.Columns[3].HeaderText = "Tamaño del Archivo";
                 dataGridView1.Columns[4].HeaderText = "Estado";
 
-                dataGridView2.Columns[0].HeaderText = "Nombre del Archivo";
-                dataGridView2.Columns[1].HeaderText = "Ruta del Archivo";
-                dataGridView2.Columns[2].HeaderText = "Tipo";
-                dataGridView2.Columns[3].HeaderText = "Tamaño del Archivo";
-                dataGridView2.Columns[4].HeaderText = "Estado";
+                //dataGridView2.Columns[0].HeaderText = "Nombre del Archivo";
+                //dataGridView2.Columns[1].HeaderText = "Ruta del Archivo";
+                //dataGridView2.Columns[2].HeaderText = "Tipo";
+                //dataGridView2.Columns[3].HeaderText = "Tamaño del Archivo";
+                //dataGridView2.Columns[4].HeaderText = "Estado";
 
                 copyHistoryDGV.Columns[0].HeaderText = "Tipo de operación";
                 copyHistoryDGV.Columns[1].HeaderText = "Ruta(s) de archivo de origen";
@@ -14125,11 +14155,11 @@ namespace CopyThatProgram
                 dataGridView1.Columns[3].HeaderText = "File's Size";
                 dataGridView1.Columns[4].HeaderText = "Status";
 
-                dataGridView2.Columns[0].HeaderText = "File's Name";
-                dataGridView2.Columns[1].HeaderText = "File's Path";
-                dataGridView2.Columns[2].HeaderText = "Type";
-                dataGridView2.Columns[3].HeaderText = "File's Size";
-                dataGridView2.Columns[4].HeaderText = "Status";
+                //dataGridView2.Columns[0].HeaderText = "File's Name";
+                //dataGridView2.Columns[1].HeaderText = "File's Path";
+                //dataGridView2.Columns[2].HeaderText = "Type";
+                //dataGridView2.Columns[3].HeaderText = "File's Size";
+                //dataGridView2.Columns[4].HeaderText = "Status";
 
                 copyHistoryDGV.Columns[0].HeaderText = "Operation Type";
                 copyHistoryDGV.Columns[1].HeaderText = "Source File Path(s)";

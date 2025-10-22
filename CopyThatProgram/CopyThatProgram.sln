@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11116.177
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyThatProgram", "CopyThatProgram\CopyThatProgram.csproj", "{E8892668-1E65-4BFA-B86C-472B0AAD47C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyControlsLibrary", "MyControlsLibrary\MyControlsLibrary.csproj", "{28F2D000-6C5B-729C-5C63-A6E254666FEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernProgress", "ModernProgress\ModernProgress.csproj", "{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +19,19 @@ Global
 		{E8892668-1E65-4BFA-B86C-472B0AAD47C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8892668-1E65-4BFA-B86C-472B0AAD47C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8892668-1E65-4BFA-B86C-472B0AAD47C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F2D000-6C5B-729C-5C63-A6E254666FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F2D000-6C5B-729C-5C63-A6E254666FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F2D000-6C5B-729C-5C63-A6E254666FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F2D000-6C5B-729C-5C63-A6E254666FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C47944D0-464D-4B6B-A384-D4C18843F0AD}
 	EndGlobalSection
 EndGlobal

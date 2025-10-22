@@ -1,0 +1,11 @@
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\bin\Debug\net8.0-windows\MyControlsLibrary.deps.json
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\bin\Debug\net8.0-windows\MyControlsLibrary.dll
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\bin\Debug\net8.0-windows\MyControlsLibrary.pdb
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\MyControlsLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\MyControlsLibrary.AssemblyInfoInputs.cache
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\MyControlsLibrary.AssemblyInfo.cs
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\MyControlsLibrary.csproj.CoreCompileInputs.cache
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\MyControlsLibrary.dll
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\refint\MyControlsLibrary.dll
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\MyControlsLibrary.pdb
+C:\Users\miken\Desktop\Havoc Software\CopyThatProgram\MyControlsLibrary\obj\Debug\net8.0-windows\ref\MyControlsLibrary.dll

@@ -32,9 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             tabControl1 = new TabControl();
             cmdHomePage = new TabPage();
+            modernTotal = new CustomControls.ModernCircularProgressBar();
+            modernFile = new CustomControls.ModernCircularProgressBar();
             fileOverAllProgressLabel = new Label();
-            totalProgressBar = new CustomControls.ModernCircularProgressBar();
-            fileProgressBar = new CustomControls.ModernCircularProgressBar();
             moveToBottomLabel = new Label();
             moveToTopLabel = new Label();
             moveFileDownLabel = new Label();
@@ -89,16 +89,15 @@
             targetLabel = new Label();
             fromLabel = new Label();
             cmdMultithread = new TabPage();
-            progressBarMutli1 = new CustomControls.ModernCircularProgressBar();
+            progressBarMultiTotal = new CustomControls.ModernCircularProgressBar();
+            progressBarMulti4 = new CustomControls.ModernCircularProgressBar();
+            progressBarMulti3 = new CustomControls.ModernCircularProgressBar();
+            progressBarMulti2 = new CustomControls.ModernCircularProgressBar();
+            progressBarMulti1 = new CustomControls.ModernCircularProgressBar();
             thread4Label = new Label();
             thread3Label = new Label();
             thread2Label = new Label();
             thread1Label = new Label();
-            progressBarMutli2 = new CustomControls.ModernCircularProgressBar();
-            progressBarMutli3 = new CustomControls.ModernCircularProgressBar();
-            progressBarMutli4 = new CustomControls.ModernCircularProgressBar();
-            progressBarMultiThreadTotal = new CustomControls.ModernCircularProgressBar();
-            dataGridView2 = new DataGridView();
             statusBarMulti = new StatusStrip();
             toolStripMulti = new ToolStripStatusLabel();
             totalProgressMultiLabel = new Label();
@@ -295,7 +294,6 @@
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileIconPicBox).BeginInit();
             cmdMultithread.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             statusBarMulti.SuspendLayout();
             cmdSkipPage.SuspendLayout();
             statusBarSkipped.SuspendLayout();
@@ -351,9 +349,9 @@
             // cmdHomePage
             // 
             cmdHomePage.BorderStyle = BorderStyle.FixedSingle;
+            cmdHomePage.Controls.Add(modernTotal);
+            cmdHomePage.Controls.Add(modernFile);
             cmdHomePage.Controls.Add(fileOverAllProgressLabel);
-            cmdHomePage.Controls.Add(totalProgressBar);
-            cmdHomePage.Controls.Add(fileProgressBar);
             cmdHomePage.Controls.Add(moveToBottomLabel);
             cmdHomePage.Controls.Add(moveToTopLabel);
             cmdHomePage.Controls.Add(moveFileDownLabel);
@@ -416,6 +414,42 @@
             cmdHomePage.UseVisualStyleBackColor = true;
             cmdHomePage.MouseEnter += cmdHomePage_MouseEnter;
             // 
+            // modernTotal
+            // 
+            modernTotal.BackColor = Color.Transparent;
+            modernTotal.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            modernTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            modernTotal.ForeColor = Color.White;
+            modernTotal.LineWidth = 12;
+            modernTotal.Location = new Point(1165, 459);
+            modernTotal.Maximum = 10000;
+            modernTotal.Minimum = 0;
+            modernTotal.Name = "modernTotal";
+            modernTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            modernTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            modernTotal.Size = new Size(132, 129);
+            modernTotal.TabIndex = 191;
+            modernTotal.Text = "modernCircularProgressBar2";
+            modernTotal.Value = 0;
+            // 
+            // modernFile
+            // 
+            modernFile.BackColor = Color.Transparent;
+            modernFile.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            modernFile.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            modernFile.ForeColor = Color.White;
+            modernFile.LineWidth = 12;
+            modernFile.Location = new Point(218, 457);
+            modernFile.Maximum = 10000;
+            modernFile.Minimum = 0;
+            modernFile.Name = "modernFile";
+            modernFile.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            modernFile.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            modernFile.Size = new Size(132, 129);
+            modernFile.TabIndex = 190;
+            modernFile.Text = "modernCircularProgressBar1";
+            modernFile.Value = 0;
+            // 
             // fileOverAllProgressLabel
             // 
             fileOverAllProgressLabel.BackColor = Color.Transparent;
@@ -426,42 +460,6 @@
             fileOverAllProgressLabel.TabIndex = 189;
             fileOverAllProgressLabel.Text = "File Overall Progress:";
             fileOverAllProgressLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // totalProgressBar
-            // 
-            totalProgressBar.BackColor = Color.Transparent;
-            totalProgressBar.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            totalProgressBar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            totalProgressBar.ForeColor = Color.White;
-            totalProgressBar.LineWidth = 12;
-            totalProgressBar.Location = new Point(1172, 466);
-            totalProgressBar.Maximum = 100;
-            totalProgressBar.Minimum = 0;
-            totalProgressBar.Name = "totalProgressBar";
-            totalProgressBar.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            totalProgressBar.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            totalProgressBar.Size = new Size(120, 120);
-            totalProgressBar.TabIndex = 188;
-            totalProgressBar.Text = "modernCircularProgressBar1";
-            totalProgressBar.Value = 0;
-            // 
-            // fileProgressBar
-            // 
-            fileProgressBar.BackColor = Color.Transparent;
-            fileProgressBar.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            fileProgressBar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            fileProgressBar.ForeColor = Color.White;
-            fileProgressBar.LineWidth = 12;
-            fileProgressBar.Location = new Point(218, 466);
-            fileProgressBar.Maximum = 100;
-            fileProgressBar.Minimum = 0;
-            fileProgressBar.Name = "fileProgressBar";
-            fileProgressBar.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            fileProgressBar.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            fileProgressBar.Size = new Size(120, 120);
-            fileProgressBar.TabIndex = 187;
-            fileProgressBar.Text = "modernCircularProgressBar1";
-            fileProgressBar.Value = 0;
             // 
             // moveToBottomLabel
             // 
@@ -1103,16 +1101,15 @@
             // 
             // cmdMultithread
             // 
-            cmdMultithread.Controls.Add(progressBarMutli1);
+            cmdMultithread.Controls.Add(progressBarMultiTotal);
+            cmdMultithread.Controls.Add(progressBarMulti4);
+            cmdMultithread.Controls.Add(progressBarMulti3);
+            cmdMultithread.Controls.Add(progressBarMulti2);
+            cmdMultithread.Controls.Add(progressBarMulti1);
             cmdMultithread.Controls.Add(thread4Label);
             cmdMultithread.Controls.Add(thread3Label);
             cmdMultithread.Controls.Add(thread2Label);
             cmdMultithread.Controls.Add(thread1Label);
-            cmdMultithread.Controls.Add(progressBarMutli2);
-            cmdMultithread.Controls.Add(progressBarMutli3);
-            cmdMultithread.Controls.Add(progressBarMutli4);
-            cmdMultithread.Controls.Add(progressBarMultiThreadTotal);
-            cmdMultithread.Controls.Add(dataGridView2);
             cmdMultithread.Controls.Add(statusBarMulti);
             cmdMultithread.Controls.Add(totalProgressMultiLabel);
             cmdMultithread.Controls.Add(filesNameLabel4);
@@ -1136,27 +1133,99 @@
             cmdMultithread.UseVisualStyleBackColor = true;
             cmdMultithread.MouseEnter += cmdMultithread_MouseEnter;
             // 
-            // progressBarMutli1
+            // progressBarMultiTotal
             // 
-            progressBarMutli1.BackColor = Color.Transparent;
-            progressBarMutli1.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMutli1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMutli1.ForeColor = Color.White;
-            progressBarMutli1.LineWidth = 12;
-            progressBarMutli1.Location = new Point(331, 12);
-            progressBarMutli1.Maximum = 100;
-            progressBarMutli1.Minimum = 0;
-            progressBarMutli1.Name = "progressBarMutli1";
-            progressBarMutli1.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMutli1.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMutli1.Size = new Size(115, 100);
-            progressBarMutli1.TabIndex = 204;
-            progressBarMutli1.Text = "modernCircularProgressBar5";
-            progressBarMutli1.Value = 0;
+            progressBarMultiTotal.BackColor = Color.Transparent;
+            progressBarMultiTotal.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMultiTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMultiTotal.ForeColor = Color.White;
+            progressBarMultiTotal.LineWidth = 12;
+            progressBarMultiTotal.Location = new Point(309, 803);
+            progressBarMultiTotal.Maximum = 10000;
+            progressBarMultiTotal.Minimum = 0;
+            progressBarMultiTotal.Name = "progressBarMultiTotal";
+            progressBarMultiTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMultiTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMultiTotal.Size = new Size(120, 105);
+            progressBarMultiTotal.TabIndex = 208;
+            progressBarMultiTotal.Text = "modernCircularProgressBar7";
+            progressBarMultiTotal.Value = 0;
+            // 
+            // progressBarMulti4
+            // 
+            progressBarMulti4.BackColor = Color.Transparent;
+            progressBarMulti4.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti4.ForeColor = Color.White;
+            progressBarMulti4.LineWidth = 12;
+            progressBarMulti4.Location = new Point(309, 609);
+            progressBarMulti4.Maximum = 10000;
+            progressBarMulti4.Minimum = 0;
+            progressBarMulti4.Name = "progressBarMulti4";
+            progressBarMulti4.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti4.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti4.Size = new Size(120, 105);
+            progressBarMulti4.TabIndex = 207;
+            progressBarMulti4.Text = "modernCircularProgressBar6";
+            progressBarMulti4.Value = 0;
+            // 
+            // progressBarMulti3
+            // 
+            progressBarMulti3.BackColor = Color.Transparent;
+            progressBarMulti3.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti3.ForeColor = Color.White;
+            progressBarMulti3.LineWidth = 12;
+            progressBarMulti3.Location = new Point(309, 415);
+            progressBarMulti3.Maximum = 10000;
+            progressBarMulti3.Minimum = 0;
+            progressBarMulti3.Name = "progressBarMulti3";
+            progressBarMulti3.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti3.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti3.Size = new Size(120, 105);
+            progressBarMulti3.TabIndex = 206;
+            progressBarMulti3.Text = "modernCircularProgressBar5";
+            progressBarMulti3.Value = 0;
+            // 
+            // progressBarMulti2
+            // 
+            progressBarMulti2.BackColor = Color.Transparent;
+            progressBarMulti2.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti2.ForeColor = Color.White;
+            progressBarMulti2.LineWidth = 12;
+            progressBarMulti2.Location = new Point(309, 221);
+            progressBarMulti2.Maximum = 10000;
+            progressBarMulti2.Minimum = 0;
+            progressBarMulti2.Name = "progressBarMulti2";
+            progressBarMulti2.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti2.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti2.Size = new Size(120, 105);
+            progressBarMulti2.TabIndex = 205;
+            progressBarMulti2.Text = "modernCircularProgressBar4";
+            progressBarMulti2.Value = 0;
+            // 
+            // progressBarMulti1
+            // 
+            progressBarMulti1.BackColor = Color.Transparent;
+            progressBarMulti1.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti1.ForeColor = Color.White;
+            progressBarMulti1.LineWidth = 12;
+            progressBarMulti1.Location = new Point(309, 27);
+            progressBarMulti1.Maximum = 10000;
+            progressBarMulti1.Minimum = 0;
+            progressBarMulti1.Name = "progressBarMulti1";
+            progressBarMulti1.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti1.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti1.Size = new Size(120, 105);
+            progressBarMulti1.TabIndex = 204;
+            progressBarMulti1.Text = "modernCircularProgressBar1";
+            progressBarMulti1.Value = 0;
             // 
             // thread4Label
             // 
-            thread4Label.Location = new Point(3, 366);
+            thread4Label.Location = new Point(18, 649);
             thread4Label.Name = "thread4Label";
             thread4Label.Size = new Size(278, 25);
             thread4Label.TabIndex = 203;
@@ -1165,7 +1234,7 @@
             // 
             // thread3Label
             // 
-            thread3Label.Location = new Point(8, 261);
+            thread3Label.Location = new Point(18, 455);
             thread3Label.Name = "thread3Label";
             thread3Label.Size = new Size(278, 25);
             thread3Label.TabIndex = 202;
@@ -1174,7 +1243,7 @@
             // 
             // thread2Label
             // 
-            thread2Label.Location = new Point(13, 156);
+            thread2Label.Location = new Point(18, 261);
             thread2Label.Name = "thread2Label";
             thread2Label.Size = new Size(273, 25);
             thread2Label.TabIndex = 201;
@@ -1183,107 +1252,12 @@
             // 
             // thread1Label
             // 
-            thread1Label.Location = new Point(8, 51);
+            thread1Label.Location = new Point(13, 67);
             thread1Label.Name = "thread1Label";
             thread1Label.Size = new Size(278, 25);
             thread1Label.TabIndex = 200;
             thread1Label.Text = "Thread 1 - Progress / Stats:";
             thread1Label.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // progressBarMutli2
-            // 
-            progressBarMutli2.BackColor = Color.Transparent;
-            progressBarMutli2.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMutli2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMutli2.ForeColor = Color.White;
-            progressBarMutli2.LineWidth = 12;
-            progressBarMutli2.Location = new Point(331, 115);
-            progressBarMutli2.Maximum = 100;
-            progressBarMutli2.Minimum = 0;
-            progressBarMutli2.Name = "progressBarMutli2";
-            progressBarMutli2.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMutli2.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMutli2.Size = new Size(115, 100);
-            progressBarMutli2.TabIndex = 198;
-            progressBarMutli2.Text = "modernCircularProgressBar5";
-            progressBarMutli2.Value = 0;
-            // 
-            // progressBarMutli3
-            // 
-            progressBarMutli3.BackColor = Color.Transparent;
-            progressBarMutli3.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMutli3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMutli3.ForeColor = Color.White;
-            progressBarMutli3.LineWidth = 12;
-            progressBarMutli3.Location = new Point(331, 218);
-            progressBarMutli3.Maximum = 100;
-            progressBarMutli3.Minimum = 0;
-            progressBarMutli3.Name = "progressBarMutli3";
-            progressBarMutli3.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMutli3.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMutli3.Size = new Size(115, 100);
-            progressBarMutli3.TabIndex = 197;
-            progressBarMutli3.Text = "modernCircularProgressBar5";
-            progressBarMutli3.Value = 0;
-            // 
-            // progressBarMutli4
-            // 
-            progressBarMutli4.BackColor = Color.Transparent;
-            progressBarMutli4.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMutli4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMutli4.ForeColor = Color.White;
-            progressBarMutli4.LineWidth = 12;
-            progressBarMutli4.Location = new Point(331, 321);
-            progressBarMutli4.Maximum = 100;
-            progressBarMutli4.Minimum = 0;
-            progressBarMutli4.Name = "progressBarMutli4";
-            progressBarMutli4.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMutli4.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMutli4.Size = new Size(115, 100);
-            progressBarMutli4.TabIndex = 196;
-            progressBarMutli4.Text = "modernCircularProgressBar5";
-            progressBarMutli4.Value = 0;
-            // 
-            // progressBarMultiThreadTotal
-            // 
-            progressBarMultiThreadTotal.BackColor = Color.Transparent;
-            progressBarMultiThreadTotal.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMultiThreadTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMultiThreadTotal.ForeColor = Color.White;
-            progressBarMultiThreadTotal.LineWidth = 12;
-            progressBarMultiThreadTotal.Location = new Point(331, 424);
-            progressBarMultiThreadTotal.Maximum = 100;
-            progressBarMultiThreadTotal.Minimum = 0;
-            progressBarMultiThreadTotal.Name = "progressBarMultiThreadTotal";
-            progressBarMultiThreadTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMultiThreadTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMultiThreadTotal.Size = new Size(115, 100);
-            progressBarMultiThreadTotal.TabIndex = 194;
-            progressBarMultiThreadTotal.Text = "modernCircularProgressBar5";
-            progressBarMultiThreadTotal.Value = 0;
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.AllowUserToAddRows = false;
-            dataGridView2.AllowUserToDeleteRows = false;
-            dataGridView2.AllowUserToOrderColumns = true;
-            dataGridView2.AllowUserToResizeColumns = false;
-            dataGridView2.AllowUserToResizeRows = false;
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView2.BackgroundColor = Color.DarkGray;
-            dataGridView2.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dataGridView2.Location = new Point(53, 580);
-            dataGridView2.MultiSelect = false;
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.ReadOnly = true;
-            dataGridView2.RowHeadersVisible = false;
-            dataGridView2.RowHeadersWidth = 62;
-            dataGridView2.ScrollBars = ScrollBars.Vertical;
-            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView2.Size = new Size(1438, 327);
-            dataGridView2.TabIndex = 189;
             // 
             // statusBarMulti
             // 
@@ -1307,7 +1281,7 @@
             // 
             totalProgressMultiLabel.BackColor = Color.Transparent;
             totalProgressMultiLabel.ForeColor = Color.Black;
-            totalProgressMultiLabel.Location = new Point(3, 467);
+            totalProgressMultiLabel.Location = new Point(18, 843);
             totalProgressMultiLabel.Name = "totalProgressMultiLabel";
             totalProgressMultiLabel.Size = new Size(278, 25);
             totalProgressMultiLabel.TabIndex = 187;
@@ -1318,9 +1292,9 @@
             // 
             filesNameLabel4.BackColor = Color.Transparent;
             filesNameLabel4.ForeColor = Color.Black;
-            filesNameLabel4.Location = new Point(489, 366);
+            filesNameLabel4.Location = new Point(476, 649);
             filesNameLabel4.Name = "filesNameLabel4";
-            filesNameLabel4.Size = new Size(1011, 25);
+            filesNameLabel4.Size = new Size(1017, 51);
             filesNameLabel4.TabIndex = 183;
             filesNameLabel4.Text = "Nothing";
             filesNameLabel4.MouseEnter += filesNameLabel4_MouseEnter;
@@ -1329,9 +1303,9 @@
             // 
             filesNameLabel3.BackColor = Color.Transparent;
             filesNameLabel3.ForeColor = Color.Black;
-            filesNameLabel3.Location = new Point(489, 261);
+            filesNameLabel3.Location = new Point(476, 455);
             filesNameLabel3.Name = "filesNameLabel3";
-            filesNameLabel3.Size = new Size(1014, 25);
+            filesNameLabel3.Size = new Size(1017, 51);
             filesNameLabel3.TabIndex = 181;
             filesNameLabel3.Text = "Nothing";
             filesNameLabel3.MouseEnter += filesNameLabel3_MouseEnter;
@@ -1340,9 +1314,9 @@
             // 
             filesNameLabel2.BackColor = Color.Transparent;
             filesNameLabel2.ForeColor = Color.Black;
-            filesNameLabel2.Location = new Point(489, 156);
+            filesNameLabel2.Location = new Point(476, 261);
             filesNameLabel2.Name = "filesNameLabel2";
-            filesNameLabel2.Size = new Size(1017, 25);
+            filesNameLabel2.Size = new Size(1017, 51);
             filesNameLabel2.TabIndex = 179;
             filesNameLabel2.Text = "Nothing";
             filesNameLabel2.MouseEnter += filesNameLabel2_MouseEnter;
@@ -1351,9 +1325,9 @@
             // 
             filesNameLabel1.BackColor = Color.Transparent;
             filesNameLabel1.ForeColor = Color.Black;
-            filesNameLabel1.Location = new Point(489, 51);
+            filesNameLabel1.Location = new Point(476, 67);
             filesNameLabel1.Name = "filesNameLabel1";
-            filesNameLabel1.Size = new Size(1017, 25);
+            filesNameLabel1.Size = new Size(1017, 51);
             filesNameLabel1.TabIndex = 177;
             filesNameLabel1.Text = "Nothing";
             filesNameLabel1.MouseEnter += filesNameLabel1_MouseEnter;
@@ -1362,7 +1336,7 @@
             // 
             onFinishMultiLabel.BackColor = Color.Transparent;
             onFinishMultiLabel.ForeColor = Color.Black;
-            onFinishMultiLabel.Location = new Point(922, 18);
+            onFinishMultiLabel.Location = new Point(958, 12);
             onFinishMultiLabel.Name = "onFinishMultiLabel";
             onFinishMultiLabel.Size = new Size(127, 30);
             onFinishMultiLabel.TabIndex = 176;
@@ -1373,7 +1347,7 @@
             // 
             onFinishMultiComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             onFinishMultiComboBox.FormattingEnabled = true;
-            onFinishMultiComboBox.Location = new Point(1055, 15);
+            onFinishMultiComboBox.Location = new Point(1113, 9);
             onFinishMultiComboBox.Name = "onFinishMultiComboBox";
             onFinishMultiComboBox.Size = new Size(361, 33);
             onFinishMultiComboBox.TabIndex = 175;
@@ -1385,7 +1359,7 @@
             pauseResumeMultiButton.BackColor = SystemColors.Control;
             pauseResumeMultiButton.Enabled = false;
             pauseResumeMultiButton.ForeColor = Color.Black;
-            pauseResumeMultiButton.Location = new Point(655, 12);
+            pauseResumeMultiButton.Location = new Point(655, 9);
             pauseResumeMultiButton.Name = "pauseResumeMultiButton";
             pauseResumeMultiButton.Size = new Size(112, 36);
             pauseResumeMultiButton.TabIndex = 174;
@@ -1399,7 +1373,7 @@
             cancelMultiButton.BackColor = SystemColors.Control;
             cancelMultiButton.Enabled = false;
             cancelMultiButton.ForeColor = Color.Black;
-            cancelMultiButton.Location = new Point(789, 12);
+            cancelMultiButton.Location = new Point(789, 9);
             cancelMultiButton.Name = "cancelMultiButton";
             cancelMultiButton.Size = new Size(112, 36);
             cancelMultiButton.TabIndex = 173;
@@ -1413,7 +1387,7 @@
             totalSpaceMultiLabel.AutoSize = true;
             totalSpaceMultiLabel.BackColor = Color.Transparent;
             totalSpaceMultiLabel.ForeColor = Color.Black;
-            totalSpaceMultiLabel.Location = new Point(931, 531);
+            totalSpaceMultiLabel.Location = new Point(861, 941);
             totalSpaceMultiLabel.Name = "totalSpaceMultiLabel";
             totalSpaceMultiLabel.Size = new Size(286, 25);
             totalSpaceMultiLabel.TabIndex = 172;
@@ -1425,7 +1399,7 @@
             speedMultiLabel.AutoSize = true;
             speedMultiLabel.BackColor = Color.Transparent;
             speedMultiLabel.ForeColor = Color.Black;
-            speedMultiLabel.Location = new Point(585, 531);
+            speedMultiLabel.Location = new Point(476, 941);
             speedMultiLabel.Name = "speedMultiLabel";
             speedMultiLabel.Size = new Size(151, 25);
             speedMultiLabel.TabIndex = 171;
@@ -1437,7 +1411,7 @@
             totalCMDMultiLabel.AutoSize = true;
             totalCMDMultiLabel.BackColor = Color.Transparent;
             totalCMDMultiLabel.ForeColor = Color.Black;
-            totalCMDMultiLabel.Location = new Point(931, 467);
+            totalCMDMultiLabel.Location = new Point(861, 843);
             totalCMDMultiLabel.Name = "totalCMDMultiLabel";
             totalCMDMultiLabel.Size = new Size(253, 25);
             totalCMDMultiLabel.TabIndex = 169;
@@ -1449,7 +1423,7 @@
             fileCountMultiLabel.AutoSize = true;
             fileCountMultiLabel.BackColor = Color.Transparent;
             fileCountMultiLabel.ForeColor = Color.Black;
-            fileCountMultiLabel.Location = new Point(585, 469);
+            fileCountMultiLabel.Location = new Point(476, 843);
             fileCountMultiLabel.Name = "fileCountMultiLabel";
             fileCountMultiLabel.Size = new Size(182, 25);
             fileCountMultiLabel.TabIndex = 168;
@@ -1461,7 +1435,7 @@
             totalTimeMultiLabel.AutoSize = true;
             totalTimeMultiLabel.BackColor = Color.Transparent;
             totalTimeMultiLabel.ForeColor = Color.Black;
-            totalTimeMultiLabel.Location = new Point(55, 531);
+            totalTimeMultiLabel.Location = new Point(55, 941);
             totalTimeMultiLabel.Name = "totalTimeMultiLabel";
             totalTimeMultiLabel.Size = new Size(343, 25);
             totalTimeMultiLabel.TabIndex = 167;
@@ -2780,14 +2754,14 @@
             // bufferNumUpDown
             // 
             bufferNumUpDown.Location = new Point(135, 29);
-            bufferNumUpDown.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
+            bufferNumUpDown.Maximum = new decimal(new int[] { 2048, 0, 0, 0 });
             bufferNumUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             bufferNumUpDown.Name = "bufferNumUpDown";
             bufferNumUpDown.ReadOnly = true;
             bufferNumUpDown.Size = new Size(140, 31);
             bufferNumUpDown.TabIndex = 69;
             bufferNumUpDown.TextAlign = HorizontalAlignment.Center;
-            bufferNumUpDown.Value = new decimal(new int[] { 1024, 0, 0, 0 });
+            bufferNumUpDown.Value = new decimal(new int[] { 2048, 0, 0, 0 });
             bufferNumUpDown.ValueChanged += bufferNumUpDown_ValueChanged;
             bufferNumUpDown.Enter += bufferNumUpDown_Enter;
             // 
@@ -3537,7 +3511,6 @@
             ((System.ComponentModel.ISupportInitialize)fileIconPicBox).EndInit();
             cmdMultithread.ResumeLayout(false);
             cmdMultithread.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             statusBarMulti.ResumeLayout(false);
             statusBarMulti.PerformLayout();
             cmdSkipPage.ResumeLayout(false);
@@ -3784,7 +3757,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn TotalDirSize;
         private DataGridView dataGridView1;
-        private DataGridView dataGridView2;
         private DataGridView filesDataGridView;
         private Label rollUpLabel;
         private Label rollDownLabel;
@@ -3795,13 +3767,7 @@
         private Label moveFileDownLabel;
         private Label moveToTopLabel;
         private Label moveToBottomLabel;
-        private CustomControls.ModernCircularProgressBar totalProgressBar;
-        private CustomControls.ModernCircularProgressBar fileProgressBar;
         private Label fileOverAllProgressLabel;
-        private CustomControls.ModernCircularProgressBar progressBarMultiThreadTotal;
-        private CustomControls.ModernCircularProgressBar progressBarMutli2;
-        private CustomControls.ModernCircularProgressBar progressBarMutli3;
-        private CustomControls.ModernCircularProgressBar progressBarMutli4;
         private Label thread4Label;
         private Label thread3Label;
         private Label thread2Label;
@@ -3842,6 +3808,12 @@
         private Label secureDeleteLabel;
         private Label aboutCTLabel;
         private PictureBox copyThatPB;
-        private CustomControls.ModernCircularProgressBar progressBarMutli1;
+        private CustomControls.ModernCircularProgressBar modernTotal;
+        private CustomControls.ModernCircularProgressBar modernFile;
+        private CustomControls.ModernCircularProgressBar progressBarMultiTotal;
+        private CustomControls.ModernCircularProgressBar progressBarMulti4;
+        private CustomControls.ModernCircularProgressBar progressBarMulti3;
+        private CustomControls.ModernCircularProgressBar progressBarMulti2;
+        private CustomControls.ModernCircularProgressBar progressBarMulti1;
     }
 }

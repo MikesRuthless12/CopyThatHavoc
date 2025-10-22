@@ -12,6 +12,8 @@
           "AlphaVSS": "2.0.3",
           "ClosedXML": "0.105.0",
           "Microsoft.Extensions.FileSystemGlobbing": "9.0.7",
+          "ModernProgress": "1.0.0",
+          "MyControlsLibrary": "1.0.0",
           "Newtonsoft.Json": "13.0.3",
           "System.Linq.Dynamic.Core": "1.6.6",
           "Twilio": "7.2.3",
@@ -242,6 +244,22 @@
           }
         }
       },
+      "ModernProgress/1.0.0": {
+        "runtime": {
+          "ModernProgress.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MyControlsLibrary/1.0.0": {
+        "runtime": {
+          "MyControlsLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Interop.WMPLib/1.0.0.0": {
         "runtime": {
           "Interop.WMPLib.dll": {
@@ -405,6 +423,16 @@
       "sha512": "sha512-HM6PQplgOkcZbJGHEw0vPj6wMdMieBBtfAbUawIrNjtTivZkfMjPPUOL0s1xh9qQZMEABgTuWyVBu37cUImoiQ==",
       "path": "twilio/7.2.3",
       "hashPath": "twilio.7.2.3.nupkg.sha512"
+    },
+    "ModernProgress/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MyControlsLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Interop.WMPLib/1.0.0.0": {
       "type": "reference",
