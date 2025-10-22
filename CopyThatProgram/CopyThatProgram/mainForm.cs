@@ -18,6 +18,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Globalization; // Provides culture-specific information like date and number formatting.
 using System.IO.Compression;
 using System.Linq; // Offers LINQ for querying data sources with a syntax similar to SQL.
+using System.Linq.Expressions;
 using System.Media; // Enables playing system sounds.
 using System.Net;
 using System.Reflection;
@@ -1203,41 +1204,44 @@ namespace CopyThatProgram
             // Populate the combo box with the available file operations.
             copyMoveDeleteComboBox.Items.Clear();
             onFinishComboBox.Items.Clear();
-            if ((selectedLanguage == "English" || selectedLanguage == "Inglés"))
+
+
+            try
             {
-                copyMoveDeleteComboBox.Items.AddRange(new[] { "Copy Files", "Move Files", "Secure Delete" });
+                // Normalise the key once
+                string langKey = (CopyThatProgram.Properties.Settings.Default.Language ?? "English")
+                                 .Trim()
+                                 .ToLowerInvariant();
 
-                onFinishComboBox.Items.AddRange(new string[]
+                // reusable string arrays
+                string[] copyMoveItems = langKey switch
                 {
-                    "Do Nothing",
-                    "Sleep",
-                    "Log Off",
-                    "Exit Program",
-                    "Shut Down"
-                });
+                    "spanish" or "español" => new[] { "Copiar archivos", "Mover archivos", "Borrado seguro" },
+                    "german" or "deutsch" => new[] { "Dateien kopieren", "Dateien verschieben", "Sicher löschen" },
+                    "french" or "français" => new[] { "Copier les fichiers", "Déplacer les fichiers", "Suppression sécurisée" },
+                    _ => new[] { "Copy Files", "Move Files", "Secure Delete" }
+                };
 
+                string[] onFinishItems = langKey switch
+                {
+                    "spanish" or "español" => new[] { "No hacer nada", "Suspender", "Cerrar sesión", "Salir del programa", "Apagar" },
+                    "german" or "deutsch" => new[] { "Nichts tun", "Ruhezustand", "Abmelden", "Programm beenden", "Herunterfahren" },
+                    "french" or "français" => new[] { "Ne rien faire", "Mettre en veille", "Se déconnecter", "Quitter le programme", "Arrêter l'ordinateur" },
+                    _ => new[] { "Do Nothing", "Sleep", "Log Off", "Exit Program", "Shut Down" }
+                };
 
+                // fill the combos
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(copyMoveItems);
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(onFinishItems);
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(onFinishItems);
             }
-            else if (selectedLanguage == "Spanish" || selectedLanguage == "Español")
+            catch
             {
-                copyMoveDeleteComboBox.Items.AddRange(new[] { "Copiar archivos", "Mover archivos", "Borrado seguro" });
-                onFinishComboBox.Items.AddRange(new string[]
-                {
-                        "No hacer nada",
-                        "Suspender",
-                        "Cerrar sesión",
-                        "Salir del programa",
-                        "Apagar"
-                });
-
-                onFinishMultiComboBox.Items.AddRange(new string[]
-                {
-                        "No hacer nada",
-                        "Suspender",
-                        "Cerrar sesión",
-                        "Salir del programa",
-                        "Apagar"
-                });
             }
 
 
@@ -1615,6 +1619,7 @@ namespace CopyThatProgram
                     break;
             }
         }
+
 
         /// <summary>
         /// Applies the theme and font settings based on user preferences.
@@ -13976,88 +13981,94 @@ namespace CopyThatProgram
 
         private void languageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_isUpdatingLanguage || _isLoadingForm) return; // Guard against recursion and initial load
+            if (_isUpdatingLanguage || _isLoadingForm) return;
             _isUpdatingLanguage = true;
 
             try
             {
-                string display = languageComboBox.SelectedItem?.ToString() ?? string.Empty;
-
-                (string key, string culture) = display switch
+                // 1️⃣ Map SelectedIndex to language key and culture
+                string key, culture;
+                switch (languageComboBox.SelectedIndex)
                 {
-                    "Español" or "Spanish" => ("Spanish", "es-ES"),
-                    "Français" or "French" => ("French", "fr-FR"),
-                    "Deutsch" or "German" => ("German", "de-DE"),
-                    _ => ("English", "en")
-                };
+                    case 1: key = "French"; culture = "fr-FR"; break;
+                    case 2: key = "German"; culture = "de-DE"; break;
+                    case 3: key = "Spanish"; culture = "es-ES"; break;
+                    default: key = "English"; culture = "en-US"; break;
+                }
 
-                // Save settings
+                // 2️⃣ Persist choice
                 CopyThatProgram.Properties.Settings.Default.Language = key;
                 CopyThatProgram.Properties.Settings.Default.Save();
 
-                // Change culture
+                // 3️⃣ Set current culture
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
 
-                // Temporarily suspend layout
                 this.SuspendLayout();
 
-                // Update language combo
-                languageComboBox.Items.Clear();
-                languageComboBox.Items.AddRange(key switch
+                // 4️⃣ Detach handler to prevent recursion
+                languageComboBox.SelectedIndexChanged -= languageComboBox_SelectedIndexChanged;
+
+                // 5️⃣ Rebuild ComboBox items in the new language
+                string[] items = key switch
                 {
                     "Spanish" => new[] { "Inglés", "Francés", "Deutsch", "Español" },
                     "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol" },
                     "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch" },
                     _ => new[] { "English", "French", "German", "Spanish" }
-                });
-                languageComboBox.SelectedItem = LangKeyToDisplay[key];
+                };
+                languageComboBox.Items.Clear();
+                languageComboBox.Items.AddRange(items);
 
-                // Apply localized .resx resources
+                // 6️⃣ Select current language
+                languageComboBox.SelectedIndex = Array.IndexOf(items, items.FirstOrDefault(i =>
+                    (key == "English" && i == "English") ||
+                    (key == "French" && i == "Français") ||
+                    (key == "German" && i == "Deutsch") ||
+                    (key == "Spanish" && i == "Español")
+                ));
+
+                // 7️⃣ Apply all resources to controls
                 var resMan = new ComponentResourceManager(typeof(mainForm));
                 ApplyAllResources(resMan);
 
-                if (key == "Spanish")
-                    ApplyManualSpanishUpdates();
-                else
-                    ApplyManualEnglishUpdates();
+                // 8️⃣ Apply manual language-specific updates
+                switch (key)
+                {
+                    case "Spanish": ApplyManualSpanishUpdates(); break;
+                    case "French": ApplyManualFrenchUpdates(); break;
+                    case "German": ApplyManualGermanUpdates(); break;
+                    default: ApplyManualEnglishUpdates(); break;
+                }
 
-                // Remember saved skin (in English)
+                // 9️⃣ Apply skins
                 _savedSkinName = CopyThatProgram.Properties.Settings.Default.Skin ?? "Light Mode";
-
-                // Update skins combo list with new language
                 UpdateSkinsComboBoxItems(key);
-
-                // Select the previously saved skin (in current language) BEFORE applying it
                 SelectSkinInCombo(_savedSkinName);
 
-                // Apply the skin theme colors - handle custom colors specially
                 if (_savedSkinName == "Custom Color")
                 {
                     var savedBack = CopyThatProgram.Properties.Settings.Default.CustomBackColor;
                     var savedFore = CopyThatProgram.Properties.Settings.Default.CustomForeColor;
-
-                    if (savedBack != Color.Empty && savedBack != Color.Transparent &&
-                        savedFore != Color.Empty && savedFore != Color.Transparent)
-                    {
-                        ApplySkin("Custom Color", savedFore, savedBack);
-                    }
-                    else
-                    {
-                        ApplySkin("Light Mode");
-                    }
+                    ApplySkin(savedFore != Color.Empty && savedBack != Color.Empty
+                              ? "Custom Color"
+                              : "Light Mode",
+                              savedFore, savedBack);
                 }
                 else
                 {
                     ApplySkin(_savedSkinName);
                 }
 
-                // Layout corrections
-                languageLabel.Left = skinsLabel.Left + skinsLabel.Width - languageLabel.Width;
-                fromLabel.Left = fileNameLabel.Left + fileNameLabel.Width - fromLabel.Width;
-                targetLabel.Left = fromLabel.Left + fromLabel.Width - targetLabel.Width;
+                // 10️⃣ Adjust layout dynamically
+                languageLabel.Left = skinsLabel.Right - languageLabel.Width;
+                fromLabel.Left = fileNameLabel.Right - fromLabel.Width;
+                targetLabel.Left = fromLabel.Right - targetLabel.Width;
 
                 this.ResumeLayout(true);
+
+                // 11️⃣ Reattach event handler
+                languageComboBox.SelectedIndexChanged += languageComboBox_SelectedIndexChanged;
             }
             catch (Exception ex)
             {
@@ -14191,6 +14202,122 @@ namespace CopyThatProgram
 
                 copyMoveDeleteComboBox.Items.Clear();
                 copyMoveDeleteComboBox.Items.AddRange(new[] { "Copy Files", "Move Files", "Secure Delete" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating English UI: {ex.Message}");
+            }
+        }
+
+
+        // ==================  ENGLISH  ==================
+        private void ApplyManualFrenchUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Nom du fichier";
+                dataGridView1.Columns[1].HeaderText = "Chemin du fichier";
+                dataGridView1.Columns[2].HeaderText = "Type";
+                dataGridView1.Columns[3].HeaderText = "Taille du fichier";
+                dataGridView1.Columns[4].HeaderText = "État";
+
+                //dataGridView2.Columns[0].HeaderText = "Nom du fichier";
+                //dataGridView2.Columns[1].HeaderText = "Chemin du fichier";
+                //dataGridView2.Columns[2].HeaderText = "Type";
+                //dataGridView2.Columns[3].HeaderText = "Taille du fichier";
+                //dataGridView2.Columns[4].HeaderText = "État";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Type d'opération";
+                copyHistoryDGV.Columns[1].HeaderText = "Chemin(s) source(s)";
+                copyHistoryDGV.Columns[2].HeaderText = "Chemin(s) de destination";
+                copyHistoryDGV.Columns[3].HeaderText = "Taille totale des répertoires";
+
+                skippedDataGridView.Columns[0].HeaderText = "État";
+                skippedDataGridView.Columns[1].HeaderText = "Chemin du fichier source";
+                skippedDataGridView.Columns[2].HeaderText = "Chemin du fichier de destination";
+                skippedDataGridView.Columns[3].HeaderText = "Nom du fichier";
+                skippedDataGridView.Columns[4].HeaderText = "Taille du fichier";
+
+                filesDataGridView.Columns[0].HeaderText = "Nom";
+                filesDataGridView.Columns[1].HeaderText = "Chemin";
+                filesDataGridView.Columns[2].HeaderText = "Type";
+                filesDataGridView.Columns[3].HeaderText = "Taille";
+                filesDataGridView.Columns[4].HeaderText = "État";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Rechercher un fichier ou un dossier…";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Ne rien faire", "Mettre en veille", "Se déconnecter", "Quitter le programme", "Arrêter l'ordinateur" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Ne rien faire", "Mettre en veille", "Se déconnecter", "Quitter le programme", "Arrêter l'ordinateur" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Copier les fichiers", "Déplacer les fichiers", "Suppression sécurisée" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating English UI: {ex.Message}");
+            }
+        }
+
+
+        // ==================  ENGLISH  ==================
+        private void ApplyManualGermanUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Dateiname";
+                dataGridView1.Columns[1].HeaderText = "Dateipfad";
+                dataGridView1.Columns[2].HeaderText = "Typ";
+                dataGridView1.Columns[3].HeaderText = "Dateigröße";
+                dataGridView1.Columns[4].HeaderText = "Status";
+
+                //dataGridView2.Columns[0].HeaderText = "Dateiname";
+                //dataGridView2.Columns[1].HeaderText = "Dateipfad";
+                //dataGridView2.Columns[2].HeaderText = "Typ";
+                //dataGridView2.Columns[3].HeaderText = "Dateigröße";
+                //dataGridView2.Columns[4].HeaderText = "Status";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Vorgangstyp";
+                copyHistoryDGV.Columns[1].HeaderText = "Quellpfad(e)";
+                copyHistoryDGV.Columns[2].HeaderText = "Zielpfad(e)";
+                copyHistoryDGV.Columns[3].HeaderText = "Gesamtgröße der Ordner";
+
+                skippedDataGridView.Columns[0].HeaderText = "Status";
+                skippedDataGridView.Columns[1].HeaderText = "Quellpfad";
+                skippedDataGridView.Columns[2].HeaderText = "Zielpfad";
+                skippedDataGridView.Columns[3].HeaderText = "Dateiname";
+                skippedDataGridView.Columns[4].HeaderText = "Dateigröße";
+
+                filesDataGridView.Columns[0].HeaderText = "Name";
+                filesDataGridView.Columns[1].HeaderText = "Pfad";
+                filesDataGridView.Columns[2].HeaderText = "Typ";
+                filesDataGridView.Columns[3].HeaderText = "Größe";
+                filesDataGridView.Columns[4].HeaderText = "Status";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Datei-/Ordnernamen suchen…";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Nichts tun", "Ruhezustand", "Abmelden", "Programm beenden", "Herunterfahren" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Nichts tun", "Ruhezustand", "Abmelden", "Programm beenden", "Herunterfahren" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Dateien kopieren", "Dateien verschieben", "Sicher löschen" });
                 if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
 
             }

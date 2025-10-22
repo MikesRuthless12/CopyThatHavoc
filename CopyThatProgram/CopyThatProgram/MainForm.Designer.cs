@@ -1140,13 +1140,13 @@
             progressBarMultiTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             progressBarMultiTotal.ForeColor = Color.White;
             progressBarMultiTotal.LineWidth = 12;
-            progressBarMultiTotal.Location = new Point(309, 803);
+            progressBarMultiTotal.Location = new Point(309, 794);
             progressBarMultiTotal.Maximum = 10000;
             progressBarMultiTotal.Minimum = 0;
             progressBarMultiTotal.Name = "progressBarMultiTotal";
             progressBarMultiTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
             progressBarMultiTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMultiTotal.Size = new Size(120, 105);
+            progressBarMultiTotal.Size = new Size(132, 129);
             progressBarMultiTotal.TabIndex = 208;
             progressBarMultiTotal.Text = "modernCircularProgressBar7";
             progressBarMultiTotal.Value = 0;
@@ -1158,13 +1158,13 @@
             progressBarMulti4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             progressBarMulti4.ForeColor = Color.White;
             progressBarMulti4.LineWidth = 12;
-            progressBarMulti4.Location = new Point(309, 609);
+            progressBarMulti4.Location = new Point(309, 601);
             progressBarMulti4.Maximum = 10000;
             progressBarMulti4.Minimum = 0;
             progressBarMulti4.Name = "progressBarMulti4";
             progressBarMulti4.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
             progressBarMulti4.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti4.Size = new Size(120, 105);
+            progressBarMulti4.Size = new Size(132, 129);
             progressBarMulti4.TabIndex = 207;
             progressBarMulti4.Text = "modernCircularProgressBar6";
             progressBarMulti4.Value = 0;
@@ -1176,13 +1176,13 @@
             progressBarMulti3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             progressBarMulti3.ForeColor = Color.White;
             progressBarMulti3.LineWidth = 12;
-            progressBarMulti3.Location = new Point(309, 415);
+            progressBarMulti3.Location = new Point(309, 408);
             progressBarMulti3.Maximum = 10000;
             progressBarMulti3.Minimum = 0;
             progressBarMulti3.Name = "progressBarMulti3";
             progressBarMulti3.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
             progressBarMulti3.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti3.Size = new Size(120, 105);
+            progressBarMulti3.Size = new Size(132, 129);
             progressBarMulti3.TabIndex = 206;
             progressBarMulti3.Text = "modernCircularProgressBar5";
             progressBarMulti3.Value = 0;
@@ -1194,13 +1194,13 @@
             progressBarMulti2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             progressBarMulti2.ForeColor = Color.White;
             progressBarMulti2.LineWidth = 12;
-            progressBarMulti2.Location = new Point(309, 221);
+            progressBarMulti2.Location = new Point(309, 215);
             progressBarMulti2.Maximum = 10000;
             progressBarMulti2.Minimum = 0;
             progressBarMulti2.Name = "progressBarMulti2";
             progressBarMulti2.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
             progressBarMulti2.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti2.Size = new Size(120, 105);
+            progressBarMulti2.Size = new Size(132, 129);
             progressBarMulti2.TabIndex = 205;
             progressBarMulti2.Text = "modernCircularProgressBar4";
             progressBarMulti2.Value = 0;
@@ -1212,13 +1212,13 @@
             progressBarMulti1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             progressBarMulti1.ForeColor = Color.White;
             progressBarMulti1.LineWidth = 12;
-            progressBarMulti1.Location = new Point(309, 27);
+            progressBarMulti1.Location = new Point(309, 22);
             progressBarMulti1.Maximum = 10000;
             progressBarMulti1.Minimum = 0;
             progressBarMulti1.Name = "progressBarMulti1";
             progressBarMulti1.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
             progressBarMulti1.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti1.Size = new Size(120, 105);
+            progressBarMulti1.Size = new Size(132, 129);
             progressBarMulti1.TabIndex = 204;
             progressBarMulti1.Text = "modernCircularProgressBar1";
             progressBarMulti1.Value = 0;
@@ -2939,7 +2939,7 @@
             // startWithWindowsCheckBox
             // 
             startWithWindowsCheckBox.AutoSize = true;
-            startWithWindowsCheckBox.Location = new Point(14, 146);
+            startWithWindowsCheckBox.Location = new Point(14, 164);
             startWithWindowsCheckBox.Name = "startWithWindowsCheckBox";
             startWithWindowsCheckBox.Size = new Size(195, 29);
             startWithWindowsCheckBox.TabIndex = 91;
@@ -2979,19 +2979,19 @@
             // 
             // errorOccursLabel
             // 
-            errorOccursLabel.AutoSize = true;
-            errorOccursLabel.Location = new Point(21, 27);
+            errorOccursLabel.Location = new Point(14, 27);
             errorOccursLabel.Name = "errorOccursLabel";
-            errorOccursLabel.Size = new Size(188, 25);
+            errorOccursLabel.Size = new Size(188, 50);
             errorOccursLabel.TabIndex = 78;
             errorOccursLabel.Text = "When an Error Occurs:";
+            errorOccursLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // restartCheckBox
             // 
             restartCheckBox.AutoSize = true;
             restartCheckBox.Checked = true;
             restartCheckBox.CheckState = CheckState.Checked;
-            restartCheckBox.Location = new Point(14, 104);
+            restartCheckBox.Location = new Point(14, 122);
             restartCheckBox.Name = "restartCheckBox";
             restartCheckBox.Size = new Size(161, 29);
             restartCheckBox.TabIndex = 77;
@@ -3003,7 +3003,7 @@
             // closeProgramCheckBox
             // 
             closeProgramCheckBox.AutoSize = true;
-            closeProgramCheckBox.Location = new Point(17, 62);
+            closeProgramCheckBox.Location = new Point(17, 80);
             closeProgramCheckBox.Name = "closeProgramCheckBox";
             closeProgramCheckBox.Size = new Size(155, 29);
             closeProgramCheckBox.TabIndex = 76;
@@ -3263,7 +3263,7 @@
             contextMenuCheckBox.AutoSize = true;
             contextMenuCheckBox.Checked = true;
             contextMenuCheckBox.CheckState = CheckState.Checked;
-            contextMenuCheckBox.Location = new Point(71, 98);
+            contextMenuCheckBox.Location = new Point(14, 108);
             contextMenuCheckBox.Name = "contextMenuCheckBox";
             contextMenuCheckBox.Size = new Size(274, 29);
             contextMenuCheckBox.TabIndex = 74;
@@ -3277,7 +3277,7 @@
             minimizeSystemTrayCheckBox.AutoSize = true;
             minimizeSystemTrayCheckBox.Checked = true;
             minimizeSystemTrayCheckBox.CheckState = CheckState.Checked;
-            minimizeSystemTrayCheckBox.Location = new Point(336, 24);
+            minimizeSystemTrayCheckBox.Location = new Point(336, 27);
             minimizeSystemTrayCheckBox.Name = "minimizeSystemTrayCheckBox";
             minimizeSystemTrayCheckBox.Size = new Size(229, 29);
             minimizeSystemTrayCheckBox.TabIndex = 72;
@@ -3291,7 +3291,7 @@
             alwaysOnTopCheckBox.AutoSize = true;
             alwaysOnTopCheckBox.Checked = true;
             alwaysOnTopCheckBox.CheckState = CheckState.Checked;
-            alwaysOnTopCheckBox.Location = new Point(71, 28);
+            alwaysOnTopCheckBox.Location = new Point(14, 31);
             alwaysOnTopCheckBox.Name = "alwaysOnTopCheckBox";
             alwaysOnTopCheckBox.Size = new Size(153, 29);
             alwaysOnTopCheckBox.TabIndex = 71;
@@ -3302,12 +3302,11 @@
             // 
             // confirmDragDropCheckBox
             // 
-            confirmDragDropCheckBox.AutoSize = true;
             confirmDragDropCheckBox.Checked = true;
             confirmDragDropCheckBox.CheckState = CheckState.Checked;
-            confirmDragDropCheckBox.Location = new Point(71, 63);
+            confirmDragDropCheckBox.Location = new Point(14, 66);
             confirmDragDropCheckBox.Name = "confirmDragDropCheckBox";
-            confirmDragDropCheckBox.Size = new Size(239, 29);
+            confirmDragDropCheckBox.Size = new Size(347, 36);
             confirmDragDropCheckBox.TabIndex = 66;
             confirmDragDropCheckBox.Text = "Always Confirm File Drop";
             confirmDragDropCheckBox.UseVisualStyleBackColor = true;

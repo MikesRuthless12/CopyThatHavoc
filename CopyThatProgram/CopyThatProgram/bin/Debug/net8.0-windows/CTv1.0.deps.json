@@ -24,11 +24,17 @@
           "CTv1.0.dll": {}
         },
         "resources": {
+          "de/CTv1.0.resources.dll": {
+            "locale": "de"
+          },
           "en/CTv1.0.resources.dll": {
             "locale": "en"
           },
           "es/CTv1.0.resources.dll": {
             "locale": "es"
+          },
+          "fr/CTv1.0.resources.dll": {
+            "locale": "fr"
           }
         }
       },

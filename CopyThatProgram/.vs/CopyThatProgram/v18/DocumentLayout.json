@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.fr.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.fr.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\copythatprogram.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\copythatprogram.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.en.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.en.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.es.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.es.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.en.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.en.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\copythatprogram.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\copythatprogram.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\customcontrols\\modernprogressbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}|ModernProgress\\ModernProgress.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\modernprogress\\modernprogress.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}|ModernProgress\\ModernProgress.csproj|solutionrelative:modernprogress\\modernprogress.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\copythatprogram.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\copythatprogram.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{923F2DB4-E81B-4C70-8C63-18123DB2DCFA}|ModernProgress\\ModernProgress.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\modernprogress\\mordernpgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,10 +51,6 @@
       "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
-      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\smsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\smsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -66,17 +62,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "mainForm.cs",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs",
               "RelativeDocumentMoniker": "CopyThatProgram\\mainForm.cs",
               "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs",
               "RelativeToolTip": "CopyThatProgram\\mainForm.cs",
-              "ViewState": "AgIAAGkkAAAAAAAAAAAjwHMkAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAJU2AAAAAAAAAAAqwJ42AAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-01T14:55:44.964Z",
               "IsPinned": true,
@@ -136,18 +132,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "MainForm.resx",
+              "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.resx",
+              "RelativeDocumentMoniker": "CopyThatProgram\\MainForm.resx",
+              "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.resx",
+              "RelativeToolTip": "CopyThatProgram\\MainForm.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-10-22T18:18:53.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainForm.fr.resx",
+              "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.fr.resx",
+              "RelativeDocumentMoniker": "CopyThatProgram\\MainForm.fr.resx",
+              "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.fr.resx",
+              "RelativeToolTip": "CopyThatProgram\\MainForm.fr.resx",
+              "ViewState": "AgIAAAUDAAAAAAAAAAAWwBgDAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-10-22T17:52:18.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "mainForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs",
               "RelativeDocumentMoniker": "CopyThatProgram\\mainForm.cs",
               "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs [Design]",
               "RelativeToolTip": "CopyThatProgram\\mainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T02:06:33.757Z"
+              "WhenOpened": "2025-10-22T02:06:33.757Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ModernProgress.csproj",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\ModernProgress\\ModernProgress.csproj",
               "RelativeDocumentMoniker": "ModernProgress\\ModernProgress.csproj",
@@ -183,18 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "MainForm.resx",
-              "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.resx",
-              "RelativeDocumentMoniker": "CopyThatProgram\\MainForm.resx",
-              "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.resx",
-              "RelativeToolTip": "CopyThatProgram\\MainForm.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-21T21:37:13.843Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ModernProgressBar.cs",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\CustomControls\\ModernProgressBar.cs",
               "RelativeDocumentMoniker": "CopyThatProgram\\CustomControls\\ModernProgressBar.cs",
@@ -206,19 +217,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "MainForm.es.resx",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.es.resx",
               "RelativeDocumentMoniker": "CopyThatProgram\\MainForm.es.resx",
               "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.es.resx",
               "RelativeToolTip": "CopyThatProgram\\MainForm.es.resx",
-              "ViewState": "AgIAALYCAAAAAAAAAAAtwMYCAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAEYCAAAAAAAAAAAWwFkCAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-01T15:58:33.829Z"
+              "WhenOpened": "2025-10-01T15:58:33.829Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "CopyThatProgram",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\CopyThatProgram.csproj",
               "RelativeDocumentMoniker": "CopyThatProgram\\CopyThatProgram.csproj",
@@ -229,43 +241,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainForm.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.Designer.cs",
-              "RelativeDocumentMoniker": "CopyThatProgram\\MainForm.Designer.cs",
-              "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.Designer.cs",
-              "RelativeToolTip": "CopyThatProgram\\MainForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T15:10:45.786Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CopyThatProgram.csproj",
-              "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\CopyThatProgram.csproj",
-              "RelativeDocumentMoniker": "CopyThatProgram\\CopyThatProgram.csproj",
-              "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\CopyThatProgram.csproj",
-              "RelativeToolTip": "CopyThatProgram\\CopyThatProgram.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-19T17:20:37.821Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "MainForm.en.resx",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.en.resx",
               "RelativeDocumentMoniker": "CopyThatProgram\\MainForm.en.resx",
               "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.en.resx",
               "RelativeToolTip": "CopyThatProgram\\MainForm.en.resx",
-              "ViewState": "AgIAALUCAAAAAAAAAAASwMYCAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAYwN0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-19T15:31:47.832Z"
+              "WhenOpened": "2025-10-19T15:31:47.832Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "smsForm.cs",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\smsForm.cs",
               "RelativeDocumentMoniker": "CopyThatProgram\\smsForm.cs",
