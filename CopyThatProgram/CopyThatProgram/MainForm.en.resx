@@ -787,4 +787,16 @@ French</value>
   <data name="resetTotalsButton.Text" xml:space="preserve">
     <value>Reset All Running Totals</value>
   </data>
+  <data name="thread1Label.Text" xml:space="preserve">
+    <value>Thread 1 - Progress / Stats:</value>
+  </data>
+  <data name="thread2Label.Text" xml:space="preserve">
+    <value>Thread 2 - Progress / Stats:</value>
+  </data>
+  <data name="thread3Label.Text" xml:space="preserve">
+    <value>Thread 3 - Progress / Stats:</value>
+  </data>
+  <data name="thread4Label.Text" xml:space="preserve">
+    <value>Thread 4 - Progress / Stats:</value>
+  </data>
 </root>

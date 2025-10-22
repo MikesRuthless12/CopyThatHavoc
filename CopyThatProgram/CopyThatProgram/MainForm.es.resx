@@ -792,4 +792,16 @@ Francés</value>
   <data name="setMBGBUnderNumUpDown.AccessibleName" xml:space="preserve">
     <value>Límite Inferior (MB)</value>
   </data>
+  <data name="thread1Label.Text" xml:space="preserve">
+    <value>Hilo 1 – Progreso / Estadísticas:</value>
+  </data>
+  <data name="thread2Label.Text" xml:space="preserve">
+    <value>Hilo 2 – Progreso / Estadísticas:</value>
+  </data>
+  <data name="thread3Label.Text" xml:space="preserve">
+    <value>Hilo 3– Progreso / Estadísticas:</value>
+  </data>
+  <data name="thread4Label.Text" xml:space="preserve">
+    <value>Hilo 4 – Progreso / Estadísticas:</value>
+  </data>
 </root>

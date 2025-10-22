@@ -2517,6 +2517,15 @@ namespace CopyThatProgram
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
 
+                // SET TRANSLATOR LANGUAGE IMMEDIATELY
+                Translator.CurrentLanguage = savedLangKey switch
+                {
+                    "French" => "fr",
+                    "German" => "de",
+                    "Spanish" => "es",
+                    _ => "en"
+                };
+
                 InitializeLanguageComboBox(savedLangKey);
                 UpdateSkinsComboBoxItems(savedLangKey);
                 LoadCurrentSettings();
@@ -2525,9 +2534,13 @@ namespace CopyThatProgram
                 var resMan = new ComponentResourceManager(typeof(mainForm));
                 ApplyAllResources(resMan);
 
-                // Apply manual translations for Spanish/English
+                // Apply manual translations - now Translator.Get() will work correctly
                 if (savedLangKey == "Spanish")
                     ApplyManualSpanishUpdates();
+                else if (savedLangKey == "French")
+                    ApplyManualFrenchUpdates();
+                else if (savedLangKey == "German")
+                    ApplyManualGermanUpdates();
                 else
                     ApplyManualEnglishUpdates();
 
@@ -2596,6 +2609,7 @@ namespace CopyThatProgram
             {
                 _isUpdatingLanguage = false;
                 _isLoadingForm = false; // CRITICAL: Set to false here!
+
 
                 languageComboBox.SelectedIndexChanged += languageComboBox_SelectedIndexChanged;
                 skinsComboBox.SelectedIndexChanged += skinsComboBox_SelectedIndexChanged;
@@ -12414,163 +12428,163 @@ namespace CopyThatProgram
         private void tabControl1_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a descriptive text about the tab control.
-            statusLabel.Text = "Tab Control: This control allows you to switch between different operation modes and settings.";
+            statusLabel.Text = Translator.Get("Tab Control: This control allows you to switch between different operation modes and settings.");
         }
 
         private void fileNamePicBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the file icon picture box.
-            statusLabel.Text = "File's Icon PictureBox: The file's icon which reflect the current file will be shown here.";
+            statusLabel.Text = Translator.Get("File's Icon PictureBox: The file's icon which reflect the current file will be shown here.");
         }
 
         private void fromDirPicBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the source directory button.
-            statusLabel.Text = "Source Directory Button: This is the button to select your source directory from which files will be copied/moved/securely deleted.";
+            statusLabel.Text = Translator.Get("Source Directory Button: This is the button to select your source directory from which files will be copied/moved/securely deleted.");
         }
 
         private void targetDirPicBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the target directory button.
-            statusLabel.Text = "Target Directory Button: This is the button to select your target directory to which your files will be copied/moved.";
+            statusLabel.Text = Translator.Get("Target Directory Button: This is the button to select your target directory to which your files will be copied/moved.");
         }
 
         private void copyMoveDeleteComboBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the operation dropdown.
-            statusLabel.Text = "Copy/Move/Secure Delete ComboBox: This dropdown combobox is to select the operation of Copy/Move/Secure Delete.";
+            statusLabel.Text = Translator.Get("Copy/Move/Secure Delete ComboBox: This dropdown combobox is to select the operation of Copy/Move/Secure Delete.");
         }
 
         private void onFinishComboBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the "on finish" dropdown.
-            statusLabel.Text = "On Finish ComboBox: This dropdown combobox is to select the action to perform when the operation finishes.";
+            statusLabel.Text = Translator.Get("On Finish ComboBox: This dropdown combobox is to select the action to perform when the operation finishes.");
         }
 
         private void startButton_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the start button.
-            statusLabel.Text = "Start Button: This button starts the operation of Copy/Move/Secure Delete.";
+            statusLabel.Text = Translator.Get("Start Button: This button starts the operation of Copy/Move/Secure Delete.");
         }
 
         private void pauseResumeButton_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the pause/resume button.
-            statusLabel.Text = "Pause/Resume Button: This button pauses/resumes the current operation.";
+            statusLabel.Text = Translator.Get("Pause/Resume Button: This button pauses/resumes the current operation.");
         }
 
         private void cancelButton_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the cancel button.
-            statusLabel.Text = "Cancel Button: This button cancels the current operation.";
+            statusLabel.Text = Translator.Get("Cancel Button: This button cancels the current operation.");
         }
 
         private void skipButton_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the skip button.
-            statusLabel.Text = "This button skips the current file and moves to the next one in the operation.";
+            statusLabel.Text = Translator.Get("This button skips the current file and moves to the next one in the operation.");
         }
 
         private void addFileButton_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the add file button.
-            statusLabel.Text = "Add File Button: This button adds files to the list for the current operation.";
+            statusLabel.Text = Translator.Get("Add File Button: This button adds files to the list for the current operation.");
         }
 
         private void removeFileButton_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the remove file button.
-            statusLabel.Text = "Remove File Button: This button removes the selected file from the list for the current operation.";
+            statusLabel.Text = Translator.Get("Remove File Button: This button removes the selected file from the list for the current operation.");
         }
 
         private void clearFileListButton_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the clear file list button.
-            statusLabel.Text = "Clear File List Button: This button clears the entire file list for the current operation.";
+            statusLabel.Text = Translator.Get("Clear File List Button: This button clears the entire file list for the current operation.");
         }
 
         private void fileCountOnLabel_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the file count label.
-            statusLabel.Text = "File Count Label: This label shows the total number of files in the current operation.";
+            statusLabel.Text = Translator.Get("File Count Label: This label shows the total number of files in the current operation.");
         }
 
         private void fileProcessedLabel_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the file processed label.
-            statusLabel.Text = "File Processed Label: This label shows the number of converted bytes that have been processed in the current operation.";
+            statusLabel.Text = Translator.Get("File Processed Label: This label shows the number of converted bytes that have been processed in the current operation.");
         }
 
         private void totalCopiedProgressLabel_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the total copied progress label.
-            statusLabel.Text = "Total Copied Progress Label: This label shows the total bytes processed and the total bytes to process in the current operation.";
+            statusLabel.Text = Translator.Get("Total Copied Progress Label: This label shows the total bytes processed and the total bytes to process in the current operation.");
         }
 
         private void elapsedAndTargetTimeLabel_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the elapsed and target time label.
-            statusLabel.Text = "Elapsed Out of Target Time Label: This label shows the elapsed time and the estimated target time for the current operation.";
+            statusLabel.Text = Translator.Get("Elapsed Out of Target Time Label: This label shows the elapsed time and the estimated target time for the current operation.");
         }
 
         private void speedLabel_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the speed label.
-            statusLabel.Text = "Speed Label: This label shows the current speed of the operation in bytes per second.";
+            statusLabel.Text = Translator.Get("Speed Label: This label shows the current speed of the operation in bytes per second.");
         }
 
         private void totalHDSpaceLeftLabel_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the total hard drive space left label.
-            statusLabel.Text = "Total HD Space Left Label: This label shows the total hard drive space left on the target drive.";
+            statusLabel.Text = Translator.Get("Total HD Space Left Label: This label shows the total hard drive space left on the target drive.");
         }
 
         private void overwriteIfNewerCheckBox_MouseDown(object sender, MouseEventArgs e)
         {
             // Updates the status label with a description of the overwrite if newer checkbox.
-            statusLabel.Text = "Overwrite If Newer CheckBox: This checkbox determines whether to overwrite files only if the source file is newer than the destination file.";
+            statusLabel.Text = Translator.Get("Overwrite If Newer CheckBox: This checkbox determines whether to overwrite files only if the source file is newer than the destination file.");
         }
 
         private void overwriteAllCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the overwrite all checkbox.
-            statusLabel.Text = "Overwrite All CheckBox: This checkbox determines whether to overwrite all files in the target directory without checking their timestamps.";
+            statusLabel.Text = Translator.Get("Overwrite All CheckBox: This checkbox determines whether to overwrite all files in the target directory without checking their timestamps.");
         }
 
         private void doNotOverwriteCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the do not overwrite checkbox.
-            statusLabel.Text = "Do Not Overwrite CheckBox: This checkbox determines whether to skip files that already exist in the target directory.";
+            statusLabel.Text = Translator.Get("Do Not Overwrite CheckBox: This checkbox determines whether to skip files that already exist in the target directory.");
         }
 
         private void keepEmptyFoldersCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the keep empty folders checkbox.
-            statusLabel.Text = "Keep Empty Folders CheckBox: This checkbox determines whether to keep empty folders in the target directory after the operation.";
+            statusLabel.Text = Translator.Get("Keep Empty Folders CheckBox: This checkbox determines whether to keep empty folders in the target directory after the operation.");
         }
 
         private void keepDirStructCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the keep directory structure checkbox.
-            statusLabel.Text = "Keep Directory Structure CheckBox: This checkbox determines whether to keep the directory structure of the source files in the target directory.";
+            statusLabel.Text = Translator.Get("Keep Directory Structure CheckBox: This checkbox determines whether to keep the directory structure of the source files in the target directory.");
         }
 
         private void createCustomDirCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the create custom directory checkbox.
-            statusLabel.Text = "Create Custom Directory Prior CheckBox: This checkbox determines whether to create a custom directory structure in the target directory based on the source files.";
+            statusLabel.Text = Translator.Get("Create Custom Directory Prior CheckBox: This checkbox determines whether to create a custom directory structure in the target directory based on the source files.");
         }
 
         private void copyFilesDirsCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the copy files and directories checkbox.
-            statusLabel.Text = "Copy Only Files CheckBox: This checkbox determines whether to copy files and no directories from the source directory to the target directory.";
+            statusLabel.Text = Translator.Get("Copy Only Files CheckBox: This checkbox determines whether to copy files and no directories from the source directory to the target directory.");
         }
 
         private void keepOnlyFilesCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Updates the status label with a description of the keep only files checkbox.
-            statusLabel.Text = "Keep Only Files CheckBox: This checkbox determines whether to keep ONLY files inside the main directory.";
+            statusLabel.Text = Translator.Get("Keep Only Files CheckBox: This checkbox determines whether to keep ONLY files inside the main directory.");
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -12679,34 +12693,34 @@ namespace CopyThatProgram
             // Handles other tab selections by updating the status label.
             else if (tabControl1.SelectedTab == cmdCopyHistory)
             {
-                toolStripCopyHistory.Text = "Current tab page: Copy History Page.";
+                toolStripCopyHistory.Text = Translator.Get("Current tab page: Copy History Page.");
             }
             else if (tabControl1.SelectedTab == cmdExclusions)
             {
-                toolStripExclusions.Text = "Current tab page: Exclusions Page.";
+                toolStripExclusions.Text = Translator.Get("Current tab page: Exclusions Page.");
             }
             else if (tabControl1.SelectedTab == cmdHomePage)
             {
-                statusLabel.Text = "Current tab page: Home Page.";
+                statusLabel.Text = Translator.Get("Current tab page: Home Page.");
             }
             else if (tabControl1.SelectedTab == cmdSettingsPage)
             {
-                toolStripSettings.Text = "Current tab page: Settings Page.";
+                toolStripSettings.Text = Translator.Get("Current tab page: Settings Page.");
             }
             else if (tabControl1.SelectedTab == cmdSkipPage)
             {
-                toolStripSkipped.Text = "Current tab page: Skipped Files Page.";
+                toolStripSkipped.Text = Translator.Get("Current tab page: Skipped Files Page.");
             }
             else
             {
-                toolStripMulti.Text = "Current tab page: Multi-Thread Page.";
+                toolStripMulti.Text = Translator.Get("Current tab page: Multi-Thread Page.");
             }
         }
 
         private void cmdHomePage_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'statusLabel' to a descriptive message when the mouse enters the 'cmdHomePage' button.
-            statusLabel.Text = "Home Page Tab: This tab contains the main interface for file operations such as copy, move, and secure delete.";
+            statusLabel.Text = Translator.Get("Home Page Tab: This tab contains the main interface for file operations such as copy, move, and secure delete.");
         }
 
         private void mainForm_MouseEnter(object sender, EventArgs e)
@@ -12720,679 +12734,679 @@ namespace CopyThatProgram
         private void titleLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'statusLabel' to a message explaining the application's title.
-            statusLabel.Text = "Copy That v1.0 By: Havoc - This is the title of the application, which reflects the current operation.";
+            statusLabel.Text = Translator.Get("Copy That v1.0 By: Havoc - This is the title of the application, which reflects the current operation.");
         }
 
         private void filePathLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'filePathLabel' control.
-            statusLabel.Text = "Current File Path: This label shows the path of the currently processed file in the operation.";
+            statusLabel.Text = Translator.Get("Current File Path: This label shows the path of the currently processed file in the operation.");
         }
 
         private void fromFilesDirLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'fromFilesDirLabel' control.
-            statusLabel.Text = "Current Source Directory: This label shows the path of the source directory from which files will be copied/moved/securely deleted.";
+            statusLabel.Text = Translator.Get("Current Source Directory: This label shows the path of the source directory from which files will be copied/moved/securely deleted.");
         }
 
         private void targetDirLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'targetDirLabel' control.
-            statusLabel.Text = "Current Target Directory: This label shows the path of the target directory to which files will be copied/moved.";
+            statusLabel.Text = Translator.Get("Current Target Directory: This label shows the path of the target directory to which files will be copied/moved.");
         }
 
         private void fileIconPicBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'fileIconPicBox' control.
-            statusLabel.Text = "Current File Icon: This picture box shows the icon of the currently processed file in the operation.";
+            statusLabel.Text = Translator.Get("Current File Icon: This picture box shows the icon of the currently processed file in the operation.");
         }
 
         private void overwriteIfNewerCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'overwriteIfNewerCheckBox'.
-            statusLabel.Text = "Overwrite If Newer: This checkbox determines whether to overwrite files only if the source file is newer than the destination file.";
+            statusLabel.Text = Translator.Get("Overwrite If Newer: This checkbox determines whether to overwrite files only if the source file is newer than the destination file.");
         }
 
         private void modernFile_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'modernFile' control.
-            statusLabel.Text = "File Progress Bar: This progress bar shows the progress of the current file being processed in the operation.";
+            statusLabel.Text = Translator.Get("File Progress Bar: This progress bar shows the progress of the current file being processed in the operation.");
         }
 
         private void fileTotalProgressLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'fileTotalProgressLabel'.
-            statusLabel.Text = "File Progress Label: This label shows the percentage of progress for the current file being processed in the operation.";
+            statusLabel.Text = Translator.Get("File Progress Label: This label shows the percentage of progress for the current file being processed in the operation.");
         }
 
         private void modernTotal_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'modernTotal' control.
-            statusLabel.Text = "Total Progress Bar: This progress bar shows the overall progress of the operation across all files being processed.";
+            statusLabel.Text = Translator.Get("Total Progress Bar: This progress bar shows the overall progress of the operation across all files being processed.");
         }
 
         private void totalProgressLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'totalProgressLabel'.
-            statusLabel.Text = "Total Progress Label: This label shows the percentage of overall progress for the operation across all files being processed.";
+            statusLabel.Text = Translator.Get("Total Progress Label: This label shows the percentage of overall progress for the operation across all files being processed.");
         }
 
         private void searchTextBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'searchTextBox'.
-            statusLabel.Text = "Search Text Box: This text box allows you to search for specific files in the file list. Type a keyword to filter the displayed files.";
+            statusLabel.Text = Translator.Get("Search Text Box: This text box allows you to search for specific files in the file list. Type a keyword to filter the displayed files.");
         }
 
         private void clearTextButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'clearTextButton'.
-            statusLabel.Text = "Clear Text Button: This button clears the text in the search box, allowing you to reset the search filter and view all files in the list.";
+            statusLabel.Text = Translator.Get("Clear Text Button: This button clears the text in the search box, allowing you to reset the search filter and view all files in the list.");
         }
 
         private void fileUpPicBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'fileUpPicBox'.
-            statusLabel.Text = "Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence.";
+            statusLabel.Text = Translator.Get("Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence.");
         }
 
         private void fileDownPicBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'fileDownPicBox'.
-            statusLabel.Text = "Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence.";
+            statusLabel.Text = Translator.Get("Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence.");
         }
 
         private void filesDataGridView_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'filesDataGridView'.
-            statusLabel.Text = "Files Data Grid View: This grid displays the list of files to be processed in the current operation, including their names, paths, sizes, and statuses.";
+            statusLabel.Text = Translator.Get("Files Data Grid View: This grid displays the list of files to be processed in the current operation, including their names, paths, sizes, and statuses.");
         }
 
         private void autoScrollCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'autoScrollCheckBox'.
-            statusLabel.Text = "Auto-Scroll CheckBox: This checkbox enables or disables automatic scrolling of the files data grid view while files are being processsed.";
+            statusLabel.Text = Translator.Get("Auto-Scroll CheckBox: This checkbox enables or disables automatic scrolling of the files data grid view while files are being processsed.");
         }
 
         private void verifyCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the status label to describe the 'verifyCheckBox'.
-            statusLabel.Text = "Verify After Transfer CheckBox: This checkbox determines whether to verify the integrity of files after they have been copied or moved.";
+            statusLabel.Text = Translator.Get("Verify After Transfer CheckBox: This checkbox determines whether to verify the integrity of files after they have been copied or moved.");
         }
 
         private void pauseResumeMultiButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Pause/Resume Multi-Thread Button: This button pauses or resumes the multi-threaded operation.";
+            toolStripMulti.Text = Translator.Get("Pause/Resume Multi-Thread Button: This button pauses or resumes the multi-threaded operation.");
         }
 
         private void cancelMultiButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Cancel Multi-Thread Button: This button cancels the multi-threaded operation.";
+            toolStripMulti.Text = Translator.Get("Cancel Multi-Thread Button: This button cancels the multi-threaded operation.");
         }
 
         private void onFinishMultiComboBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "On Finish Multi-Thread ComboBox: This dropdown combobox is to select the action to perform when the multi-threaded operation finishes.";
+            toolStripMulti.Text = Translator.Get("On Finish Multi-Thread ComboBox: This dropdown combobox is to select the action to perform when the multi-threaded operation finishes.");
         }
 
         private void filesNameLabel1_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Files Name Label 1: This label shows the name of the file being processed by thread 1, along with the percentage and speed.";
+            toolStripMulti.Text = Translator.Get("Files Name Label 1: This label shows the name of the file being processed by thread 1, along with the percentage and speed.");
         }
 
         private void totalPCTMultiLabel1_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Total Percentage Multi Label 1: This label shows the percentage of progress for the file being processed by thread 1.";
+            toolStripMulti.Text = Translator.Get("Total Percentage Multi Label 1: This label shows the percentage of progress for the file being processed by thread 1.");
         }
 
         private void filesNameLabel2_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Files Name Label 2: This label shows the name of the file being processed by thread 2, along with the percentage and speed.";
+            toolStripMulti.Text = Translator.Get("Files Name Label 2: This label shows the name of the file being processed by thread 2, along with the percentage and speed.");
         }
 
         private void filesNameLabel3_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Files Name Label 3: This label shows the name of the file being processed by thread 3, along with the percentage and speed.";
+            toolStripMulti.Text = Translator.Get("Files Name Label 3: This label shows the name of the file being processed by thread 3, along with the percentage and speed.");
         }
 
         private void totalPCTMultiLabel2_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Total Percentage Multi Label 2: This label shows the percentage of progress for the file being processed by thread 2.";
+            toolStripMulti.Text = Translator.Get("Total Percentage Multi Label 2: This label shows the percentage of progress for the file being processed by thread 2.");
         }
 
         private void totalPCTMultiLabel3_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Total Percentage Multi Label 3: This label shows the percentage of progress for the file being processed by thread 3.";
+            toolStripMulti.Text = Translator.Get("Total Percentage Multi Label 3: This label shows the percentage of progress for the file being processed by thread 3.");
         }
 
         private void filesNameLabel4_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Files Name Label 4: This label shows the name of the file being processed by thread 4, along with the percentage and speed.";
+            toolStripMulti.Text = Translator.Get("Files Name Label 4: This label shows the name of the file being processed by thread 4, along with the percentage and speed.");
         }
 
         private void totalPCTMultiLabel4_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Total Percentage Multi Label 4: This label shows the percentage of progress for the file being processed by thread 4.";
+            toolStripMulti.Text = Translator.Get("Total Percentage Multi Label 4: This label shows the percentage of progress for the file being processed by thread 4.");
         }
 
         private void progressBarMultiTotal_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Progress Bar Multi-Thread Total: This progress bar shows the overall progress of the multi-threaded operation across all threads.";
+            toolStripMulti.Text = Translator.Get("Progress Bar Multi-Thread Total: This progress bar shows the overall progress of the multi-threaded operation across all threads.");
         }
 
         private void multiThreadTotalProgressLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Multi-Thread Total Progress Label: This label shows the percentage of overall progress for the multi-threaded operation across all threads.";
+            toolStripMulti.Text = Translator.Get("Multi-Thread Total Progress Label: This label shows the percentage of overall progress for the multi-threaded operation across all threads.");
         }
 
         private void fileCountMultiLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "File Count Multi Label: This label shows the number of files processed out of the total number of files in the multi-threaded operation.";
+            toolStripMulti.Text = Translator.Get("File Count Multi Label: This label shows the number of files processed out of the total number of files in the multi-threaded operation.");
         }
 
         private void totalTimeMultiLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Total Time Multi Label: This label shows the elapsed time out of the estimated target time for the multi-threaded operation.";
+            toolStripMulti.Text = Translator.Get("Total Time Multi Label: This label shows the elapsed time out of the estimated target time for the multi-threaded operation.");
         }
 
         private void speedMultiLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Speed Multi Label: This label shows the current speed of the multi-threaded operation in bytes per second.";
+            toolStripMulti.Text = Translator.Get("Speed Multi Label: This label shows the current speed of the multi-threaded operation in bytes per second.");
         }
 
         private void totalCMDMultiLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Total C/M/D Label: This label shows the total space processed out of the total space for all files.";
+            toolStripMulti.Text = Translator.Get("Total C/M/D Label: This label shows the total space processed out of the total space for all files.");
         }
 
         private void totalSpaceMultiLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Total Space Left Label: This label shows the total hard drive used out of the total hard drive space left on the target drive for the multi-threaded operation.";
+            toolStripMulti.Text = Translator.Get("Total Space Left Label: This label shows the total hard drive used out of the total hard drive space left on the target drive for the multi-threaded operation.");
         }
 
         private void goToInExplorerButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSkipped' to a descriptive message.
-            toolStripSkipped.Text = "Go To In Explorer Button: This button opens the selected file's location in Windows Explorer.";
+            toolStripSkipped.Text = Translator.Get("Go To In Explorer Button: This button opens the selected file's location in Windows Explorer.");
         }
 
         private void totalSkippedLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSkipped' to a descriptive message.
-            toolStripSkipped.Text = "Total Skipped Label: This label shows the total number of files that were skipped during the operation.";
+            toolStripSkipped.Text = Translator.Get("Total Skipped Label: This label shows the total number of files that were skipped during the operation.");
         }
 
         private void clearSkippedListButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSkipped' to a descriptive message.
-            toolStripSkipped.Text = "Clear Skipped List Button: This button clears the list of skipped files.";
+            toolStripSkipped.Text = Translator.Get("Clear Skipped List Button: This button clears the list of skipped files.");
         }
 
         private void skippedDataGridView_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSkipped' to a descriptive message.
-            toolStripSkipped.Text = "Skipped Data Grid View: This grid displays the list of files that were skipped during the operation, including their names, paths, sizes, and reasons for skipping.";
+            toolStripSkipped.Text = Translator.Get("Skipped Data Grid View: This grid displays the list of files that were skipped during the operation, including their names, paths, sizes, and reasons for skipping.");
         }
 
         private void cloneButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
-            toolStripCopyHistory.Text = "Clone Button: This button clones the selected operation from the history list, allowing you to quickly repeat a previous operation.";
+            toolStripCopyHistory.Text = Translator.Get("Clone Button: This button clones the selected operation from the history list, allowing you to quickly repeat a previous operation.");
         }
 
         private void deleteEntryButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
-            toolStripCopyHistory.Text = "Delete Entry Button: This button deletes the selected entry from the operation history list.";
+            toolStripCopyHistory.Text = Translator.Get("Delete Entry Button: This button deletes the selected entry from the operation history list.");
         }
 
         private void clearHistoryButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
-            toolStripCopyHistory.Text = "Clear History Button: This button clears the entire operation history list.";
+            toolStripCopyHistory.Text = Translator.Get("Clear History Button: This button clears the entire operation history list.");
         }
 
         private void totalHistoryLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
-            toolStripCopyHistory.Text = "Total History Label: This label shows the total number of operations recorded in the history list.";
+            toolStripCopyHistory.Text = Translator.Get("Total History Label: This label shows the total number of operations recorded in the history list.");
         }
 
         private void addAllowedButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Add Allowed Button: This button adds a new allowed file or directory to the allowed list.";
+            toolStripExclusions.Text = Translator.Get("Add Allowed Button: This button adds a new allowed file or directory to the allowed list.");
         }
 
         private void removeAllowedButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Remove Allowed Button: This button removes the selected allowed file or directory from the allowed list.";
+            toolStripExclusions.Text = Translator.Get("Remove Allowed Button: This button removes the selected allowed file or directory from the allowed list.");
         }
 
         private void clearAllowedButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Clear Allowed Button: This button clears the entire list of allowed files and directories.";
+            toolStripExclusions.Text = Translator.Get("Clear Allowed Button: This button clears the entire list of allowed files and directories.");
         }
 
         private void addExcludedButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Add Excluded Button: This button adds a new excluded file or directory to the exclusions list.";
+            toolStripExclusions.Text = Translator.Get("Add Excluded Button: This button adds a new excluded file or directory to the exclusions list.");
         }
 
         private void removeExcludedButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Remove Excluded Button: This button removes the selected excluded file or directory from the exclusions list.";
+            toolStripExclusions.Text = Translator.Get("Remove Excluded Button: This button removes the selected excluded file or directory from the exclusions list.");
         }
 
         private void clearExcludedButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Clear Excluded Button: This button clears the entire list of excluded files and directories.";
+            toolStripExclusions.Text = Translator.Get("Clear Excluded Button: This button clears the entire list of excluded files and directories.");
         }
 
         private void allowedTextBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Allowed Text Box: This text box allows you to enter file or directory paths to be added to the allowed list.";
+            toolStripExclusions.Text = Translator.Get("Allowed Text Box: This text box allows you to enter file or directory paths to be added to the allowed list.");
         }
 
         private void excludedTextBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Excluded Text Box: This text box allows you to enter file or directory paths to be added to the exclusions list.";
+            toolStripExclusions.Text = Translator.Get("Excluded Text Box: This text box allows you to enter file or directory paths to be added to the exclusions list.");
         }
 
         private void allowedExtListBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Allowed List Box: This list box displays the list of allowed files and directories that will be included in the operation.";
+            toolStripExclusions.Text = Translator.Get("Allowed List Box: This list box displays the list of allowed files and directories that will be included in the operation.");
         }
 
         private void excludedExtListBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Excluded List Box: This list box displays the list of excluded files and directories that will be skipped during the operation.";
+            toolStripExclusions.Text = Translator.Get("Excluded List Box: This list box displays the list of excluded files and directories that will be skipped during the operation.");
         }
 
         private void cmdExclusions_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripExclusions' to a descriptive message.
-            toolStripExclusions.Text = "Exclusions Tab: This tab allows you to manage the lists of allowed and excluded files and directories for the operation.";
+            toolStripExclusions.Text = Translator.Get("Exclusions Tab: This tab allows you to manage the lists of allowed and excluded files and directories for the operation.");
         }
 
         private void cmdSkipPage_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSkipped' to a descriptive message.
-            toolStripSkipped.Text = "Skipped Tab: This tab displays the list of files that were skipped during the operation, along with options to manage the skipped files.";
+            toolStripSkipped.Text = Translator.Get("Skipped Tab: This tab displays the list of files that were skipped during the operation, along with options to manage the skipped files.");
         }
 
         private void cmdMultithread_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripMulti' to a descriptive message.
-            toolStripMulti.Text = "Multi-Thread Tab: This tab allows you to configure and monitor multi-threaded operations for copying or moving files.";
+            toolStripMulti.Text = Translator.Get("Multi-Thread Tab: This tab allows you to configure and monitor multi-threaded operations for copying or moving files.");
         }
 
         private void windowGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Window Group Box: This group box contains settings related to the application's window behavior, such as minimizing to the system tray.";
+            toolStripSettings.Text = Translator.Get("Window Group Box: This group box contains settings related to the application's window behavior, such as minimizing to the system tray.");
         }
 
         private void alwaysOnTopCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows.";
+            toolStripSettings.Text = Translator.Get("Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows.");
         }
 
         private void minimizeSystemTrayCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Minimize to System Tray CheckBox: This checkbox determines whether the application should minimize to the system tray instead of the taskbar.";
+            toolStripSettings.Text = Translator.Get("Minimize to System Tray CheckBox: This checkbox determines whether the application should minimize to the system tray instead of the taskbar.");
         }
 
         private void confirmDragDropCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application.";
+            toolStripSettings.Text = Translator.Get("Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application.");
         }
 
         private void contextMenuCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application.";
+            toolStripSettings.Text = Translator.Get("Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application.");
         }
 
         private void skinsLanguageGoupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Skins & Language Group Box: This group box contains settings related to the application's appearance and language preferences.";
+            toolStripSettings.Text = Translator.Get("Skins & Language Group Box: This group box contains settings related to the application's appearance and language preferences.");
         }
 
         private void languageComboBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface.";
+            toolStripSettings.Text = Translator.Get("Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface.");
         }
 
         private void skinsComboBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance.";
+            toolStripSettings.Text = Translator.Get("Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance.");
         }
 
         private void fontNumUpDown_Enter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Font Size Numeric Up-Down: This control allows you to adjust the font size used in the application's user interface.";
+            toolStripSettings.Text = Translator.Get("Font Size Numeric Up-Down: This control allows you to adjust the font size used in the application's user interface.");
         }
 
         private void soundsGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Sounds Group Box: This group box contains settings related to the application's sound notifications for various events.";
+            toolStripSettings.Text = Translator.Get("Sounds Group Box: This group box contains settings related to the application's sound notifications for various events.");
         }
 
         private void onFinishCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes.";
+            toolStripSettings.Text = Translator.Get("On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes.");
         }
 
         private void onCancelCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled.";
+            toolStripSettings.Text = Translator.Get("On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled.");
         }
 
         private void onAddFilesCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list.";
+            toolStripSettings.Text = Translator.Get("On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list.");
         }
 
         private void onErrorCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation.";
+            toolStripSettings.Text = Translator.Get("On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation.");
         }
 
         private void updateGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Update Group Box: This group box contains settings related to the application's update preferences.";
+            toolStripSettings.Text = Translator.Get("Update Group Box: This group box contains settings related to the application's update preferences.");
         }
 
         private void updateAutoCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup.";
+            toolStripSettings.Text = Translator.Get("Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup.");
         }
 
         private void updateBetaCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates.";
+            toolStripSettings.Text = Translator.Get("Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates.");
         }
 
         private void checkForUpdatesButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Check for Updates Button: This button manually checks for updates to the application.";
+            toolStripSettings.Text = Translator.Get("Check for Updates Button: This button manually checks for updates to the application.");
         }
 
         private void defaultSettingsButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Default Settings Button: This button resets all settings to their default values.";
+            toolStripSettings.Text = Translator.Get("Default Settings Button: This button resets all settings to their default values.");
         }
 
         private void recSettingsButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Recommended Settings Button: This button applies a set of recommended settings for optimal performance and usability.";
+            toolStripSettings.Text = Translator.Get("Recommended Settings Button: This button applies a set of recommended settings for optimal performance and usability.");
         }
 
         private void priorityTrackBar_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated.";
+            toolStripSettings.Text = Translator.Get("Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated.");
         }
 
         private void opacityTrackBar_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent.";
+            toolStripSettings.Text = Translator.Get("Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent.");
         }
 
         private void logFileCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application.";
+            toolStripSettings.Text = Translator.Get("Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application.");
         }
 
         private void logDaysNumUpDown_Enter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Log Days Numeric Up-Down: This control allows you to specify the number of days to retain log files before they are automatically deleted.";
+            toolStripSettings.Text = Translator.Get("Log Days Numeric Up-Down: This control allows you to specify the number of days to retain log files before they are automatically deleted.");
         }
 
         private void saveAutoCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Auto Save Settings CheckBox: This checkbox determines whether to automatically save the current settings when the application is closed.";
+            toolStripSettings.Text = Translator.Get("Auto Save Settings CheckBox: This checkbox determines whether to automatically save the current settings when the application is closed.");
         }
 
         private void clearSettingsButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration.";
+            toolStripSettings.Text = Translator.Get("Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration.");
         }
 
         private void saveSettingsButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions.";
+            toolStripSettings.Text = Translator.Get("Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions.");
         }
 
         private void performanceGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Performance Group Box: This group box contains settings related to the application's performance, such as buffer size and multi-threading options.";
+            toolStripSettings.Text = Translator.Get("Performance Group Box: This group box contains settings related to the application's performance, such as buffer size and multi-threading options.");
         }
 
         private void bufferNumUpDown_Enter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Buffer Size Numeric Up-Down: This control allows you to adjust the buffer size used during file operations, which can affect performance.";
+            toolStripSettings.Text = Translator.Get("Buffer Size Numeric Up-Down: This control allows you to adjust the buffer size used during file operations, which can affect performance.");
         }
 
         private void multithreadCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Multi-Thread CheckBox: This checkbox enables or disables multi-threaded file operations, allowing multiple files to be processed simultaneously for improved performance.";
+            toolStripSettings.Text = Translator.Get("Multi-Thread CheckBox: This checkbox enables or disables multi-threaded file operations, allowing multiple files to be processed simultaneously for improved performance.");
         }
 
         private void underMBCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes.";
+            toolStripSettings.Text = Translator.Get("Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes.");
         }
 
         private void overMBCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes.";
+            toolStripSettings.Text = Translator.Get("Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes.");
         }
 
         private void setMBGBUnderNumUpDown_Enter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Set MB/GB Under Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to smaller files.";
+            toolStripSettings.Text = Translator.Get("Set MB/GB Under Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to smaller files.");
         }
 
         private void setMBGBOverNumUpDown_Enter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Set MB/GB Over Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to larger files.";
+            toolStripSettings.Text = Translator.Get("Set MB/GB Over Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to larger files.");
         }
 
         private void fileDirSettingsGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "File/Directory Settings Group Box: This group box contains settings related to how files and directories are exported or zipped (before) for the copy or move operations.";
+            toolStripSettings.Text = Translator.Get("File/Directory Settings Group Box: This group box contains settings related to how files and directories are exported or zipped (before) for the copy or move operations.");
         }
 
         private void onlyNamesCheckBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Only Names CheckBox: This checkbox determines whether to export only the names of files and directories without their full paths.";
+            toolStripSettings.Text = Translator.Get("Only Names CheckBox: This checkbox determines whether to export only the names of files and directories without their full paths.");
         }
 
         private void fullPathsCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories.";
+            toolStripSettings.Text = Translator.Get("Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories.");
         }
 
         private void exportButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Export Button: This button exports the list of files and directories to a text file based on the selected settings (only names or full paths).";
+            toolStripSettings.Text = Translator.Get("Export Button: This button exports the list of files and directories to a text file based on the selected settings (only names or full paths).");
         }
 
         private void zipSeparateCheckBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Zip Separate CheckBox: This checkbox determines whether to create separate zip files for each file and directory before the copy or move operations.";
+            toolStripSettings.Text = Translator.Get("Zip Separate CheckBox: This checkbox determines whether to create separate zip files for each file and directory before the copy or move operations.");
         }
 
         private void zipTogetherCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations.";
+            toolStripSettings.Text = Translator.Get("Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations.");
         }
 
         private void emailGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Email Group Box: This group box contains settings related to exporting and emailing the file list for the application.";
+            toolStripSettings.Text = Translator.Get("Email Group Box: This group box contains settings related to exporting and emailing the file list for the application.");
         }
 
         private void smsGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "SMS Group Box: This group box contains settings for configuring SMS notifications when operations complete.";
+            toolStripSettings.Text = Translator.Get("SMS Group Box: This group box contains settings for configuring SMS notifications when operations complete.");
         }
 
         private void setUpSMSButton_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Set Up SMS Button: This button opens the SMS notification setup dialog, allowing you to configure SMS settings for operation completion notifications.";
+            toolStripSettings.Text = Translator.Get("Set Up SMS Button: This button opens the SMS notification setup dialog, allowing you to configure SMS settings for operation completion notifications.");
         }
 
         private void setUpEmailButton_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Set Up Email Button: This button opens the email setup dialog, allowing you to configure email settings for exporting and sending the file list.";
+            toolStripSettings.Text = Translator.Get("Set Up Email Button: This button opens the email setup dialog, allowing you to configure email settings for exporting and sending the file list.");
         }
 
         private void emailNamesCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export.";
+            toolStripSettings.Text = Translator.Get("Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export.");
         }
 
         private void emailPathsCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export.";
+            toolStripSettings.Text = Translator.Get("Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export.");
         }
 
         private void otherSettingsGroupBox_MouseHover(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Other Settings Group Box: This group box contains miscellaneous settings for the application.";
+            toolStripSettings.Text = Translator.Get("Other Settings Group Box: This group box contains miscellaneous settings for the application.");
         }
 
         private void closeProgramCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs.";
+            toolStripSettings.Text = Translator.Get("Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs.");
         }
 
         private void restartCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs.";
+            toolStripSettings.Text = Translator.Get("Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs.");
         }
 
         private void startWithWindowsCheckBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts.";
+            toolStripSettings.Text = Translator.Get("Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts.");
         }
 
         private void serialMaskedTextBox_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Serial Key Text Box: This text box allows you to enter your serial key to activate the application.";
+            toolStripSettings.Text = Translator.Get("Serial Key Text Box: This text box allows you to enter your serial key to activate the application.");
         }
 
         private void registerButton_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Register Button: This button submits the entered serial key for validation and activates the application if the key is valid.";
+            toolStripSettings.Text = Translator.Get("Register Button: This button submits the entered serial key for validation and activates the application if the key is valid.");
         }
 
         private void securePassesNumUpDown_Enter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Secure Passes Numeric Up-Down: This control allows you to specify the number of passes to use for securely deleting files.";
+            toolStripSettings.Text = Translator.Get("Secure Passes Numeric Up-Down: This control allows you to specify the number of passes to use for securely deleting files.");
         }
 
         private void cmdSettingsPage_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.";
+            toolStripSettings.Text = Translator.Get("Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.");
         }
 
         private void seLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Move Application Label:  This allows you to move the application to different parts of the screen.";
+            toolStripSettings.Text = Translator.Get("Move Application Label:  This allows you to move the application to different parts of the screen.");
         }
 
         private void cmdSettingsPage_MouseEnter_1(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = "Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.";
+            toolStripSettings.Text = Translator.Get("Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.");
         }
 
         private void copyHistoryDGV_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
-            toolStripCopyHistory.Text = "Copy History Data Grid View: This grid displays the history of file operations performed by the application, including details such as source and target paths, operation type, date, and status.";
+            toolStripCopyHistory.Text = Translator.Get("Copy History Data Grid View: This grid displays the history of file operations performed by the application, including details such as source and target paths, operation type, date, and status.");
         }
 
         private void exportDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -13948,17 +13962,6 @@ namespace CopyThatProgram
                 list.Add(col);
         }
 
-
-
-
-
-
-
-
-
-
-
-
         private void filesDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             // This is an event handler for when the selection in the DataGridView changes.
@@ -13979,6 +13982,769 @@ namespace CopyThatProgram
         int skinNum = 0;
 
 
+
+        public static class Translator
+        {
+                public static string CurrentLanguage { get; set; } = "en";
+
+
+            // public lookup:  English → (French, German, Spanish)
+            private static readonly Dictionary<string, (string fr, string de, string es)> _map =
+                new(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["Tab Control: This control allows you to switch between different operation modes and settings."] =
+                        ("Onglet de contrôle : permet de basculer entre les différents modes d’opération et réglages.",
+                         "Registerkarte: Hiermit schalten Sie zwischen verschiedenen Betriebsmodi und Einstellungen um.",
+                         "Pestaña de control: le permite cambiar entre diferentes modos de operación y ajustes."),
+
+                    ["File's Icon PictureBox: The file's icon which reflect the current file will be shown here."] =
+                        ("PictureBox de l’icône du fichier : l’icône du fichier actuel s’affiche ici.",
+                         "Symbol PictureBox: Das Symbol der aktuellen Datei wird hier angezeigt.",
+                         "PictureBox del icono del archivo: aquí se muestra el icono del archivo actual."),
+
+                    ["Source Directory Button: This is the button to select your source directory from which files will be copied/moved/securely deleted."] =
+                        ("Bouton Répertoire source : permet de choisir le dossier source depuis lequel les fichiers seront copiés/déplacés/supprimés de façon sécurisée.",
+                         "Quellverzeichnis-Schaltfläche: Wählt das Quellverzeichnis aus, aus dem Dateien kopiert/verschoben/sicher gelöscht werden.",
+                         "Botón Directorio de origen: permite elegir la carpeta de origen desde la que se copiarán/moverán/borrarán de forma segura los archivos."),
+
+                    ["Target Directory Button: This is the button to select your target directory to which your files will be copied/moved."] =
+                        ("Bouton Répertoire cible : permet de choisir le dossier de destination vers lequel les fichiers seront copiés ou déplacés.",
+                         "Zielverzeichnis-Schaltfläche: Wählt das Zielverzeichnis aus, in das Dateien kopiert oder verschoben werden.",
+                         "Botón Directorio de destino: permite elegir la carpeta de destino a la que se copiarán o moverán los archivos."),
+
+                    ["Copy/Move/Secure Delete ComboBox: This dropdown combobox is to select the operation of Copy/Move/Secure Delete."] =
+                        ("ComboBox Copier/Déplacer/Suppression sécurisée : permet de choisir l’opération à effectuer.",
+                         "Kopieren/Verschieben/Sicheres Löschen-ComboBox: Wählt die gewünschte Operation aus.",
+                         "ComboBox Copiar/Mover/Borrado seguro: permite elegir la operación a realizar."),
+
+                    ["On Finish ComboBox: This dropdown combobox is to select the action to perform when the operation finishes."] =
+                        ("ComboBox À la fin : permet de choisir l’action à effectuer une fois l’opération terminée.",
+                         "Beenden-ComboBox: Legt fest, was nach Abschluss der Operation geschehen soll.",
+                         "ComboBox Al finalizar: permite elegir la acción a realizar cuando termine la operación."),
+
+                    ["Start Button: This button starts the operation of Copy/Move/Secure Delete."] =
+                        ("Bouton Démarrer : lance l’opération de copie/déplacement/suppression sécurisée.",
+                         "Start-Schaltfläche: Startet die Operation Kopieren/Verschieben/Sicheres Löschen.",
+                         "Botón Iniciar: inicia la operación de copiar/mover/borrar de forma segura."),
+
+                    ["Pause/Resume Button: This button pauses/resumes the current operation."] =
+                        ("Bouton Pause/Reprise : met l’opération en pause ou la reprend.",
+                         "Pause/Weiter-Schaltfläche: Pausiert oder setzt die aktuelle Operation fort.",
+                         "Botón Pausar/Reanudar: pone en pausa o reanuda la operación actual."),
+
+                    ["Cancel Button: This button cancels the current operation."] =
+                        ("Bouton Annuler : annule l’opération en cours.",
+                         "Abbrechen-Schaltfläche: Bricht die aktuelle Operation ab.",
+                         "Botón Cancelar: cancela la operación actual."),
+
+                    ["This button skips the current file and moves to the next one in the operation."] =
+                        ("Ce bouton ignore le fichier actuel et passe au suivant.",
+                         "Diese Schaltfläche überspringt die aktuelle Datei und fährt mit der nächsten fort.",
+                         "Este botón omite el archivo actual y pasa al siguiente."),
+
+                    ["Add File Button: This button adds files to the list for the current operation."] =
+                        ("Bouton Ajouter un fichier : ajoute des fichiers à la liste de l’opération.",
+                         "Datei hinzufügen-Schaltfläche: Fügt der Liste Dateien hinzu.",
+                         "Botón Añadir archivo: agrega archivos a la lista de la operación."),
+
+                    ["Remove File Button: This button removes the selected file from the list for the current operation."] =
+                        ("Bouton Supprimer le fichier : retire le fichier sélectionné de la liste.",
+                         "Datei entfernen-Schaltfläche: Entfernt die ausgewählte Datei aus der Liste.",
+                         "Botón Quitar archivo: quita el archivo seleccionado de la lista."),
+
+                    ["Clear File List Button: This button clears the entire file list for the current operation."] =
+                        ("Bouton Effacer la liste : vide complètement la liste de fichiers.",
+                         "Liste löschen-Schaltfläche: Leert die gesamte Dateiliste.",
+                         "Botón Limpiar lista: vacía completamente la lista de archivos."),
+
+                    ["File Count Label: This label shows the total number of files in the current operation."] =
+                        ("Étiquette Nombre de fichiers : affiche le nombre total de fichiers de l’opération.",
+                         "Dateianzahl-Label: Zeigt die Gesamtanzahl der Dateien in der Operation an.",
+                         "Etiqueta Contador de archivos: muestra el número total de archivos de la operación."),
+
+                    ["File Processed Label: This label shows the number of converted bytes that have been processed in the current operation."] =
+                        ("Étiquette Fichiers traités : affiche le nombre d’octets traités.",
+                         "Verarbeitete-Dateien-Label: Zeigt die Anzahl der verarbeiteten Bytes an.",
+                         "Etiqueta Archivos procesados: muestra la cantidad de bytes procesados."),
+
+                    ["Total Copied Progress Label: This label shows the total bytes processed and the total bytes to process in the current operation."] =
+                        ("Étiquette Progression totale : affiche les octets traités et restants.",
+                         "Gesamtfortschritt-Label: Zeigt die verarbeiteten und die gesamten Bytes an.",
+                         "Etiqueta Progreso total copiado: muestra los bytes procesados y los restantes."),
+
+                    ["Elapsed Out of Target Time Label: This label shows the elapsed time and the estimated target time for the current operation."] =
+                        ("Étiquette Temps écoulé/estimé : affiche le temps écoulé et le temps estimé.",
+                         "Verstrichene/Gesamtdauer-Label: Zeigt verstrichene und geschätzte Zeit an.",
+                         "Etiqueta Tiempo transcurrido y estimado: muestra el tiempo transcurrido y el estimado."),
+
+                    ["Speed Label: This label shows the current speed of the operation in bytes per second."] =
+                        ("Étiquette Vitesse : affiche la vitesse actuelle en octets par seconde.",
+                         "Geschwindigkeit-Label: Zeigt die aktuelle Geschwindigkeit in Bytes pro Sekunde.",
+                         "Etiqueta Velocidad: muestra la velocidad actual en bytes por segundo."),
+
+                    ["Total HD Space Left Label: This label shows the total hard drive space left on the target drive."] =
+                        ("Étiquette Espace disque restant : affiche l’espace disponible sur le disque cible.",
+                         "Verbleibender Festplattenspeicher-Label: Zeigt den freien Speicherplatz auf dem Ziellaufwerk.",
+                         "Etiqueta Espacio restante en disco: muestra el espacio libre en la unidad de destino."),
+
+                    ["Overwrite If Newer CheckBox: This checkbox determines whether to overwrite files only if the source file is newer than the destination file."] =
+                        ("Case Remplacer si plus récent : écrase uniquement si la source est plus récente.",
+                         "Überschreiben wenn neuer-CheckBox: Überschreibt nur, wenn die Quelldatei neuer ist.",
+                         "Casilla Sobrescribir si es más nuevo: sobrescribe solo si el origen es más reciente."),
+
+                    ["Overwrite All CheckBox: This checkbox determines whether to overwrite all files in the target directory without checking their timestamps."] =
+                        ("Case Remplacer tout : écrase tous les fichiers sans vérifier la date.",
+                         "Alles überschreiben-CheckBox: Überschreibt alle Dateien ohne Zeitstempelprüfung.",
+                         "Casilla Sobrescribir todo: sobrescribe todos los archivos sin comprobar la fecha."),
+
+                    ["Do Not Overwrite CheckBox: This checkbox determines whether to skip files that already exist in the target directory."] =
+                        ("Case Ne pas remplacer : ignore les fichiers existants.",
+                         "Nicht überschreiben-CheckBox: Überspringt vorhandene Dateien.",
+                         "Casilla No sobrescribir: omite los archivos que ya existen."),
+
+                    ["Keep Empty Folders CheckBox: This checkbox determines whether to keep empty folders in the target directory after the operation."] =
+                        ("Case Garder dossiers vides : conserve les dossiers vides.",
+                         "Leere Ordner behalten-CheckBox: Behält leere Ordner bei.",
+                         "Casilla Mantener carpetas vacías: mantiene las carpetas vacías."),
+
+                    ["Keep Directory Structure CheckBox: This checkbox determines whether to keep the directory structure of the source files in the target directory."] =
+                        ("Case Garder structure dossiers : conserve la structure complète.",
+                         "Verzeichnisstruktur beibehalten-CheckBox: Behält die Struktur bei.",
+                         "Casilla Mantener estructura de carpetas: mantiene la estructura completa."),
+
+                    ["Create Custom Directory Prior CheckBox: This checkbox determines whether to create a custom directory structure in the target directory based on the source files."] =
+                        ("Case Créer arborescence personnalisée : crée une structure personnalisée.",
+                         "Benutzerdefinierte Ordnerstruktur-CheckBox: Erstellt eine angepasste Struktur.",
+                         "Casilla Crear estructura personalizada: crea una estructura personalizada."),
+
+                    ["Copy Only Files CheckBox: This checkbox determines whether to copy files and no directories from the source directory to the target directory."] =
+                        ("Case Copier uniquement fichiers : copie uniquement les fichiers.",
+                         "Nur Dateien kopieren-CheckBox: Kopiert nur Dateien, keine Ordner.",
+                         "Casilla Copiar solo archivos: copia solo archivos, no carpetas."),
+
+                    ["Keep Only Files CheckBox: This checkbox determines whether to keep ONLY files inside the main directory."] =
+                        ("Case Garder uniquement fichiers : ne conserve que les fichiers.",
+                         "Nur Dateien behalten-CheckBox: Behält nur Dateien im Hauptordner.",
+                         "Casilla Mantener solo archivos: conserva solo archivos en la carpeta principal."),
+
+                    ["Home Page Tab: This tab contains the main interface for file operations such as copy, move, and secure delete."] =
+                        ("Onglet Page d’accueil : contient l’interface principale pour copier, déplacer, supprimer.",
+                         "Startseite-Tab: Enthält die Hauptoberfläche für Kopieren, Verschieben, Sicheres Löschen.",
+                         "Pestaña Página principal: contiene la interfaz principal para copiar, mover, borrar de forma segura."),
+
+                    ["Copy That v1.0 Pro By: Havoc - Home"] =
+                        ("Copy That v1.0 Pro Par: Havoc - Accueil",
+                         "Copy That v1.0 Pro Von: Havoc - Startseite",
+                         "Copy That v1.0 Pro Por: Havoc - Inicio"),
+
+                    ["Copy That v1.0 By: Havoc - Home"] =
+                        ("Copy That v1.0 Par: Havoc - Accueil",
+                         "Copy That v1.0 Von: Havoc - Startseite",
+                         "Copy That v1.0 Por: Havoc - Inicio"),
+
+                    ["Copy That v1.0 By: Havoc - This is the title of the application, which reflects the current operation."] =
+                        ("Copy That v1.0 Par: Havoc – titre de l’application reflétant l’opération en cours.",
+                         "Copy That v1.0 Von: Havoc – Anwendungstitel, der den aktuellen Vorgang widerspiegelt.",
+                         "Copy That v1.0 Por: Havoc – título de la aplicación que refleja la operación actual."),
+
+                    ["Current File Path: This label shows the path of the currently processed file in the operation."] =
+                        ("Chemin du fichier actuel : affiche le chemin du fichier en cours de traitement.",
+                         "Aktueller Dateipfad: Zeigt den Pfad der gerade verarbeiteten Datei.",
+                         "Ruta del archivo actual: muestra la ruta del archivo que se está procesando."),
+
+                    ["Current Source Directory: This label shows the path of the source directory from which files will be copied/moved/securely deleted."] =
+        ("Répertoire source actuel : affiche le chemin du dossier source depuis lequel les fichiers seront copiés/déplacés/supprimés de façon sécurisée.",
+         "Aktuelles Quellverzeichnis: Zeigt den Pfad des Quellordners an, aus dem Dateien kopiert/verschoben/sicher gelöscht werden.",
+         "Directorio de origen actual: muestra la ruta de la carpeta de origen desde la que se copiarán/moverán/borrarán de forma segura los archivos."),
+                    ["Current Target Directory: This label shows the path of the target directory to which files will be copied/moved."] =
+                    ("Répertoire cible actuel : affiche le chemin du dossier de destination.",
+                     "Aktuelles Zielverzeichnis: Zeigt den Pfad des Zielordners an.",
+                     "Directorio de destino actual: muestra la ruta de la carpeta de destino."),
+
+                    ["Current File Icon: This picture box shows the icon of the currently processed file in the operation."] =
+                    ("Icône du fichier actuel : cette zone affiche l’icône du fichier en cours de traitement.",
+                     "Aktuelles Dateisymbol: Diese PictureBox zeigt das Symbol der gerade verarbeiteten Datei.",
+                     "Icono del archivo actual: este cuadro muestra el icono del archivo que se está procesando."),
+
+                    ["Overwrite If Newer: This checkbox determines whether to overwrite files only if the source file is newer than the destination file."] =
+                    ("Remplacer si plus récent : écrase uniquement si la source est plus récente.",
+                     "Überschreiben wenn neuer: Überschreibt nur, wenn die Quelldatei neuer ist.",
+                     "Sobrescribir si es más nuevo: sobrescribe solo si el origen es más reciente."),
+
+                    ["File Progress Bar: This progress bar shows the progress of the current file being processed in the operation."] =
+                    ("Barre de progression du fichier : indique l’avancement du fichier en cours.",
+                     "Datei-Fortschrittsbalken: Zeigt den Fortschritt der gerade bearbeiteten Datei.",
+                     "Barra de progreso del archivo: muestra el avance del archivo que se está procesando."),
+
+                    ["File Progress Label: This label shows the percentage of progress for the current file being processed in the operation."] =
+                    ("Étiquette progression fichier : affiche le pourcentage d’avancement du fichier actuel.",
+                     "Datei-Fortschritt-Label: Zeigt den Prozentwert des Fortschritts der aktuellen Datei.",
+                     "Etiqueta de progreso del archivo: muestra el porcentaje de avance del archivo actual."),
+
+                    ["Total Progress Bar: This progress bar shows the overall progress of the operation across all files being processed."] =
+                    ("Barre de progression totale : indique l’avancement global de l’opération sur tous les fichiers.",
+                     "Gesamt-Fortschrittsbalken: Zeigt den Gesamtfortschritt der Operation über alle Dateien.",
+                     "Barra de progreso total: muestra el avance general de la operación en todos los archivos."),
+
+                    ["Total Progress Label: This label shows the percentage of overall progress for the operation across all files being processed."] =
+                    ("Étiquette progression totale : affiche le pourcentage de progression global.",
+                     "Gesamt-Fortschritt-Label: Zeigt den Prozentwert des Gesamtfortschritts.",
+                     "Etiqueta de progreso total: muestra el porcentaje de avance general."),
+
+                    ["Search Text Box: This text box allows you to search for specific files in the file list. Type a keyword to filter the displayed files."] =
+                    ("Zone de recherche : permet de filtrer la liste des fichiers en tapant un mot-clé.",
+                     "Such-Textbox: Ermöglicht das Filtern der Dateiliste durch Eingabe eines Stichworts.",
+                     "Cuadro de búsqueda: permite filtrar la lista de archivos escribiendo una palabra clave."),
+
+                    ["Clear Text Button: This button clears the text in the search box, allowing you to reset the search filter and view all files in the list."] =
+                    ("Bouton Effacer texte : vide la zone de recherche pour réafficher tous les fichiers.",
+                     "Text löschen-Schaltfläche: Leert das Suchfeld, damit wieder alle Dateien angezeigt werden.",
+                     "Botón Borrar texto: vacía el cuadro de búsqueda para volver a mostrar todos los archivos."),
+
+                    ["Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence."] =
+                    ("Bouton Monter : déplace le fichier sélectionné vers le haut dans la liste.",
+                     "Nach oben-Schaltfläche: Verschiebt die markierte Datei eine Position nach oben.",
+                     "Botón Subir: mueve el archivo seleccionado hacia arriba en la lista."),
+
+                    ["Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence."] =
+                    ("Bouton Descendre : déplace le fichier sélectionné vers le bas dans la liste.",
+                     "Nach unten-Schaltfläche: Verschiebt die markierte Datei eine Position nach unten.",
+                     "Botón Bajar: mueve el archivo seleccionado hacia abajo en la lista."),
+
+                    ["Files Data Grid View: This grid displays the list of files to be processed in the current operation, including their names, paths, sizes, and statuses."] =
+                    ("Grille des fichiers : affiche la liste des fichiers à traiter avec nom, chemin, taille et état.",
+                     "Datei-DataGridView: Zeigt die zu bearbeitenden Dateien mit Name, Pfad, Größe und Status.",
+                     "Cuadrícula de archivos: muestra la lista de archivos a procesar con nombre, ruta, tamaño y estado."),
+
+                    ["Auto-Scroll CheckBox: This checkbox enables or disables automatic scrolling of the files data grid view while files are being processed."] =
+                    ("Case Défilement automatique : active/désactive le défilement automatique de la grille pendant le traitement.",
+                     "Auto-Scroll-CheckBox: Aktiviert/deaktiviert das automatische Scrollen der Dateiliste während der Verarbeitung.",
+                     "Casilla Desplazamiento automático: activa/desactiva el desplazamiento automático de la lista mientras se procesan archivos."),
+
+                    ["Verify After Transfer CheckBox: This checkbox determines whether to verify the integrity of files after they have been copied or moved."] =
+                    ("Case Vérifier après transfert : vérifie l’intégrité des fichiers après copie/déplacement.",
+                     "Nach Übertragung prüfen-CheckBox: Prüft die Integrität der Dateien nach dem Kopieren/Verschieben.",
+                     "Casilla Verificar después de transferir: verifica la integridad de los archivos después de copiarlos o moverlos."),
+
+                    ["Pause/Resume Multi-Thread Button: This button pauses or resumes the multi-threaded operation."] =
+                    ("Bouton Pause/Reprise multi-thread : met en pause ou reprend l’opération multi-thread.",
+                     "Multi-Thread Pause/Weiter-Schaltfläche: Pausiert oder setzt die Multithread-Operation fort.",
+                     "Botón Pausar/Reanudar multi-hilo: pone en pausa o reanuda la operación multi-hilo."),
+
+                    ["Cancel Multi-Thread Button: This button cancels the multi-threaded operation."] =
+                    ("Bouton Annuler multi-thread : annule l’opération multi-thread.",
+                     "Multi-Thread Abbrechen-Schaltfläche: Bricht die Multithread-Operation ab.",
+                     "Botón Cancelar multi-hilo: cancela la operación multi-hilo."),
+
+                    ["On Finish Multi-Thread ComboBox: This dropdown combobox is to select the action to perform when the multi-threaded operation finishes."] =
+                    ("ComboBox À la fin multi-thread : choisit l’action à effectuer à la fin de l’opération multi-thread.",
+                     "Beenden-Multi-Thread-ComboBox: Legt fest, was nach Abschluss der Multithread-Operation geschehen soll.",
+                     "ComboBox Al finalizar multi-hilo: elige la acción a realizar cuando termine la operación multi-hilo."),
+
+                    ["Files Name Label 1: This label shows the name of the file being processed by thread 1, along with the percentage and speed."] =
+                    ("Étiquette Nom fichier 1 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 1.",
+                     "Dateiname-Label 1: Zeigt Name, Prozent und Geschwindigkeit der von Thread 1 bearbeiteten Datei.",
+                     "Etiqueta Nombre archivo 1: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 1."),
+
+                    ["Total Percentage Multi Label 1: This label shows the percentage of progress for the file being processed by thread 1."] =
+                    ("Étiquette Pourcentage total 1 : affiche le pourcentage de progression du fichier traité par le thread 1.",
+                     "Gesamt-Prozent-Label 1: Zeigt den Prozentwert des Fortschritts der von Thread 1 bearbeiteten Datei.",
+                     "Etiqueta Porcentaje total 1: muestra el porcentaje de progreso del archivo procesado por el hilo 1."),
+
+                    ["Files Name Label 2: This label shows the name of the file being processed by thread 2, along with the percentage and speed."] =
+                    ("Étiquette Nom fichier 2 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 2.",
+                     "Dateiname-Label 2: Zeigt Name, Prozent und Geschwindigkeit der von Thread 2 bearbeiteten Datei.",
+                     "Etiqueta Nombre archivo 2: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 2."),
+
+                    ["Files Name Label 3: This label shows the name of the file being processed by thread 3, along with the percentage and speed."] =
+                    ("Étiquette Nom fichier 3 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 3.",
+                     "Dateiname-Label 3: Zeigt Name, Prozent und Geschwindigkeit der von Thread 3 bearbeiteten Datei.",
+                     "Etiqueta Nombre archivo 3: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 3."),
+
+                    ["Total Percentage Multi Label 2: This label shows the percentage of progress for the file being processed by thread 2."] =
+                    ("Étiquette Pourcentage total 2 : affiche le pourcentage de progression du fichier traité par le thread 2.",
+                     "Gesamt-Prozent-Label 2: Zeigt den Prozentwert des Fortschritts der von Thread 2 bearbeiteten Datei.",
+                     "Etiqueta Porcentaje total 2: muestra el porcentaje de progreso del archivo procesado por el hilo 2."),
+
+                    ["Total Percentage Multi Label 3: This label shows the percentage of progress for the file being processed by thread 3."] =
+                    ("Étiquette Pourcentage total 3 : affiche le pourcentage de progression du fichier traité par le thread 3.",
+                     "Gesamt-Prozent-Label 3: Zeigt den Prozentwert des Fortschritts der von Thread 3 bearbeiteten Datei.",
+                     "Etiqueta Porcentaje total 3: muestra el porcentaje de progreso del archivo procesado por el hilo 3."),
+
+                    ["Files Name Label 4: This label shows the name of the file being processed by thread 4, along with the percentage and speed."] =
+                    ("Étiquette Nom fichier 4 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 4.",
+                     "Dateiname-Label 4: Zeigt Name, Prozent und Geschwindigkeit der von Thread 4 bearbeiteten Datei.",
+                     "Etiqueta Nombre archivo 4: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 4."),
+
+                    ["Total Percentage Multi Label 4: This label shows the percentage of progress for the file being processed by thread 4."] =
+                    ("Étiquette Pourcentage total 4 : affiche le pourcentage de progression du fichier traité par le thread 4.",
+                     "Gesamt-Prozent-Label 4: Zeigt den Prozentwert des Fortschritts der von Thread 4 bearbeiteten Datei.",
+                     "Etiqueta Porcentaje total 4: muestra el porcentaje de progreso del archivo procesado por el hilo 4."),
+
+                    ["Progress Bar Multi-Thread Total: This progress bar shows the overall progress of the multi-threaded operation across all threads."] =
+                    ("Barre de progression multi-thread totale : indique l’avancement global de l’opération multi-thread.",
+                     "Multi-Thread-Gesamt-Fortschrittsbalken: Zeigt den Gesamtfortschritt der Multithread-Operation.",
+                     "Barra de progreso total multi-hilo: muestra el avance global de la operación multi-hilo."),
+
+                    ["Multi-Thread Total Progress Label: This label shows the percentage of overall progress for the multi-threaded operation across all threads."] =
+                    ("Étiquette Progression totale multi-thread : affiche le pourcentage de progression global de l’opération multi-thread.",
+                     "Multi-Thread-Gesamt-Fortschritt-Label: Zeigt den Prozentwert des Gesamtfortschritts der Multithread-Operation.",
+                     "Etiqueta Progreso total multi-hilo: muestra el porcentaje de avance global de la operación multi-hilo."),
+
+                    ["File Count Multi Label: This label shows the number of files processed out of the total number of files in the multi-threaded operation."] =
+                    ("Étiquette Compteur fichiers multi-thread : affiche le nombre de fichiers traités sur le total.",
+                     "Multi-Thread-Dateianzahl-Label: Zeigt die Anzahl der bearbeiteten Dateien von der Gesamtanzahl.",
+                     "Etiqueta Contador archivos multi-hilo: muestra la cantidad de archivos procesados del total."),
+
+                    ["Total Time Multi Label: This label shows the elapsed time out of the estimated target time for the multi-threaded operation."] =
+                    ("Étiquette Temps total multi-thread : affiche le temps écoulé sur le temps estimé.",
+                     "Multi-Thread-Gesamtzeit-Label: Zeigt die verstrichene Zeit gegenüber der geschätzten Gesamtzeit.",
+                     "Etiqueta Tiempo total multi-hilo: muestra el tiempo transcurrido frente al tiempo estimado."),
+
+                    ["Speed Multi Label: This label shows the current speed of the multi-threaded operation in bytes per second."] =
+                    ("Étiquette Vitesse multi-thread : affiche la vitesse actuelle en octets par seconde.",
+                     "Multi-Thread-Geschwindigkeit-Label: Zeigt die aktuelle Geschwindigkeit in Bytes pro Sekunde.",
+                     "Etiqueta Velocidad multi-hilo: muestra la velocidad actual en bytes por segundo."),
+
+                    ["Total C/M/D Label: This label shows the total space processed out of the total space for all files."] =
+                    ("Étiquette Total C/M/D : affiche l’espace traité sur l’espace total de tous les fichiers.",
+                     "Gesamt-C/M/D-Label: Zeigt den verarbeiteten Speicherplatz im Verhältnis zum Gesamtplatz aller Dateien.",
+                     "Etiqueta Total C/M/D: muestra el espacio procesado frente al espacio total de todos los archivos."),
+
+                    ["Total Space Left Label: This label shows the total hard drive used out of the total hard drive space left on the target drive for the multi-threaded operation."] =
+                    ("Étiquette Espace restant total : affiche l’espace disque utilisé sur l’espace restant du disque cible pour l’opération multi-thread.",
+                     "Gesamt-verbleibender-Speicher-Label: Zeigt den belegten Speicherplatz im Verhältnis zum freien Speicher des Ziellaufwerks für die Multithread-Operation.",
+                     "Etiqueta Espacio restante total: muestra el espacio en disco usado frente al espacio libre de la unidad de destino para la operación multi-hilo."),
+
+                    ["Go To In Explorer Button: This button opens the selected file's location in Windows Explorer."] =
+                    ("Bouton Ouvrir dans l’explorateur : ouvre l’emplacement du fichier sélectionné dans l’Explorateur Windows.",
+                     "Im Explorer öffnen-Schaltfläche: Öffnet den Speicherort der markierten Datei im Windows-Explorer.",
+                     "Botón Ir en Explorador: abre la ubicación del archivo seleccionado en el Explorador de Windows."),
+
+                    ["Total Skipped Label: This label shows the total number of files that were skipped during the operation."] =
+                    ("Étiquette Total ignoré : affiche le nombre total de fichiers ignorés pendant l’opération.",
+                     "Gesamt-übersprungen-Label: Zeigt die Gesamtanzahl der während der Operation übersprungenen Dateien.",
+                     "Etiqueta Total omitido: muestra la cantidad total de archivos omitidos durante la operación."),
+
+                    ["Clear Skipped List Button: This button clears the list of skipped files."] =
+                    ("Bouton Effacer liste ignorés : vide la liste des fichiers ignorés.",
+                     "Übersprungen-Liste löschen-Schaltfläche: Leert die Liste der übersprungenen Dateien.",
+                     "Botón Limpiar lista omitidos: vacía la lista de archivos omitidos."),
+
+                    ["Skipped Data Grid View: This grid displays the list of files that were skipped during the operation, including their names, paths, sizes, and reasons for skipping."] =
+                    ("Grille des fichiers ignorés : affiche la liste des fichiers ignorés avec nom, chemin, taille et motif.",
+                     "Übersprungen-DataGridView: Zeigt die übersprungenen Dateien mit Name, Pfad, Größe und Grund.",
+                     "Cuadrícula de omitidos: muestra la lista de archivos omitidos con nombre, ruta, tamaño y motivo."),
+
+                    ["Clone Button: This button clones the selected operation from the history list, allowing you to quickly repeat a previous operation."] =
+                    ("Bouton Cloner : clone l’opération sélectionnée dans l’historique pour la répéter rapidement.",
+                     "Klonen-Schaltfläche: Klont den markierten Eintrag aus der Historie, um ihn schnell zu wiederholen.",
+                     "Botón Clonar: clona la operación seleccionada del historial para repetirla rápidamente."),
+
+                    ["Delete Entry Button: This button deletes the selected entry from the operation history list."] =
+                    ("Bouton Supprimer entrée : retire l’entrée sélectionnée de l’historique.",
+                     "Eintrag löschen-Schaltfläche: Entfernt den markierten Eintrag aus der Historie.",
+                     "Botón Borrar entrada: quita la entrada seleccionada del historial."),
+
+                    ["Clear History Button: This button clears the entire operation history list."] =
+                    ("Bouton Effacer historique : vide complètement la liste de l’historique.",
+                     "Historie löschen-Schaltfläche: Leert die gesamte Historien-Liste.",
+                     "Botón Limpiar historial: vacía completamente la lista del historial."),
+
+                    ["Total History Label: This label shows the total number of operations recorded in the history list."] =
+                    ("Étiquette Total historique : affiche le nombre total d’opérations enregistrées.",
+                     "Gesamt-Historie-Label: Zeigt die Gesamtanzahl der gespeicherten Operationen.",
+                     "Etiqueta Total historial: muestra el número total de operaciones guardadas."),
+
+                    ["Add Allowed Button: This button adds a new allowed file or directory to the allowed list."] =
+                    ("Bouton Ajouter autorisé : ajoute un nouveau fichier ou dossier autorisé.",
+                     "Hinzufügen erlaubt-Schaltfläche: Fügt eine neue erlaubte Datei oder einen Ordner hinzu.",
+                     "Botón Añadir permitido: agrega un nuevo archivo o carpeta permitida."),
+
+                    ["Remove Allowed Button: This button removes the selected allowed file or directory from the allowed list."] =
+                    ("Bouton Supprimer autorisé : retire l’élément autorisé sélectionné.",
+                     "Entfernen erlaubt-Schaltfläche: Entfernt das markierte erlaubte Element.",
+                     "Botón Quitar permitido: quita el elemento permitido seleccionado."),
+
+                    ["Clear Allowed Button: This button clears the entire list of allowed files and directories."] =
+                    ("Bouton Effacer autorisés : vide la liste complète des éléments autorisés.",
+                     "Erlaubt-Liste löschen-Schaltfläche: Leert die gesamte Liste der erlaubten Elemente.",
+                     "Botón Limpiar permitidos: vacía la lista completa de elementos permitidos."),
+
+                    ["Add Excluded Button: This button adds a new excluded file or directory to the exclusions list."] =
+                    ("Bouton Ajouter exclu : ajoute un nouveau fichier ou dossier exclu.",
+                     "Hinzufügen ausgeschlossen-Schaltfläche: Fügt eine neue ausgeschlossene Datei oder einen Ordner hinzu.",
+                     "Botón Añadir excluido: agrega un nuevo archivo o carpeta excluida."),
+
+                    ["Remove Excluded Button: This button removes the selected excluded file or directory from the exclusions list."] =
+                    ("Bouton Supprimer exclu : retire l’élément exclu sélectionné.",
+                     "Entfernen ausgeschlossen-Schaltfläche: Entfernt das markierte ausgeschlossene Element.",
+                     "Botón Quitar excluido: quita el elemento excluido seleccionado."),
+
+                    ["Clear Excluded Button: This button clears the entire list of excluded files and directories."] =
+                    ("Bouton Effacer exclus : vide la liste complète des éléments exclus.",
+                     "Ausgeschlossen-Liste löschen-Schaltfläche: Leert die gesamte Liste der ausgeschlossenen Elemente.",
+                     "Botón Limpiar excluidos: vacía la lista completa de elementos excluidos."),
+
+                    ["Allowed Text Box: This text box allows you to enter file or directory paths to be added to the allowed list."] =
+                    ("Zone de texte autorisés : permet de saisir les chemins à ajouter à la liste des autorisés.",
+                     "Erlaubt-Textbox: Ermöglicht das Eingeben von Pfaden, die zur erlaubten Liste hinzugefügt werden.",
+                     "Cuadro de texto permitidos: permite escribir rutas para agregar a la lista de permitidos."),
+
+                    ["Excluded Text Box: This text box allows you to enter file or directory paths to be added to the exclusions list."] =
+                    ("Zone de texte exclus : permet de saisir les chemins à ajouter à la liste des exclus.",
+                     "Ausgeschlossen-Textbox: Ermöglicht das Eingeben von Pfaden, die zur Ausgeschlossen-Liste hinzugefügt werden.",
+                     "Cuadro de texto excluidos: permite escribir rutas para agregar a la lista de excluidos."),
+
+                    ["Allowed List Box: This list box displays the list of allowed files and directories that will be included in the operation."] =
+                    ("Liste des autorisés : affiche les fichiers et dossiers autorisés à être inclus dans l’opération.",
+                     "Erlaubt-Liste: Zeigt die erlaubten Dateien und Ordner an, die in die Operation einbezogen werden.",
+                     "Lista de permitidos: muestra los archivos y carpetas permitidos que se incluirán en la operación."),
+
+                    ["Excluded List Box: This list box displays the list of excluded files and directories that will be skipped during the operation."] =
+                    ("Liste des exclus : affiche les fichiers et dossiers exclus qui seront ignorés pendant l’opération.",
+                     "Ausgeschlossen-Liste: Zeigt die ausgeschlossenen Dateien und Ordner an, die übersprungen werden.",
+                     "Lista de excluidos: muestra los archivos y carpetas excluidos que se omitirán durante la operación."),
+
+                    ["Exclusions Tab: This tab allows you to manage the lists of allowed and excluded files and directories for the operation."] =
+                    ("Onglet Exclusions : permet de gérer les listes de fichiers et dossiers autorisés et exclus pour l’opération.",
+                     "Ausschluss-Tab: Ermöglicht die Verwaltung der Listen mit erlaubten und ausgeschlossenen Dateien und Ordnern für die Operation.",
+                     "Pestaña Exclusiones: permite administrar las listas de archivos y carpetas permitidos y excluidos para la operación."),
+
+                    ["Skipped Tab: This tab displays the list of files that were skipped during the operation, along with options to manage the skipped files."] =
+                    ("Onglet Ignorés : affiche la liste des fichiers ignorés pendant l’opération avec des options pour les gérer.",
+                     "Übersprungen-Tab: Zeigt die Liste der übersprungenen Dateien der Operation mit Verwaltungsoptionen.",
+                     "Pestaña Omitidos: muestra la lista de archivos omitidos durante la operación con opciones para administrarlos."),
+
+                    ["Multi-Thread Tab: This tab allows you to configure and monitor multi-threaded operations for copying or moving files."] =
+                    ("Onglet Multi-thread : permet de configurer et surveiller les opérations multi-thread pour copier ou déplacer des fichiers.",
+                     "Multi-Thread-Tab: Ermöglicht die Konfiguration und Überwachung von Multithread-Operationen zum Kopieren oder Verschieben von Dateien.",
+                     "Pestaña Multi-hilo: permite configurar y supervisar operaciones multi-hilo para copiar o mover archivos."),
+
+                    ["Window Group Box: This group box contains settings related to the application's window behavior, such as minimizing to the system tray."] =
+                    ("Groupe Fenêtre : contient les réglages relatifs au comportement de la fenêtre, comme la minimisation dans la zone de notification.",
+                     "Fenster-Gruppe: Enthält Einstellungen zum Fensterverhalten, z. B. Minimieren in das Benachrichtigungsfeld.",
+                     "Grupo Ventana: contiene ajustes relacionados con el comportamiento de la ventana, como minimizar a la bandeja del sistema."),
+
+                    ["Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows."] =
+                    ("Case Toujours au premier plan : détermine si la fenêtre reste toujours au-dessus des autres.",
+                     "Immer im Vordergrund-CheckBox: Legt fest, ob das Fenster immer über anderen Fenstern bleibt.",
+                     "Casilla Siempre encima: determina si la ventana permanece siempre por encima de las demás."),
+
+                    ["Minimize to System Tray CheckBox: This checkbox determines whether the application should minimize to the system tray instead of the taskbar."] =
+                    ("Case Réduire dans la barre d’état : détermine si l’application se réduit dans la zone de notification au lieu de la barre des tâches.",
+                     "In Benachrichtigungsfeld minimieren-CheckBox: Legt fest, ob sich die Anwendung in das Benachrichtigungsfeld anstatt in die Taskleiste minimiert.",
+                     "Casilla Minimizar a bandeja: determina si la aplicación se minimiza a la bandeja del sistema en lugar de a la barra de tareas."),
+
+                    ["Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application."] =
+                    ("Case Confirmer glisser-déposer : affiche une boîte de confirmation lors du glisser-déposer de fichiers.",
+                     "Drag & Drop bestätigen-CheckBox: Zeigt einen Bestätigungsdialog beim Ablegen von Dateien an.",
+                     "Casilla Confirmar arrastrar y soltar: muestra un diálogo de confirmación al soltar archivos."),
+
+                    ["Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application."] =
+                    ("Case Menu contextuel : ajoute une option au menu contextuel de Windows pour un accès rapide.",
+                     "Kontextmenü-CheckBox: Fügt dem Windows-Kontextmenü eine Option für schnellen Zugriff hinzu.",
+                     "Casilla Menú contextual: añade una opción al menú contextual de Windows para acceso rápido."),
+
+                    ["Skins & Language Group Box: This group box contains settings related to the application's appearance and language preferences."] =
+                    ("Groupe Apparence & Langue : contient les réglages d’apparence et de langue de l’application.",
+                     "Design & Sprache-Gruppe: Enthält Einstellungen zum Erscheinungsbild und zur Sprache der Anwendung.",
+                     "Grupo Aspecto e idioma: contiene ajustes de apariencia e idioma de la aplicación."),
+
+                    ["Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface."] =
+                    ("ComboBox Langue : permet de choisir la langue de l’interface utilisateur.",
+                     "Sprache-ComboBox: Ermöglicht die Auswahl der Sprache der Benutzeroberfläche.",
+                     "ComboBox Idioma: permite elegir el idioma de la interfaz de usuario."),
+
+                    ["Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance."] =
+                    ("ComboBox Thèmes : permet de choisir un thème pour l’apparence de l’application.",
+                     "Design-ComboBox: Ermöglicht die Auswahl verschiedener Designs für das Erscheinungsbild.",
+                     "ComboBox Temas: permite elegir un tema para la apariencia de la aplicación."),
+
+                    ["Font Size Numeric Up-Down: This control allows you to adjust the font size used in the application's user interface."] =
+                    ("Zone numérique Taille police : permet de régler la taille de police utilisée dans l’interface.",
+                     "Schriftgröße-Numeric-Up-Down: Ermöglicht das Einstellen der in der Benutzeroberfläche verwendeten Schriftgröße.",
+                     "Control numérico Tamaño de fuente: permite ajustar el tamaño de fuente usado en la interfaz."),
+
+                    ["Sounds Group Box: This group box contains settings related to the application's sound notifications for various events."] =
+                    ("Groupe Sons : contient les réglages des notifications sonores pour divers événements.",
+                     "Sounds-Gruppe: Enthält Einstellungen für Soundbenachrichtigungen bei verschiedenen Ereignissen.",
+                     "Grupo Sonidos: contiene ajustes de notificaciones sonoras para varios eventos."),
+
+                    ["On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes."] =
+                    ("Case À la fin : détermine si un son est joué quand l’opération se termine.",
+                     "Beenden-CheckBox: Legt fest, ob ein Sound bei Abschluss der Dateioperation abgespielt wird.",
+                     "Casilla Al finalizar: determina si se reproduce un sonido cuando termina la operación."),
+
+                    ["On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled."] =
+                    ("Case À l’annulation : détermine si un son est joué quand l’opération est annulée.",
+                     "Abbrechen-CheckBox: Legt fest, ob ein Sound beim Abbrechen der Dateioperation abgespielt wird.",
+                     "Casilla Al cancelar: determina si se reproduce un sonido cuando se cancela la operación."),
+
+                    ["On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list."] =
+                    ("Case À l’ajout : détermine si un son est joué quand des fichiers sont ajoutés à la liste.",
+                     "Hinzufügen-CheckBox: Legt fest, ob ein Sound beim Hinzufügen von Dateien zur Liste abgespielt wird.",
+                     "Casilla Al añadir archivos: determina si se reproduce un sonido cuando se agregan archivos a la lista."),
+
+                    ["On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation."] =
+                    ("Case En cas d’erreur : détermine si un son est joué quand une erreur survient.",
+                     "Fehler-CheckBox: Legt fest, ob ein Sound bei einem Fehler während der Dateioperation abgespielt wird.",
+                     "Casilla Al producirse error: determina si se reproduce un sonido cuando ocurre un error."),
+
+                    ["Update Group Box: This group box contains settings related to the application's update preferences."] =
+                    ("Groupe Mise à jour : contient les réglages relat aux préférences de mise à jour de l’application.",
+                     "Update-Gruppe: Enthält Einstellungen zu den Update-Präferenzen der Anwendung.",
+                     "Grupo Actualización: contiene ajustes relacionados con las preferencias de actualización de la aplicación."),
+
+                    ["Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup."] =
+                    ("Case Vérifier maj auto : détermine si l’application vérifie automatiquement les mises à jour au démarrage.",
+                     "Auto-Update-Check-CheckBox: Legt fest, ob die Anwendung beim Start automatisch nach Updates sucht.",
+                     "Casilla Buscar actualizaciones auto: determina si la aplicación busca actualizaciones automáticamente al iniciar."),
+
+                    ["Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates."] =
+                    ("Case Inclure versions bêta : inclut les versions bêta lors de la recherche de mises à jour.",
+                     "Beta-Versionen einbeziehen-CheckBox: Schließt Beta-Versionen bei der Update-Suche ein.",
+                     "Casilla Incluir versiones beta: incluye versiones beta al buscar actualizaciones."),
+
+                    ["Check for Updates Button: This button manually checks for updates to the application."] =
+                    ("Bouton Vérifier les mises à jour : lance une recherche manuelle de mises à jour.",
+                     "Auf Updates prüfen-Schaltfläche: Sucht manuell nach Updates für die Anwendung.",
+                     "Botón Buscar actualizaciones: realiza una búsqueda manual de actualizaciones."),
+
+                    ["Default Settings Button: This button resets all settings to their default values."] =
+                    ("Bouton Paramètres par défaut : réinitialise tous les réglages aux valeurs par défaut.",
+                     "Standard-Einstellungen-Schaltfläche: Setzt alle Einstellungen auf die Standardwerte zurück.",
+                     "Botón Ajustes predeterminados: restablece todos los ajustes a los valores predeterminados."),
+
+                    ["Recommended Settings Button: This button applies a set of recommended settings for optimal performance and usability."] =
+                    ("Bouton Paramètres recommandés : applique un ensemble de réglages recommandés pour des performances optimales.",
+                     "Empfohlene Einstellungen-Schaltfläche: Wendet eine Reihe empfohlener Einstellungen für optimale Leistung an.",
+                     "Botón Ajustes recomendados: aplica un conjunto de ajustes recomendados para un rendimiento óptimo."),
+
+                    ["Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated."] =
+                    ("Curseur Priorité : permet de régler le niveau de priorité des opérations sur fichiers, influençant l’allocation des ressources système.",
+                     "Priorität-TrackBar: Ermöglicht das Einstellen der Priorität von Dateioperationen, wodurch die Systemressourcen-Zuteilung beeinflusst wird.",
+                     "Barra de prioridad: permite ajustar el nivel de prioridad de las operaciones de archivos, afectando la asignación de recursos del sistema."),
+
+                    ["Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent."] =
+                    ("Curseur Opacité : permet de régler le niveau d’opacité de la fenêtre, la rendant plus ou moins transparente.",
+                     "Deckkraft-TrackBar: Ermöglicht das Einstellen der Transparenz des Anwendungsfensters.",
+                     "Barra de opacidad: permite ajustar el nivel de opacidad de la ventana, haciéndola más o menos transparente."),
+
+                    ["Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application."] =
+                    ("Case Fichier journal : détermine si un fichier journal est créé pour enregistrer les détails des opérations.",
+                     "Log-Datei-CheckBox: Legt fest, ob eine Protokolldatei erstellt wird, die Details der Dateioperationen speichert.",
+                     "Casilla Archivo de registro: determina si se crea un archivo de registro que guarda detalles de las operaciones."),
+
+                    ["Log Days Numeric Up-Down: This control allows you to specify the number of days to retain log files before they are automatically deleted."] =
+                    ("Zone numérique Jours de conservation : définit le nombre de jours avant suppression automatique des fichiers journal.",
+                     "Log-Tage-Numeric-Up-Down: Legt fest, wie viele Tage Log-Dateien aufbewahrt werden, bevor sie automatisch gelöscht werden.",
+                     "Control numérico Días de registro: define cuántos días se conservan los archivos de registro antes de borrarse automáticamente."),
+
+                    ["Auto Save Settings CheckBox: This checkbox determines whether to automatically save the current settings when the application is closed."] =
+                    ("Case Sauvegarde auto : détermine si les réglages actuels sont automatiquement sauvegardés à la fermeture.",
+                     "Auto-Speichern-CheckBox: Legt fest, ob die aktuellen Einstellungen beim Beenden automatisch gespeichert werden.",
+                     "Casilla Guardado auto: determina si se guardan automáticamente los ajustes actuales al cerrar."),
+
+                    ["Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration."] =
+                    ("Bouton Effacer réglages : supprime tous les réglages utilisateur et réinitialise l’application.",
+                     "Einstellungen löschen-Schaltfläche: Löscht alle benutzerdefinierten Einstellungen und setzt die Anwendung zurück.",
+                     "Botón Borrar ajustes: elimina todos los ajustes definidos por el usuario y reinicia la aplicación."),
+
+                    ["Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions."] =
+                    ("Bouton Sauvegarder réglages : enregistre les réglages actuels pour les sessions futures.",
+                     "Einstellungen speichern-Schaltfläche: Speichert die aktuellen Einstellungen für zukünftige Sitzungen.",
+                     "Botón Guardar ajustes: guarda los ajustes actuales para futuras sesiones."),
+
+                    ["Performance Group Box: This group box contains settings related to the application's performance, such as buffer size and multi-threading options."] =
+                    ("Groupe Performance : contient les réglages liés aux performances, comme la taille du tampon et les options multi-thread.",
+                     "Leistung-Gruppe: Enthält Einstellungen zur Leistung, wie Puffergröße und Multithread-Optionen.",
+                     "Grupo Rendimiento: contiene ajustes relacionados con el rendimiento, como tamaño de búfer y opciones multi-hilo."),
+
+                    ["Buffer Size Numeric Up-Down: This control allows you to adjust the buffer size used during file operations, which can affect performance."] =
+                    ("Zone numérique Taille tampon : permet de régler la taille du tampon utilisée pendant les opérations, influençant les performances.",
+                     "Puffergröße-Numeric-Up-Down: Ermöglicht das Einstellen der Puffergröße während Dateioperationen, wodurch sich die Leistung beeinflussen lässt.",
+                     "Control numérico Tamaño de búfer: permite ajustar el tamaño del búfer usado durante las operaciones, afectando el rendimiento."),
+
+                    ["Multi-Thread CheckBox: This checkbox enables or disables multi-threaded file operations, allowing multiple files to be processed simultaneously for improved performance."] =
+                    ("Case Multi-thread : active/désactive les opérations multi-thread pour traiter plusieurs fichiers simultanément.",
+                     "Multi-Thread-CheckBox: Aktiviert/deaktiviert Multithread-Dateioperationen, um mehrere Dateien gleichzeitig zu verarbeiten.",
+                     "Casilla Multi-hilo: activa/desactiva operaciones de archivos multi-hilo para procesar varios archivos simultáneamente."),
+
+                    ["Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes."] =
+                    ("Case Sous MB : applique le multi-thread uniquement aux fichiers plus petits que la taille spécifiée en Mo.",
+                     "Unter MB-CheckBox: Wendet Multithreading nur auf Dateien an, die kleiner als die angegebene Größe in MB sind.",
+                     "Casilla Bajo MB: aplica multi-hilo solo a archivos más pequeños que el tamaño especificado en MB."),
+
+                    ["Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes."] =
+                    ("Case Au-dessus MB : applique le multi-thread uniquement aux fichiers plus grands que la taille spécifiée en Mo.",
+                     "Über MB-CheckBox: Wendet Multithreading nur auf Dateien an, die größer als die angegebene Größe in MB sind.",
+                     "Casilla Sobre MB: aplica multi-hilo solo a archivos más grandes que el tamaño especificado en MB."),
+
+                    ["Set MB/GB Under Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to smaller files."] =
+                    ("Zone numérique Définir MB/GB sous : définit le seuil en mégaoctets pour appliquer le multi-thread aux petits fichiers.",
+                     "MB/GB-unter-Numeric-Up-Down: Legt die Größenschwelle in Megabytes fest, ab der Multithreading für kleinere Dateien angewendet wird.",
+                     "Control numérico Establecer MB/GB bajo: define el umbral en megabytes para aplicar multi-hilo a archivos pequeños."),
+
+                    ["Set MB/GB Over Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to larger files."] =
+                    ("Zone numérique Définir MB/GB au-dessus : définit le seuil en mégaoctets pour appliquer le multi-thread aux gros fichiers.",
+                     "MB/GB-über-Numeric-Up-Down: Legt die Größenschwelle in Megabytes fest, ab der Multithreading für größere Dateien angewendet wird.",
+                     "Control numérico Establecer MB/GB sobre: define el umbral en megabytes para aplicar multi-hilo a archivos grandes."),
+
+                    ["File/Directory Settings Group Box: This group box contains settings related to how files and directories are exported or zipped (before) for the copy or move operations."] =
+                    ("Groupe Paramètres Fichiers/Dossiers : contient les réglages sur l’export ou la compression avant copie/déplacement.",
+                     "Datei/Ordner-Einstellungen-Gruppe: Enthält Einstellungen zum Exportieren oder Komprimieren (vorher) von Dateien und Ordnern für Kopier-/Verschiebe-Operationen.",
+                     "Grupo Ajustes Archivos/Carpetas: contiene ajustes sobre exportar o comprimir (antes) archivos y carpetas para operaciones de copiar/mover."),
+
+                    ["Only Names CheckBox: This checkbox determines whether to export only the names of files and directories without their full paths."] =
+                    ("Case Noms seulement : exporte uniquement les noms sans les chemins complets.",
+                     "Nur Namen-CheckBox: Exportiert nur die Namen ohne vollständige Pfade.",
+                     "Casilla Solo nombres: exporta solo los nombres sin rutas completas."),
+
+                    ["Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories."] =
+                    ("Case Chemins complets : exporte les chemins complets.",
+                     "Vollständige Pfade-CheckBox: Exportiert die vollständigen Pfade.",
+                     "Casilla Rutas completas: exporta las rutas completas."),
+
+                    ["Export Button: This button exports the list of files and directories to a text file based on the selected settings (only names or full paths)."] =
+                    ("Bouton Exporter : exporte la liste vers un fichier texte selon les réglages choisis (noms ou chemins complets).",
+                     "Exportieren-Schaltfläche: Exportiert die Liste in eine Textdatei gemäß den gewählten Einstellungen (Namen oder vollständige Pfade).",
+                     "Botón Exportar: exporta la lista a un archivo de texto según los ajustes elegidos (nombres o rutas completas)."),
+
+                    ["Zip Separate CheckBox: This checkbox determines whether to create separate zip files for each file and directory before the copy or move operations."] =
+                    ("Case Zip séparé : crée des fichiers zip séparés pour chaque élément avant copie/déplacement.",
+                     "Getrennt zippen-CheckBox: Erstellt separate Zip-Dateien für jedes Element vor dem Kopieren/Verschieben.",
+                     "Casilla Zip separado: crea archivos zip separados para cada elemento antes de copiar/mover."),
+
+                    ["Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations."] =
+                    ("Case Zip ensemble : crée un seul fichier zip contenant tous les éléments avant copie/déplacement.",
+                     "Gemeinsam zippen-CheckBox: Erstellt eine einzelne Zip-Datei mit allen Elementen vor dem Kopieren/Verschieben.",
+                     "Casilla Zip conjunto: crea un único archivo zip con todos los elementos antes de copiar/mover."),
+
+                    ["Email Group Box: This group box contains settings related to exporting and emailing the file list for the application."] =
+                    ("Groupe E-mail : contient les réglages pour exporter et envoyer la liste de fichiers par e-mail.",
+                     "E-Mail-Gruppe: Enthält Einstellungen zum Exportieren und Versenden der Dateiliste per E-Mail.",
+                     "Grupo Correo electrónico: contiene ajustes para exportar y enviar la lista de archivos por correo."),
+
+                    ["SMS Group Box: This group box contains settings for configuring SMS notifications when operations complete."] =
+                    ("Groupe SMS : contient les réglages pour configurer les notifications SMS à la fin des opérations.",
+                     "SMS-Gruppe: Enthält Einstellungen zum Konfigurieren von SMS-Benachrichtigungen nach Abschluss von Operationen.",
+                     "Grupo SMS: contiene ajustes para configurar notificaciones SMS al finalizar operaciones."),
+
+                    ["Set Up SMS Button: This button opens the SMS notification setup dialog, allowing you to configure SMS settings for operation completion notifications."] =
+                    ("Bouton Configurer SMS : ouvre la boîte de dialogue de configuration des notifications SMS.",
+                     "SMS einrichten-Schaltfläche: Öffnet den Dialog zur Konfiguration von SMS-Benachrichtigungen.",
+                     "Botón Configurar SMS: abre el diálogo para configurar notificaciones SMS."),
+
+                    ["Set Up Email Button: This button opens the email setup dialog, allowing you to configure email settings for exporting and sending the file list."] =
+                    ("Bouton Configurer e-mail : ouvre la boîte de dialogue de configuration de l’e-mail.",
+                     "E-Mail einrichten-Schaltfläche: Öffnet den Dialog zur Konfiguration der E-Mail-Einstellungen.",
+                     "Botón Configurar correo: abre el diálogo para configurar ajustes de correo electrónico."),
+
+                    ["Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export."] =
+                    ("Case Noms e-mail : n’inclut que les noms dans l’export e-mail.",
+                     "E-Mail-Namen-CheckBox: Fügt dem E-Mail-Export nur Namen hinzu.",
+                     "Casilla Nombres correo: incluye solo nombres en la exportación por correo."),
+
+                    ["Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export."] =
+                    ("Case Chemins e-mail : inclut les chemins complets dans l’export e-mail.",
+                     "E-Mail-Pfade-CheckBox: Fügt dem E-Mail-Export vollständige Pfade hinzu.",
+                     "Casilla Rutas correo: incluye rutas completas en la exportación por correo."),
+
+                    ["Other Settings Group Box: This group box contains miscellaneous settings for the application."] =
+                    ("Groupe Autres réglages : contient divers réglages pour l’application.",
+                     "Sonstige Einstellungen-Gruppe: Enthält verschiedene Einstellungen für die Anwendung.",
+                     "Grupo Otros ajustes: contiene diversos ajustes para la aplicación."),
+
+                    ["Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs."] =
+                    ("Case Fermer programme : détermine si l’application se ferme automatiquement en cas d’erreur.",
+                     "Programm schließen-CheckBox: Legt fest, ob die Anwendung bei einem Fehler automatisch geschlossen wird.",
+                     "Casilla Cerrar programa: determina si la aplicación se cierra automáticamente cuando ocurre un error."),
+
+                    ["Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs."] =
+                    ("Case Redémarrer : détermine si l’application redémarre automatiquement en cas d’erreur.",
+                     "Neustart-CheckBox: Legt fest, ob die Anwendung bei einem Fehler automatisch neu startet.",
+                     "Casilla Reiniciar: determina si la aplicación se reinicia automáticamente cuando ocurre un error."),
+
+                    ["Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts."] =
+                    ("Case Lancer avec Windows : détermine si l’application démarre automatiquement avec Windows.",
+                     "Mit Windows starten-CheckBox: Legt fest, ob die Anwendung automatisch mit Windows gestartet wird.",
+                     "Casilla Iniciar con Windows: determina si la aplicación se inicia automáticamente con Windows."),
+
+                    ["Serial Key Text Box: This text box allows you to enter your serial key to activate the application."] =
+                    ("Zone de texte Clé série : permet de saisir votre clé de série pour activer l’application.",
+                     "Seriennummer-Textbox: Ermöglicht die Eingabe Ihres Serienschlüssels zur Aktivierung der Anwendung.",
+                     "Cuadro de texto Clave de serie: permite escribir su clave de serie para activar la aplicación."),
+
+                    ["Register Button: This button submits the entered serial key for validation and activates the application if the key is valid."] =
+                    ("Bouton Enregistrer : envoie la clé de série saisie pour validation et active l’application si la clé est valide.",
+                     "Registrieren-Schaltfläche: Sendet den eingegebenen Serienschlüssel zur Validierung und aktiviert die Anwendung, falls der Schlüssel gültig ist.",
+                     "Botón Registrar: envía la clave de serie introducida para validación y activa la aplicación si la clave es válida."),
+
+                    ["Secure Passes Numeric Up-Down: This control allows you to specify the number of passes to use for securely deleting files."] =
+                    ("Zone numérique Passages sécurisés : définit le nombre de passages pour la suppression sécurisée.",
+                     "Sichere-Passwörter-Numeric-Up-Down: Legt die Anzahl der Überschreibungsdurchläufe für sicheres Löschen fest.",
+                     "Control numérico Pasadas seguras: define la cantidad de pasadas para el borrado seguro."),
+
+                    ["Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences."] =
+                    ("Onglet Paramètres : permet de configurer divers réglages de l’application, y compris le comportement de la fenêtre, l’apparence, les performances et autres préférences.",
+                     "Einstellungen-Tab: Ermöglicht die Konfiguration verschiedener Einstellungen der Anwendung, einschließlich Fensterverhalten, Erscheinungsbild, Leistung und andere Präferenzen.",
+                     "Pestaña Ajustes: permite configurar varios ajustes de la aplicación, incluyendo comportamiento de ventana, apariencia, rendimiento y otras preferencias."),
+
+                    ["Move Application Label: This allows you to move the application to different parts of the screen."] =
+                    ("Étiquette Déplacer application : permet de déplacer l’application vers différentes zones de l’écran.",
+                     "Anwendung verschieben-Label: Ermöglicht das Verschieben der Anwendung an verschiedene Bildschirmbereiche.",
+                     "Etiqueta Mover aplicación: permite mover la aplicación a diferentes zonas de la pantalla."),
+
+                    ["Copy History Data Grid View: This grid displays the history of file operations performed by the application, including details such as source and target paths, operation type, date, and status."] =
+                    ("Grille Historique des copies : affiche l’historique des opérations avec chemins source/cible, type, date et état.",
+                     "Kopie-Historie-DataGridView: Zeigt den Verlauf der Dateioperationen mit Quell-/Zielpfad, Typ, Datum und Status.",
+                     "Cuadrícula Historial de copias: muestra el historial de operaciones con ruta origen/destino, tipo, fecha y estado."),
+
+                };
+
+            public static string Get(string english)
+            {
+                System.Diagnostics.Debug.WriteLine($"=== Translator.Get Debug ===");
+                System.Diagnostics.Debug.WriteLine($"Input: '{english ?? "NULL"}'");
+                System.Diagnostics.Debug.WriteLine($"CurrentLanguage: '{CurrentLanguage ?? "NULL"}'");
+
+                if (string.IsNullOrEmpty(english))
+                {
+                    System.Diagnostics.Debug.WriteLine("ERROR: Input is null or empty!");
+                    return string.Empty;
+                }
+
+                if (string.IsNullOrEmpty(CurrentLanguage) || CurrentLanguage == "en")
+                {
+                    System.Diagnostics.Debug.WriteLine("Returning English (default)");
+                    return english;
+                }
+
+                if (!_map.TryGetValue(english, out var t))
+                {
+                    System.Diagnostics.Debug.WriteLine("ERROR: Key not found in dictionary!");
+                    return english;
+                }
+
+                System.Diagnostics.Debug.WriteLine($"Found translation: fr='{t.fr}', de='{t.de}', es='{t.es}'");
+
+                var result = CurrentLanguage switch
+                {
+                    "fr" => t.fr ?? english,
+                    "de" => t.de ?? english,
+                    "es" => t.es ?? english,
+                    _ => english
+                };
+
+                System.Diagnostics.Debug.WriteLine($"Returning: '{result ?? "NULL"}'");
+                return result ?? english;  // ← Extra safety
+            }
+        };
+           
+
+
+
         private void languageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_isUpdatingLanguage || _isLoadingForm) return;
@@ -13986,7 +14752,7 @@ namespace CopyThatProgram
 
             try
             {
-                // 1️⃣ Map SelectedIndex to language key and culture
+
                 string key, culture;
                 switch (languageComboBox.SelectedIndex)
                 {
@@ -13996,7 +14762,6 @@ namespace CopyThatProgram
                     default: key = "English"; culture = "en-US"; break;
                 }
 
-                // 2️⃣ Persist choice
                 CopyThatProgram.Properties.Settings.Default.Language = key;
                 CopyThatProgram.Properties.Settings.Default.Save();
 
@@ -14006,10 +14771,8 @@ namespace CopyThatProgram
 
                 this.SuspendLayout();
 
-                // 4️⃣ Detach handler to prevent recursion
                 languageComboBox.SelectedIndexChanged -= languageComboBox_SelectedIndexChanged;
 
-                // 5️⃣ Rebuild ComboBox items in the new language
                 string[] items = key switch
                 {
                     "Spanish" => new[] { "Inglés", "Francés", "Deutsch", "Español" },
@@ -14020,7 +14783,6 @@ namespace CopyThatProgram
                 languageComboBox.Items.Clear();
                 languageComboBox.Items.AddRange(items);
 
-                // 6️⃣ Select current language
                 languageComboBox.SelectedIndex = Array.IndexOf(items, items.FirstOrDefault(i =>
                     (key == "English" && i == "English") ||
                     (key == "French" && i == "Français") ||
@@ -14028,11 +14790,16 @@ namespace CopyThatProgram
                     (key == "Spanish" && i == "Español")
                 ));
 
-                // 7️⃣ Apply all resources to controls
+                Translator.CurrentLanguage = key switch
+                {
+                    "French" => "fr",
+                    "German" => "de",
+                    "Spanish" => "es",
+                    _ => "en"
+                };
                 var resMan = new ComponentResourceManager(typeof(mainForm));
                 ApplyAllResources(resMan);
 
-                // 8️⃣ Apply manual language-specific updates
                 switch (key)
                 {
                     case "Spanish": ApplyManualSpanishUpdates(); break;
@@ -14041,7 +14808,6 @@ namespace CopyThatProgram
                     default: ApplyManualEnglishUpdates(); break;
                 }
 
-                // 9️⃣ Apply skins
                 _savedSkinName = CopyThatProgram.Properties.Settings.Default.Skin ?? "Light Mode";
                 UpdateSkinsComboBoxItems(key);
                 SelectSkinInCombo(_savedSkinName);
@@ -14060,14 +14826,12 @@ namespace CopyThatProgram
                     ApplySkin(_savedSkinName);
                 }
 
-                // 10️⃣ Adjust layout dynamically
                 languageLabel.Left = skinsLabel.Right - languageLabel.Width;
                 fromLabel.Left = fileNameLabel.Right - fromLabel.Width;
                 targetLabel.Left = fromLabel.Right - targetLabel.Width;
 
                 this.ResumeLayout(true);
 
-                // 11️⃣ Reattach event handler
                 languageComboBox.SelectedIndexChanged += languageComboBox_SelectedIndexChanged;
             }
             catch (Exception ex)
@@ -14080,14 +14844,6 @@ namespace CopyThatProgram
                 _isUpdatingLanguage = false;
             }
         }
-
-
-
-
-
-
-
-        // This helper applies the .resx resources (your original code)
         private void ApplyAllResources(ComponentResourceManager resMan)
         {
             foreach (TabPage page in tabControl1.TabPages)
@@ -14368,12 +15124,12 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse pointer enters the area of the 'rollUpLabel'.
             // It updates the text of multiple ToolStripStatusLabels to provide a tooltip description.
-            statusLabel.Text = "Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripCopyHistory.Text = "Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripExclusions.Text = "Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripMulti.Text = "Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripSettings.Text = "Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripSkipped.Text = "Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.";
+            statusLabel.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripCopyHistory.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripExclusions.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripMulti.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSettings.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSkipped.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
         }
 
         private void rollUpLabel_Click(object sender, EventArgs e)
@@ -14387,12 +15143,12 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse pointer enters the 'rollDownLabel'.
             // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the roll-down button.
-            statusLabel.Text = "Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripCopyHistory.Text = "Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripExclusions.Text = "Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripMulti.Text = "Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripSettings.Text = "Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.";
-            toolStripSkipped.Text = "Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.";
+            statusLabel.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripCopyHistory.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripExclusions.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripMulti.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSettings.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSkipped.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
         }
 
         private void rollDownLabel_Click(object sender, EventArgs e)
@@ -14442,12 +15198,12 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse pointer enters the 'settingsLabel'.
             // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the settings button.
-            statusLabel.Text = "Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.";
-            toolStripCopyHistory.Text = "Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.";
-            toolStripExclusions.Text = "Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.";
-            toolStripMulti.Text = "Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.";
-            toolStripSettings.Text = "Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.";
-            toolStripSkipped.Text = "Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.";
+            statusLabel.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripCopyHistory.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripExclusions.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripMulti.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripSettings.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripSkipped.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
         }
 
         private void ScrollTimer_Tick(object sender, EventArgs e)
@@ -14621,12 +15377,12 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse pointer enters the 'minimizeLabel'.
             // It updates the text of multiple ToolStripStatusLabels with a tooltip description.
-            statusLabel.Text = "Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.";
-            toolStripCopyHistory.Text = "Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.";
-            toolStripExclusions.Text = "Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.";
-            toolStripMulti.Text = "Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.";
-            toolStripSettings.Text = "Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.";
-            toolStripSkipped.Text = "Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.";
+            statusLabel.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripCopyHistory.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripExclusions.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripMulti.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripSettings.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripSkipped.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
         }
 
         private async void exitLabel_Click(object sender, EventArgs e)
@@ -14721,24 +15477,24 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse pointer enters the 'exitLabel'.
             // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the exit button.
-            statusLabel.Text = "Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.";
-            toolStripCopyHistory.Text = "Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.";
-            toolStripExclusions.Text = "Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.";
-            toolStripMulti.Text = "Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.";
-            toolStripSettings.Text = "Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.";
-            toolStripSkipped.Text = "Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.";
+            statusLabel.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripCopyHistory.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripExclusions.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripMulti.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripSettings.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripSkipped.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
         }
 
         private void allAboutLabel_MouseEnter(object sender, EventArgs e)
         {
             // This event handler is triggered when the mouse pointer enters the 'allAboutLabel'.
             // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the about button.
-            statusLabel.Text = "About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.";
-            toolStripCopyHistory.Text = "About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.";
-            toolStripExclusions.Text = "About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.";
-            toolStripMulti.Text = "About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.";
-            toolStripSettings.Text = "About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.";
-            toolStripSkipped.Text = "About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.";
+            statusLabel.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripCopyHistory.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripExclusions.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripMulti.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripSettings.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripSkipped.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
         }
 
 
@@ -14905,13 +15661,13 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse enters the sourceDirectoryLabel.
             // It updates the status bar's text to provide a tooltip description for the source directory button.
-            statusLabel.Text = "Source Directory Button: This is the button to select your source directory from which files will be copied/moved/securely deleted.";
+            statusLabel.Text = Translator.Get("Source Directory Button: This is the button to select your source directory from which files will be copied/moved/securely deleted.");
         }
         private void targetDirectoryLabel_MouseEnter(object sender, EventArgs e)
         {
             // This event handler is triggered when the mouse enters the targetDirectoryLabel.
             // It updates the status bar's text to provide a tooltip description for the target directory button.
-            statusLabel.Text = "Target Directory Button: This is the button to select your target directory to which your files will be copied/moved.";
+            statusLabel.Text = Translator.Get("Target Directory Button: This is the button to select your target directory to which your files will be copied/moved.");
         }
         private void moveFileUpLabel_Click(object sender, EventArgs e)
         {
@@ -14960,7 +15716,7 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse enters the moveFileUpLabel.
             // It updates the status bar with a tooltip describing the button's function.
-            statusLabel.Text = "Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence.";
+            statusLabel.Text = Translator.Get("Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence.");
         }
 
         private void moveFileDownLabel_Click(object sender, EventArgs e)
@@ -14999,7 +15755,7 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse enters the moveFileDownLabel.
             // It updates the status bar with a tooltip describing the button's function.
-            statusLabel.Text = "Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence.";
+            statusLabel.Text = Translator.Get("Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence.");
         }
 
         private void moveToTopLabel_Click(object sender, EventArgs e)
@@ -15043,7 +15799,7 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse enters the moveToTopLabel.
             // It updates the status bar with a tooltip describing the button's function.
-            statusLabel.Text = "Move to Top Button: This button moves the selected file to the top of the list, making it the first file to be processed in the operation.";
+            statusLabel.Text = Translator.Get("Move to Top Button: This button moves the selected file to the top of the list, making it the first file to be processed in the operation.");
         }
 
         private void moveToBottomLabel_Click(object sender, EventArgs e)
@@ -15082,7 +15838,7 @@ namespace CopyThatProgram
         {
             // This event handler is triggered when the mouse enters the moveToBottomLabel.
             // It updates the status bar with a tooltip describing the button's function.
-            statusLabel.Text = "Move to Bottom Button: This button moves the selected file to the bottom of the list, making it the last file to be processed in the operation.";
+            statusLabel.Text = Translator.Get("Move to Bottom Button: This button moves the selected file to the bottom of the list, making it the last file to be processed in the operation.");
         }
 
 

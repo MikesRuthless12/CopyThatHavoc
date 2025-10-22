@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|solutionrelative:copythatprogram\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8892668-1E65-4BFA-B86C-472B0AAD47C0}|CopyThatProgram\\CopyThatProgram.csproj|c:\\users\\miken\\desktop\\havoc software\\copythatprogram\\copythatprogram\\mainform.fr.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -62,17 +62,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 16,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "mainForm.cs",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs",
               "RelativeDocumentMoniker": "CopyThatProgram\\mainForm.cs",
               "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs",
               "RelativeToolTip": "CopyThatProgram\\mainForm.cs",
-              "ViewState": "AgIAAJU2AAAAAAAAAAAqwJ42AAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAMMJAAAAAAAAAAAAwNgJAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-01T14:55:44.964Z",
               "IsPinned": true,
@@ -132,6 +132,17 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "mainForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs",
+              "RelativeDocumentMoniker": "CopyThatProgram\\mainForm.cs",
+              "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs [Design]",
+              "RelativeToolTip": "CopyThatProgram\\mainForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T21:28:59.874Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "MainForm.resx",
               "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.resx",
@@ -139,8 +150,7 @@
               "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\MainForm.resx",
               "RelativeToolTip": "CopyThatProgram\\MainForm.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-22T18:18:53.858Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T18:18:53.858Z"
             },
             {
               "$type": "Document",
@@ -152,20 +162,7 @@
               "RelativeToolTip": "CopyThatProgram\\MainForm.fr.resx",
               "ViewState": "AgIAAAUDAAAAAAAAAAAWwBgDAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-22T17:52:18.339Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "mainForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs",
-              "RelativeDocumentMoniker": "CopyThatProgram\\mainForm.cs",
-              "ToolTip": "C:\\Users\\miken\\Desktop\\Havoc Software\\CopyThatProgram\\CopyThatProgram\\mainForm.cs [Design]",
-              "RelativeToolTip": "CopyThatProgram\\mainForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T02:06:33.757Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-10-22T17:52:18.339Z"
             },
             {
               "$type": "Document",
@@ -225,8 +222,7 @@
               "RelativeToolTip": "CopyThatProgram\\MainForm.es.resx",
               "ViewState": "AgIAAEYCAAAAAAAAAAAWwFkCAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-01T15:58:33.829Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T15:58:33.829Z"
             },
             {
               "$type": "Document",
@@ -249,8 +245,7 @@
               "RelativeToolTip": "CopyThatProgram\\MainForm.en.resx",
               "ViewState": "AgIAAMoAAAAAAAAAAAAYwN0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-10-19T15:31:47.832Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-19T15:31:47.832Z"
             },
             {
               "$type": "Document",
