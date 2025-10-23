@@ -2,6 +2,7 @@
 using CopyThatProgram.Models;
 using CustomControls;
 using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Vml;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -15,6 +16,7 @@ using System.ComponentModel; // Supports components, data binding, and licensing
 using System.Data; // Provides classes for managing data from various sources (e.g., DataTables).
 using System.Diagnostics; // Allows interaction with system processes, event logs, and performance counters.
 using System.DirectoryServices.ActiveDirectory;
+using System.Drawing;
 using System.Globalization; // Provides culture-specific information like date and number formatting.
 using System.IO.Compression;
 using System.Linq; // Offers LINQ for querying data sources with a syntax similar to SQL.
@@ -29,8 +31,10 @@ using System.Security.Cryptography;
 using System.Text; // Contains classes for character encodings (e.g., ASCII, UTF-8).
 using System.Text.Json; // Provides functionality to serialize objects to and deserialize objects from JSON.
 using System.Threading.Tasks.Dataflow; // Offers a library for creating dataflow pipelines, useful for asynchronous data processing.
+using System.Windows.Forms;
 using System.Xml; // Provides a framework for working with XML data.
 using System.Xml.Linq; // Offers LINQ for XML, a convenient way to manipulate XML documents.
+using Twilio.TwiML.Messaging;
 using Color = System.Drawing.Color;
 using FastFileSystemEntry = CopyThatProgram.FastEnumerator.Entry; // Alias for a file system entry class, likely for performance.
 using Label = System.Windows.Forms.Label; // Explicitly specifies the Label control from Windows Forms.
@@ -1115,19 +1119,19 @@ namespace CopyThatProgram
                     break;
                 case UIUpdateType.OperationCanceled:
                     // Display a message box informing the user that the operation was canceled.
-                    MessageBox.Show(message, "Operation Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Translator.Get(message), Translator.Get("Operation Canceled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // Call a method to reset all UI elements and variables related to progress.
                     ResetProgressUIAndVariables();
                     break;
                 case UIUpdateType.OperationCompleted:
                     // Display a message box informing the user that the operation is complete.
-                    MessageBox.Show(message, "Operation Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Translator.Get(message), Translator.Get("Operation Complete"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // Reset all progress-related UI and variables.
                     ResetProgressUIAndVariables();
                     break;
                 case UIUpdateType.Error:
                     // Display an error message box with the provided message.
-                    MessageBox.Show("Error: " + message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translator.Get("Error: " + message), Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 case UIUpdateType.StatusMessage:
                     // This case is currently empty, but would be used to display simple status messages.
@@ -1702,7 +1706,7 @@ namespace CopyThatProgram
             // Validation checks to ensure the path is valid and exists.
             if (string.IsNullOrWhiteSpace(path) || !Directory.Exists(path))
             {
-                MessageBox.Show($"Invalid folder: {path}", "Scan Error",
+                MessageBox.Show(Translator.Get($"Invalid folder: {path}"), Translator.Get("Scan Error"),
                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -1714,7 +1718,7 @@ namespace CopyThatProgram
             string root = System.IO.Path.GetPathRoot(fullPath).TrimEnd(System.IO.Path.DirectorySeparatorChar);
             if (string.Equals(root, fullPath, StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("You cannot scan an entire drive.", "Scan Not Allowed",
+                MessageBox.Show(Translator.Get("You cannot scan an entire drive."), Translator.Get("Scan Not Allowed"),
                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -2234,17 +2238,27 @@ namespace CopyThatProgram
             // Gets the name of the operation from the enum.
             string operationName = operation.ToString();
             // Constructs the message string with a summary of the operation statistics.
-            string message = $"----- {operationName} Operation Summary ({status}) -----\n\n" +
-                             $"Total files considered: {totalFilesConsidered:N0}\n" +
-                             $"Files copied: {_processedFiles:N0} / {_grandTotalFileCount:N0}\n" +
-                             $"Files skipped (by filter/user): {_totalFilesSkipped:N0}\n" +
-                             $"Files failed (due to error): {_totalFilesFailed:N0}\n\n" +
-                             $"Total bytes processed: {FormatBytes(_totalBytesProcessed)}\n\n" +
-                             $"Total bytes to process (estimated): {FormatBytes(_totalBytesToProcess)}\n\n" +
-                             $"{operationName} {status}!";
+            string tmpl = Translator.Get("----- {0} Operation Summary ({1}) -----\n\n" +
+                                         "Total files considered: {2:N0}\nFiles copied: {3:N0} / {4:N0}\n" +
+                                         "Files skipped (by filter/user): {5:N0}\nFiles failed (due to error): {6:N0}\n\n" +
+                                         "Total bytes processed: {7}\n\nTotal bytes to process (estimated): {8}\n\n{0} {1}!");
 
-            // Sets the icon of the message box based on the operation's status.
-            MessageBoxIcon icon = MessageBoxIcon.Information;
+            string message = string.Format(tmpl,
+                                operationName, status,
+                                totalFilesConsidered, _processedFiles, _grandTotalFileCount,
+                                _totalFilesSkipped, _totalFilesFailed,
+                                FormatBytes(_totalBytesProcessed),
+                                FormatBytes(_totalBytesToProcess));
+
+            string title2 = string.Format(Translator.Get("Operation {0}"), status);
+
+            MessageBoxIcon icon = status switch
+            {
+                "Cancelled" => MessageBoxIcon.Warning,
+                "Failed" => MessageBoxIcon.Error,
+                _ => MessageBoxIcon.Information
+            };
+
             if (status == "Cancelled")
             {
                 icon = MessageBoxIcon.Warning;
@@ -2255,7 +2269,7 @@ namespace CopyThatProgram
             }
 
             // Displays the message box.
-            MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
+            MessageBox.Show(Translator.Get(message), Translator.Get(title2), MessageBoxButtons.OK, icon);
         }
         /// <summary>
         /// A setter method for a private folder path field.
@@ -2368,7 +2382,7 @@ namespace CopyThatProgram
             catch (Exception ex)
             {
                 // Shows a message box if the icon fails to load.
-                MessageBox.Show($"Failed to load icon: {ex.Message}");
+                MessageBox.Show(Translator.Get($"Failed to load icon: {ex.Message}"), "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2534,15 +2548,7 @@ namespace CopyThatProgram
                 var resMan = new ComponentResourceManager(typeof(mainForm));
                 ApplyAllResources(resMan);
 
-                // Apply manual translations - now Translator.Get() will work correctly
-                if (savedLangKey == "Spanish")
-                    ApplyManualSpanishUpdates();
-                else if (savedLangKey == "French")
-                    ApplyManualFrenchUpdates();
-                else if (savedLangKey == "German")
-                    ApplyManualGermanUpdates();
-                else
-                    ApplyManualEnglishUpdates();
+                
 
                 allTabs.AddRange(tabControl1.TabPages.Cast<TabPage>());
                 tabControl1.Selecting += TabControl1_Selecting;
@@ -2566,8 +2572,9 @@ namespace CopyThatProgram
                 InitializeDataGridView();
                 InitializeRollAnimation();
                 proVersion = true;
-                titleLabel.Text = proVersion ? "Copy That v1.0 Pro - File/Directory Tool - Home"
-                                             : "Copy That v1.0 - File/Directory Tool - Home";
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - Home"
+                    : "Copy That v1.0 By: Havoc - Home");
 
                 overwriteOption = "Overwrite Type - If Newer";
                 modernFile.Value = 0;
@@ -2604,6 +2611,153 @@ namespace CopyThatProgram
 
                 // Select the skin in ComboBox (but don't apply colors yet)
                 SelectSkinInCombo(savedSkinKey);
+
+                // Apply manual translations - now Translator.Get() will work correctly
+                if (savedLangKey == "Spanish")
+                {
+                    /* ---------- grid headers ---------- */
+                    dataGridView1.Columns[0].HeaderText = "Nombre del Archivo";
+                    dataGridView1.Columns[1].HeaderText = "Ruta del Archivo";
+                    dataGridView1.Columns[2].HeaderText = "Tipo";
+                    dataGridView1.Columns[3].HeaderText = "Tamaño del Archivo";
+                    dataGridView1.Columns[4].HeaderText = "Estado";
+
+                    //dataGridView2.Columns[0].HeaderText = "Nombre del Archivo";
+                    //dataGridView2.Columns[1].HeaderText = "Ruta del Archivo";
+                    //dataGridView2.Columns[2].HeaderText = "Tipo";
+                    //dataGridView2.Columns[3].HeaderText = "Tamaño del Archivo";
+                    //dataGridView2.Columns[4].HeaderText = "Estado";
+
+                    copyHistoryDGV.Columns[0].HeaderText = "Tipo de operación";
+                    copyHistoryDGV.Columns[1].HeaderText = "Ruta(s) de archivo de origen";
+                    copyHistoryDGV.Columns[2].HeaderText = "Ruta(s) de archivo de destino";
+                    copyHistoryDGV.Columns[3].HeaderText = "Tamaño total de carpeta(s)";
+
+                    skippedDataGridView.Columns[0].HeaderText = "Estado";
+                    skippedDataGridView.Columns[1].HeaderText = "Ruta del archivo de origen";
+                    skippedDataGridView.Columns[2].HeaderText = "Ruta del archivo de destino";
+                    skippedDataGridView.Columns[3].HeaderText = "Nombre del archivo";
+                    skippedDataGridView.Columns[4].HeaderText = "Tamaño del archivo";
+
+                    filesDataGridView.Columns[0].HeaderText = "Nombre";
+                    filesDataGridView.Columns[1].HeaderText = "Ruta";
+                    filesDataGridView.Columns[2].HeaderText = "Tipo";
+                    filesDataGridView.Columns[3].HeaderText = "Tamaño";
+                    filesDataGridView.Columns[4].HeaderText = "Estado";
+
+                    /* ---------- other controls ---------- */
+                    searchTextBox.PlaceholderText = "Ingrese el nombre del archivo o carpeta a buscar...";
+                    ApplyManualSpanishUpdates();
+                }
+                else if (savedLangKey == "French")
+                {
+                    /* ---------- grid headers ---------- */
+                    dataGridView1.Columns[0].HeaderText = "Nom du fichier";
+                    dataGridView1.Columns[1].HeaderText = "Chemin du fichier";
+                    dataGridView1.Columns[2].HeaderText = "Type";
+                    dataGridView1.Columns[3].HeaderText = "Taille du fichier";
+                    dataGridView1.Columns[4].HeaderText = "État";
+
+                    //dataGridView2.Columns[0].HeaderText = "Nom du fichier";
+                    //dataGridView2.Columns[1].HeaderText = "Chemin du fichier";
+                    //dataGridView2.Columns[2].HeaderText = "Type";
+                    //dataGridView2.Columns[3].HeaderText = "Taille du fichier";
+                    //dataGridView2.Columns[4].HeaderText = "État";
+
+                    copyHistoryDGV.Columns[0].HeaderText = "Type d'opération";
+                    copyHistoryDGV.Columns[1].HeaderText = "Chemin(s) source(s)";
+                    copyHistoryDGV.Columns[2].HeaderText = "Chemin(s) de destination";
+                    copyHistoryDGV.Columns[3].HeaderText = "Taille totale des répertoires";
+
+                    skippedDataGridView.Columns[0].HeaderText = "État";
+                    skippedDataGridView.Columns[1].HeaderText = "Chemin du fichier source";
+                    skippedDataGridView.Columns[2].HeaderText = "Chemin du fichier de destination";
+                    skippedDataGridView.Columns[3].HeaderText = "Nom du fichier";
+                    skippedDataGridView.Columns[4].HeaderText = "Taille du fichier";
+
+                    filesDataGridView.Columns[0].HeaderText = "Nom";
+                    filesDataGridView.Columns[1].HeaderText = "Chemin";
+                    filesDataGridView.Columns[2].HeaderText = "Type";
+                    filesDataGridView.Columns[3].HeaderText = "Taille";
+                    filesDataGridView.Columns[4].HeaderText = "État";
+
+                    /* ---------- other controls ---------- */
+                    searchTextBox.PlaceholderText = "Rechercher un fichier ou un dossier…";
+                    ApplyManualFrenchUpdates();
+                }
+
+                else if (savedLangKey == "German")
+                {
+                    /* ---------- grid headers ---------- */
+                    dataGridView1.Columns[0].HeaderText = "Dateiname";
+                    dataGridView1.Columns[1].HeaderText = "Dateipfad";
+                    dataGridView1.Columns[2].HeaderText = "Typ";
+                    dataGridView1.Columns[3].HeaderText = "Dateigröße";
+                    dataGridView1.Columns[4].HeaderText = "Status";
+
+                    //dataGridView2.Columns[0].HeaderText = "Dateiname";
+                    //dataGridView2.Columns[1].HeaderText = "Dateipfad";
+                    //dataGridView2.Columns[2].HeaderText = "Typ";
+                    //dataGridView2.Columns[3].HeaderText = "Dateigröße";
+                    //dataGridView2.Columns[4].HeaderText = "Status";
+
+                    copyHistoryDGV.Columns[0].HeaderText = "Vorgangstyp";
+                    copyHistoryDGV.Columns[1].HeaderText = "Quellpfad(e)";
+                    copyHistoryDGV.Columns[2].HeaderText = "Zielpfad(e)";
+                    copyHistoryDGV.Columns[3].HeaderText = "Gesamtgröße der Ordner";
+
+                    skippedDataGridView.Columns[0].HeaderText = "Status";
+                    skippedDataGridView.Columns[1].HeaderText = "Quellpfad";
+                    skippedDataGridView.Columns[2].HeaderText = "Zielpfad";
+                    skippedDataGridView.Columns[3].HeaderText = "Dateiname";
+                    skippedDataGridView.Columns[4].HeaderText = "Dateigröße";
+
+                    filesDataGridView.Columns[0].HeaderText = "Name";
+                    filesDataGridView.Columns[1].HeaderText = "Pfad";
+                    filesDataGridView.Columns[2].HeaderText = "Typ";
+                    filesDataGridView.Columns[3].HeaderText = "Größe";
+                    filesDataGridView.Columns[4].HeaderText = "Status";
+
+                    /* ---------- other controls ---------- */
+                    searchTextBox.PlaceholderText = "Datei-/Ordnernamen suchen…";
+                    ApplyManualGermanUpdates();
+                }
+                else
+                {
+                    /* ---------- grid headers ---------- */
+                    dataGridView1.Columns[0].HeaderText = "File's Name";
+                    dataGridView1.Columns[1].HeaderText = "File's Path";
+                    dataGridView1.Columns[2].HeaderText = "Type";
+                    dataGridView1.Columns[3].HeaderText = "File's Size";
+                    dataGridView1.Columns[4].HeaderText = "Status";
+
+                    //dataGridView2.Columns[0].HeaderText = "File's Name";
+                    //dataGridView2.Columns[1].HeaderText = "File's Path";
+                    //dataGridView2.Columns[2].HeaderText = "Type";
+                    //dataGridView2.Columns[3].HeaderText = "File's Size";
+                    //dataGridView2.Columns[4].HeaderText = "Status";
+
+                    copyHistoryDGV.Columns[0].HeaderText = "Operation Type";
+                    copyHistoryDGV.Columns[1].HeaderText = "Source File Path(s)";
+                    copyHistoryDGV.Columns[2].HeaderText = "Destination File Path(s)";
+                    copyHistoryDGV.Columns[3].HeaderText = "Total Size of Dir(s)";
+
+                    skippedDataGridView.Columns[0].HeaderText = "Status";
+                    skippedDataGridView.Columns[1].HeaderText = "Source File's Path";
+                    skippedDataGridView.Columns[2].HeaderText = "Destination File's Path";
+                    skippedDataGridView.Columns[3].HeaderText = "File's Name";
+                    skippedDataGridView.Columns[4].HeaderText = "File's Size";
+
+                    filesDataGridView.Columns[0].HeaderText = "Name";
+                    filesDataGridView.Columns[1].HeaderText = "Path";
+                    filesDataGridView.Columns[2].HeaderText = "Type";
+                    filesDataGridView.Columns[3].HeaderText = "Size";
+                    filesDataGridView.Columns[4].HeaderText = "Status";
+
+                    /* ---------- other controls ---------- */
+                    searchTextBox.PlaceholderText = "Enter File/Folder Name to Search For...";
+                    ApplyManualEnglishUpdates();
+                }
             }
             finally
             {
@@ -3013,7 +3167,7 @@ namespace CopyThatProgram
             // Checks if the path is a root directory and shows an error message if so.
             if (folderPath == Directory.GetDirectoryRoot(folderPath))
             {
-                MessageBox.Show("You cannot copy/move/delete the root directory!", "Copy That v1.0 By: Havoc - Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get("You cannot copy/move/delete the root directory!"), Translator.Get("Copy That v1.0 By: Havoc - Error!"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 noDragDrop = false;
             }
             // Checks if the file list is empty.
@@ -3042,7 +3196,7 @@ namespace CopyThatProgram
                 else
                 {
                     // Shows a message if the file/folder has already been added.
-                    MessageBox.Show("File/Folder was already added to the file/folder list!", "Copy That v1.0 - File/Directory Tool - File/Folder Already Added!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translator.Get("File/Folder was already added to the file/folder list!"), Translator.Get("Copy That v1.0 - File/Directory Tool - File/Folder Already Added!"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     noDragDrop = false;
                 }
             }
@@ -3149,15 +3303,15 @@ namespace CopyThatProgram
                         if (files.Any(f => DriveInfo.GetDrives().Any(d => d.RootDirectory.FullName.TrimEnd('\\') == f.TrimEnd('\\'))))
                         {
                             // Shows a warning message and disallows the drop if a drive is detected.
-                            MessageBox.Show("Dropping Drives is Not Allowed.", "Invalid Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(Translator.Get("Dropping Drives is Not Allowed."), Translator.Get("Invalid Operation"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             e.Effect = DragDropEffects.None;
                             return;
                         }
 
                         // Shows a confirmation dialog to the user.
                         DialogResult result = MessageBox.Show(
-                            $"Do You Want to Add {files.Length} File(s) to Copy?",
-                            "Confirm Drag and Drop",
+                            Translator.Get($"Do You Want to Add {files.Length} File(s) to Copy?"),
+                            Translator.Get("Confirm Drag and Drop"),
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Question
                         );
@@ -3189,7 +3343,7 @@ namespace CopyThatProgram
                         // Checks for and disallows dropping drives.
                         if (files.Any(f => DriveInfo.GetDrives().Any(d => d.RootDirectory.FullName.TrimEnd('\\') == f.TrimEnd('\\'))))
                         {
-                            MessageBox.Show("Dropping Drives is Not Allowed.", "Invalid Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(Translator.Get("Dropping Drives is Not Allowed."), Translator.Get("Invalid Operation"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             e.Effect = DragDropEffects.None;
                             return;
                         }
@@ -3207,7 +3361,7 @@ namespace CopyThatProgram
             catch (Exception ex)
             {
                 // Shows a generic error message if something goes wrong during the drag-and-drop process.
-                MessageBox.Show("Sorry, but the directory or file couldn't be added.", "Copy That v1.0 By: Havoc - Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get("Sorry, but the directory or file couldn't be added."), Translator.Get("Copy That v1.0 By: Havoc - Error!"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
@@ -3258,7 +3412,7 @@ namespace CopyThatProgram
             // If no files were dropped, it shows an error message and exits the method.
             if (droppedFiles.Length == 0)
             {
-                MessageBox.Show("Sorry, But That Directory or File Couln't be Added");
+                MessageBox.Show(Translator.Get("Sorry, but the directory or file couldn't be added."), Translator.Get("Copy That v1.0 By: Havoc - Error!"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             // Iterates through each dropped file or directory.
@@ -3267,8 +3421,7 @@ namespace CopyThatProgram
                 // Gets the full path of the dropped item.
                 string fileName = getFileName(file);
                 // Shows a message box to inform the user what they dropped.
-                MessageBox.Show("You dropped" + fileName);
-
+                MessageBox.Show(Translator.Get("You dropped " + fileName), Translator.Get("Drppped File") , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Checks if the dropped item is a directory.
                 if (Directory.Exists(file))
                 {
@@ -3314,8 +3467,8 @@ namespace CopyThatProgram
                     string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                     // Displays a message box to confirm with the user if they want to add the files.
                     DialogResult result = MessageBox.Show(
-                        $"Do you want to add {files.Length} file(s) to copy?",
-                        "Confirm Drag and Drop",
+                        Translator.Get($"Do you want to add {files.Length} file(s) to copy?"),
+                        Translator.Get("Confirm Drag and Drop"),
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question
                     );
@@ -3334,7 +3487,7 @@ namespace CopyThatProgram
             catch (Exception ex)
             {
                 // Catches any exceptions and displays a generic error message.
-                MessageBox.Show("Sorry, but the directory or file couldn't be added.", "Copy That v1.0 By: Havoc - Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get("Sorry, but the directory or file couldn't be added."), Translator.Get("Copy That v1.0 By: Havoc - Error!"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -3621,8 +3774,8 @@ namespace CopyThatProgram
             // Checks if the file list is empty and shows a warning if so.
             if (_fileList == null || _fileList.Count == 0)
             {
-                MessageBox.Show("You must select files or folders to Copy/Move/Delete!",
-                                "No Source Items", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Translator.Get("You must select files or folders to Copy/Move/Delete!"),
+                                Translator.Get("No Source Items"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -3636,8 +3789,8 @@ namespace CopyThatProgram
                 // If the path is invalid, shows a message and exits.
                 if (string.IsNullOrWhiteSpace(customDir))
                 {
-                    MessageBox.Show("Operation cancelled: Custom directory not specified.",
-                                    "Operation Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Translator.Get("Operation cancelled: Custom directory not specified."),
+                                    Translator.Get("Operation Cancelled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 // Adds the custom directory to the target paths.
@@ -3648,8 +3801,8 @@ namespace CopyThatProgram
                 // If not creating a custom directory, checks if a target path is selected.
                 if (this.targetPaths == null || this.targetPaths.Count == 0)
                 {
-                    MessageBox.Show("Please select at least one destination folder.",
-                                    "Missing Destination", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Translator.Get("Please select at least one destination folder."),
+                                    Translator.Get("Missing Destination"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 // Adds the existing target paths.
@@ -3705,19 +3858,18 @@ namespace CopyThatProgram
                         // If no space is available, it shows an error message.
                         if (allowedBytes <= 0)
                         {
-                            MessageBox.Show("Not enough space left on drive " + drive.Name + ".",
-                                            "Out of space", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Translator.Get("Not enough space left on drive " + drive.Name + "."),
+                                            Translator.Get("Out of space"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
 
                         // Shows a warning message to the user about low disk space and asks for confirmation.
                         var result = MessageBox.Show(
-                            $"Drive {drive.Name} will have less than 100 MB free.\n\n" +
-                            $"Only {FormatBytes(allowedBytes)} will be copied so that around {FormatBytes(keepBytes)} remain.\n\nContinue?",
-                            "Low disk space",
+                            Translator.Get($"Drive {drive.Name} will have less than 100 MB free.\n\n" +
+                            $"Only {FormatBytes(allowedBytes)} will be copied so that around {FormatBytes(keepBytes)} remain.\n\nContinue?"),
+                            Translator.Get("Low disk space"),
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Warning);
-
                         // If the user does not confirm, it exits the method.
                         if (result != DialogResult.Yes) return;
 
@@ -3751,7 +3903,7 @@ namespace CopyThatProgram
                     ? "When creating a custom directory or keeping only empty folders, you may select up to 3 behavior options."
                     : "Only one behaviour option may be selected at a time.";
 
-                MessageBox.Show(message, "Invalid Options", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(message, Translator.Get("Invalid Options"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -3760,8 +3912,8 @@ namespace CopyThatProgram
                 !keepDirStructCheckBox.Checked &&
                 !copyFilesDirsCheckBox.Checked)
             {
-                MessageBox.Show("'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'.",
-                               "Invalid Combination", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Translator.Get("'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."),
+                               Translator.Get("Invalid Combination"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -3776,16 +3928,16 @@ namespace CopyThatProgram
 
                 if (overwriteModes == 0)
                 {
-                    MessageBox.Show("When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer).",
-                                   "Missing Overwrite Option", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Translator.Get("When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."),
+                                   Translator.Get("Missing Overwrite Option"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Check that at least one directory structure option is selected
                 if (behaviourOptions == 0)
                 {
-                    MessageBox.Show("When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders).",
-                                   "Missing Directory Structure Option", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Translator.Get("When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."),
+                                   Translator.Get("Missing Directory Structure Option"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -3799,8 +3951,8 @@ namespace CopyThatProgram
             // Shows an error if more than one overwrite mode is selected.
             if (totalOverwriteModes > 1)
             {
-                MessageBox.Show("Only one overwrite behaviour may be selected.",
-                               "Invalid Options", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Translator.Get("Only one overwrite behaviour may be selected."),
+                               Translator.Get("Invalid Options"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -3822,8 +3974,8 @@ namespace CopyThatProgram
                 case "Secure Delete Files": operation = FileOperation.SecureDelete; break;
                 default:
                     // Shows an error if no valid operation is selected.
-                    MessageBox.Show("Please select a valid operation.",
-                                    "Invalid Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Translator.Get("Please select a valid operation."),
+                                    Translator.Get("Invalid Operation"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
             }
             // Stores the selected operation.
@@ -4190,11 +4342,10 @@ namespace CopyThatProgram
                             else // If the file does not exist on the file system.
                             {
                                 MessageBox.Show( // Displays a message box to the user.
-                                                    "File/Folder was already added to the file/folder list!",
-                                  "Copy That v1.0 By: Havoc - File/Folder Already Added!",
-                                  MessageBoxButtons.OK,
+                                                    Translator.Get("File/Folder was already added to the file/folder list!"),
+                                  Translator.Get("Copy That v1.0 By: Havoc - File/Folder Already Added!"),
+                                MessageBoxButtons.OK,
                                   MessageBoxIcon.Error);
-
                                 noDragDrop = false; // Re-enables drag and drop.
                                 return; // Exits the method.
                             }
@@ -4202,16 +4353,16 @@ namespace CopyThatProgram
                         catch (SecurityException ex) // Catches a security exception if the user doesn't have permissions.
                         {
                             MessageBox.Show( // Displays a security error message.
-                                              $"Security error!\n\nError message: {ex.Message}\n\nDetails:\n\n{ex.StackTrace}",
-                              "Copy That v1.0 By: Havoc - Error!",
+                                              Translator.Get($"Security error!\n\nError message: {ex.Message}\n\nDetails:\n\n{ex.StackTrace}"),
+                              Translator.Get("Copy That v1.0 By: Havoc - Error!"),
                               MessageBoxButtons.OK,
                               MessageBoxIcon.Error);
                         }
                         catch (Exception ex) // Catches any other general exception.
                         {
                             MessageBox.Show( // Displays a general error message.
-                                              $"Cannot display the file: ({fileInfoNow.Name}). You may not have permission to read the file, or it may be corrupt.\n\nReported error: {ex.Message}",
-                              "Copy That v1.0 By: Havoc - Error!",
+                                             Translator.Get($"Cannot display the file: ({fileInfoNow.Name}). You may not have permission to read the file, or it may be corrupt.\n\nReported error: {ex.Message}"),
+                              Translator.Get("Copy That v1.0 By: Havoc - Error!"),
                               MessageBoxButtons.OK,
                               MessageBoxIcon.Error);
                         }
@@ -4409,7 +4560,7 @@ namespace CopyThatProgram
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error applying skin: {ex.Message}");
-                MessageBox.Show($"Error applying skin: {ex.Message}", "Error",
+                MessageBox.Show(Translator.Get($"Error applying skin: {ex.Message}"), Translator.Get("Error"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -4490,7 +4641,7 @@ namespace CopyThatProgram
                 {
                     alwaysOnTopCheckBox.Checked = false; // Unchecks the always-on-top box.
                     this.TopMost = false; // Sets the form to not be always on top.
-                    MessageBox.Show("You may not have this form always on top if you add the context menu item.", "Information", // Shows an informational message box.
+                    MessageBox.Show(Translator.Get("You may not have this form always on top if you add the context menu item."), Translator.Get("Information"), // Shows an informational message box.
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -4801,61 +4952,60 @@ namespace CopyThatProgram
                     // Prevent the user from selecting a source folder that is also a target folder.
                     if (targetPaths.Any(tp => string.Equals(tp, sourceDir, StringComparison.OrdinalIgnoreCase)))
                     {
-                        MessageBox.Show("The source folder cannot be the same as one of the target folders.",
-                                        "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+                        MessageBox.Show(Translator.Get("The source folder cannot be the same as one of the target folders."),
+                                        Translator.Get("Invalid Selection"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    // Temporarily disable various UI controls to prevent user interaction during the scan.
-                    startButton.Enabled = false;
-                    clearFileListButton.Enabled = false;
-                    removeFileButton.Enabled = false;
-                    cancelButton.Enabled = false;
-                    skipButton.Enabled = false;
-                    addFileButton.Enabled = false;
-
-                    // Enable labels to show progress and information.
-                    filePathLabel.Enabled = true;
-                    totalCopiedProgressLabel.Enabled = true;
-                    fileCountOnLabel.Enabled = true;
-                    totalHDSpaceLeftLabel.Enabled = true;
-
-                    // Create a Progress object to update the UI label asynchronously.
-                    var progress = new Progress<string>(msg => fromFilesDirLabel.Text = msg);
-
-                    try
-                    {
-                        // Asynchronously scan the selected directory for files.
-                        await ScanDirectoryWithUpdatesAsync(sourceDir, updateIntervalMs: 50);
-                        _bindingSource.ResetBindings(false);
-                    }
-                    catch (Exception ex)
-                    {
-                        // Handle and display any errors that occur during the scanning process.
-                        fromFilesDirLabel.Text = $"Error: {ex.Message}";
-                        MessageBox.Show($"An error occurred during scanning: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        // Re-enable all controls and update the UI to reflect the end of the scan.
-                        EnableAllControls(cmdHomePage);
-                        startButton.Enabled = true;
-                        pauseResumeButton.Enabled = false;
+                        // Temporarily disable various UI controls to prevent user interaction during the scan.
+                        startButton.Enabled = false;
+                        clearFileListButton.Enabled = false;
+                        removeFileButton.Enabled = false;
                         cancelButton.Enabled = false;
                         skipButton.Enabled = false;
-                        addFileButton.Enabled = true;
-                        clearFileListButton.Enabled = true;
-                        removeFileButton.Enabled = true;
-                        sourceDirectoryLabel.Enabled = true;
+                        addFileButton.Enabled = false;
+
+                        // Enable labels to show progress and information.
+                        filePathLabel.Enabled = true;
+                        totalCopiedProgressLabel.Enabled = true;
+                        fileCountOnLabel.Enabled = true;
+                        totalHDSpaceLeftLabel.Enabled = true;
+
+                        // Create a Progress object to update the UI label asynchronously.
+                        var progress = new Progress<string>(msg => fromFilesDirLabel.Text = msg);
+
+                        try
+                        {
+                            // Asynchronously scan the selected directory for files.
+                            await ScanDirectoryWithUpdatesAsync(sourceDir, updateIntervalMs: 50);
+                            _bindingSource.ResetBindings(false);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle and display any errors that occur during the scanning process.
+                            fromFilesDirLabel.Text = $"Error: {ex.Message}";
+                            MessageBox.Show(Translator.Get($"An error occurred during scanning: {ex.Message}"), Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            // Re-enable all controls and update the UI to reflect the end of the scan.
+                            EnableAllControls(cmdHomePage);
+                            startButton.Enabled = true;
+                            pauseResumeButton.Enabled = false;
+                            cancelButton.Enabled = false;
+                            skipButton.Enabled = false;
+                            addFileButton.Enabled = true;
+                            clearFileListButton.Enabled = true;
+                            removeFileButton.Enabled = true;
+                            sourceDirectoryLabel.Enabled = true;
+                        }
+
+                        // Play a sound to indicate that files have been added.
+                        PlaySound("FileAdded");
                     }
 
-                    // Play a sound to indicate that files have been added.
-                    PlaySound("FileAdded");
+                    // Reset the file path label and update the data bindings.
+                    filePathLabel.Text = "Nothing";
+                    _bindingSource.ResetBindings(false);
                 }
-
-                // Reset the file path label and update the data bindings.
-                filePathLabel.Text = "Nothing";
-                _bindingSource.ResetBindings(false);
             }
         }
 
@@ -6120,8 +6270,9 @@ namespace CopyThatProgram
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Startup sync failed: {ex.Message}",
-                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Translator.Get($"Startup sync failed: {ex.Message}"),
+                    Translator.Get("Warning"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
         }
 
@@ -6152,8 +6303,8 @@ namespace CopyThatProgram
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to update startup setting: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get($"Failed to update startup setting: {ex.Message}"),
+                    Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -6487,7 +6638,7 @@ namespace CopyThatProgram
             if (dataGridView1.Rows.Count == 0)
             {
                 // Displays a message box if there is no data to export.
-                MessageBox.Show("There is no data to export.", "Copy That v1.0 File/Directory Tool - Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get("There is no data to export."), Translator.Get("Copy That v1.0 File/Directory Tool - Information"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             // Calls a method to update the total count label.
@@ -6860,8 +7011,8 @@ namespace CopyThatProgram
                 else
                 {
                     // Shows a message box if the extension already exists.
-                    MessageBox.Show("This extension already exists in the excluded extensions or in the added extensions.",
-            "Copy That v1.0 File/Directory Tool - Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Translator.Get("This extension already exists in the excluded extensions or in the added extensions."),
+            Translator.Get("Copy That v1.0 File/Directory Tool - Information"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     allowedTextBox.Focus();
                 }
             }
@@ -6886,8 +7037,8 @@ namespace CopyThatProgram
             else
             {
                 // Shows a message box if no item is selected to remove.
-                MessageBox.Show("Please select an item to remove.",
-                "Copy That v1.0 File/Directory Tool - Information",
+                MessageBox.Show(Translator.Get("Please select an item to remove."),
+                Translator.Get("Copy That v1.0 File/Directory Tool - Information"),
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -6929,9 +7080,8 @@ namespace CopyThatProgram
                 else
                 {
                     // Shows a message box if the extension already exists.
-                    MessageBox.Show("This extension already exists in the excluded extensions or in the added extensions.",
-            "Copy That v1.0 File/Directory Tool - Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    MessageBox.Show(Translator.Get("This extension already exists in the excluded extensions or in the added extensions."),
+            Translator.Get("Copy That v1.0 File/Directory Tool - Information"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     excludedTextBox.Focus();
                 }
             }
@@ -6954,8 +7104,8 @@ namespace CopyThatProgram
             else
             {
                 // Shows a message box if no item is selected to remove.
-                MessageBox.Show("Please select an item to remove.",
-            "Copy That v1.0 File/Directory Tool - Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get("Please select an item to remove."),
+            Translator.Get("Copy That v1.0 File/Directory Tool - Information"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -7126,8 +7276,9 @@ namespace CopyThatProgram
                 scrollTimer.Stop();
                 scrollTimer.Dispose();
 
-                // Updates the title label text based on the version (Pro or standard).
-                titleLabel.Text = proVersion ? "Copy That v1.0 Pro By: Havoc - Home" : "Copy That v1.0 By: Havoc - Home";
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - Home"
+                    : "Copy That v1.0 By: Havoc - Home");
 
                 // Saves settings if auto-save is enabled.
                 if (saveAutoCheckBox.Checked)
@@ -7142,9 +7293,9 @@ namespace CopyThatProgram
                 // Stops and disposes of the scroll timer.
                 scrollTimer.Stop();
                 scrollTimer.Dispose();
-
-                // Updates the title label.
-                titleLabel.Text = proVersion ? "Copy That v1.0 Pro By: Havoc - Multithreading" : "Copy That v1.0 By: Havoc - MultiThreading";
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - Multi-Threading"
+                    : "Copy That v1.0 By: Havoc - Multi-Threading");
 
                 // Saves settings if auto-save is enabled.
                 if (saveAutoCheckBox.Checked)
@@ -7162,8 +7313,9 @@ namespace CopyThatProgram
                 scrollTimer.Stop();
                 scrollTimer.Dispose();
 
-                // Updates the title label.
-                titleLabel.Text = proVersion ? "Copy That v1.0 Pro By: Havoc - Allow/Exclude" : "Copy That v1.0 By: Havoc - Allow/Exclude";
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - Allow/Exclude"
+                    : "Copy That v1.0 By: Havoc - Allow/Exclude");
 
                 // Saves settings if auto-save is enabled.
                 if (saveAutoCheckBox.Checked)
@@ -7182,8 +7334,9 @@ namespace CopyThatProgram
                 scrollTimer.Stop();
                 scrollTimer.Dispose();
 
-                // Updates the title label.
-                titleLabel.Text = proVersion ? "Copy That v1.0 Pro By: Havoc - Skipped Files/Dirs." : "Copy That v1.0 By: Havoc - Skipped Files/Dirs.";
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - Skipped Files/Dirs."
+                    : "Copy That v1.0 By: Havoc - Skipped Files/Dirs.");
 
                 // Saves settings if auto-save is enabled.
                 if (saveAutoCheckBox.Checked)
@@ -7266,9 +7419,9 @@ namespace CopyThatProgram
 
                 // Calls a method to update saved checkboxes.
                 editSavedCheckBoxes();
-
-                // Updates the title label.
-                titleLabel.Text = proVersion ? "Copy That v1.0 Pro By: Havoc - Settings" : "Copy That v1.0 By: Havoc - Settings";
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - Settings"
+                    : "Copy That v1.0 By: Havoc - Settings");
 
 
                 //ApplyThemeSettings();
@@ -7299,8 +7452,9 @@ namespace CopyThatProgram
                 scrollTimer.Stop();
                 scrollTimer.Dispose();
 
-                // Updates the title label.
-                titleLabel.Text = proVersion ? "Copy That v1.0 Pro By: Havoc - History" : "Copy That v1.0 By: Havoc - History";
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - History"
+                    : "Copy That v1.0 By: Havoc - History");
 
                 // Saves settings if auto-save is enabled.
                 if (saveAutoCheckBox.Checked)
@@ -7361,7 +7515,7 @@ namespace CopyThatProgram
             /// Processes Windows messages, specifically handling clipboard update notifications.
             /// </summary>
             /// <param name="m">The Windows message to process</param>
-            protected override void WndProc(ref Message m)
+            protected override void WndProc(ref System.Windows.Forms.Message m)
             {
                 // Overrides the Windows procedure to handle custom messages.
                 // If the message is a clipboard update, it checks the clipboard for files.
@@ -7398,7 +7552,7 @@ namespace CopyThatProgram
 
                         // Displays a message box with the list of files.
                         MessageBox.Show(fileList.ToString(),
-               "Paste Operation Detected",
+               Translator.Get("Paste Operation Detected"),
                MessageBoxButtons.OK,
                MessageBoxIcon.Information);
                     }
@@ -7615,7 +7769,11 @@ namespace CopyThatProgram
                 if (this.targetPaths == null || this.targetPaths.Count == 0)
                 {
                     // Show a user-friendly error message box.
-                    MessageBox.Show("No destination folder selected. Cannot skip and log file with intended destination.", "Skip Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+    Translator.Get("No destination folder selected. Cannot skip and log file with intended destination."),
+    Translator.Get("Skip Error"),
+    MessageBoxButtons.OK,
+    MessageBoxIcon.Error);
                     // Update the status of the file in the list to "Skipped (No Target)".
                     UpdateFileStatus(_fileList[_currentFileIndex], "Skipped (No Target)"); ;
                     // Increment the counters for files processed and skipped.
@@ -8216,7 +8374,7 @@ namespace CopyThatProgram
             if (e.Error != null)
             {
                 // Show a message box with the error.
-                MessageBox.Show($"Copy operation completed with errors: {e.Error.Message}", "Copy Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get($"Copy operation completed with errors: {e.Error.Message}"), Translator.Get("Copy Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // Log the error.
                 LogError($"Copy Worker Error: {e.Error}");
             }
@@ -8224,7 +8382,7 @@ namespace CopyThatProgram
             else if (e.Cancelled)
             {
                 // Show a message box confirming cancellation.
-                MessageBox.Show("Copy operation cancelled by user.", "Operation Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get("Copy operation cancelled by user."), Translator.Get("Operation Cancelled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // If no errors or cancellations, show a summary of the completed operation.
             else
@@ -8238,7 +8396,7 @@ namespace CopyThatProgram
                     $"Total Bytes Processed: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
 
                 // Show the summary message box.
-                MessageBox.Show(summaryMessage, "Copy Operation Summary", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(summaryMessage, Translator.Get("Copy Operation Summary"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // If the verify checkbox is checked and the operation was "Copy Files", start file verification.
                 if (verifyCheckBox != null && verifyCheckBox.Checked && copyMoveDeleteComboBox != null && copyMoveDeleteComboBox.SelectedItem != null && copyMoveDeleteComboBox.SelectedItem.ToString() == "Copy Files")
@@ -8436,8 +8594,8 @@ namespace CopyThatProgram
             // Check if we have any target paths available
             if (this.targetPaths == null || this.targetPaths.Count == 0)
             {
-                MessageBox.Show("No target paths available for custom directory creation.",
-                               "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get("No target paths available for custom directory creation."),
+                               Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
@@ -8457,8 +8615,8 @@ namespace CopyThatProgram
                 // Validate the directory name for invalid characters
                 if (inputDir.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) >= 0)
                 {
-                    MessageBox.Show("Directory name contains invalid characters. Please try again.",
-                                   "Invalid Directory Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Translator.Get("Directory name contains invalid characters. Please try again."),
+                                   Translator.Get("Invalid Directory Name"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     continue;
                 }
 
@@ -8466,8 +8624,8 @@ namespace CopyThatProgram
                 string fullPath = System.IO.Path.Combine(baseTargetPath, inputDir);
 
                 // Show a confirmation message box to the user.
-                var result = MessageBox.Show($"Copy files into:\n\n{fullPath}?\n\nYes = Use This\nNo = Edit Again\nCancel = Abort",
-                    "Confirm Directory",
+                var result = MessageBox.Show(Translator.Get($"Copy files into:\n\n{fullPath}?\n\nYes = Use This\nNo = Edit Again\nCancel = Abort"),
+                    Translator.Get("Confirm Directory"),
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Question);
 
@@ -8481,8 +8639,8 @@ namespace CopyThatProgram
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Failed to create directory:\n{ex.Message}\n\nPlease try a different name.",
-                                       "Directory Creation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Translator.Get($"Failed to create directory:\n{ex.Message}\n\nPlease try a different name."),
+                                       Translator.Get("Directory Creation Failed"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         // Continue the loop to let user try again
                     }
                 }
@@ -9365,8 +9523,7 @@ namespace CopyThatProgram
                             }
                             else
                             {
-                                // ✅ Debug: show what went wrong
-                                MessageBox.Show($"Directory not found in _fileList:\n{dirPath}");
+                                MessageBox.Show(Translator.Get($"Directory not found in the file list:\n{dirPath}"), Translator.Get("Directory Not Found"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
 
                             _bindingSource.ResetBindings(false); // ✅ Force refresh
@@ -9653,8 +9810,8 @@ namespace CopyThatProgram
                         string rootFolder = System.IO.Path.GetDirectoryName(_fileList.FirstOrDefault()?.FilePath ?? "");
                         // Shows a confirmation message box
                         var confirm = MessageBox.Show(
-                            $"Secure deletion is about to take place on folder:\n\n{rootFolder}\n\nWould you like to continue?",
-                            "Confirm Secure Delete",
+                            Translator.Get($"Secure deletion is about to take place on folder:\n\n{rootFolder}\n\nWould you like to continue?"),
+                            Translator.Get("Confirm Secure Delete"),
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Warning);
 
@@ -9940,7 +10097,7 @@ namespace CopyThatProgram
             if (e.Error != null)
             {
                 // Displays a message box with the error message.
-                MessageBox.Show($"Move operation completed with errors: {e.Error.Message}", "Move Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get($"Move operation completed with errors: {e.Error.Message}"), Translator.Get("Move Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // Logs the error.
                 LogError($"Move Worker Error: {e.Error}");
                 // Invokes a delegate to show operation statistics and reset the UI.
@@ -9958,7 +10115,7 @@ namespace CopyThatProgram
             else if (e.Cancelled)
             {
                 // Displays a message box informing the user of the cancellation.
-                MessageBox.Show("Move operation cancelled by user.", "Operation Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get("Move operation cancelled by user."), Translator.Get("Operation Cancelled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // If the operation completed without errors or cancellation.
             else
@@ -10113,7 +10270,7 @@ namespace CopyThatProgram
             if (e.Error != null)
             {
                 // Displays error message.
-                MessageBox.Show($"Secure Delete operation completed with errors: {e.Error.Message}", "Secure Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get($"Secure Delete operation completed with errors: {e.Error.Message}"), Translator.Get("Secure Delete Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // Logs the error.
                 LogError($"Secure Delete Worker Error: {e.Error}");
                 // Invokes a method to show stats and reset UI.
@@ -10130,7 +10287,7 @@ namespace CopyThatProgram
             else if (e.Cancelled)
             {
                 // Displays cancellation message.
-                MessageBox.Show("Secure Delete operation cancelled by user.", "Operation Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get("Secure Delete operation cancelled by user."), Translator.Get("Operation Cancelled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // If deletion completed successfully.
             else
@@ -10704,7 +10861,7 @@ namespace CopyThatProgram
                 _stopwatch.Stop();
                 _updateTimer.Stop();
                 elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
-                MessageBox.Show($"Copy operation completed with errors: {isCancelled.Error.Message}", "Copy Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get($"Copy operation completed with errors: {isCancelled.Error.Message}"), Translator.Get("Copy Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LogError($"Copy Worker Error: {isCancelled.Error}");
                 if (onErrorCheckBox.Checked) PlayRes(Properties.Resources.OnError);
                 Invoke(() => { ShowOperationStatisticsSummary(isMultiThreaded); ResetProgressUIAndVariables(); });
@@ -10715,7 +10872,7 @@ namespace CopyThatProgram
                 _stopwatch.Stop();
                 _updateTimer.Stop();
                 elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
-                MessageBox.Show("Copy operation cancelled by user.", "Operation Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get("Copy operation cancelled by user."), Translator.Get("Operation Cancelled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (onCancelCheckBox.Checked) PlayRes(Properties.Resources.OnCancel);
                 ShowOperationStatisticsSummary(isMultiThreaded);
                 ResetProgressUIAndVariables();
@@ -11451,21 +11608,23 @@ namespace CopyThatProgram
             if (multithreadCheckBox.Checked && isMultiThreaded)
             {
                 // Prepends "Multi-threaded" to the operation name.
-                operationName = "Multi-threaded " + operationName;
+                operationName = "Multi-Threaded " + operationName;
 
-                // Creates a message string summarizing the multi-threaded operation results.
-                string message = $"- {operationName} Operation Summary ({status}) -\n\n" +
-                                     $"Files Copied: {_totalFilesCopiedMulti:N0}\n" +
-                                     $"Files Skipped: {_totalFilesSkipped:N0}\n" +
-                                     $"Files Failed: {_totalFilesFailed:N0}\n" +
-                                     $"Total Files Processed: {_processedFiles:N0} / {_grandTotalFileCount:N0}\n" +
-                                     $"Total Bytes Processed: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_grandBytesToProcess)}";
+                string tmpl = Translator.Get("- {0} Operation Summary ({1}) -\n\n" +
+                                      "Files Copied: {2:N0}\nFiles Skipped: {3:N0}\nFiles Failed: {4:N0}\n" +
+                                      "Total Files Processed: {5:N0} / {6:N0}\nTotal Bytes Processed: {7} / {8}");
 
-                // Determines the message box icon based on the status.
+                string message = string.Format(tmpl,
+                               operationName, status,
+                               _totalFilesCopiedMulti, _totalFilesSkipped, _totalFilesFailed,
+                               _processedFiles, _grandTotalFileCount,
+                               FormatBytes(_totalBytesProcessed),
+                               FormatBytes(_grandBytesToProcess));
+
+                string title = string.Format(Translator.Get("Operation {0}"), status);
+
                 MessageBoxIcon icon = _isCanceled ? MessageBoxIcon.Warning : MessageBoxIcon.Information;
-
-                // Displays a message box with the summary.
-                MessageBox.Show(message, $"Operation {status}", MessageBoxButtons.OK, icon);
+                MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
 
                 // Sends an SMS notification with the summary.
                 //smsForm.SendOperationSummaryNotification(message);
@@ -11474,21 +11633,23 @@ namespace CopyThatProgram
             else if (!multithreadCheckBox.Checked && !isMultiThreaded)
             {
                 // Prepends "Single-threaded" to the operation name.
-                operationName = "Single-threaded " + operationName;
+                operationName = "Single-Threaded " + operationName;
 
-                // Creates a message string summarizing the single-threaded operation results.
-                string message = $"- {operationName} Operation Summary ({status}) -\n\n" +
-                                                 $"Files Copied: {_totalFilesCopied:N0}\n" +
-                                                 $"Files Skipped: {_totalFilesSkipped:N0}\n" +
-                                                 $"Files Failed: {_totalFilesFailed:N0}\n" +
-                                                 $"Total Files Processed: {_processedFiles:N0} / {_grandTotalFileCount:N0}\n" +
-                                                 $"Total Bytes Processed: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_grandBytesToProcess)}";
+                string tmpl = Translator.Get("- {0} Operation Summary ({1}) -\n\n" +
+                                      "Files Copied: {2:N0}\nFiles Skipped: {3:N0}\nFiles Failed: {4:N0}\n" +
+                                      "Total Files Processed: {5:N0} / {6:N0}\nTotal Bytes Processed: {7} / {8}");
 
-                // Determines the message box icon based on the status.
+                string message = string.Format(tmpl,
+                               operationName, status,
+                               _totalFilesCopied, _totalFilesSkipped, _totalFilesFailed,
+                               _processedFiles, _grandTotalFileCount,
+                               FormatBytes(_totalBytesProcessed),
+                               FormatBytes(_grandBytesToProcess));
+
+                string title = string.Format(Translator.Get("Operation {0}"), status);
+
                 MessageBoxIcon icon = _isCanceled ? MessageBoxIcon.Warning : MessageBoxIcon.Information;
-
-                // Displays a message box with the summary.
-                MessageBox.Show(message, $"Operation {status}", MessageBoxButtons.OK, icon);
+                MessageBox.Show(message, title, MessageBoxButtons.OK, icon);
 
                 // Sends an SMS notification with the summary.
                 //smsForm.SendOperationSummaryNotification(message);
@@ -11770,7 +11931,7 @@ namespace CopyThatProgram
                 if (this.targetPaths == null || this.targetPaths.Count == 0)
                 {
                     // Displays a message box if no destination is selected.
-                    MessageBox.Show("No destination folder selected. Cannot verify files.", "Verification Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translator.Get("No destination folder selected. Cannot verify files."), Translator.Get("Verification Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     e.Cancel = true; // Cancels the operation.
                     return;
                 }
@@ -11880,18 +12041,18 @@ namespace CopyThatProgram
                 if (e.Error != null)
                 {
                     // Displays a message box about the error.
-                    MessageBox.Show($"File verification completed with errors: {e.Error.Message}", "Verification Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translator.Get($"File verification completed with errors: {e.Error.Message}"), Translator.Get("Verification Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     LogError($"Verification Worker Error: {e.Error}"); // Logs the error.
                 }
                 else if (e.Cancelled) // Checks if the operation was cancelled.
                 {
                     // Displays a message box about the cancellation.
-                    MessageBox.Show("File verification cancelled.", "Verification Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Translator.Get("File verification cancelled."), Translator.Get("Verification Cancelled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else // The operation completed successfully.
                 {
                     // Displays a message box about successful completion.
-                    MessageBox.Show("File verification completed.", "Verification Complete",
+                    MessageBox.Show(Translator.Get("File verification completed."), Translator.Get("Verification Complete"),
                                       MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             };
@@ -12191,8 +12352,8 @@ namespace CopyThatProgram
                 string json = File.ReadAllText(stateFile);
 
                 // Displays a message box asking the user if they want to resume the operation.
-                if (MessageBox.Show("Previous operation state found. Do you want to resume?",
-                                     "Resume Operation", MessageBoxButtons.YesNo,
+                if (MessageBox.Show(Translator.Get("Previous operation state found. Do you want to resume?"),
+                                     Translator.Get("Resume Operation"), MessageBoxButtons.YesNo,
                                      MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     // If the user chooses not to resume, deletes the state file and returns.
@@ -12396,8 +12557,8 @@ namespace CopyThatProgram
                 {
                     cancelButton.Enabled = false;
                     dr = MessageBox.Show(
-                            "Cancel the copy?\n\nChoosing ‘Yes’ will finish the current file and then stop.",
-                            "Confirm cancel",
+                            Translator.Get("Cancel the copy?\n\nChoosing ‘Yes’ will finish the current file and then stop."),
+                            Translator.Get("Confirm cancel"),
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Question);
                 }));
@@ -12406,8 +12567,8 @@ namespace CopyThatProgram
             {
                 cancelButton.Enabled = false;
                 dr = MessageBox.Show(
-                        "Cancel the copy?\n\nChoosing ‘Yes’ will finish the current file and then stop.",
-                        "Confirm cancel",
+                        Translator.Get("Cancel the copy?\n\nChoosing ‘Yes’ will finish the current file and then stop."),
+                        Translator.Get("Confirm cancel"),
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question);
             }
@@ -12591,16 +12752,9 @@ namespace CopyThatProgram
         {
             try
             {
-                if (proVersion)
-                {
-                    // Updates the title label to show the current tab name.
-                    titleLabel.Text = "Copy That v1.0 Pro By: Havoc";
-                }
-                else
-                {
-                    // Updates the title label to show the current tab name.
-                    titleLabel.Text = "Copy That v1.0 By: Havoc";
-                }
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc"
+                    : "Copy That v1.0 By: Havoc");
             }
             catch
             {
@@ -12634,14 +12788,9 @@ namespace CopyThatProgram
                 tabControl1.SelectedTab = cmdAboutPage;
 
                 // Updates the title label based on whether it's the "Pro" version.
-                if (proVersion)
-                {
-                    titleLabel.Text = "Copy That v1.0 Pro By: Havoc - About";
-                }
-                else
-                {
-                    titleLabel.Text = "Copy That v1.0 By: Havoc - About";
-                }
+                titleLabel.Text = Translator.Get(proVersion
+                   ? "Copy That v1.0 Pro By: Havoc - About"
+                   : "Copy That v1.0 By: Havoc - About");
 
                 // Defines constants for logo size and padding.
                 int logoWidth = 300;
@@ -13887,7 +14036,7 @@ namespace CopyThatProgram
             else
             {
                 // If neither is checked, shows a warning message and exits the method.
-                MessageBox.Show("Please check either Full Paths or Only Names before exporting.", "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Translator.Get("Please check either Full Paths or Only Names before exporting."), Translator.Get("Export Error"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -13931,17 +14080,17 @@ namespace CopyThatProgram
                         ExportMarkdown(filePath, exportColumns, exportRows);
                         break;
                     default:
-                        MessageBox.Show("Unsupported file type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Translator.Get("Unsupported file type."), Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
 
                 // Displays a success message to the user.
-                MessageBox.Show($"Exported successfully to: {filePath}", "Export Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get($"Exported successfully to: {filePath}"), Translator.Get("Export Success"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 // Catches any exceptions that occur during the export process and shows an error message.
-                MessageBox.Show($"Error exporting data: {ex.Message}", "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translator.Get($"Error exporting data: {ex.Message}"), Translator.Get("Export Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -14701,7 +14850,617 @@ namespace CopyThatProgram
                      "Kopie-Historie-DataGridView: Zeigt den Verlauf der Dateioperationen mit Quell-/Zielpfad, Typ, Datum und Status.",
                      "Cuadrícula Historial de copias: muestra el historial de operaciones con ruta origen/destino, tipo, fecha y estado."),
 
+
+
+
+                    // ---  T I T L E   S T R I N G S  ---------------------------------
+                    ["Copy That v1.0 Pro By: Havoc - Home"] =
+    ("Copy That v1.0 Pro Par: Havoc - Accueil",
+     "Copy That v1.0 Pro Von: Havoc - Startseite",
+     "Copy That v1.0 Pro Por: Havoc - Inicio"),
+
+                    ["Copy That v1.0 By: Havoc - Home"] =
+    ("Copy That v1.0 Par: Havoc - Accueil",
+     "Copy That v1.0 Von: Havoc - Startseite",
+     "Copy That v1.0 Por: Havoc - Inicio"),
+
+                    ["Copy That v1.0 Pro By: Havoc - Multi-Threading"] =
+    ("Copy That v1.0 Pro Par: Havoc - Multi-Thread",
+     "Copy That v1.0 Pro Von: Havoc - Multi-Threading",
+     "Copy That v1.0 Pro Por: Havoc - Multi-Hilo"),
+
+                    ["Copy That v1.0 By: Havoc - Multi-Threading"] =
+    ("Copy That v1.0 Par: Havoc - Multi-Thread",
+     "Copy That v1.0 Von: Havoc - Multi-Threading",
+     "Copy That v1.0 Por: Havoc - Multi-Hilo"),
+
+                    ["Copy That v1.0 Pro By: Havoc - Allow/Exclude"] =
+    ("Copy That v1.0 Pro Par: Havoc - Autoriser/Exclure",
+     "Copy That v1.0 Pro Von: Havoc - Erlauben/Ausschließen",
+     "Copy That v1.0 Pro Por: Havoc - Permitir/Excluir"),
+
+                    ["Copy That v1.0 By: Havoc - Allow/Exclude"] =
+    ("Copy That v1.0 Par: Havoc - Autoriser/Exclure",
+     "Copy That v1.0 Von: Havoc - Erlauben/Ausschließen",
+     "Copy That v1.0 Por: Havoc - Permitir/Excluir"),
+
+                    ["Copy That v1.0 Pro By: Havoc - Skipped Files/Dirs."] =
+    ("Copy That v1.0 Pro Par: Havoc - Fichiers/Dossiers ignorés",
+     "Copy That v1.0 Pro Von: Havoc - Übersprungene Dateien/Ordner",
+     "Copy That v1.0 Pro Por: Havoc - Archivos/Carpetas omitidos"),
+
+                    ["Copy That v1.0 By: Havoc - Skipped Files/Dirs."] =
+    ("Copy That v1.0 Par: Havoc - Fichiers/Dossiers ignorés",
+     "Copy That v1.0 Von: Havoc - Übersprungene Dateien/Ordner",
+     "Copy That v1.0 Por: Havoc - Archivos/Carpetas omitidos"),
+
+                    ["Copy That v1.0 Pro By: Havoc - Settings"] =
+    ("Copy That v1.0 Pro Par: Havoc - Paramètres",
+     "Copy That v1.0 Pro Von: Havoc - Einstellungen",
+     "Copy That v1.0 Pro Por: Havoc - Ajustes"),
+
+                    ["Copy That v1.0 By: Havoc - Settings"] =
+    ("Copy That v1.0 Par: Havoc - Paramètres",
+     "Copy That v1.0 Von: Havoc - Einstellungen",
+     "Copy That v1.0 Por: Havoc - Ajustes"),
+
+                    ["Copy That v1.0 Pro By: Havoc - History"] =
+    ("Copy That v1.0 Pro Par: Havoc - Historique",
+     "Copy That v1.0 Pro Von: Havoc - Verlauf",
+     "Copy That v1.0 Pro Por: Havoc - Historial"),
+
+                    ["Copy That v1.0 By: Havoc - History"] =
+    ("Copy That v1.0 Par: Havoc - Historique",
+     "Copy That v1.0 Von: Havoc - Verlauf",
+     "Copy That v1.0 Por: Havoc - Historial"),
+
+                    ["Copy That v1.0 Pro By: Havoc - About"] =
+    ("Copy That v1.0 Pro Par: Havoc - À propos",
+     "Copy That v1.0 Pro Von: Havoc - Über",
+     "Copy That v1.0 Pro Por: Havoc - Acerca de"),
+
+                    ["Copy That v1.0 By: Havoc - About"] =
+    ("Copy That v1.0 Par: Havoc - À propos",
+     "Copy That v1.0 Von: Havoc - Über",
+     "Copy That v1.0 Por: Havoc - Acerca de"),
+
+
+                    // ----  M E S S A G E   B O X E S  ----
+                    ["Skip Error"] =
+    ("Erreur de saut",
+     "Skip-Fehler",
+     "Error de omisión"),
+
+                    ["No destination folder selected. Cannot skip and log file with intended destination."] =
+    ("Aucun dossier de destination sélectionné. Impossible de sauter et journaliser le fichier avec la destination prévue.",
+     "Kein Zielordner ausgewählt. Datei kann nicht übersprungen und mit dem beabsichtigten Ziel protokolliert werden.",
+     "No se ha seleccionado carpeta de destino. No se puede omitir y registrar el archivo con el destino previsto."),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    /*  =========  M E S S A G E   B O X   L I T E R A L S  =========  */
+
+                    /* ----------  generic / small  ---------- */
+                    ["Error"] =
+    ("Erreur", "Fehler", "Error"),
+
+                    ["Warning"] =
+    ("Avertissement", "Warnung", "Advertencia"),
+
+                    ["Information"] =
+    ("Information", "Information", "Información"),
+
+                    ["Question"] =
+    ("Question", "Frage", "Pregunta"),
+
+                    ["Confirm Reset"] =
+    ("Confirmer la réinitialisation", "Zurücksetzen bestätigen", "Confirmar reinicio"),
+
+                    ["Updater"] =
+    ("Mise à jour", "Updater", "Actualizador"),
+
+                    ["Invalid Selection"] =
+    ("Sélection invalide", "Ungültige Auswahl", "Selección inválida"),
+
+                    ["Duplicate folder"] =
+    ("Dossier en double", "Doppelter Ordner", "Carpeta duplicada"),
+
+                    ["Scan Not Allowed"] =
+    ("Analyse non autorisée", "Scan nicht erlaubt", "Escaneo no permitido"),
+
+                    ["Scan Error"] =
+    ("Erreur d’analyse", "Scan-Fehler", "Error de escaneo"),
+
+                    ["Operation Complete"] =
+    ("Opération terminée", "Operation abgeschlossen", "Operación completada"),
+
+                    ["Operation Canceled"] =
+    ("Opération annulée", "Operation abgebrochen", "Operación cancelada"),
+
+                    /* ----------  full sentences  ---------- */
+                    ["Error changing language: {0}"] =
+    ("Erreur lors du changement de langue : {0}", "Fehler beim Ändern der Sprache: {0}", "Error al cambiar el idioma: {0}"),
+
+                    ["Error exporting data: {0}"] =
+    ("Erreur lors de l’exportation des données : {0}", "Fehler beim Exportieren der Daten: {0}", "Error al exportar datos: {0}"),
+
+                    ["Exported successfully to: {0}"] =
+    ("Exportation réussie vers : {0}", "Erfolgreich exportiert nach: {0}", "Exportado con éxito a: {0}"),
+
+                    ["Unsupported file type."] =
+    ("Type de fichier non pris en charge.", "Nicht unterstützter Dateityp.", "Tipo de archivo no admitido."),
+
+                    ["Please check either Full Paths or Only Names before exporting."] =
+    ("Veuillez cocher soit Chemins complets soit Noms seulement avant l’exportation.", "Bitte vor dem Exportieren entweder Vollständige Pfade oder Nur Namen aktivieren.", "Marque Rutas completas o Solo nombres antes de exportar."),
+
+                    ["Cancel the copy?\n\nChoosing ‘Yes’ will finish the current file and then stop."] =
+    ("Annuler la copie ?\n\nChoisir Oui terminera le fichier actuel puis s’arrêtera.", "Kopie abbrechen?\n\nWenn Ja gewählt wird, wird die aktuelle Datei fertiggestellt und dann gestoppt.", "¿Cancelar la copia?\n\nElegir Sí terminará el archivo actual y luego se detendrá."),
+
+                    ["Confirm cancel"] =
+    ("Confirmer l’annulation", "Kopie abbrechen bestätigen", "Confirmar cancelación"),
+
+                    ["Previous operation state found. Do you want to resume?"] =
+    ("État d’opération précédent trouvé. Voulez-vous reprendre ?", "Vorheriger Operationsstatus gefunden. Möchten Sie fortsetzen?", "Se encontró estado de operación anterior. ¿Desea reanudar?"),
+
+                    ["Resume Operation"] =
+    ("Reprendre l’opération", "Operation fortsetzen", "Reanudar operación"),
+
+                    ["File verification completed."] =
+    ("Vérification de fichier terminée.", "Dateiüberprüfung abgeschlossen.", "Verificación de archivo completada."),
+
+                    ["Verification Complete"] =
+    ("Vérification terminée", "Überprüfung abgeschlossen", "Verificación completada"),
+
+                    ["File verification cancelled."] =
+    ("Vérification de fichier annulée.", "Dateiüberprüfung abgebrochen.", "Verificación de archivo cancelada."),
+
+                    ["Verification Cancelled"] =
+    ("Vérification annulée", "Überprüfung abgebrochen", "Verificación cancelada"),
+
+                    ["File verification completed with errors: {0}"] =
+    ("Vérification de fichier terminée avec des erreurs : {0}", "Dateiüberprüfung mit Fehlern abgeschlossen: {0}", "Verificación de archivo completada con errores: {0}"),
+
+                    ["Verification Error"] =
+    ("Erreur de vérification", "Überprüfungsfehler", "Error de verificación"),
+
+                    ["No destination folder selected. Cannot verify files."] =
+    ("Aucun dossier de destination sélectionné. Impossible de vérifier les fichiers.", "Kein Zielordner ausgewählt. Dateien können nicht überprüft werden.", "No se ha seleccionado carpeta de destino. No se pueden verificar los archivos."),
+
+                    /* ----------  multi-thread summary  ---------- */
+                    ["{0} Operation Summary ({1}) -\n\nFiles Copied: {2:N0}\nFiles Skipped: {3:N0}\nFiles Failed: {4:N0}\nTotal Files Processed: {5:N0} / {6:N0}\nTotal Bytes Processed: {7} / {8}"] =
+    ("Résumé de l’opération {0} ({1}) -\n\nFichiers copiés : {2:N0}\nFichiers ignorés : {3:N0}\nFichiers en échec : {4:N0}\nFichiers traités au total : {5:N0} / {6:N0}\nOctets traités au total : {7} / {8}",
+     "{0} Operation-Zusammenfassung ({1}) -\n\nKopierte Dateien: {2:N0}\nÜbersprungene Dateien: {3:N0}\nFehlgeschlagene Dateien: {4:N0}\nGesamt bearbeitete Dateien: {5:N0} / {6:N0}\nGesamt bearbeitete Bytes: {7} / {8}",
+     "Resumen de operación {0} ({1}) -\n\nArchivos copiados: {2:N0}\nArchivos omitidos: {3:N0}\nArchivos fallidos: {4:N0}\nTotal archivos procesados: {5:N0} / {6:N0}\nTotal bytes procesados: {7} / {8}"),
+
+                    ["Operation {0}"] =
+    ("Opération {0}", "Operation {0}", "Operación {0}"),
+
+                    /* ----------  copy / move / secure-delete  ---------- */
+                    ["Copy operation cancelled by user."] =
+    ("Opération de copie annulée par l’utilisateur.", "Kopie-Operation vom Benutzer abgebrochen.", "Operación de copia cancelada por el usuario."),
+
+                    ["Operation Cancelled"] =
+    ("Opération annulée", "Operation abgebrochen", "Operación cancelada"),
+
+                    ["Copy operation completed with errors: {0}"] =
+    ("Opération de copie terminée avec des erreurs : {0}", "Kopie-Operation mit Fehlern abgeschlossen: {0}", "Operación de copia completada con errores: {0}"),
+
+                    ["Copy Error"] =
+    ("Erreur de copie", "Kopie-Fehler", "Error de copia"),
+
+                    ["Secure Delete operation cancelled by user."] =
+    ("Suppression sécurisée annulée par l’utilisateur.", "Sicheres Löschen vom Benutzer abgebrochen.", "Borrado seguro cancelado por el usuario."),
+
+                    ["Secure Delete operation completed with errors: {0}"] =
+    ("Suppression sécurisée terminée avec des erreurs : {0}", "Sicheres Löschen mit Fehlern abgeschlossen: {0}", "Borrado seguro completado con errores: {0}"),
+
+                    ["Secure Delete Error"] =
+    ("Erreur de suppression sécurisée", "Fehler beim sicheren Löschen", "Error de borrado seguro"),
+
+                    ["Move operation cancelled by user."] =
+    ("Déplacement annulé par l’utilisateur.", "Verschieben vom Benutzer abgebrochen.", "Operación de mover cancelada por el usuario."),
+
+                    ["Move operation completed with errors: {0}"] =
+    ("Déplacement terminé avec des erreurs : {0}", "Verschieben mit Fehlern abgeschlossen: {0}", "Operación de mover completada con errores: {0}"),
+
+                    ["Move Error"] =
+    ("Erreur de déplacement", "Verschiebe-Fehler", "Error de mover"),
+
+                    /* ----------  confirmations / warnings  ---------- */
+                    ["Secure deletion is about to take place on folder:\n\n{0}\n\nWould you like to continue?"] =
+    ("Une suppression sécurisée va avoir lieu sur le dossier :\n\n{0}\n\nVoulez-vous continuer ?", "Sicheres Löschen wird für Ordner ausgeführt:\n\n{0}\n\nMöchten Sie fortfahren?", "El borrado seguro se realizará en la carpeta:\n\n{0}\n\n¿Desea continuar?"),
+
+                    ["Confirm Secure Delete"] =
+    ("Confirmer la suppression sécurisée", "Sicheres Löschen bestätigen", "Confirmar borrado seguro"),
+
+                    ["Directory not found in the file list:\n{0}"] =
+    ("Répertoire non trouvé dans la liste de fichiers :\n{0}", "Verzeichnis in Dateiliste nicht gefunden:\n{0}", "Directorio no encontrado en la lista de archivos:\n{0}"),
+
+                    ["Directory Not Found"] =
+    ("Répertoire non trouvé", "Verzeichnis nicht gefunden", "Directorio no encontrado"),
+
+                    ["Failed to create directory:\n{0}\n\nPlease try a different name."] =
+    ("Échec de création du répertoire :\n{0}\n\nVeuillez essayer un autre nom.", "Verzeichnis erstellen fehlgeschlagen:\n{0}\n\nBitte einen anderen Namen versuchen.", "Error al crear directorio:\n{0}\n\nPruebe con otro nombre."),
+
+                    ["Directory Creation Failed"] =
+    ("Échec de création du répertoire", "Verzeichnis-Erstellung fehlgeschlagen", "Error al crear directorio"),
+
+                    ["Directory name contains invalid characters. Please try again."] =
+    ("Le nom du répertoire contient des caractères invalides. Veuillez réessayer.", "Verzeichnisname enthält ungültige Zeichen. Bitte erneut versuchen.", "El nombre del directorio contiene caracteres inválidos. Inténtelo de nuevo."),
+
+                    ["Invalid Directory Name"] =
+    ("Nom de répertoire invalide", "Ungültiger Verzeichnisname", "Nombre de directorio inválido"),
+
+                    ["No target paths available for custom directory creation."] =
+    ("Aucun chemin cible disponible pour la création de répertoire personnalisé.", "Keine Zielpfade für benutzerdefinierte Verzeichnis-Erstellung verfügbar.", "No hay rutas de destino disponibles para crear directorio personalizado."),
+
+                    ["No data to export."] =
+    ("Aucune donnée à exporter.", "Keine Daten zum Exportieren.", "No hay datos para exportar."),
+
+                    ["Failed to update startup setting: {0}"] =
+    ("Échec de mise à jour du paramètre de démarrage : {0}", "Fehler beim Aktualisieren der Start-Einstellung: {0}", "Error al actualizar configuración de inicio: {0}"),
+
+                    ["Startup sync failed: {0}"] =
+    ("Échec de synchronisation au démarrage : {0}", "Start-Sync fehlgeschlagen: {0}", "Error de sincronización al inicio: {0}"),
+
+                    ["You may not have this form always on top if you add the context menu item."] =
+    ("Vous ne pouvez pas garder cette fenêtre toujours au premier plan si vous ajoutez l’élément du menu contextuel.", "Sie können dieses Fenster nicht immer im Vordergrund halten, wenn Sie das Kontextmenü-Element hinzufügen.", "No puede mantener este formulario siempre encima si agrega el elemento del menú contextual."),
+
+                    ["Error applying skin: {0}"] =
+    ("Erreur lors de l’application du thème : {0}", "Fehler beim Anwenden des Skins: {0}", "Error al aplicar tema: {0}"),
+
+                    ["Cannot display the file: ({0}). You may not have permission to read the file, or it may be corrupt.\n\nReported error: {1}"] =
+    ("Impossible d’afficher le fichier : ({0}). Vous n’avez peut-être pas la permission de le lire, ou il est corrompu.\n\nErreur signalée : {1}", "Datei kann nicht angezeigt werden: ({0}). Möglicherweise fehlt die Leseberechtigung oder die Datei ist beschädigt.\n\nGemeldeter Fehler: {1}", "No se puede mostrar el archivo: ({0}). Es posible que no tenga permiso para leerlo o esté dañado.\n\nError reportado: {1}"),
+
+                    ["Security error!\n\nError message: {0}\n\nDetails:\n\n{1}"] =
+    ("Erreur de sécurité !\n\nMessage d’erreur : {0}\n\nDétails :\n\n{1}", "Sicherheitsfehler!\n\nFehlermeldung: {0}\n\nDetails:\n\n{1}", "¡Error de seguridad!\n\nMensaje de error: {0}\n\nDetalles:\n\n{1}"),
+
+                    ["File/Folder was already added to the file/folder list!"] =
+    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
+
+                    ["You cannot copy/move/delete the root directory!"] =
+    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
+
+                    ["Failed to load icon: {0}"] =
+    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
+
+                    ["You cannot scan an entire drive."] =
+    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
+
+                    ["Invalid folder: {0}"] =
+    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
+
+                    ["Error: {0}"] =
+    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
+
+                    ["Please select a valid operation."] =
+    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
+
+                    ["Only one overwrite behaviour may be selected."] =
+    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
+
+                    ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
+
+                    ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todo, No sobrescribir o Sobrescribir si es más reciente)."),
+
+                    ["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
+    ("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
+
+                    ["{0}"] =   // for dynamic message built above
+    ("{0}", "{0}", "{0}"),
+
+                    ["Invalid Options"] =
+    ("Options invalides", "Ungültige Optionen", "Opciones inválidas"),
+
+                    ["Low disk space"] =
+    ("Espace disque faible", "Wenig Speicherplatz", "Poco espacio en disco"),
+
+                    ["Drive {0} will have less than 100 MB free.\n\nOnly {1} will be copied so that around {2} remain.\n\nContinue?"] =
+    ("Le lecteur {0} aura moins de 100 Mo libres.\n\nSeulement {1} seront copiés afin qu’environ {2} restent.\n\nContinuer ?", "Laufwerk {0} wird weniger als 100 MB frei haben.\n\nEs werden nur {1} kopiert, damit etwa {2} verbleiben.\n\nFortfahren?", "La unidad {0} tendrá menos de 100 MB libres.\n\nSolo se copiarán {1} para que queden aproximadamente {2}.\n\n¿Continuar?"),
+
+                    ["Not enough space left on drive {0}."] =
+    ("Espace insuffisant sur le lecteur {0}.", "Nicht genügend Speicherplatz auf Laufwerk {0}.", "No hay suficiente espacio en la unidad {0}."),
+
+                    ["Out of space"] =
+    ("Plus d’espace", "Kein Speicherplatz", "Sin espacio"),
+
+                    ["Please select at least one destination folder."] =
+    ("Veuillez sélectionner au moins un dossier de destination.", "Bitte mindestens einen Zielordner auswählen.", "Seleccione al menos una carpeta de destino."),
+
+                    ["Operation cancelled: Custom directory not specified."] =
+    ("Opération annulée : répertoire personnalisé non spécifié.", "Operation abgebrochen: Benutzerdefiniertes Verzeichnis nicht angegeben.", "Operación cancelada: directorio personalizado no especificado."),
+
+                    ["You must select files or folders to Copy/Move/Delete!"] =
+    ("Vous devez sélectionner des fichiers ou dossiers à copier/déplacer/supprimer !", "Sie müssen Dateien oder Ordner zum Kopieren/Verschieben/Löschen auswählen!", "¡Debe seleccionar archivos o carpetas para Copiar/Mover/Eliminar!"),
+
+                    ["Do you want to add {0} file(s) to copy?"] =
+    ("Voulez-vous ajouter {0} fichier(s) à copier ?", "Möchten Sie {0} Datei(en) zum Kopieren hinzufügen?", "¿Desea agregar {0} archivo(s) para copiar?"),
+
+                    ["Confirm Drag and Drop"] =
+    ("Confirmer le glisser-déposer", "Drag & Drop bestätigen", "Confirmar arrastrar y soltar"),
+
+                    ["You dropped{0}"] =   // keep placeholder for file name
+    ("Vous avez déposé{0}", "Sie haben{0} abgelegt", "Solto{0}"),
+
+                    ["Sorry, but the directory or file couldn't be added."] =
+    ("Désolé, mais le répertoire ou le fichier n’a pas pu être ajouté.", "Es tut uns leid, aber das Verzeichnis oder die Datei konnte nicht hinzugefügt werden.", "Lo sentimos, pero no se pudo agregar el directorio o el archivo."),
+
+                    ["Copy That v1.0 By: Havoc - Error!"] =
+    ("Copy That v1.0 Par : Havoc - Erreur !", "Copy That v1.0 Von : Havoc - Fehler!", "Copy That v1.0 Por : Havoc - ¡Error!"),
+
+                    ["Dropping Drives is Not Allowed."] =
+    ("Le dépôt de lecteurs n’est pas autorisé.", "Das Ablegen von Laufwerken ist nicht erlaubt.", "No se permite soltar unidades."),
+
+                    ["File/Folder was already added to the file/folder list!"] =
+    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
+
+                    ["You cannot copy/move/delete the root directory!"] =
+    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
+
+                    ["Failed to load icon: {0}"] =
+    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
+
+                    ["You cannot scan an entire drive."] =
+    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
+
+                    ["Invalid folder: {0}"] =
+    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
+
+                    ["Error: {0}"] =
+    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
+
+                    ["Please select a valid operation."] =
+    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
+
+                    ["Only one overwrite behaviour may be selected."] =
+    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
+
+                    ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
+
+                    ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todo, No sobrescribir o Sobrescribir si es más reciente)."),
+
+                    ["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
+    ("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
+
+                    ["{0}"] =   // reusable dynamic placeholder
+    ("{0}", "{0}", "{0}"),
+
+                    ["Invalid Options"] =
+    ("Options invalides", "Ungültige Optionen", "Opciones inválidas"),
+
+                    ["Low disk space"] =
+    ("Espace disque faible", "Wenig Speicherplatz", "Poco espacio en disco"),
+
+                    ["Drive {0} will have less than 100 MB free.\n\nOnly {1} will be copied so that around {2} remain.\n\nContinue?"] =
+    ("Le lecteur {0} aura moins de 100 Mo libres.\n\nSeulement {1} seront copiés afin qu’environ {2} restent.\n\nContinuer ?", "Laufwerk {0} wird weniger als 100 MB frei haben.\n\nEs werden nur {1} kopiert, damit etwa {2} verbleiben.\n\nFortfahren?", "La unidad {0} tendrá menos de 100 MB libres.\n\nSolo se copiarán {1} para que queden aproximadamente {2}.\n\n¿Continuar?"),
+
+                    ["Not enough space left on drive {0}."] =
+    ("Espace insuffisant sur le lecteur {0}.", "Nicht genügend Speicherplatz auf Laufwerk {0}.", "No hay suficiente espacio en la unidad {0}."),
+
+                    ["Out of space"] =
+    ("Plus d’espace", "Kein Speicherplatz", "Sin espacio"),
+
+                    ["Please select at least one destination folder."] =
+    ("Veuillez sélectionner au moins un dossier de destination.", "Bitte mindestens einen Zielordner auswählen.", "Seleccione al menos una carpeta de destino."),
+
+                    ["Operation cancelled: Custom directory not specified."] =
+    ("Opération annulée : répertoire personnalisé non spécifié.", "Operation abgebrochen: Benutzerdefiniertes Verzeichnis nicht angegeben.", "Operación cancelada: directorio personalizado no especificado."),
+
+                    ["You must select files or folders to Copy/Move/Delete!"] =
+    ("Vous devez sélectionner des fichiers ou dossiers à copier/déplacer/supprimer !", "Sie müssen Dateien oder Ordner zum Kopieren/Verschieben/Löschen auswählen!", "¡Debe seleccionar archivos o carpetas para Copiar/Mover/Eliminar!"),
+
+                    ["Do you want to add {0} file(s) to copy?"] =
+    ("Voulez-vous ajouter {0} fichier(s) à copier ?", "Möchten Sie {0} Datei(en) zum Kopieren hinzufügen?", "¿Desea agregar {0} archivo(s) para copiar?"),
+
+                    ["Confirm Drag and Drop"] =
+    ("Confirmer le glisser-déposer", "Drag & Drop bestätigen", "Confirmar arrastrar y soltar"),
+
+                    ["You dropped{0}"] =   // keep placeholder for file name
+    ("Vous avez déposé{0}", "Sie haben{0} abgelegt", "Solto{0}"),
+
+                    ["Sorry, but the directory or file couldn't be added."] =
+    ("Désolé, mais le répertoire ou le fichier n’a pas pu être ajouté.", "Es tut uns leid, aber das Verzeichnis oder die Datei konnte nicht hinzugefügt werden.", "Lo sentimos, pero no se pudo agregar el directorio o el archivo."),
+
+                    ["Copy That v1.0 By: Havoc - Error!"] =
+    ("Copy That v1.0 Par : Havoc - Erreur !", "Copy That v1.0 Von : Havoc - Fehler!", "Copy That v1.0 Por : Havoc - ¡Error!"),
+
+                    ["Dropping Drives is Not Allowed."] =
+    ("Le dépôt de lecteurs n’est pas autorisé.", "Das Ablegen von Laufwerken ist nicht erlaubt.", "No se permite soltar unidades."),
+
+                    ["File/Folder was already added to the file/folder list!"] =
+    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
+
+                    ["You cannot copy/move/delete the root directory!"] =
+    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
+
+                    ["Failed to load icon: {0}"] =
+    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
+
+                    ["You cannot scan an entire drive."] =
+    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
+
+                    ["Invalid folder: {0}"] =
+    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
+
+                    ["Error: {0}"] =
+    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
+
+                    ["Please select a valid operation."] =
+    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
+
+                    ["Only one overwrite behaviour may be selected."] =
+    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
+
+                    ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
+
+                    ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todo, No sobrescribir o Sobrescribir si es más reciente)."),
+
+                    ["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
+    ("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
+
+                    ["{0}"] =   // reusable dynamic placeholder
+    ("{0}", "{0}", "{0}"),
+
+                    ["Invalid Options"] =
+    ("Options invalides", "Ungültige Optionen", "Opciones inválidas"),
+
+                    ["Low disk space"] =
+    ("Espace disque faible", "Wenig Speicherplatz", "Poco espacio en disco"),
+
+                    ["Drive {0} will have less than 100 MB free.\n\nOnly {1} will be copied so that around {2} remain.\n\nContinue?"] =
+    ("Le lecteur {0} aura moins de 100 Mo libres.\n\nSeulement {1} seront copiés afin qu’environ {2} restent.\n\nContinuer ?", "Laufwerk {0} wird weniger als 100 MB frei haben.\n\nEs werden nur {1} kopiert, damit etwa {2} verbleiben.\n\nFortfahren?", "La unidad {0} tendrá menos de 100 MB libres.\n\nSolo se copiarán {1} para que queden aproximadamente {2}.\n\n¿Continuar?"),
+
+                    ["Not enough space left on drive {0}."] =
+    ("Espace insuffisant sur le lecteur {0}.", "Nicht genügend Speicherplatz auf Laufwerk {0}.", "No hay suficiente espacio en la unidad {0}."),
+
+                    ["Out of space"] =
+    ("Plus d’espace", "Kein Speicherplatz", "Sin espacio"),
+
+                    ["Please select at least one destination folder."] =
+    ("Veuillez sélectionner au moins un dossier de destination.", "Bitte mindestens einen Zielordner auswählen.", "Seleccione al menos una carpeta de destino."),
+
+                    ["Operation cancelled: Custom directory not specified."] =
+    ("Opération annulée : répertoire personnalisé non spécifié.", "Operation abgebrochen: Benutzerdefiniertes Verzeichnis nicht angegeben.", "Operación cancelada: directorio personalizado no especificado."),
+
+                    ["You must select files or folders to Copy/Move/Delete!"] =
+    ("Vous devez sélectionner des fichiers ou dossiers à copier/déplacer/supprimer !", "Sie müssen Dateien oder Ordner zum Kopieren/Verschieben/Löschen auswählen!", "¡Debe seleccionar archivos o carpetas para Copiar/Mover/Eliminar!"),
+
+                    ["Do you want to add {0} file(s) to copy?"] =
+    ("Voulez-vous ajouter {0} fichier(s) à copier ?", "Möchten Sie {0} Datei(en) zum Kopieren hinzufügen?", "¿Desea agregar {0} archivo(s) para copiar?"),
+
+                    ["Confirm Drag and Drop"] =
+    ("Confirmer le glisser-déposer", "Drag & Drop bestätigen", "Confirmar arrastrar y soltar"),
+
+                    ["You dropped{0}"] =   // keep placeholder for file name
+    ("Vous avez déposé{0}", "Sie haben{0} abgelegt", "Solto{0}"),
+
+                    ["Sorry, but the directory or file couldn't be added."] =
+    ("Désolé, mais le répertoire ou le fichier n’a pas pu être ajouté.", "Es tut uns leid, aber das Verzeichnis oder die Datei konnte nicht hinzugefügt werden.", "Lo sentimos, pero no se pudo agregar el directorio o el archivo."),
+
+                    ["Copy That v1.0 By: Havoc - Error!"] =
+    ("Copy That v1.0 Par : Havoc - Erreur !", "Copy That v1.0 Von : Havoc - Fehler!", "Copy That v1.0 Por : Havoc - ¡Error!"),
+
+                    ["Dropping Drives is Not Allowed."] =
+    ("Le dépôt de lecteurs n’est pas autorisé.", "Das Ablegen von Laufwerken ist nicht erlaubt.", "No se permite soltar unidades."),
+
+                    ["File/Folder was already added to the file/folder list!"] =
+    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
+
+                    ["You cannot copy/move/delete the root directory!"] =
+    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
+
+                    ["Failed to load icon: {0}"] =
+    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
+
+                    ["You cannot scan an entire drive."] =
+    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
+
+                    ["Invalid folder: {0}"] =
+    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
+
+                    ["Error: {0}"] =
+    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
+
+                    ["Please select a valid operation."] =
+    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
+
+                    ["Only one overwrite behaviour may be selected."] =
+    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
+
+                    ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
+
+                    ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
+    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todoNo sobrescribir o Sobrescribir si es más reciente)."),
+["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
+("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
+
+
+
+
+
+
+
+                    /* ----------  O P E R A T I O N   S U M M A R Y   T E M P L A T E S  ---------- */
+
+                    ["----- {0} Operation Summary ({1}) -----\n\nTotal files considered: {2:N0}\nFiles copied: {3:N0} / {4:N0}\nFiles skipped (by filter/user): {5:N0}\nFiles failed (due to error): {6:N0}\n\nTotal bytes processed: {7}\n\nTotal bytes to process (estimated): {8}\n\n{0} {1}!"] =
+    ("----- Résumé de l’opération {0} ({1}) -----\n\nFichiers considérés au total : {2:N0}\nFichiers copiés : {3:N0} / {4:N0}\nFichiers ignorés (par filtre/utilisateur) : {5:N0}\nFichiers en échec (erreur) : {6:N0}\n\nOctets traités au total : {7}\n\nOctets à traiter (estimé) : {8}\n\n{0} {1} !",
+     "----- {0} Operation-Zusammenfassung ({1}) -----\n\nGesamt berücksichtigte Dateien: {2:N0}\nKopierte Dateien: {3:N0} / {4:N0}\nÜbersprungene Dateien (durch Filter/Benutzer): {5:N0}\nFehlgeschlagene Dateien (Fehler): {6:N0}\n\nGesamtverarbeitete Bytes: {7}\n\nZu verarbeitende Bytes (geschätzt): {8}\n\n{0} {1}!",
+     "----- Resumen de operación {0} ({1}) -----\n\nArchivos considerados en total: {2:N0}\nArchivos copiados: {3:N0} / {4:N0}\nArchivos omitidos (por filtro/usuario): {5:N0}\nArchivos fallidos (por error): {6:N0}\n\nBytes procesados en total: {7}\n\nBytes a procesar (estimado): {8}\n\n¡{0} {1}!"),
+
+                    ["- {0} Operation Summary ({1}) -\n\nFiles Copied: {2:N0}\nFiles Skipped: {3:N0}\nFiles Failed: {4:N0}\nTotal Files Processed: {5:N0} / {6:N0}\nTotal Bytes Processed: {7} / {8}"] =
+    ("- Résumé de l’opération {0} ({1}) -\n\nFichiers copiés : {2:N0}\nFichiers ignorés : {3:N0}\nFichiers en échec : {4:N0}\nFichiers traités au total : {5:N0} / {6:N0}\nOctets traités au total : {7} / {8}",
+     "- {0} Operation-Zusammenfassung ({1}) -\n\nKopierte Dateien: {2:N0}\nÜbersprungene Dateien: {3:N0}\nFehlgeschlagene Dateien: {4:N0}\nGesamt bearbeitete Dateien: {5:N0} / {6:N0}\nGesamt bearbeitete Bytes: {7} / {8}",
+     "- Resumen de operación {0} ({1}) -\n\nArchivos copiados: {2:N0}\nArchivos omitidos: {3:N0}\nArchivos fallidos: {4:N0}\nTotal archivos procesados: {5:N0} / {6:N0}\nTotal bytes procesados: {7} / {8}"),
+
+                    ["Operation {0}"] =   // caption
+    ("Opération {0}", "Operation {0}", "Operación {0}"),
+
+
+
+                    ["The source folder cannot be added twice."] =
+    ("Le dossier source ne peut pas être ajouté deux fois.",
+     "Der Quellordner kann nicht zweimal hinzugefügt werden.",
+     "La carpeta de origen no puede agregarse dos veces."),
+
+                    ["The source folder cannot be the same as one of the target folders."] =
+    ("Le dossier source ne peut pas être identique à l’un des dossiers cibles.",
+     "Der Quellordner darf nicht mit einem der Zielordner identisch sein.",
+     "La carpeta de origen no puede ser igual a una de las carpetas de destino."),
+
+
+                    ["The target folder cannot be the same as one of the source folders."] =
+    ("Le dossier cible ne peut pas être identique à l’un des dossiers sources.",
+     "Der Zielordner darf nicht mit einem der Quellordner identisch sein.",
+     "La carpeta de destino no puede ser igual a una de las carpetas de origen."),
+
+                    ["The target folder cannot be added twice."] =
+    ("Le dossier cible ne peut pas être ajouté deux fois.",
+     "Der Zielordner kann nicht zweimal hinzugefügt werden.",
+     "La carpeta de destino no puede agregarse dos veces."),
+
                 };
+
+
+            // somewhere in your static Translator class
+            public static string Title(bool pro, string suffix)
+            {
+                string en = pro
+                    ? $"Copy That v1.0 Pro By: Havoc - {suffix}"
+                    : $"Copy That v1.0 By: Havoc - {suffix}";
+
+                return CurrentLanguage switch
+                {
+                    "fr" => pro
+                        ? $"Copy That v1.0 Pro Par : Havoc - {suffix}"
+                        : $"Copy That v1.0 Par : Havoc - {suffix}",
+                    "de" => pro
+                        ? $"Copy That v1.0 Pro Von : Havoc - {suffix}"
+                        : $"Copy That v1.0 Von : Havoc - {suffix}",
+                    "es" => pro
+                        ? $"Copy That v1.0 Pro Por : Havoc - {suffix}"
+                        : $"Copy That v1.0 Por : Havoc - {suffix}",
+                    _ => en
+                };
+            }
+
 
             public static string Get(string english)
             {
@@ -14836,7 +15595,7 @@ namespace CopyThatProgram
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error changing language: {ex.Message}", "Error",
+                MessageBox.Show(Translator.Get($"Error changing language: {ex.Message}"), Translator.Get("Error"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -15175,14 +15934,9 @@ namespace CopyThatProgram
 
 
                 // Updates the form's title label based on whether it's the "Pro" version or not.
-                if (proVersion)
-                {
-                    titleLabel.Text = "Copy That v1.0 Pro By: Havoc - Settings";
-                }
-                else
-                {
-                    titleLabel.Text = "Copy That v1.0 By: Havoc - Settings";
-                }
+                titleLabel.Text = Translator.Get(proVersion
+                    ? "Copy That v1.0 Pro By: Havoc - Settings"
+                    : "Copy That v1.0 By: Havoc - Settings");
 
                 // Enables all controls on the form.
                 EnableAllControls(this);
@@ -15249,14 +16003,9 @@ namespace CopyThatProgram
             tabControl1.SelectedTab = cmdAboutPage;
 
             // Updates the title label based on whether it's the "Pro" version or not.
-            if (proVersion)
-            {
-                titleLabel.Text = "Copy That v1.0 Pro By: Havoc - About";
-            }
-            else
-            {
-                titleLabel.Text = "Copy That v1.0 By: Havoc - About";
-            }
+            titleLabel.Text = Translator.Get(proVersion
+        ? "Copy That v1.0 Pro By: Havoc - About"
+        : "Copy That v1.0 By: Havoc - About");
 
             // Defines constants for logo size and padding.
             int logoWidth = 300;
@@ -15417,7 +16166,7 @@ namespace CopyThatProgram
 
                 // Debug output
                 System.Diagnostics.Debug.WriteLine($"[EXIT] Saving Custom Color - Fore: {this.ForeColor}, Back: {this.BackColor}");
-                // MessageBox.Show($"Saving: Back={this.BackColor}, Fore={this.ForeColor}");
+                // MessageBox.Show(Translator.Get($"Saving: Back={this.BackColor}, Fore={this.ForeColor}");
 
                 // ALWAYS save custom colors immediately, regardless of auto-save setting
                 Properties.Settings.Default.Save();
@@ -15505,8 +16254,8 @@ namespace CopyThatProgram
             // 1. Duplication check
             if (_sourcePaths.Any(p => p.Equals(fullPath, StringComparison.OrdinalIgnoreCase)))
             {
-                MessageBox.Show("This source folder has already been added.",
-                                "Duplicate folder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Translator.Get("This source folder has already been added."),
+                                Translator.Get("Duplicate folder"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -15533,16 +16282,18 @@ namespace CopyThatProgram
                     if (!string.IsNullOrEmpty(targetDirLabel.Text) &&
                        targetPaths.Any(tp => string.Equals(tp, sourceDir, StringComparison.OrdinalIgnoreCase)))
                     {
-                        MessageBox.Show("The source folder cannot be the same as one of the target folders.",
-                                        "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(
+                            Translator.Get("The source folder cannot be the same as one of the target folders."),
+                                        Translator.Get("Invalid Selection"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
                     if (!string.IsNullOrEmpty(targetDirLabel.Text) &&
                        _sourceDirectories.Any(tp => string.Equals(tp, sourceDir, StringComparison.OrdinalIgnoreCase)))
                     {
-                        MessageBox.Show("The source folder cannot be added twice.",
-                                        "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(
+                            Translator.Get("The source folder cannot be added twice."),
+                                        Translator.Get("Invalid Selection"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     else
@@ -15575,8 +16326,9 @@ namespace CopyThatProgram
                     catch (Exception ex)
                     {
                         fromFilesDirLabel.Text = $"Error: {ex.Message}";
-                        MessageBox.Show($"An error occurred during scanning: {ex.Message}",
-                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(
+                            Translator.Get($"An error occurred during scanning: {ex.Message}"),
+                                        Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
@@ -15618,16 +16370,18 @@ namespace CopyThatProgram
                 if (!string.IsNullOrEmpty(targetDirLabel.Text) &&
                          targetPaths.Any(tp => string.Equals(tp, selectedPath, StringComparison.OrdinalIgnoreCase)))
                 {
-                    MessageBox.Show("The target folder cannot be added twice.",
-                                    "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        Translator.Get("The target folder cannot be added twice."),
+                                    Translator.Get("Invalid Selection"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (!string.IsNullOrEmpty(targetDirLabel.Text) &&
                          _sourceDirectories.Any(tp => string.Equals(tp, selectedPath, StringComparison.OrdinalIgnoreCase)))
                 {
-                    MessageBox.Show("The target folder cannot be the same as one of the source folders.",
-                                    "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        Translator.Get("The target folder cannot be the same as one of the source folders."),
+                                    Translator.Get("Invalid Selection"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -15887,14 +16641,16 @@ namespace CopyThatProgram
                 }
 
                 // No update found – inform the user
-                MessageBox.Show("The program is up to date.", "Updater",
+                MessageBox.Show(
+                    Translator.Get("The program is up to date."), Translator.Get("Updater"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             catch (Exception ex)
             {
                 // Show error and exit if update check fails
-                MessageBox.Show($"Update check failed:\n{ex.Message}", "Updater",
+                MessageBox.Show(
+                    Translator.Get($"Update check failed:\n{ex.Message}"), Translator.Get("Updater"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Windows.Forms.Application.Exit();
                 return;
@@ -15995,7 +16751,8 @@ namespace CopyThatProgram
             // Exit if the download encountered an error
             if (e.Error != null)
             {
-                MessageBox.Show($"Download failed:\n{e.Error.Message}", "Updater",
+                MessageBox.Show
+                    (Translator.Get($"Download failed:\n{e.Error.Message}"), Translator.Get("Updater"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
                 return;
@@ -16057,7 +16814,7 @@ namespace CopyThatProgram
             catch (Exception ex)
             {
                 // Inform user if update process fails
-                MessageBox.Show($"Update failed:\n{ex.Message}", "Updater",
+                MessageBox.Show(Translator.Get($"Update failed:\n{ex.Message}"), Translator.Get("Updater"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
@@ -16192,12 +16949,11 @@ Start-Process (Join-Path $final "{{newExeName}}")
 
             // Ask the user for confirmation before resetting
             DialogResult result = MessageBox.Show(
-                "Are you sure you want to reset all totals? This action cannot be undone.",
-                "Confirm Reset",
+                Translator.Get("Are you sure you want to reset all totals? This action cannot be undone."),
+                Translator.Get("Confirm Reset"),
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
-
             // Reset totals if user confirms
             if (result == DialogResult.Yes)
             {
