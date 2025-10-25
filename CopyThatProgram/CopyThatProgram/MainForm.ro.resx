@@ -1,0 +1,765 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmdHomePage.Text" xml:space="preserve">
+    <value>- Acasă</value>
+  </data>
+  <data name="cmdMultithread.Text" xml:space="preserve">
+    <value>- Multi-Fir</value>
+  </data>
+  <data name="cmdExclusions.Text" xml:space="preserve">
+    <value>Permite / Exclude</value>
+  </data>
+  <data name="cmdSkipPage.Text" xml:space="preserve">
+    <value>- Fișiere/Directoare Oprite</value>
+  </data>
+  <data name="cmdSettingsPage.Text" xml:space="preserve">
+    <value>- Setări</value>
+  </data>
+  <data name="cmdAboutPage.Text" xml:space="preserve">
+    <value>- Despre</value>
+  </data>
+  <data name="cmdCopyHistory.Text" xml:space="preserve">
+    <value>- Istoric</value>
+  </data>
+  <data name="addFileButton.Text" xml:space="preserve">
+    <value>Adaugă Fișiere</value>
+  </data>
+  <data name="removeFileButton.Text" xml:space="preserve">
+    <value>Îndepărtează Fișier</value>
+  </data>
+  <data name="clearFileListButton.Text" xml:space="preserve">
+    <value>Curăță Lista</value>
+  </data>
+  <data name="startButton.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="pauseResumeButton.Text" xml:space="preserve">
+    <value>Pauză</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
+  <data name="skipButton.Text" xml:space="preserve">
+    <value>Omite</value>
+  </data>
+  <data name="pauseResumeMultiButton.Text" xml:space="preserve">
+    <value>Pauză</value>
+  </data>
+  <data name="cancelMultiButton.Text" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
+  <data name="elapsedAndTargetTimeLabel.Text" xml:space="preserve">
+    <value>Timp Scurs / Țintă: 00:00:00 / 00:00:00</value>
+  </data>
+  <data name="filePathLabel.Text" xml:space="preserve">
+    <value>Niciun Fișier Selectat</value>
+  </data>
+  <data name="fromFilesDirLabel.Text" xml:space="preserve">
+    <value>Selectează Fișiere/Director</value>
+  </data>
+  <data name="targetDirLabel.Text" xml:space="preserve">
+    <value>Selectează Director Destinație</value>
+  </data>
+  <data name="fileTotalProgressLabel.Text" xml:space="preserve">
+    <value>0.00 %</value>
+  </data>
+  <data name="totalProgressLabel.Text" xml:space="preserve">
+    <value>0.00 %</value>
+  </data>
+  <data name="copyMoveDeleteComboBox.Items" xml:space="preserve">
+    <value>Copiază Fișiere
+Mută Fișiere
+Ștergere Securizată Fișiere</value>
+  </data>
+  <data name="onFinishComboBox.Items" xml:space="preserve">
+    <value>Nu Face Nimic
+Deconectare
+Oprește PC
+Repornește PC
+Repornește Copy That
+Închide Copy That</value>
+  </data>
+  <data name="overwriteIfNewerCheckBox.Text" xml:space="preserve">
+    <value>Suprascrie Dacă Mai Nou</value>
+  </data>
+  <data name="overwriteAllCheckBox.Text" xml:space="preserve">
+    <value>Suprascrie Tot</value>
+  </data>
+  <data name="doNotOverwriteCheckBox.Text" xml:space="preserve">
+    <value>Nu Suprascrie</value>
+  </data>
+  <data name="keepDirStructCheckBox.Text" xml:space="preserve">
+    <value>Păstrează Structura Director</value>
+  </data>
+  <data name="keepEmptyFoldersCheckBox.Text" xml:space="preserve">
+    <value>Păstrează Foldere Goale</value>
+  </data>
+  <data name="createCustomDirCheckBox.Text" xml:space="preserve">
+    <value>Creează Director Personalizat Întâi</value>
+  </data>
+  <data name="copyFilesDirsCheckBox.Text" xml:space="preserve">
+    <value>Copiază doar fișiere</value>
+  </data>
+  <data name="keepOnlyFilesCheckBox.Text" xml:space="preserve">
+    <value>Păstrează doar fișiere</value>
+  </data>
+  <data name="multithreadCheckBox.Text" xml:space="preserve">
+    <value>Multi-Fir</value>
+  </data>
+  <data name="alwaysOnTopCheckBox.Text" xml:space="preserve">
+    <value>Întotdeauna deasupra</value>
+  </data>
+  <data name="confirmDragDropCheckBox.Text" xml:space="preserve">
+    <value>Confirmă Drag &amp; Drop</value>
+  </data>
+  <data name="minimizeSystemTrayCheckBox.Text" xml:space="preserve">
+    <value>Minimizează în Bara de Sistem</value>
+  </data>
+  <data name="contextMenuCheckBox.Text" xml:space="preserve">
+    <value>Adaugă în Meniul Contextual</value>
+  </data>
+  <data name="onFinishCheckBox.Text" xml:space="preserve">
+    <value>La Finalizare</value>
+  </data>
+  <data name="onAddFilesCheckBox.Text" xml:space="preserve">
+    <value>La Adăugarea Fișierelor</value>
+  </data>
+  <data name="onCancelCheckBox.Text" xml:space="preserve">
+    <value>La Anulare</value>
+  </data>
+  <data name="onErrorCheckBox.Text" xml:space="preserve">
+    <value>La Eroare</value>
+  </data>
+  <data name="updateAutoCheckBox.Text" xml:space="preserve">
+    <value>Verificare Automată Actualizări</value>
+  </data>
+  <data name="updateBetaCheckBox.Text" xml:space="preserve">
+    <value>Include Versiuni Beta</value>
+  </data>
+  <data name="updateManuallyCheckBox.Text" xml:space="preserve">
+    <value>Verifică Manual</value>
+  </data>
+  <data name="restartCheckBox.Text" xml:space="preserve">
+    <value>Repornește la Eroare</value>
+  </data>
+  <data name="closeProgramCheckBox.Text" xml:space="preserve">
+    <value>Închide la Eroare</value>
+  </data>
+  <data name="startWithWindowsCheckBox.Text" xml:space="preserve">
+    <value>Pornește cu Windows</value>
+  </data>
+  <data name="saveAutoCheckBox.Text" xml:space="preserve">
+    <value>Salvare Automată Setări</value>
+  </data>
+  <data name="logFileCheckBox.Text" xml:space="preserve">
+    <value>Loghează în Fișier</value>
+  </data>
+  <data name="underMBCheckBox.Text" xml:space="preserve">
+    <value>Sub MB</value>
+  </data>
+  <data name="overMBCheckBox.Text" xml:space="preserve">
+    <value>Peste MB</value>
+  </data>
+  <data name="fullPathsCheckBox.Text" xml:space="preserve">
+    <value>Căi Complete</value>
+  </data>
+  <data name="onlyNamesCheckBox.Text" xml:space="preserve">
+    <value>Doar Nume</value>
+  </data>
+  <data name="zipSeparateCheckBox.Text" xml:space="preserve">
+    <value>Zip Separat</value>
+  </data>
+  <data name="zipTogetherCheckBox.Text" xml:space="preserve">
+    <value>Zip Împreună</value>
+  </data>
+  <data name="emailNamesCheckBox.Text" xml:space="preserve">
+    <value>Doar Nume în E-mail</value>
+  </data>
+  <data name="emailPathsCheckBox.Text" xml:space="preserve">
+    <value>Căi Complete în E-mail</value>
+  </data>
+  <data name="verifyCheckBox.Text" xml:space="preserve">
+    <value>Verifică După Transfer</value>
+  </data>
+  <data name="autoScrollCheckBox.Text" xml:space="preserve">
+    <value>Derulare Automată</value>
+  </data>
+  <data name="defaultSettingsButton.Text" xml:space="preserve">
+    <value>Restaurează Implicite</value>
+  </data>
+  <data name="recSettingsButton.Text" xml:space="preserve">
+    <value>Recomandate</value>
+  </data>
+  <data name="retentionLabel.Text" xml:space="preserve">
+    <value>Zile pentru Păstrarea Logurilor:</value>
+  </data>
+  <data name="clearSettingsButton.Text" xml:space="preserve">
+    <value>Curăță Setări</value>
+  </data>
+  <data name="saveSettingsButton.Text" xml:space="preserve">
+    <value>Salvează Setări</value>
+  </data>
+  <data name="errorOccursLabel.Text" xml:space="preserve">
+    <value>Când Apare o Eroare:</value>
+  </data>
+  <data name="secureDeleteLabel.Text" xml:space="preserve">
+    <value>Trecere Ștergere Securizată:</value>
+  </data>
+  <data name="registerButton.Text" xml:space="preserve">
+    <value>Înregistrează Serial</value>
+  </data>
+  <data name="serialNumberLabel.Text" xml:space="preserve">
+    <value>Introdu Număr Serial:</value>
+  </data>
+  <data name="appLocationLabel.Text" xml:space="preserve">
+    <value>Locație Aplicație (Click Mai Jos):</value>
+  </data>
+  <data name="whenEmailingLabel.Text" xml:space="preserve">
+    <value>La Trimiterea Listei Fișier/Folder:</value>
+  </data>
+  <data name="emailGroupBox.Text" xml:space="preserve">
+    <value>Setări E-mail (Pro):</value>
+  </data>
+  <data name="zipSettingsLabel.Text" xml:space="preserve">
+    <value>Setări Fișier Zip Înainte de C/M:</value>
+  </data>
+  <data name="exportListLabel.Text" xml:space="preserve">
+    <value>Setări Export Listă:</value>
+  </data>
+  <data name="setBufferLabel.Text" xml:space="preserve">
+    <value>Dimensiune Buffer:</value>
+  </data>
+  <data name="cmOnlyIfLabel.Text" xml:space="preserve">
+    <value>C/M Doar Dacă:</value>
+  </data>
+  <data name="setMBUmderLabel.Text" xml:space="preserve">
+    <value>C/M Dacă Sub:</value>
+  </data>
+  <data name="setMBGBOverLabel.Text" xml:space="preserve">
+    <value>C/M Dacă Peste:</value>
+  </data>
+  <data name="exportFileListLabel.Text" xml:space="preserve">
+    <value>Exportă Listă Fișiere:</value>
+  </data>
+  <data name="skinsLabel.Text" xml:space="preserve">
+    <value>Teme:</value>
+  </data>
+  <data name="languageLabel.Text" xml:space="preserve">
+    <value>Limbă:</value>
+  </data>
+  <data name="pasteLabel.Text" xml:space="preserve">
+    <value>Lipește:</value>
+  </data>
+  <data name="dragDropLabel.Text" xml:space="preserve">
+    <value>Trage &amp; Plasează:</value>
+  </data>
+  <data name="settingsWindowLabel.Text" xml:space="preserve">
+    <value>Fereastră:</value>
+  </data>
+  <data name="fontsLabel.Text" xml:space="preserve">
+    <value>Dimensiune Font:</value>
+  </data>
+  <data name="checkForUpdatesButton.Text" xml:space="preserve">
+    <value>Verifică Actualizări</value>
+  </data>
+  <data name="addAllowedButton.Text" xml:space="preserve">
+    <value>Adaugă Ext.</value>
+  </data>
+  <data name="removeAllowedButton.Text" xml:space="preserve">
+    <value>Îndepărtează Ext.</value>
+  </data>
+  <data name="clearAllowedButton.Text" xml:space="preserve">
+    <value>Curăță Lista</value>
+  </data>
+  <data name="allowedLabel.Text" xml:space="preserve">
+    <value>Extensii Permise:</value>
+  </data>
+  <data name="addExcludedButton.Text" xml:space="preserve">
+    <value>Adaugă Ext.</value>
+  </data>
+  <data name="removeExcludedButton.Text" xml:space="preserve">
+    <value>Îndepărtează Ext.</value>
+  </data>
+  <data name="clearExcludedButton.Text" xml:space="preserve">
+    <value>Curăță Lista</value>
+  </data>
+  <data name="excludedLabel.Text" xml:space="preserve">
+    <value>Extensii Excluse:</value>
+  </data>
+  <data name="cloneButton.Text" xml:space="preserve">
+    <value>Rescanează &amp; Clonează</value>
+  </data>
+  <data name="totalHistoryLabel.Text" xml:space="preserve">
+    <value>Total Elemente Istoric: 0</value>
+  </data>
+  <data name="deleteEntryButton.Text" xml:space="preserve">
+    <value>Șterge Intrarea</value>
+  </data>
+  <data name="clearHistoryButton.Text" xml:space="preserve">
+    <value>Curăță Istoric</value>
+  </data>
+  <data name="goToInExplorerButton.Text" xml:space="preserve">
+    <value>Deschide Fișier în Explorer</value>
+  </data>
+  <data name="totalSkippedLabel.Text" xml:space="preserve">
+    <value>Total Fișiere Oprite: 0</value>
+  </data>
+  <data name="clearSkippedListButton.Text" xml:space="preserve">
+    <value>Curăță Lista Oprite</value>
+  </data>
+  <data name="fileNameLabel1.Text" xml:space="preserve">
+    <value>Nume fișier:</value>
+  </data>
+  <data name="fileNameLabel2.Text" xml:space="preserve">
+    <value>Nume fișier:</value>
+  </data>
+  <data name="fileNameLabel3.Text" xml:space="preserve">
+    <value>Nume fișier:</value>
+  </data>
+  <data name="fileNameLabel4.Text" xml:space="preserve">
+    <value>Nume fișier:</value>
+  </data>
+  <data name="filesNameLabel1.Text" xml:space="preserve">
+    <value>Nimic</value>
+  </data>
+  <data name="filesNameLabel2.Text" xml:space="preserve">
+    <value>Nimic</value>
+  </data>
+  <data name="filesNameLabel3.Text" xml:space="preserve">
+    <value>Nimic</value>
+  </data>
+  <data name="filesNameLabel4.Text" xml:space="preserve">
+    <value>Nimic</value>
+  </data>
+  <data name="totalProgressMultiLabel.Text" xml:space="preserve">
+    <value>Total Progres General:</value>
+  </data>
+  <data name="onFinishMultiLabel.Text" xml:space="preserve">
+    <value>La Finalizare:</value>
+  </data>
+  <data name="fileNameLabel.Text" xml:space="preserve">
+    <value>Fișier:</value>
+  </data>
+  <data name="fromLabel.Text" xml:space="preserve">
+    <value>Sursă(e):</value>
+  </data>
+  <data name="targetLabel.Text" xml:space="preserve">
+    <value>Destinație(i):</value>
+  </data>
+  <data name="fileOptionsLabel.Text" xml:space="preserve">
+    <value>Opțiuni Fișier pentru Procesare și După Procesare: ||</value>
+  </data>
+  <data name="onFinishLabel.Text" xml:space="preserve">
+    <value>La Finalizare:</value>
+  </data>
+  <data name="cmdLabel.Text" xml:space="preserve">
+    <value>C/M/Ș:</value>
+  </data>
+  <data name="searchFileFolderLabel.Text" xml:space="preserve">
+    <value>Caută Fișier/Folder:</value>
+  </data>
+  <data name="clearTextButton.Text" xml:space="preserve">
+    <value>Curăță Text</value>
+  </data>
+  <data name="fileUpLabel.Text" xml:space="preserve">
+    <value>Mută Fișier Sus:</value>
+  </data>
+  <data name="fileDownLabel.Text" xml:space="preserve">
+    <value>Mută Fișier Jos:</value>
+  </data>
+  <data name="moveTopLabel.Text" xml:space="preserve">
+    <value>Mută în Vârf:</value>
+  </data>
+  <data name="moveBottomLabel.Text" xml:space="preserve">
+    <value>Mută în Fund:</value>
+  </data>
+  <data name="overallProgressLabel.Text" xml:space="preserve">
+    <value>Total Progres General:</value>
+  </data>
+  <data name="filesDataGridView.Name" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="filesDataGridView.Path" xml:space="preserve">
+    <value>Cale</value>
+  </data>
+  <data name="filesDataGridView.Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="filesDataGridView.Size" xml:space="preserve">
+    <value>Dimensiune</value>
+  </data>
+  <data name="filesDataGridView.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="dataGridView2.Name" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="dataGridView2.Path" xml:space="preserve">
+    <value>Cale</value>
+  </data>
+  <data name="dataGridView2.Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="dataGridView2.Size" xml:space="preserve">
+    <value>Dimensiune</value>
+  </data>
+  <data name="dataGridView2.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="dataGridView1.Name" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="dataGridView1.Path" xml:space="preserve">
+    <value>Cale</value>
+  </data>
+  <data name="dataGridView1.Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="dataGridView1.Size" xml:space="preserve">
+    <value>Dimensiune</value>
+  </data>
+  <data name="dataGridView1.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="skippedDataGridView.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="skippedDataGridView.FileName" xml:space="preserve">
+    <value>Nume Fișier</value>
+  </data>
+  <data name="skippedDataGridView.FileSize" xml:space="preserve">
+    <value>Dimensiune Fișier</value>
+  </data>
+  <data name="skippedDataGridView.SourceFilePath" xml:space="preserve">
+    <value>Cale Fișier Sursă</value>
+  </data>
+  <data name="skippedDataGridView.DestinationFilePath" xml:space="preserve">
+    <value>Cale Fișier Destinație</value>
+  </data>
+  <data name="copyHistoryDGV.Date" xml:space="preserve">
+    <value>Dată</value>
+  </data>
+  <data name="copyHistoryDGV.Operation" xml:space="preserve">
+    <value>Operație</value>
+  </data>
+  <data name="copyHistoryDGV.Source" xml:space="preserve">
+    <value>Sursă</value>
+  </data>
+  <data name="copyHistoryDGV.Destination" xml:space="preserve">
+    <value>Destinație</value>
+  </data>
+  <data name="copyHistoryDGV.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="aboutCTLabel.Text" xml:space="preserve">
+    <value>Copy That v1.0 Pro De: Havoc
+Realizat cu Visual Studio 2022 Community
+C# .NET 8.0 Framework
+Început: Nov. 2023
+Versiune: 1.0</value>
+  </data>
+  <data name="exportButton.Text" xml:space="preserve">
+    <value>Exportă</value>
+  </data>
+  <data name="setUpEmailButton.Text" xml:space="preserve">
+    <value>Configurează E-mail</value>
+  </data>
+  <data name="skinsComboBox.Items" xml:space="preserve">
+    <value>Mod Întunecat
+Mod Mediu
+Mod Luminos
+_________________
+Culoare Personalizată</value>
+  </data>
+  <data name="languageComboBox.Items" xml:space="preserve">
+    <value>Engleză
+Spaniolă
+Germană
+Franceză</value>
+  </data>
+  <data name="filesDataGridView.Header.Name" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="filesDataGridView.Header.Path" xml:space="preserve">
+    <value>Cale</value>
+  </data>
+  <data name="filesDataGridView.Header.Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="filesDataGridView.Header.Size" xml:space="preserve">
+    <value>Dimensiune</value>
+  </data>
+  <data name="filesDataGridView.Header.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="dataGridView1.Header.Name" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="dataGridView1.Header.Path" xml:space="preserve">
+    <value>Cale</value>
+  </data>
+  <data name="dataGridView1.Header.Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="dataGridView1.Header.Size" xml:space="preserve">
+    <value>Dimensiune</value>
+  </data>
+  <data name="dataGridView1.Header.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="dataGridView2.Header.Name" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="dataGridView2.Header.Path" xml:space="preserve">
+    <value>Cale</value>
+  </data>
+  <data name="dataGridView2.Header.Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="dataGridView2.Header.Size" xml:space="preserve">
+    <value>Dimensiune</value>
+  </data>
+  <data name="dataGridView2.Header.Status" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="skippedDataGridView.Header.StatusColumn.HeaderText" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="skippedDataGridView.Header.FileNameColumn.HeaderText" xml:space="preserve">
+    <value>Nume Fișier</value>
+  </data>
+  <data name="skippedDataGridView.Header.FileSizeColumn.HeaderText" xml:space="preserve">
+    <value>Dimensiune Fișier</value>
+  </data>
+  <data name="skippedDataGridView.Header.SourceFilePathColumn.HeaderText" xml:space="preserve">
+    <value>Cale Fișier Sursă</value>
+  </data>
+  <data name="skippedDataGridView.Header.DestinationFilePathColumn.HeaderText" xml:space="preserve">
+    <value>Cale Fișier Destinație</value>
+  </data>
+  <data name="priorityLabel.Text" xml:space="preserve">
+    <value>Prioritate Program:</value>
+  </data>
+  <data name="opacityLabel.Text" xml:space="preserve">
+    <value>Opacitate:</value>
+  </data>
+  <data name="windowGroupBox.Text" xml:space="preserve">
+    <value>Setări Fereastră</value>
+  </data>
+  <data name="skinsLanguageGoupBox.Text" xml:space="preserve">
+    <value>Limbă</value>
+  </data>
+  <data name="soundsGroupBox.Text" xml:space="preserve">
+    <value>Setări Sunet</value>
+  </data>
+  <data name="performanceGroupBox.Text" xml:space="preserve">
+    <value>Setări Performanță</value>
+  </data>
+  <data name="fileDirSettingsGroupBox.Text" xml:space="preserve">
+    <value>Setări Fișier/Director</value>
+  </data>
+  <data name="otherSettingsGroupBox.Text" xml:space="preserve">
+    <value>Alte Setări</value>
+  </data>
+  <data name="bufferNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Dimensiune Buffer (KB)</value>
+  </data>
+  <data name="securePassesNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Trecere Ștergere Securizată</value>
+  </data>
+  <data name="btnGoToInExplorer.Text" xml:space="preserve">
+    <value>Deschide în Explorer</value>
+  </data>
+  <data name="btnClearSkippedList.Text" xml:space="preserve">
+    <value>Curăță Lista Oprite</value>
+  </data>
+  <data name="updateGroupBox.Text" xml:space="preserve">
+    <value>Setări Actualizare</value>
+  </data>
+  <data name="setUpSMSButton.Text" xml:space="preserve">
+    <value>Configurează SMS</value>
+  </data>
+  <data name="cmdTotals.Text" xml:space="preserve">
+    <value>- Totaluri în Curs</value>
+  </data>
+  <data name="leaveEmptyFoldersCheckBox.Text" xml:space="preserve">
+    <value>Lasă Foldere Goale</value>
+  </data>
+  <data name="titleTotalsLabel.Text" xml:space="preserve">
+    <value>Totaluri în Curs pentru Toate Statisticile</value>
+  </data>
+  <data name="totalCopyOperationsTitleLabel.Text" xml:space="preserve">
+    <value>Total Operațiuni Copiere:</value>
+  </data>
+  <data name="totalMoveOperationsTitleLabel.Text" xml:space="preserve">
+    <value>Total Operațiuni Mutare:</value>
+  </data>
+  <data name="totalDeleteOperationsTItleLabel.Text" xml:space="preserve">
+    <value>Total Operațiuni Ștergere Securizată:</value>
+  </data>
+  <data name="fileOverAllProgressLabel.Text" xml:space="preserve">
+    <value>Progres General Fișier:</value>
+  </data>
+  <data name="totalFilesConsideredTitleLabel.Text" xml:space="preserve">
+    <value>Total Fișiere Considerate:</value>
+  </data>
+  <data name="totalFilesMovedTitleLabel.Text" xml:space="preserve">
+    <value>Fișiere Mutate:</value>
+  </data>
+  <data name="totalFilesCopiedTitleLabel.Text" xml:space="preserve">
+    <value>Fișiere Copiate:</value>
+  </data>
+  <data name="totalFilesDeletedTitleLabel.Text" xml:space="preserve">
+    <value>Fișiere Șterse Securizat</value>
+  </data>
+  <data name="totalFilesFailedTitleLabel.Text" xml:space="preserve">
+    <value>Fișiere Eșuate:</value>
+  </data>
+  <data name="totalFilesSkippedTitleLabel.Text" xml:space="preserve">
+    <value>Fișiere Oprite:</value>
+  </data>
+  <data name="totalBytesProcessedTitleLabel.Text" xml:space="preserve">
+    <value>Total Octeți Procesați:</value>
+  </data>
+  <data name="totalBytesToProcessTitleLabel.Text" xml:space="preserve">
+    <value>Total Octeți de Procesat (Estimare):</value>
+  </data>
+  <data name="totalTargetTimeTitleLabel.Text" xml:space="preserve">
+    <value>Timp Total Țintă:</value>
+  </data>
+  <data name="totalElapsedTimeTitleLabel.Text" xml:space="preserve">
+    <value>Timp Total Scurs:</value>
+  </data>
+  <data name="resetTotalsButton.Text" xml:space="preserve">
+    <value>Resetează Toate Totalurile în Curs</value>
+  </data>
+  <data name="thread1Label.Text" xml:space="preserve">
+    <value>Fir 1 - Progres / Statistici:</value>
+  </data>
+  <data name="thread2Label.Text" xml:space="preserve">
+    <value>Fir 2 - Progres / Statistici:</value>
+  </data>
+  <data name="thread3Label.Text" xml:space="preserve">
+    <value>Fir 3 - Progres / Statistici:</value>
+  </data>
+  <data name="thread4Label.Text" xml:space="preserve">
+    <value>Fir 4 - Progres / Statistici:</value>
+  </data>
+</root>

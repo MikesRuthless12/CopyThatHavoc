@@ -429,6 +429,796 @@ namespace CopyThatProgram
             /// <summary>
             /// A read-only property that returns a user-friendly description of the item type.
             /// </summary>
+            /// 
+
+
+
+            private Dictionary<string, Dictionary<string, string>> _languageMaps = new()
+{
+    {
+        "en", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            // ── Microsoft / Office ---------------------------------------------
+            { ".docx", "Word Document" },  { ".doc", "Word 97-2003" },
+            { ".xlsx", "Excel Workbook" }, { ".xls", "Excel 97-2003" },
+            { ".pptx", "PowerPoint" },     { ".ppt", "PowerPoint 97-2003" },
+            { ".vsdx", "Visio Drawing" },  { ".pub", "Publisher Document" },
+            { ".one",  "OneNote Notebook" },
+            { ".ost", "Outlook Offline" }, { ".pst", "Outlook Personal" },
+            { ".msg", "Outlook Message" }, { ".eml", "Email Message" },
+
+            // ── Web / Mark-up ---------------------------------------------------
+            { ".html", "HTML Document" },  { ".htm", "HTML Document" },
+            { ".css",  "CSS Style Sheet" }, { ".scss", "Sass (SCSS)" },
+            { ".sass", "Sass (Indented)" }, { ".less", "Less Style" },
+            { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+            { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+            { ".json", "JSON Data" },       { ".xml", "XML Document" },
+            { ".yml",  "YAML Config" },
+
+            // ── Microsoft / .NET ----------------------------------------------
+            { ".cs", "C# Source" },         { ".csx", "C# Script" },
+            { ".fs", "F# Source" },         { ".vb", "VB.NET Source" },
+            { ".il", "IL Assembly" },       { ".resx", "Resource XML" },
+            { ".xaml", "XAML Mark-up" },    { ".sln", "Visual Studio Solution" },
+            { ".vbproj", "VB Project" },
+            { ".vcxproj", "C++ Project" },  { ".props", "MSBuild Props" },
+            { ".targets", "MSBuild Targets" },
+
+            // ── C / C++ --------------------------------------------------------
+            { ".cpp", "C++ Source" },       { ".cc", "C++ Source" },
+            { ".cxx", "C++ Source" },       { ".c", "C Source" },
+            { ".hpp", "C++ Header" },       { ".h", "C/C++ Header" },
+            { ".inl", "Inline C++" },       { ".idl", "Interface Definition" },
+            { ".rc", "Resource Script" },   { ".manifest", "Application Manifest" },
+
+            // ── Java / JVM ------------------------------------------------------
+            { ".java", "Java Source" },     { ".class", "Java Class" },
+            { ".jar", "Java Archive" },     { ".war", "Java Web Archive" },
+            { ".ear", "Enterprise Archive" }, { ".scala", "Scala Source" },
+            { ".groovy", "Groovy Source" }, { ".clj", "Clojure Source" },
+
+            // ── Python ----------------------------------------------------------
+            { ".py", "Python Script" },     { ".pyw", "Python (No Console)" },
+            { ".pyi", "Python Stub" },      { ".pyc", "Python Bytecode" },
+            { ".pyo", "Python Optimised" }, { ".pyd", "Python Extension" },
+            { ".whl", "Python Wheel" },     { ".ipynb", "Jupyter Notebook" },
+
+            // ── Mobile ----------------------------------------------------------
+            { ".swift", "Swift Source" },   { ".dart", "Dart Source" },
+            { ".kt", "Kotlin Source" },     { ".kts", "Kotlin Script" },
+            { ".gradle", "Gradle Script" }, { ".aar", "Android Archive" },
+            { ".apk", "Android Package" },  { ".aab", "Android App Bundle" },
+            { ".ipa", "iOS Package" },
+
+            // ── Game Dev / 3D ---------------------------------------------------
+            { ".unity", "Unity Scene" },    { ".prefab", "Unity Prefab" },
+            { ".uasset", "Unreal Asset" },  { ".umap", "Unreal Map" },
+            { ".fbx", "FBX 3D Model" },     { ".obj", "Wavefront 3D" },
+            { ".gltf", "glTF 3D Model" },   { ".blend", "Blender Project" },
+            { ".dae", "Collada Model" },    { ".3ds", "3D Studio Model" },
+            { ".stl", "STL Model" },        { ".dxf", "AutoCAD DXF" },
+
+            // ── Creative / Adobe ----------------------------------------------
+            { ".psd", "Photoshop Document" }, { ".psb", "Photoshop Large" },
+            { ".ai",  "Illustrator Art" },   { ".indd", "InDesign Document" },
+            { ".prproj", "Premiere Project" }, { ".aep", "After Effects" },
+            { ".xd",  "Adobe XD Prototype" }, { ".sketch", "Sketch Document" },
+            { ".fig", "Figma Document" },
+
+            // ── Audio -----------------------------------------------------------
+            { ".mp3", "MP3 Audio" },        { ".wav", "Wave Audio" },
+            { ".flac", "FLAC Audio" },      { ".aac", "AAC Audio" },
+            { ".ogg", "OGG Vorbis" },       { ".wma", "Windows Audio" },
+            { ".opus", "Opus Audio" },      { ".m4a", "MPEG-4 Audio" },
+            { ".midi", "MIDI Sequence" },   { ".aiff", "AIFF Audio" },
+
+            // ── Video -----------------------------------------------------------
+            { ".mp4", "MP4 Video" },        { ".mkv", "Matroska Video" },
+            { ".avi", "AVI Video" },        { ".mov", "QuickTime Video" },
+            { ".wmv", "Windows Video" },    { ".webm", "WebM Video" },
+            { ".flv", "Flash Video" },      { ".m4v", "M4V Video" },
+            { ".m3u8", "HLS Playlist" },
+            { ".ogv", "OGG Video" },        { ".3gp", "3GP Video" },
+
+            // ── Images ----------------------------------------------------------
+            { ".jpg", "JPEG Image" },       { ".jpeg", "JPEG Image" },
+            { ".png", "PNG Image" },        { ".gif", "GIF Image" },
+            { ".bmp", "BMP Image" },        { ".tiff", "TIFF Image" },
+            { ".webp", "WebP Image" },      { ".ico", "Icon" },
+            { ".svg", "SVG Vector" },       { ".eps", "Encapsulated PostScript" },
+            { ".raw", "RAW Image" },
+            { ".cr2", "Canon RAW" },        { ".nef", "Nikon RAW" },
+            { ".arw", "Sony RAW" },         { ".dng", "Digital Negative" },
+
+            // ── Archives --------------------------------------------------------
+            { ".zip", "ZIP Archive" },      { ".rar", "RAR Archive" },
+            { ".7z",  "7-Zip Archive" },    { ".tar", "Tar Archive" },
+            { ".gz",  "GZip Archive" },     { ".bz2", "BZip2 Archive" },
+            { ".xz",  "XZ Archive" },       { ".zst", "Zstd Archive" },
+            { ".lz4", "LZ4 Archive" },      { ".cab", "Cabinet Archive" },
+            { ".iso", "Disc Image" },       { ".dmg", "macOS Disk Image" },
+            { ".img", "Raw Disk Image" },   { ".vhd", "Virtual Hard Disk" },
+            { ".vhdx","Hyper-V Disk" },     { ".wim", "Windows Image" },
+
+            // ── Database --------------------------------------------------------
+            { ".sql", "SQL Script" },       { ".db",  "Database" },
+            { ".sqlite", "SQLite DB" },     { ".mdb", "Access DB" },
+            { ".accdb", "Access Database" }, { ".mdf", "SQL Server DB" },
+            { ".ndf", "SQL Server NDF" },   { ".ldf", "SQL Server Log" },
+            { ".bak", "SQL Backup" },       { ".dmp", "Database Dump" },
+
+            // ── Scientific / Math ---------------------------------------------
+            { ".mat", "MATLAB Data" },      { ".m", "MATLAB Script" },
+            { ".r", "R Script" },           { ".rdata", "R Dataset" },
+            { ".csv", "CSV Data" },         { ".tsv", "TSV Data" },
+            { ".sas", "SAS Program" },      { ".sav", "SPSS Dataset" },
+            { ".por", "SPSS Portable" },
+
+            // ── Crypto / Blockchain -------------------------------------------
+            { ".gpg", "GPG Encrypted" },    { ".pgp", "PGP Encrypted" },
+            { ".asc", "PGP Signature" },    { ".sig", "Detached Signature" },
+            { ".wallet", "Crypto Wallet" }, { ".key", "Key File" },
+            { ".pem", "PEM Certificate" },  { ".crt", "Certificate" },
+            { ".p12", "PKCS#12 Keystore" }, { ".pfx", "Windows Keystore" },
+
+            // ── Emulation / ROMs ----------------------------------------------
+            { ".gba", "Game Boy ROM" },     { ".nds", "Nintendo DS ROM" },
+            { ".wbfs", "Wii Backup" },
+            { ".cia", "3DS Installer" },    { ".nsp", "Switch Package" },
+            { ".xci", "Switch Cartridge" }, { ".wad", "Wii Channel" },
+
+            // ── Misc ------------------------------------------------------------
+            { ".exe", "Windows Executable" }, { ".msi", "Windows Installer" },
+            { ".com", "DOS Command" },      { ".bat", "Batch Script" },
+            { ".ps1", "PowerShell Script" }, { ".cmd", "Command Script" },
+            { ".reg", "Registry Entry" },
+            { ".url", "Internet Shortcut" }, { ".torrent", "BitTorrent" },
+            { ".log", "Log File" },         { ".ini", "INI Configuration" },
+            { ".cfg", "Config File" },      { ".conf", "Configuration" },
+            { ".yaml", "YAML Config" },     { ".toml", "TOML Config" },
+            { ".env", "Environment File" }, { ".gitignore", "Git Ignore" },
+            { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+            { ".tex", "LaTeX Source" },     { ".bib", "BibTeX Library" },
+
+            // ── Additional / Misc ---------------------------------------------
+            { ".dwp", "SharePoint Web Part" },
+            { ".fxp", "FoxPro Compiled" },
+            { ".asd", "Word AutoSave" },
+            { ".fsc", "Windows Search Cache" },
+            { ".mid", "MIDI Sequence" },
+            { ".fst", "FL Studio State" },
+            { ".txt", "Plain Text File" },
+            { ".pdb", "Program Database" },
+            { ".dll", "Dynamic-Link Library" },
+            { ".resources", ".NET Resources" },
+            { ".cache", "Cache File" },
+            { ".settings", "Settings XML" },
+            { ".csproj", "C# Project" },
+            { ".editorconfig", "EditorConfig" },
+            { ".kdbx", "KeePass File" },
+            { ".nupkg", "NuGet Package" },
+            { ".p7s", "PKCS #7 Signature" },
+            { ".map", "Source-Map File" },
+            { ".flow", "Flow Type Declaration" },
+            { ".mjs", "ES Module (JavaScript)" },
+            { ".cjs", "CommonJS (JavaScript)" },
+            { ".cts", "TypeScript CommonJS" },
+            { ".mts", "TypeScript ES Module" },
+            { ".jst", "JavaScript Template" },
+            { ".markdown", "Markdown Document" },
+            { ".applescript", "AppleScript" },
+            { ".ch1", "Nintendo Character Data" },
+            { ".vital", "Vital Synthesizer Preset" },
+            { ".ds_store", "macOS Desktop Services Store" },
+            { ".zpw", "ZippedWeb Package" },
+            { ".flp", "FL Studio Project" },
+            { ".flstheme", "FL Studio Theme" },
+            { ".nmsv", "Native Instruments NMSV Preset" },
+            { ".wav.256", "256-bit WAV Variant" },
+            { ".pdf", "Portable Document Format" },
+            { ".config", "Configuration XML/JSON" },
+            { ".user", "User Settings" },
+            { ".uptodate", "Up2Date Cache Flag" },
+            { ".rtf", "Rich Text Format" },
+            { ".buildwithskipanalyzers", "MSBuild Skip-Analyzers Flag" },
+            { ".node", "Node.js Binary Module" },
+            { ".snap", "Snapcraft Package" },
+            { ".def", "Module-Definition File" },
+            { ".bsd", "BSD Licence/Configuration" },
+            { ".babelrc", "Babel Configuration" },
+            { ".prettierrc", "Prettier Configuration" },
+            { ".npignore", "NuGet Ignore Rules" },
+            { ".php", "PHP Script" },
+            { ".eslintignore", "ESLint Ignore" },
+            { ".lic", "License File" },
+            { ".nib", "NeXT Interface Builder" },
+            { ".plist", "macOS Property List" },
+            { ".mui", "Multilingual User Interface" },
+            { ".efi", "UEFI Firmware" },
+            { ".cip", "Chrome CIP Package" },
+            { ".bin", "Binary Data" },
+            { ".sdi", "System Deployment Image" },
+            { ".ttf", "TrueType Font" },
+            { ".cur", "Windows Cursor" },
+            { ".ani", "Animated Cursor" },
+            { ".diagpkg", "Windows Diagnostic Package" },
+            { ".dat", "Generic Data File" },
+            { ".diffbase", "Diff Base Snapshot" },
+            { ".lm", "Language Model" },
+            { ".lm1", "Language Model Variant 1" },
+            { ".lm2", "Language Model Variant 2" },
+            { ".lm3", "Language Model Variant 3" },
+            { ".lex", "Lexicon Data" },
+            { ".res", "Windows Resource" },
+            { ".nlt", "NetLink Trust Data" },
+            { ".nls", "National Language Support" },
+            { ".chm", "Compiled HTML Help" },
+            { ".fil", "File List Container" },
+            { ".msixbundle", "MSIX Bundle" },
+            { ".p7x", "PKCS #7 Extended" },
+            { ".pri", "Package Resource Index" },
+            { ".etl", "Event Trace Log" },
+            { ".nlp", "Natural Language Processor Data" },
+            { ".compositefont", "WPF Composite Font" },
+            { ".aspx", "ASP.NET Page" },
+            { ".ascx", "ASP.NET User Control" },
+            { ".master", "ASP.NET Master Page" },
+            { ".browser", "Browser Definition" },
+            { ".lnk", "Windows Shortcut" },
+            { ".default", "Default Settings" },
+            { ".comments", "Comment Metadata" },
+            { ".rsp", "Response File" },
+            { ".tld", "Tag Library Descriptor" },
+            { ".win32manifest", "Win32 Manifest" },
+            { ".man", "Manual Page" },
+            { ".mof", "Managed Object Format" },
+            { ".uninstall", "Uninstall Script" },
+            { ".tasks", "MSBuild Tasks" },
+            { ".overridetasks", "MSBuild Override Tasks" },
+            { ".orp", "ORP Data" },
+            { ".adml", "Administrative Template Language" },
+            { ".ppkg", "Provisioning Package" },
+            { ".mstheme", "Microsoft Theme" },
+            { ".msstyles", "Windows Style" },
+            { ".mum", "Manifest Update Module" },
+            { ".cat", "Security Catalog" },
+            { ".jfm", "Jet Database Metadata" },
+            { ".rs", "Rust Source" },
+            { ".jll", "Julia LLVM Bitcode" },
+            { ".sys", "Windows System Driver" },
+            { ".p7b", "PKCS #7 Certificate Chain" },
+            { ".wmfw", "Windows Media Framework" },
+            { ".inf_loc", "INF Localization" },
+            { ".winmd", "Windows Metadata" },
+            { ".xbf", "XAML Binary Format" },
+            { ".license", "License Token" },
+            { ".fpie", "FPGA Intermediate Executable" },
+            { ".cso", "Compiled Shader Object" },
+            { ".sccd", "System Center Config Data" },
+            { ".bundle", "Application Bundle" },
+            { ".schema", "JSON/XML Schema" },
+            { ".csg", "Constructive Solid Geometry" },
+            { ".mun", "Multi-Unit Network" },
+            { ".uce", "Universal Chess Engine" },
+            { ".cpl", "Control Panel Applet" },
+            { ".msc", "Microsoft Management Console" },
+            { ".ax", "DirectShow Filter" },
+            { ".table", "Lookup/Hash Table" },
+            { ".tsp", "TSP Package/Script" },
+            { ".tbl", "Table Data" },
+            { ".drv", "Device Driver" },
+            { ".sep", "Separator File" },
+            { ".ocx", "ActiveX Control" },
+            { ".msp", "Windows Installer Patch" },
+            { ".scr", "Windows Screen Saver" },
+            { ".vbs", "VBScript" },
+            { ".grxml", "Grammar XML" },
+            { ".xrm-ms", "Microsoft License" },
+            { ".rll", "Resource Link Library" },
+            { ".mfl", "MFL Language File" },
+            { ".cdxml", "Cmdlet Definition XML" },
+            { ".dtd", "Document Type Definition" },
+            { ".psm1", "PowerShell Module Script" },
+            { ".ps1xml", "PowerShell Format Data" },
+            { ".wprp", "Windows Performance Recorder Profile" },
+            { ".xsl", "XSLT Stylesheet" },
+            { ".gyp", "Generate Your Projects" },
+            { ".rld", "ReLoad Data" },
+            { ".job", "Windows Task Job" },
+            { ".gypi", "GYP Include" },
+            { ".hlp", "Windows Help" },
+            { ".gdl", "Generic Description Language" },
+            { ".elf", "Executable and Linkable Format" },
+            { ".ppd", "PostScript Printer Description" },
+            { ".gpd", "Generic Printer Description" },
+            { ".mbn", "Modem Binary" },
+            { ".pak", "PAK Archive" },
+            { ".dgml", "Directed Graph Markup" },
+            { ".smp", "Sample File" },
+            { ".lxa", "Microsoft Lexicon Audio" },
+            { ".wwd", "Microsoft Works Wizard" },
+            { ".wsf", "Windows Script File" },
+            { ".cw", "CardWorks Template" },
+            { ".phn", "Phun Physics Scene" },
+            { ".am", "Automake File" },
+            { ".fe", "File Encryptor" },
+            { ".mllr", "Maximum Likelihood Linear Regression" },
+            { ".ngr", "NEOGEO ROM" },
+            { ".sch", "Schedule/Schema" },
+            { ".adlm", "Autodesk License Manager" },
+            { ".adxm", "Administrative XML" },
+            { ".nmnl", "Normalized Minimal" },
+            { ".propdesc", "Property Description" },
+            { ".nsl", "Nokia Sound Library" },
+            { ".ntf", "National Transfer Format" },
+            { ".ntp", "NTP Configuration" },
+            { ".forms", "Windows Forms" },
+            { ".runtime", "Runtime Manifest" },
+            { ".interop", "COM Interop Data" },
+            { ".frm", "Visual Basic Form" },
+            { ".bas", "Visual Basic Module" },
+            { ".dwb", "Drum Workshop Bundle" },
+            { ".npmignore", "NPM Ignore Rules" },
+            { ".rsrc", "macOS Resource Fork" },
+            { ".upd2date", "Up2Date Cache Flag" },
+            { ".Up2Date", "Up2Date Cache Flag" },
+            { ".jshintrc", "JSHint Configuration" },
+            { ".lock", "Lock/Dependency Pin" },
+            { ".nix", "Nix Expression" },
+            { ".hr1", "HR1 Game Data" },
+            { ".hr2", "HR2 Game Data" },
+            { ".hr3", "HR3 Game Data" },
+            { ".hr4", "HR4 Game Data" },
+            { ".hr5", "HR5 Game Data" },
+            { ".hr6", "HR6 Game Data" },
+            { ".hr7", "HR7 Game Data" },
+            { ".hr8", "HR8 Game Data" },
+            { ".hr9", "HR9 Game Data" },
+            { ".bnf", "Backus-Naur Form Grammar" },
+            { ".clb", "COM+ Catalog" },
+            { ".tlb", "Type Library" },
+            { ".dic", "Dictionary/Lexicon" },
+            { ".aux", "Auxiliary TeX File" },
+            { ".ds", "DataStore/DS_Store" },
+            { ".inc", "Include/Source Include" },
+            { ".cpx", "Code Page Translation" },
+            { ".mdl", "Model/Module File" },
+            { ".dls", "Downloadable Sounds Bank" },
+            { ".cdf-ms", "ClickOnce Deployment Manifest" },
+            { ".addin", "Visual Studio Add-in" },
+            { ".scp", "Windows Script Component" },
+            { ".wmz", "Compressed Windows Media Player Skin" },
+            { ".iec", "IEC Database" },
+            { ".wsc", "Windows Script Component" },
+            { ".vrg", "Visual Studio Registry Script" },
+            { ".prx", "Proxy Auto-Config" },
+            { ".nuspec", "NuGet Specification" },
+            
+            // ── Extended Archive / Compression --------------------------------
+            { ".zipx", "ZIPX Archive" },
+            { ".alz", "ALZip Archive" },
+            { ".eeg", "EEG Compressed" },
+            { ".001", "Split Archive Part 1" },
+            { ".arj", "ARJ Archive" },
+            { ".bh",  "BlakHole Archive" },
+            { ".lha", "LHA Archive" },
+            { ".lzh", "LHA/LZH Archive" },
+            { ".pma", "PMarc Archive" },
+            { ".arc", "ARC Archive" },
+            { ".ace", "ACE Archive" },
+            { ".aes", "AES-Encrypted File" },
+            { ".zpak", "ZPAQ Archive" },
+            { ".zstd", "Zstandard Archive" },
+            { ".br",  "Brotli Archive" },
+            { ".pea", "PeaZip Archive" },
+            { ".tbz", "Tar.BZ Archive" },
+            { ".tbz2", "Tar.BZ2 Archive" },
+            { ".txz", "Tar.XZ Archive" },
+            { ".tlz", "Tar.LZMA Archive" },
+            { ".uu",  "UUEncoded File" },
+            { ".uue", "UUEncoded File" },
+            { ".xxe", "XXEncoded File" },
+            { ".z",   "Unix Compress" },
+            { ".tgz", "Tar.GZ Archive" },
+            { ".isz", "ISO-Zipped Image" },
+            { ".udf", "Universal Disk Format" },
+            { ".i00", "DVD Decrypter Split Image Part 1" }
+        }
+    },
+    {
+        "it", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            // ── Microsoft / Office ---------------------------------------------
+            { ".docx", "Documento Word" },  { ".doc", "Word 97-2003" },
+            { ".xlsx", "Cartella di lavoro Excel" }, { ".xls", "Excel 97-2003" },
+            { ".pptx", "Presentazione PowerPoint" }, { ".ppt", "PowerPoint 97-2003" },
+            { ".vsdx", "Disegno Visio" },  { ".pub", "Documento Publisher" },
+            { ".one",  "Quaderno OneNote" },
+            { ".ost", "Outlook Offline" }, { ".pst", "Outlook Personale" },
+            { ".msg", "Messaggio Outlook" }, { ".eml", "Messaggio Email" },
+
+            // ── Web / Mark-up ---------------------------------------------------
+            { ".html", "Documento HTML" },  { ".htm", "Documento HTML" },
+            { ".css",  "Foglio di stile CSS" }, { ".scss", "Sass (SCSS)" },
+            { ".sass", "Sass (Indentato)" }, { ".less", "Stile Less" },
+            { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+            { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+            { ".json", "Dati JSON" },       { ".xml", "Documento XML" },
+            { ".yml",  "Configurazione YAML" },
+
+            // ── Microsoft / .NET ----------------------------------------------
+            { ".cs", "Codice C#" },         { ".csx", "Script C#" },
+            { ".fs", "Codice F#" },         { ".vb", "Codice VB.NET" },
+            { ".il", "Assembly IL" },       { ".resx", "Risorse XML" },
+            { ".xaml", "Mark-up XAML" },    { ".sln", "Soluzione Visual Studio" },
+            { ".vbproj", "Progetto VB" },
+            { ".vcxproj", "Progetto C++" },  { ".props", "Proprietà MSBuild" },
+            { ".targets", "Target MSBuild" },
+
+            // ── C / C++ --------------------------------------------------------
+            { ".cpp", "Codice C++" },       { ".cc", "Codice C++" },
+            { ".cxx", "Codice C++" },       { ".c", "Codice C" },
+            { ".hpp", "Intestazione C++" }, { ".h", "Intestazione C/C++" },
+            { ".inl", "C++ Inline" },       { ".idl", "Definizione Interfaccia" },
+            { ".rc", "Script Risorse" },    { ".manifest", "Manifest Applicazione" },
+
+            // ── Java / JVM ------------------------------------------------------
+            { ".java", "Codice Java" },     { ".class", "Classe Java" },
+            { ".jar", "Archivio Java" },    { ".war", "Archivio Web Java" },
+            { ".ear", "Archivio Enterprise" }, { ".scala", "Codice Scala" },
+            { ".groovy", "Codice Groovy" }, { ".clj", "Codice Clojure" },
+
+            // ── Python ----------------------------------------------------------
+            { ".py", "Script Python" },     { ".pyw", "Python (No Console)" },
+            { ".pyi", "Stub Python" },      { ".pyc", "Bytecode Python" },
+            { ".pyo", "Python Ottimizzato" }, { ".pyd", "Estensione Python" },
+            { ".whl", "Wheel Python" },     { ".ipynb", "Notebook Jupyter" },
+
+            // ── Mobile ----------------------------------------------------------
+            { ".swift", "Codice Swift" },   { ".dart", "Codice Dart" },
+            { ".kt", "Codice Kotlin" },     { ".kts", "Script Kotlin" },
+            { ".gradle", "Script Gradle" }, { ".aar", "Archivio Android" },
+            { ".apk", "Pacchetto Android" }, { ".aab", "Bundle App Android" },
+            { ".ipa", "Pacchetto iOS" },
+
+            // ── Game Dev / 3D ---------------------------------------------------
+            { ".unity", "Scena Unity" },    { ".prefab", "Prefab Unity" },
+            { ".uasset", "Risorsa Unreal" }, { ".umap", "Mappa Unreal" },
+            { ".fbx", "Modello 3D FBX" },   { ".obj", "Modello 3D Wavefront" },
+            { ".gltf", "Modello 3D glTF" }, { ".blend", "Progetto Blender" },
+            { ".dae", "Modello Collada" },  { ".3ds", "Modello 3D Studio" },
+            { ".stl", "Modello STL" },      { ".dxf", "AutoCAD DXF" },
+
+            // ── Creative / Adobe ----------------------------------------------
+            { ".psd", "Documento Photoshop" }, { ".psb", "Photoshop Grande" },
+            { ".ai",  "Arte Illustrator" }, { ".indd", "Documento InDesign" },
+            { ".prproj", "Progetto Premiere" }, { ".aep", "After Effects" },
+            { ".xd",  "Prototipo Adobe XD" }, { ".sketch", "Documento Sketch" },
+            { ".fig", "Documento Figma" },
+
+            // ── Audio -----------------------------------------------------------
+            { ".mp3", "Audio MP3" },        { ".wav", "Audio Wave" },
+            { ".flac", "Audio FLAC" },      { ".aac", "Audio AAC" },
+            { ".ogg", "OGG Vorbis" },       { ".wma", "Audio Windows" },
+            { ".opus", "Audio Opus" },      { ".m4a", "Audio MPEG-4" },
+            { ".midi", "Sequenza MIDI" },   { ".aiff", "Audio AIFF" },
+
+            // ── Video -----------------------------------------------------------
+            { ".mp4", "Video MP4" },        { ".mkv", "Video Matroska" },
+            { ".avi", "Video AVI" },        { ".mov", "Video QuickTime" },
+            { ".wmv", "Video Windows" },    { ".webm", "Video WebM" },
+            { ".flv", "Video Flash" },      { ".m4v", "Video M4V" },
+            { ".m3u8", "Playlist HLS" },
+            { ".ogv", "Video OGG" },        { ".3gp", "Video 3GP" },
+
+            // ── Images ----------------------------------------------------------
+            { ".jpg", "Immagine JPEG" },    { ".jpeg", "Immagine JPEG" },
+            { ".png", "Immagine PNG" },     { ".gif", "Immagine GIF" },
+            { ".bmp", "Immagine BMP" },     { ".tiff", "Immagine TIFF" },
+            { ".webp", "Immagine WebP" },   { ".ico", "Icona" },
+            { ".svg", "Vettoriale SVG" },   { ".eps", "PostScript Incapsulato" },
+            { ".raw", "Immagine RAW" },
+            { ".cr2", "RAW Canon" },        { ".nef", "RAW Nikon" },
+            { ".arw", "RAW Sony" },         { ".dng", "Negativo Digitale" },
+
+            // ── Archives --------------------------------------------------------
+            { ".zip", "Archivio ZIP" },     { ".rar", "Archivio RAR" },
+            { ".7z",  "Archivio 7-Zip" },   { ".tar", "Archivio Tar" },
+            { ".gz",  "Archivio GZip" },    { ".bz2", "Archivio BZip2" },
+            { ".xz",  "Archivio XZ" },      { ".zst", "Archivio Zstd" },
+            { ".lz4", "Archivio LZ4" },     { ".cab", "Archivio Cabinet" },
+            { ".iso", "Immagine Disco" },   { ".dmg", "Immagine Disco macOS" },
+            { ".img", "Immagine Disco Raw" }, { ".vhd", "Disco Rigido Virtuale" },
+            { ".vhdx","Disco Hyper-V" },    { ".wim", "Immagine Windows" },
+
+            // ── Database --------------------------------------------------------
+            { ".sql", "Script SQL" },       { ".db",  "Database" },
+            { ".sqlite", "DB SQLite" },     { ".mdb", "DB Access" },
+            { ".accdb", "Database Access" }, { ".mdf", "DB SQL Server" },
+            { ".ndf", "NDF SQL Server" },   { ".ldf", "Log SQL Server" },
+            { ".bak", "Backup SQL" },       { ".dmp", "Dump Database" },
+
+            // ── Scientific / Math ---------------------------------------------
+            { ".mat", "Dati MATLAB" },      { ".m", "Script MATLAB" },
+            { ".r", "Script R" },           { ".rdata", "Dataset R" },
+            { ".csv", "Dati CSV" },         { ".tsv", "Dati TSV" },
+            { ".sas", "Programma SAS" },    { ".sav", "Dataset SPSS" },
+            { ".por", "SPSS Portatile" },
+
+            // ── Crypto / Blockchain -------------------------------------------
+            { ".gpg", "Criptato GPG" },    { ".pgp", "Criptato PGP" },
+            { ".asc", "Firma PGP" },       { ".sig", "Firma Separata" },
+            { ".wallet", "Portafoglio Crypto" }, { ".key", "File Chiave" },
+            { ".pem", "Certificato PEM" }, { ".crt", "Certificato" },
+            { ".p12", "Keystore PKCS#12" }, { ".pfx", "Keystore Windows" },
+
+            // ── Emulation / ROMs ----------------------------------------------
+            { ".gba", "ROM Game Boy" },     { ".nds", "ROM Nintendo DS" },
+            { ".wbfs", "Backup Wii" },
+            { ".cia", "Installer 3DS" },    { ".nsp", "Pacchetto Switch" },
+            { ".xci", "Cartuccia Switch" }, { ".wad", "Canale Wii" },
+
+            // ── Misc ------------------------------------------------------------
+            { ".exe", "Eseguibile Windows" }, { ".msi", "Installer Windows" },
+            { ".com", "Comando DOS" },      { ".bat", "Script Batch" },
+            { ".ps1", "Script PowerShell" }, { ".cmd", "Script Comando" },
+            { ".reg", "Voce Registro" },
+            { ".url", "Collegamento Internet" }, { ".torrent", "BitTorrent" },
+            { ".log", "File Log" },         { ".ini", "Configurazione INI" },
+            { ".cfg", "File Config" },      { ".conf", "Configurazione" },
+            { ".yaml", "Configurazione YAML" }, { ".toml", "Configurazione TOML" },
+            { ".env", "File Ambiente" },    { ".gitignore", "Git Ignore" },
+            { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+            { ".tex", "Sorgente LaTeX" },   { ".bib", "Libreria BibTeX" },
+
+            // ── Additional / Misc ---------------------------------------------
+            { ".dwp", "Web Part SharePoint" },
+            { ".fxp", "FoxPro Compilato" },
+            { ".asd", "Salvataggio Automatico Word" },
+            { ".fsc", "Cache Ricerca Windows" },
+            { ".mid", "Sequenza MIDI" },
+            { ".fst", "Stato FL Studio" },
+            { ".txt", "File di Testo Semplice" },
+            { ".pdb", "Database Programma" },
+            { ".dll", "Libreria a Collegamento Dinamico" },
+            { ".resources", "Risorse .NET" },
+            { ".cache", "File Cache" },
+            { ".settings", "Impostazioni XML" },
+            { ".csproj", "Progetto C#" },
+            { ".editorconfig", "EditorConfig" },
+            { ".kdbx", "File KeePass" },
+            { ".nupkg", "Pacchetto NuGet" },
+            { ".p7s", "Firma PKCS #7" },
+            { ".map", "File Source-Map" },
+            { ".flow", "Dichiarazione Tipo Flow" },
+            { ".mjs", "Modulo ES (JavaScript)" },
+            { ".cjs", "CommonJS (JavaScript)" },
+            { ".cts", "TypeScript CommonJS" },
+            { ".mts", "TypeScript ES Module" },
+            { ".jst", "Template JavaScript" },
+            { ".markdown", "Documento Markdown" },
+            { ".applescript", "AppleScript" },
+            { ".ch1", "Dati Personaggio Nintendo" },
+            { ".vital", "Preset Sintetizzatore Vital" },
+            { ".ds_store", "macOS Desktop Services Store" },
+            { ".zpw", "Pacchetto ZippedWeb" },
+            { ".flp", "Progetto FL Studio" },
+            { ".flstheme", "Tema FL Studio" },
+            { ".nmsv", "Preset Native Instruments NMSV" },
+            { ".wav.256", "Variante WAV 256-bit" },
+            { ".pdf", "Formato Documento Portatile" },
+            { ".config", "Configurazione XML/JSON" },
+            { ".user", "Impostazioni Utente" },
+            { ".uptodate", "Flag Cache Up2Date" },
+            { ".rtf", "Formato Testo Ricco" },
+            { ".buildwithskipanalyzers", "Flag MSBuild Skip-Analyzers" },
+            { ".node", "Modulo Binario Node.js" },
+            { ".snap", "Pacchetto Snapcraft" },
+            { ".def", "File Definizione Modulo" },
+            { ".bsd", "Licenza/Configurazione BSD" },
+            { ".babelrc", "Configurazione Babel" },
+            { ".prettierrc", "Configurazione Prettier" },
+            { ".npignore", "Regole Ignore NuGet" },
+            { ".php", "Script PHP" },
+            { ".eslintignore", "ESLint Ignore" },
+            { ".lic", "File Licenza" },
+            { ".nib", "NeXT Interface Builder" },
+            { ".plist", "Elenco Proprietà macOS" },
+            { ".mui", "Interfaccia Utente Multilingue" },
+            { ".efi", "Firmware UEFI" },
+            { ".cip", "Pacchetto Chrome CIP" },
+            { ".bin", "Dati Binari" },
+            { ".sdi", "Immagine Distribuzione Sistema" },
+            { ".ttf", "Font TrueType" },
+            { ".cur", "Cursore Windows" },
+            { ".ani", "Cursore Animato" },
+            { ".diagpkg", "Pacchetto Diagnostico Windows" },
+            { ".dat", "File Dati Generico" },
+            { ".diffbase", "Snapshot Base Diff" },
+            { ".lm", "Modello Lingua" },
+            { ".lm1", "Variante Modello Lingua 1" },
+            { ".lm2", "Variante Modello Lingua 2" },
+            { ".lm3", "Variante Modello Lingua 3" },
+            { ".lex", "Dati Lessico" },
+            { ".res", "Risorsa Windows" },
+            { ".nlt", "Dati Fiducia NetLink" },
+            { ".nls", "Supporto Lingua Nazionale" },
+            { ".chm", "Guida HTML Compilata" },
+            { ".fil", "Contenitore Elenco File" },
+            { ".msixbundle", "Bundle MSIX" },
+            { ".p7x", "PKCS #7 Esteso" },
+            { ".pri", "Indice Risorse Pacchetto" },
+            { ".etl", "Log Traccia Eventi" },
+            { ".nlp", "Dati Processore Lingua Naturale" },
+            { ".compositefont", "Font Composito WPF" },
+            { ".aspx", "Pagina ASP.NET" },
+            { ".ascx", "Controllo Utente ASP.NET" },
+            { ".master", "Pagina Master ASP.NET" },
+            { ".browser", "Definizione Browser" },
+            { ".lnk", "Collegamento Windows" },
+            { ".default", "Impostazioni Predefinite" },
+            { ".comments", "Metadati Commenti" },
+            { ".rsp", "File Risposta" },
+            { ".tld", "Descrittore Libreria Tag" },
+            { ".win32manifest", "Manifest Win32" },
+            { ".man", "Pagina Manuale" },
+            { ".mof", "Formato Oggetto Gestito" },
+            { ".uninstall", "Script Disinstallazione" },
+            { ".tasks", "Attività MSBuild" },
+            { ".overridetasks", "Attività Override MSBuild" },
+            { ".orp", "Dati ORP" },
+            { ".adml", "Linguaggio Modello Amministrativo" },
+            { ".ppkg", "Pacchetto Provisioning" },
+            { ".mstheme", "Tema Microsoft" },
+            { ".msstyles", "Stile Windows" },
+            { ".mum", "Modulo Aggiornamento Manifest" },
+            { ".cat", "Catalogo Sicurezza" },
+            { ".jfm", "Metadati Database Jet" },
+            { ".rs", "Codice Rust" },
+            { ".jll", "Bitcode Julia LLVM" },
+            { ".sys", "Driver Sistema Windows" },
+            { ".p7b", "Catena Certificati PKCS #7" },
+            { ".wmfw", "Framework Windows Media" },
+            { ".inf_loc", "Localizzazione INF" },
+            { ".winmd", "Metadati Windows" },
+            { ".xbf", "Formato Binario XAML" },
+            { ".license", "Token Licenza" },
+            { ".fpie", "Eseguibile Intermedio FPGA" },
+            { ".cso", "Oggetto Shader Compilato" },
+            { ".sccd", "Dati Config System Center" },
+            { ".bundle", "Bundle Applicazione" },
+            { ".schema", "Schema JSON/XML" },
+            { ".csg", "Geometria Solida Costruttiva" },
+            { ".mun", "Rete Multi-Unita" },
+            { ".uce", "Motore Scacchi Universale" },
+            { ".cpl", "Applet Pannello Controllo" },
+            { ".msc", "Console Gestione Microsoft" },
+            { ".ax", "Filtro DirectShow" },
+            { ".table", "Tabella Hash/Ricerca" },
+            { ".tsp", "Pacchetto/Script TSP" },
+            { ".tbl", "Dati Tabella" },
+            { ".drv", "Driver Dispositivo" },
+            { ".sep", "File Separatore" },
+            { ".ocx", "Controllo ActiveX" },
+            { ".msp", "Patch Installer Windows" },
+            { ".scr", "Salvaschermo Windows" },
+            { ".vbs", "VBScript" },
+            { ".grxml", "Grammatica XML" },
+            { ".xrm-ms", "Licenza Microsoft" },
+            { ".rll", "Libreria Collegamento Risorse" },
+            { ".mfl", "File Lingua MFL" },
+            { ".cdxml", "Definizione Cmdlet XML" },
+            { ".dtd", "Definizione Tipo Documento" },
+            { ".psm1", "Script Modulo PowerShell" },
+            { ".ps1xml", "Dati Formato PowerShell" },
+            { ".wprp", "Profilo Registratore Prestazioni Windows" },
+            { ".xsl", "Foglio Stile XSLT" },
+            { ".gyp", "Genera i Tuoi Progetti" },
+            { ".rld", "Dati Ricarica" },
+            { ".job", "Lavoro Attività Windows" },
+            { ".gypi", "Includi GYP" },
+            { ".hlp", "Guida Windows" },
+            { ".gdl", "Linguaggio Descrizione Generico" },
+            { ".elf", "Formato Eseguibile e Collegabile" },
+            { ".ppd", "Descrizione Stampante PostScript" },
+            { ".gpd", "Descrizione Stampante Generica" },
+            { ".mbn", "Binario Modem" },
+            { ".pak", "Archivio PAK" },
+            { ".dgml", "Markup Grafo Diretto" },
+            { ".smp", "File Campione" },
+            { ".lxa", "Audio Lessico Microsoft" },
+            { ".wwd", "Procedura Guidata Microsoft Works" },
+            { ".wsf", "File Script Windows" },
+            { ".cw", "Modello CardWorks" },
+            { ".phn", "Scena Fisica Phun" },
+            { ".am", "File Automake" },
+            { ".fe", "Crittatore File" },
+            { ".mllr", "Regressione Lineale Massima Verosimiglianza" },
+            { ".ngr", "ROM NEOGEO" },
+            { ".sch", "Programma/Schema" },
+            { ".adlm", "Gestore Licenze Autodesk" },
+            { ".adxm", "XML Amministrativo" },
+            { ".nmnl", "Minimo Normalizzato" },
+            { ".propdesc", "Descrizione Proprietà" },
+            { ".nsl", "Libreria Suono Nokia" },
+            { ".ntf", "Formato Trasferimento Nazionale" },
+            { ".ntp", "Configurazione NTP" },
+            { ".forms", "Windows Forms" },
+            { ".runtime", "Manifest Runtime" },
+            { ".interop", "Dati Interop COM" },
+            { ".frm", "Modulo Visual Basic" },
+            { ".bas", "Modulo Visual Basic" },
+            { ".dwb", "Bundle Drum Workshop" },
+            { ".npmignore", "Regole Ignore NPM" },
+            { ".rsrc", "Fork Risorse macOS" },
+            { ".upd2date", "Flag Cache Up2Date" },
+            { ".Up2Date", "Flag Cache Up2Date" },
+            { ".jshintrc", "Configurazione JSHint" },
+            { ".lock", "Blocco/Dipendenza" },
+            { ".nix", "Espressione Nix" },
+            { ".hr1", "Dati Gioco HR1" },
+            { ".hr2", "Dati Gioco HR2" },
+            { ".hr3", "Dati Gioco HR3" },
+            { ".hr4", "Dati Gioco HR4" },
+            { ".hr5", "Dati Gioco HR5" },
+            { ".hr6", "Dati Gioco HR6" },
+            { ".hr7", "Dati Gioco HR7" },
+            { ".hr8", "Dati Gioco HR8" },
+            { ".hr9", "Dati Gioco HR9" },
+            { ".bnf", "Grammatica Forma Backus-Naur" },
+            { ".clb", "Catalogo COM+" },
+            { ".tlb", "Libreria Tipi" },
+            { ".dic", "Dizionario/Lessico" },
+            { ".aux", "File TeX Ausiliario" },
+            { ".ds", "Archivio Dati/DS_Store" },
+            { ".inc", "Includi/Includi Sorgente" },
+            { ".cpx", "Traduzione Pagina Codice" },
+            { ".mdl", "File Modello/Modulo" },
+            { ".dls", "Bank Suoni Scaricabili" },
+            { ".cdf-ms", "Manifest Distribuzione ClickOnce" },
+            { ".addin", "Add-in Visual Studio" },
+            { ".scp", "Componente Script Windows" },
+            { ".wmz", "Skin Windows Media Player Compressa" },
+            { ".iec", "Database IEC" },
+            { ".wsc", "Componente Script Windows" },
+            { ".vrg", "Script Registro Visual Studio" },
+            { ".prx", "Configurazione Proxy Automatica" },
+            { ".nuspec", "Specifica NuGet" },
+            
+            // ── Extended Archive / Compression --------------------------------
+            { ".zipx", "Archivio ZIPX" },
+            { ".alz", "Archivio ALZip" },
+            { ".eeg", "Compresso EEG" },
+            { ".001", "Parte Archivio Diviso 1" },
+            { ".arj", "Archivio ARJ" },
+            { ".bh",  "Archivio BlakHole" },
+            { ".lha", "Archivio LHA" },
+            { ".lzh", "Archivio LHA/LZH" },
+            { ".pma", "Archivio PMarc" },
+            { ".arc", "Archivio ARC" },
+            { ".ace", "Archivio ACE" },
+            { ".aes", "File Criptato AES" },
+            { ".zpak", "Archivio ZPAQ" },
+            { ".zstd", "Archivio Zstandard" },
+            { ".br",  "Archivio Brotli" },
+            { ".pea", "Archivio PeaZip" },
+            { ".tbz", "Archivio Tar.BZ" },
+            { ".tbz2", "Archivio Tar.BZ2" },
+            { ".txz", "Archivio Tar.XZ" },
+            { ".tlz", "Archivio Tar.LZMA" },
+            { ".uu",  "File UUEncoded" },
+            { ".uue", "File UUEncoded" },
+            { ".xxe", "File XXEncoded" },
+            { ".z",   "Compress Unix" },
+            { ".tgz", "Archivio Tar.GZ" },
+            { ".isz", "Immagine ISO-Zippata" },
+            { ".udf", "Formato Disco Universale" },
+            { ".i00", "Parte Immagine Divisa DVD Decrypter 1" }
+        }
+    },
+};
+
             public string ItemType
             {
                 get
@@ -1199,59 +1989,6 @@ namespace CopyThatProgram
                 isSortedValue = false;
             }
         }
-        private void InitializeOperationComboBox()
-        {
-
-
-
-            string selectedLanguage = CopyThatProgram.Properties.Settings.Default.Language;
-            // Populate the combo box with the available file operations.
-            copyMoveDeleteComboBox.Items.Clear();
-            onFinishComboBox.Items.Clear();
-
-
-            try
-            {
-                // Normalise the key once
-                string langKey = (CopyThatProgram.Properties.Settings.Default.Language ?? "English")
-                                 .Trim()
-                                 .ToLowerInvariant();
-
-                // reusable string arrays
-                string[] copyMoveItems = langKey switch
-                {
-                    "spanish" or "español" => new[] { "Copiar archivos", "Mover archivos", "Borrado seguro" },
-                    "german" or "deutsch" => new[] { "Dateien kopieren", "Dateien verschieben", "Sicher löschen" },
-                    "french" or "français" => new[] { "Copier les fichiers", "Déplacer les fichiers", "Suppression sécurisée" },
-                    _ => new[] { "Copy Files", "Move Files", "Secure Delete" }
-                };
-
-                string[] onFinishItems = langKey switch
-                {
-                    "spanish" or "español" => new[] { "No hacer nada", "Suspender", "Cerrar sesión", "Salir del programa", "Apagar" },
-                    "german" or "deutsch" => new[] { "Nichts tun", "Ruhezustand", "Abmelden", "Programm beenden", "Herunterfahren" },
-                    "french" or "français" => new[] { "Ne rien faire", "Mettre en veille", "Se déconnecter", "Quitter le programme", "Arrêter l'ordinateur" },
-                    _ => new[] { "Do Nothing", "Sleep", "Log Off", "Exit Program", "Shut Down" }
-                };
-
-                // fill the combos
-                copyMoveDeleteComboBox.Items.Clear();
-                copyMoveDeleteComboBox.Items.AddRange(copyMoveItems);
-
-                onFinishComboBox.Items.Clear();
-                onFinishComboBox.Items.AddRange(onFinishItems);
-
-                onFinishMultiComboBox.Items.Clear();
-                onFinishMultiComboBox.Items.AddRange(onFinishItems);
-            }
-            catch
-            {
-            }
-
-
-            // Attach an event handler to update the UI when the selected item changes.
-            copyMoveDeleteComboBox.SelectedIndexChanged += (s, e) => UpdateUIForOperation();
-        }
 
         /// <summary>
         /// Updates the UI based on the selected file operation.
@@ -1306,8 +2043,10 @@ namespace CopyThatProgram
 
             // Reset the total progress label and bar.
             fileProcessedLabel.Text = "File Processed: 0 Bytes / 0 Bytes";
-            totalCopiedProgressLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes";
-            fileCountOnLabel.Text = "File Count: 0 / 0";
+            totalCopiedProgressLabel.Text = string.Format(
+                Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+                FormatBytes(_totalBytesToProcess));
+            fileCountOnLabel.Text = Translator.Get("File Count: 0 Out of 0");
             // Reset internal total bytes processed counters.
             _totalBytesProcessed = 0;
             _totalBytesToProcess = 0;
@@ -1326,13 +2065,15 @@ namespace CopyThatProgram
             //multiThreadTotalProgressLabel.Text = "0.00%";
 
             // Reset the path labels to their default text.
-            fileCountOnLabel.Text = "File Count: 0 Out of 0"; // Resets the file count UI label.
-            totalCopiedProgressLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets the progress UI label.
-            fromFilesDirLabel.Text = "Select Files/Directory"; // Resets the source directory UI label.
-            targetDirLabel.Text = "Select Target Directory"; // Resets the target directory UI label.
-            fileCountMultiLabel.Text = "File Count: 0 Out of 0"; // Resets a multi-file count UI label.
-            totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets a multi-file progress UI label.
-            filePathLabel.Text = "Nothing"; // Resets the file path UI label.
+            fileCountOnLabel.Text = Translator.Get("File Count: 0 Out of 0");
+            totalCopiedProgressLabel.Text = string.Format(
+                Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+                FormatBytes(_totalBytesToProcess));
+            fromFilesDirLabel.Text = Translator.Get("Select Files/Directory");
+            targetDirLabel.Text = Translator.Get("Select Target Directory");
+            fileCountMultiLabel.Text = Translator.Get("File Count: 0 Out of 0");
+            totalCMDMultiLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
+            filePathLabel.Text = Translator.Get("Nothing");
             _fileList.Clear();
             _sourceDirectories.Clear();
             _currentTargetPaths.Clear();
@@ -1451,7 +2192,7 @@ namespace CopyThatProgram
 
             // Update the UI labels with the new speed and time information
             if (speedLabel != null && !speedLabel.IsDisposed)
-                speedLabel.Text = $"Speed: {speedText}";
+                speedLabel.Text = string.Format(Translator.Get("Speed: {0}"), speedText);
 
             // Update current operation time display
             if (elapsedAndTargetTimeLabel != null && !elapsedAndTargetTimeLabel.IsDisposed)
@@ -1842,10 +2583,6 @@ namespace CopyThatProgram
             long filesSnap = _grandTotalFileCount;
             long bytesSnap = _totalBytesToProcess;
 
-            // Format the strings on the worker thread to offload work from the UI thread.
-            string fileText = $"File Count: 0 Out of {filesSnap:N0}";
-            string byteText = $"Total C/M/D: 0 / {FormatBytes(bytesSnap)}";
-
             // Use BeginInvoke to add the batch to the UI thread's queue.
             this.BeginInvoke((Action)(() =>
             {
@@ -1861,9 +2598,12 @@ namespace CopyThatProgram
                         }
                     }
 
-                    // Update the UI labels with the new counts.
-                    fileCountOnLabel.Text = fileText;
-                    totalCopiedProgressLabel.Text = byteText;
+                    fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                  _processedFiles.ToString("N0"),
+                  _grandTotalFileCount.ToString("N0"));
+                    totalCopiedProgressLabel.Text = string.Format(
+            Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+            FormatBytes(_totalBytesToProcess));
                 }
             }));
         }
@@ -1978,11 +2718,23 @@ namespace CopyThatProgram
             _grandTotalFileCount = fileCount;
             _totalBytesToProcess = totalBytes;
 
-            fileCountOnLabel.Text = $"File Count: 0 Out of {_grandTotalFileCount:N0}";
-            totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / {FormatBytes(_totalBytesToProcess)}";
-            fromFilesDirLabel.Text = $"Scan complete: {_grandTotalFileCount:N0} files and {dirCount:N0} folders || {FormatBytes(_totalBytesToProcess)} total";
-            statusLabel.Text = $"Scan complete: {_totalFileCount:N0} files…";
-            filePathLabel.Text = "Ready";
+            fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                _processedFiles.ToString("N0"),
+                _grandTotalFileCount.ToString("N0"));
+
+            totalCopiedProgressLabel.Text = string.Format(
+    Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+    FormatBytes(_totalBytesToProcess));
+            fromFilesDirLabel.Text = string.Format(
+                Translator.Get("Scan complete: {0} files and {1} folders || {2} total"),
+                _grandTotalFileCount.ToString("N0"),
+                dirCount.ToString("N0"),
+                FormatBytes(_totalBytesToProcess));
+            statusLabel.Text = string.Format(
+                Translator.Get("Scan complete: {0} files…"),
+                _totalFileCount.ToString("N0"));
+
+            filePathLabel.Text = Translator.Get("Ready");
         }
 
 
@@ -2016,13 +2768,17 @@ namespace CopyThatProgram
             if (fileCountOnLabel != null)
             {
                 // Updates the text of the label with the total file count.
-                fileCountOnLabel.Text = $"File Count: 0 Out of " + _grandTotalFileCount.ToString("N0") + "";
+                fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                    _processedFiles.ToString("N0"),
+                    _grandTotalFileCount.ToString("N0"));
             }
             // Checks if the `totalCopiedProgressLabel` control exists.
             if (totalCopiedProgressLabel != null)
             {
                 // Updates the text of the label with the total size of files to be processed.
-                totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / {FormatBytes(_totalBytesToProcess)}";
+                totalCopiedProgressLabel.Text = string.Format(
+        Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+        FormatBytes(_totalBytesToProcess));
             }
 
             // This is the second time the files are being added, which will result in duplicate entries.
@@ -2209,7 +2965,7 @@ namespace CopyThatProgram
                 // Forces the label to repaint.
                 fromFilesDirLabel.Refresh();
                 // Updates the text of the speed label.
-                speedLabel.Text = $"{report.Speed:0.00} MB/s";
+                speedLabel.Text = string.Format(Translator.Get("{0} MB/s"), report.Speed.ToString("0.00"));
                 // Forces the speed label to repaint.
                 speedLabel.Refresh();
             });
@@ -2490,23 +3246,35 @@ namespace CopyThatProgram
         private bool _isLoadingForm = false;
 
         private static readonly Dictionary<string, string> LangKeyToDisplay =
-            new(StringComparer.OrdinalIgnoreCase)
-        {
-    {"English", "English"},
-    {"Spanish", "Español"},
-    {"French",  "Français"},
-    {"German",  "Deutsch"}
-        };
+     new(StringComparer.OrdinalIgnoreCase)
+ {
+    {"English",                  "English"},
+    {"French",                   "Français"},
+    {"German",                   "Deutsch"},
+    {"Spanish",                  "Español"},
+    {"Italian",                  "Italiano"},
+    {"Portuguese - Portugal",    "Português (Portugal)"},
+    {"Portuguese - Brazil",      "Português (Brasil)"},
+    {"Dutch",                    "Nederlands"},
+    {"Swedish",                  "Svenska"},
+    {"Norwegian",                "Norsk"},
+    {"Danish",                   "Dansk"},
+    {"Finnish",                  "Suomi"},
+    {"Polish",                   "Polski"},
+    {"Czech",                    "Čeština"},
+    {"Hungarian",                "Magyar"},
+    {"Romanian",                 "Română"}
+ };
 
 
 
 
-
+        string savedLangKey = "";
 
         // ==================== MAIN FORM LOAD ====================
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _multiThreadUiTimer.Interval = 500; // update UI every 0.5s
+            _multiThreadUiTimer.Interval = 500;
             _multiThreadUiTimer.Tick += UpdateMultiThreadUiTimer_Tick;
 
             _isUpdatingLanguage = true;
@@ -2517,38 +3285,106 @@ namespace CopyThatProgram
 
             try
             {
+                /* 1. read what the user saved */
                 string savedLangKey = Properties.Settings.Default.Language ?? "English";
                 string savedSkinKey = Properties.Settings.Default.Skin ?? "Light Mode";
 
-                // SET THE CULTURE FIRST based on saved language
+                /* 2. set culture + translator BEFORE touching the UI */
                 string culture = savedLangKey switch
                 {
                     "Spanish" => "es-ES",
                     "French" => "fr-FR",
                     "German" => "de-DE",
+                    "Italian" => "it-IT",
+                    "Portuguese - Portugal" => "pt-PT",
+                    "Portuguese - Brazil" => "pt-BR",
+                    "Dutch" => "nl-NL",
+                    "Swedish" => "sv-SE",
+                    "Norwegian" => "nb-NO",
+                    "Danish" => "da-DK",
+                    "Finnish" => "fi-FI",
+                    "Polish" => "pl-PL",
+                    "Czech" => "cs-CZ",
+                    "Hungarian" => "hu-HU",
+                    "Romanian" => "ro-RO",
                     _ => "en"
                 };
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+                Thread.CurrentThread.CurrentUICulture =
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
 
-                // SET TRANSLATOR LANGUAGE IMMEDIATELY
                 Translator.CurrentLanguage = savedLangKey switch
                 {
                     "French" => "fr",
                     "German" => "de",
                     "Spanish" => "es",
+                    "Italian" => "it",
+                    "Portuguese - Portugal" => "pt-PT",
+                    "Portuguese - Brazil" => "pt-BR",
+                    "Dutch" => "nl",
+                    "Swedish" => "sv",
+                    "Norwegian" => "no",
+                    "Danish" => "da",
+                    "Finnish" => "fi",
+                    "Polish" => "pl",
+                    "Czech" => "cs",
+                    "Hungarian" => "hu",
+                    "Romanian" => "ro",
                     _ => "en"
                 };
 
-                InitializeLanguageComboBox(savedLangKey);
+                /* 3. Populate the language combo box with items in the current language */
+                string[] languageItems = savedLangKey switch
+                {
+                    "Spanish" => new[] { "Inglés", "Francés", "Alemán", "Español", "Italiano", "Portugués (Portugal)", "Portugués (Brasil)", "Holandés", "Sueco", "Noruego", "Danés", "Finlandés", "Polaco", "Checo", "Húngaro", "Rumano" },
+                    "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol", "Italien", "Portugais (Portugal)", "Portugais (Brésil)", "Néerlandais", "Suédois", "Norvégien", "Danois", "Finnois", "Polonais", "Tchèque", "Hongrois", "Roumain" },
+                    "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch", "Italienisch", "Portugiesisch (Portugal)", "Portugiesisch (Brasilien)", "Niederländisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Ungarisch", "Rumänisch" },
+                    "Italian" => new[] { "Inglese", "Francese", "Tedesco", "Spagnolo", "Italiano", "Portoghese (Portogallo)", "Portoghese (Brasile)", "Olandese", "Svedese", "Norvegese", "Danese", "Finlandese", "Polacco", "Ceco", "Ungherese", "Rumeno" },
+                    "Portuguese - Portugal" => new[] { "Inglês", "Francês", "Alemão", "Espanhol", "Italiano", "Português (Portugal)", "Português (Brasil)", "Holandês", "Sueco", "Norueguês", "Dinamarquês", "Finlandês", "Polaco", "Checo", "Húngaro", "Romeno" },
+                    "Portuguese - Brazil" => new[] { "Inglês", "Francês", "Alemão", "Espanhol", "Italiano", "Português (Portugal)", "Português (Brasil)", "Holandês", "Sueco", "Norueguês", "Dinamarquês", "Finlandês", "Polonês", "Tcheco", "Húngaro", "Romeno" },
+                    "Dutch" => new[] { "Engels", "Frans", "Duits", "Spaans", "Italiaans", "Portugees (Portugal)", "Portugees (Brazilië)", "Nederlands", "Zweeds", "Noors", "Deens", "Fins", "Pools", "Tsjechisch", "Hongaars", "Roemeens" },
+                    "Swedish" => new[] { "Engelska", "Franska", "Tyska", "Spanska", "Italienska", "Portugisiska (Portugal)", "Portugisiska (Brasilien)", "Nederländska", "Svenska", "Norska", "Danska", "Finska", "Polska", "Tjeckiska", "Ungerska", "Rumänska" },
+                    "Norwegian" => new[] { "Engelsk", "Fransk", "Tysk", "Spansk", "Italiensk", "Portugisisk (Portugal)", "Portugisisk (Brasil)", "Nederlandsk", "Svensk", "Norsk", "Dansk", "Finsk", "Polsk", "Tsjekkisk", "Ungarsk", "Rumensk" },
+                    "Danish" => new[] { "Engelsk", "Fransk", "Tysk", "Spansk", "Italiensk", "Portugisisk (Portugal)", "Portugisisk (Brasilien)", "Hollandsk", "Svensk", "Norsk", "Dansk", "Finsk", "Polsk", "Tjekkisk", "Ungarsk", "Rumænsk" },
+                    "Finnish" => new[] { "Englanti", "Ranska", "Saksa", "Espanja", "Italia", "Portugali (Portugali)", "Portugali (Brasilia)", "Hollanti", "Ruotsi", "Norja", "Tanska", "Suomi", "Puola", "Tšekki", "Unkari", "Romania" },
+                    "Polish" => new[] { "Angielski", "Francuski", "Niemiecki", "Hiszpański", "Włoski", "Portugalski (Portugalia)", "Portugalski (Brazylia)", "Holenderski", "Szwedzki", "Norweski", "Duński", "Fiński", "Polski", "Czeski", "Węgierski", "Rumuński" },
+                    "Czech" => new[] { "Angličtina", "Francouzština", "Němčina", "Španělština", "Italština", "Portugalština (Portugalsko)", "Portugalština (Brazílie)", "Nizozemština", "Švédština", "Norština", "Dánština", "Finština", "Polština", "Čeština", "Maďarština", "Rumunština" },
+                    "Hungarian" => new[] { "Angol", "Francia", "Német", "Spanyol", "Olasz", "Portugál (Portugália)", "Portugál (Brazília)", "Holland", "Svéd", "Norvég", "Dán", "Finn", "Lengyel", "Cseh", "Magyar", "Román" },
+                    "Romanian" => new[] { "Engleză", "Franceză", "Germană", "Spaniolă", "Italiană", "Portugheză (Portugalia)", "Portugheză (Brazilia)", "Olandeză", "Suedeză", "Norvegiană", "Daneză", "Finlandeză", "Poloneză", "Cehă", "Maghiară", "Română" },
+                    _ => new[] { "English", "French", "German", "Spanish", "Italian", "Portuguese - Portugal", "Portuguese - Brazil", "Dutch", "Swedish", "Norwegian", "Danish", "Finnish", "Polish", "Czech", "Hungarian", "Romanian" }
+                };
+
+                languageComboBox.Items.Clear();
+                languageComboBox.Items.AddRange(languageItems);
+
+                // Select the correct item based on the saved language key
+                int selectedIndex = savedLangKey switch
+                {
+                    "French" => 1,
+                    "German" => 2,
+                    "Spanish" => 3,
+                    "Italian" => 4,
+                    "Portuguese - Portugal" => 5,
+                    "Portuguese - Brazil" => 6,
+                    "Dutch" => 7,
+                    "Swedish" => 8,
+                    "Norwegian" => 9,
+                    "Danish" => 10,
+                    "Finnish" => 11,
+                    "Polish" => 12,
+                    "Czech" => 13,
+                    "Hungarian" => 14,
+                    "Romanian" => 15,
+                    _ => 0 // English
+                };
+
+                languageComboBox.SelectedIndex = selectedIndex;
+
                 UpdateSkinsComboBoxItems(savedLangKey);
                 LoadCurrentSettings();
 
                 // Apply localized .resx resources
                 var resMan = new ComponentResourceManager(typeof(mainForm));
                 ApplyAllResources(resMan);
-
-                
 
                 allTabs.AddRange(tabControl1.TabPages.Cast<TabPage>());
                 tabControl1.Selecting += TabControl1_Selecting;
@@ -2612,163 +3448,60 @@ namespace CopyThatProgram
                 // Select the skin in ComboBox (but don't apply colors yet)
                 SelectSkinInCombo(savedSkinKey);
 
-                // Apply manual translations - now Translator.Get() will work correctly
-                if (savedLangKey == "Spanish")
+                // Apply manual translations – now Translator.Get() works correctly
+                switch (savedLangKey)
                 {
-                    /* ---------- grid headers ---------- */
-                    dataGridView1.Columns[0].HeaderText = "Nombre del Archivo";
-                    dataGridView1.Columns[1].HeaderText = "Ruta del Archivo";
-                    dataGridView1.Columns[2].HeaderText = "Tipo";
-                    dataGridView1.Columns[3].HeaderText = "Tamaño del Archivo";
-                    dataGridView1.Columns[4].HeaderText = "Estado";
-
-                    //dataGridView2.Columns[0].HeaderText = "Nombre del Archivo";
-                    //dataGridView2.Columns[1].HeaderText = "Ruta del Archivo";
-                    //dataGridView2.Columns[2].HeaderText = "Tipo";
-                    //dataGridView2.Columns[3].HeaderText = "Tamaño del Archivo";
-                    //dataGridView2.Columns[4].HeaderText = "Estado";
-
-                    copyHistoryDGV.Columns[0].HeaderText = "Tipo de operación";
-                    copyHistoryDGV.Columns[1].HeaderText = "Ruta(s) de archivo de origen";
-                    copyHistoryDGV.Columns[2].HeaderText = "Ruta(s) de archivo de destino";
-                    copyHistoryDGV.Columns[3].HeaderText = "Tamaño total de carpeta(s)";
-
-                    skippedDataGridView.Columns[0].HeaderText = "Estado";
-                    skippedDataGridView.Columns[1].HeaderText = "Ruta del archivo de origen";
-                    skippedDataGridView.Columns[2].HeaderText = "Ruta del archivo de destino";
-                    skippedDataGridView.Columns[3].HeaderText = "Nombre del archivo";
-                    skippedDataGridView.Columns[4].HeaderText = "Tamaño del archivo";
-
-                    filesDataGridView.Columns[0].HeaderText = "Nombre";
-                    filesDataGridView.Columns[1].HeaderText = "Ruta";
-                    filesDataGridView.Columns[2].HeaderText = "Tipo";
-                    filesDataGridView.Columns[3].HeaderText = "Tamaño";
-                    filesDataGridView.Columns[4].HeaderText = "Estado";
-
-                    /* ---------- other controls ---------- */
-                    searchTextBox.PlaceholderText = "Ingrese el nombre del archivo o carpeta a buscar...";
-                    ApplyManualSpanishUpdates();
-                }
-                else if (savedLangKey == "French")
-                {
-                    /* ---------- grid headers ---------- */
-                    dataGridView1.Columns[0].HeaderText = "Nom du fichier";
-                    dataGridView1.Columns[1].HeaderText = "Chemin du fichier";
-                    dataGridView1.Columns[2].HeaderText = "Type";
-                    dataGridView1.Columns[3].HeaderText = "Taille du fichier";
-                    dataGridView1.Columns[4].HeaderText = "État";
-
-                    //dataGridView2.Columns[0].HeaderText = "Nom du fichier";
-                    //dataGridView2.Columns[1].HeaderText = "Chemin du fichier";
-                    //dataGridView2.Columns[2].HeaderText = "Type";
-                    //dataGridView2.Columns[3].HeaderText = "Taille du fichier";
-                    //dataGridView2.Columns[4].HeaderText = "État";
-
-                    copyHistoryDGV.Columns[0].HeaderText = "Type d'opération";
-                    copyHistoryDGV.Columns[1].HeaderText = "Chemin(s) source(s)";
-                    copyHistoryDGV.Columns[2].HeaderText = "Chemin(s) de destination";
-                    copyHistoryDGV.Columns[3].HeaderText = "Taille totale des répertoires";
-
-                    skippedDataGridView.Columns[0].HeaderText = "État";
-                    skippedDataGridView.Columns[1].HeaderText = "Chemin du fichier source";
-                    skippedDataGridView.Columns[2].HeaderText = "Chemin du fichier de destination";
-                    skippedDataGridView.Columns[3].HeaderText = "Nom du fichier";
-                    skippedDataGridView.Columns[4].HeaderText = "Taille du fichier";
-
-                    filesDataGridView.Columns[0].HeaderText = "Nom";
-                    filesDataGridView.Columns[1].HeaderText = "Chemin";
-                    filesDataGridView.Columns[2].HeaderText = "Type";
-                    filesDataGridView.Columns[3].HeaderText = "Taille";
-                    filesDataGridView.Columns[4].HeaderText = "État";
-
-                    /* ---------- other controls ---------- */
-                    searchTextBox.PlaceholderText = "Rechercher un fichier ou un dossier…";
-                    ApplyManualFrenchUpdates();
-                }
-
-                else if (savedLangKey == "German")
-                {
-                    /* ---------- grid headers ---------- */
-                    dataGridView1.Columns[0].HeaderText = "Dateiname";
-                    dataGridView1.Columns[1].HeaderText = "Dateipfad";
-                    dataGridView1.Columns[2].HeaderText = "Typ";
-                    dataGridView1.Columns[3].HeaderText = "Dateigröße";
-                    dataGridView1.Columns[4].HeaderText = "Status";
-
-                    //dataGridView2.Columns[0].HeaderText = "Dateiname";
-                    //dataGridView2.Columns[1].HeaderText = "Dateipfad";
-                    //dataGridView2.Columns[2].HeaderText = "Typ";
-                    //dataGridView2.Columns[3].HeaderText = "Dateigröße";
-                    //dataGridView2.Columns[4].HeaderText = "Status";
-
-                    copyHistoryDGV.Columns[0].HeaderText = "Vorgangstyp";
-                    copyHistoryDGV.Columns[1].HeaderText = "Quellpfad(e)";
-                    copyHistoryDGV.Columns[2].HeaderText = "Zielpfad(e)";
-                    copyHistoryDGV.Columns[3].HeaderText = "Gesamtgröße der Ordner";
-
-                    skippedDataGridView.Columns[0].HeaderText = "Status";
-                    skippedDataGridView.Columns[1].HeaderText = "Quellpfad";
-                    skippedDataGridView.Columns[2].HeaderText = "Zielpfad";
-                    skippedDataGridView.Columns[3].HeaderText = "Dateiname";
-                    skippedDataGridView.Columns[4].HeaderText = "Dateigröße";
-
-                    filesDataGridView.Columns[0].HeaderText = "Name";
-                    filesDataGridView.Columns[1].HeaderText = "Pfad";
-                    filesDataGridView.Columns[2].HeaderText = "Typ";
-                    filesDataGridView.Columns[3].HeaderText = "Größe";
-                    filesDataGridView.Columns[4].HeaderText = "Status";
-
-                    /* ---------- other controls ---------- */
-                    searchTextBox.PlaceholderText = "Datei-/Ordnernamen suchen…";
-                    ApplyManualGermanUpdates();
-                }
-                else
-                {
-                    /* ---------- grid headers ---------- */
-                    dataGridView1.Columns[0].HeaderText = "File's Name";
-                    dataGridView1.Columns[1].HeaderText = "File's Path";
-                    dataGridView1.Columns[2].HeaderText = "Type";
-                    dataGridView1.Columns[3].HeaderText = "File's Size";
-                    dataGridView1.Columns[4].HeaderText = "Status";
-
-                    //dataGridView2.Columns[0].HeaderText = "File's Name";
-                    //dataGridView2.Columns[1].HeaderText = "File's Path";
-                    //dataGridView2.Columns[2].HeaderText = "Type";
-                    //dataGridView2.Columns[3].HeaderText = "File's Size";
-                    //dataGridView2.Columns[4].HeaderText = "Status";
-
-                    copyHistoryDGV.Columns[0].HeaderText = "Operation Type";
-                    copyHistoryDGV.Columns[1].HeaderText = "Source File Path(s)";
-                    copyHistoryDGV.Columns[2].HeaderText = "Destination File Path(s)";
-                    copyHistoryDGV.Columns[3].HeaderText = "Total Size of Dir(s)";
-
-                    skippedDataGridView.Columns[0].HeaderText = "Status";
-                    skippedDataGridView.Columns[1].HeaderText = "Source File's Path";
-                    skippedDataGridView.Columns[2].HeaderText = "Destination File's Path";
-                    skippedDataGridView.Columns[3].HeaderText = "File's Name";
-                    skippedDataGridView.Columns[4].HeaderText = "File's Size";
-
-                    filesDataGridView.Columns[0].HeaderText = "Name";
-                    filesDataGridView.Columns[1].HeaderText = "Path";
-                    filesDataGridView.Columns[2].HeaderText = "Type";
-                    filesDataGridView.Columns[3].HeaderText = "Size";
-                    filesDataGridView.Columns[4].HeaderText = "Status";
-
-                    /* ---------- other controls ---------- */
-                    searchTextBox.PlaceholderText = "Enter File/Folder Name to Search For...";
-                    ApplyManualEnglishUpdates();
+                    case "Spanish": ApplyManualSpanishUpdates(); break;
+                    case "French": ApplyManualFrenchUpdates(); break;
+                    case "German": ApplyManualGermanUpdates(); break;
+                    case "Italian": ApplyManualItalianUpdates(); break;
+                    case "Portuguese - Portugal": ApplyManualPortuguesePortugalUpdates(); break;
+                    case "Portuguese - Brazil": ApplyManualPortugueseBrazilUpdates(); break;
+                    case "Dutch": ApplyManualDutchUpdates(); break;
+                    case "Swedish": ApplyManualSwedishUpdates(); break;
+                    case "Norwegian": ApplyManualNorwegianUpdates(); break;
+                    case "Danish": ApplyManualDanishUpdates(); break;
+                    case "Finnish": ApplyManualFinnishUpdates(); break;
+                    case "Polish": ApplyManualPolishUpdates(); break;
+                    case "Czech": ApplyManualCzechUpdates(); break;
+                    case "Hungarian": ApplyManualHungarianUpdates(); break;
+                    case "Romanian": ApplyManualRomanianUpdates(); break;
+                    default: ApplyManualEnglishUpdates(); break;
                 }
             }
             finally
             {
                 _isUpdatingLanguage = false;
-                _isLoadingForm = false; // CRITICAL: Set to false here!
-
+                _isLoadingForm = false;
 
                 languageComboBox.SelectedIndexChanged += languageComboBox_SelectedIndexChanged;
                 skinsComboBox.SelectedIndexChanged += skinsComboBox_SelectedIndexChanged;
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private static string FormatTime(double seconds)
         {
@@ -2830,20 +3563,281 @@ namespace CopyThatProgram
                 ApplySkin(savedSkinKey);
                 System.Diagnostics.Debug.WriteLine($"[SHOWN] Applied skin: {savedSkinKey}");
             }
+
+            fileCountOnLabel.Text = Translator.Get("File Count: 0 Out of 0");
+            totalCMDMultiLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
+            totalCopiedProgressLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
+            fromFilesDirLabel.Text = Translator.Get("Select Files/Directory");
+            targetDirLabel.Text = Translator.Get("Select Target Directory");
+            fileCountMultiLabel.Text = Translator.Get("File Count: 0 Out of 0");
+            filePathLabel.Text = Translator.Get("Nothing");
+            fileProcessedLabel.Text = Translator.Get("Files Processed: 0 Bytes / 0 Bytes");
+            speedLabel.Text = Translator.Get("Speed: 0 MB/s");
+            speedMultiLabel.Text = Translator.Get("Speed: 0 MB/s");
+            elapsedAndTargetTimeLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
+            totalTimeMultiLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
+            totalSpaceMultiLabel.Text = Translator.Get("Total Space Used: 0 Bytes / 0 Bytes");
         }
+
+
 
         // ==================== INITIALIZE LANGUAGE COMBOBOX ====================
         private void InitializeLanguageComboBox(string language)
         {
             languageComboBox.Items.Clear();
-            languageComboBox.Items.AddRange(language switch
+
+            string[] items = savedLangKey switch
             {
-                "Spanish" => new[] { "Inglés", "Francés", "Deutsch", "Español" },  // FIXED: Match pattern
-                "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol" },
-                "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch" },
-                _ => new[] { "English", "French", "German", "Spanish" }
-            });
-            languageComboBox.SelectedItem = LangKeyToDisplay.TryGetValue(language, out var d) ? d : language;
+                "Spanish" => new[] { "Inglés", "Francés", "Deutsch", "Español", "Italiano", "Portugués (Portugal)", "Portugués (Brasil)", "Holandés", "Sueco", "Noruego", "Danés", "Finlandés", "Polaco", "Checo", "Húngaro", "Rumano" },
+                "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol", "Italien", "Portugais (Portugal)", "Portugais (Brésil)", "Néerlandais", "Suédois", "Norvégien", "Danois", "Finnois", "Polonais", "Tchèque", "Hongrois", "Roumain" },
+                "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch", "Italienisch", "Portugiesisch (Portugal)", "Portugiesisch (Brasilien)", "Niederländisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Ungarisch", "Rumänisch" },
+                "Italian" => new[] { "Inglese", "Francese", "Tedesco", "Spagnolo", "Italiano", "Portoghese (Portogallo)", "Portoghese (Brasile)", "Olandese", "Svedese", "Norvegese", "Danese", "Finlandese", "Polacco", "Ceco", "Ungherese", "Rumeno" },
+                "Portuguese - Portugal" => new[] { "Inglês", "Francês", "Alemão", "Espanhol", "Italiano", "Português (Portugal)", "Português (Brasil)", "Holandês", "Sueco", "Norueguês", "Dinamarquês", "Finlandês", "Polaco", "Checo", "Húngaro", "Romeno" },
+                "Portuguese - Brazil" => new[] { "Inglês", "Francês", "Alemão", "Espanhol", "Italiano", "Português (Portugal)", "Português (Brasil)", "Holandês", "Sueco", "Norueguês", "Dinamarquês", "Finlandês", "Polonês", "Tcheco", "Húngaro", "Romeno" },
+                "Dutch" => new[] { "Engels", "Frans", "Duits", "Spaans", "Italiaans", "Portugees (Portugal)", "Portugees (Brazilië)", "Nederlands", "Zweeds", "Noors", "Deens", "Fins", "Pools", "Tsjechisch", "Hongaars", "Roemeens" },
+                "Swedish" => new[] { "Engelska", "Franska", "Tyska", "Spanska", "Italienska", "Portugisiska (Portugal)", "Portugisiska (Brasilien)", "Nederländska", "Svenska", "Norska", "Danska", "Finska", "Polska", "Tjeckiska", "Ungerska", "Rumänska" },
+                "Norwegian" => new[] { "Engelsk", "Fransk", "Tysk", "Spansk", "Italiensk", "Portugisisk (Portugal)", "Portugisisk (Brasil)", "Nederlandsk", "Svensk", "Norsk", "Dansk", "Finsk", "Polsk", "Tsjekkisk", "Ungarsk", "Rumensk" },
+                "Danish" => new[] { "Engelsk", "Fransk", "Tysk", "Spansk", "Italiensk", "Portugisisk (Portugal)", "Portugisisk (Brasilien)", "Hollandsk", "Svensk", "Norsk", "Dansk", "Finsk", "Polsk", "Tjekkisk", "Ungarsk", "Rumænsk" },
+                "Finnish" => new[] { "Englanti", "Ranska", "Saksa", "Espanja", "Italia", "Portugali (Portugali)", "Portugali (Brasilia)", "Hollanti", "Ruotsi", "Norja", "Tanska", "Suomi", "Puola", "Tšekki", "Unkari", "Romania" },
+                "Polish" => new[] { "Angielski", "Francuski", "Niemiecki", "Hiszpański", "Włoski", "Portugalski (Portugalia)", "Portugalski (Brazylia)", "Holenderski", "Szwedzki", "Norweski", "Duński", "Fiński", "Polski", "Czeski", "Węgierski", "Rumuński" },
+                "Czech" => new[] { "Angličtina", "Francouzština", "Němčina", "Španělština", "Italština", "Portugalština (Portugalsko)", "Portugalština (Brazílie)", "Nizozemština", "Švédština", "Norština", "Dánština", "Finština", "Polština", "Čeština", "Maďarština", "Rumunština" },
+                "Hungarian" => new[] { "Angol", "Francia", "Német", "Spanyol", "Olasz", "Portugál (Portugália)", "Portugál (Brazília)", "Holland", "Svéd", "Norvég", "Dán", "Finn", "Lengyel", "Cseh", "Magyar", "Román" },
+                "Romanian" => new[] { "Engleză", "Franceză", "Germană", "Spaniolă", "Italiană", "Portugheză (Portugalia)", "Portugheză (Brazilia)", "Olandeză", "Suedeză", "Norvegiană", "Daneză", "Finlandeză", "Poloneză", "Cehă", "Maghiară", "Română" },
+                _ => new[] { "English", "French", "German", "Spanish", "Italian", "Portuguese - Portugal", "Portuguese - Brazil", "Dutch", "Swedish", "Norwegian", "Danish", "Finnish", "Polish", "Czech", "Hungarian", "Romanian" }
+            };
+
+            languageComboBox.Items.AddRange(items);
+
+            // Set the selected index based on the saved language
+            int selectedIndex = savedLangKey switch
+            {
+                "English" => 0,
+                "French" => 1,
+                "German" => 2,
+                "Spanish" => 3,
+                "Italian" => 4,
+                "Portuguese - Portugal" => 5,
+                "Portuguese - Brazil" => 6,
+                "Dutch" => 7,
+                "Swedish" => 8,
+                "Norwegian" => 9,
+                "Danish" => 10,
+                "Finnish" => 11,
+                "Polish" => 12,
+                "Czech" => 13,
+                "Hungarian" => 14,
+                "Romanian" => 15,
+                _ => 0
+            };
+
+            languageComboBox.SelectedIndex = selectedIndex;
+        }
+
+        // ==================== HELPER METHODS ====================
+        private void UpdateSkinsComboBoxItems(string languageKey)
+        {
+            skinsComboBox.Items.Clear();
+            switch (languageKey)
+            {
+                case "Spanish":
+                    skinsComboBox.Items.AddRange(new[] { "Modo Claro", "Modo Medio", "Modo Oscuro", "_________________", "Color Personalizado" });
+                    break;
+                case "French":
+                    skinsComboBox.Items.AddRange(new[] { "Mode Clair", "Mode Moyen", "Mode Sombre", "_________________", "Couleur Personnalisée" });
+                    break;
+                case "German":
+                    skinsComboBox.Items.AddRange(new[] { "Heller Modus", "Mittlerer Modus", "Dunkler Modus", "_________________", "Benutzerdefinierte Farbe" });
+                    break;
+                case "Italian":
+                    skinsComboBox.Items.AddRange(new[] { "Modalità Chiara", "Modalità Media", "Modalità Scura", "_________________", "Colore Personalizzato" });
+                    break;
+                case "Portuguese - Portugal":
+                case "Portuguese - Brazil":
+                    skinsComboBox.Items.AddRange(new[] { "Modo Claro", "Modo Médio", "Modo Escuro", "_________________", "Cor Personalizada" });
+                    break;
+                case "Dutch":
+                    skinsComboBox.Items.AddRange(new[] { "Lichte Modus", "Middelmodus", "Donkere Modus", "_________________", "Aangepaste Kleur" });
+                    break;
+                case "Swedish":
+                    skinsComboBox.Items.AddRange(new[] { "Ljust Läge", "Mellanläge", "Mörkt Läge", "_________________", "Anpassad Färg" });
+                    break;
+                case "Norwegian":
+                    skinsComboBox.Items.AddRange(new[] { "Lys Modus", "Middels Modus", "Mørk Modus", "_________________", "Egendefinert Farge" });
+                    break;
+                case "Danish":
+                    skinsComboBox.Items.AddRange(new[] { "Lys Tilstand", "Mellem Tilstand", "Mørk Tilstand", "_________________", "Brugerdefineret Farve" });
+                    break;
+                case "Finnish":
+                    skinsComboBox.Items.AddRange(new[] { "Vaalea Tila", "Keskitila", "Tumma Tila", "_________________", "Mukautettu Väri" });
+                    break;
+                case "Polish":
+                    skinsComboBox.Items.AddRange(new[] { "Tryb Jasny", "Tryb Średni", "Tryb Ciemny", "_________________", "Niestandardowy Kolor" });
+                    break;
+                case "Czech":
+                    skinsComboBox.Items.AddRange(new[] { "Světlý Režim", "Střední Režim", "Tmavý Režim", "_________________", "Vlastní Barva" });
+                    break;
+                case "Hungarian":
+                    skinsComboBox.Items.AddRange(new[] { "Világos Mód", "Közepes Mód", "Sötét Mód", "_________________", "Egyéni Szín" });
+                    break;
+                case "Romanian":
+                    skinsComboBox.Items.AddRange(new[] { "Mod Luminos", "Mod Mediu", "Mod Întunecat", "_________________", "Culoare Personalizată" });
+                    break;
+                default: // English
+                    skinsComboBox.Items.AddRange(new[] { "Light Mode", "Medium Mode", "Dark Mode", "_________________", "Custom Color" });
+                    break;
+            }
+        }
+
+
+        private static readonly Dictionary<string, Dictionary<string, string>> SkinLocalized =
+    new(StringComparer.OrdinalIgnoreCase)
+{
+    { "Light Mode", new Dictionary<string, string>
+        {
+            { "English", "Light Mode" },
+            { "Spanish", "Modo Claro" },
+            { "French", "Mode Clair" },
+            { "German", "Heller Modus" },
+            { "Italian", "Modalità Chiara" },
+            { "Portuguese - Portugal", "Modo Claro" },
+            { "Portuguese - Brazil", "Modo Claro" },
+            { "Dutch", "Lichte Modus" },
+            { "Swedish", "Ljust Läge" },
+            { "Norwegian", "Lys Modus" },
+            { "Danish", "Lys Tilstand" },
+            { "Finnish", "Vaalea Tila" },
+            { "Polish", "Tryb Jasny" },
+            { "Czech", "Světlý Režim" },
+            { "Hungarian", "Világos Mód" },
+            { "Romanian", "Mod Luminos" }
+        }
+    },
+    { "Medium Mode", new Dictionary<string, string>
+        {
+            { "English", "Medium Mode" },
+            { "Spanish", "Modo Medio" },
+            { "French", "Mode Moyen" },
+            { "German", "Mittlerer Modus" },
+            { "Italian", "Modalità Media" },
+            { "Portuguese - Portugal", "Modo Médio" },
+            { "Portuguese - Brazil", "Modo Médio" },
+            { "Dutch", "Middelmodus" },
+            { "Swedish", "Mellanläge" },
+            { "Norwegian", "Middels Modus" },
+            { "Danish", "Mellem Tilstand" },
+            { "Finnish", "Keskitila" },
+            { "Polish", "Tryb Średni" },
+            { "Czech", "Střední Režim" },
+            { "Hungarian", "Közepes Mód" },
+            { "Romanian", "Mod Mediu" }
+        }
+    },
+    { "Dark Mode", new Dictionary<string, string>
+        {
+            { "English", "Dark Mode" },
+            { "Spanish", "Modo Oscuro" },
+            { "French", "Mode Sombre" },
+            { "German", "Dunkler Modus" },
+            { "Italian", "Modalità Scura" },
+            { "Portuguese - Portugal", "Modo Escuro" },
+            { "Portuguese - Brazil", "Modo Escuro" },
+            { "Dutch", "Donkere Modus" },
+            { "Swedish", "Mörkt Läge" },
+            { "Norwegian", "Mørk Modus" },
+            { "Danish", "Mørk Tilstand" },
+            { "Finnish", "Tumma Tila" },
+            { "Polish", "Tryb Ciemny" },
+            { "Czech", "Tmavý Režim" },
+            { "Hungarian", "Sötét Mód" },
+            { "Romanian", "Mod Întunecat" }
+        }
+    },
+    { "Custom Color", new Dictionary<string, string>
+        {
+            { "English", "Custom Color" },
+            { "Spanish", "Color Personalizado" },
+            { "French", "Couleur Personnalisée" },
+            { "German", "Benutzerdefinierte Farbe" },
+            { "Italian", "Colore Personalizzato" },
+            { "Portuguese - Portugal", "Cor Personalizada" },
+            { "Portuguese - Brazil", "Cor Personalizada" },
+            { "Dutch", "Aangepaste Kleur" },
+            { "Swedish", "Anpassad Färg" },
+            { "Norwegian", "Egendefinert Farge" },
+            { "Danish", "Brugerdefineret Farve" },
+            { "Finnish", "Mukautettu Väri" },
+            { "Polish", "Niestandardowy Kolor" },
+            { "Czech", "Vlastní Barva" },
+            { "Hungarian", "Egyéni Szín" },
+            { "Romanian", "Culoare Personalizată" }
+        }
+    }
+};
+
+        private void InitializeOperationComboBox()
+        {
+            string selectedLanguage = CopyThatProgram.Properties.Settings.Default.Language;
+            // Populate the combo box with the available file operations.
+            copyMoveDeleteComboBox.Items.Clear();
+            onFinishComboBox.Items.Clear();
+            try
+            {
+                // Normalise the key once
+                string langKey = (CopyThatProgram.Properties.Settings.Default.Language ?? "English")
+                                 .Trim()
+                                 .ToLowerInvariant();
+                // reusable string arrays
+                string[] copyMoveItems = langKey switch
+                {
+                    "spanish" or "español" => new[] { "Copiar archivos", "Mover archivos", "Borrado seguro" },
+                    "german" or "deutsch" => new[] { "Dateien kopieren", "Dateien verschieben", "Sicher löschen" },
+                    "french" or "français" => new[] { "Copier les fichiers", "Déplacer les fichiers", "Suppression sécurisée" },
+                    "italian" or "italiano" => new[] { "Copia file", "Sposta file", "Eliminazione sicura" },
+                    "portuguese - portugal" or "português (portugal)" => new[] { "Copiar ficheiros", "Mover ficheiros", "Eliminação segura" },
+                    "portuguese - brazil" or "português (brasil)" => new[] { "Copiar arquivos", "Mover arquivos", "Exclusão segura" },
+                    "dutch" or "nederlands" => new[] { "Bestanden kopiëren", "Bestanden verplaatsen", "Veilig verwijderen" },
+                    "swedish" or "svenska" => new[] { "Kopiera filer", "Flytta filer", "Säker radering" },
+                    "norwegian" or "norsk" => new[] { "Kopier filer", "Flytt filer", "Sikker sletting" },
+                    "danish" or "dansk" => new[] { "Kopier filer", "Flyt filer", "Sikker sletning" },
+                    "finnish" or "suomi" => new[] { "Kopioi tiedostot", "Siirrä tiedostot", "Turvallinen poisto" },
+                    "polish" or "polski" => new[] { "Kopiuj pliki", "Przenieś pliki", "Bezpieczne usuwanie" },
+                    "czech" or "čeština" => new[] { "Kopírovat soubory", "Přesunout soubory", "Bezpečné mazání" },
+                    "hungarian" or "magyar" => new[] { "Fájlok másolása", "Fájlok áthelyezése", "Biztonságos törlés" },
+                    "romanian" or "română" => new[] { "Copiază fișiere", "Mută fișiere", "Ștergere securizată" },
+                    _ => new[] { "Copy Files", "Move Files", "Secure Delete" }
+                };
+                string[] onFinishItems = langKey switch
+                {
+                    "spanish" or "español" => new[] { "No hacer nada", "Suspender", "Cerrar sesión", "Salir del programa", "Apagar" },
+                    "german" or "deutsch" => new[] { "Nichts tun", "Ruhezustand", "Abmelden", "Programm beenden", "Herunterfahren" },
+                    "french" or "français" => new[] { "Ne rien faire", "Mettre en veille", "Se déconnecter", "Quitter le programme", "Arrêter l'ordinateur" },
+                    "italian" or "italiano" => new[] { "Non fare nulla", "Sospendi", "Disconnetti", "Esci dal programma", "Spegni" },
+                    "portuguese - portugal" or "português (portugal)" => new[] { "Não fazer nada", "Suspender", "Terminar sessão", "Sair do programa", "Encerrar" },
+                    "portuguese - brazil" or "português (brasil)" => new[] { "Não fazer nada", "Suspender", "Fazer logoff", "Sair do programa", "Desligar" },
+                    "dutch" or "nederlands" => new[] { "Niets doen", "Slaapstand", "Afmelden", "Programma afsluiten", "Afsluiten" },
+                    "swedish" or "svenska" => new[] { "Gör ingenting", "Viloläge", "Logga ut", "Avsluta programmet", "Stäng av" },
+                    "norwegian" or "norsk" => new[] { "Gjør ingenting", "Dvale", "Logg ut", "Avslutt programmet", "Slå av" },
+                    "danish" or "dansk" => new[] { "Gør ingenting", "Dvale", "Log af", "Afslut programmet", "Luk ned" },
+                    "finnish" or "suomi" => new[] { "Älä tee mitään", "Lepotila", "Kirjaudu ulos", "Sulje ohjelma", "Sammuta" },
+                    "polish" or "polski" => new[] { "Nic nie rób", "Uśpij", "Wyloguj", "Zakończ program", "Zamknij system" },
+                    "czech" or "čeština" => new[] { "Nedělat nic", "Režim spánku", "Odhlásit se", "Ukončit program", "Vypnout" },
+                    "hungarian" or "magyar" => new[] { "Ne csinálj semmit", "Alvó állapot", "Kijelentkezés", "Kilépés a programból", "Leállítás" },
+                    "romanian" or "română" => new[] { "Nu face nimic", "Suspendare", "Deconectare", "Ieșire din program", "Oprire" },
+                    _ => new[] { "Do Nothing", "Sleep", "Log Off", "Exit Program", "Shut Down" }
+                };
+                // fill the combos
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(copyMoveItems);
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(onFinishItems);
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(onFinishItems);
+            }
+            catch
+            {
+            }
+            // Attach an event handler to update the UI when the selected item changes.
+            copyMoveDeleteComboBox.SelectedIndexChanged += (s, e) => UpdateUIForOperation();
         }
 
         // ==================== APPLY SKIN ====================
@@ -2921,28 +3915,45 @@ namespace CopyThatProgram
             }
         }
 
-        // ==================== HELPER METHODS ====================
-        private void UpdateSkinsComboBoxItems(string languageKey)
+        private string ToDisplay(string englishKey)
         {
-            skinsComboBox.Items.Clear();
+            if (!SkinLocalized.TryGetValue(englishKey, out var translations))
+                return englishKey;
 
-            switch (languageKey)
-            {
-                case "Spanish":
-                    skinsComboBox.Items.AddRange(new[] { "Modo Claro", "Modo Medio", "Modo Oscuro", "_________________", "Color Personalizado" });
-                    break;
-                case "French":
-                    skinsComboBox.Items.AddRange(new[] { "Mode Clair", "Mode Moyen", "Mode Sombre", "_________________", "Couleur Personnalisée" });
-                    break;
-                case "German":
-                    skinsComboBox.Items.AddRange(new[] { "Heller Modus", "Mittlerer Modus", "Dunkler Modus", "_________________", "Benutzerdefinierte Farbe" });
-                    break;
-                default: // English
-                    skinsComboBox.Items.AddRange(new[] { "Light Mode", "Medium Mode", "Dark Mode", "_________________", "Custom Color" });
-                    break;
-            }
+            // Get the current language key from settings
+            string currentLangKey = Properties.Settings.Default.Language ?? "English";
+
+            if (translations.TryGetValue(currentLangKey, out var translation))
+                return translation;
+
+            return englishKey;
         }
 
+        private string ToEn(string display) => display switch
+        {
+            // Light Mode translations
+            "Light Mode" or "Modo Claro" or "Mode Clair" or "Heller Modus" or "Modalità Chiara" or
+            "Lichte Modus" or "Ljust Läge" or "Lys Modus" or "Lys Tilstand" or "Vaalea Tila" or
+            "Tryb Jasny" or "Světlý Režim" or "Világos Mód" or "Mod Luminos" => "Light Mode",
+
+            // Medium Mode translations
+            "Medium Mode" or "Modo Medio" or "Mode Moyen" or "Mittlerer Modus" or "Modalità Media" or
+            "Modo Médio" or "Middelmodus" or "Mellanläge" or "Middels Modus" or "Mellem Tilstand" or
+            "Keskitila" or "Tryb Średni" or "Střední Režim" or "Közepes Mód" or "Mod Mediu" => "Medium Mode",
+
+            // Dark Mode translations
+            "Dark Mode" or "Modo Oscuro" or "Mode Sombre" or "Dunkler Modus" or "Modalità Scura" or
+            "Modo Escuro" or "Donkere Modus" or "Mörkt Läge" or "Mørk Modus" or "Mørk Tilstand" or
+            "Tumma Tila" or "Tryb Ciemny" or "Tmavý Režim" or "Sötét Mód" or "Mod Întunecat" => "Dark Mode",
+
+            // Custom Color translations
+            "Custom Color" or "Color Personalizado" or "Couleur Personnalisée" or "Benutzerdefinierte Farbe" or
+            "Colore Personalizzato" or "Cor Personalizada" or "Aangepaste Kleur" or "Anpassad Färg" or
+            "Egendefinert Farge" or "Brugerdefineret Farve" or "Mukautettu Väri" or "Niestandardowy Kolor" or
+            "Vlastní Barva" or "Egyéni Szín" or "Culoare Personalizată" => "Custom Color",
+
+            _ => display
+        };
         private void SelectSkinInCombo(string englishKey)
         {
             if (skinsComboBox == null || skinsComboBox.Items.Count == 0) return;
@@ -2970,30 +3981,6 @@ namespace CopyThatProgram
             }
         }
 
-        private string ToDisplay(string englishKey)
-        {
-            if (!SkinLocalized.TryGetValue(englishKey, out var translations))
-                return englishKey;
-
-            string currentLang = languageComboBox.SelectedItem?.ToString() ?? "English";
-
-            return currentLang switch
-            {
-                "Español" or "Spanish" => translations.Spanish,
-                "Français" or "French" => translations.French,
-                "Deutsch" or "German" => translations.German,
-                _ => englishKey
-            };
-        }
-
-        private string ToEn(string display) => display switch
-        {
-            "Modo Claro" or "Mode Clair" or "Heller Modus" => "Light Mode",
-            "Modo Medio" or "Mode Moyen" or "Mittlerer Modus" => "Medium Mode",
-            "Modo Oscuro" or "Mode Sombre" or "Dunkler Modus" => "Dark Mode",
-            "Color Personalizado" or "Couleur Personnalisée" or "Benutzerdefinierte Farbe" => "Custom Color",
-            _ => display
-        };
 
         private void ApplyColorsToControl(System.Windows.Forms.Control ctrl, Color fore, Color back)
         {
@@ -3004,15 +3991,6 @@ namespace CopyThatProgram
                 ApplyColorsToControl(child, fore, back);
         }
 
-        private static readonly Dictionary<string, (string Spanish, string French, string German)> SkinLocalized =
-            new(StringComparer.OrdinalIgnoreCase)
-        {
-    { "Light Mode", ("Modo Claro", "Mode Clair", "Heller Modus") },
-    { "Medium Mode", ("Modo Medio", "Mode Moyen", "Mittlerer Modus") },
-    { "Dark Mode", ("Modo Oscuro", "Mode Sombre", "Dunkler Modus") },
-    { "Custom Color", ("Color Personalizado", "Couleur Personnalisée", "Benutzerdefinierte Farbe") }
-        };
-
         /// <summary>
         /// Translates the header text of the DataGridView columns using a resource manager.
         /// </summary>
@@ -3021,7 +3999,7 @@ namespace CopyThatProgram
             // Creates a new resource manager.
             var rm = new ComponentResourceManager(typeof(mainForm));
             // Iterates through several DataGridViews.
-            foreach (var grid in new[] { filesDataGridView, dataGridView1})
+            foreach (var grid in new[] { filesDataGridView, dataGridView1 })
             {
                 // Iterates through each column in the current DataGridView.
                 foreach (DataGridViewColumn col in grid.Columns)
@@ -3251,7 +4229,9 @@ namespace CopyThatProgram
             speedLabel.Text = $"Speed: {progress.Speed:0.00} MB/s";
 
             // Updates the text of the `fromFilesDirLabel`.
-            fromFilesDirLabel.Text = $"Current Source: {progress.CurrentFile}";
+            fromFilesDirLabel.Text = string.Format(
+                Translator.Get("Current Source: {0}"),
+                progress.CurrentFile);
         }
 
         /// <summary>
@@ -3421,7 +4401,7 @@ namespace CopyThatProgram
                 // Gets the full path of the dropped item.
                 string fileName = getFileName(file);
                 // Shows a message box to inform the user what they dropped.
-                MessageBox.Show(Translator.Get("You dropped " + fileName), Translator.Get("Drppped File") , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Translator.Get("You dropped " + fileName), Translator.Get("Drppped File"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Checks if the dropped item is a directory.
                 if (Directory.Exists(file))
                 {
@@ -3967,13 +4947,37 @@ namespace CopyThatProgram
 
             // Determines the file operation based on the selected item in the combo box.
             FileOperation operation;
-            switch (copyMoveDeleteComboBox.SelectedItem?.ToString())
+            string selectedOperation = copyMoveDeleteComboBox.SelectedItem?.ToString();
+            string englishOperation = selectedOperation switch
+            {
+                // Copy Files
+                "Copy Files" or "Copiar Archivos" or "Copier des Fichiers" or "Dateien Kopieren" or
+                "Copia File" or "Copiar Ficheiros" or "Bestanden Kopiëren" or "Kopiera Filer" or
+                "Kopier Filer" or "Kopier Filer" or "Kopioi Tiedostoja" or "Kopiuj Pliki" or
+                "Kopírovat Soubory" or "Fájlok Másolása" or "Copiază Fișiere" => "Copy Files",
+
+                // Move Files
+                "Move Files" or "Mover Archivos" or "Déplacer des Fichiers" or "Dateien Verschieben" or
+                "Sposta File" or "Mover Ficheiros" or "Bestanden Verplaatsen" or "Flytta Filer" or
+                "Flytt Filer" or "Flyt Filer" or "Siirrä Tiedostoja" or "Przenieś Pliki" or
+                "Přesunout Soubory" or "Fájlok Áthelyezése" or "Mută Fișiere" => "Move Files",
+
+                // Secure Delete Files
+                "Secure Delete Files" or "Eliminar Archivos de Forma Segura" or "Supprimer des Fichiers de Manière Sécurisée" or
+                "Dateien Sicher Löschen" or "Elimina File in Modo Sicuro" or "Eliminar Ficheiros de Forma Segura" or
+                "Bestanden Veilig Verwijderen" or "Radera Filer Säkert" or "Slett Filer Trygt" or
+                "Slet Filer Sikkert" or "Poista Tiedostot Turvallisesti" or "Bezpiecznie Usuń Pliki" or
+                "Bezpečně Smazat Soubory" or "Fájlok Biztonságos Törlése" or "Șterge Fișiere în Siguranță" => "Secure Delete Files",
+
+                _ => null
+            };
+
+            switch (englishOperation)
             {
                 case "Copy Files": operation = FileOperation.Copy; break;
                 case "Move Files": operation = FileOperation.Move; break;
                 case "Secure Delete Files": operation = FileOperation.SecureDelete; break;
                 default:
-                    // Shows an error if no valid operation is selected.
                     MessageBox.Show(Translator.Get("Please select a valid operation."),
                                     Translator.Get("Invalid Operation"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -4088,9 +5092,9 @@ namespace CopyThatProgram
                                 _totalBytesToProcess *= targetCount;
                             }
 
-                            // ✅ Update initial UI
-                            fileCountOnLabel.Text = $"File Count: 0 Out of {_grandTotalFileCount:N0}";
-                            totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / {FormatBytes(_totalBytesToProcess)}";
+                            fileCountOnLabel.Text = string.Format(Translator.Get("File Count: 0 Out of {0}"), _grandTotalFileCount.ToString("N0"));
+
+                            totalCopiedProgressLabel.Text = string.Format(Translator.Get("Total C/M/D: 0 Bytes / {0}"), FormatBytes(_totalBytesToProcess));
 
 
                             tabControl1.SelectedTab = cmdMultithread;
@@ -4116,9 +5120,9 @@ namespace CopyThatProgram
                                 _totalBytesToProcess *= targetCount2;
                             }
 
-                            // ✅ Update initial UI
-                            fileCountOnLabel.Text = $"File Count: 0 Out of {_grandTotalFileCount:N0}";
-                            totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / {FormatBytes(_totalBytesToProcess)}";
+                            fileCountOnLabel.Text = string.Format(Translator.Get("File Count: 0 Out of {0}"), _grandTotalFileCount.ToString("N0"));
+
+                            totalCopiedProgressLabel.Text = string.Format(Translator.Get("Total C/M/D: 0 Bytes / {0}"), FormatBytes(_totalBytesToProcess));
 
 
                             // Disable all other tabs
@@ -4143,9 +5147,9 @@ namespace CopyThatProgram
                             _totalBytesToProcess *= targetCount3;
                         }
 
-                        // ✅ Update initial UI
-                        fileCountOnLabel.Text = $"File Count: 0 Out of {_grandTotalFileCount:N0}";
-                        totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / {FormatBytes(_totalBytesToProcess)}";
+                        fileCountOnLabel.Text = string.Format(Translator.Get("File Count: 0 Out of {0}"), _grandTotalFileCount.ToString("N0"));
+
+                        totalCopiedProgressLabel.Text = string.Format(Translator.Get("Total C/M/D: 0 Bytes / {0}"), FormatBytes(_totalBytesToProcess));
 
                         // Starts the move worker.
                         _moveWorker?.RunWorkerAsync();
@@ -4165,9 +5169,9 @@ namespace CopyThatProgram
                             _totalBytesToProcess *= targetCount4;
                         }
 
-                        // ✅ Update initial UI
-                        fileCountOnLabel.Text = $"File Count: 0 Out of {_grandTotalFileCount:N0}";
-                        totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / {FormatBytes(_totalBytesToProcess)}";
+                        fileCountOnLabel.Text = string.Format(Translator.Get("File Count: 0 Out of {0}"), _grandTotalFileCount.ToString("N0"));
+
+                        totalCopiedProgressLabel.Text = string.Format(Translator.Get("Total C/M/D: 0 Bytes / {0}"), FormatBytes(_totalBytesToProcess));
 
 
                         // Starts the delete worker.
@@ -4200,7 +5204,12 @@ namespace CopyThatProgram
                 _updateTimer.Stop(); // Stops the update timer.
             }
         }
-        private void pauseResumeButton_Click(object sender, EventArgs e) // Event handler for the pause/resume button click.
+        private void
+
+
+
+
+            Button_Click(object sender, EventArgs e) // Event handler for the pause/resume button click.
         {
             _isPaused = !_isPaused; // Toggles the boolean state of the _isPaused variable.
 
@@ -4332,10 +5341,12 @@ namespace CopyThatProgram
                                 _grandTotalFileCount++; // Increments the total file count.
                                 _totalBytesToProcess += fileInfoNow.Length; // Adds the file's size to the total bytes to be processed.
 
-                                this.fileCountOnLabel.Text = // Updates a UI label with the current file count.
-                                    $"File Count: 0 Out of {_grandTotalFileCount:N0}";
-                                totalCopiedProgressLabel.Text = // Updates a UI label with the total bytes to process.
-                                                    $"Total C/M/D: 0 Bytes / {FormatBytes(_totalBytesToProcess)}";
+                                fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                                    _processedFiles.ToString("N0"),
+                                    _grandTotalFileCount.ToString("N0"));
+                                totalCopiedProgressLabel.Text = string.Format(
+                        Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+                        FormatBytes(_totalBytesToProcess));
 
                                 totalSizeBytesFile = 0; // Resets the local size counter.
                             }
@@ -4443,32 +5454,36 @@ namespace CopyThatProgram
 
         private void clearFileListButton_Click(object sender, EventArgs e) // Event handler for the "Clear File List" button.
         {
-            _cancellationTokenSource?.Cancel(); // Requests cancellation of any pending operations.
-            _cancellationTokenSource?.Dispose(); // Disposes of the cancellation token source.
-            _cancellationTokenSource = null; // Sets the cancellation token source to null.
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
+            _fileList.Clear();
+            _sourceDirectories.Clear();
+            _targetDirectories.Clear();
+            targetPaths.Clear();
+            _sourcePaths.Clear();
+            _grandTotalFileCount = 0;
+            _totalFolders = 0;
+            _totalBytesToProcess = 0;
+            _totalBytesProcessed = 0;
+            _processedFiles = 0;
+            _processedFolders = 0;
 
-            _fileList.Clear(); // Clears the list of files.
-
-            _sourceDirectories.Clear(); // Clears the list of source directories.
-            _targetDirectories.Clear(); // Clears the list of target directories.
-            targetPaths.Clear(); // Clears the list of target paths.
-            _sourcePaths.Clear(); // Clears the list of source paths.
-            _grandTotalFileCount = 0; // Resets the total file count.
-            _totalFolders = 0; // Resets the total folders count.
-            _totalBytesToProcess = 0; // Resets the total bytes to process.
-            _totalBytesProcessed = 0; // Resets the processed bytes.
-            _processedFiles = 0; // Resets the processed files count.
-            _processedFolders = 0; // Resets the processed folders count.
-
-
-            fileCountOnLabel.Text = "File Count: 0 Out of 0"; // Resets the file count UI label.
-            totalCopiedProgressLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets the progress UI label.
-            fromFilesDirLabel.Text = "Select Files/Directory"; // Resets the source directory UI label.
-            targetDirLabel.Text = "Select Target Directory"; // Resets the target directory UI label.
-            fileCountMultiLabel.Text = "File Count: 0 Out of 0"; // Resets a multi-file count UI label.
-            totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes"; // Resets a multi-file progress UI label.
-            filePathLabel.Text = "Nothing"; // Resets the file path UI label.
-        }
+            // Use Translator for all labels
+            fileCountOnLabel.Text = Translator.Get("File Count: 0 Out of 0");
+            totalCMDMultiLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
+            totalCopiedProgressLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
+            fromFilesDirLabel.Text = Translator.Get("Select Files/Directory");
+            targetDirLabel.Text = Translator.Get("Select Target Directory");
+            fileCountMultiLabel.Text = Translator.Get("File Count: 0 Out of 0");
+            filePathLabel.Text = Translator.Get("Nothing");
+            fileProcessedLabel.Text = Translator.Get("Files Processed: 0 Bytes / 0 Bytes");
+            speedLabel.Text = Translator.Get("Speed: 0 MB/s");
+            speedMultiLabel.Text = Translator.Get("Speed: 0 MB/s");
+            elapsedAndTargetTimeLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
+            totalTimeMultiLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
+            totalSpaceMultiLabel.Text = Translator.Get("Total Space Used: 0 Bytes / 0 Bytes");
+        }
         private void onFinishComboBox_SelectedIndexChanged(object sender, EventArgs e) // Event handler for the "onFinish" combo box selection change.
         {
             if (onFinishMultiComboBox.SelectedIndex == -1) // Checks if the multi-select combo box has no selection.
@@ -4981,7 +5996,7 @@ namespace CopyThatProgram
                         catch (Exception ex)
                         {
                             // Handle and display any errors that occur during the scanning process.
-                            fromFilesDirLabel.Text = $"Error: {ex.Message}";
+                            fromFilesDirLabel.Text = string.Format(Translator.Get("Error: {0}"), ex.Message);
                             MessageBox.Show(Translator.Get($"An error occurred during scanning: {ex.Message}"), Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         finally
@@ -5003,7 +6018,7 @@ namespace CopyThatProgram
                     }
 
                     // Reset the file path label and update the data bindings.
-                    filePathLabel.Text = "Nothing";
+                    filePathLabel.Text = Translator.Get("Nothing");
                     _bindingSource.ResetBindings(false);
                 }
             }
@@ -5940,8 +6955,8 @@ namespace CopyThatProgram
 
         private void removeDirBGW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // Sets the text of a label to a default value.
-            fromFilesDirLabel.Text = "Select Files/Directory";
+            // Sets the text of a label to a default value.
+            fromFilesDirLabel.Text = Translator.Get("Select Files/Directory");
 
             // Sets the selected tab to the command home page.
             tabControl1.SelectedTab = cmdHomePage;
@@ -6384,127 +7399,21 @@ namespace CopyThatProgram
         }
         private void setUpEmailButton_Click(object sender, EventArgs e)
         {
-            // Checks if there are any rows in the data grid view.
-            if (dataGridView1.Rows.Count > 0)
+            if (dataGridView1.Rows.Count > 0 && skinsComboBox.SelectedItem != null)
             {
-                // Checks if an item is selected in the skins combo box.
-                if (skinsComboBox.SelectedItem != null)
-                {
-                    if (languageComboBox.SelectedItem.ToString() == "English" || languageComboBox.SelectedItem.ToString() == "Inglés")
-                    {
-                        // Gets the selected skin string.
-                        string selectedSkin = skinsComboBox.SelectedItem.ToString();
-                        // Uses a switch statement to set the global mode based on the selected skin.
-                        switch (selectedSkin)
-                        {
-                            case "Dark Mode":
-                                globalMODE = "Dark Mode";
-                                break;
-                            case "Medium Mode":
-                                globalMODE = "Medium Mode";
-                                break;
-                            case "Light Mode":
-                                globalMODE = "Light Mode";
-                                break;
-                            case "Custom Color":
-                                globalMODE = "Custom Color";
-                                break;
-                            default:
-                                globalMODE = "Dark Mode";
-                                break;
-                        }
-
-                        // Creates and shows a new email form.
-                        new emailForm().ShowDialog();
-                    }
-                    else if (languageComboBox.SelectedItem.ToString() == "Spanish" || languageComboBox.SelectedItem.ToString() == "Español")
-                    {
-                        // Gets the selected skin string.
-                        string selectedSkin = skinsComboBox.SelectedItem.ToString();
-                        // Uses a switch statement to set the global mode based on the selected skin.
-                        switch (selectedSkin)
-                        {
-                            case "Modo Claro":
-                                globalMODE = "Modo Claro";
-                                break;
-                            case "Modo Medio":
-                                globalMODE = "Modo Medio";
-                                break;
-                            case "Modo Oscuro":
-                                globalMODE = "Modo Oscuro";
-                                break;
-                            case "Color Personalizado":
-                                globalMODE = "Color Personalizado";
-                                break;
-                            default:
-                                globalMODE = "Modo Oscuro";
-                                break;
-                        }
-                        // Creates and shows a new email form.
-                        new emailForm().ShowDialog();
-                    }
-                }
+                string selectedDisplay = skinsComboBox.SelectedItem.ToString();
+                globalMODE = ToEn(selectedDisplay); // Convert to English key for consistency
+                new emailForm().ShowDialog();
             }
         }
 
         private void setUpSMSButton_Click(object sender, EventArgs e)
         {
-            // Checks if an item is selected in the skins combo box.
             if (skinsComboBox.SelectedItem != null)
             {
-                if (languageComboBox.SelectedItem.ToString() == "English" || languageComboBox.SelectedItem.ToString() == "Inglés")
-                {
-                    // Gets the selected skin string.
-                    string selectedSkin = skinsComboBox.SelectedItem.ToString();
-                    // Uses a switch statement to set the global mode based on the selected skin.
-                    switch (selectedSkin)
-                    {
-                        case "Dark Mode":
-                            globalMODE = "Dark Mode";
-                            break;
-                        case "Medium Mode":
-                            globalMODE = "Medium Mode";
-                            break;
-                        case "Light Mode":
-                            globalMODE = "Light Mode";
-                            break;
-                        case "Custom Color":
-                            globalMODE = "Custom Color";
-                            break;
-                        default:
-                            globalMODE = "Dark Mode";
-                            break;
-                    }
-
-                    // Creates and shows a new email form.
-                    new emailForm().ShowDialog();
-                }
-                else if (languageComboBox.SelectedItem.ToString() == "Spanish" || languageComboBox.SelectedItem.ToString() == "Español")
-                {
-                    // Gets the selected skin string.
-                    string selectedSkin = skinsComboBox.SelectedItem.ToString();
-                    // Uses a switch statement to set the global mode based on the selected skin.
-                    switch (selectedSkin)
-                    {
-                        case "Modo Claro":
-                            globalMODE = "Modo Claro";
-                            break;
-                        case "Modo Medio":
-                            globalMODE = "Modo Medio";
-                            break;
-                        case "Modo Oscuro":
-                            globalMODE = "Modo Oscuro";
-                            break;
-                        case "Color Personalizado":
-                            globalMODE = "Color Personalizado";
-                            break;
-                        default:
-                            globalMODE = "Modo Oscuro";
-                            break;
-                    }
-                    // Creates and shows a new email form.
-                    new smsForm().ShowDialog();
-                }
+                string selectedDisplay = skinsComboBox.SelectedItem.ToString();
+                globalMODE = ToEn(selectedDisplay); // Convert to English key for consistency
+                new smsForm().ShowDialog();
             }
         }
 
@@ -7887,7 +8796,9 @@ namespace CopyThatProgram
             if (InvokeRequired) { Invoke(new Action(UpdateOverallLabels)); return; }
 
             // Update the file count label with the number of processed files out of the grand total.
-            fileCountOnLabel.Text = $"File Count: {_processedFiles:N0} Out of " + _grandTotalFileCount.ToString("N0") + "";
+            fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                _processedFiles.ToString("N0"),
+                _grandTotalFileCount.ToString("N0"));
             // Update the label showing total bytes copied, moved, or deleted.
             //totalCopiedProgressLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
         }
@@ -8350,7 +9261,10 @@ namespace CopyThatProgram
             if (totalCopiedProgressLabel != null && !totalCopiedProgressLabel.IsDisposed)
             {
                 // Update the label text with the total bytes processed.
-                totalCopiedProgressLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
+                totalCopiedProgressLabel.Text = string.Format(
+    Translator.Get("Total C/M/D: {0} / {1}"),
+    FormatBytes(_totalBytesProcessed),
+    FormatBytes(_totalBytesToProcess));
             }
         }
 
@@ -8359,8 +9273,11 @@ namespace CopyThatProgram
             // Check if the totalCopiedProgressLabel object is valid and not disposed.
             if (totalCopiedProgressLabel != null && !totalCopiedProgressLabel.IsDisposed)
             {
-                // Update the label text with the total bytes processed.
-                totalCopiedProgressLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
+                // Update the label text with the total bytes processed.
+                totalCopiedProgressLabel.Text = string.Format(
+     Translator.Get("Total C/M/D: {0} / {1}"),
+     FormatBytes(_totalBytesProcessed),
+     FormatBytes(_totalBytesToProcess));
             }
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -8419,7 +9336,9 @@ namespace CopyThatProgram
                 Invoke((Action)UpdateFileCountLabel);
             // Otherwise, update the label directly.
             else
-                fileCountOnLabel.Text = $"File Count: 0 Out of " + _grandTotalFileCount.ToString("N0") + "";
+                fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+      _processedFiles.ToString("N0"),
+      _grandTotalFileCount.ToString("N0"));
         }
 
         /// <summary>
@@ -9020,10 +9939,10 @@ namespace CopyThatProgram
                     progressBarMultiTotal.Value = 0;
                     progressBarMultiTotal.Text = "0.00%";
                     fileCountMultiLabel.Text = "Files Processed: 0 Out of 0";
-                    speedMultiLabel.Text = "Speed: 0 B/s";
-                    totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes / 0 Bytes";
-                    totalTimeMultiLabel.Text = "Elapsed / Target Time: 00:00:00 / 00:00:00";
-                    totalSpaceMultiLabel.Text = "Total Space Used: 0 Bytes / 0 Bytes";
+                    speedMultiLabel.Text = Translator.Get("Speed: 0 MB/s");
+                    totalCMDMultiLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
+                    totalTimeMultiLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
+                    totalSpaceMultiLabel.Text = Translator.Get("Total Space Used: 0 Bytes / 0 Bytes");
 
                     foreach (var s in _slots) UpdateMultiSlotStatus(s.Id, "Idle", string.Empty);
 
@@ -9037,15 +9956,20 @@ namespace CopyThatProgram
             catch (OperationCanceledException)
             {
                 _multiThreadUiTimer.Stop();
-                Invoke(() => { speedMultiLabel.Text = "Operation canceled."; ToggleControlsForOperation(true); });
-                //_copyWorker_RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(null, null, true));
+                Invoke(() =>
+                {
+                    speedMultiLabel.Text = Translator.Get("Operation canceled.");
+                    ToggleControlsForOperation(true);
+                });
             }
             catch (Exception ex)
             {
                 _multiThreadUiTimer.Stop();
-                Invoke(() => { speedMultiLabel.Text = $"Error: {ex.Message}"; ToggleControlsForOperation(true); });
-                //_copyWorker_RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(null, ex, false));
-
+                Invoke(() =>
+                {
+                    speedMultiLabel.Text = string.Format(Translator.Get("Error: {0}"), ex.Message);
+                    ToggleControlsForOperation(true);
+                });
             }
         }
         #endregion
@@ -9237,10 +10161,16 @@ namespace CopyThatProgram
             progressBarMultiTotal.Text = $"{totalPct:F2}%";
 
             fileCountMultiLabel.Text = $"Files Processed: {_multiThreadProcessedFiles:N0} Out of {_grandTotalFileCount:N0}";
-            totalCMDMultiLabel.Text = $"Total C/M/D: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
-            speedMultiLabel.Text = $"Speed: {FormatSpeed(bytesPerSec)}";
+            totalCMDMultiLabel.Text = string.Format(
+    Translator.Get("Total C/M/D: {0} / {1}"),
+    FormatBytes(_totalBytesProcessed),
+    FormatBytes(_totalBytesToProcess));
+            speedMultiLabel.Text = string.Format(Translator.Get("Speed: {0}"), FormatSpeed(bytesPerSec));
 
-            totalTimeMultiLabel.Text = $"Elapsed / Target Time: {elapsed:hh\\:mm\\:ss} / {target:hh\\:mm\\:ss}";
+totalTimeMultiLabel.Text = string.Format(
+    Translator.Get("Elapsed / Target Time: {0} / {1}"),
+    elapsed.ToString(@"hh\:mm\:ss"),
+    target.ToString(@"hh\:mm\:ss"));
         }
 
 
@@ -9386,7 +10316,7 @@ namespace CopyThatProgram
 
         private void UpdateMultiSlotProgress(int slot, double percent, string fileName)
         {
-             CustomControls.ModernCircularProgressBar bar = slot switch
+            CustomControls.ModernCircularProgressBar bar = slot switch
             {
                 1 => progressBarMulti1,
                 2 => progressBarMulti2,
@@ -9512,14 +10442,16 @@ namespace CopyThatProgram
                         Invoke((System.Windows.Forms.MethodInvoker)(() =>
                         {
                             fromFilesDirLabel.Text = dirPath;
-                            statusLabel.Text = $"Creating folder – {System.IO.Path.GetFileName(dirPath)}";
+                            statusLabel.Text = string.Format(
+                                Translator.Get("Creating folder – {0}"),
+                                System.IO.Path.GetFileName(dirPath));
 
                             var dirItem = _fileList.FirstOrDefault(d =>
                                 d.IsDirectory && d.FilePath.Equals(dirPath, StringComparison.OrdinalIgnoreCase));
 
                             if (dirItem != null)
                             {
-                                UpdateFileStatus(dirItem, "Folder Created...");
+                                UpdateFileStatus(dirItem, Translator.Get("Folder Created..."));
                             }
                             else
                             {
@@ -9567,8 +10499,9 @@ namespace CopyThatProgram
                         ComputeDestinationPath(item.FilePath, false, targetBase, _currentSourceRootPath)
                     );
                     targetDirLabel.Text = targetDir;
-
-                    statusLabel.Text = $"Copying – {System.IO.Path.GetFileName(item.FilePath)}";
+                    statusLabel.Text = string.Format(
+                        Translator.Get("Copying – {0}"),
+                        System.IO.Path.GetFileName(item.FilePath));
                     SelectCurrentFileInGrid(gridIndex);
                 });
 
@@ -9586,8 +10519,15 @@ namespace CopyThatProgram
                     }
                     catch (IOException ex) when (attempt < MAX_RETRIES)
                     {
-                        Invoke(() => UpdateFileStatus(item, $"Failed: Retry #{attempt}"));
-                        LogWarning($"Retry {attempt}/{MAX_RETRIES} – {ex.Message}");
+                        Invoke(() => UpdateFileStatus(item, string.Format(
+     Translator.Get("Failed: Retry #{0}"),
+     attempt)));
+
+                        LogWarning(string.Format(
+                            Translator.Get("Retry {0}/{1} – {2}"),
+                            attempt,
+                            MAX_RETRIES,
+                            ex.Message));
                         await Task.Delay(500);
                     }
                     catch (Exception ex)
@@ -9600,7 +10540,7 @@ namespace CopyThatProgram
                 if (copied)
                 {
                     Interlocked.Increment(ref _totalFilesCopied);
-                    Invoke(() => UpdateFileStatus(item, "File Copied..."));
+                    Invoke(() => UpdateFileStatus(item, Translator.Get("File Copied...")));
                 }
                 else
                 {
@@ -9637,7 +10577,9 @@ namespace CopyThatProgram
                         Invoke(() =>
                         {
                             //fromFilesDirLabel.Text = $"Target: {targetBase}";
-                            statusLabel.Text = $"Starting copy to {targetBase}";
+                            statusLabel.Text = string.Format(
+                                Translator.Get("Starting copy to {0}"),
+                                targetBase);
                         });
 
                         // --- Perform the actual copy for this target ---
@@ -9650,7 +10592,9 @@ namespace CopyThatProgram
                     // Final UI update
                     Invoke(() =>
                     {
-                        statusLabel.Text = bw.CancellationPending ? "Cancelled" : "All targets complete";
+                        statusLabel.Text = bw.CancellationPending
+                            ? Translator.Get("Cancelled")
+                            : Translator.Get("All targets complete");
                         modernTotal.Value = modernTotal.Maximum;
                         modernTotal.Text = "100.00%";
                     });
@@ -9722,9 +10666,13 @@ namespace CopyThatProgram
                         // Updates UI labels with move progress
                         Invoke(() =>
                         {
-                            fileCountOnLabel.Text = $"File Count: {_processedFiles:N0} / {_grandTotalFileCount:N0}";
+                            fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                                _processedFiles.ToString("N0"),
+                                _grandTotalFileCount.ToString("N0"));
                             filePathLabel.Text = item.FilePath;
-                            statusLabel.Text = $"Moving – {System.IO.Path.GetFileName(item.FilePath)}";
+                            statusLabel.Text = string.Format(
+                                Translator.Get("Moving – {0}"),
+                                System.IO.Path.GetFileName(item.FilePath));
                         });
 
                         // Selects the current file in the grid
@@ -9759,7 +10707,7 @@ namespace CopyThatProgram
                         if (moved)
                         {
                             // Updates the file status and waits briefly
-                            item.Status = "Moved";
+                            item.Status = Translator.Get("Moved");
                             await Task.Delay(25);
                         }
                         // If the move failed, logs and skips the file
@@ -9842,9 +10790,13 @@ namespace CopyThatProgram
                         // Updates UI labels with delete progress
                         Invoke(() =>
                         {
-                            fileCountOnLabel.Text = $"File Count: {_processedFiles:N0} / {_grandTotalFileCount:N0}";
+                            fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                                _processedFiles.ToString("N0"),
+                                _grandTotalFileCount.ToString("N0"));
                             filePathLabel.Text = item.FilePath;
-                            statusLabel.Text = $"Secure deleting – {System.IO.Path.GetFileName(item.FilePath)}";
+                            statusLabel.Text = string.Format(
+                                Translator.Get("Secure deleting – {0}"),
+                                System.IO.Path.GetFileName(item.FilePath));
                         });
 
                         // Selects the current file in the grid
@@ -9873,7 +10825,9 @@ namespace CopyThatProgram
                         if (deleted)
                         {
                             // Updates the file status and waits briefly
-                            item.Status = "Securely Deleted";
+                            item.Status = Translator.Get("Securely Deleted");
+
+
                             await Task.Delay(25);
                         }
                         // If the delete failed, logs and skips the file
@@ -9994,16 +10948,16 @@ namespace CopyThatProgram
 
                 if (_doNotOverwrite)
                 {
-                    string reason = "File exists and 'Do Not Overwrite' is selected.";
-                    Invoke(() => UpdateFileStatus(item, "Skipped (exists)"));
+                    string reason = Translator.Get("File exists and 'Do Not Overwrite' is selected.");
+                    Invoke(() => UpdateFileStatus(item, Translator.Get("Skipped (exists)")));
                     Interlocked.Increment(ref _totalFilesSkipped);
                     HandleSkippedFile(item, reason, dstPath);
                     return;
                 }
                 if (_overwriteIfNewer && srcInfo.LastWriteTime <= dstInfo.LastWriteTime)
                 {
-                    string reason = "Destination file is newer or the same age.";
-                    Invoke(() => UpdateFileStatus(item, "Skipped (not newer)"));
+                    string reason = Translator.Get("Destination file is newer or the same age.");
+                    Invoke(() => UpdateFileStatus(item, Translator.Get("Skipped (not newer)")));
                     Interlocked.Increment(ref _totalFilesSkipped);
                     HandleSkippedFile(item, reason, dstPath);
                     return;
@@ -10186,8 +11140,10 @@ namespace CopyThatProgram
             modernFile.Value = 0;
             // Resets various progress-related labels.
             fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
-            totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / 0 Bytes";
-            speedLabel.Text = "Speed: N/A";
+            totalCopiedProgressLabel.Text = string.Format(
+    Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+    FormatBytes(_totalBytesToProcess));
+            speedLabel.Text = Translator.Get("Speed: N/A");
             elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
 
             // Resets internal counters and variables.
@@ -10355,8 +11311,10 @@ namespace CopyThatProgram
             modernFile.Value = 0;
             // Resets status labels.
             fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
-            totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / 0 Bytes";
-            speedLabel.Text = "Speed: N/A";
+            totalCopiedProgressLabel.Text = string.Format(
+    Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+    FormatBytes(_totalBytesToProcess));
+            speedLabel.Text = Translator.Get("Speed: N/A");
             elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
 
             // Resets internal state variables.
@@ -10853,9 +11811,9 @@ namespace CopyThatProgram
                 }
             }));
 
-          
 
-            if (isCancelled.Error != null)        
+
+            if (isCancelled.Error != null)
             {
                 status = "Error";
                 _stopwatch.Stop();
@@ -10866,7 +11824,7 @@ namespace CopyThatProgram
                 if (onErrorCheckBox.Checked) PlayRes(Properties.Resources.OnError);
                 Invoke(() => { ShowOperationStatisticsSummary(isMultiThreaded); ResetProgressUIAndVariables(); });
             }
-            else if (isCancelled.Cancelled)      
+            else if (isCancelled.Cancelled)
             {
                 status = "Cancelled";
                 _stopwatch.Stop();
@@ -10877,7 +11835,7 @@ namespace CopyThatProgram
                 ShowOperationStatisticsSummary(isMultiThreaded);
                 ResetProgressUIAndVariables();
             }
-            else                                  
+            else
             {
                 status = "Completed";
                 if (onFinishCheckBox.Checked) PlayRes(Properties.Resources.OnFinish);
@@ -10950,8 +11908,10 @@ namespace CopyThatProgram
             modernFile.Value = 0;
 
             fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
-            totalCopiedProgressLabel.Text = $"Total C/M/D: 0 Bytes / 0 Bytes";
-            speedLabel.Text = "Speed: N/A";
+            totalCopiedProgressLabel.Text = string.Format(
+    Translator.Get("Total C/M/D: 0 Bytes / {0}"),
+    FormatBytes(_totalBytesToProcess));
+            speedLabel.Text = Translator.Get("Speed: N/A");
 
             _totalBytesProcessed = 0;
             _totalBytesToProcess = 0;
@@ -11529,7 +12489,10 @@ namespace CopyThatProgram
             }
 
             // Updates the label showing total bytes copied/moved/deleted.
-            totalCMDMultiLabel.Text = $"Total C/M/D: {FormatBytes(processedBytes)} / {FormatBytes(_totalBytesToProcess)}";
+            totalCMDMultiLabel.Text = string.Format(
+                Translator.Get("Total C/M/D: {0} / {1}"),
+                FormatBytes(_totalBytesProcessed),
+                FormatBytes(_totalBytesToProcess));
 
 
             // Calls a method to update drive space information.
@@ -11549,9 +12512,12 @@ namespace CopyThatProgram
             // Calculates the estimated total time for the operation.
             TimeSpan estTotal = TimeSpan.FromSeconds(_totalBytesToProcess / Math.Max(_totalBytesProcessed / Math.Max(elapsed.TotalSeconds, 0.1), 1));
             // Updates a label with the elapsed and estimated total time.
-            totalTimeMultiLabel.Text = $"Elapsed / Target Time: {elapsed:hh\\:mm\\:ss} / {estTotal:hh\\:mm\\:ss}";
+            totalTimeMultiLabel.Text = string.Format(
+                Translator.Get("Elapsed / Target Time: {0} / {1}"),
+                elapsed.ToString(@"hh\:mm\:ss"),
+                estTotal.ToString(@"hh\:mm\:ss"));
             // Updates a label with the calculated speed.
-            speedMultiLabel.Text = $"Speed: {mbPerSec:F2} MB/sec";
+            speedMultiLabel.Text = string.Format(Translator.Get("Speed: {0} MB/s"), mbPerSec.ToString("F2"));
         }
 
         /// <summary>
@@ -11581,17 +12547,17 @@ namespace CopyThatProgram
             progressBarMultiTotal.Value = 0;
             //multiThreadTotalProgressLabel.Text = "0.00%";
             // Resets the source directory label.
-            fromFilesDirLabel.Text = "Current Source: None";
+            fromFilesDirLabel.Text = Translator.Get("Current Source: None");
             // Resets all counters and stopwatch.
             _multiThreadProcessedFiles = 0;
             _totalBytesToProcess = 0;
             _stopwatch.Reset();
             // Resets all status labels to their initial values.
-            fileCountMultiLabel.Text = "File Count: 0 Out of 0";
-            totalTimeMultiLabel.Text = "Elapsed / Target Time: 00:00:00 / 00:00:00";
-            totalCMDMultiLabel.Text = "Total C/M/D: 0 B / 0 B";
-            totalSpaceMultiLabel.Text = "Total Space Used: 0 Bytes / 0 Bytes";
-            speedMultiLabel.Text = "Speed: 0 MB/sec.";
+            fileCountMultiLabel.Text = Translator.Get("File Count: 0 Out of 0");
+            totalTimeMultiLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
+            totalCMDMultiLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
+            totalSpaceMultiLabel.Text = Translator.Get("Total Space Used: 0 Bytes / 0 Bytes");
+            speedMultiLabel.Text = string.Format(Translator.Get("Speed: {0} MB/s"));
         }
 
         /// <summary>
@@ -11884,7 +12850,9 @@ namespace CopyThatProgram
             }
 
             // Updates the file count label with processed and total file counts.
-            fileCountOnLabel.Text = $"File Count: {_processedFiles:N0} Out of " + _grandTotalFileCount.ToString("N0") + "";
+            fileCountOnLabel.Text = string.Format(Translator.Get("File Count: {0} Out of {1}"),
+                _processedFiles.ToString("N0"),
+                _grandTotalFileCount.ToString("N0"));
             // Updates the label for total bytes copied/moved/deleted.
             totalCopiedProgressLabel.Text = $"Total C/M/D: {FormatFileSize(_totalBytesProcessed)} / {FormatFileSize(_totalBytesToProcess)}";
         }
@@ -12128,22 +13096,20 @@ namespace CopyThatProgram
         }
         private void btnPauseResumeMulti_Click(object sender, EventArgs e)
         {
-            _isPaused = !_isPaused; // Toggles the boolean state of the _isPaused variable.
+            _isPaused = !_isPaused;
 
-            if (_isPaused) // Checks if the application is now in a paused state.
-            {
-                _pauseEvent.Reset(); // Resets the pause event, effectively blocking a waiting thread.
-                pauseResumeMultiButton.Text = "Resume"; // Changes the button's text to "Resume".
-
-                _multiThreadUiTimer.Stop(); // Calls the helper method to stop the timer.
-            }
-            else // If the application is not paused (it's resuming).
-            {
-                _pauseEvent.Set(); // Sets the pause event, allowing a blocked thread to continue.
-                pauseResumeMultiButton.Text = "Pause"; // Changes the button's text to "Pause".
-
-                _multiThreadUiTimer.Start(); // Calls the helper method to start the timer.
-            }
+            if (_isPaused)
+            {
+                _pauseEvent.Reset();
+                pauseResumeButton.Text = Translator.Get("Resume");
+                StopElapsedTimer();
+            }
+            else
+            {
+                _pauseEvent.Set();
+                pauseResumeButton.Text = Translator.Get("Pause");
+                StartElapsedTimer();
+            }
         }
         private void cancelMultiButton_Click(object sender, EventArgs e)
         {
@@ -12512,27 +13478,24 @@ namespace CopyThatProgram
         {
             // Ensures a valid row and column index were clicked.
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 &&
-                e.RowIndex < filesDataGridView.Rows.Count &&
-                e.ColumnIndex < filesDataGridView.Columns.Count)
+     e.RowIndex < filesDataGridView.Rows.Count &&
+     e.ColumnIndex < filesDataGridView.Columns.Count)
             {
-                // Gets the cell at the clicked location in the first column.
                 var cell = filesDataGridView.Rows[e.RowIndex].Cells[0];
-                // Checks if the cell value is not null.
                 if (cell?.Value != null)
                 {
-                    // Updates a label to show the name of the selected file.
-                    filePathLabel.Text = "Current Selection: " + cell.Value.ToString();
+                    filePathLabel.Text = string.Format(
+                        Translator.Get("Current Selection: {0}"),
+                        cell.Value.ToString());
                 }
                 else
                 {
-                    // If the cell value is null, updates the label to show "No File Selected".
-                    filePathLabel.Text = "No File Selected";
+                    filePathLabel.Text = Translator.Get("No File Selected");
                 }
             }
             else
             {
-                // If the click was outside the valid range, updates the label to show "No File Selected".
-                filePathLabel.Text = "No File Selected";
+                filePathLabel.Text = Translator.Get("No File Selected");
             }
         }
 
@@ -12842,11 +13805,11 @@ namespace CopyThatProgram
             // Handles other tab selections by updating the status label.
             else if (tabControl1.SelectedTab == cmdCopyHistory)
             {
-                toolStripCopyHistory.Text = Translator.Get("Current tab page: Copy History Page.");
+                statusLabel.Text = Translator.Get("Current tab page: Copy History Page.");
             }
             else if (tabControl1.SelectedTab == cmdExclusions)
             {
-                toolStripExclusions.Text = Translator.Get("Current tab page: Exclusions Page.");
+                statusLabel.Text = Translator.Get("Current tab page: Exclusions Page.");
             }
             else if (tabControl1.SelectedTab == cmdHomePage)
             {
@@ -12854,15 +13817,19 @@ namespace CopyThatProgram
             }
             else if (tabControl1.SelectedTab == cmdSettingsPage)
             {
-                toolStripSettings.Text = Translator.Get("Current tab page: Settings Page.");
+                statusLabel.Text = Translator.Get("Current tab page: Settings Page.");
             }
             else if (tabControl1.SelectedTab == cmdSkipPage)
             {
-                toolStripSkipped.Text = Translator.Get("Current tab page: Skipped Files Page.");
+                statusLabel.Text = Translator.Get("Current tab page: Skipped Files Page.");
+            }
+            else if (tabControl1.SelectedTab == cmdExclusions)
+            {
+                statusLabel.Text = Translator.Get("Current tab page: Allowed/Excluded Page.");
             }
             else
             {
-                toolStripMulti.Text = Translator.Get("Current tab page: Multi-Thread Page.");
+                statusLabel.Text = Translator.Get("Current tab page: Multi-Thread Page.");
             }
         }
 
@@ -12968,12 +13935,6 @@ namespace CopyThatProgram
         {
             // Sets the status label to describe the 'filesDataGridView'.
             statusLabel.Text = Translator.Get("Files Data Grid View: This grid displays the list of files to be processed in the current operation, including their names, paths, sizes, and statuses.");
-        }
-
-        private void autoScrollCheckBox_MouseEnter(object sender, EventArgs e)
-        {
-            // Sets the status label to describe the 'autoScrollCheckBox'.
-            statusLabel.Text = Translator.Get("Auto-Scroll CheckBox: This checkbox enables or disables automatic scrolling of the files data grid view while files are being processsed.");
         }
 
         private void verifyCheckBox_MouseEnter(object sender, EventArgs e)
@@ -13543,7 +14504,7 @@ namespace CopyThatProgram
         private void seLabel_MouseEnter(object sender, EventArgs e)
         {
             // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Move Application Label:  This allows you to move the application to different parts of the screen.");
+            toolStripSettings.Text = Translator.Get("Move Application Label: This allows you to move the application to different parts of the screen.");
         }
 
         private void cmdSettingsPage_MouseEnter_1(object sender, EventArgs e)
@@ -13590,7 +14551,8 @@ namespace CopyThatProgram
             // Initializes a counter for visible and non-new rows.
             int totalItems = dataGridView1.Rows.Cast<DataGridViewRow>().Count(r => r.Visible && !r.IsNewRow);
             // Updates the 'fileCountOnLabel' with the total count, formatted with a thousands separator.
-            fileCountOnLabel.Text = $"Total File/Folder Count: {totalItems:N0}";
+            fileCountOnLabel.Text = string.Format(Translator.Get("Total File/Folder Count: {0}"),
+                totalItems.ToString("N0"));
         }
 
         /// <summary>
@@ -14047,7 +15009,8 @@ namespace CopyThatProgram
 
             // Updates the total file count label with the number of rows to be exported.
             int totalItems = exportRows.Count;
-            fileCountOnLabel.Text = $"Total File/Folder Count: {totalItems:N0}";
+            fileCountOnLabel.Text = string.Format(Translator.Get("Total File/Folder Count: {0}"),
+                totalItems.ToString("N0"));
 
             try
             {
@@ -14134,1308 +15097,5495 @@ namespace CopyThatProgram
 
         public static class Translator
         {
-                public static string CurrentLanguage { get; set; } = "en";
+            public static string CurrentLanguage { get; set; } = "en";
 
-
-            // public lookup:  English → (French, German, Spanish)
-            private static readonly Dictionary<string, (string fr, string de, string es)> _map =
-                new(StringComparer.OrdinalIgnoreCase)
+            private static readonly Dictionary<string,
+                    (string fr, string de, string es,
+                     string it, string pt, string ptBR, string nl,
+                     string sv, string no, string da, string fi,
+                     string pl, string cs, string hu, string ro)>
+                _map = new(StringComparer.OrdinalIgnoreCase)
                 {
+
+                    ["Total Space Used: 0 Bytes / 0 Bytes"] =
+("Espace total utilisé : 0 octets / 0 octets",
+ "Gesamter belegter Speicher: 0 Bytes / 0 Bytes",
+ "Espacio total usado: 0 Bytes / 0 Bytes",
+ "Spazio totale utilizzato: 0 Byte / 0 Byte",
+ "Espaço total usado: 0 Bytes / 0 Bytes",
+ "Espaço total usado: 0 Bytes / 0 Bytes",
+ "Totale gebruikte ruimte: 0 Bytes / 0 Bytes",
+ "Totalt använt utrymme: 0 Byte / 0 Byte",
+ "Totalt brukt plass: 0 Byte / 0 Byte",
+ "Samlet brugt plads: 0 Byte / 0 Byte",
+ "Käytetty tila yhteensä: 0 tavua / 0 tavua",
+ "Całkowite użyte miejsce: 0 Bajtów / 0 Bajtów",
+ "Celkové využité místo: 0 Bajtů / 0 Bajtů",
+ "Teljes felhasznált hely: 0 Bájt / 0 Bájt",
+ "Spațiu total utilizat: 0 Octeți / 0 Octeți"),
+
+                    ["Elapsed / Target Time: {0} / {1}"] =
+("Temps écoulé / temps cible : {0} / {1}",
+ "Verstrichene / Zielzeit: {0} / {1}",
+ "Tiempo transcurrido / tiempo objetivo: {0} / {1}",
+ "Tempo trascorso / tempo previsto: {0} / {1}",
+ "Tempo decorrido / tempo previsto: {0} / {1}",
+ "Tempo decorrido / tempo previsto: {0} / {1}",
+ "Verstreken / doeltijd: {0} / {1}",
+ "Förfluten / måltid: {0} / {1}",
+ "Forløpt / måltid: {0} / {1}",
+ "Forløbet / måltid: {0} / {1}",
+ "Kulunut / tavoiteaika: {0} / {1}",
+ "Upłynęło / czas docelowy: {0} / {1}",
+ "Uplynulo / cílový čas: {0} / {1}",
+ "Eltelt / célidő: {0} / {1}",
+ "Timp scurs / timp țintă: {0} / {1}"),
+
+                    ["File exists and 'Do Not Overwrite' is selected."] =
+("Le fichier existe et 'Ne pas écraser' est sélectionné.",
+ "Datei existiert und 'Nicht überschreiben' ist ausgewählt.",
+ "El archivo existe y 'No sobrescribir' está seleccionado.",
+ "Il file esiste e 'Non sovrascrivere' è selezionato.",
+ "O ficheiro existe e 'Não substituir' está selecionado.",
+ "O arquivo existe e 'Não sobrescrever' está selecionado.",
+ "Bestand bestaat en 'Niet overschrijven' is geselecteerd.",
+ "Filen finns och 'Skriv inte över' är valt.",
+ "Filen finnes og 'Ikke overskriv' er valgt.",
+ "Filen findes og 'Overskriv ikke' er valgt.",
+ "Tiedosto on olemassa ja 'Älä korvaa' on valittu.",
+ "Plik istnieje i wybrano 'Nie nadpisuj'.",
+ "Soubor existuje a je vybrána možnost 'Nepřepisovat'.",
+ "A fájl létezik és a 'Ne írja felül' van kiválasztva.",
+ "Fișierul există și 'Nu suprascrie' este selectat."),
+
+                    ["Skipped (exists)"] =
+("Ignoré (existe)",
+ "Übersprungen (existiert)",
+ "Omitido (existe)",
+ "Saltato (esiste)",
+ "Ignorado (existe)",
+ "Ignorado (existe)",
+ "Overgeslagen (bestaat)",
+ "Överhoppad (finns)",
+ "Hoppet over (finnes)",
+ "Sprunget over (findes)",
+ "Ohitettu (on olemassa)",
+ "Pominięty (istnieje)",
+ "Přeskočeno (existuje)",
+ "Kihagyva (létezik)",
+ "Omis (există)"),
+
+                    ["Destination file is newer or the same age."] =
+("Le fichier de destination est plus récent ou du même âge.",
+ "Zieldatei ist neuer oder gleich alt.",
+ "El archivo de destino es más reciente o de la misma fecha.",
+ "Il file di destinazione è più recente o della stessa data.",
+ "O ficheiro de destino é mais recente ou da mesma data.",
+ "O arquivo de destino é mais recente ou da mesma data.",
+ "Doelbestand is nieuwer of even oud.",
+ "Målfilen är nyare eller lika gammal.",
+ "Målfilen er nyere eller like gammel.",
+ "Målfilen er nyere eller lige gammel.",
+ "Kohdetiedosto on uudempi tai saman ikäinen.",
+ "Plik docelowy jest nowszy lub tego samego wieku.",
+ "Cílový soubor je novější nebo stejně starý.",
+ "A célfájl újabb vagy ugyanolyan régi.",
+ "Fișierul destinație este mai nou sau de aceeași dată."),
+
+                    ["Skipped (not newer)"] =
+("Ignoré (pas plus récent)",
+ "Übersprungen (nicht neuer)",
+ "Omitido (no más reciente)",
+ "Saltato (non più recente)",
+ "Ignorado (não mais recente)",
+ "Ignorado (não mais recente)",
+ "Overgeslagen (niet nieuwer)",
+ "Överhoppad (inte nyare)",
+ "Hoppet over (ikke nyere)",
+ "Sprunget over (ikke nyere)",
+ "Ohitettu (ei uudempi)",
+ "Pominięty (nie nowszy)",
+ "Přeskočeno (není novější)",
+ "Kihagyva (nem újabb)",
+ "Omis (nu mai nou)"),
+
+
+
+
+                    ["Securely Deleted"] =
+("Supprimé de manière sécurisée",
+ "Sicher gelöscht",
+ "Eliminado de forma segura",
+ "Eliminato in modo sicuro",
+ "Eliminado de forma segura",
+ "Excluído de forma segura",
+ "Veilig verwijderd",
+ "Säkert raderad",
+ "Trygt slettet",
+ "Sikkert slettet",
+ "Poistettu turvallisesti",
+ "Bezpiecznie usunięty",
+ "Bezpečně smazáno",
+ "Biztonságosan törölve",
+ "Șters în siguranță"),
+
+                    ["Secure deleting – {0}"] =
+("Suppression sécurisée – {0}",
+ "Sicheres Löschen – {0}",
+ "Eliminación segura – {0}",
+ "Eliminazione sicura – {0}",
+ "Eliminação segura – {0}",
+ "Exclusão segura – {0}",
+ "Veilig verwijderen – {0}",
+ "Säker radering – {0}",
+ "Trygg sletting – {0}",
+ "Sikker sletning – {0}",
+ "Turvallinen poisto – {0}",
+ "Bezpieczne usuwanie – {0}",
+ "Bezpečné mazání – {0}",
+ "Biztonságos törlés – {0}",
+ "Ștergere securizată – {0}"),
+
+
+
+                    ["Moved"] =
+("Déplacé",
+ "Verschoben",
+ "Movido",
+ "Spostato",
+ "Movido",
+ "Movido",
+ "Verplaatst",
+ "Flyttad",
+ "Flyttet",
+ "Flyttet",
+ "Siirretty",
+ "Przeniesiony",
+ "Přesunuto",
+ "Áthelyezve",
+ "Mutat"),
+
+
+
+                    ["Moving – {0}"] =
+("Déplacement – {0}",
+ "Verschieben – {0}",
+ "Moviendo – {0}",
+ "Spostamento – {0}",
+ "A mover – {0}",
+ "Movendo – {0}",
+ "Verplaatsen – {0}",
+ "Flyttar – {0}",
+ "Flytter – {0}",
+ "Flytter – {0}",
+ "Siirretään – {0}",
+ "Przenoszenie – {0}",
+ "Přesouvání – {0}",
+ "Áthelyezés – {0}",
+ "Se mută – {0}"),
+
+
+
+                    ["File Copied..."] =
+("Fichier copié...",
+ "Datei kopiert...",
+ "Archivo copiado...",
+ "File copiato...",
+ "Ficheiro copiado...",
+ "Arquivo copiado...",
+ "Bestand gekopieerd...",
+ "Fil kopierad...",
+ "Fil kopiert...",
+ "Fil kopieret...",
+ "Tiedosto kopioitu...",
+ "Plik skopiowany...",
+ "Soubor zkopírován...",
+ "Fájl másolva...",
+ "Fișier copiat..."),
+
+
+
+                    ["Failed: Retry #{0}"] =
+("Échec : Nouvelle tentative n°{0}",
+ "Fehlgeschlagen: Versuch #{0}",
+ "Fallido: Reintento n.º {0}",
+ "Fallito: Tentativo n. {0}",
+ "Falhou: Tentativa n.º {0}",
+ "Falhou: Tentativa nº {0}",
+ "Mislukt: Poging #{0}",
+ "Misslyckades: Försök #{0}",
+ "Mislyktes: Forsøk #{0}",
+ "Mislykkedes: Forsøg #{0}",
+ "Epäonnistui: Yritys #{0}",
+ "Niepowodzenie: Próba #{0}",
+ "Selhalo: Pokus č. {0}",
+ "Sikertelen: Próbálkozás #{0}",
+ "Eșuat: Încercare #{0}"),
+
+                    ["Retry {0}/{1} – {2}"] =
+("Nouvelle tentative {0}/{1} – {2}",
+ "Versuch {0}/{1} – {2}",
+ "Reintento {0}/{1} – {2}",
+ "Tentativo {0}/{1} – {2}",
+ "Tentativa {0}/{1} – {2}",
+ "Tentativa {0}/{1} – {2}",
+ "Poging {0}/{1} – {2}",
+ "Försök {0}/{1} – {2}",
+ "Forsøk {0}/{1} – {2}",
+ "Forsøg {0}/{1} – {2}",
+ "Yritys {0}/{1} – {2}",
+ "Próba {0}/{1} – {2}",
+ "Pokus {0}/{1} – {2}",
+ "Próbálkozás {0}/{1} – {2}",
+ "Încercare {0}/{1} – {2}"),
+
+
+
+                    ["Copying – {0}"] =
+("Copie – {0}",
+ "Kopieren – {0}",
+ "Copiando – {0}",
+ "Copia – {0}",
+ "A copiar – {0}",
+ "Copiando – {0}",
+ "Kopiëren – {0}",
+ "Kopierar – {0}",
+ "Kopierer – {0}",
+ "Kopierer – {0}",
+ "Kopioidaan – {0}",
+ "Kopiowanie – {0}",
+ "Kopírování – {0}",
+ "Másolás – {0}",
+ "Se copiază – {0}"),
+
+
+
+                    ["Folder Created..."] =
+("Dossier créé...",
+ "Ordner erstellt...",
+ "Carpeta creada...",
+ "Cartella creata...",
+ "Pasta criada...",
+ "Pasta criada...",
+ "Map aangemaakt...",
+ "Mapp skapad...",
+ "Mappe opprettet...",
+ "Mappe oprettet...",
+ "Kansio luotu...",
+ "Folder utworzony...",
+ "Složka vytvořena...",
+ "Mappa létrehozva...",
+ "Folder creat..."),
+
+
+
+                    ["Creating folder – {0}"] =
+("Création du dossier – {0}",
+ "Ordner wird erstellt – {0}",
+ "Creando carpeta – {0}",
+ "Creazione cartella – {0}",
+ "A criar pasta – {0}",
+ "Criando pasta – {0}",
+ "Map aanmaken – {0}",
+ "Skapar mapp – {0}",
+ "Oppretter mappe – {0}",
+ "Opretter mappe – {0}",
+ "Luodaan kansiota – {0}",
+ "Tworzenie folderu – {0}",
+ "Vytváření složky – {0}",
+ "Mappa létrehozása – {0}",
+ "Se creează folder – {0}"),
+
+
+
+                    ["Current Selection: {0}"] =
+("Sélection actuelle : {0}",
+ "Aktuelle Auswahl: {0}",
+ "Selección actual: {0}",
+ "Selezione attuale: {0}",
+ "Seleção atual: {0}",
+ "Seleção atual: {0}",
+ "Huidige selectie: {0}",
+ "Aktuellt val: {0}",
+ "Nåværende valg: {0}",
+ "Aktuel valg: {0}",
+ "Nykyinen valinta: {0}",
+ "Bieżący wybór: {0}",
+ "Aktuální výběr: {0}",
+ "Jelenlegi kiválasztás: {0}",
+ "Selecția curentă: {0}"),
+
+                    ["No File Selected"] =
+("Aucun fichier sélectionné",
+ "Keine Datei ausgewählt",
+ "Ningún archivo seleccionado",
+ "Nessun file selezionato",
+ "Nenhum ficheiro selecionado",
+ "Nenhum arquivo selecionado",
+ "Geen bestand geselecteerd",
+ "Ingen fil vald",
+ "Ingen fil valgt",
+ "Ingen fil valgt",
+ "Ei tiedostoa valittuna",
+ "Nie wybrano pliku",
+ "Nebyl vybrán žádný soubor",
+ "Nincs fájl kiválasztva",
+ "Niciun fișier selectat"),
+
+                    ["Select Files/Directory"] =
+("Sélectionner fichiers/répertoire",
+ "Dateien/Verzeichnis auswählen",
+ "Seleccionar archivos/directorio",
+ "Seleziona file/cartella",
+ "Selecionar ficheiros/diretório",
+ "Selecionar arquivos/diretório",
+ "Bestanden/map selecteren",
+ "Välj filer/katalog",
+ "Velg filer/katalog",
+ "Vælg filer/mappe",
+ "Valitse tiedostoja/hakemisto",
+ "Wybierz pliki/katalog",
+ "Vybrat soubory/adresář",
+ "Fájlok/könyvtár kiválasztása",
+ "Selectează fișiere/director"),
+
+                    ["Scan complete: {0} files and {1} folders || {2} total"] =
+("Analyse terminée : {0} fichiers et {1} dossiers || {2} au total",
+ "Scan abgeschlossen: {0} Dateien und {1} Ordner || {2} insgesamt",
+ "Escaneo completo: {0} archivos y {1} carpetas || {2} en total",
+ "Scansione completata: {0} file e {1} cartelle || {2} totale",
+ "Análise concluída: {0} ficheiros e {1} pastas || {2} no total",
+ "Verificação concluída: {0} arquivos e {1} pastas || {2} no total",
+ "Scan voltooid: {0} bestanden en {1} mappen || {2} totaal",
+ "Skanning klar: {0} filer och {1} mappar || {2} totalt",
+ "Skanning fullført: {0} filer og {1} mapper || {2} totalt",
+ "Scanning færdig: {0} filer og {1} mapper || {2} i alt",
+ "Skannaus valmis: {0} tiedostoa ja {1} kansiota || {2} yhteensä",
+ "Skanowanie zakończone: {0} plików i {1} folderów || {2} łącznie",
+ "Skenování dokončeno: {0} souborů a {1} složek || {2} celkem",
+ "Vizsgálat befejezve: {0} fájl és {1} mappa || {2} összesen",
+ "Scanare finalizată: {0} fișiere și {1} foldere || {2} total"),
+
+                    ["Scan complete: {0} files…"] =
+("Analyse terminée : {0} fichiers…",
+ "Scan abgeschlossen: {0} Dateien…",
+ "Escaneo completo: {0} archivos…",
+ "Scansione completata: {0} file…",
+ "Análise concluída: {0} ficheiros…",
+ "Verificação concluída: {0} arquivos…",
+ "Scan voltooid: {0} bestanden…",
+ "Skanning klar: {0} filer…",
+ "Skanning fullført: {0} filer…",
+ "Scanning færdig: {0} filer…",
+ "Skannaus valmis: {0} tiedostoa…",
+ "Skanowanie zakończone: {0} plików…",
+ "Skenování dokončeno: {0} souborů…",
+ "Vizsgálat befejezve: {0} fájl…",
+ "Scanare finalizată: {0} fișiere…"),
+
+
+                    ["Current Source: {0}"] =
+("Source actuelle : {0}",
+ "Aktuelle Quelle: {0}",
+ "Fuente actual: {0}",
+ "Origine attuale: {0}",
+ "Origem atual: {0}",
+ "Origem atual: {0}",
+ "Huidige bron: {0}",
+ "Aktuell källa: {0}",
+ "Nåværende kilde: {0}",
+ "Aktuel kilde: {0}",
+ "Nykyinen lähde: {0}",
+ "Bieżące źródło: {0}",
+ "Aktuální zdroj: {0}",
+ "Jelenlegi forrás: {0}",
+ "Sursă curentă: {0}"),
+
+                    ["Current Source: None"] =
+("Source actuelle : Aucune",
+ "Aktuelle Quelle: Keine",
+ "Fuente actual: Ninguna",
+ "Origine attuale: Nessuna",
+ "Origem atual: Nenhuma",
+ "Origem atual: Nenhuma",
+ "Huidige bron: Geen",
+ "Aktuell källa: Ingen",
+ "Nåværende kilde: Ingen",
+ "Aktuel kilde: Ingen",
+ "Nykyinen lähde: Ei mitään",
+ "Bieżące źródło: Brak",
+ "Aktuální zdroj: Žádný",
+ "Jelenlegi forrás: Nincs",
+ "Sursă curentă: Niciuna"),
+
+                    ["Starting copy to {0}"] =
+("Démarrage de la copie vers {0}",
+ "Kopieren nach {0} wird gestartet",
+ "Iniciando copia a {0}",
+ "Avvio copia su {0}",
+ "A iniciar cópia para {0}",
+ "Iniciando cópia para {0}",
+ "Kopiëren naar {0} starten",
+ "Startar kopiering till {0}",
+ "Starter kopiering til {0}",
+ "Starter kopiering til {0}",
+ "Aloitetaan kopiointi kohteeseen {0}",
+ "Rozpoczynanie kopiowania do {0}",
+ "Spouštění kopírování do {0}",
+ "Másolás indítása ide: {0}",
+ "Se începe copierea către {0}"),
+
+                    ["Cancelled"] =
+("Annulée",
+ "Abgebrochen",
+ "Cancelada",
+ "Annullata",
+ "Cancelada",
+ "Cancelada",
+ "Geannuleerd",
+ "Avbruten",
+ "Avbrutt",
+ "Annulleret",
+ "Peruutettu",
+ "Anulowano",
+ "Zrušeno",
+ "Megszakítva",
+ "Anulată"),
+
+                    ["All targets complete"] =
+("Toutes les cibles terminées",
+ "Alle Ziele abgeschlossen",
+ "Todos los destinos completados",
+ "Tutte le destinazioni completate",
+ "Todos os destinos concluídos",
+ "Todos os destinos concluídos",
+ "Alle doelen voltooid",
+ "Alla mål slutförda",
+ "Alle mål fullført",
+ "Alle mål færdige",
+ "Kaikki kohteet valmiit",
+ "Wszystkie cele ukończone",
+ "Všechny cíle dokončeny",
+ "Minden cél befejezve",
+ "Toate destinațiile finalizate"),
+
+
+                    ["Ready"] =
+("Prêt",
+ "Bereit",
+ "Listo",
+ "Pronto",
+ "Pronto",
+ "Pronto",
+ "Klaar",
+ "Redo",
+ "Klar",
+ "Klar",
+ "Valmis",
+ "Gotowe",
+ "Připraveno",
+ "Kész",
+ "Pregătit"),
+
+                    ["Error: {0}"] =
+("Erreur : {0}",
+ "Fehler: {0}",
+ "Error: {0}",
+ "Errore: {0}",
+ "Erro: {0}",
+ "Erro: {0}",
+ "Fout: {0}",
+ "Fel: {0}",
+ "Feil: {0}",
+ "Fejl: {0}",
+ "Virhe: {0}",
+ "Błąd: {0}",
+ "Chyba: {0}",
+ "Hiba: {0}",
+ "Eroare: {0}"),
+
+                    ["Operation canceled."] =
+("Opération annulée.",
+ "Vorgang abgebrochen.",
+ "Operación cancelada.",
+ "Operazione annullata.",
+ "Operação cancelada.",
+ "Operação cancelada.",
+ "Bewerking geannuleerd.",
+ "Åtgärd avbruten.",
+ "Operasjon avbrutt.",
+ "Handling annulleret.",
+ "Toiminto peruutettu.",
+ "Operacja anulowana.",
+ "Operace zrušena.",
+ "Művelet megszakítva.",
+ "Operațiune anulată."),
+
+                    ["Error: {0}"] =
+("Erreur : {0}",
+ "Fehler: {0}",
+ "Error: {0}",
+ "Errore: {0}",
+ "Erro: {0}",
+ "Erro: {0}",
+ "Fout: {0}",
+ "Fel: {0}",
+ "Feil: {0}",
+ "Fejl: {0}",
+ "Virhe: {0}",
+ "Błąd: {0}",
+ "Chyba: {0}",
+ "Hiba: {0}",
+ "Eroare: {0}"),
+
+
+
+                    ["Speed: {0} MB/s"] =
+("Vitesse : {0} Mo/s",
+ "Geschwindigkeit: {0} MB/s",
+ "Velocidad: {0} MB/s",
+ "Velocità: {0} MB/s",
+ "Velocidade: {0} MB/s",
+ "Velocidade: {0} MB/s",
+ "Snelheid: {0} MB/s",
+ "Hastighet: {0} MB/s",
+ "Hastighet: {0} MB/s",
+ "Hastighed: {0} MB/s",
+ "Nopeus: {0} Mt/s",
+ "Prędkość: {0} MB/s",
+ "Rychlost: {0} MB/s",
+ "Sebesség: {0} MB/s",
+ "Viteză: {0} MB/s"),
+
+                    ["Speed: {0}"] =
+("Vitesse : {0}",
+ "Geschwindigkeit: {0}",
+ "Velocidad: {0}",
+ "Velocità: {0}",
+ "Velocidade: {0}",
+ "Velocidade: {0}",
+ "Snelheid: {0}",
+ "Hastighet: {0}",
+ "Hastighet: {0}",
+ "Hastighed: {0}",
+ "Nopeus: {0}",
+ "Prędkość: {0}",
+ "Rychlost: {0}",
+ "Sebesség: {0}",
+ "Viteză: {0}"),
+
+                    ["{0} MB/s"] =
+("{0} Mo/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} Mt/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s",
+ "{0} MB/s"),
+
+
+
+                    ["Speed: N/A"] =
+("Vitesse : N/D",
+ "Geschwindigkeit: N/V",
+ "Velocidad: N/D",
+ "Velocità: N/D",
+ "Velocidade: N/D",
+ "Velocidade: N/D",
+ "Snelheid: N/B",
+ "Hastighet: Ej tillgänglig",
+ "Hastighet: Ikke tilgjengelig",
+ "Hastighed: Ikke tilgængelig",
+ "Nopeus: Ei saatavilla",
+ "Prędkość: Niedostępna",
+ "Rychlost: Nedostupná",
+ "Sebesség: Nem elérhető",
+ "Viteză: Indisponibilă"),
+
+
+
+                    ["Total C/M/D: {0} / {1}"] =
+("Total C/D/S : {0} / {1}",
+ "Gesamt K/V/L: {0} / {1}",
+ "Total C/M/E: {0} / {1}",
+ "Totale C/S/E: {0} / {1}",
+ "Total C/M/E: {0} / {1}",
+ "Total C/M/E: {0} / {1}",
+ "Totaal K/V/V: {0} / {1}",
+ "Totalt K/F/R: {0} / {1}",
+ "Totalt K/F/S: {0} / {1}",
+ "Total K/F/S: {0} / {1}",
+ "Yhteensä K/S/P: {0} / {1}",
+ "Łącznie K/P/U: {0} / {1}",
+ "Celkem K/P/S: {0} / {1}",
+ "Összes M/Á/T: {0} / {1}",
+ "Total C/M/Ș: {0} / {1}"),
+
+                    ["Total File/Folder Count: {0}"] =
+("Nombre total de fichiers/dossiers : {0}",
+ "Gesamtanzahl Dateien/Ordner: {0}",
+ "Recuento total de archivos/carpetas: {0}",
+ "Conteggio totale file/cartelle: {0}",
+ "Contagem total de ficheiros/pastas: {0}",
+ "Contagem total de arquivos/pastas: {0}",
+ "Totaal aantal bestanden/mappen: {0}",
+ "Totalt antal filer/mappar: {0}",
+ "Totalt antall filer/mapper: {0}",
+ "Samlet antal filer/mapper: {0}",
+ "Tiedostojen/kansioiden kokonaismäärä: {0}",
+ "Łączna liczba plików/folderów: {0}",
+ "Celkový počet souborů/složek: {0}",
+ "Fájlok/mappák teljes száma: {0}",
+ "Număr total fișiere/foldere: {0}"),
+
+
+                    ["Total C/M/D: 0 Bytes / {0}"] =
+("Total C/D/S : 0 octets / {0}",
+ "Gesamt K/V/L: 0 Bytes / {0}",
+ "Total C/M/E: 0 Bytes / {0}",
+ "Totale C/S/E: 0 Byte / {0}",
+ "Total C/M/E: 0 Bytes / {0}",
+ "Total C/M/E: 0 Bytes / {0}",
+ "Totaal K/V/V: 0 Bytes / {0}",
+ "Totalt K/F/R: 0 Byte / {0}",
+ "Totalt K/F/S: 0 Byte / {0}",
+ "Total K/F/S: 0 Byte / {0}",
+ "Yhteensä K/S/P: 0 tavua / {0}",
+ "Łącznie K/P/U: 0 Bajtów / {0}",
+ "Celkem K/P/S: 0 Bajtů / {0}",
+ "Összes M/Á/T: 0 Bájt / {0}",
+ "Total C/M/Ș: 0 Octeți / {0}"),
+
+                    ["File Count: {0} Out of {1}"] =
+("Nombre de fichiers : {0} sur {1}",
+ "Dateianzahl: {0} von {1}",
+ "Recuento de archivos: {0} de {1}",
+ "Conteggio file: {0} su {1}",
+ "Contagem de ficheiros: {0} de {1}",
+ "Contagem de arquivos: {0} de {1}",
+ "Aantal bestanden: {0} van {1}",
+ "Filantal: {0} av {1}",
+ "Filantall: {0} av {1}",
+ "Filantal: {0} ud af {1}",
+ "Tiedostojen määrä: {0} / {1}",
+ "Liczba plików: {0} z {1}",
+ "Počet souborů: {0} z {1}",
+ "Fájlszám: {0} / {1}",
+ "Număr fișiere: {0} din {1}"),
+
+
+                    ["File Count: 0 Out of 0"] =
+("Nombre de fichiers : 0 sur 0",
+ "Dateianzahl: 0 von 0",
+ "Recuento de archivos: 0 de 0",
+ "Conteggio file: 0 su 0",
+ "Contagem de ficheiros: 0 de 0",
+ "Contagem de arquivos: 0 de 0",
+ "Aantal bestanden: 0 van 0",
+ "Filantal: 0 av 0",
+ "Filantall: 0 av 0",
+ "Filantal: 0 ud af 0",
+ "Tiedostojen määrä: 0 / 0",
+ "Liczba plików: 0 z 0",
+ "Počet souborů: 0 z 0",
+ "Fájlszám: 0 / 0",
+ "Număr fișiere: 0 din 0"),
+
+                    ["Total C/M/D: 0 Bytes / 0 Bytes"] =
+("Total C/D/S : 0 octets / 0 octets",
+ "Gesamt K/V/L: 0 Bytes / 0 Bytes",
+ "Total C/M/E: 0 Bytes / 0 Bytes",
+ "Totale C/S/E: 0 Byte / 0 Byte",
+ "Total C/M/E: 0 Bytes / 0 Bytes",
+ "Total C/M/E: 0 Bytes / 0 Bytes",
+ "Totaal K/V/V: 0 Bytes / 0 Bytes",
+ "Totalt K/F/R: 0 Byte / 0 Byte",
+ "Totalt K/F/S: 0 Byte / 0 Byte",
+ "Total K/F/S: 0 Byte / 0 Byte",
+ "Yhteensä K/S/P: 0 tavua / 0 tavua",
+ "Łącznie K/P/U: 0 Bajtów / 0 Bajtów",
+ "Celkem K/P/S: 0 Bajtů / 0 Bajtů",
+ "Összes M/Á/T: 0 Bájt / 0 Bájt",
+ "Total C/M/Ș: 0 Octeți / 0 Octeți"),
+
+                    ["Select Files/Directory"] =
+("Sélectionner fichiers/répertoire",
+ "Dateien/Verzeichnis auswählen",
+ "Seleccionar archivos/directorio",
+ "Seleziona file/cartella",
+ "Selecionar ficheiros/diretório",
+ "Selecionar arquivos/diretório",
+ "Bestanden/map selecteren",
+ "Välj filer/katalog",
+ "Velg filer/katalog",
+ "Vælg filer/mappe",
+ "Valitse tiedostoja/hakemisto",
+ "Wybierz pliki/katalog",
+ "Vybrat soubory/adresář",
+ "Fájlok/könyvtár kiválasztása",
+ "Selectează fișiere/director"),
+
+                    ["Select Target Directory"] =
+("Sélectionner le répertoire cible",
+ "Zielverzeichnis auswählen",
+ "Seleccionar directorio de destino",
+ "Seleziona cartella di destinazione",
+ "Selecionar diretório de destino",
+ "Selecionar diretório de destino",
+ "Doelmap selecteren",
+ "Välj målkatalog",
+ "Velg målkatalog",
+ "Vælg målmappe",
+ "Valitse kohdehakemisto",
+ "Wybierz katalog docelowy",
+ "Vybrat cílový adresář",
+ "Célkönyvtár kiválasztása",
+ "Selectează director destinație"),
+
+                    ["Nothing"] =
+("Rien",
+ "Nichts",
+ "Nada",
+ "Niente",
+ "Nada",
+ "Nada",
+ "Niets",
+ "Ingenting",
+ "Ingenting",
+ "Intet",
+ "Ei mitään",
+ "Nic",
+ "Nic",
+ "Semmi",
+ "Nimic"),
+
+
+                    ["Files Processed: 0 Bytes / 0 Bytes"] =
+("Fichiers traités : 0 octets / 0 octets",
+ "Dateien verarbeitet: 0 Bytes / 0 Bytes",
+ "Archivos procesados: 0 Bytes / 0 Bytes",
+ "File elaborati: 0 Byte / 0 Byte",
+ "Ficheiros processados: 0 Bytes / 0 Bytes",
+ "Arquivos processados: 0 Bytes / 0 Bytes",
+ "Bestanden verwerkt: 0 Bytes / 0 Bytes",
+ "Filer bearbetade: 0 Byte / 0 Byte",
+ "Filer behandlet: 0 Byte / 0 Byte",
+ "Filer behandlet: 0 Byte / 0 Byte",
+ "Tiedostoja käsitelty: 0 tavua / 0 tavua",
+ "Pliki przetworzone: 0 Bajtów / 0 Bajtów",
+ "Soubory zpracovány: 0 Bajtů / 0 Bajtů",
+ "Feldolgozott fájlok: 0 Bájt / 0 Bájt",
+ "Fișiere procesate: 0 Octeți / 0 Octeți"),
+
+                    ["Speed: 0 MB/Sec."] =
+("Vitesse : 0 Mo/sec.",
+ "Geschwindigkeit: 0 MB/Sek.",
+ "Velocidad: 0 MB/seg.",
+ "Velocità: 0 MB/sec.",
+ "Velocidade: 0 MB/seg.",
+ "Velocidade: 0 MB/seg.",
+ "Snelheid: 0 MB/sec.",
+ "Hastighet: 0 MB/sek.",
+ "Hastighet: 0 MB/sek.",
+ "Hastighed: 0 MB/sek.",
+ "Nopeus: 0 Mt/s",
+ "Prędkość: 0 MB/sek.",
+ "Rychlost: 0 MB/sek.",
+ "Sebesség: 0 MB/mp.",
+ "Viteză: 0 MB/sec."),
+
+                    ["Total HD Space Left: 0 Bytes"] =
+("Espace disque restant : 0 octets",
+ "Verbleibender Festplattenspeicher: 0 Bytes",
+ "Espacio total del disco restante: 0 Bytes",
+ "Spazio totale su disco rimanente: 0 Byte",
+ "Espaço total do disco restante: 0 Bytes",
+ "Espaço total do disco restante: 0 Bytes",
+ "Totale schijfruimte over: 0 Bytes",
+ "Totalt ledigt hårddiskutrymme: 0 Byte",
+ "Total ledig diskplass: 0 Byte",
+ "Samlet ledig plads på harddisk: 0 Byte",
+ "Kiintolevyn vapaata tilaa jäljellä: 0 tavua",
+ "Całkowita pozostała przestrzeń dyskowa: 0 Bajtów",
+ "Celkové volné místo na disku: 0 Bajtů",
+ "Teljes szabad lemezterület: 0 Bájt",
+ "Spațiu total rămas pe disc: 0 Octeți"),
+
+
+                    ["Elapsed / Target Time: 00:00:00 / 00:00:00"] =
+("Temps écoulé / temps cible : 00:00:00 / 00:00:00",
+ "Verstrichene / Zielzeit: 00:00:00 / 00:00:00",
+ "Tiempo transcurrido / tiempo objetivo: 00:00:00 / 00:00:00",
+ "Tempo trascorso / tempo previsto: 00:00:00 / 00:00:00",
+ "Tempo decorrido / tempo previsto: 00:00:00 / 00:00:00",
+ "Tempo decorrido / tempo previsto: 00:00:00 / 00:00:00",
+ "Verstreken / doeltijd: 00:00:00 / 00:00:00",
+ "Förfluten / måltid: 00:00:00 / 00:00:00",
+ "Forløpt / måltid: 00:00:00 / 00:00:00",
+ "Forløbet / måltid: 00:00:00 / 00:00:00",
+ "Kulunut / tavoiteaika: 00:00:00 / 00:00:00",
+ "Upłynęło / czas docelowy: 00:00:00 / 00:00:00",
+ "Uplynulo / cílový čas: 00:00:00 / 00:00:00",
+ "Eltelt / célidő: 00:00:00 / 00:00:00",
+ "Timp scurs / timp țintă: 00:00:00 / 00:00:00"),
+
                     ["Tab Control: This control allows you to switch between different operation modes and settings."] =
-                        ("Onglet de contrôle : permet de basculer entre les différents modes d’opération et réglages.",
-                         "Registerkarte: Hiermit schalten Sie zwischen verschiedenen Betriebsmodi und Einstellungen um.",
-                         "Pestaña de control: le permite cambiar entre diferentes modos de operación y ajustes."),
+    ("Onglet de contrôle : permet de basculer entre les différents modes d’opération et réglages.",
+     "Registerkarte: Hiermit schalten Sie zwischen verschiedenen Betriebsmodi und Einstellungen um.",
+     "Pestaña de control: le permite cambiar entre diferentes modos de operación y ajustes.",
+     "Scheda di controllo: consente di passare tra diverse modalità operative e impostazioni.",
+     "Separador de controle: permite alternar entre diferentes modos de operação e definições.",
+     "Guia de controle: permite alternar entre diferentes modos de operação e configurações.",
+     "Tabblad Besturing: hiermee schakelt u tussen verschillende bewerkingsmodi en instellingen.",
+     "Flik Kontroll: låter dig växla mellan olika driftslägen och inställningar.",
+     "Kontroll-fane: lar deg bytte mellom ulike driftsmodi og innstillinger.",
+     "Kontrolfane: lader dig skifte mellem forskellige driftsformer og indstillinger.",
+     "Hallinta-välilehti: mahdollistaa vaihtamisen eri toimintatilojen ja asetusten välillä.",
+     "Zakładka Kontrolna: pozwala przełączać się między różnymi trybami działania i ustawieniami.",
+     "Karta Ovládání: umožňuje přepínat mezi různými provozními režimy a nastaveními.",
+     "Vezérlőlap: lehetővé teszi különböző műveleti módok és beállítások közötti váltást.",
+     "Filă de control: permite comutarea între diferite moduri de operare și setări."),
 
                     ["File's Icon PictureBox: The file's icon which reflect the current file will be shown here."] =
-                        ("PictureBox de l’icône du fichier : l’icône du fichier actuel s’affiche ici.",
-                         "Symbol PictureBox: Das Symbol der aktuellen Datei wird hier angezeigt.",
-                         "PictureBox del icono del archivo: aquí se muestra el icono del archivo actual."),
+    ("PictureBox de l’icône du fichier : l’icône du fichier actuel s’affiche ici.",
+     "Symbol PictureBox: Das Symbol der aktuellen Datei wird hier angezeigt.",
+     "PictureBox del icono del archivo: aquí se muestra el icono del archivo actual.",
+     "PictureBox dell’icona del file: mostra l’icona del file corrente.",
+     "PictureBox do ícone do ficheiro: aqui é mostrado o ícone do ficheiro atual.",
+     "PictureBox do ícone do arquivo: aqui é mostrado o ícone do arquivo atual.",
+     "PictureBox van bestandspictogram: het pictogram van het huidige bestand wordt hier getoond.",
+     "Bildruta för filens ikon: filens ikon som motsvarar den aktuella filen visas här.",
+     "Bilderamme for filens ikon: filens ikon som gjenspeiler gjeldende fil vises her.",
+     "Billede-boks for filens ikon: ikonet for den aktuelle fil vises her.",
+     "Tiedoston kuvake-PictureBox: nykyisen tiedoston kuvake näytetään tässä.",
+     "PictureBox ikony pliku: tutaj pojawi się ikona bieżącego pliku.",
+     "PictureBox ikony souboru: zde se zobrazí ikona aktuálního souboru.",
+     "Fájl ikon PictureBox: a jelenlegi fájl ikonja jelenik meg itt.",
+     "PictureBox pentru pictograma fișierului: va fi afișată pictograma fișierului curent."),
 
                     ["Source Directory Button: This is the button to select your source directory from which files will be copied/moved/securely deleted."] =
-                        ("Bouton Répertoire source : permet de choisir le dossier source depuis lequel les fichiers seront copiés/déplacés/supprimés de façon sécurisée.",
-                         "Quellverzeichnis-Schaltfläche: Wählt das Quellverzeichnis aus, aus dem Dateien kopiert/verschoben/sicher gelöscht werden.",
-                         "Botón Directorio de origen: permite elegir la carpeta de origen desde la que se copiarán/moverán/borrarán de forma segura los archivos."),
+    ("Bouton Répertoire source : permet de choisir le dossier source depuis lequel les fichiers seront copiés/déplacés/supprimés de façon sécurisée.",
+     "Quellverzeichnis-Schaltfläche: Wählt das Quellverzeichnis aus, aus dem Dateien kopiert/verschoben/sicher gelöscht werden.",
+     "Botón Directorio de origen: permite elegir la carpeta de origen desde la que se copiarán/moverán/borrarán de forma segura los archivos.",
+     "Pulsante Cartella di origine: consente di selezionare la cartella di origine da cui copiare/spostare/eliminare in modo sicuro i file.",
+     "Botão Diretório de origem: permite escolher a pasta de origem da qual os ficheiros serão copiados/movidos/eliminados de forma segura.",
+     "Botão Diretório de origem: permite escolher a pasta de origem de onde os arquivos serão copiados/movidos/excluídos com segurança.",
+     "Knop Bronmap: hiermee selecteert u de bronmap waaruit bestanden worden gekopieerd/verplaatst/veilig verwijderd.",
+     "Källa Mapp-knapp: låter dig välja källmappen som filer ska kopieras/flyttas/säkert raderas från.",
+     "Kilde Mappe-knapp: lar deg velge kildemappen som filer skal kopieres/flyttes/slettes sikkert fra.",
+     "Kilde Mappe-knap: lader dig vælge kildemappen, hvorfra filer kopieres/flyttes/slettes sikkert.",
+     "Lähdehakemisto-painike: valitsee hakemiston, josta tiedostot kopioidaan/siirretään/poistetaan turvallisesti.",
+     "Przycisk Katalog źródłowy: pozwala wybrać katalog źródłowy, z którego pliki będą kopiowane/przenoszone/bezpiecznie usuwane.",
+     "Tlačítko Zdrojový adresář: umožňuje vybrat zdrojovou složku, ze které budou soubory kopírovány/přesunuty/bezpečně smazány.",
+     "Forrás könyvtár gomb: lehetővé teszi a forráskönyvtár kiválasztását, ahonnan a fájlok másolása/áthelyezése/biztonságos törlése történik.",
+     "Buton Director sursă: permite selectarea directorului sursă din care fișierele vor fi copiate/mutate/șterse în siguranță."),
 
                     ["Target Directory Button: This is the button to select your target directory to which your files will be copied/moved."] =
-                        ("Bouton Répertoire cible : permet de choisir le dossier de destination vers lequel les fichiers seront copiés ou déplacés.",
-                         "Zielverzeichnis-Schaltfläche: Wählt das Zielverzeichnis aus, in das Dateien kopiert oder verschoben werden.",
-                         "Botón Directorio de destino: permite elegir la carpeta de destino a la que se copiarán o moverán los archivos."),
+    ("Bouton Répertoire cible : permet de choisir le dossier de destination vers lequel les fichiers seront copiés ou déplacés.",
+     "Zielverzeichnis-Schaltfläche: Wählt das Zielverzeichnis aus, in das Dateien kopiert oder verschoben werden.",
+     "Botón Directorio de destino: permite elegir la carpeta de destino a la que se copiarán o moverán los archivos.",
+     "Pulsante Cartella di destinazione: consente di selezionare la cartella di destinazione in cui copiare o spostare i file.",
+     "Botão Diretório de destino: permite escolher a pasta de destino para onde os ficheiros serão copiados ou movidos.",
+     "Botão Diretório de destino: permite escolher a pasta de destino para onde os arquivos serão copiados ou movidos.",
+     "Knop Doelmap: hiermee selecteert u de doelmap waarnaar uw bestanden worden gekopieerd of verplaatst.",
+     "Mål Mapp-knapp: låter dig välja målmappen som dina filer ska kopieras eller flyttas till.",
+     "Mål Mappe-knapp: lar deg velge målmappen som filene skal kopieres eller flyttes til.",
+     "Mål Mappe-knap: lader dig vælge målmappen, som dine filer kopieres eller flyttes til.",
+     "Kohdehakemisto-painike: valitsee kohdehakemiston, johon tiedostot kopioidaan tai siirretään.",
+     "Przycisk Katalog docelowy: pozwala wybrać katalog docelowy, do którego pliki zostaną skopiowane lub przeniesione.",
+     "Tlačítko Cílový adresář: umožňuje vybrat cílovou složku, do které budou soubory zkopírovány nebo přesunuty.",
+     "Cél könyvtár gomb: lehetővé teszi a célkönyvtár kiválasztását, ahová a fájlok másolása vagy áthelyezése történik.",
+     "Buton Director destinație: permite selectarea directorului țintă în care fișierele vor fi copiate/mutate."),
 
                     ["Copy/Move/Secure Delete ComboBox: This dropdown combobox is to select the operation of Copy/Move/Secure Delete."] =
-                        ("ComboBox Copier/Déplacer/Suppression sécurisée : permet de choisir l’opération à effectuer.",
-                         "Kopieren/Verschieben/Sicheres Löschen-ComboBox: Wählt die gewünschte Operation aus.",
-                         "ComboBox Copiar/Mover/Borrado seguro: permite elegir la operación a realizar."),
+    ("ComboBox Copier/Déplacer/Suppression sécurisée : permet de choisir l’opération à effectuer.",
+     "Kopieren/Verschieben/Sicheres Löschen-ComboBox: Wählt die gewünschte Operation aus.",
+     "ComboBox Copiar/Mover/Borrado seguro: permite elegir la operación a realizar.",
+     "ComboBox Copia/Spostamento/Eliminazione sicura: consente di selezionare l’operazione di copia/spostamento/eliminazione sicura.",
+     "ComboBox Copiar/Mover/Eliminação segura: permite escolher a operação Copiar/Mover/Eliminar de forma segura.",
+     "ComboBox Copiar/Mover/Exclusão segura: permite escolher a operação Copiar/Mover/Excluir com segurança.",
+     "ComboBox Kopiëren/Verplaatsen/Secure Verwijderen: hiermee selecteert u de bewerking Kopiëren/Verplaatsen/Secure Verwijderen.",
+     "ComboBox Kopiera/Flytta/Säker borttagning: låter dig välja åtgärden Kopiera/Flytta/Säker borttagning.",
+     "ComboBox Kopier/Flytt/Sikker sletting: lar deg velge handlingen Kopier/Flytt/Sikker sletting.",
+     "ComboBox Kopiér/Flyt/Sikker sletning: lader dig vælge handlingen Kopiér/Flyt/Sikker sletning.",
+     "ComboBox Kopioi/Siirrä/Turvallinen poisto: mahdollistaa toiminnon Kopioi/Siirrä/Turvallinen poisto valinnan.",
+     "ComboBox Kopiuj/Przenieś/Bezpieczne usuwanie: pozwala wybrać operację Kopiuj/Przenieś/Bezpieczne usuwanie.",
+     "ComboBox Kopírovat/Přesunout/Bezpečné smazání: umožňuje vybrat operaci Kopírovat/Přesunout/Bezpečné smazání.",
+     "ComboBox Másol/Áthelyez/Biztonságos törlés: lehetővé teszi a Másol/Áthelyez/Biztonságos törlés művelet kiválasztását.",
+     "ComboBox Copiere/Mutare/Ștergere sigură: permite selectarea operațiunii Copiere/Mutare/Ștergere sigură."),
 
                     ["On Finish ComboBox: This dropdown combobox is to select the action to perform when the operation finishes."] =
-                        ("ComboBox À la fin : permet de choisir l’action à effectuer une fois l’opération terminée.",
-                         "Beenden-ComboBox: Legt fest, was nach Abschluss der Operation geschehen soll.",
-                         "ComboBox Al finalizar: permite elegir la acción a realizar cuando termine la operación."),
+    ("ComboBox À la fin : permet de choisir l’action à effectuer une fois l’opération terminée.",
+     "Beenden-ComboBox: Legt fest, was nach Abschluss der Operation geschehen soll.",
+     "ComboBox Al finalizar: permite elegir la acción a realizar cuando termine la operación.",
+     "ComboBox Al termine: consente di selezionare l’azione da eseguire al termine dell’operazione.",
+     "ComboBox Ao finalizar: permite escolher a ação a realizar quando a operação terminar.",
+     "ComboBox Ao finalizar: permite escolher a ação a realizar quando a operação terminar.",
+     "ComboBox Bij voltooien: hiermee selecteert u de actie die moet worden uitgevoerd wanneer de bewerking is voltooid.",
+     "ComboBox Vid slutförd: låter dig välja åtgärden som ska utföras när åtgärden är slutförd.",
+     "ComboBox Ved ferdigstillelse: lar deg velge handlingen som skal utføres når operasjonen er fullført.",
+     "ComboBox Ved færdiggørelse: lader dig vælge handlingen, der skal udføres, når operationen er afsluttet.",
+     "ComboBox Valmistuessa: mahdollistaa toiminnon valinnan, joka suoritetaan toimenpiteen valmistuessa.",
+     "ComboBox Po zakończeniu: pozwala wybrać działanie do wykonania po zakończeniu operacji.",
+     "ComboBox Po dokončení: umožňuje vybrat akci, která se provede po dokončení operace.",
+     "ComboBox Befejezéskor: lehetővé teszi a művelet befejezésekor végrehajtandó művelet kiválasztását.",
+     "ComboBox La finalizare: permite selectarea acțiunii de efectuat la finalizarea operațiunii."),
 
                     ["Start Button: This button starts the operation of Copy/Move/Secure Delete."] =
-                        ("Bouton Démarrer : lance l’opération de copie/déplacement/suppression sécurisée.",
-                         "Start-Schaltfläche: Startet die Operation Kopieren/Verschieben/Sicheres Löschen.",
-                         "Botón Iniciar: inicia la operación de copiar/mover/borrar de forma segura."),
+    ("Bouton Démarrer : lance l’opération de copie/déplacement/suppression sécurisée.",
+     "Start-Schaltfläche: Startet die Operation Kopieren/Verschieben/Sicheres Löschen.",
+     "Botón Iniciar: inicia la operación de copiar/mover/borrar de forma segura.",
+     "Pulsante Avvia: avvia l’operazione di Copia/Spostamento/Eliminazione sicura.",
+     "Botão Iniciar: inicia a operação Copiar/Mover/Eliminar de forma segura.",
+     "Botão Iniciar: inicia a operação Copiar/Mover/Excluir com segurança.",
+     "Knop Starten: start de bewerking Kopiëren/Verplaatsen/Secure Verwijderen.",
+     "Start-knapp: startar åtgärden Kopiera/Flytta/Säker borttagning.",
+     "Start-knapp: starter operasjonen Kopier/Flytt/Sikker sletting.",
+     "Start-knap: starter handlingen Kopiér/Flyt/Sikker sletning.",
+     "Käynnistä-painike: käynnistää toiminnon Kopioi/Siirrä/Turvallinen poisto.",
+     "Przycisk Start: rozpoczyna operację Kopiuj/Przenieś/Bezpieczne usuwanie.",
+     "Tlačítko Start: spustí operaci Kopírovat/Přesunout/Bezpečné smazání.",
+     "Start gomb: elindítja a Másol/Áthelyez/Biztonságos törlés műveletet.",
+     "Buton Start: pornește operațiunea Copiere/Mutare/Ștergere sigură."),
+
 
                     ["Pause/Resume Button: This button pauses/resumes the current operation."] =
-                        ("Bouton Pause/Reprise : met l’opération en pause ou la reprend.",
-                         "Pause/Weiter-Schaltfläche: Pausiert oder setzt die aktuelle Operation fort.",
-                         "Botón Pausar/Reanudar: pone en pausa o reanuda la operación actual."),
+    ("Bouton Pause/Reprise : met l’opération en pause ou la reprend.",
+     "Pause/Weiter-Schaltfläche: Pausiert oder setzt die aktuelle Operation fort.",
+     "Botón Pausar/Reanudar: pone en pausa o reanuda la operación actual.",
+     "Pulsante Pausa/Riprendi: mette in pausa o riprende l’operazione corrente.",
+     "Botão Pausa/Continuar: coloca em pausa ou retoma a operação atual.",
+     "Botão Pausar/Retomar: coloca em pausa ou retoma a operação atual.",
+     "Knop Pauzeren/Hervatten: pauzeert of hervat de huidige bewerking.",
+     "Pausa/Fortsätt-knapp: pausar eller återupptar den aktuella åtgärden.",
+     "Pause/Start-knapp: pauserer eller gjenopptar den gjeldende operasjonen.",
+     "Pause/Fortsæt-knap: pauserer eller genoptager den aktuelle operation.",
+     "Keskeytä/Jatka-painike: keskeyttää tai jatkaa nykyistä toimenpidettä.",
+     "Przycisk Pauza/Wznów: wstrzymuje lub wznawia bieżącą operację.",
+     "Tlačítko Pozastavit/Pokračovat: pozastaví nebo obnoví aktuální operaci.",
+     "Szünet/Folytat gomb: szünetelteti vagy folytatja a jelenlegi műveletet.",
+     "Buton Pauză/Reluare: pune pe pauză sau reia operațiunea curentă."),
 
                     ["Cancel Button: This button cancels the current operation."] =
-                        ("Bouton Annuler : annule l’opération en cours.",
-                         "Abbrechen-Schaltfläche: Bricht die aktuelle Operation ab.",
-                         "Botón Cancelar: cancela la operación actual."),
+    ("Bouton Annuler : annule l’opération en cours.",
+     "Abbrechen-Schaltfläche: Bricht die aktuelle Operation ab.",
+     "Botón Cancelar: cancela la operación actual.",
+     "Pulsante Annulla: annulla l’operazione corrente.",
+     "Botão Cancelar: cancela a operação atual.",
+     "Botão Cancelar: cancela a operação atual.",
+     "Knop Annuleren: annuleert de huidige bewerking.",
+     "Avbryt-knapp: avbryter den aktuella åtgärden.",
+     "Avbryt-knapp: avbryter den gjeldende operasjonen.",
+     "Annuller-knap: annullerer den aktuelle operation.",
+     "Peruuta-painike: peruuttaa nykyisen toimenpiteen.",
+     "Przycisk Anuluj: anuluje bieżącą operację.",
+     "Tlačítko Zrušit: zruší aktuální operaci.",
+     "Mégsem gomb: megszakítja a jelenlegi műveletet.",
+     "Buton Anulare: anulează operațiunea curentă."),
 
                     ["This button skips the current file and moves to the next one in the operation."] =
-                        ("Ce bouton ignore le fichier actuel et passe au suivant.",
-                         "Diese Schaltfläche überspringt die aktuelle Datei und fährt mit der nächsten fort.",
-                         "Este botón omite el archivo actual y pasa al siguiente."),
+    ("Ce bouton ignore le fichier actuel et passe au suivant.",
+     "Diese Schaltfläche überspringt die aktuelle Datei und fährt mit der nächsten fort.",
+     "Este botón omite el archivo actual y pasa al siguiente.",
+     "Questo pulsante salta il file corrente e passa al successivo nell’operazione.",
+     "Este botão ignora o ficheiro atual e passa para o seguinte.",
+     "Este botão ignora o arquivo atual e passa para o próximo.",
+     "Deze knop slaat het huidige bestand over en gaat naar het volgende in de bewerking.",
+     "Denna knapp hoppar över den aktuella filen och går till nästa i åtgärden.",
+     "Denne knappen hopper over gjeldende fil og går til neste i operasjonen.",
+     "Denne knap springer den aktuelle fil over og går til den næste i handlingen.",
+     "Tämä painike ohittaa nykyisen tiedoston ja siirtyy toimenpiteen seuraavaan.",
+     "Ten przycisk pomija bieżący plik i przechodzi do następnego w operacji.",
+     "Toto tlačítko přeskočí aktuální soubor a přejde k dalšímu v operaci.",
+     "Ez a gomb átugorja a jelenlegi fájlt és a művelet következőjére lép.",
+     "Acest buton sare peste fișierul curent și trece la următorul din operațiune."),
 
                     ["Add File Button: This button adds files to the list for the current operation."] =
-                        ("Bouton Ajouter un fichier : ajoute des fichiers à la liste de l’opération.",
-                         "Datei hinzufügen-Schaltfläche: Fügt der Liste Dateien hinzu.",
-                         "Botón Añadir archivo: agrega archivos a la lista de la operación."),
+    ("Bouton Ajouter un fichier : ajoute des fichiers à la liste de l’opération.",
+     "Datei hinzufügen-Schaltfläche: Fügt der Liste Dateien hinzu.",
+     "Botón Añadir archivo: agrega archivos a la lista de la operación.",
+     "Pulsante Aggiungi file: aggiunge file alla lista per l’operazione corrente.",
+     "Botão Adicionar ficheiro: adiciona ficheiros à lista da operação atual.",
+     "Botão Adicionar arquivo: adiciona arquivos à lista da operação atual.",
+     "Knop Bestand toevoegen: voegt bestanden toe aan de lijst voor de huidige bewerking.",
+     "Lägg till fil-knapp: lägger till filer i listan för den aktuella åtgärden.",
+     "Legg til fil-knapp: legger til filer i listen for gjeldende operasjon.",
+     "Tilføj fil-knap: tilføjer filer til listen for den aktuelle operation.",
+     "Lisää tiedosto -painike: lisää tiedostot nykyisen toimenpiteen luetteloon.",
+     "Przycisk Dodaj plik: dodaje pliki do listy bieżącej operacji.",
+     "Tlačítko Přidat soubor: přidá soubory do seznamu aktuální operace.",
+     "Fájl hozzáadása gomb: fájlokat ad hozzá a jelenlegi művelet listájához.",
+     "Buton Adăugare fișier: adaugă fișiere la lista pentru operațiunea curentă."),
 
                     ["Remove File Button: This button removes the selected file from the list for the current operation."] =
-                        ("Bouton Supprimer le fichier : retire le fichier sélectionné de la liste.",
-                         "Datei entfernen-Schaltfläche: Entfernt die ausgewählte Datei aus der Liste.",
-                         "Botón Quitar archivo: quita el archivo seleccionado de la lista."),
+    ("Bouton Supprimer le fichier : retire le fichier sélectionné de la liste.",
+     "Datei entfernen-Schaltfläche: Entfernt die ausgewählte Datei aus der Liste.",
+     "Botón Quitar archivo: quita el archivo seleccionado de la lista.",
+     "Pulsante Rimuovi file: rimuove il file selezionato dalla lista.",
+     "Botão Remover ficheiro: remove o ficheiro selecionado da lista.",
+     "Botão Remover arquivo: remove o arquivo selecionado da lista.",
+     "Knop Bestand verwijderen: verwijdert het geselecteerde bestand uit de lijst.",
+     "Ta bort fil-knapp: tar bort den valda filen från listan.",
+     "Fjern fil-knapp: fjerner den valgte filen fra listen.",
+     "Fjern fil-knap: fjerner den valgte fil fra listen.",
+     "Poista tiedosto -painike: poistaa valitun tiedoston luettelosta.",
+     "Przycisk Usuń plik: usuwa wybrany plik z listy.",
+     "Tlačítko Odebrat soubor: odebere vybraný soubor ze seznamu.",
+     "Fájl eltávolítása gomb: eltávolítja a kijelölt fájlt a listáról.",
+     "Buton Eliminare fișier: elimină fișierul selectat din lista operațiunii."),
 
                     ["Clear File List Button: This button clears the entire file list for the current operation."] =
-                        ("Bouton Effacer la liste : vide complètement la liste de fichiers.",
-                         "Liste löschen-Schaltfläche: Leert die gesamte Dateiliste.",
-                         "Botón Limpiar lista: vacía completamente la lista de archivos."),
+    ("Bouton Effacer la liste : vide complètement la liste de fichiers.",
+     "Liste löschen-Schaltfläche: Leert die gesamte Dateiliste.",
+     "Botón Limpiar lista: vacía completamente la lista de archivos.",
+     "Pulsante Cancella elenco: cancella l’intera lista di file per l’operazione corrente.",
+     "Botão Limpar lista de ficheiros: limpa toda a lista de ficheiros da operação atual.",
+     "Botão Limpar lista de arquivos: limpa toda a lista de arquivos da operação atual.",
+     "Knop Bestandslijst wissen: wist de volledige bestandslijst voor de huidige bewerking.",
+     "Rensa fillista-knapp: rensar hela fillistan för den aktuella åtgärden.",
+     "Tøm filliste-knapp: tømmer hele fillisten for gjeldende operasjon.",
+     "Ryd filliste-knap: rydder hele fillisten for den aktuelle operation.",
+     "Tyhjennä tiedostolista-painike: tyhjentää koko tiedostolistan nykyisestä toimenpiteestä.",
+     "Przycisk Wyczyść listę plików: czyści całą listę plików bieżącej operacji.",
+     "Tlačítko Vyčistit seznam souborů: vyčistí celý seznam souborů aktuální operace.",
+     "Fájllista törlése gomb: törli a jelenlegi művelet teljes fájllistáját.",
+     "Buton Golește lista de fișiere: șterge întreaga listă de fișiere pentru operațiunea curentă."),
 
                     ["File Count Label: This label shows the total number of files in the current operation."] =
-                        ("Étiquette Nombre de fichiers : affiche le nombre total de fichiers de l’opération.",
-                         "Dateianzahl-Label: Zeigt die Gesamtanzahl der Dateien in der Operation an.",
-                         "Etiqueta Contador de archivos: muestra el número total de archivos de la operación."),
+    ("Étiquette Nombre de fichiers : affiche le nombre total de fichiers de l’opération.",
+     "Dateianzahl-Label: Zeigt die Gesamtanzahl der Dateien in der Operation an.",
+     "Etiqueta Contador de archivos: muestra el número total de archivos de la operación.",
+     "Etichetta Conteggio file: mostra il numero totale di file nell’operazione corrente.",
+     "Etiqueta Contagem de ficheiros: mostra o número total de ficheiros na operação atual.",
+     "Etiqueta Contador de arquivos: mostra o número total de arquivos na operação atual.",
+     "Label Bestandstelling: toont het totale aantal bestanden in de huidige bewerking.",
+     "Fileräknare-etikett: visar det totala antalet filer i den aktuella åtgärden.",
+     "Filantall-etikett: viser det totale antallet filer i gjeldende operasjon.",
+     "Filantal-label: viser det samlede antal filer i den aktuelle operation.",
+     "Tiedostojen määrä -tarra: näyttää nykyisen toimenpiteen tiedostojen kokonaismäärän.",
+     "Etykieta Liczba plików: pokazuje całkowitą liczbę plików w bieżącej operacji.",
+     "Štítek Počet souborů: zobrazuje celkový počet souborů v aktuální operaci.",
+     "Fájlok száma címke: megjeleníti a jelenlegi művelet fájljainak teljes számát.",
+     "Etichetă Număr fișiere: afișează numărul total de fișiere din operațiunea curentă."),
 
                     ["File Processed Label: This label shows the number of converted bytes that have been processed in the current operation."] =
-                        ("Étiquette Fichiers traités : affiche le nombre d’octets traités.",
-                         "Verarbeitete-Dateien-Label: Zeigt die Anzahl der verarbeiteten Bytes an.",
-                         "Etiqueta Archivos procesados: muestra la cantidad de bytes procesados."),
+    ("Étiquette Fichiers traités : affiche le nombre d’octets traités.",
+     "Verarbeitete-Dateien-Label: Zeigt die Anzahl der verarbeiteten Bytes an.",
+     "Etiqueta Archivos procesados: muestra la cantidad de bytes procesados.",
+     "Etichetta File elaborati: mostra il numero di byte elaborati nell’operazione corrente.",
+     "Etiqueta Ficheiros processados: mostra o número de bytes processados na operação atual.",
+     "Etiqueta Arquivos processados: mostra a quantidade de bytes processados na operação atual.",
+     "Label Verwerkte bestanden: toont het aantal verwerkte bytes in de huidige bewerking.",
+     "Bearbetade filer-etikett: visar antalet bearbetade byte i den aktuella åtgärden.",
+     "Behandlede filer-etikett: viser antallet av prosesserte bytes i gjeldende operasjon.",
+     "Behandlede filer-label: viser antallet af behandlede bytes i den aktuelle operation.",
+     "Käsitellyt tiedostot -tarra: näyttää nykyisessä toimenpiteessä käsiteltyjen tavujen määrän.",
+     "Etykieta Przetworzone pliki: pokazuje liczbę przetworzonych bajtów w bieżącej operacji.",
+     "Štítek Zpracované soubory: zobrazuje počet zpracovaných bajtů v aktuální operaci.",
+     "Feldolgozott fájlok címke: megjeleníti a jelenlegi művelet során feldolgozott bájtok számát.",
+     "Etichetă Fișiere procesate: afișează numărul de octeți procesați în operațiunea curentă."),
 
                     ["Total Copied Progress Label: This label shows the total bytes processed and the total bytes to process in the current operation."] =
-                        ("Étiquette Progression totale : affiche les octets traités et restants.",
-                         "Gesamtfortschritt-Label: Zeigt die verarbeiteten und die gesamten Bytes an.",
-                         "Etiqueta Progreso total copiado: muestra los bytes procesados y los restantes."),
+    ("Étiquette Progression totale : affiche les octets traités et restants.",
+     "Gesamtfortschritt-Label: Zeigt die verarbeiteten und die gesamten Bytes an.",
+     "Etiqueta Progreso total copiado: muestra los bytes procesados y los restantes.",
+     "Etichetta Avanzamento copia totale: mostra i byte elaborati e quelli totali dell’operazione.",
+     "Etiqueta Progresso total copiado: mostra os bytes processados e os restantes.",
+     "Etiqueta Progresso total copiado: mostra os bytes processados e os restantes.",
+     "Label Totale gekopieerde voortgang: toont de verwerkte en totale bytes in de huidige bewerking.",
+     "Total kopieringsförlopp-etikett: visar de bearbetade och totala bytes i den aktuella åtgärden.",
+     "Total kopierte fremgang-etikett: viser de prosesserte og totale bytes i gjeldende operasjon.",
+     "Total kopierte fremskridt-label: viser de behandlede og totale bytes i den aktuelle operation.",
+     "Kopioinnin kokonaisprogressin tarra: näyttää käsitellyt ja kokonaistavut nykyisessä toimenpiteessä.",
+     "Etykieta Całkowity postęp kopiowania: pokazuje przetworzone i całkowite bajty w bieżącej operacji.",
+     "Štítek Celkový průběh kopírování: zobrazuje zpracované a celkové bajty v aktuální operaci.",
+     "Teljes másolási folyamat címke: megjeleníti a feldolgozott és a teljes bájtokat a jelenlegi műveletben.",
+     "Etichetă Progres total copiere: afișează octeții procesați și totalul de octeți din operațiunea curentă."),
+
+
+
 
                     ["Elapsed Out of Target Time Label: This label shows the elapsed time and the estimated target time for the current operation."] =
-                        ("Étiquette Temps écoulé/estimé : affiche le temps écoulé et le temps estimé.",
-                         "Verstrichene/Gesamtdauer-Label: Zeigt verstrichene und geschätzte Zeit an.",
-                         "Etiqueta Tiempo transcurrido y estimado: muestra el tiempo transcurrido y el estimado."),
+    ("Étiquette Temps écoulé/estimé : affiche le temps écoulé et le temps estimé.",
+     "Verstrichene/Gesamtdauer-Label: Zeigt verstrichene und geschätzte Zeit an.",
+     "Etiqueta Tiempo transcurrido y estimado: muestra el tiempo transcurrido y el estimado.",
+     "Etichetta Tempo trascorso/stimato: mostra il tempo trascorso e quello stimato per l’operazione.",
+     "Etiqueta Tempo decorrido/estimado: mostra o tempo decorrido e o estimado da operação.",
+     "Etiqueta Tempo decorrido/estimado: mostra o tempo decorrido e o estimado da operação.",
+     "Label Verstreken/verwachte tijd: toont de verstreken en de geschatte doeltijd van de bewerking.",
+     "Förfluten/beräknad tid-etikett: visar den förflutna och den beräknade måltiden för åtgärden.",
+     "Forløpt/estimert tid-etikett: viser den forløpte og den estimerte måltiden for operasjonen.",
+     "Forløbet/estimeret tid-label: viser den forløbne og den estimerede måltid for handlingen.",
+     "Kulunut/arvioitu aika -tarra: näyttää kuluneen ja arvioidun kohdeajan nykyiselle toimenpiteelle.",
+     "Etykieta Czas upłynął/czas docelowy: pokazuje upłynięty i szacowany czas docelowy bieżącej operacji.",
+     "Štítek Uplynulý/cílový čas: zobrazuje uplynulý a odhadovaný cílový čas aktuální operace.",
+     "Eltelt/cél idő címke: megjeleníti az eltelt és a becsült célidőt a jelenlegi művelethez.",
+     "Etichetă Timp scurs/țintă: afișează timpul scurs și timpul țintă estimat pentru operațiunea curentă."),
 
                     ["Speed Label: This label shows the current speed of the operation in bytes per second."] =
-                        ("Étiquette Vitesse : affiche la vitesse actuelle en octets par seconde.",
-                         "Geschwindigkeit-Label: Zeigt die aktuelle Geschwindigkeit in Bytes pro Sekunde.",
-                         "Etiqueta Velocidad: muestra la velocidad actual en bytes por segundo."),
+    ("Étiquette Vitesse : affiche la vitesse actuelle en octets par seconde.",
+     "Geschwindigkeit-Label: Zeigt die aktuelle Geschwindigkeit in Bytes pro Sekunde an.",
+     "Etiqueta Velocidad: muestra la velocidad actual en bytes por segundo.",
+     "Etichetta Velocità: mostra la velocità corrente dell’operazione in byte al secondo.",
+     "Etiqueta Velocidade: mostra a velocidade atual da operação em bytes por segundo.",
+     "Etiqueta Velocidade: mostra a velocidade atual da operação em bytes por segundo.",
+     "Label Snelheid: toont de huidige snelheid van de bewerking in bytes per seconde.",
+     "Hastighet-etikett: visar den aktuella hastigheten för åtgärden i bytes per sekund.",
+     "Hastighet-etikett: viser den aktuelle hastigheten for operasjonen i bytes per sekund.",
+     "Hastighed-label: viser den aktuelle hastighed for handlingen i bytes pr. sekund.",
+     "Nopeus-tarra: näyttää nykyisen toimenpiteen nopeuden tavuina sekunnissa.",
+     "Etykieta Prędkość: pokazuje bieżącą prędkość operacji w bajtach na sekundę.",
+     "Štítek Rychlost: zobrazuje aktuální rychlost operace v bajtech za sekundu.",
+     "Sebesség címke: megjeleníti a művelet jelenlegi sebességét bájtban másodpercenként.",
+     "Etichetă Viteză: afișează viteza curentă a operațiunii în octeți pe secundă."),
 
-                    ["Total HD Space Left Label: This label shows the total hard drive space left on the target drive."] =
-                        ("Étiquette Espace disque restant : affiche l’espace disponible sur le disque cible.",
-                         "Verbleibender Festplattenspeicher-Label: Zeigt den freien Speicherplatz auf dem Ziellaufwerk.",
-                         "Etiqueta Espacio restante en disco: muestra el espacio libre en la unidad de destino."),
+                    ["Total HD Space Left Label: This label shows the total hard-drive space left on the target drive."] =
+    ("Étiquette Espace disque restant : affiche l’espace disponible sur le disque cible.",
+     "Verbleibender-Festplattenspeicher-Label: Zeigt den freien Speicherplatz auf dem Ziellaufwerk.",
+     "Etiqueta Espacio restante en disco: muestra el espacio libre en la unidad de destino.",
+     "Etichetta Spazio rimanente su HD: mostra lo spazio totale rimasto sul disco di destinazione.",
+     "Etiqueta Espaço restante em HD: mostra o espaço total restante na unidade de destino.",
+     "Etiqueta Espaço restante em HD: mostra o espaço total restante na unidade de destino.",
+     "Label Totale HD-ruimte over: toont de totale resterende harde-schijfruimte op het doelstation.",
+     "Total HD-utrymme kvar-etikett: visar den totala hårddiskyta som återstår på målenheten.",
+     "Total HD-plass igjen-etikett: viser den totale harddiskplassen som gjenstår på målenheten.",
+     "Total HD-plads tilbage-label: viser den samlede harddiskplads, der er tilbage på måldrevet.",
+     "Kiintolevyllä jäljellä oleva tila -tarra: näyttää kohdeasemalla jäljellä olevan kiintolevytilan kokonaismäärän.",
+     "Etykieta Całkowite pozostałe miejsce na HD: pokazuje całkowitą pozostałą przestrzeń na dysku twardym w dysku docelowym.",
+     "Štítek Celkové místo na HD zbývající: zobrazuje celkové zbývající místo na pevném disku cílové jednotky.",
+     "Teljes merevlemez-hely maradt címke: megjeleníti a célmeghajtón maradt teljes merevlemez-területet.",
+     "Etichetă Spațiu total rămas pe HD: afișează spațiul total rămas pe hard-disk-ul unității țintă."),
 
                     ["Overwrite If Newer CheckBox: This checkbox determines whether to overwrite files only if the source file is newer than the destination file."] =
-                        ("Case Remplacer si plus récent : écrase uniquement si la source est plus récente.",
-                         "Überschreiben wenn neuer-CheckBox: Überschreibt nur, wenn die Quelldatei neuer ist.",
-                         "Casilla Sobrescribir si es más nuevo: sobrescribe solo si el origen es más reciente."),
+    ("Case Remplacer si plus récent : écrase uniquement si la source est plus récente.",
+     "Überschreiben-wenn-neuer-CheckBox: Überschreibt nur, wenn die Quelldatei neuer ist.",
+     "Casilla Sobrescribir si es más nuevo: sobrescribe solo si el origen es más reciente.",
+     "Casella di controllo Sovrascrivi se più recente: sovrascrive solo se il file sorgente è più recente.",
+     "Caixa de verificação Substituir se mais recente: substitui apenas se o ficheiro de origem for mais recente.",
+     "Caixa de seleção Sobrescrever se mais recente: sobrescreve apenas se o arquivo de origem for mais recente.",
+     "Aanvinkvakje Overschrijven indien nieuwer: overschrijft alleen als het bronbestand nieuwer is.",
+     "Kryssruta Skriv över om nyare: skriver bara över om källfilen är nyare.",
+     "Avkrysningsboks Overskriv hvis nyere: overskriver bare hvis kildefilen er nyere.",
+     "Markeringsfelt Overskriv hvis nyere: overskriver kun hvis kildefilen er nyere.",
+     "Valintaruutu Korvaa, jos uudempi: korvaa vain, jos lähde on uudempi.",
+     "Pole wyboru Nadpisz, jeśli nowszy: nadpisuje tylko jeśli plik źródłowy jest nowszy.",
+     "Zaškrtávací pole Přepsat, pokud novější: přepíše pouze v případě, že zdrojový soubor je novější.",
+     "Jelölőnégyzet Felülír, ha újabb: csak akkor írja felül, ha a forrásfájl újabb.",
+     "Casetă de selectare Suprascriere dacă este mai nou: suprascrie numai dacă fișierul sursă este mai nou."),
 
                     ["Overwrite All CheckBox: This checkbox determines whether to overwrite all files in the target directory without checking their timestamps."] =
-                        ("Case Remplacer tout : écrase tous les fichiers sans vérifier la date.",
-                         "Alles überschreiben-CheckBox: Überschreibt alle Dateien ohne Zeitstempelprüfung.",
-                         "Casilla Sobrescribir todo: sobrescribe todos los archivos sin comprobar la fecha."),
+    ("Case Remplacer tout : écrase tous les fichiers sans vérifier la date.",
+     "Alles-überschreiben-CheckBox: Überschreibt alle Dateien ohne Zeitstempelprüfung.",
+     "Casilla Sobrescribir todo: sobrescribe todos los archivos sin comprobar la fecha.",
+     "Casella di controllo Sovrascrivi tutto: sovrascrive tutti i file senza verificarne la data.",
+     "Caixa de verificação Substituir tudo: substitui todos os ficheiros sem verificar as respetivas datas.",
+     "Caixa de seleção Sobrescrever tudo: sobrescreve todos os arquivos sem verificar suas datas.",
+     "Aanvinkvakje Alles overschrijven: overschrijft alle bestanden zonder de tijdstempels te controleren.",
+     "Kryssruta Skriv över alla: skriver över alla filer utan att kontrollera deras tidsstämplar.",
+     "Avkrysningsboks Overskriv alle: overskriver alle filer uten å sjekke tidsstemplene.",
+     "Markeringsfelt Overskriv alle: overskriver alle filer uden at kontrollere deres tidsstempler.",
+     "Valintaruutu Korvaa kaikki: korvaa kaikki tiedostot tarkistamatta niiden aikaleimoja.",
+     "Pole wyboru Nadpisz wszystko: nadpisuje wszystkie pliki bez sprawdzania ich znaczników czasu.",
+     "Zaškrtávací pole Přepsat vše: přepíše všechny soubory bez kontroly jejich časových razítek.",
+     "Jelölőnégyzet Mindet felülír: felülír minden fájlt anélkül, hogy ellenőrizné azok időbélyegét.",
+     "Casetă de selectare Suprascriere tot: suprascrie toate fișierele fără a verifica marcajele de timp."),
 
                     ["Do Not Overwrite CheckBox: This checkbox determines whether to skip files that already exist in the target directory."] =
-                        ("Case Ne pas remplacer : ignore les fichiers existants.",
-                         "Nicht überschreiben-CheckBox: Überspringt vorhandene Dateien.",
-                         "Casilla No sobrescribir: omite los archivos que ya existen."),
+    ("Case Ne pas remplacer : ignore les fichiers existants.",
+     "Nicht-überschreiben-CheckBox: Überspringt vorhandene Dateien.",
+     "Casilla No sobrescribir: omite los archivos que ya existen.",
+     "Casella di controllo Non sovrascrivere: ignora i file già esistenti nella cartella di destinazione.",
+     "Caixa de verificação Não substituir: ignora os ficheiros que já existem na pasta de destino.",
+     "Caixa de seleção Não sobrescrever: ignora os arquivos que já existem na pasta de destino.",
+     "Aanvinkvakje Niet overschrijven: slaat bestanden die al in de doelmap bestaan over.",
+     "Kryssruta Skriv inte över: hoppar över filer som redan finns i målmappen.",
+     "Avkrysningsboks Ikke overskriv: hopper over filer som allerede finnes i målappen.",
+     "Markeringsfelt Ikke overskriv: springer over filer, der allerede findes i målmappen.",
+     "Valintaruutu Älä korvaa: ohittaa tiedostot, jotka ovat jo kohdehakemistossa.",
+     "Pole wyboru Nie nadpisuj: pomija pliki, które już istnieją w katalogu docelowym.",
+     "Zaškrtávací pole Nepřepisovat: přeskočí soubory, které již v cílové složce existují.",
+     "Jelölőnégyzet Ne írja felül: kihagyja azokat a fájlokat, amelyek már léteznek a célkönyvtárban.",
+     "Casetă de selectare Nu suprascrie: ignoră fișierele care există deja în directorul țintă."),
 
                     ["Keep Empty Folders CheckBox: This checkbox determines whether to keep empty folders in the target directory after the operation."] =
-                        ("Case Garder dossiers vides : conserve les dossiers vides.",
-                         "Leere Ordner behalten-CheckBox: Behält leere Ordner bei.",
-                         "Casilla Mantener carpetas vacías: mantiene las carpetas vacías."),
+    ("Case Garder dossiers vides : conserve les dossiers vides.",
+     "Leere-Ordner-behalten-CheckBox: Behält leere Ordner bei.",
+     "Casilla Mantener carpetas vacías: mantiene las carpetas vacías.",
+     "Casella di controllo Mantieni cartelle vuote: mantiene le cartelle vuote dopo l’operazione.",
+     "Caixa de verificação Manter pastas vazias: mantém as pastas vazias no diretório de destino.",
+     "Caixa de seleção Manter pastas vazias: mantém as pastas vazias no diretório de destino.",
+     "Aanvinkvakje Lege mappen behouden: behoudt lege mappen in de doelmap na de bewerking.",
+     "Kryssruta Behåll tomma mappar: behåller tomma mappar i målmappen efter åtgärden.",
+     "Avkrysningsboks Behold tomme mapper: beholder tomme mapper i målappen etter operasjonen.",
+     "Markeringsfelt Behold tomme mapper: beholder tomme mapper i målmappen efter handlingen.",
+     "Valintaruutu Säilytä tyhjät kansiot: säilyttää tyhjät kansiot kohdehakemistossa toimenpiteen jälkeen.",
+     "Pole wyboru Zachowaj puste foldery: zachowuje puste foldery w katalogu docelowym po operacji.",
+     "Zaškrtávací pole Zachovat prázdné složky: zachová prázdné složky v cílovém adresáři po operaci.",
+     "Jelölőnégyzet Üres mappák megtartása: megtartja az üres mappákat a művelet után a célkönyvtárban.",
+     "Casetă de selectare Păstrare foldere goale: păstrează folderele goale în directorul țintă după operațiune."),
 
                     ["Keep Directory Structure CheckBox: This checkbox determines whether to keep the directory structure of the source files in the target directory."] =
-                        ("Case Garder structure dossiers : conserve la structure complète.",
-                         "Verzeichnisstruktur beibehalten-CheckBox: Behält die Struktur bei.",
-                         "Casilla Mantener estructura de carpetas: mantiene la estructura completa."),
+    ("Case Garder structure dossiers : conserve la structure complète.",
+     "Verzeichnisstruktur-beibehalten-CheckBox: Behält die Struktur bei.",
+     "Casilla Mantener estructura de carpetas: mantiene la estructura completa.",
+     "Casella di controllo Mantieni struttura cartelle: mantiene la struttura completa delle cartelle di origine.",
+     "Caixa de verificação Manter estrutura de pastas: mantém a estrutura completa das pastas de origem.",
+     "Caixa de seleção Manter estrutura de pastas: mantém a estrutura completa das pastas de origem.",
+     "Aanvinkvakje Mapstructuur behouden: behoudt de mappenstructuur van de bronbestanden in de doelmap.",
+     "Kryssruta Behåll katalogstruktur: behåller katalogstrukturen för källfilerna i målmappen.",
+     "Avkrysningsboks Behold katalogstruktur: beholder katalogstrukturen til kildefilene i målappen.",
+     "Markeringsfelt Behold mappestruktur: beholder mappestrukturen for kildefilerne i målmappen.",
+     "Valintaruutu Säilytä hakemistorakenne: säilyttää lähdehakemistojen rakenteen kohdehakemistossa.",
+     "Pole wyboru Zachowaj strukturę katalogów: zachowuje strukturę katalogów plików źródłowych w katalogu docelowym.",
+     "Zaškrtávací pole Zachovat strukturu adresářů: zachová strukturu adresářů zdrojových souborů v cílovém adresáři.",
+     "Jelölőnégyzet Könyvtárstruktúra megtartása: megtartja a forrásfájlok könyvtárstruktúráját a célkönyvtárban.",
+     "Casetă de selectare Păstrare structură directoare: păstrează structura directorului fișierelor sursă în directorul țintă."),
+
+
+
 
                     ["Create Custom Directory Prior CheckBox: This checkbox determines whether to create a custom directory structure in the target directory based on the source files."] =
-                        ("Case Créer arborescence personnalisée : crée une structure personnalisée.",
-                         "Benutzerdefinierte Ordnerstruktur-CheckBox: Erstellt eine angepasste Struktur.",
-                         "Casilla Crear estructura personalizada: crea una estructura personalizada."),
+    ("Case Créer arborescence personnalisée : crée une structure personnalisée.",
+     "Benutzerdefinierte-Ordnerstruktur-CheckBox: Erstellt eine angepasste Struktur.",
+     "Casilla Crear estructura personalizada: crea una estructura personalizada.",
+     "Casella di controllo Crea struttura personalizzata: crea una struttura personalizzata nel percorso di destinazione.",
+     "Caixa de verificação Criar estrutura personalizada: cria uma estrutura personalizada no diretório de destino.",
+     "Caixa de seleção Criar estrutura personalizada: cria uma estrutura personalizada no diretório de destino.",
+     "Aanvinkvakje Aangepaste mapstructuur maken: maakt een aangepaste mapstructuur in de doelmap op basis van bronbestanden.",
+     "Kryssruta Skapa anpassad katalogstruktur: skapar en anpassad katalogstruktur i målmappen baserat på källfiler.",
+     "Avkrysningsboks Opprett egendefinert katalogstruktur: oppretter en egendefinert katalogstruktur i målappen basert på kildefiler.",
+     "Markeringsfelt Opret brugerdefineret mappestruktur: opretter en brugerdefineret mappestruktur i målmappen baseret på kildefiler.",
+     "Valintaruutu Luo mukautettu hakemistorakenne: luo mukautetun hakemistorakenteen kohdehakemistoon lähdetiedostojen perusteella.",
+     "Pole wyboru Utwórz niestandardową strukturę katalogów: tworzy niestandardową strukturę katalogów w katalogu docelowym na podstawie plików źródłowych.",
+     "Zaškrtávací pole Vytvořit vlastní strukturu adresářů: vytvoří vlastní strukturu adresářů v cílovém adresáři na základě zdrojových souborů.",
+     "Jelölőnégyzet Egyéni könyvtárstruktúra létrehozása: egyéni könyvtárstruktúrát hoz létre a célkönyvtárban a forrásfájlok alapján.",
+     "Casetă de selectare Creare structură directoare personalizată: creează o structură personalizată în directorul țintă pe baza fișierelor sursă."),
 
                     ["Copy Only Files CheckBox: This checkbox determines whether to copy files and no directories from the source directory to the target directory."] =
-                        ("Case Copier uniquement fichiers : copie uniquement les fichiers.",
-                         "Nur Dateien kopieren-CheckBox: Kopiert nur Dateien, keine Ordner.",
-                         "Casilla Copiar solo archivos: copia solo archivos, no carpetas."),
+    ("Case Copier uniquement fichiers : copie uniquement les fichiers.",
+     "Nur-Dateien-kopieren-CheckBox: Kopiert nur Dateien, keine Ordner.",
+     "Casilla Copiar solo archivos: copia solo archivos, no carpetas.",
+     "Casella di controllo Copia solo file: copia solo file e nessuna cartella dalla cartella di origine a quella di destinazione.",
+     "Caixa de verificação Copiar apenas ficheiros: copia apenas ficheiros e não pastas do diretório de origem para o de destino.",
+     "Caixa de seleção Copiar apenas arquivos: copia apenas arquivos e não pastas do diretório de origem para o de destino.",
+     "Aanvinkvakje Alleen bestanden kopiëren: kopieert alleen bestanden en geen mappen van bronmap naar doelmap.",
+     "Kryssruta Kopiera endast filer: kopierar endast filer och inga mappar från källmappen till målmappen.",
+     "Avkrysningsboks Kopier bare filer: kopierer bare filer og ingen mapper fra kilde- til målmappe.",
+     "Markeringsfelt Kopiér kun filer: kopierer kun filer og ingen mapper fra kilde- til målmappe.",
+     "Valintaruutu Kopioi vain tiedostot: kopioi vain tiedostot eikä kansioita lähdehakemistosta kohdehakemistoon.",
+     "Pole wyboru Kopiuj tylko pliki: kopiuje tylko pliki, a nie foldery z katalogu źródłowego do docelowego.",
+     "Zaškrtávací pole Kopírovat pouze soubory: zkopíruje pouze soubory, žádné složky ze zdrojového adresáře do cílového.",
+     "Jelölőnégyzet Csak fájlok másolása: csak fájlokat másol, könyvtárakat nem a forráskönyvtárból a célkönyvtárba.",
+     "Casetă de selectare Copiere doar fișiere: copiază doar fișierele și nu directoarele din directorul sursă în directorul țintă."),
 
                     ["Keep Only Files CheckBox: This checkbox determines whether to keep ONLY files inside the main directory."] =
-                        ("Case Garder uniquement fichiers : ne conserve que les fichiers.",
-                         "Nur Dateien behalten-CheckBox: Behält nur Dateien im Hauptordner.",
-                         "Casilla Mantener solo archivos: conserva solo archivos en la carpeta principal."),
+    ("Case Garder uniquement fichiers : ne conserve que les fichiers.",
+     "Nur-Dateien-behalten-CheckBox: Behält nur Dateien im Hauptordner.",
+     "Casilla Mantener solo archivos: conserva solo archivos en la carpeta principal.",
+     "Casella di controllo Mantieni solo file: mantiene SOLO file all’interno della directory principale.",
+     "Caixa de verificação Manter apenas ficheiros: mantém APENAS ficheiros dentro da pasta principal.",
+     "Caixa de seleção Manter apenas arquivos: mantém APENAS arquivos dentro da pasta principal.",
+     "Aanvinkvakje Alleen bestanden behouden: behoudt ALLEEN bestanden binnen de hoofdmap.",
+     "Kryssruta Behåll endast filer: behåller ENDAST filer inuti huvudmappen.",
+     "Avkrysningsboks Behold bare filer: beholder KUN filer inni hovedmappen.",
+     "Markeringsfelt Behold kun filer: beholder KUN filer inde i hovedmappen.",
+     "Valintaruutu Säilytä vain tiedostot: säilyttää VAIN tiedostot päähakemistossa.",
+     "Pole wyboru Zachowaj tylko pliki: zachowuje TYLKO pliki wewnątrz głównego katalogu.",
+     "Zaškrtávací pole Ponechat pouze soubory: ponechá POUCZE soubory uvnitř hlavní složky.",
+     "Jelölőnégyzet Csak fájlok megtartása: CSAK a fájlokat tartja meg a főkönyvtárban.",
+     "Casetă de selectare Păstrează doar fișierele: păstrează DOAR fișierele din directorul principal."),
 
                     ["Home Page Tab: This tab contains the main interface for file operations such as copy, move, and secure delete."] =
-                        ("Onglet Page d’accueil : contient l’interface principale pour copier, déplacer, supprimer.",
-                         "Startseite-Tab: Enthält die Hauptoberfläche für Kopieren, Verschieben, Sicheres Löschen.",
-                         "Pestaña Página principal: contiene la interfaz principal para copiar, mover, borrar de forma segura."),
+    ("Onglet Page d’accueil : contient l’interface principale pour copier, déplacer, supprimer.",
+     "Startseite-Tab: Enthält die Hauptoberfläche für Kopieren, Verschieben, Sicheres Löschen.",
+     "Pestaña Página principal: contiene la interfaz principal para copiar, mover, borrar de forma segura.",
+     "Scheda Pagina iniziale: contiene l’interfaccia principale per le operazioni di copia, spostamento ed eliminazione sicura.",
+     "Separador Página inicial: contém a interface principal para copiar, mover e eliminar de forma segura.",
+     "Guia Página inicial: contém a interface principal para copiar, mover e excluir com segurança.",
+     "Tabblad Startpagina: bevat de hoofdinterface voor kopiëren, verplaatsen en veilig verwijderen.",
+     "Flik Startsida: innehåller huvudgränssnittet för kopiera, flytta och säker borttagning.",
+     "Fane Forside: inneholder hovedgrensesnittet for kopier, flytt og sikker sletting.",
+     "Fane Startside: indeholder hovedgrænsefladen for kopiér, flyt og sikker sletning.",
+     "Kotisivu-välilehti: sisältää pääkäyttöliittymän kopiointiin, siirtämiseen ja turvalliseen poistamiseen.",
+     "Zakładka Strona główna: zawiera główny interfejs do kopiowania, przenoszenia i bezpiecznego usuwania.",
+     "Záložka Domovská stránka: obsahuje hlavní rozhraní pro kopírování, přesun a bezpečné mazání.",
+     "Főoldal lap: tartalmazza a másoláshoz, áthelyezéshez és biztonságos törléshez tartozó fő felületet.",
+     "Filă Pagină principală: conține interfața principală pentru operațiunile de copiere, mutare și ștergere sigură."),
 
-                    ["Copy That v1.0 Pro By: Havoc - Home"] =
-                        ("Copy That v1.0 Pro Par: Havoc - Accueil",
-                         "Copy That v1.0 Pro Von: Havoc - Startseite",
-                         "Copy That v1.0 Pro Por: Havoc - Inicio"),
-
-                    ["Copy That v1.0 By: Havoc - Home"] =
-                        ("Copy That v1.0 Par: Havoc - Accueil",
-                         "Copy That v1.0 Von: Havoc - Startseite",
-                         "Copy That v1.0 Por: Havoc - Inicio"),
-
-                    ["Copy That v1.0 By: Havoc - This is the title of the application, which reflects the current operation."] =
-                        ("Copy That v1.0 Par: Havoc – titre de l’application reflétant l’opération en cours.",
-                         "Copy That v1.0 Von: Havoc – Anwendungstitel, der den aktuellen Vorgang widerspiegelt.",
-                         "Copy That v1.0 Por: Havoc – título de la aplicación que refleja la operación actual."),
-
-                    ["Current File Path: This label shows the path of the currently processed file in the operation."] =
-                        ("Chemin du fichier actuel : affiche le chemin du fichier en cours de traitement.",
-                         "Aktueller Dateipfad: Zeigt den Pfad der gerade verarbeiteten Datei.",
-                         "Ruta del archivo actual: muestra la ruta del archivo que se está procesando."),
-
-                    ["Current Source Directory: This label shows the path of the source directory from which files will be copied/moved/securely deleted."] =
-        ("Répertoire source actuel : affiche le chemin du dossier source depuis lequel les fichiers seront copiés/déplacés/supprimés de façon sécurisée.",
-         "Aktuelles Quellverzeichnis: Zeigt den Pfad des Quellordners an, aus dem Dateien kopiert/verschoben/sicher gelöscht werden.",
-         "Directorio de origen actual: muestra la ruta de la carpeta de origen desde la que se copiarán/moverán/borrarán de forma segura los archivos."),
-                    ["Current Target Directory: This label shows the path of the target directory to which files will be copied/moved."] =
-                    ("Répertoire cible actuel : affiche le chemin du dossier de destination.",
-                     "Aktuelles Zielverzeichnis: Zeigt den Pfad des Zielordners an.",
-                     "Directorio de destino actual: muestra la ruta de la carpeta de destino."),
-
-                    ["Current File Icon: This picture box shows the icon of the currently processed file in the operation."] =
-                    ("Icône du fichier actuel : cette zone affiche l’icône du fichier en cours de traitement.",
-                     "Aktuelles Dateisymbol: Diese PictureBox zeigt das Symbol der gerade verarbeiteten Datei.",
-                     "Icono del archivo actual: este cuadro muestra el icono del archivo que se está procesando."),
-
-                    ["Overwrite If Newer: This checkbox determines whether to overwrite files only if the source file is newer than the destination file."] =
-                    ("Remplacer si plus récent : écrase uniquement si la source est plus récente.",
-                     "Überschreiben wenn neuer: Überschreibt nur, wenn die Quelldatei neuer ist.",
-                     "Sobrescribir si es más nuevo: sobrescribe solo si el origen es más reciente."),
-
-                    ["File Progress Bar: This progress bar shows the progress of the current file being processed in the operation."] =
-                    ("Barre de progression du fichier : indique l’avancement du fichier en cours.",
-                     "Datei-Fortschrittsbalken: Zeigt den Fortschritt der gerade bearbeiteten Datei.",
-                     "Barra de progreso del archivo: muestra el avance del archivo que se está procesando."),
-
-                    ["File Progress Label: This label shows the percentage of progress for the current file being processed in the operation."] =
-                    ("Étiquette progression fichier : affiche le pourcentage d’avancement du fichier actuel.",
-                     "Datei-Fortschritt-Label: Zeigt den Prozentwert des Fortschritts der aktuellen Datei.",
-                     "Etiqueta de progreso del archivo: muestra el porcentaje de avance del archivo actual."),
-
-                    ["Total Progress Bar: This progress bar shows the overall progress of the operation across all files being processed."] =
-                    ("Barre de progression totale : indique l’avancement global de l’opération sur tous les fichiers.",
-                     "Gesamt-Fortschrittsbalken: Zeigt den Gesamtfortschritt der Operation über alle Dateien.",
-                     "Barra de progreso total: muestra el avance general de la operación en todos los archivos."),
-
-                    ["Total Progress Label: This label shows the percentage of overall progress for the operation across all files being processed."] =
-                    ("Étiquette progression totale : affiche le pourcentage de progression global.",
-                     "Gesamt-Fortschritt-Label: Zeigt den Prozentwert des Gesamtfortschritts.",
-                     "Etiqueta de progreso total: muestra el porcentaje de avance general."),
-
-                    ["Search Text Box: This text box allows you to search for specific files in the file list. Type a keyword to filter the displayed files."] =
-                    ("Zone de recherche : permet de filtrer la liste des fichiers en tapant un mot-clé.",
-                     "Such-Textbox: Ermöglicht das Filtern der Dateiliste durch Eingabe eines Stichworts.",
-                     "Cuadro de búsqueda: permite filtrar la lista de archivos escribiendo una palabra clave."),
-
-                    ["Clear Text Button: This button clears the text in the search box, allowing you to reset the search filter and view all files in the list."] =
-                    ("Bouton Effacer texte : vide la zone de recherche pour réafficher tous les fichiers.",
-                     "Text löschen-Schaltfläche: Leert das Suchfeld, damit wieder alle Dateien angezeigt werden.",
-                     "Botón Borrar texto: vacía el cuadro de búsqueda para volver a mostrar todos los archivos."),
-
-                    ["Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence."] =
-                    ("Bouton Monter : déplace le fichier sélectionné vers le haut dans la liste.",
-                     "Nach oben-Schaltfläche: Verschiebt die markierte Datei eine Position nach oben.",
-                     "Botón Subir: mueve el archivo seleccionado hacia arriba en la lista."),
-
-                    ["Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence."] =
-                    ("Bouton Descendre : déplace le fichier sélectionné vers le bas dans la liste.",
-                     "Nach unten-Schaltfläche: Verschiebt die markierte Datei eine Position nach unten.",
-                     "Botón Bajar: mueve el archivo seleccionado hacia abajo en la lista."),
-
-                    ["Files Data Grid View: This grid displays the list of files to be processed in the current operation, including their names, paths, sizes, and statuses."] =
-                    ("Grille des fichiers : affiche la liste des fichiers à traiter avec nom, chemin, taille et état.",
-                     "Datei-DataGridView: Zeigt die zu bearbeitenden Dateien mit Name, Pfad, Größe und Status.",
-                     "Cuadrícula de archivos: muestra la lista de archivos a procesar con nombre, ruta, tamaño y estado."),
-
-                    ["Auto-Scroll CheckBox: This checkbox enables or disables automatic scrolling of the files data grid view while files are being processed."] =
-                    ("Case Défilement automatique : active/désactive le défilement automatique de la grille pendant le traitement.",
-                     "Auto-Scroll-CheckBox: Aktiviert/deaktiviert das automatische Scrollen der Dateiliste während der Verarbeitung.",
-                     "Casilla Desplazamiento automático: activa/desactiva el desplazamiento automático de la lista mientras se procesan archivos."),
-
-                    ["Verify After Transfer CheckBox: This checkbox determines whether to verify the integrity of files after they have been copied or moved."] =
-                    ("Case Vérifier après transfert : vérifie l’intégrité des fichiers après copie/déplacement.",
-                     "Nach Übertragung prüfen-CheckBox: Prüft die Integrität der Dateien nach dem Kopieren/Verschieben.",
-                     "Casilla Verificar después de transferir: verifica la integridad de los archivos después de copiarlos o moverlos."),
-
-                    ["Pause/Resume Multi-Thread Button: This button pauses or resumes the multi-threaded operation."] =
-                    ("Bouton Pause/Reprise multi-thread : met en pause ou reprend l’opération multi-thread.",
-                     "Multi-Thread Pause/Weiter-Schaltfläche: Pausiert oder setzt die Multithread-Operation fort.",
-                     "Botón Pausar/Reanudar multi-hilo: pone en pausa o reanuda la operación multi-hilo."),
-
-                    ["Cancel Multi-Thread Button: This button cancels the multi-threaded operation."] =
-                    ("Bouton Annuler multi-thread : annule l’opération multi-thread.",
-                     "Multi-Thread Abbrechen-Schaltfläche: Bricht die Multithread-Operation ab.",
-                     "Botón Cancelar multi-hilo: cancela la operación multi-hilo."),
-
-                    ["On Finish Multi-Thread ComboBox: This dropdown combobox is to select the action to perform when the multi-threaded operation finishes."] =
-                    ("ComboBox À la fin multi-thread : choisit l’action à effectuer à la fin de l’opération multi-thread.",
-                     "Beenden-Multi-Thread-ComboBox: Legt fest, was nach Abschluss der Multithread-Operation geschehen soll.",
-                     "ComboBox Al finalizar multi-hilo: elige la acción a realizar cuando termine la operación multi-hilo."),
-
-                    ["Files Name Label 1: This label shows the name of the file being processed by thread 1, along with the percentage and speed."] =
-                    ("Étiquette Nom fichier 1 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 1.",
-                     "Dateiname-Label 1: Zeigt Name, Prozent und Geschwindigkeit der von Thread 1 bearbeiteten Datei.",
-                     "Etiqueta Nombre archivo 1: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 1."),
-
-                    ["Total Percentage Multi Label 1: This label shows the percentage of progress for the file being processed by thread 1."] =
-                    ("Étiquette Pourcentage total 1 : affiche le pourcentage de progression du fichier traité par le thread 1.",
-                     "Gesamt-Prozent-Label 1: Zeigt den Prozentwert des Fortschritts der von Thread 1 bearbeiteten Datei.",
-                     "Etiqueta Porcentaje total 1: muestra el porcentaje de progreso del archivo procesado por el hilo 1."),
-
-                    ["Files Name Label 2: This label shows the name of the file being processed by thread 2, along with the percentage and speed."] =
-                    ("Étiquette Nom fichier 2 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 2.",
-                     "Dateiname-Label 2: Zeigt Name, Prozent und Geschwindigkeit der von Thread 2 bearbeiteten Datei.",
-                     "Etiqueta Nombre archivo 2: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 2."),
-
-                    ["Files Name Label 3: This label shows the name of the file being processed by thread 3, along with the percentage and speed."] =
-                    ("Étiquette Nom fichier 3 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 3.",
-                     "Dateiname-Label 3: Zeigt Name, Prozent und Geschwindigkeit der von Thread 3 bearbeiteten Datei.",
-                     "Etiqueta Nombre archivo 3: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 3."),
-
-                    ["Total Percentage Multi Label 2: This label shows the percentage of progress for the file being processed by thread 2."] =
-                    ("Étiquette Pourcentage total 2 : affiche le pourcentage de progression du fichier traité par le thread 2.",
-                     "Gesamt-Prozent-Label 2: Zeigt den Prozentwert des Fortschritts der von Thread 2 bearbeiteten Datei.",
-                     "Etiqueta Porcentaje total 2: muestra el porcentaje de progreso del archivo procesado por el hilo 2."),
-
-                    ["Total Percentage Multi Label 3: This label shows the percentage of progress for the file being processed by thread 3."] =
-                    ("Étiquette Pourcentage total 3 : affiche le pourcentage de progression du fichier traité par le thread 3.",
-                     "Gesamt-Prozent-Label 3: Zeigt den Prozentwert des Fortschritts der von Thread 3 bearbeiteten Datei.",
-                     "Etiqueta Porcentaje total 3: muestra el porcentaje de progreso del archivo procesado por el hilo 3."),
-
-                    ["Files Name Label 4: This label shows the name of the file being processed by thread 4, along with the percentage and speed."] =
-                    ("Étiquette Nom fichier 4 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 4.",
-                     "Dateiname-Label 4: Zeigt Name, Prozent und Geschwindigkeit der von Thread 4 bearbeiteten Datei.",
-                     "Etiqueta Nombre archivo 4: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 4."),
-
-                    ["Total Percentage Multi Label 4: This label shows the percentage of progress for the file being processed by thread 4."] =
-                    ("Étiquette Pourcentage total 4 : affiche le pourcentage de progression du fichier traité par le thread 4.",
-                     "Gesamt-Prozent-Label 4: Zeigt den Prozentwert des Fortschritts der von Thread 4 bearbeiteten Datei.",
-                     "Etiqueta Porcentaje total 4: muestra el porcentaje de progreso del archivo procesado por el hilo 4."),
-
-                    ["Progress Bar Multi-Thread Total: This progress bar shows the overall progress of the multi-threaded operation across all threads."] =
-                    ("Barre de progression multi-thread totale : indique l’avancement global de l’opération multi-thread.",
-                     "Multi-Thread-Gesamt-Fortschrittsbalken: Zeigt den Gesamtfortschritt der Multithread-Operation.",
-                     "Barra de progreso total multi-hilo: muestra el avance global de la operación multi-hilo."),
-
-                    ["Multi-Thread Total Progress Label: This label shows the percentage of overall progress for the multi-threaded operation across all threads."] =
-                    ("Étiquette Progression totale multi-thread : affiche le pourcentage de progression global de l’opération multi-thread.",
-                     "Multi-Thread-Gesamt-Fortschritt-Label: Zeigt den Prozentwert des Gesamtfortschritts der Multithread-Operation.",
-                     "Etiqueta Progreso total multi-hilo: muestra el porcentaje de avance global de la operación multi-hilo."),
-
-                    ["File Count Multi Label: This label shows the number of files processed out of the total number of files in the multi-threaded operation."] =
-                    ("Étiquette Compteur fichiers multi-thread : affiche le nombre de fichiers traités sur le total.",
-                     "Multi-Thread-Dateianzahl-Label: Zeigt die Anzahl der bearbeiteten Dateien von der Gesamtanzahl.",
-                     "Etiqueta Contador archivos multi-hilo: muestra la cantidad de archivos procesados del total."),
-
-                    ["Total Time Multi Label: This label shows the elapsed time out of the estimated target time for the multi-threaded operation."] =
-                    ("Étiquette Temps total multi-thread : affiche le temps écoulé sur le temps estimé.",
-                     "Multi-Thread-Gesamtzeit-Label: Zeigt die verstrichene Zeit gegenüber der geschätzten Gesamtzeit.",
-                     "Etiqueta Tiempo total multi-hilo: muestra el tiempo transcurrido frente al tiempo estimado."),
-
-                    ["Speed Multi Label: This label shows the current speed of the multi-threaded operation in bytes per second."] =
-                    ("Étiquette Vitesse multi-thread : affiche la vitesse actuelle en octets par seconde.",
-                     "Multi-Thread-Geschwindigkeit-Label: Zeigt die aktuelle Geschwindigkeit in Bytes pro Sekunde.",
-                     "Etiqueta Velocidad multi-hilo: muestra la velocidad actual en bytes por segundo."),
-
-                    ["Total C/M/D Label: This label shows the total space processed out of the total space for all files."] =
-                    ("Étiquette Total C/M/D : affiche l’espace traité sur l’espace total de tous les fichiers.",
-                     "Gesamt-C/M/D-Label: Zeigt den verarbeiteten Speicherplatz im Verhältnis zum Gesamtplatz aller Dateien.",
-                     "Etiqueta Total C/M/D: muestra el espacio procesado frente al espacio total de todos los archivos."),
-
-                    ["Total Space Left Label: This label shows the total hard drive used out of the total hard drive space left on the target drive for the multi-threaded operation."] =
-                    ("Étiquette Espace restant total : affiche l’espace disque utilisé sur l’espace restant du disque cible pour l’opération multi-thread.",
-                     "Gesamt-verbleibender-Speicher-Label: Zeigt den belegten Speicherplatz im Verhältnis zum freien Speicher des Ziellaufwerks für die Multithread-Operation.",
-                     "Etiqueta Espacio restante total: muestra el espacio en disco usado frente al espacio libre de la unidad de destino para la operación multi-hilo."),
-
-                    ["Go To In Explorer Button: This button opens the selected file's location in Windows Explorer."] =
-                    ("Bouton Ouvrir dans l’explorateur : ouvre l’emplacement du fichier sélectionné dans l’Explorateur Windows.",
-                     "Im Explorer öffnen-Schaltfläche: Öffnet den Speicherort der markierten Datei im Windows-Explorer.",
-                     "Botón Ir en Explorador: abre la ubicación del archivo seleccionado en el Explorador de Windows."),
-
-                    ["Total Skipped Label: This label shows the total number of files that were skipped during the operation."] =
-                    ("Étiquette Total ignoré : affiche le nombre total de fichiers ignorés pendant l’opération.",
-                     "Gesamt-übersprungen-Label: Zeigt die Gesamtanzahl der während der Operation übersprungenen Dateien.",
-                     "Etiqueta Total omitido: muestra la cantidad total de archivos omitidos durante la operación."),
-
-                    ["Clear Skipped List Button: This button clears the list of skipped files."] =
-                    ("Bouton Effacer liste ignorés : vide la liste des fichiers ignorés.",
-                     "Übersprungen-Liste löschen-Schaltfläche: Leert die Liste der übersprungenen Dateien.",
-                     "Botón Limpiar lista omitidos: vacía la lista de archivos omitidos."),
-
-                    ["Skipped Data Grid View: This grid displays the list of files that were skipped during the operation, including their names, paths, sizes, and reasons for skipping."] =
-                    ("Grille des fichiers ignorés : affiche la liste des fichiers ignorés avec nom, chemin, taille et motif.",
-                     "Übersprungen-DataGridView: Zeigt die übersprungenen Dateien mit Name, Pfad, Größe und Grund.",
-                     "Cuadrícula de omitidos: muestra la lista de archivos omitidos con nombre, ruta, tamaño y motivo."),
-
-                    ["Clone Button: This button clones the selected operation from the history list, allowing you to quickly repeat a previous operation."] =
-                    ("Bouton Cloner : clone l’opération sélectionnée dans l’historique pour la répéter rapidement.",
-                     "Klonen-Schaltfläche: Klont den markierten Eintrag aus der Historie, um ihn schnell zu wiederholen.",
-                     "Botón Clonar: clona la operación seleccionada del historial para repetirla rápidamente."),
-
-                    ["Delete Entry Button: This button deletes the selected entry from the operation history list."] =
-                    ("Bouton Supprimer entrée : retire l’entrée sélectionnée de l’historique.",
-                     "Eintrag löschen-Schaltfläche: Entfernt den markierten Eintrag aus der Historie.",
-                     "Botón Borrar entrada: quita la entrada seleccionada del historial."),
-
-                    ["Clear History Button: This button clears the entire operation history list."] =
-                    ("Bouton Effacer historique : vide complètement la liste de l’historique.",
-                     "Historie löschen-Schaltfläche: Leert die gesamte Historien-Liste.",
-                     "Botón Limpiar historial: vacía completamente la lista del historial."),
-
-                    ["Total History Label: This label shows the total number of operations recorded in the history list."] =
-                    ("Étiquette Total historique : affiche le nombre total d’opérations enregistrées.",
-                     "Gesamt-Historie-Label: Zeigt die Gesamtanzahl der gespeicherten Operationen.",
-                     "Etiqueta Total historial: muestra el número total de operaciones guardadas."),
-
-                    ["Add Allowed Button: This button adds a new allowed file or directory to the allowed list."] =
-                    ("Bouton Ajouter autorisé : ajoute un nouveau fichier ou dossier autorisé.",
-                     "Hinzufügen erlaubt-Schaltfläche: Fügt eine neue erlaubte Datei oder einen Ordner hinzu.",
-                     "Botón Añadir permitido: agrega un nuevo archivo o carpeta permitida."),
-
-                    ["Remove Allowed Button: This button removes the selected allowed file or directory from the allowed list."] =
-                    ("Bouton Supprimer autorisé : retire l’élément autorisé sélectionné.",
-                     "Entfernen erlaubt-Schaltfläche: Entfernt das markierte erlaubte Element.",
-                     "Botón Quitar permitido: quita el elemento permitido seleccionado."),
-
-                    ["Clear Allowed Button: This button clears the entire list of allowed files and directories."] =
-                    ("Bouton Effacer autorisés : vide la liste complète des éléments autorisés.",
-                     "Erlaubt-Liste löschen-Schaltfläche: Leert die gesamte Liste der erlaubten Elemente.",
-                     "Botón Limpiar permitidos: vacía la lista completa de elementos permitidos."),
-
-                    ["Add Excluded Button: This button adds a new excluded file or directory to the exclusions list."] =
-                    ("Bouton Ajouter exclu : ajoute un nouveau fichier ou dossier exclu.",
-                     "Hinzufügen ausgeschlossen-Schaltfläche: Fügt eine neue ausgeschlossene Datei oder einen Ordner hinzu.",
-                     "Botón Añadir excluido: agrega un nuevo archivo o carpeta excluida."),
-
-                    ["Remove Excluded Button: This button removes the selected excluded file or directory from the exclusions list."] =
-                    ("Bouton Supprimer exclu : retire l’élément exclu sélectionné.",
-                     "Entfernen ausgeschlossen-Schaltfläche: Entfernt das markierte ausgeschlossene Element.",
-                     "Botón Quitar excluido: quita el elemento excluido seleccionado."),
-
-                    ["Clear Excluded Button: This button clears the entire list of excluded files and directories."] =
-                    ("Bouton Effacer exclus : vide la liste complète des éléments exclus.",
-                     "Ausgeschlossen-Liste löschen-Schaltfläche: Leert die gesamte Liste der ausgeschlossenen Elemente.",
-                     "Botón Limpiar excluidos: vacía la lista completa de elementos excluidos."),
-
-                    ["Allowed Text Box: This text box allows you to enter file or directory paths to be added to the allowed list."] =
-                    ("Zone de texte autorisés : permet de saisir les chemins à ajouter à la liste des autorisés.",
-                     "Erlaubt-Textbox: Ermöglicht das Eingeben von Pfaden, die zur erlaubten Liste hinzugefügt werden.",
-                     "Cuadro de texto permitidos: permite escribir rutas para agregar a la lista de permitidos."),
-
-                    ["Excluded Text Box: This text box allows you to enter file or directory paths to be added to the exclusions list."] =
-                    ("Zone de texte exclus : permet de saisir les chemins à ajouter à la liste des exclus.",
-                     "Ausgeschlossen-Textbox: Ermöglicht das Eingeben von Pfaden, die zur Ausgeschlossen-Liste hinzugefügt werden.",
-                     "Cuadro de texto excluidos: permite escribir rutas para agregar a la lista de excluidos."),
-
-                    ["Allowed List Box: This list box displays the list of allowed files and directories that will be included in the operation."] =
-                    ("Liste des autorisés : affiche les fichiers et dossiers autorisés à être inclus dans l’opération.",
-                     "Erlaubt-Liste: Zeigt die erlaubten Dateien und Ordner an, die in die Operation einbezogen werden.",
-                     "Lista de permitidos: muestra los archivos y carpetas permitidos que se incluirán en la operación."),
-
-                    ["Excluded List Box: This list box displays the list of excluded files and directories that will be skipped during the operation."] =
-                    ("Liste des exclus : affiche les fichiers et dossiers exclus qui seront ignorés pendant l’opération.",
-                     "Ausgeschlossen-Liste: Zeigt die ausgeschlossenen Dateien und Ordner an, die übersprungen werden.",
-                     "Lista de excluidos: muestra los archivos y carpetas excluidos que se omitirán durante la operación."),
-
-                    ["Exclusions Tab: This tab allows you to manage the lists of allowed and excluded files and directories for the operation."] =
-                    ("Onglet Exclusions : permet de gérer les listes de fichiers et dossiers autorisés et exclus pour l’opération.",
-                     "Ausschluss-Tab: Ermöglicht die Verwaltung der Listen mit erlaubten und ausgeschlossenen Dateien und Ordnern für die Operation.",
-                     "Pestaña Exclusiones: permite administrar las listas de archivos y carpetas permitidos y excluidos para la operación."),
-
-                    ["Skipped Tab: This tab displays the list of files that were skipped during the operation, along with options to manage the skipped files."] =
-                    ("Onglet Ignorés : affiche la liste des fichiers ignorés pendant l’opération avec des options pour les gérer.",
-                     "Übersprungen-Tab: Zeigt die Liste der übersprungenen Dateien der Operation mit Verwaltungsoptionen.",
-                     "Pestaña Omitidos: muestra la lista de archivos omitidos durante la operación con opciones para administrarlos."),
-
-                    ["Multi-Thread Tab: This tab allows you to configure and monitor multi-threaded operations for copying or moving files."] =
-                    ("Onglet Multi-thread : permet de configurer et surveiller les opérations multi-thread pour copier ou déplacer des fichiers.",
-                     "Multi-Thread-Tab: Ermöglicht die Konfiguration und Überwachung von Multithread-Operationen zum Kopieren oder Verschieben von Dateien.",
-                     "Pestaña Multi-hilo: permite configurar y supervisar operaciones multi-hilo para copiar o mover archivos."),
-
-                    ["Window Group Box: This group box contains settings related to the application's window behavior, such as minimizing to the system tray."] =
-                    ("Groupe Fenêtre : contient les réglages relatifs au comportement de la fenêtre, comme la minimisation dans la zone de notification.",
-                     "Fenster-Gruppe: Enthält Einstellungen zum Fensterverhalten, z. B. Minimieren in das Benachrichtigungsfeld.",
-                     "Grupo Ventana: contiene ajustes relacionados con el comportamiento de la ventana, como minimizar a la bandeja del sistema."),
-
-                    ["Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows."] =
-                    ("Case Toujours au premier plan : détermine si la fenêtre reste toujours au-dessus des autres.",
-                     "Immer im Vordergrund-CheckBox: Legt fest, ob das Fenster immer über anderen Fenstern bleibt.",
-                     "Casilla Siempre encima: determina si la ventana permanece siempre por encima de las demás."),
-
-                    ["Minimize to System Tray CheckBox: This checkbox determines whether the application should minimize to the system tray instead of the taskbar."] =
-                    ("Case Réduire dans la barre d’état : détermine si l’application se réduit dans la zone de notification au lieu de la barre des tâches.",
-                     "In Benachrichtigungsfeld minimieren-CheckBox: Legt fest, ob sich die Anwendung in das Benachrichtigungsfeld anstatt in die Taskleiste minimiert.",
-                     "Casilla Minimizar a bandeja: determina si la aplicación se minimiza a la bandeja del sistema en lugar de a la barra de tareas."),
-
-                    ["Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application."] =
-                    ("Case Confirmer glisser-déposer : affiche une boîte de confirmation lors du glisser-déposer de fichiers.",
-                     "Drag & Drop bestätigen-CheckBox: Zeigt einen Bestätigungsdialog beim Ablegen von Dateien an.",
-                     "Casilla Confirmar arrastrar y soltar: muestra un diálogo de confirmación al soltar archivos."),
-
-                    ["Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application."] =
-                    ("Case Menu contextuel : ajoute une option au menu contextuel de Windows pour un accès rapide.",
-                     "Kontextmenü-CheckBox: Fügt dem Windows-Kontextmenü eine Option für schnellen Zugriff hinzu.",
-                     "Casilla Menú contextual: añade una opción al menú contextual de Windows para acceso rápido."),
-
-                    ["Skins & Language Group Box: This group box contains settings related to the application's appearance and language preferences."] =
-                    ("Groupe Apparence & Langue : contient les réglages d’apparence et de langue de l’application.",
-                     "Design & Sprache-Gruppe: Enthält Einstellungen zum Erscheinungsbild und zur Sprache der Anwendung.",
-                     "Grupo Aspecto e idioma: contiene ajustes de apariencia e idioma de la aplicación."),
-
-                    ["Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface."] =
-                    ("ComboBox Langue : permet de choisir la langue de l’interface utilisateur.",
-                     "Sprache-ComboBox: Ermöglicht die Auswahl der Sprache der Benutzeroberfläche.",
-                     "ComboBox Idioma: permite elegir el idioma de la interfaz de usuario."),
-
-                    ["Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance."] =
-                    ("ComboBox Thèmes : permet de choisir un thème pour l’apparence de l’application.",
-                     "Design-ComboBox: Ermöglicht die Auswahl verschiedener Designs für das Erscheinungsbild.",
-                     "ComboBox Temas: permite elegir un tema para la apariencia de la aplicación."),
-
-                    ["Font Size Numeric Up-Down: This control allows you to adjust the font size used in the application's user interface."] =
-                    ("Zone numérique Taille police : permet de régler la taille de police utilisée dans l’interface.",
-                     "Schriftgröße-Numeric-Up-Down: Ermöglicht das Einstellen der in der Benutzeroberfläche verwendeten Schriftgröße.",
-                     "Control numérico Tamaño de fuente: permite ajustar el tamaño de fuente usado en la interfaz."),
-
-                    ["Sounds Group Box: This group box contains settings related to the application's sound notifications for various events."] =
-                    ("Groupe Sons : contient les réglages des notifications sonores pour divers événements.",
-                     "Sounds-Gruppe: Enthält Einstellungen für Soundbenachrichtigungen bei verschiedenen Ereignissen.",
-                     "Grupo Sonidos: contiene ajustes de notificaciones sonoras para varios eventos."),
-
-                    ["On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes."] =
-                    ("Case À la fin : détermine si un son est joué quand l’opération se termine.",
-                     "Beenden-CheckBox: Legt fest, ob ein Sound bei Abschluss der Dateioperation abgespielt wird.",
-                     "Casilla Al finalizar: determina si se reproduce un sonido cuando termina la operación."),
-
-                    ["On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled."] =
-                    ("Case À l’annulation : détermine si un son est joué quand l’opération est annulée.",
-                     "Abbrechen-CheckBox: Legt fest, ob ein Sound beim Abbrechen der Dateioperation abgespielt wird.",
-                     "Casilla Al cancelar: determina si se reproduce un sonido cuando se cancela la operación."),
-
-                    ["On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list."] =
-                    ("Case À l’ajout : détermine si un son est joué quand des fichiers sont ajoutés à la liste.",
-                     "Hinzufügen-CheckBox: Legt fest, ob ein Sound beim Hinzufügen von Dateien zur Liste abgespielt wird.",
-                     "Casilla Al añadir archivos: determina si se reproduce un sonido cuando se agregan archivos a la lista."),
-
-                    ["On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation."] =
-                    ("Case En cas d’erreur : détermine si un son est joué quand une erreur survient.",
-                     "Fehler-CheckBox: Legt fest, ob ein Sound bei einem Fehler während der Dateioperation abgespielt wird.",
-                     "Casilla Al producirse error: determina si se reproduce un sonido cuando ocurre un error."),
-
-                    ["Update Group Box: This group box contains settings related to the application's update preferences."] =
-                    ("Groupe Mise à jour : contient les réglages relat aux préférences de mise à jour de l’application.",
-                     "Update-Gruppe: Enthält Einstellungen zu den Update-Präferenzen der Anwendung.",
-                     "Grupo Actualización: contiene ajustes relacionados con las preferencias de actualización de la aplicación."),
-
-                    ["Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup."] =
-                    ("Case Vérifier maj auto : détermine si l’application vérifie automatiquement les mises à jour au démarrage.",
-                     "Auto-Update-Check-CheckBox: Legt fest, ob die Anwendung beim Start automatisch nach Updates sucht.",
-                     "Casilla Buscar actualizaciones auto: determina si la aplicación busca actualizaciones automáticamente al iniciar."),
-
-                    ["Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates."] =
-                    ("Case Inclure versions bêta : inclut les versions bêta lors de la recherche de mises à jour.",
-                     "Beta-Versionen einbeziehen-CheckBox: Schließt Beta-Versionen bei der Update-Suche ein.",
-                     "Casilla Incluir versiones beta: incluye versiones beta al buscar actualizaciones."),
-
-                    ["Check for Updates Button: This button manually checks for updates to the application."] =
-                    ("Bouton Vérifier les mises à jour : lance une recherche manuelle de mises à jour.",
-                     "Auf Updates prüfen-Schaltfläche: Sucht manuell nach Updates für die Anwendung.",
-                     "Botón Buscar actualizaciones: realiza una búsqueda manual de actualizaciones."),
-
-                    ["Default Settings Button: This button resets all settings to their default values."] =
-                    ("Bouton Paramètres par défaut : réinitialise tous les réglages aux valeurs par défaut.",
-                     "Standard-Einstellungen-Schaltfläche: Setzt alle Einstellungen auf die Standardwerte zurück.",
-                     "Botón Ajustes predeterminados: restablece todos los ajustes a los valores predeterminados."),
-
-                    ["Recommended Settings Button: This button applies a set of recommended settings for optimal performance and usability."] =
-                    ("Bouton Paramètres recommandés : applique un ensemble de réglages recommandés pour des performances optimales.",
-                     "Empfohlene Einstellungen-Schaltfläche: Wendet eine Reihe empfohlener Einstellungen für optimale Leistung an.",
-                     "Botón Ajustes recomendados: aplica un conjunto de ajustes recomendados para un rendimiento óptimo."),
-
-                    ["Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated."] =
-                    ("Curseur Priorité : permet de régler le niveau de priorité des opérations sur fichiers, influençant l’allocation des ressources système.",
-                     "Priorität-TrackBar: Ermöglicht das Einstellen der Priorität von Dateioperationen, wodurch die Systemressourcen-Zuteilung beeinflusst wird.",
-                     "Barra de prioridad: permite ajustar el nivel de prioridad de las operaciones de archivos, afectando la asignación de recursos del sistema."),
-
-                    ["Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent."] =
-                    ("Curseur Opacité : permet de régler le niveau d’opacité de la fenêtre, la rendant plus ou moins transparente.",
-                     "Deckkraft-TrackBar: Ermöglicht das Einstellen der Transparenz des Anwendungsfensters.",
-                     "Barra de opacidad: permite ajustar el nivel de opacidad de la ventana, haciéndola más o menos transparente."),
-
-                    ["Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application."] =
-                    ("Case Fichier journal : détermine si un fichier journal est créé pour enregistrer les détails des opérations.",
-                     "Log-Datei-CheckBox: Legt fest, ob eine Protokolldatei erstellt wird, die Details der Dateioperationen speichert.",
-                     "Casilla Archivo de registro: determina si se crea un archivo de registro que guarda detalles de las operaciones."),
-
-                    ["Log Days Numeric Up-Down: This control allows you to specify the number of days to retain log files before they are automatically deleted."] =
-                    ("Zone numérique Jours de conservation : définit le nombre de jours avant suppression automatique des fichiers journal.",
-                     "Log-Tage-Numeric-Up-Down: Legt fest, wie viele Tage Log-Dateien aufbewahrt werden, bevor sie automatisch gelöscht werden.",
-                     "Control numérico Días de registro: define cuántos días se conservan los archivos de registro antes de borrarse automáticamente."),
-
-                    ["Auto Save Settings CheckBox: This checkbox determines whether to automatically save the current settings when the application is closed."] =
-                    ("Case Sauvegarde auto : détermine si les réglages actuels sont automatiquement sauvegardés à la fermeture.",
-                     "Auto-Speichern-CheckBox: Legt fest, ob die aktuellen Einstellungen beim Beenden automatisch gespeichert werden.",
-                     "Casilla Guardado auto: determina si se guardan automáticamente los ajustes actuales al cerrar."),
-
-                    ["Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration."] =
-                    ("Bouton Effacer réglages : supprime tous les réglages utilisateur et réinitialise l’application.",
-                     "Einstellungen löschen-Schaltfläche: Löscht alle benutzerdefinierten Einstellungen und setzt die Anwendung zurück.",
-                     "Botón Borrar ajustes: elimina todos los ajustes definidos por el usuario y reinicia la aplicación."),
-
-                    ["Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions."] =
-                    ("Bouton Sauvegarder réglages : enregistre les réglages actuels pour les sessions futures.",
-                     "Einstellungen speichern-Schaltfläche: Speichert die aktuellen Einstellungen für zukünftige Sitzungen.",
-                     "Botón Guardar ajustes: guarda los ajustes actuales para futuras sesiones."),
-
-                    ["Performance Group Box: This group box contains settings related to the application's performance, such as buffer size and multi-threading options."] =
-                    ("Groupe Performance : contient les réglages liés aux performances, comme la taille du tampon et les options multi-thread.",
-                     "Leistung-Gruppe: Enthält Einstellungen zur Leistung, wie Puffergröße und Multithread-Optionen.",
-                     "Grupo Rendimiento: contiene ajustes relacionados con el rendimiento, como tamaño de búfer y opciones multi-hilo."),
-
-                    ["Buffer Size Numeric Up-Down: This control allows you to adjust the buffer size used during file operations, which can affect performance."] =
-                    ("Zone numérique Taille tampon : permet de régler la taille du tampon utilisée pendant les opérations, influençant les performances.",
-                     "Puffergröße-Numeric-Up-Down: Ermöglicht das Einstellen der Puffergröße während Dateioperationen, wodurch sich die Leistung beeinflussen lässt.",
-                     "Control numérico Tamaño de búfer: permite ajustar el tamaño del búfer usado durante las operaciones, afectando el rendimiento."),
-
-                    ["Multi-Thread CheckBox: This checkbox enables or disables multi-threaded file operations, allowing multiple files to be processed simultaneously for improved performance."] =
-                    ("Case Multi-thread : active/désactive les opérations multi-thread pour traiter plusieurs fichiers simultanément.",
-                     "Multi-Thread-CheckBox: Aktiviert/deaktiviert Multithread-Dateioperationen, um mehrere Dateien gleichzeitig zu verarbeiten.",
-                     "Casilla Multi-hilo: activa/desactiva operaciones de archivos multi-hilo para procesar varios archivos simultáneamente."),
-
-                    ["Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes."] =
-                    ("Case Sous MB : applique le multi-thread uniquement aux fichiers plus petits que la taille spécifiée en Mo.",
-                     "Unter MB-CheckBox: Wendet Multithreading nur auf Dateien an, die kleiner als die angegebene Größe in MB sind.",
-                     "Casilla Bajo MB: aplica multi-hilo solo a archivos más pequeños que el tamaño especificado en MB."),
-
-                    ["Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes."] =
-                    ("Case Au-dessus MB : applique le multi-thread uniquement aux fichiers plus grands que la taille spécifiée en Mo.",
-                     "Über MB-CheckBox: Wendet Multithreading nur auf Dateien an, die größer als die angegebene Größe in MB sind.",
-                     "Casilla Sobre MB: aplica multi-hilo solo a archivos más grandes que el tamaño especificado en MB."),
-
-                    ["Set MB/GB Under Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to smaller files."] =
-                    ("Zone numérique Définir MB/GB sous : définit le seuil en mégaoctets pour appliquer le multi-thread aux petits fichiers.",
-                     "MB/GB-unter-Numeric-Up-Down: Legt die Größenschwelle in Megabytes fest, ab der Multithreading für kleinere Dateien angewendet wird.",
-                     "Control numérico Establecer MB/GB bajo: define el umbral en megabytes para aplicar multi-hilo a archivos pequeños."),
-
-                    ["Set MB/GB Over Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to larger files."] =
-                    ("Zone numérique Définir MB/GB au-dessus : définit le seuil en mégaoctets pour appliquer le multi-thread aux gros fichiers.",
-                     "MB/GB-über-Numeric-Up-Down: Legt die Größenschwelle in Megabytes fest, ab der Multithreading für größere Dateien angewendet wird.",
-                     "Control numérico Establecer MB/GB sobre: define el umbral en megabytes para aplicar multi-hilo a archivos grandes."),
-
-                    ["File/Directory Settings Group Box: This group box contains settings related to how files and directories are exported or zipped (before) for the copy or move operations."] =
-                    ("Groupe Paramètres Fichiers/Dossiers : contient les réglages sur l’export ou la compression avant copie/déplacement.",
-                     "Datei/Ordner-Einstellungen-Gruppe: Enthält Einstellungen zum Exportieren oder Komprimieren (vorher) von Dateien und Ordnern für Kopier-/Verschiebe-Operationen.",
-                     "Grupo Ajustes Archivos/Carpetas: contiene ajustes sobre exportar o comprimir (antes) archivos y carpetas para operaciones de copiar/mover."),
-
-                    ["Only Names CheckBox: This checkbox determines whether to export only the names of files and directories without their full paths."] =
-                    ("Case Noms seulement : exporte uniquement les noms sans les chemins complets.",
-                     "Nur Namen-CheckBox: Exportiert nur die Namen ohne vollständige Pfade.",
-                     "Casilla Solo nombres: exporta solo los nombres sin rutas completas."),
-
-                    ["Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories."] =
-                    ("Case Chemins complets : exporte les chemins complets.",
-                     "Vollständige Pfade-CheckBox: Exportiert die vollständigen Pfade.",
-                     "Casilla Rutas completas: exporta las rutas completas."),
-
-                    ["Export Button: This button exports the list of files and directories to a text file based on the selected settings (only names or full paths)."] =
-                    ("Bouton Exporter : exporte la liste vers un fichier texte selon les réglages choisis (noms ou chemins complets).",
-                     "Exportieren-Schaltfläche: Exportiert die Liste in eine Textdatei gemäß den gewählten Einstellungen (Namen oder vollständige Pfade).",
-                     "Botón Exportar: exporta la lista a un archivo de texto según los ajustes elegidos (nombres o rutas completas)."),
-
-                    ["Zip Separate CheckBox: This checkbox determines whether to create separate zip files for each file and directory before the copy or move operations."] =
-                    ("Case Zip séparé : crée des fichiers zip séparés pour chaque élément avant copie/déplacement.",
-                     "Getrennt zippen-CheckBox: Erstellt separate Zip-Dateien für jedes Element vor dem Kopieren/Verschieben.",
-                     "Casilla Zip separado: crea archivos zip separados para cada elemento antes de copiar/mover."),
-
-                    ["Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations."] =
-                    ("Case Zip ensemble : crée un seul fichier zip contenant tous les éléments avant copie/déplacement.",
-                     "Gemeinsam zippen-CheckBox: Erstellt eine einzelne Zip-Datei mit allen Elementen vor dem Kopieren/Verschieben.",
-                     "Casilla Zip conjunto: crea un único archivo zip con todos los elementos antes de copiar/mover."),
-
-                    ["Email Group Box: This group box contains settings related to exporting and emailing the file list for the application."] =
-                    ("Groupe E-mail : contient les réglages pour exporter et envoyer la liste de fichiers par e-mail.",
-                     "E-Mail-Gruppe: Enthält Einstellungen zum Exportieren und Versenden der Dateiliste per E-Mail.",
-                     "Grupo Correo electrónico: contiene ajustes para exportar y enviar la lista de archivos por correo."),
-
-                    ["SMS Group Box: This group box contains settings for configuring SMS notifications when operations complete."] =
-                    ("Groupe SMS : contient les réglages pour configurer les notifications SMS à la fin des opérations.",
-                     "SMS-Gruppe: Enthält Einstellungen zum Konfigurieren von SMS-Benachrichtigungen nach Abschluss von Operationen.",
-                     "Grupo SMS: contiene ajustes para configurar notificaciones SMS al finalizar operaciones."),
-
-                    ["Set Up SMS Button: This button opens the SMS notification setup dialog, allowing you to configure SMS settings for operation completion notifications."] =
-                    ("Bouton Configurer SMS : ouvre la boîte de dialogue de configuration des notifications SMS.",
-                     "SMS einrichten-Schaltfläche: Öffnet den Dialog zur Konfiguration von SMS-Benachrichtigungen.",
-                     "Botón Configurar SMS: abre el diálogo para configurar notificaciones SMS."),
-
-                    ["Set Up Email Button: This button opens the email setup dialog, allowing you to configure email settings for exporting and sending the file list."] =
-                    ("Bouton Configurer e-mail : ouvre la boîte de dialogue de configuration de l’e-mail.",
-                     "E-Mail einrichten-Schaltfläche: Öffnet den Dialog zur Konfiguration der E-Mail-Einstellungen.",
-                     "Botón Configurar correo: abre el diálogo para configurar ajustes de correo electrónico."),
-
-                    ["Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export."] =
-                    ("Case Noms e-mail : n’inclut que les noms dans l’export e-mail.",
-                     "E-Mail-Namen-CheckBox: Fügt dem E-Mail-Export nur Namen hinzu.",
-                     "Casilla Nombres correo: incluye solo nombres en la exportación por correo."),
-
-                    ["Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export."] =
-                    ("Case Chemins e-mail : inclut les chemins complets dans l’export e-mail.",
-                     "E-Mail-Pfade-CheckBox: Fügt dem E-Mail-Export vollständige Pfade hinzu.",
-                     "Casilla Rutas correo: incluye rutas completas en la exportación por correo."),
-
-                    ["Other Settings Group Box: This group box contains miscellaneous settings for the application."] =
-                    ("Groupe Autres réglages : contient divers réglages pour l’application.",
-                     "Sonstige Einstellungen-Gruppe: Enthält verschiedene Einstellungen für die Anwendung.",
-                     "Grupo Otros ajustes: contiene diversos ajustes para la aplicación."),
-
-                    ["Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs."] =
-                    ("Case Fermer programme : détermine si l’application se ferme automatiquement en cas d’erreur.",
-                     "Programm schließen-CheckBox: Legt fest, ob die Anwendung bei einem Fehler automatisch geschlossen wird.",
-                     "Casilla Cerrar programa: determina si la aplicación se cierra automáticamente cuando ocurre un error."),
-
-                    ["Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs."] =
-                    ("Case Redémarrer : détermine si l’application redémarre automatiquement en cas d’erreur.",
-                     "Neustart-CheckBox: Legt fest, ob die Anwendung bei einem Fehler automatisch neu startet.",
-                     "Casilla Reiniciar: determina si la aplicación se reinicia automáticamente cuando ocurre un error."),
-
-                    ["Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts."] =
-                    ("Case Lancer avec Windows : détermine si l’application démarre automatiquement avec Windows.",
-                     "Mit Windows starten-CheckBox: Legt fest, ob die Anwendung automatisch mit Windows gestartet wird.",
-                     "Casilla Iniciar con Windows: determina si la aplicación se inicia automáticamente con Windows."),
-
-                    ["Serial Key Text Box: This text box allows you to enter your serial key to activate the application."] =
-                    ("Zone de texte Clé série : permet de saisir votre clé de série pour activer l’application.",
-                     "Seriennummer-Textbox: Ermöglicht die Eingabe Ihres Serienschlüssels zur Aktivierung der Anwendung.",
-                     "Cuadro de texto Clave de serie: permite escribir su clave de serie para activar la aplicación."),
-
-                    ["Register Button: This button submits the entered serial key for validation and activates the application if the key is valid."] =
-                    ("Bouton Enregistrer : envoie la clé de série saisie pour validation et active l’application si la clé est valide.",
-                     "Registrieren-Schaltfläche: Sendet den eingegebenen Serienschlüssel zur Validierung und aktiviert die Anwendung, falls der Schlüssel gültig ist.",
-                     "Botón Registrar: envía la clave de serie introducida para validación y activa la aplicación si la clave es válida."),
-
-                    ["Secure Passes Numeric Up-Down: This control allows you to specify the number of passes to use for securely deleting files."] =
-                    ("Zone numérique Passages sécurisés : définit le nombre de passages pour la suppression sécurisée.",
-                     "Sichere-Passwörter-Numeric-Up-Down: Legt die Anzahl der Überschreibungsdurchläufe für sicheres Löschen fest.",
-                     "Control numérico Pasadas seguras: define la cantidad de pasadas para el borrado seguro."),
-
-                    ["Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences."] =
-                    ("Onglet Paramètres : permet de configurer divers réglages de l’application, y compris le comportement de la fenêtre, l’apparence, les performances et autres préférences.",
-                     "Einstellungen-Tab: Ermöglicht die Konfiguration verschiedener Einstellungen der Anwendung, einschließlich Fensterverhalten, Erscheinungsbild, Leistung und andere Präferenzen.",
-                     "Pestaña Ajustes: permite configurar varios ajustes de la aplicación, incluyendo comportamiento de ventana, apariencia, rendimiento y otras preferencias."),
-
-                    ["Move Application Label: This allows you to move the application to different parts of the screen."] =
-                    ("Étiquette Déplacer application : permet de déplacer l’application vers différentes zones de l’écran.",
-                     "Anwendung verschieben-Label: Ermöglicht das Verschieben der Anwendung an verschiedene Bildschirmbereiche.",
-                     "Etiqueta Mover aplicación: permite mover la aplicación a diferentes zonas de la pantalla."),
-
-                    ["Copy History Data Grid View: This grid displays the history of file operations performed by the application, including details such as source and target paths, operation type, date, and status."] =
-                    ("Grille Historique des copies : affiche l’historique des opérations avec chemins source/cible, type, date et état.",
-                     "Kopie-Historie-DataGridView: Zeigt den Verlauf der Dateioperationen mit Quell-/Zielpfad, Typ, Datum und Status.",
-                     "Cuadrícula Historial de copias: muestra el historial de operaciones con ruta origen/destino, tipo, fecha y estado."),
-
-
-
-
-                    // ---  T I T L E   S T R I N G S  ---------------------------------
                     ["Copy That v1.0 Pro By: Havoc - Home"] =
     ("Copy That v1.0 Pro Par: Havoc - Accueil",
      "Copy That v1.0 Pro Von: Havoc - Startseite",
-     "Copy That v1.0 Pro Por: Havoc - Inicio"),
+     "Copy That v1.0 Pro Por: Havoc - Inicio",
+     "Copy That v1.0 Pro Di: Havoc - Pagina iniziale",
+     "Copy That v1.0 Pro Por: Havoc - Página inicial",
+     "Copy That v1.0 Pro Por: Havoc - Página inicial",
+     "Copy That v1.0 Pro Door: Havoc - Startpagina",
+     "Copy That v1.0 Pro Av: Havoc - Startsida",
+     "Copy That v1.0 Pro Av: Havoc - Forside",
+     "Copy That v1.0 Pro Af: Havoc - Startside",
+     "Copy That v1.0 Pro Tekijä: Havoc - Kotisivu",
+     "Copy That v1.0 Pro Przez: Havoc - Strona główna",
+     "Copy That v1.0 Pro Od: Havoc - Domovská stránka",
+     "Copy That v1.0 Pro Készítette: Havoc - Főoldal",
+     "Copy That v1.0 Pro De: Havoc - Pagina principală"),
 
                     ["Copy That v1.0 By: Havoc - Home"] =
     ("Copy That v1.0 Par: Havoc - Accueil",
      "Copy That v1.0 Von: Havoc - Startseite",
-     "Copy That v1.0 Por: Havoc - Inicio"),
+     "Copy That v1.0 Por: Havoc - Inicio",
+     "Copy That v1.0 Di: Havoc - Pagina iniziale",
+     "Copy That v1.0 Por: Havoc - Página inicial",
+     "Copy That v1.0 Por: Havoc - Página inicial",
+     "Copy That v1.0 Door: Havoc - Startpagina",
+     "Copy That v1.0 Av: Havoc - Startsida",
+     "Copy That v1.0 Av: Havoc - Forside",
+     "Copy That v1.0 Af: Havoc - Startside",
+     "Copy That v1.0 Tekijä: Havoc - Kotisivu",
+     "Copy That v1.0 Przez: Havoc - Strona główna",
+     "Copy That v1.0 Od: Havoc - Domovská stránka",
+     "Copy That v1.0 Készítette: Havoc - Főoldal",
+     "Copy That v1.0 De: Havoc - Pagina principală"),
+
+                    ["Copy That v1.0 By: Havoc - This is the title of the application, which reflects the current operation."] =
+    ("Copy That v1.0 Par: Havoc – titre de l’application reflétant l’opération en cours.",
+     "Copy That v1.0 Von: Havoc – Anwendungstitel, der den aktuellen Vorgang widerspiegelt.",
+     "Copy That v1.0 Por: Havoc – título de la aplicación que refleja la operación actual.",
+     "Copy That v1.0 Di: Havoc – titolo dell’applicazione che riflette l’operazione corrente.",
+     "Copy That v1.0 Por: Havoc – título da aplicação que reflete a operação atual.",
+     "Copy That v1.0 Por: Havoc – título do aplicativo que reflete a operação atual.",
+     "Copy That v1.0 Door: Havoc – applicatietitel die de huidige bewerking weergeeft.",
+     "Copy That v1.0 Av: Havoc – applikationens titel som speglar den aktuella åtgärden.",
+     "Copy That v1.0 Av: Havoc – tittel på applikasjonen som reflekterer gjeldende operasjon.",
+     "Copy That v1.0 Af: Havoc – programmets titel, der afspejler den aktuelle operation.",
+     "Copy That v1.0 Tekijä: Havoc – sovelluksen otsikko, joka heijastaa nykyistä toimenpidettä.",
+     "Copy That v1.0 Przez: Havoc – tytuł aplikacji odzwierciedlający bieżącą operację.",
+     "Copy That v1.0 Od: Havoc – titul aplikace odrážející aktuální operaci.",
+     "Copy That v1.0 Készítette: Havoc – az alkalmazás címe, amely tükrözi a jelenlegi műveletet.",
+     "Copy That v1.0 De: Havoc – titlul aplicației care reflectă operațiunea curentă."),
+
+
+
+
+                    ["Current File Path: This label shows the path of the currently processed file in the operation."] =
+    ("Chemin du fichier actuel : affiche le chemin du fichier en cours de traitement.",
+     "Aktueller-Dateipfad-Label: Zeigt den Pfad der gerade verarbeiteten Datei.",
+     "Ruta del archivo actual: muestra la ruta del archivo que se está procesando.",
+     "Etichetta Percorso file corrente: mostra il percorso del file attualmente elaborato.",
+     "Etiqueta Caminho do ficheiro atual: mostra o caminho do ficheiro a ser processado na operação.",
+     "Etiqueta Caminho do arquivo atual: mostra o caminho do arquivo sendo processado na operação.",
+     "Label Huidige bestandspad: toont het pad van het bestand dat momenteel wordt verwerkt.",
+     "Etikett Nuvarande filsökväg: visar sökvägen till filen som bearbetas i åtgärden.",
+     "Etikett Gjeldende filbane: viser banen til filen som behandles i operasjonen.",
+     "Label Nuværende filsti: viser stien til filen, der behandles i handlingen.",
+     "Nykyisen tiedoston polku -tarra: näyttää parhaillaan käsiteltävän tiedoston polun toimenpiteessä.",
+     "Etykieta Bieżąca ścieżka pliku: pokazuje ścieżkę pliku aktualnie przetwarzanego w operacji.",
+     "Štítek Aktuální cesta souboru: zobrazuje cestu k souboru, který je aktuálně zpracováván v operaci.",
+     "Jelenlegi fájl elérési útja címke: megjeleníti a művelet során feldolgozás alatt álló fájl elérési útját.",
+     "Etichetă Cale fișier curent: afișează calea fișierului procesat în operațiunea curentă."),
+
+                    ["Current Source Directory: This label shows the path of the source directory from which files will be copied/moved/securely deleted."] =
+    ("Répertoire source actuel : affiche le chemin du dossier source depuis lequel les fichiers seront copiés/déplacés/supprimés de façon sécurisée.",
+     "Aktuelles-Quellverzeichnis-Label: Zeigt den Pfad des Quellordners an, aus dem Dateien kopiert/verschoben/sicher gelöscht werden.",
+     "Directorio de origen actual: muestra la ruta de la carpeta de origen desde la que se copiarán/moverán/borrarán de forma segura los archivos.",
+     "Etichetta Cartella di origine corrente: mostra il percorso della cartella di origine da cui copiare/spostare/eliminare in modo sicuro i file.",
+     "Etiqueta Diretório de origem atual: mostra o caminho da pasta de origem da qual os ficheiros serão copiados/movidos/eliminados de forma segura.",
+     "Etiqueta Diretório de origem atual: mostra o caminho da pasta de origem de onde os arquivos serão copiados/movidos/excluídos com segurança.",
+     "Label Huidige bronmap: toont het pad van de bronmap waaruit bestanden worden gekopieerd/verplaatst/veilig verwijderd.",
+     "Etikett Nuvarande källmapp: visar sökvägen till källmappen som filer ska kopieras/flyttas/säkert raderas från.",
+     "Etikett Gjeldende kildemappe: viser banen til kildemappen som filer skal kopieres/flyttes/slettes sikkert fra.",
+     "Label Nuværende kilde mappe: viser stien til kildemappen, hvorfra filer kopieres/flyttes/slettes sikkert.",
+     "Nykyisen lähdehakemiston tarra: näyttää hakemiston polun, josta tiedostot kopioidaan/siirretään/poistetaan turvallisesti.",
+     "Etykieta Bieżący katalog źródłowy: pokazuje ścieżkę katalogu źródłowego, z którego pliki będą kopiowane/przenoszone/bezpiecznie usuwane.",
+     "Štítek Aktuální zdrojový adresář: zobrazuje cestu ke zdrojovému adresáři, ze kterého budou soubory kopírovány/přesunuty/bezpečně smazány.",
+     "Jelenlegi forráskönyvtár címke: megjeleníti a forráskönyvtár elérési útját, ahonnan a fájlok másolása/áthelyezése/biztonságos törlése történik.",
+     "Etichetă Director sursă curent: afișează calea directorului sursă din care fișierele vor fi copiate/mutate/șterse în siguranță."),
+
+                    ["Current Target Directory: This label shows the path of the target directory to which files will be copied/moved."] =
+    ("Répertoire cible actuel : affiche le chemin du dossier de destination.",
+     "Aktuelles-Zielverzeichnis-Label: Zeigt den Pfad des Zielordners an.",
+     "Directorio de destino actual: muestra la ruta de la carpeta de destino.",
+     "Etichetta Cartella di destinazione corrente: mostra il percorso della cartella di destinazione.",
+     "Etiqueta Diretório de destino atual: mostra o caminho da pasta de destino.",
+     "Etiqueta Diretório de destino atual: mostra o caminho da pasta de destino.",
+     "Label Huidige doelmap: toont het pad van de doelmap.",
+     "Etikett Nuvarande målmapp: visar sökvägen till målmappen.",
+     "Etikett Gjeldende målmappe: viser banen til målmappe.",
+     "Label Nuværende mål mappe: viser stien til mål mappen.",
+     "Nykyisen kohdehakemiston tarra: näyttää kohdehakemiston polun.",
+     "Etykieta Bieżący katalog docelowy: pokazuje ścieżkę katalogu docelowego.",
+     "Štítek Aktuální cílový adresář: zobrazuje cestu k cílovému adresáři.",
+     "Jelenlegi célkönyvtár címke: megjeleníti a célkönyvtár elérési útját.",
+     "Etichetă Director țintă curent: afișează calea directorului țintă."),
+
+                    ["Current File Icon: This picture box shows the icon of the currently processed file in the operation."] =
+    ("Icône du fichier actuel : cette zone affiche l’icône du fichier en cours de traitement.",
+     "Aktuelles-Dateisymbol-PictureBox: Diese PictureBox zeigt das Symbol der gerade bearbeiteten Datei.",
+     "Icono del archivo actual: este cuadro muestra el icono del archivo que se está procesando.",
+     "Icona file corrente: questa picture box mostra l’icona del file attualmente elaborato.",
+     "Ícone do ficheiro atual: esta picture box mostra o ícone do ficheiro a ser processado.",
+     "Ícone do arquivo atual: esta picture box mostra o ícone do arquivo sendo processado.",
+     "Huidige bestandspictogram PictureBox: dit vak toont het pictogram van het bestand dat momenteel wordt verwerkt.",
+     "Nuvarande filikon PictureBox: denna ruta visar ikonen för filen som bearbetas i åtgärden.",
+     "Gjeldende filikon PictureBox: denne boksen viser ikonet til filen som behandles i operasjonen.",
+     "Nuværende filikon PictureBox: denne boks viser ikonet for den fil, der behandles i handlingen.",
+     "Nykyisen tiedoston kuvake PictureBox: tämä laatikko näyttää parhaillaan käsiteltävän tiedoston kuvakkeen.",
+     "Ikona bieżącego pliku PictureBox: to pole wyświetla ikonę pliku aktualnie przetwarzanego w operacji.",
+     "Ikona aktuálního souboru PictureBox: toto pole zobrazuje ikonu souboru, který je aktuálně zpracováván v operaci.",
+     "Jelenlegi fájl ikonja PictureBox: ez a mező megjeleníti a művelet során feldolgozás alatt álló fájl ikonját.",
+     "Pictograma fișierului curent PictureBox: această casetă afișează pictograma fișierului procesat în operațiunea curentă."),
+
+                    ["Overwrite If Newer: This checkbox determines whether to overwrite files only if the source file is newer than the destination file."] =
+    ("Remplacer si plus récent : écrase uniquement si la source est plus récente.",
+     "Überschreiben-wenn-neuer: Überschreibt nur, wenn die Quelldatei neuer ist.",
+     "Sobrescribir si es más nuevo: sobrescribe solo si el origen es más reciente.",
+     "Sovrascrivi se più recente: sovrascrive solo se il file sorgente è più recente.",
+     "Substituir se mais recente: substitui apenas se o ficheiro de origem for mais recente.",
+     "Sobrescrever se mais recente: sobrescreve apenas se o arquivo de origem for mais recente.",
+     "Overschrijven indien nieuwer: overschrijft alleen als het bronbestand nieuwer is.",
+     "Skriv över om nyare: skriver bara över om källfilen är nyare.",
+     "Overskriv hvis nyere: overskriver bare hvis kildefilen er nyere.",
+     "Overskriv hvis nyere: overskriver kun hvis kildefilen er nyere.",
+     "Korvaa, jos uudempi: korvaa vain, jos lähde on uudempi.",
+     "Nadpisz, jeśli nowszy: nadpisuje tylko jeśli plik źródłowy jest nowszy.",
+     "Přepsat, pokud novější: přepíše pouze v případě, že zdrojový soubor je novější.",
+     "Felülír, ha újabb: csak akkor írja felül, ha a forrásfájl újabb.",
+     "Suprascriere dacă este mai nou: suprascrie numai dacă fișierul sursă este mai nou."),
+
+                    ["File Progress Bar: This progress bar shows the progress of the current file being processed in the operation."] =
+    ("Barre de progression du fichier : indique l’avancement du fichier en cours.",
+     "Datei-Fortschrittsbalken: Zeigt den Fortschritt der gerade bearbeiteten Datei.",
+     "Barra de progreso del archivo: muestra el avance del archivo que se está procesando.",
+     "Barra di avanzamento file: mostra l’avanzamento del file attualmente elaborato.",
+     "Barra de progresso do ficheiro: mostra o progresso do ficheiro a ser processado.",
+     "Barra de progresso do arquivo: mostra o progresso do arquivo sendo processado.",
+     "Voortgangsbalk Bestand: toont de voortgang van het bestand dat momenteel wordt verwerkt.",
+     "Förloppsindikator för fil: visar framstegen för filen som bearbetas i åtgärden.",
+     "Fremdriftslinje for fil: viser fremgangen til filen som behandles i operasjonen.",
+     "Fil-fremdringslinje: viser fremskridtet for den fil, der behandles i handlingen.",
+     "Tiedoston edistymispalkki: näyttää parhaillaan käsiteltävän tiedoston edistymisen toimenpiteessä.",
+     "Pasek postępu pliku: pokazuje postęp aktualnie przetwarzanego pliku w operacji.",
+     "Ukazatel průběhu souboru: zobrazuje průběh souboru, který je aktuálně zpracováván v operaci.",
+     "Fájl folyamatjelző sáv: megjeleníti a művelet során feldolgozás alatt álló fájl előrehaladását.",
+     "Bară de progres fișier: afișează progresul fișierului procesat în operațiunea curentă."),
+
+                    ["File Progress Label: This label shows the percentage of progress for the current file being processed in the operation."] =
+    ("Étiquette progression fichier : affiche le pourcentage d’avancement du fichier actuel.",
+     "Datei-Fortschritt-Label: Zeigt den Prozentwert des Fortschritts der aktuellen Datei.",
+     "Etiqueta de progreso del archivo: muestra el porcentaje de avance del archivo actual.",
+     "Etichetta Avanzamento file: mostra la percentuale di avanzamento del file attualmente elaborato.",
+     "Etiqueta Progresso do ficheiro: mostra a percentagem de progresso do ficheiro a ser processado.",
+     "Etiqueta Progresso do arquivo: mostra a porcentagem de progresso do arquivo sendo processado.",
+     "Label Bestandsvoortgang: toont het percentage voortgang van het bestand dat momenteel wordt verwerkt.",
+     "Etikett Filförlopp: visar procentandelen av framstegen för filen som bearbetas.",
+     "Etikett Filfremdrift: viser prosentandelen av fremgangen til filen som behandles.",
+     "Label Filfremgang: viser procentdelen af fremskridtet for den fil, der behandles.",
+     "Tiedoston edistymisen tarra: näyttää parhaillaan käsiteltävän tiedoston edistymisen prosenttiosuuden.",
+     "Etykieta Postęp pliku: pokazuje procent postępu aktualnie przetwarzanego pliku w operacji.",
+     "Štítek Průběh souboru: zobrazuje procentuální průběh souboru, který je aktuálně zpracováván.",
+     "Fájl folyamat címke: megjeleníti a művelet során feldolgozás alatt álló fájl előrehaladási százalékát.",
+     "Etichetă Progres fișier: afișează procentul de progres al fișierului procesat în operațiunea curentă."),
+
+                    ["Total Progress Bar: This progress bar shows the overall progress of the operation across all files being processed."] =
+    ("Barre de progression totale : indique l’avancement global de l’opération sur tous les fichiers.",
+     "Gesamt-Fortschrittsbalken: Zeigt den Gesamtfortschritt der Operation über alle Dateien.",
+     "Barra de progreso total: muestra el avance general de la operación en todos los archivos.",
+     "Barra di avanzamento totale: mostra l’avanzamento complessivo dell’operazione su tutti i file elaborati.",
+     "Barra de progresso total: mostra o progresso geral da operação em todos os ficheiros processados.",
+     "Barra de progresso total: mostra o progresso geral da operação em todos os arquivos processados.",
+     "Voortgangsbalk Totaal: toont de algehele voortgang van de bewerking voor alle bestanden die worden verwerkt.",
+     "Totala framstegsindikatorn: visar den övergripande framstegen för åtgärden över alla bearbetade filer.",
+     "Total fremdriftslinje: viser den totale fremgangen til operasjonen over alle filer som behandles.",
+     "Samlede fremdringslinje: viser den samlede fremgang for handlingen på tværs af alle filer, der behandles.",
+     "Kokonaisprogressipalkki: näyttää toimenpiteen kokonaisprogressin kaikissa käsiteltävissä tiedostoissa.",
+     "Pasek postępu całkowitego: pokazuje ogólny postęp operacji we wszystkich przetwarzanych plikach.",
+     "Ukazatel celkového průběhu: zobrazuje celkový průběh operace napříč všemi zpracovávanými soubory.",
+     "Teljes folyamatjelző sáv: megjeleníti a művelet teljes előrehaladását az összes feldolgozás alatt álló fájlban.",
+     "Bară de progres total: afișează progresul general al operațiunii pentru toate fișierele procesate."),
+
+
+
+
+
+
+                    ["Total Progress Label: This label shows the percentage of overall progress for the operation across all files being processed."] =
+    ("Étiquette progression totale : affiche le pourcentage de progression global.",
+     "Gesamt-Fortschritt-Label: Zeigt den Prozentwert des Gesamtfortschritts.",
+     "Etiqueta de progreso total: muestra el porcentaje de avance general.",
+     "Etichetta Avanzamento totale: mostra la percentuale di avanzamento complessivo dell’operazione.",
+     "Etiqueta Progresso total: mostra a percentagem de progresso geral da operação.",
+     "Etiqueta Progresso total: mostra a porcentagem de progresso geral da operação.",
+     "Label Totale voortgang: toont het percentage van de algehele voortgang van de bewerking.",
+     "Etikett Totala framsteg: visar procentandelen av den totala framstegen för åtgärden.",
+     "Etikett Total fremdrift: viser prosentandelen av den totale fremgangen for operasjonen.",
+     "Label Samlet fremgang: viser procentdelen af den samlede fremgang for handlingen.",
+     "Kokonaisprogressin tarra: näyttää toimenpiteen kokonaisprogressin prosenttiosuuden kaikissa käsiteltävissä tiedostoissa.",
+     "Etykieta Całkowity postęp: pokazuje procent ogólnego postępu operacji we wszystkich przetwarzanych plikach.",
+     "Štítek Celkový průběh: zobrazuje procento celkového průběhu operace napříč všemi zpracovávanými soubory.",
+     "Teljes folyamat címke: megjeleníti a művelet teljes előrehaladási százalékát az összes feldolgozás alatt álló fájlban.",
+     "Etichetă Progres total: afișează procentul de progres general al operațiunii pentru toate fișierele procesate."),
+
+                    ["Search Text Box: This text box allows you to search for specific files in the file list. Type a keyword to filter the displayed files."] =
+    ("Zone de recherche : permet de filtrer la liste des fichiers en tapant un mot-clé.",
+     "Such-Textbox: Ermöglicht das Filtern der Dateiliste durch Eingabe eines Stichworts.",
+     "Cuadro de búsqueda: permite filtrar la lista de archivos escribiendo una palabra clave.",
+     "Casella di testo Ricerca: consente di cercare file specifici nella lista digitando una parola chiave.",
+     "Caixa de texto Pesquisar: permite procurar ficheiros específicos na lista digitando uma palavra-chave.",
+     "Caixa de texto Pesquisar: permite procurar arquivos específicos na lista digitando uma palavra-chave.",
+     "Tekstvak Zoeken: laat u specifieke bestanden in de lijst zoeken door een trefwoord in te typen.",
+     "Sökruta: låter dig söka efter specifika filer i listan genom att skriva ett nyckelord.",
+     "Søketekstboks: lar deg søke etter spesifikke filer i listen ved å skrive et nøkkelord.",
+     "Søgetekstboks: lader dig søge efter specifikke filer i listen ved at skrive et nøgleord.",
+     "Hakutekstilaatikko: mahdollistaa tiettyjen tiedostojen etsimisen luettelosta kirjoittamalla avainsanan.",
+     "Pole tekstowe Szukaj: pozwala wyszukiwać konkretne pliki na liście poprzez wpisanie słowa kluczowego.",
+     "Textové pole Hledat: umožňuje vyhledat konkrétní soubory v seznamu zadáním klíčového slova.",
+     "Keresési szövegmező: lehetővé teszi adott fájlok keresését a listában kulcsszó begépelésével.",
+     "Casetă text Căutare: permite căutarea fișierelor specifice în listă prin introducerea unui cuvânt cheie."),
+
+                    ["Clear Text Button: This button clears the text in the search box, allowing you to reset the search filter and view all files in the list."] =
+    ("Bouton Effacer texte : vide la zone de recherche pour réafficher tous les fichiers.",
+     "Text-löschen-Schaltfläche: Leert das Suchfeld, damit wieder alle Dateien angezeigt werden.",
+     "Botón Borrar texto: vacía el cuadro de búsqueda para volver a mostrar todos los archivos.",
+     "Pulsante Cancella testo: cancella il testo nella casella di ricerca per reimpostare il filtro e visualizzare tutti i file.",
+     "Botão Limpar texto: limpa a caixa de texto de pesquisa, permitindo redefinir o filtro e ver todos os ficheiros.",
+     "Botão Limpar texto: limpa a caixa de texto de pesquisa, permitindo redefinir o filtro e ver todos os arquivos.",
+     "Knop Tekst wissen: wist de tekst in het zoekvak zodat het filter wordt gereset en alle bestanden worden getoond.",
+     "Rensa text-knapp: rensar textrutan och återställer filtret så att alla filer visas.",
+     "Tøm tekst-knapp: tømmer tekstboksen og tilbakestiller filteret slik at alle filer vises.",
+     "Ryd tekst-knap: rydder tekstboksen og nulstiller filteret, så alle filer vises.",
+     "Tyhjennä teksti -painike: tyhjentää hakulaatikon, jolloin suodatin nollautuu ja kaikki tiedostot näkyvät.",
+     "Przycisk Wyczyść tekst: czyści pole tekstowe wyszukiwania, pozwalając zresetować filtr i wyświetlić wszystkie pliki.",
+     "Tlačítko Vymazat text: vymaže text v poli vyhledávání, čímž resetuje filtr a zobrazí všechny soubory.",
+     "Szöveg törlése gomb: törli a keresőmező szövegét, így visszaállítja a szűrőt és az összes fájl megjelenik.",
+     "Buton Ștergere text: șterge textul din caseta de căutare, permițând resetarea filtrului și vizualizarea tuturor fișierelor."),
+
+                    ["Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence."] =
+    ("Bouton Monter : déplace le fichier sélectionné vers le haut dans la liste.",
+     "Nach-oben-Schaltfläche: Verschiebt die markierte Datei eine Position nach oben.",
+     "Botón Subir: mueve el archivo seleccionado hacia arriba en la lista.",
+     "Pulsante Su: sposta il file selezionato verso l’alto nella lista, modificando il suo ordine nella sequenza operativa.",
+     "Botão Mover para cima: move o ficheiro selecionado para cima na lista, alterando a sua ordem na sequência da operação.",
+     "Botão Mover para cima: move o arquivo selecionado para cima na lista, alterando sua ordem na sequência da operação.",
+     "Knop Omhoog: verplaatst het geselecteerde bestand omhoog in de lijst en wijzigt daarmee de volgorde.",
+     "Knapp Upp: flyttar den valda filen uppåt i listan och ändrar dess ordning i åtgärdsskedjan.",
+     "Knapp Opp: flytter den valgte filen opp i listen og endrer rekkefølgen i operasjonen.",
+     "Knap Op: flytter den valgte fil op i listen og ændrer dermed rækkefølgen i handlingen.",
+     "Ylös-painike: siirtää valitun tiedoston ylöspäin listassa ja muuttaa sen järjestystä toimenpidesarjassa.",
+     "Przycisk Do góry: przesuwa wybrany plik w górę listy, zmieniając jego kolejność w sekwencji operacji.",
+     "Tlačítko Nahoru: posune vybraný soubor v seznamu nahoru a změní tak jeho pořadí v operaci.",
+     "Fel gomb: felfelé mozgatja a kijelölt fájlt a listában, megváltoztatva annak sorrendjét a műveletben.",
+     "Buton Sus: mută fișierul selectat în sus în listă, schimbând ordinea sa în secvența operațiunii."),
+
+                    ["Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence."] =
+    ("Bouton Descendre : déplace le fichier sélectionné vers le bas dans la lista.",
+     "Nach-unten-Schaltfläche: Verschiebt die markierte Datei eine Position nach unten.",
+     "Botón Bajar: mueve el archivo seleccionado hacia abajo en la lista.",
+     "Pulsante Giù: sposta il file selezionato verso il basso nella lista, modificando il suo ordine nella sequenza operativa.",
+     "Botão Mover para baixo: move o ficheiro selecionado para baixo na lista, alterando a sua ordem na sequência da operação.",
+     "Botão Mover para baixo: move o arquivo selecionado para baixo na lista, alterando sua ordem na sequência da operação.",
+     "Knop Omlaag: verplaatst het geselecteerde bestand omlaag in de lijst en wijzigt daarmee de volgorde.",
+     "Knapp Ner: flyttar den valda filen nedåt i listan och ändrar dess ordning i åtgärdsskedjan.",
+     "Knapp Ned: flytter den valgte filen ned i listen og endrer rekkefølgen i operasjonen.",
+     "Knap Ned: flytter den valgte fil ned i listen og ændrer dermed rækkefølgen i handlingen.",
+     "Alas-painike: siirtää valitun tiedoston alaspäin listassa ja muuttaa sen järjestystä toimenpidesarjassa.",
+     "Przycisk W dół: przesuwa wybrany plik w dół listy, zmieniając jego kolejność w sekwencji operacji.",
+     "Tlačítko Dolů: posune vybraný soubor v seznamu dolů a změní tak jeho pořadí v operaci.",
+     "Le gomb: lefelé mozgatja a kijelölt fájlt a listában, megváltoztatva annak sorrendjét a műveletben.",
+     "Buton Jos: mută fișierul selectat în jos în listă, schimbând ordinea sa în secvența operațiunii."),
+
+                    ["Files Data Grid View: This grid displays the list of files to be processed in the current operation, including their names, paths, sizes, and statuses."] =
+    ("Grille des fichiers : affiche la liste des fichiers à traiter avec nom, chemin, taille et état.",
+     "Datei-DataGridView: Zeigt die zu bearbeitenden Dateien mit Name, Pfad, Größe und Status.",
+     "Cuadrícula de archivos: muestra la lista de archivos a procesar con nombre, ruta, tamaño y estado.",
+     "Griglia Dati file: mostra l’elenco dei file da elaborare con nome, percorso, dimensione e stato.",
+     "Grelha de Dados de ficheiros: mostra a lista de ficheiros a processar com nome, caminho, tamanho e estado.",
+     "Grade de Dados de arquivos: mostra a lista de arquivos a processar com nome, caminho, tamanho e estado.",
+     "Bestanden DataGridView: toont de lijst met te verwerken bestanden inclusief naam, pad, grootte en status.",
+     "Filer DataGridView: visar listan med filer som ska bearbetas med namn, sökväg, storlek och status.",
+     "Filer DataGridView: viser listen over filer som skal behandles med navn, bane, størrelse og status.",
+     "Filer DataGridView: viser listen over filer, der skal behandles med navn, sti, størrelse og status.",
+     "Tiedostot DataGridView: näyttää käsiteltävien tiedostojen luettelon nimineen, polkuineen, kokoineen ja tiloineen.",
+     "DataGridView plików: wyświetla listę plików do przetworzenia wraz z nazwą, ścieżką, rozmiarem i statusem.",
+     "DataGridView souborů: zobrazuje seznam souborů k zpracování včetně názvu, cesty, velikosti a stavu.",
+     "Fájlok DataGridView: megjeleníti a feldolgozandó fájlok listáját nevükkel, elérési útjukkal, méretükkel és állapotukkal.",
+     "DataGridView fișiere: afișează lista fișierelor de procesat împreună cu numele, calea, dimensiunea și starea."),
+
+
+
+
+
+
+
+                    ["Auto-Scroll CheckBox: This checkbox enables or disables automatic scrolling of the files data grid view while files are being processed."] =
+("Case Défilement automatique : active/désactive le défilement automatique de la grille pendant le traitement.",
+ "Auto-Scroll-CheckBox: Aktiviert/deaktiviert das automatische Scrollen der Dateiliste während der Verarbeitung.",
+ "Casilla Desplazamiento automático: activa/desactiva el desplazamiento automático de la lista mientras se procesan archivos.",
+ "Casella di controllo Scorri automaticamente: abilita/disabilita lo scorrimento automatico della griglia durante l’elaborazione.",
+ "Caixa de verificação Deslocamento automático: ativa/desativa a rolagem automática da grelha enquanto os ficheiros são processados.",
+ "Caixa de seleção Deslocamento automático: ativa/desativa o deslocamento automático da grade enquanto os arquivos são processados.",
+ "Aanvinkvakje Automatisch scrollen: schakelt automatisch scrollen van de bestandenraster in/uit tijdens verwerking.",
+ "Kryssruta Auto-scroll: aktiverar/inaktiverar automatisk rullning av filerutnätet medan filer bearbetas.",
+ "Avkrysningsboks Auto-scroll: aktiverer/deaktiverer automatisk rulling av filgriden mens filer behandles.",
+ "Markeringsfelt Auto-scroll: aktiverer/deaktiverer automatisk rulning af filgitteret mens filer behandles.",
+ "Valintaruutu Automaattinen vieritys: ottaa käyttöön tai poistaa käytöstä tiedostonäkymän automaattisen vierityksen tiedostoja käsiteltäessä.",
+ "Pole wyboru Autoprzewijanie: włącza/wyłącza automatyczne przewijanie siatki plików podczas przetwarzania.",
+ "Zaškrtávací pole Automatické posouvání: zapne/vypne automatické posouvání mřížky souborů během zpracování.",
+ "Jelölőnégyzet Automatikus görgetés: engedélyezi/letiltja a fájl rács automatikus görgetését a fájlok feldolgozása közben.",
+ "Casetă de selectare Derulare automată: activează/dezactivează derularea automată a grilei de fișiere în timp ce fișierele sunt procesate."),
+
+                    ["Verify After Transfer CheckBox: This checkbox determines whether to verify the integrity of files after they have been copied or moved."] =
+    ("Case Vérifier après transfert : vérifie l’intégrité des fichiers après copie/déplacement.",
+     "Nach-Übertragung-prüfen-CheckBox: Prüft die Integrität der Dateien nach dem Kopieren/Verschieben.",
+     "Casilla Verificar después de transferir: verifica la integridad de los archivos después de copiarlos o moverlos.",
+     "Casella di controllo Verifica dopo trasferimento: verifica l’integrità dei file dopo che sono stati copiati o spostati.",
+     "Caixa de verificação Verificar após transferência: verifica a integridade dos ficheiros depois de copiados ou movidos.",
+     "Caixa de seleção Verificar após transferência: verifica a integridade dos arquivos depois de copiados ou movidos.",
+     "Aanvinkvakje Verifiëren na overdracht: controleert de integriteit van bestanden nadat ze zijn gekopieerd of verplaatst.",
+     "Kryssruta Verifiera efter överföring: kontrollerar filernas integritet efter att de har kopierats eller flyttats.",
+     "Avkrysningsboks Verifiser etter overføring: verifiserer filenes integritet etter at de er kopiert eller flyttet.",
+     "Markeringsfelt Verificer efter overførsel: verificerer filernes integritet efter de er blevet kopieret eller flyttet.",
+     "Valintaruutu Varmista siirron jälkeen: tarkistaa tiedostojen eheyden niiden kopioinnin tai siirron jälkeen.",
+     "Pole wyboru Weryfikuj po transferze: weryfikuje integralność plików po ich skopiowaniu lub przeniesieniu.",
+     "Zaškrtávací pole Ověřit po přenosu: ověří integritu souborů poté, co byly zkopírovány nebo přesunuty.",
+     "Jelölőnégyzet Átvitel utáni ellenőrzés: ellenőrzi a fájlok integritását azután, hogy azokat másolták vagy áthelyezték.",
+     "Casetă de selectare Verificare după transfer: verifică integritatea fișierelor după ce au fost copiate sau mutate."),
+
+                    ["Pause/Resume Multi-Thread Button: This button pauses or resumes the multi-threaded operation."] =
+    ("Bouton Pause/Reprise multi-thread : met en pause ou reprend l’opération multi-thread.",
+     "Multi-Thread-Pause/Weiter-Schaltfläche: Pausiert oder setzt die Multithread-Operation fort.",
+     "Botón Pausar/Reanudar multi-hilo: pone en pausa o reanuda la operación multi-hilo.",
+     "Pulsante Pausa/Riprendi multi-thread: mette in pausa o riprende l’operazione multi-thread.",
+     "Botão Pausa/Continuar multi-thread: coloca em pausa ou retoma a operação multi-thread.",
+     "Botão Pausar/Retomar multi-thread: coloca em pausa ou retoma a operação multi-thread.",
+     "Knop Pauzeren/Hervatten multi-thread: pauzeert of hervat de multi-thread bewerking.",
+     "Knapp Pausa/Fortsätt multi-thread: pausar eller återupptar den multi-thread åtgärden.",
+     "Knapp Pause/Start multi-thread: pauserer eller gjenopptar multi-thread operasjonen.",
+     "Knap Pause/Fortsæt multi-thread: pauserer eller genoptager multi-thread handlingen.",
+     "Keskeytä/Jatka multi-thread -painike: keskeyttää tai jatkaa multi-thread toimenpidettä.",
+     "Przycisk Pauza/Wznów multi-thread: wstrzymuje lub wznawia operację multi-thread.",
+     "Tlačítko Pozastavit/Pokračovat multi-thread: pozastaví nebo obnoví multi-thread operaci.",
+     "Szünet/Folytat multi-thread gomb: szünetelteti vagy folytatja a multi-thread műveletet.",
+     "Buton Pauză/Reluare multi-thread: pune pe pauză sau reia operațiunea multi-thread."),
+
+                    ["Cancel Multi-Thread Button: This button cancels the multi-threaded operation."] =
+    ("Bouton Annuler multi-thread : annule l’opération multi-thread.",
+     "Multi-Thread-Abbrechen-Schaltfläche: Bricht die Multithread-Operation ab.",
+     "Botón Cancelar multi-hilo: cancela la operación multi-hilo.",
+     "Pulsante Annulla multi-thread: annulla l’operazione multi-thread.",
+     "Botão Cancelar multi-thread: cancela a operação multi-thread.",
+     "Botão Cancelar multi-thread: cancela a operação multi-thread.",
+     "Knop Annuleren multi-thread: annuleert de multi-thread bewerking.",
+     "Knapp Avbryt multi-thread: avbryter den multi-thread åtgärden.",
+     "Knapp Avbryt multi-thread: avbryter multi-thread operasjonen.",
+     "Knap Annuller multi-thread: annullerer multi-thread handlingen.",
+     "Peruuta multi-thread -painike: peruuttaa multi-thread toimenpiteen.",
+     "Przycisk Anuluj multi-thread: anuluje operację multi-thread.",
+     "Tlačítko Zrušit multi-thread: zruší multi-thread operaci.",
+     "Mégsem multi-thread gomb: megszakítja a multi-thread műveletet.",
+     "Buton Anulare multi-thread: anulează operațiunea multi-thread."),
+
+                    ["On Finish Multi-Thread ComboBox: This dropdown combobox is to select the action to perform when the multi-threaded operation finishes."] =
+    ("ComboBox À la fin multi-thread : choisit l’action à effectuer à la fin de l’opération multi-thread.",
+     "Beenden-Multi-Thread-ComboBox: Legt fest, was nach Abschluss der Multithread-Operation geschehen soll.",
+     "ComboBox Al finalizar multi-hilo: elige la acción a realizar cuando termine la operación multi-hilo.",
+     "ComboBox Al termine multi-thread: consente di selezionare l’azione da eseguire al termine dell’operazione multi-thread.",
+     "ComboBox Ao finalizar multi-thread: permite escolher a ação a realizar quando a operação multi-thread terminar.",
+     "ComboBox Ao finalizar multi-thread: permite escolher a ação a realizar quando a operação multi-thread terminar.",
+     "ComboBox Bij voltooien multi-thread: hiermee selecteert u de actie die moet worden uitgevoerd wanneer de multi-thread bewerking is voltooid.",
+     "ComboBox Vid slutförd multi-thread: låter dig välja åtgärden som ska utföras när multi-thread åtgärden är slutförd.",
+     "ComboBox Ved ferdig multi-thread: lar deg velge handlingen som skal utføres når multi-thread operasjonen er fullført.",
+     "ComboBox Ved færdig multi-thread: lader dig vælge handlingen, der skal udføres, når multi-thread handlingen er afsluttet.",
+     "ComboBox Valmistuessa multi-thread: mahdollistaa toiminnon valinnan, joka suoritetaan multi-thread toimenpiteen valmistuessa.",
+     "ComboBox Po zakończeniu multi-thread: pozwala wybrać działanie do wykonania po zakończeniu operacji multi-thread.",
+     "ComboBox Po dokončení multi-thread: umožňuje vybrat akci, která se provede po dokončení multi-thread operace.",
+     "ComboBox Multi-thread befejezéskor: lehetővé teszi a multi-thread művelet befejezésekor végrehajtandó művelet kiválasztását.",
+     "ComboBox La finalizare multi-thread: permite selectarea acțiunii de efectuat la finalizarea operațiunii multi-thread."),
+
+                    ["Files Name Label 1: This label shows the name of the file being processed by thread 1, along with the percentage and speed."] =
+    ("Étiquette Nom fichier 1 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 1.",
+     "Dateiname-Label 1: Zeigt Name, Prozent und Geschwindigkeit der von Thread 1 bearbeiteten Datei.",
+     "Etiqueta Nombre archivo 1: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 1.",
+     "Etichetta Nome file 1: mostra nome, percentuale e velocità del file elaborato dal thread 1.",
+     "Etiqueta Nome ficheiro 1: mostra o nome, a percentagem e a velocidade do ficheiro processado pela thread 1.",
+     "Etiqueta Nome arquivo 1: mostra o nome, a porcentagem e a velocidade do arquivo processado pela thread 1.",
+     "Label Bestandsnaam 1: toont naam, percentage en snelheid van het bestand dat door thread 1 wordt verwerkt.",
+     "Etikett Filnamn 1: visar namn, procent och hastighet för filen som bearbetas av tråd 1.",
+     "Etikett Filnavn 1: viser navn, prosent og hastighet til filen som behandles av tråd 1.",
+     "Label Filnavn 1: viser navn, procent og hastighed for den fil, der behandles af tråd 1.",
+     "Tiedoston nimi 1 -tarra: näyttää nimen, prosenttiosuuden ja nopeuden tiedostosta, jota säie 1 käsittelee.",
+     "Etykieta Nazwa pliku 1: pokazuje nazwę, procent i prędkość pliku przetwarzanego przez wątek 1.",
+     "Štítek Název souboru 1: zobrazuje název, procento a rychlost souboru zpracovávaného vláknem 1.",
+     "Fájlnév 1 címke: megjeleníti a 1. szál által feldolgozott fájl nevét, százalékát és sebességét.",
+     "Etichetă Nume fișier 1: afișează numele, procentul și viteza fișierului procesat de firul 1."),
+
+                    ["Total Percentage Multi Label 1: This label shows the percentage of progress for the file being processed by thread 1."] =
+    ("Étiquette Pourcentage total 1 : affiche le pourcentage de progression du fichier traité par le thread 1.",
+     "Gesamt-Prozent-Label 1: Zeigt den Prozentwert des Fortschritts der von Thread 1 bearbeiteten Datei.",
+     "Etiqueta Porcentaje total 1: muestra el porcentaje de progreso del archivo procesado por el hilo 1.",
+     "Etichetta Percentuale totale 1: mostra la percentuale di avanzamento del file elaborato dal thread 1.",
+     "Etiqueta Percentagem total 1: mostra a percentagem de progresso do ficheiro processado pela thread 1.",
+     "Etiqueta Porcentagem total 1: mostra a porcentagem de progresso do arquivo processado pela thread 1.",
+     "Label Totaalpercentage 1: toont het percentage voortgang van het bestand dat door thread 1 wordt verwerkt.",
+     "Etikett Total procent 1: visar procentandelen av framstegen för filen som bearbetas av tråd 1.",
+     "Etikett Total prosent 1: viser prosentandelen av fremgangen til filen som behandles av tråd 1.",
+     "Label Total procent 1: viser procentdelen af fremskridtet for den fil, der behandles af tråd 1.",
+     "Kokonaisprosentti 1 -tarra: näyttää säikeen 1 käsittelemän tiedoston edistymisen prosenttiosuuden.",
+     "Etykieta Całkowity procent 1: pokazuje procent postępu pliku przetwarzanego przez wątek 1.",
+     "Štítek Celkové procento 1: zobrazuje procento průběhu souboru zpracovávaného vláknem 1.",
+     "Teljes százalék 1 címke: megjeleníti az 1. szál által feldolgozott fájl előrehaladási százalékát.",
+     "Etichetă Procent total 1: afișează procentul de progres al fișierului procesat de firul 1."),
+
+                    ["Files Name Label 2: This label shows the name of the file being processed by thread 2, along with the percentage and speed."] =
+    ("Étiquette Nom fichier 2 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 2.",
+     "Dateiname-Label 2: Zeigt Name, Prozent und Geschwindigkeit der von Thread 2 bearbeiteten Datei.",
+     "Etiqueta Nombre archivo 2: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 2.",
+     "Etichetta Nome file 2: mostra nome, percentuale e velocità del file elaborato dal thread 2.",
+     "Etiqueta Nome ficheiro 2: mostra o nome, a percentagem e a velocidade do ficheiro processado pela thread 2.",
+     "Etiqueta Nome arquivo 2: mostra o nome, a porcentagem e a velocidade do arquivo processado pela thread 2.",
+     "Label Bestandsnaam 2: toont naam, percentage en snelheid van het bestand dat door thread 2 wordt verwerkt.",
+     "Etikett Filnamn 2: visar namn, procent och hastighet för filen som bearbetas av tråd 2.",
+     "Etikett Filnavn 2: viser navn, prosent og hastighet til filen som behandles av tråd 2.",
+     "Label Filnavn 2: viser navn, procent og hastighed for den fil, der behandles af tråd 2.",
+     "Tiedoston nimi 2 -tarra: näyttää nimen, prosenttiosuuden ja nopeuden tiedostosta, jota säie 2 käsittelee.",
+     "Etykieta Nazwa pliku 2: pokazuje nazwę, procent i prędkość pliku przetwarzanego przez wątek 2.",
+     "Štítek Název souboru 2: zobrazuje název, procento a rychlost souboru zpracovávaného vláknem 2.",
+     "Fájlnév 2 címke: megjeleníti a 2. szál által feldolgozott fájl nevét, százalékát és sebességét.",
+     "Etichetă Nume fișier 2: afișează numele, procentul și viteza fișierului procesat de firul 2."),
+
+                    ["Files Name Label 3: This label shows the name of the file being processed by thread 3, along with the percentage and speed."] =
+    ("Étiquette Nom fichier 3 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 3.",
+     "Dateiname-Label 3: Zeigt Name, Prozent und Geschwindigkeit der von Thread 3 bearbeiteten Datei.",
+     "Etiqueta Nombre archivo 3: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 3.",
+     "Etichetta Nome file 3: mostra nome, percentuale e velocità del file elaborato dal thread 3.",
+     "Etiqueta Nome ficheiro 3: mostra o nome, a percentagem e a velocidade do ficheiro processado pela thread 3.",
+     "Etiqueta Nome arquivo 3: mostra o nome, a porcentagem e a velocidade do arquivo processado pela thread 3.",
+     "Label Bestandsnaam 3: toont naam, percentage en snelheid van het bestand dat door thread 3 wordt verwerkt.",
+     "Etikett Filnamn 3: visar namn, procent och hastighet för filen som bearbetas av tråd 3.",
+     "Etikett Filnavn 3: viser navn, prosent og hastighet til filen som behandles av tråd 3.",
+     "Label Filnavn 3: viser navn, procent og hastighed for den fil, der behandles af tråd 3.",
+     "Tiedoston nimi 3 -tarra: näyttää nimen, prosenttiosuuden ja nopeuden tiedostosta, jota säie 3 käsittelee.",
+     "Etykieta Nazwa pliku 3: pokazuje nazwę, procent i prędkość pliku przetwarzanego przez wątek 3.",
+     "Štítek Název souboru 3: zobrazuje název, procento a rychlost souboru zpracovávaného vláknem 3.",
+     "Fájlnév 3 címke: megjeleníti a 3. szál által feldolgozott fájl nevét, százalékát és sebességét.",
+     "Etichetă Nume fișier 3: afișează numele, procentul și viteza fișierului procesat de firul 3."),
+
+                    ["Total Percentage Multi Label 2: This label shows the percentage of progress for the file being processed by thread 2."] =
+    ("Étiquette Pourcentage total 2 : affiche le pourcentage de progression du fichier traité par le thread 2.",
+     "Gesamt-Prozent-Label 2: Zeigt den Prozentwert des Fortschritts der von Thread 2 bearbeiteten Datei.",
+     "Etiqueta Porcentaje total 2: muestra el porcentaje de progreso del archivo procesado por el hilo 2.",
+     "Etichetta Percentuale totale 2: mostra la percentuale di avanzamento del file elaborato dal thread 2.",
+     "Etiqueta Percentagem total 2: mostra a percentagem de progresso do ficheiro processado pela thread 2.",
+     "Etiqueta Porcentagem total 2: mostra a porcentagem de progresso do arquivo processado pela thread 2.",
+     "Label Totaalpercentage 2: toont het percentage voortgang van het bestand dat door thread 2 wordt verwerkt.",
+     "Etikett Total procent 2: visar procentandelen av framstegen för filen som bearbetas av tråd 2.",
+     "Etikett Total prosent 2: viser prosentandelen av fremgangen til filen som behandles av tråd 2.",
+     "Label Total procent 2: viser procentdelen af fremskridtet for den fil, der behandles af tråd 2.",
+     "Kokonaisprosentti 2 -tarra: näyttää säikeen 2 käsittelemän tiedoston edistymisen prosenttiosuuden.",
+     "Etykieta Całkowity procent 2: pokazuje procent postępu pliku przetwarzanego przez wątek 2.",
+     "Štítek Celkové procento 2: zobrazuje procento průběhu souboru zpracovávaného vláknem 2.",
+     "Teljes százalék 2 címke: megjeleníti a 2. szál által feldolgozott fájl előrehaladási százalékát.",
+     "Etichetă Procent total 2: afișează procentul de progres al fișierului procesat de firul 2."),
+
+                    ["Total Percentage Multi Label 3: This label shows the percentage of progress for the file being processed by thread 3."] =
+    ("Étiquette Pourcentage total 3 : affiche le pourcentage de progression du fichier traité par le thread 3.",
+     "Gesamt-Prozent-Label 3: Zeigt den Prozentwert des Fortschritts der von Thread 3 bearbeiteten Datei.",
+     "Etiqueta Porcentaje total 3: muestra el porcentaje de progreso del archivo procesado por el hilo 3.",
+     "Etichetta Percentuale totale 3: mostra la percentuale di avanzamento del file elaborato dal thread 3.",
+     "Etiqueta Percentagem total 3: mostra a percentagem de progresso do ficheiro processado pela thread 3.",
+     "Etiqueta Porcentagem total 3: mostra a porcentagem de progresso do arquivo processado pela thread 3.",
+     "Label Totaalpercentage 3: toont het percentage voortgang van het bestand dat door thread 3 wordt verwerkt.",
+     "Etikett Total procent 3: visar procentandelen av framstegen för filen som bearbetas av tråd 3.",
+     "Etikett Total prosent 3: viser prosentandelen av fremgangen til filen som behandles av tråd 3.",
+     "Label Total procent 3: viser procentdelen af fremskridtet for den fil, der behandles af tråd 3.",
+     "Kokonaisprosentti 3 -tarra: näyttää säikeen 3 käsittelemän tiedoston edistymisen prosenttiosuuden.",
+     "Etykieta Całkowity procent 3: pokazuje procent postępu pliku przetwarzanego przez wątek 3.",
+     "Štítek Celkové procento 3: zobrazuje procento průběhu souboru zpracovávaného vláknem 3.",
+     "Teljes százalék 3 címke: megjeleníti a 3. szál által feldolgozott fájl előrehaladási százalékát.",
+     "Etichetă Procent total 3: afișează procentul de progres al fișierului procesat de firul 3."),
+
+                    ["Files Name Label 4: This label shows the name of the file being processed by thread 4, along with the percentage and speed."] =
+    ("Étiquette Nom fichier 4 : affiche le nom, le pourcentage et la vitesse du fichier traité par le thread 4.",
+     "Dateiname-Label 4: Zeigt Name, Prozent und Geschwindigkeit der von Thread 4 bearbeiteten Datei.",
+     "Etiqueta Nombre archivo 4: muestra el nombre, porcentaje y velocidad del archivo procesado por el hilo 4.",
+     "Etichetta Nome file 4: mostra nome, percentuale e velocità del file elaborato dal thread 4.",
+     "Etiqueta Nome ficheiro 4: mostra o nome, a percentagem e a velocidade do ficheiro processado pela thread 4.",
+     "Etiqueta Nome arquivo 4: mostra o nome, a porcentagem e a velocidade do arquivo processado pela thread 4.",
+     "Label Bestandsnaam 4: toont naam, percentage en snelheid van het bestand dat door thread 4 wordt verwerkt.",
+     "Etikett Filnamn 4: visar namn, procent och hastighet för filen som bearbetas av tråd 4.",
+     "Etikett Filnavn 4: viser navn, prosent og hastighet til filen som behandles av tråd 4.",
+     "Label Filnavn 4: viser navn, procent og hastighed for den fil, der behandles af tråd 4.",
+     "Tiedoston nimi 4 -tarra: näyttää nimen, prosenttiosuuden ja nopeuden tiedostosta, jota säie 4 käsittelee.",
+     "Etykieta Nazwa pliku 4: pokazuje nazwę, procent i prędkość pliku przetwarzanego przez wątek 4.",
+     "Štítek Název souboru 4: zobrazuje název, procento a rychlost souboru zpracovávaného vláknem 4.",
+     "Fájlnév 4 címke: megjeleníti a 4. szál által feldolgozott fájl nevét, százalékát és sebességét.",
+     "Etichetă Nume fișier 4: afișează numele, procentul și viteza fișierului procesat de firul 4."),
+
+                    ["Total Percentage Multi Label 4: This label shows the percentage of progress for the file being processed by thread 4."] =
+    ("Étiquette Pourcentage total 4 : affiche le pourcentage de progression du fichier traité par le thread 4.",
+     "Gesamt-Prozent-Label 4: Zeigt den Prozentwert des Fortschritts der von Thread 4 bearbeiteten Datei.",
+     "Etiqueta Porcentaje total 4: muestra el porcentaje de progreso del archivo procesado por el hilo 4.",
+     "Etichetta Percentuale totale 4: mostra la percentuale di avanzamento del file elaborato dal thread 4.",
+     "Etiqueta Percentagem total 4: mostra a percentagem de progresso do ficheiro processado pela thread 4.",
+     "Etiqueta Porcentagem total 4: mostra a porcentagem de progresso do arquivo processado pela thread 4.",
+     "Label Totaalpercentage 4: toont het percentage voortgang van het bestand dat door thread 4 wordt verwerkt.",
+     "Etikett Total procent 4: visar procentandelen av framstegen för filen som bearbetas av tråd 4.",
+     "Etikett Total prosent 4: viser prosentandelen av fremgangen til filen som behandles av tråd 4.",
+     "Label Total procent 4: viser procentdelen af fremskridtet for den fil, der behandles af tråd 4.",
+     "Kokonaisprosentti 4 -tarra: näyttää säikeen 4 käsittelemän tiedoston edistymisen prosenttiosuuden.",
+     "Etykieta Całkowity procent 4: pokazuje procent postępu pliku przetwarzanego przez wątek 4.",
+     "Štítek Celkové procento 4: zobrazuje procento průběhu souboru zpracovávaného vláknem 4.",
+     "Teljes százalék 4 címke: megjeleníti a 4. szál által feldolgozott fájl előrehaladási százalékát.",
+     "Etichetă Procent total 4: afișează procentul de progres al fișierului procesat de firul 4."),
+
+                    ["Progress Bar Multi-Thread Total: This progress bar shows the overall progress of the multi-threaded operation across all threads."] =
+    ("Barre de progression multi-thread totale : indique l’avancement global de l’opération multi-thread.",
+     "Multi-Thread-Gesamt-Fortschrittsbalken: Zeigt den Gesamtfortschritt der Multithread-Operation.",
+     "Barra de progreso total multi-hilo: muestra el avance global de la operación multi-hilo.",
+     "Barra di avanzamento totale multi-thread: mostra l’avanzamento complessivo dell’operazione multi-thread su tutti i thread.",
+     "Barra de progresso total multi-thread: mostra o progresso geral da operação multi-thread em todas as threads.",
+     "Barra de progresso total multi-thread: mostra o progresso geral da operação multi-thread em todas as threads.",
+     "Voortgangsbalk Multi-thread totaal: toont de algehele voortgang van de multi-thread bewerking over alle threads.",
+     "Förloppsindikator Multi-thread total: visar den totala framstegen för multi-thread åtgärden över alla trådar.",
+     "Fremdriftslinje Multi-thread total: viser den totale fremgangen til multi-thread operasjonen over alle tråder.",
+     "Fremdringslinje Multi-thread total: viser den samlede fremgang for multi-thread handlingen på tværs af alle tråde.",
+     "Multi-thread kokonaispalkki: näyttää multi-thread toimenpiteen kokonaisprogressin kaikissa säikeissä.",
+     "Pasek postępu całkowitego multi-thread: pokazuje ogólny postęp operacji multi-thread we wszystkich wątkach.",
+     "Ukazatel celkového průběhu multi-thread: zobrazuje celkový průběh multi-thread operace napříč všemi vlákny.",
+     "Multi-thread teljes folyamatjelző sáv: megjeleníti a multi-thread művelet teljes előrehaladását az összes szálon.",
+     "Bară de progres total multi-thread: afișează progresul general al operațiunii multi-thread pe toate firele."),
+
+                    ["Multi-Thread Total Progress Label: This label shows the percentage of overall progress for the multi-threaded operation across all threads."] =
+    ("Étiquette Progression totale multi-thread : affiche le pourcentage de progression global de l’opération multi-thread.",
+     "Multi-Thread-Gesamt-Fortschritt-Label: Zeigt den Prozentwert des Gesamtfortschritts der Multithread-Operation.",
+     "Etiqueta Progreso total multi-hilo: muestra el porcentaje de avance global de la operación multi-hilo.",
+     "Etichetta Avanzamento totale multi-thread: mostra la percentuale di avanzamento complessivo dell’operazione multi-thread.",
+     "Etiqueta Progresso total multi-thread: mostra a percentagem de progresso geral da operação multi-thread.",
+     "Etiqueta Progresso total multi-thread: mostra a porcentagem de progresso geral da operação multi-thread.",
+     "Label Multi-thread totale voortgang: toont het percentage van de algehele voortgang van de multi-thread bewerking.",
+     "Etikett Multi-thread totala framsteg: visar procentandelen av den totala framstegen för multi-thread åtgärden.",
+     "Etikett Multi-thread total fremdrift: viser prosentandelen av den totale fremgangen for multi-thread operasjonen.",
+     "Label Multi-thread samlede fremgang: viser procentdelen af den samlede fremgang for multi-thread handlingen.",
+     "Multi-thread kokonaisprogressin tarra: näyttää multi-thread toimenpiteen kokonaisprogressin prosenttiosuuden kaikissa säikeissä.",
+     "Etykieta Całkowity postęp multi-thread: pokazuje procent ogólnego postępu operacji multi-thread we wszystkich wątkach.",
+     "Štítek Celkový průběh multi-thread: zobrazuje procento celkového průběhu multi-thread operace napříč všemi vlákny.",
+     "Multi-thread teljes progressz címke: megjeleníti a multi-thread művelet teljes előrehaladási százalékát az összes szálon.",
+     "Etichetă Progres total multi-thread: afișează procentul de progres general al operațiunii multi-thread pe toate firele."),
+
+                    ["File Count Multi Label: This label shows the number of files processed out of the total number of files in the multi-threaded operation."] =
+    ("Étiquette Compteur fichiers multi-thread : affiche le nombre de fichiers traités sur le total.",
+     "Multi-Thread-Dateianzahl-Label: Zeigt die Anzahl der bearbeiteten Dateien von der Gesamtanzahl.",
+     "Etiqueta Contador archivos multi-hilo: muestra la cantidad de archivos procesados del total.",
+     "Etichetta Conteggio file multi-thread: mostra il numero di file elaborati rispetto al totale nell’operazione multi-thread.",
+     "Etiqueta Contador de ficheiros multi-thread: mostra o número de ficheiros processados do total.",
+     "Etiqueta Contador de arquivos multi-thread: mostra a quantidade de arquivos processados do total.",
+     "Label Multi-thread bestandstelling: toont het aantal verwerkte bestanden ten opzichte van het totaal in de multi-thread bewerking.",
+     "Etikett Multi-thread filräknare: visar antalet bearbetade filer av det totala antalet i multi-thread åtgärden.",
+     "Etikett Multi-thread filantall: viser antallet av prosesserte filer av totalt antall i multi-thread operasjonen.",
+     "Label Multi-thread filantal: viser antallet af behandlede filer ud af det samlede antal i multi-thread handlingen.",
+     "Multi-thread tiedostojen määrä -tarra: näyttää multi-thread toimenpiteessä käsiteltyjen tiedostojen määrän kokonaismäärästä.",
+     "Etykieta Liczba plików multi-thread: pokazuje liczbę przetworzonych plików z całkowitej liczby plików w operacji multi-thread.",
+     "Štítek Počet souborů multi-thread: zobrazuje počet zpracovaných souborů z celkového počtu souborů v multi-thread operaci.",
+     "Multi-thread fájlok száma címke: megjeleníti a multi-thread műveletben feldolgozott fájlok számát a teljes számból.",
+     "Etichetă Număr fișiere multi-thread: afișează numărul de fișiere procesate din numărul total de fișiere în operațiunea multi-thread."),
+
+                    ["Total Time Multi Label: This label shows the elapsed time out of the estimated target time for the multi-threaded operation."] =
+    ("Étiquette Temps total multi-thread : affiche le temps écoulé sur le temps estimé.",
+     "Multi-Thread-Gesamtzeit-Label: Zeigt die verstrichene Zeit gegenüber der geschätzten Gesamtzeit.",
+     "Etiqueta Tiempo total multi-hilo: muestra el tiempo transcurrido frente al tiempo estimado.",
+     "Etichetta Tempo totale multi-thread: mostra il tempo trascorso rispetto al tempo stimato per l’operazione multi-thread.",
+     "Etiqueta Tempo total multi-thread: mostra o tempo decorrido face ao tempo estimado para a operação multi-thread.",
+     "Etiqueta Tempo total multi-thread: mostra o tempo decorrido em relação ao tempo estimado para a operação multi-thread.",
+     "Label Totale tijd multi-thread: toont de verstreken tijd ten opzichte van de geschatte totale tijd voor de multi-thread bewerking.",
+     "Etikett Total tid multi-thread: visar den förflutna tiden gentemot den beräknade totala tiden för multi-thread åtgärden.",
+     "Etikett Total tid multi-thread: viser den forløpte tiden opp mot den estimerte totale tiden for multi-thread operasjonen.",
+     "Label Total tid multi-thread: viser den forløbne tid i forhold til den estimerede totale tid for multi-thread handlingen.",
+     "Multi-thread kokonaisaika -tarra: näyttää kuluneen ajan suhteessa arvioituun kokonaisaikaan multi-thread toimenpiteessä.",
+     "Etykieta Całkowity czas multi-thread: pokazuje upłynięty czas w stosunku do szacowanego całkowitego czasu operacji multi-thread.",
+     "Štítek Celkový čas multi-thread: zobrazuje uplynulý čas vůči odhadovanému celkovému času multi-thread operace.",
+     "Multi-thread teljes idő címke: megjeleníti az eltelt időt a becsült teljes időhöz képest a multi-thread műveletben.",
+     "Etichetă Timp total multi-thread: afișează timpul scurs față de timpul total estimat pentru operațiunea multi-thread."),
+
+                    ["Speed Multi Label: This label shows the current speed of the multi-threaded operation in bytes per second."] =
+    ("Étiquette Vitesse multi-thread : affiche la vitesse actuelle en octets par seconde.",
+     "Multi-Thread-Geschwindigkeit-Label: Zeigt die aktuelle Geschwindigkeit in Bytes pro Sekunde.",
+     "Etiqueta Velocidad multi-hilo: muestra la velocidad actual en bytes por segundo.",
+     "Etichetta Velocità multi-thread: mostra la velocità corrente dell’operazione multi-thread in byte al secondo.",
+     "Etiqueta Velocidade multi-thread: mostra a velocidade atual da operação multi-thread em bytes por segundo.",
+     "Etiqueta Velocidade multi-thread: mostra a velocidade atual da operação multi-thread em bytes por segundo.",
+     "Label Snelheid multi-thread: toont de huidige snelheid van de multi-thread bewerking in bytes per seconde.",
+     "Etikett Hastighet multi-thread: visar den aktuella hastigheten för multi-thread åtgärden i bytes per sekund.",
+     "Etikett Hastighet multi-thread: viser den aktuelle hastigheten for multi-thread operasjonen i bytes per sekund.",
+     "Label Hastighed multi-thread: viser den aktuelle hastighed for multi-thread handlingen i bytes pr. sekund.",
+     "Multi-thread nopeus -tarra: näyttää multi-thread toimenpiteen nykyisen nopeuden tavuina sekunnissa.",
+     "Etykieta Prędkość multi-thread: pokazuje bieżącą prędkość operacji multi-thread w bajtach na sekundę.",
+     "Štítek Rychlost multi-thread: zobrazuje aktuální rychlost multi-thread operace v bajtech za sekundu.",
+     "Multi-thread sebesség címke: megjeleníti a multi-thread művelet jelenlegi sebességét bájtban másodpercenként.",
+     "Etichetă Viteză multi-thread: afișează viteza curentă a operațiunii multi-thread în octeți pe secundă."),
+
+                    ["Total C/M/D Label: This label shows the total space processed out of the total space for all files."] =
+    ("Étiquette Total C/M/D : affiche l’espace traité sur l’espace total de tous les fichiers.",
+     "Gesamt-C/M/D-Label: Zeigt den verarbeiteten Speicherplatz im Verhältnis zum Gesamtplatz aller Dateien.",
+     "Etiqueta Total C/M/D: muestra el espacio procesado frente al espacio total de todos los archivos.",
+     "Etichetta Totale C/M/D: mostra lo spazio elaborato rispetto allo spazio totale di tutti i file.",
+     "Etiqueta Total C/M/D: mostra o espaço processado face ao espaço total de todos os ficheiros.",
+     "Etiqueta Total C/M/D: mostra o espaço processado em relação ao espaço total de todos os arquivos.",
+     "Label Totale C/M/D: toont de verwerkte ruimte ten opzichte van de totale ruimte voor alle bestanden.",
+     "Etikett Total C/M/D: visar det bearbetade utrymmet i förhållande till det totala utrymmet för alla filer.",
+     "Etikett Total C/M/D: viser det behandlede området i forhold til det totale området for alle filer.",
+     "Label Total C/M/D: viser det behandlede rum i forhold til det samlede rum for alle filer.",
+     "Kokonais-C/M/D -tarra: näyttää käsitellyn tilan suhteessa kaikkien tiedostojen kokonaistilaan.",
+     "Etykieta Całkowite C/M/D: pokazuje przetworzoną przestrzeń w stosunku do całkowitej przestrzeni wszystkich plików.",
+     "Štítek Celkové C/M/D: zobrazuje zpracované místo v poměru k celkovému místu všech souborů.",
+     "Teljes C/M/D címke: megjeleníti a feldolgozott területet az összes fájl teljes területéhez képest.",
+     "Etichetă Total C/M/D: afișează spațiul procesat față de spațiul total al tuturor fișierelor."),
+
+                    ["Total Space Left Label: This label shows the total hard-drive used out of the total hard-drive space left on the target drive for the multi-threaded operation."] =
+    ("Étiquette Espace restant total : affiche l’espace disque utilisé sur l’espace restant du disque cible pour l’opération multi-thread.",
+     "Gesamt-verbleibender-Speicher-Label: Zeigt den belegten Speicherplatz im Verhältnis zum freien Speicher des Ziellaufwerks für die Multithread-Operation.",
+     "Etiqueta Espacio restante total: muestra el espacio en disco usado frente al espacio libre de la unidad de destino para la operación multi-hilo.",
+     "Etichetta Spazio totale rimasto: mostra lo spazio su disco utilizzato rispetto a quello libero sul disco di destinazione per l’operazione multi-thread.",
+     "Etiqueta Espaço restante total: mostra o espaço em disco usado face ao espaço livre da unidade de destino para a operação multi-thread.",
+     "Etiqueta Espaço restante total: mostra o espaço em disco usado em relação ao espaço livre da unidade de destino para a operação multi-thread.",
+     "Label Totale HD-ruimte over: toont de gebruikte harde-schijfruimte ten opzichte van de vrije ruimte op het doelstation voor de multi-thread bewerking.",
+     "Etikett Total HD-utrymme kvar: visar den använda hårddiskytan i förhållande till den lediga ytan på målenheten för multi-thread åtgärden.",
+     "Etikett Total HD-plass igjen: viser det brukte harddiskområdet i forhold til ledig plass på målenheten for multi-thread operasjonen.",
+     "Label Total HD-plads tilbage: viser den brugte harddiskplads i forhold til den ledige plads på måldrevet for multi-thread handlingen.",
+     "Kokonaislevyllä jäljellä oleva tila -tarra: näyttää käytetyn kiintolevytilan suhteessa kohdeasemalla jäljellä olevaan tilaan multi-thread toimenpiteessä.",
+     "Etykieta Całkowite pozostałe miejsce na HD: pokazuje użyte miejsce na dysku twardym w stosunku do pozostałego miejsca na dysku docelowym dla operacji multi-thread.",
+     "Štítek Celkové zbývající místo na HD: zobrazuje využité místo na pevném disku v poměru k zbývajícímu místu na cílovém disku pro multi-thread operaci.",
+     "Multi-thread teljes merevlemez-hely maradt címke: megjeleníti a felhasznált teljes merevlemez-területet a célmeghajtón maradt teljes merevlemez-területhez képest a multi-thread műveletben.",
+     "Etichetă Spațiu total rămas pe HD: afișează spațiul de hard-disk utilizat față de spațiul total rămas pe unitatea țintă pentru operațiunea multi-thread."),
+
+                    ["Go To In Explorer Button: This button opens the selected file's location in Windows Explorer."] =
+    ("Bouton Ouvrir dans l’explorateur : ouvre l’emplacement du fichier sélectionné dans l’Explorateur Windows.",
+     "Im-Explorer-öffnen-Schaltfläche: Öffnet den Speicherort der markierten Datei im Windows-Explorer.",
+     "Botón Ir en Explorador: abre la ubicación del archivo seleccionado en el Explorador de Windows.",
+     "Pulsante Apri in Esplora risorse: apre la posizione del file selezionato in Windows Explorer.",
+     "Botão Ir para o Explorador: abre a localização do ficheiro selecionado no Windows Explorer.",
+     "Botão Ir para o Explorador: abre a localização do arquivo selecionado no Windows Explorer.",
+     "Knop Ga naar in Verkenner: opent de locatie van het geselecteerde bestand in Windows Verkenner.",
+     "Knapp Gå till i Utforskaren: öppnar den valda filens plats i Windows Utforskaren.",
+     "Knapp Gå til i Utforsker: åpner den valgte filens plassering i Windows Utforsker.",
+     "Knap Gå til i Stifinder: åbner den valgte fils placering i Windows Stifinder.",
+     "Siirry Resurssienhallinnassa -painike: avaa valitun tiedoston sijainnin Windows Resurssienhallinnassa.",
+     "Przycisk Przejdź w Eksploratorze: otwiera lokalizację wybranego pliku w Eksploratorze Windows.",
+     "Tlačítko Přejít v Průzkumníkovi: otevře umístění vybraného souboru v Průzkumníkovi Windows.",
+     "Ugrás a Fájlkezelőben gomb: megnyitja a kijelölt fájl helyét a Windows Fájlkezelőben.",
+     "Buton Du-te în Explorer: deschide locația fișierului selectat în Windows Explorer."),
+
+                    ["Total Skipped Label: This label shows the total number of files that were skipped during the operation."] =
+    ("Étiquette Total ignoré : affiche le nombre total de fichiers ignorés pendant l’opération.",
+     "Gesamt-übersprungen-Label: Zeigt die Gesamtanzahl der während der Operation übersprungenen Dateien.",
+     "Etiqueta Total omitido: muestra la cantidad total de archivos omitidos durante la operación.",
+     "Etichetta Totale saltati: mostra il numero totale di file saltati durante l’operazione.",
+     "Etiqueta Total ignorado: mostra o número total de ficheiros ignorados durante a operação.",
+     "Etiqueta Total omitido: mostra a quantidade total de arquivos omitidos durante a operação.",
+     "Label Totaal overgeslagen: toont het totale aantal bestanden dat tijdens de bewerking is overgeslagen.",
+     "Etikett Totalt hoppade över: visar det totala antalet filer som hoppades över under åtgärden.",
+     "Etikett Totalt hoppet over: viser det totale antallet filer som ble hoppet over under operasjonen.",
+     "Label Total sprunget over: viser det samlede antal filer, der blev sprunget over under handlingen.",
+     "Yhteensä ohitetut -tarra: näyttää toimenpiteen aikana ohitettujen tiedostojen kokonaismäärän.",
+     "Etykieta Całkowicie pominięte: pokazuje całkowitą liczbę plików, które zostały pominięte podczas operacji.",
+     "Štítek Celkově přeskočeno: zobrazuje celkový počet souborů, které byly během operace přeskočeny.",
+     "Összesen kihagyva címke: megjeleníti a művelet során kihagyott fájlok teljes számát.",
+     "Etichetă Total omise: afișează numărul total de fișiere care au fost omise în timpul operațiunii."),
+
+
+
+
+
+
+                    ["Clear Skipped List Button: This button clears the list of skipped files."] =
+    ("Bouton Effacer liste ignorés : vide la liste des fichiers ignorés.",
+     "Übersprungen-Liste-löschen-Schaltfläche: Leert die Liste der übersprungenen Dateien.",
+     "Botón Limpiar lista omitidos: vacía la lista de archivos omitidos.",
+     "Pulsante Cancella lista saltati: cancella l’elenco dei file saltati.",
+     "Botão Limpar lista ignorados: limpa a lista de ficheiros ignorados.",
+     "Botão Limpar lista omitidos: limpa a lista de arquivos omitidos.",
+     "Knop Overgeslagen lijst wissen: wist de lijst met overgeslagen bestanden.",
+     "Knapp Rensa lista överhoppade: rensar listan med hoppade filer.",
+     "Knapp Tøm liste over hoppet over: tømmer listen over filer som er hoppet over.",
+     "Knap Ryd liste over sprunget over: rydder listen over filer, der er sprunget over.",
+     "Ohitetut-listan tyhjennys-painike: tyhjentää ohitettujen tiedostojen luettelon.",
+     "Przycisk Wyczyść listę pominiętych: czyści listę pominiętych plików.",
+     "Tlačítko Vyčistit seznam přeskočených: vyčistí seznam přeskočených souborů.",
+     "Kihagyott lista törlése gomb: törli a kihagyott fájlok listáját.",
+     "Buton Golește lista omise: șterge lista fișierelor omise."),
+
+                    ["Skipped Data Grid View: This grid displays the list of files that were skipped during the operation, including their names, paths, sizes, and reasons for skipping."] =
+    ("Grille des fichiers ignorés : affiche la liste des fichiers ignorés avec nom, chemin, taille et motif.",
+     "Übersprungen-DataGridView: Zeigt die übersprungenen Dateien mit Name, Pfad, Größe und Grund.",
+     "Cuadrícula de omitidos: muestra la lista de archivos omitidos con nombre, ruta, tamaño y motivo.",
+     "Griglia Dati saltati: mostra l’elenco dei file saltati con nome, percorso, dimensione e motivo.",
+     "Grelha de Dados ignorados: mostra a lista de ficheiros ignorados com nome, caminho, tamanho e motivo.",
+     "Grade de Dados omitidos: mostra a lista de arquivos omitidos com nome, caminho, tamanho e motivo.",
+     "Overgeslagen DataGridView: toont de lijst met overgeslagen bestanden inclusief naam, pad, grootte en reden.",
+     "Hoppade DataGridView: visar listan med hoppade filer inklusive namn, sökväg, storlek och anledning.",
+     "Hoppet over DataGridView: viser listen over filer som er hoppet over med navn, bane, størrelse og årsak.",
+     "Sprunget over DataGridView: viser listen over filer, der er sprunget over med navn, sti, størrelse og årsag.",
+     "Ohitetut DataGridView: näyttää ohitettujen tiedostojen luettelon nimineen, polkuineen, kokoineen ja syineen.",
+     "DataGridView pominiętych: wyświetla listę pominiętych plików wraz z nazwą, ścieżką, rozmiarem i powodem pominięcia.",
+     "DataGridView přeskočených: zobrazuje seznam přeskočených souborů včetně názvu, cesty, velikosti a důvodu přeskočení.",
+     "Kihagyott DataGridView: megjeleníti a kihagyott fájlok listáját nevükkel, elérési útjukkal, méretükkel és kihagyásuk okával.",
+     "DataGridView fișiere omise: afișează lista fișierelor omise împreună cu numele, calea, dimensiunea și motivul omiterii."),
+
+                    ["Clone Button: This button clones the selected operation from the history list, allowing you to quickly repeat a previous operation."] =
+    ("Bouton Cloner : clone l’opération sélectionnée dans l’historique pour la répéter rapidement.",
+     "Klonen-Schaltfläche: Klont den markierten Eintrag aus der Historie, um ihn schnell zu wiederholen.",
+     "Botón Clonar: clona la operación seleccionada del historial para repetirla rápidamente.",
+     "Pulsante Clona: clona l’operazione selezionata dalla cronologia per ripeterla rapidamente.",
+     "Botão Clonar: clona a operação selecionada do histórico para a repetir rapidamente.",
+     "Botão Clonar: clona a operação selecionada do histórico para repetí-la rapidamente.",
+     "Knop Klonen: klont de geselecteerde bewerking uit de geschiedenis om deze snel te herhalen.",
+     "Knapp Klona: klonar den valda åtgärden från historiken för att snabbt upprepa den.",
+     "Knapp Klon: kloner den valgte handlingen fra historikken for å raskt gjenta den.",
+     "Knap Klon: kloner den valgte handling fra historikken for hurtigt at gentage den.",
+     "Kloonaa-painike: kloonaa valitun toimenpiteen historiasta, jotta voit nopeasti toistaa aiemman toimenpiteen.",
+     "Przycisk Klonuj: klonuje wybraną operację z historii, pozwalając szybko powtórzyć poprzednią operację.",
+     "Tlačítko Klonovat: naklonuje vybranou operaci z historie, což umožní rychle opakovat předchozí operaci.",
+     "Klónozás gomb: klónozza a kijelölt műveletet az előzményekből, lehetővé téve egy korábbi művelet gyors megismétlését.",
+     "Buton Clonare: clonează operațiunea selectată din istoric, permițând repetarea rapidă a unei operațiuni anterioare."),
+
+                    ["Delete Entry Button: This button deletes the selected entry from the operation history list."] =
+    ("Bouton Supprimer entrée : retire l’entrée sélectionnée de l’historique.",
+     "Eintrag-löschen-Schaltfläche: Entfernt den markierten Eintrag aus der Historie.",
+     "Botón Borrar entrada: quita la entrada seleccionada del historial.",
+     "Pulsante Elimina voce: elimina la voce selezionata dalla cronologia.",
+     "Botão Eliminar entrada: remove a entrada selecionada do histórico.",
+     "Botão Excluir entrada: remove a entrada selecionada do histórico.",
+     "Knop Verwijder item: verwijdert het geselecteerde item uit de geschiedenis.",
+     "Knapp Ta bort post: tar bort den valda posten från historiken.",
+     "Knapp Slett oppføring: fjerner den valgte oppføringen fra historikken.",
+     "Knap Slet post: fjerner den valgte post fra historikken.",
+     "Poista merkintä -painike: poistaa valitun merkinnän toimenpiteiden historiasta.",
+     "Przycisk Usuń wpis: usuwa wybrany wpis z historii operacji.",
+     "Tlačítko Smazat položku: odstraní vybranou položku z historie operací.",
+     "Bejegyzés törlése gomb: eltávolítja a kijelölt bejegyzést a műveletek előzményeiből.",
+     "Buton Ștergere intrare: elimină intrarea selectată din lista de istoric a operațiunilor."),
+
+                    ["Clear History Button: This button clears the entire operation history list."] =
+    ("Bouton Effacer historique : vide complètement la liste de l’historique.",
+     "Historie-löschen-Schaltfläche: Leert die gesamte Historien-Liste.",
+     "Botón Limpiar historial: vacía completamente la lista del historial.",
+     "Pulsante Cancella cronologia: cancella l’intero elenco della cronologia.",
+     "Botão Limpar histórico: limpa completamente a lista do histórico.",
+     "Botão Limpar histórico: limpa completamente a lista do histórico.",
+     "Knop Geschiedenis wissen: wist de volledige geschiedenislijst.",
+     "Knapp Rensa historik: rensar hela historiklistan.",
+     "Knapp Tøm historikk: tømmer hele historikklisten.",
+     "Knap Ryd historik: rydder hele historiklisten.",
+     "Tyhjennä historia -painike: tyhjentää koko historialuettelon.",
+     "Przycisk Wyczyść historię: czyści całą listę historii.",
+     "Tlačítko Vyčistit historii: vyčistí celý seznam historie.",
+     "Előzmények törlése gomb: törli az előzmények teljes listáját.",
+     "Buton Golește istoric: șterge întreaga listă de istoric."),
+
+                    ["Total History Label: This label shows the total number of operations recorded in the history list."] =
+    ("Étiquette Total historique : affiche le nombre total d’opérations enregistrées.",
+     "Gesamt-Historie-Label: Zeigt die Gesamtanzahl der gespeicherten Operationen.",
+     "Etiqueta Total historial: muestra el número total de operaciones guardadas.",
+     "Etichetta Totale cronologia: mostra il numero totale di operazioni registrate nella cronologia.",
+     "Etiqueta Total histórico: mostra o número total de operações registadas no histórico.",
+     "Etiqueta Total histórico: mostra o número total de operações registradas no histórico.",
+     "Label Totale geschiedenis: toont het totale aantal bewerkingen dat in de geschiedenis is opgeslagen.",
+     "Etikett Total historia: visar det totala antalet åtgärder som sparats i historiken.",
+     "Etikett Total historikk: viser det totale antallet operasjoner som er lagret i historikken.",
+     "Label Total historik: viser det samlede antal handlinger, der er gemt i historikken.",
+     "Historian kokonaismäärä -tarra: näyttää historiassa tallennettujen toimenpiteiden kokonaismäärän.",
+     "Etykieta Całkowita historia: pokazuje całkowitą liczbę operacji zapisanych w historii.",
+     "Štítek Celková historie: zobrazuje celkový počet operací uložených v historii.",
+     "Teljes előzmény címke: megjeleníti az előzményekben tárolt műveletek teljes számát.",
+     "Etichetă Total istoric: afișează numărul total de operațiuni înregistrate în istoric."),
+
+                    ["Add Allowed Button: This button adds a new allowed file or directory to the allowed list."] =
+    ("Bouton Ajouter autorisé : ajoute un nouveau fichier ou dossier autorisé.",
+     "Hinzufügen-erlaubt-Schaltfläche: Fügt eine neue erlaubte Datei oder einen Ordner hinzu.",
+     "Botón Añadir permitido: agrega un nuevo archivo o carpeta permitida.",
+     "Pulsante Aggiungi consentito: aggiunge un nuovo file o cartella consentita all’elenco.",
+     "Botão Adicionar permitido: adiciona um novo ficheiro ou pasta permitida à lista.",
+     "Botão Adicionar permitido: adiciona um novo arquivo ou pasta permitida à lista.",
+     "Knop Toegestaan toevoegen: voegt een nieuw toegestaan bestand of map toe aan de lijst.",
+     "Knapp Lägg till tillåten: lägger till en ny tillåten fil eller mapp i listan.",
+     "Knapp Legg til tillatt: legger til en ny tillatt fil eller mappe i listen.",
+     "Knap Tilføj tilladt: tilføjer en ny tilladt fil eller mappe til listen.",
+     "Lisää sallittu -painike: lisää uuden sallitun tiedoston tai kansion luetteloon.",
+     "Przycisk Dodaj dozwolone: dodaje nowy dozwolony plik lub folder do listy.",
+     "Tlačítko Přidat povolené: přidá nový povolený soubor nebo složku do seznamu.",
+     "Engedélyezett hozzáadása gomb: új engedélyezett fájlt vagy mappát ad hozzá az engedélyezettek listájához.",
+     "Buton Adăugare permis: adaugă un fișier sau director permis nou în listă."),
+
+                    ["Remove Allowed Button: This button removes the selected allowed file or directory from the allowed list."] =
+    ("Bouton Supprimer autorisé : retire l’élément autorisé sélectionné.",
+     "Entfernen-erlaubt-Schaltfläche: Entfernt das markierte erlaubte Element.",
+     "Botón Quitar permitido: quita el elemento permitido seleccionado.",
+     "Pulsante Rimuovi consentito: rimuove il file o la cartella consentita selezionata.",
+     "Botão Remover permitido: remove o item permitido selecionado.",
+     "Botão Remover permitido: remove o elemento permitido selecionado.",
+     "Knop Toegestaan verwijderen: verwijdert het geselecteerde toegestane bestand of map uit de lijst.",
+     "Knapp Ta bort tillåten: tar bort den valda tillåtna filen eller mappen från listan.",
+     "Knapp Fjern tillatt: fjerner den valgte tillatte filen eller mappen fra listen.",
+     "Knap Fjern tilladt: fjerner den valgte tilladte fil eller mappe fra listen.",
+     "Poista sallittu -painike: poistaa valitun sallitun tiedoston tai kansion luettelosta.",
+     "Przycisk Usuń dozwolone: usuwa wybrany dozwolony plik lub folder z listy.",
+     "Tlačítko Odebrat povolené: odebere vybraný povolený soubor nebo složku ze seznamu.",
+     "Engedélyezett eltávolítása gomb: eltávolítja a kijelölt engedélyezett fájlt vagy mappát az engedélyezettek listájáról.",
+     "Buton Eliminare permis: elimină fișierul sau directorul permis selectat din lista de permise."),
+
+                    ["Clear Allowed Button: This button clears the entire list of allowed files and directories."] =
+    ("Bouton Effacer autorisés : vide la liste complète des éléments autorisés.",
+     "Erlaubt-Liste-löschen-Schaltfläche: Leert die gesamte Liste der erlaubten Elemente.",
+     "Botón Limpiar permitidos: vacía la lista completa de elementos permitidos.",
+     "Pulsante Cancella consentiti: cancella l’intero elenco di file e cartelle consentite.",
+     "Botão Limpar permitidos: limpa a lista completa de ficheiros e pastas permitidas.",
+     "Botão Limpar permitidos: limpa a lista completa de arquivos e pastas permitidas.",
+     "Knop Toegestane lijst wissen: wist de volledige lijst met toegestane bestanden en mappen.",
+     "Knapp Rensa tillåtna: rensar hela listan med tillåtna filer och mappar.",
+     "Knapp Tøm tillatte: tømmer hele listen over tillatte filer og mapper.",
+     "Knap Ryd tilladte: rydder hele listen over tilladte filer og mapper.",
+     "Tyhjennä sallitut -painike: tyhjentää koko sallittujen tiedostojen ja kansioiden luettelon.",
+     "Przycisk Wyczyść dozwolone: czyści całą listę dozwolonych plików i folderów.",
+     "Tlačítko Vyčistit povolené: vyčistí celý seznam povolených souborů a složek.",
+     "Engedélyezettek törlése gomb: törli az engedélyezett fájlok és mappák teljes listáját.",
+     "Buton Golește permise: șterge întreaga listă de fișiere și directoare permise."),
+
+                    ["Add Excluded Button: This button adds a new excluded file or directory to the exclusions list."] =
+    ("Bouton Ajouter exclu : ajoute un nouveau fichier ou dossier exclu.",
+     "Hinzufügen-ausgeschlossen-Schaltfläche: Fügt eine neue ausgeschlossene Datei oder einen Ordner hinzu.",
+     "Botón Añadir excluido: agrega un nuevo archivo o carpeta excluida.",
+     "Pulsante Aggiungi escluso: aggiunge un nuovo file o cartella esclusa all’elenco.",
+     "Botão Adicionar excluído: adiciona um novo ficheiro ou pasta excluída à lista.",
+     "Botão Adicionar excluído: adiciona um novo arquivo ou pasta excluída à lista.",
+     "Knop Uitgesloten toevoegen: voegt een nieuw uitgesloten bestand of map toe aan de lijst.",
+     "Knapp Lägg till exkluderad: lägger till en ny exkluderad fil eller mapp i listan.",
+     "Knapp Legg til ekskludert: legger til en ny ekskludert fil eller mappe i listen.",
+     "Knap Tilføj ekskluderet: tilføjer en ny ekskluderet fil eller mappe til listen.",
+     "Lisää poissuljettu -painike: lisää uuden poissuljetun tiedoston tai kansion luetteloon.",
+     "Przycisk Dodaj wykluczone: dodaje nowy wykluczony plik lub folder do listy.",
+     "Tlačítko Přidat vyloučené: přidá nový vyloučený soubor nebo složku do seznamu.",
+     "Kizárt hozzáadása gomb: új kizárt fájlt vagy mappát ad hozzá a kizártak listájához.",
+     "Buton Adăugare exclus: adaugă un fișier sau director exclus nou în lista de excluderi."),
+
+                    ["Remove Excluded Button: This button removes the selected excluded file or directory from the exclusions list."] =
+    ("Bouton Supprimer exclu : retire l’élément exclu sélectionné.",
+     "Entfernen-ausgeschlossen-Schaltfläche: Entfernt das markierte ausgeschlossene Element.",
+     "Botón Quitar excluido: quita el elemento excluido seleccionado.",
+     "Pulsante Rimuovi escluso: rimuove il file o la cartella esclusa selezionata.",
+     "Botão Remover excluído: remove o item excluído selecionado.",
+     "Botão Remover excluído: remove o elemento excluído selecionado.",
+     "Knop Uitgesloten verwijderen: verwijdert het geselecteerde uitgesloten bestand of map uit de lijst.",
+     "Knapp Ta bort exkluderad: tar bort den valda exkluderade filen eller mappen från listan.",
+     "Knapp Fjern ekskludert: fjerner den valgte ekskluderte filen eller mappen fra listen.",
+     "Knap Fjern ekskluderet: fjerner den valgte ekskluderede fil eller mappe fra listen.",
+     "Poista poissuljettu -painike: poistaa valitun poissuljetun tiedoston tai kansion luettelosta.",
+     "Przycisk Usuń wykluczone: usuwa wybrany wykluczony plik lub folder z listy.",
+     "Tlačítko Odebrat vyloučené: odebere vybraný vyloučený soubor nebo složku ze seznamu.",
+     "Kizárt eltávolítása gomb: eltávolítja a kijelölt kizárt fájlt vagy mappát a kizártak listájáról.",
+     "Buton Eliminare exclus: elimină fișierul sau directorul exclus selectat din lista de excluderi."),
+
+                    ["Clear Excluded Button: This button clears the entire list of excluded files and directories."] =
+    ("Bouton Effacer exclus : vide la liste complète des éléments exclus.",
+     "Ausgeschlossen-Liste-löschen-Schaltfläche: Leert die gesamte Liste der ausgeschlossenen Elemente.",
+     "Botón Limpiar excluidos: vacía la lista completa de elementos excluidos.",
+     "Pulsante Cancella esclusi: cancella l’intero elenco di file e cartelle esclusi.",
+     "Botão Limpar excluídos: limpa a lista completa de ficheiros e pastas excluídas.",
+     "Botão Limpar excluídos: limpa a lista completa de arquivos e pastas excluídas.",
+     "Knop Uitgesloten lijst wissen: wist de volledige lijst met uitgesloten bestanden en mappen.",
+     "Knapp Rensa exkluderade: rensar hela listan med exkluderade filer och mappar.",
+     "Knapp Tøm ekskluderte: tømmer hele listen over ekskluderte filer og mapper.",
+     "Knap Ryd ekskluderede: rydder hele listen over ekskluderede filer og mapper.",
+     "Tyhjennä poissuljetut -painike: tyhjentää koko poissuljettujen tiedostojen ja kansioiden luettelon.",
+     "Przycisk Wyczyść wykluczone: czyści całą listę wykluczonych plików i folderów.",
+     "Tlačítko Vyčistit vyloučené: vyčistí celý seznam vyloučených souborů a složek.",
+     "Kizártak törlése gomb: törli a kizárt fájlok és mappák teljes listáját.",
+     "Buton Golește excluse: șterge întreaga listă de fișiere și directoare excluse."),
+
+                    ["Allowed Text Box: This text box allows you to enter file or directory paths to be added to the allowed list."] =
+    ("Zone de texte autorisés : permet de saisir les chemins à ajouter à la liste des autorisés.",
+     "Erlaubt-Textbox: Ermöglicht das Eingeben von Pfaden, die zur erlaubten Liste hinzugefügt werden.",
+     "Cuadro de texto permitidos: permite escribir rutas para agregar a la lista de permitidos.",
+     "Casella di testo Consentiti: consente di immettere i percorsi dei file o delle cartelle da aggiungere all’elenco consentiti.",
+     "Caixa de texto Autorizados: permite introduzir caminhos de ficheiros ou pastas a adicionar à lista de autorizados.",
+     "Caixa de texto Permitidos: permite introduzir caminhos de arquivos ou pastas a adicionar à lista de permitidos.",
+     "Tekstvak Toegestaan: laat u bestands- of mappaden invoeren die aan de toegestane lijst moeten worden toegevoegd.",
+     "Textruta Tillåtna: låter dig ange fil- eller mapsökvägar som ska läggas till i listan över tillåtna.",
+     "Tekstboks Tillatte: lar deg skrive inn fil- eller mappebaner som skal legges til i listen over tillatte.",
+     "Tekstboks Tilladte: lader dig indtaste fil- eller mappestier, der skal føjes til listen over tilladte.",
+     "Sallittu-tekstilaatikko: mahdollistaa tiedosto- tai kansiopolkien kirjoittamisen lisättäväksi sallittujen luetteloon.",
+     "Pole tekstowe Dozwolone: pozwala wprowadzić ścieżki plików lub folderów, które mają zostać dodane do listy dozwolonych.",
+     "Textové pole Povolené: umožňuje zadat cesty k souborům nebo složkám, které mají být přidány do seznamu povolených.",
+     "Engedélyezettek szövegmezője: lehetővé teszi fájl- vagy könyvtárutak megadását az engedélyezettek listájához való hozzáadáshoz.",
+     "Casetă text Permise: permite introducerea căilor fișierelor sau directoarelor care urmează să fie adăugate în lista de permise."),
+
+                    ["Excluded Text Box: This text box allows you to enter file or directory paths to be added to the exclusions list."] =
+    ("Zone de texte exclus : permet de saisir les chemins à ajouter à la liste des exclus.",
+     "Ausgeschlossen-Textbox: Ermöglicht das Eingeben von Pfaden, die zur Ausgeschlossen-Liste hinzugefügt werden.",
+     "Cuadro de texto excluidos: permite escribir rutas para agregar a la lista de excluidos.",
+     "Casella di testo Esclusi: consente di immettere i percorsi dei file o delle cartelle da aggiungere all’elenco esclusi.",
+     "Caixa de texto Excluídos: permite introduzir caminhos de ficheiros ou pastas a adicionar à lista de excluídos.",
+     "Caixa de texto Excluídos: permite introduzir caminhos de arquivos ou pastas a adicionar à lista de excluídos.",
+     "Tekstvak Uitgesloten: laat u bestands- of mappaden invoeren die aan de uitsluitingslijst moeten worden toegevoegd.",
+     "Textruta Exkluderade: låter dig ange fil- eller mapsökvägar som ska läggas till i listan över exkluderade.",
+     "Tekstboks Ekskluderte: lar deg skrive inn fil- eller mappebaner som skal legges til i listen over ekskluderte.",
+     "Tekstboks Ekskluderede: lader dig indtaste fil- eller mappestier, der skal føjes til listen over ekskluderede.",
+     "Poissuljetut-tekstilaatikko: mahdollistaa tiedosto- tai kansiopolkien kirjoittamisen lisättäväksi poissuljettujen luetteloon.",
+     "Pole tekstowe Wykluczone: pozwala wprowadzić ścieżki plików lub folderów, które mają zostać dodane do listy wykluczonych.",
+     "Textové pole Vyloučené: umožňuje zadat cesty k souborům nebo složkám, které mají být přidány do seznamu vyloučených.",
+     "Kizártak szövegmezője: lehetővé teszi fájl- vagy könyvtárutak megadását a kizártak listájához való hozzáadáshoz.",
+     "Casetă text Excluse: permite introducerea căilor fișierelor sau directoarelor care urmează să fie adăugate în lista de excluse."),
+
+                    ["Allowed List Box: This list box displays the list of allowed files and directories that will be included in the operation."] =
+    ("Liste des autorisés : affiche les fichiers et dossiers autorisés à être inclus dans l’opération.",
+     "Erlaubt-Liste: Zeigt die erlaubten Dateien und Ordner an, die in die Operation einbezogen werden.",
+     "Lista de permitidos: muestra los archivos y carpetas permitidos que se incluirán en la operación.",
+     "ListBox Consentiti: mostra l’elenco dei file e delle cartelle consentiti che saranno inclusi nell’operazione.",
+     "Caixa de lista Autorizados: mostra a lista de ficheiros e pastas autorizados a serem incluídos na operação.",
+     "Caixa de lista Permitidos: mostra a lista de arquivos e pastas permitidos que serão incluídos na operação.",
+     "Lijstbox Toegestaan: toont de lijst met toegestane bestanden en mappen die in de bewerking worden opgenomen.",
+     "Listruta Tillåtna: visar listan över tillåtna filer och mappar som kommer att inkluderas i åtgärden.",
+     "Listeboks Tillatte: viser listen over tillatte filer og mapper som skal inkluderes i operasjonen.",
+     "Listeboks Tilladte: viser listen over tilladte filer og mapper, der skal inkluderes i handlingen.",
+     "Sallitut-luetteloruutu: näyttää luettelon sallituista tiedostoista ja kansioista, jotka sisällytetään toimenpiteeseen.",
+     "Listbox Dozwolone: wyświetla listę dozwolonych plików i folderów, które zostaną uwzględnione w operacji.",
+     "Seznam povolených: zobrazuje seznam povolených souborů a složek, které budou zahrnuty do operace.",
+     "Engedélyezettek listája: megjeleníti az engedélyezett fájlok és mappák listáját, amelyek bekerülnek a műveletbe.",
+     "Listă Permise: afișează lista fișierelor și directoarelor permise care vor fi incluse în operațiune."),
+
+
+
+
+
+
+
+                    ["Excluded List Box: This list box displays the list of excluded files and directories that will be skipped during the operation."] =
+    ("Liste des exclus : affiche les fichiers et dossiers exclus qui seront ignorés pendant l’opération.",
+     "Ausgeschlossen-Liste: Zeigt die ausgeschlossenen Dateien und Ordner an, die übersprungen werden.",
+     "Lista de excluidos: muestra los archivos y carpetas excluidos que se omitirán durante la operación.",
+     "ListBox Esclusi: mostra l’elenco dei file e delle cartelle esclusi che saranno ignorati durante l’operazione.",
+     "Caixa de lista Excluídos: mostra a lista de ficheiros e pastas excluídos que serão ignorados durante a operação.",
+     "Caixa de lista Excluídos: mostra a lista de arquivos e pastas excluídos que serão ignorados durante a operação.",
+     "Lijstbox Uitgesloten: toont de lijst met uitgesloten bestanden en mappen die tijdens de bewerking worden overgeslagen.",
+     "Listruta Exkluderade: visar listan över exkluderade filer och mappar som kommer att hoppas över under åtgärden.",
+     "Listeboks Ekskluderte: viser listen over ekskluderte filer og mapper som skal hoppes over under operasjonen.",
+     "Listeboks Ekskluderede: viser listen over ekskluderede filer og mapper, der springes over under handlingen.",
+     "Poissuljetut-luetteloruutu: näyttää luettelon poissuljetuista tiedostoista ja kansioista, jotka ohitetaan toimenpiteen aikana.",
+     "Listbox Wykluczone: wyświetla listę wykluczonych plików i folderów, które zostaną pominięte podczas operacji.",
+     "Seznam vyloučených: zobrazuje seznam vyloučených souborů a složek, které budou během operace přeskočeny.",
+     "Kizártak listája: megjeleníti a kizárt fájlok és mappák listáját, amelyek a művelet során kihagyásra kerülnek.",
+     "Listă Excluse: afișează lista fișierelor și directoarelor excluse care vor fi omise în timpul operațiunii."),
+
+                    ["Exclusions Tab: This tab allows you to manage the lists of allowed and excluded files and directories for the operation."] =
+    ("Onglet Exclusions : permet de gérer les listes de fichiers et dossiers autorisés et exclus pour l’opération.",
+     "Ausschluss-Tab: Ermöglicht die Verwaltung der Listen mit erlaubten und ausgeschlossenen Dateien und Ordnern für die Operation.",
+     "Pestaña Exclusiones: permite administrar las listas de archivos y carpetas permitidos y excluidos para la operación.",
+     "Scheda Esclusioni: consente di gestire gli elenchi di file e cartelle consentiti ed esclusi per l’operazione.",
+     "Separador Exclusões: permite gerir as listas de ficheiros e pastas autorizados e excluídos para a operação.",
+     "Guia Exclusões: permite gerenciar as listas de arquivos e pastas permitidos e excluídos para a operação.",
+     "Tabblad Uitsluitingen: hiermee beheert u de lijsten met toegestane en uitgesloten bestanden en mappen voor de bewerking.",
+     "Flik Exkluderingar: låter dig hantera listorna över tillåtna och exkluderade filer och mappar för åtgärden.",
+     "Fane Ekskluderinger: lar deg administrere listene over tillatte og ekskluderte filer og mapper for operasjonen.",
+     "Fane Ekskluderinger: lader dig administrere listerne over tilladte og ekskluderede filer og mapper for handlingen.",
+     "Poissulkemiset-välilehti: mahdollistaa sallittujen ja poissuljettujen tiedostojen ja kansioiden luetteloiden hallinnan toimenpiteelle.",
+     "Zakładka Wykluczenia: pozwala zarządzać listami dozwolonych i wykluczonych plików oraz folderów dla operacji.",
+     "Záložka Vyloučení: umožňuje spravovat seznamy povolených a vyloučených souborů a složek pro operaci.",
+     "Kizárások lap: lehetővé teszi az engedélyezett és kizárt fájlok és mappák listáinak kezelését a művelethez.",
+     "Filă Excluderi: permite gestionarea listelor de fișiere și directoare permise și excluse pentru operațiune."),
+
+                    ["Skipped Tab: This tab displays the list of files that were skipped during the operation, along with options to manage the skipped files."] =
+("Onglet Ignorés : affiche la liste des fichiers ignorés pendant l’opération avec des options pour les gérer.",
+ "Übersprungen-Tab: Zeigt die Liste der übersprungenen Dateien der Operation mit Verwaltungsoptionen.",
+ "Pestaña Omitidos: muestra la lista de archivos omitidos durante la operación con opciones para administrarlos.",
+ "Scheda Saltati: mostra l’elenco dei file saltati durante l’operazione con opzioni per gestirli.",
+ "Separador Ignorados: mostra a lista de ficheiros ignorados durante a operação com opções para os gerir.",
+ "Guia Omitidos: mostra a lista de arquivos omitidos durante a operação com opções para administrá-los.",
+ "Tabblad Overgeslagen: toont de lijst met bestanden die tijdens de bewerking zijn overgeslagen, inclusief beheeropties.",
+ "Flik Överhoppade: visar listan över filer som hoppades över under åtgärden med alternativ för att hantera dem.",
+ "Fane Hoppet over: viser listen over filer som ble hoppet over under operasjonen med valg for å administrere dem.",
+ "Fane Sprunget over: viser listen over filer, der er sprunget over under handlingen med muligheder for at administrere dem.",
+ "Ohitetut-välilehti: näyttää toimenpiteen aikana ohitettujen tiedostojen luettelon hallintavaihtoehtoineen.",
+ "Zakładka Pominięte: wyświetla listę plików pominiętych podczas operacji wraz z opcjami ich zarządzania.",
+ "Záložka Přeskočené: zobrazuje seznam souborů přeskočených během operace spolu s možnostmi jejich správy.",
+ "Kihagyott lap: megjeleníti a művelet során kihagyott fájlok listáját a kezelésükre szolgáló lehetőségekkel.",
+ "Filă Omise: afișează lista fișierelor omise în timpul operațiunii împreună cu opțiunile de administrare a acestora."),
+
+                    ["Multi-Thread Tab: This tab allows you to configure and monitor multi-threaded operations for copying or moving files."] =
+("Onglet Multi-thread : permet de configurer et surveiller les opérations multi-thread pour copier ou déplacer des fichiers.",
+ "Multi-Thread-Tab: Ermöglicht die Konfiguration und Überwachung von Multithread-Operationen zum Kopieren oder Verschieben von Dateien.",
+ "Pestaña Multi-hilo: permite configurar y supervisar operaciones multi-hilo para copiar o mover archivos.",
+ "Scheda Multi-thread: consente di configurare e monitorare le operazioni multi-thread per copiare o spostare file.",
+ "Separador Multi-thread: permite configurar e monitorizar operações multi-thread para copiar ou mover ficheiros.",
+ "Guia Multi-hilo: permite configurar e monitorar operações multi-thread para copiar ou mover arquivos.",
+ "Tabblad Multi-thread: hiermee configureert en bewaakt u multi-thread bewerkingen voor het kopiëren of verplaatsen van bestanden.",
+ "Flik Multi-thread: låter dig konfigurera och övervaka multi-thread åtgärder för att kopiera eller flytta filer.",
+ "Fane Multi-thread: lar deg konfigurere og overvåke multi-thread operasjoner for å kopiere eller flytte filer.",
+ "Fane Multi-thread: lader dig konfigurere og overvåge multi-thread handlinger til kopiering eller flytning af filer.",
+ "Multi-thread-välilehti: mahdollistaa multi-thread toimenpiteiden määrittämisen ja seurannan tiedostojen kopiointia tai siirtämistä varten.",
+ "Zakładka Multi-thread: pozwala konfigurować i monitorować operacje multi-thread do kopiowania lub przenoszenia plików.",
+ "Záložka Multi-thread: umožňuje konfigurovat a sledovat multi-thread operace pro kopírování nebo přesun souborů.",
+ "Multi-thread lap: lehetővé teszi a multi-thread műveletek konfigurálását és figyelését fájlok másolásához vagy áthelyezéséhez.",
+ "Filă Multi-thread: permite configurarea și monitorizarea operațiunilor multi-thread pentru copierea sau mutarea fișierelor."),
+
+                    ["Window Group Box: This group box contains settings related to the application's window behavior, such as minimizing to the system tray."] =
+    ("Groupe Fenêtre : contient les réglages relatifs au comportement de la fenêtre, comme la minimisation dans la zone de notification.",
+     "Fenster-Gruppe: Enthält Einstellungen zum Fensterverhalten, z. B. Minimieren in das Benachrichtigungsfeld.",
+     "Grupo Ventana: contiene ajustes relacionados con el comportamiento de la ventana, como minimizar a la bandeja del sistema.",
+     "Gruppo Finestra: contiene le impostazioni relative al comportamento della finestra, come la riduzione a icona nell’area di notifica.",
+     "Grupo Janela: contém as definições relacionadas com o comportamento da janela, como minimizar para a área de notificação.",
+     "Grupo Janela: contém as configurações relacionadas ao comportamento da janela, como minimizar para a bandeja do sistema.",
+     "Groep Venster: bevat instellingen met betrekking tot het venstergedrag, zoals minimaliseren naar het systeemvak.",
+     "Grupp Fönster: innehåller inställningar relaterade till programfönstrets beteende, t.ex. minimering till systemfältet.",
+     "Gruppe Vindu: inneholder innstillinger relatert til programvinduets atferd, som for eksempel minimering til systemstatusfeltet.",
+     "Gruppe Vindue: indeholder indstillinger relateret til programvinduets adfærd, såsom minimering til systembakken.",
+     "Ikkuna-ryhmä: sisältää sovellusikkunan käyttäytymiseen liittyvät asetukset, kuten minimointi ilmoitusalueelle.",
+     "Grupa Okno: zawiera ustawienia dotyczące zachowania okna aplikacji, takie jak minimalizowanie do zasobnika systemowego.",
+     "Skupina Okno: obsahuje nastavení související s chováním okna aplikace, například minimalizaci do oznamovací oblasti.",
+     "Ablak csoport: tartalmazza az alkalmazásablak viselkedésével kapcsolatos beállításokat, például a tálcára minimalizálást.",
+     "Grup Fereastră: conține setări legate de comportamentul ferestrei aplicației, cum ar fi minimizarea în zona de notificare."),
+
+                    ["Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows."] =
+    ("Case Toujours au premier plan : détermine si la fenêtre reste toujours au-dessus des autres.",
+     "Immer-im-Vordergrund-CheckBox: Legt fest, ob das Fenster immer über anderen Fenstern bleibt.",
+     "Casilla Siempre encima: determina si la ventana permanece siempre por encima de las demás.",
+     "Casella di controllo Sempre in primo piano: determina se la finestra rimane sempre sopra le altre.",
+     "Caixa de verificação Sempre no topo: determina se a janela fica sempre por cima das outras.",
+     "Caixa de seleção Sempre no topo: determina se a janela permanece sempre acima das outras.",
+     "Aanvinkvakje Altijd bovenop: bepaalt of het venster altijd bovenop andere vensters blijft.",
+     "Kryssruta Alltid överst: avgör om fönstret alltid ska ligga överst bland andra fönster.",
+     "Avkrysningsboks Alltid øverst: bestemmer om vinduet alltid skal ligge øverst blant andre vinduer.",
+     "Markeringsfelt Altid øverst: afgør om vinduet altid skal forblive øverst blandt andre vinduer.",
+     "Valintaruutu Aina päällimmäisenä: määrittää, pysyykö ikkuna aina muiden ikkunoiden päällä.",
+     "Pole wyboru Zawsze na wierzchu: określa, czy okno aplikacji ma zawsze pozostawać nad innymi oknami.",
+     "Zaškrtávací pole Vždy nahoře: určuje, zda má okno aplikace vždy zůstat nad ostatními okny.",
+     "Mindig felül jelölőnégyzet: meghatározza, hogy az alkalmazásablak mindig a többi ablak felett maradjon-e.",
+     "Casetă de selectare Întotdeauna deasupra: determină dacă fereastra aplicației rămâne întotdeauna deasupra celorlalte ferestre."),
+
+                    ["Minimize to System Tray CheckBox: This checkbox determines whether the application should minimize to the system tray instead of the taskbar."] =
+    ("Case Réduire dans la barre d’état : détermine si l’application se réduit dans la zone de notification au lieu de la barre des tâches.",
+     "In-Benachrichtigungsfeld-minimieren-CheckBox: Legt fest, ob sich die Anwendung in das Benachrichtigungsfeld anstatt in die Taskleiste minimiert.",
+     "Casilla Minimizar a bandeja: determina si la aplicación se minimiza a la bandeja del sistema en lugar de a la barra de tareas.",
+     "Casella di controllo Riduci a icona nell’area di notifica: determina se l’applicazione viene minimizzata nell’area di notifica anziché nella barra delle applicazioni.",
+     "Caixa de verificação Minimizar para a área de notificação: determina se a aplicação é minimizada para a área de notificação em vez da barra de tarefas.",
+     "Caixa de seleção Minimizar para a bandeja do sistema: determina se o aplicativo é minimizado para a bandeja do sistema em vez da barra de tarefas.",
+     "Aanvinkvakje Minimaliseren naar systeemvak: bepaalt of het programma naar het systeemvak wordt geminimaliseerd in plaats van naar de taakbalk.",
+     "Kryssruta Minimera till systemfältet: avgör om programmet ska minimeras till systemfältet i stället för aktivitetsfältet.",
+     "Avkrysningsboks Minimer til systemstatusfelt: bestemmer om programmet skal minimeres til systemstatusfeltet i stedet for oppgavelinjen.",
+     "Markeringsfelt Minimer til systembakke: afgør om programmet skal minimeres til systembakken i stedet for proceslinjen.",
+     "Valintaruutu Pienennä ilmoitusalueelle: määrittää, pienennetäänkö sovellus ilmoitusalueelle tehtäväpalkin sijasta.",
+     "Pole wyboru Minimalizuj do zasobnika systemowego: określa, czy aplikacja ma być minimalizowana do zasobnika systemowego zamiast do paska zadań.",
+     "Zaškrtávací pole Minimalizovat do oznamovací oblasti: určuje, zda se má aplikace minimalizovat do oznamovací oblasti namísto na hlavní panel.",
+     "Minimalizálás a tálcára jelölőnégyzet: meghatározza, hogy az alkalmazás a tálcára legyen-e minimalizálva a feladatsáv helyett.",
+     "Casetă de selectare Minimizare în zona de notificare: determină dacă aplicația se minimizează în zona de notificare în loc de bara de activități."),
+
+                    ["Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application."] =
+    ("Case Confirmer glisser-déposer : affiche une boîte de confirmation lors du glisser-déposer de fichiers.",
+     "Drag-&-Drop-bestätigen-CheckBox: Zeigt einen Bestätigungsdialog beim Ablegen von Dateien an.",
+     "Casilla Confirmar arrastrar y soltar: muestra un diálogo de confirmación al soltar archivos.",
+     "Casella di controllo Conferma trascina e rilascia: mostra una finestra di conferma quando i file vengono trascinati e rilasciati nell’applicazione.",
+     "Caixa de verificação Confirmar arrastar e soltar: mostra uma caixa de diálogo de confirmação quando ficheiros são arrastados e largados na aplicação.",
+     "Caixa de seleção Confirmar arrastar e soltar: mostra uma caixa de diálogo de confirmação quando arquivos são arrastados e soltos no aplicativo.",
+     "Aanvinkvakje Drag & drop bevestigen: bepaalt of een bevestigingsdialoogvenster wordt weergegeven wanneer bestanden worden verslepen en neergezet in de toepassing.",
+     "Kryssruta Bekräfta dra och släpp: avgör om en bekräftelsedialog ska visas när filer dras och släpps i programmet.",
+     "Avkrysningsboks Bekreft dra og slipp: bestemmer om en bekreftelsesdialog skal vises når filer dras og slippes i programmet.",
+     "Markeringsfelt Bekræft træk og slip: afgør om en bekræftelsesdialog skal vises, når filer trækkes og slippes i programmet.",
+     "Valintaruutu Vahvista vedä ja pudota: määrittää, näytetäänkö vahvistusvalintaikkuna, kun tiedostoja vedetään ja pudotetaan sovellukseen.",
+     "Pole wyboru Potwierdź przeciągnij i upuść: określa, czy wyświetlać okno potwierdzenia po przeciągnięciu i upuszczeniu plików do aplikacji.",
+     "Zaškrtávací pole Potvrdit přetažení: určuje, zda se má zobrazit potvrzovací dialog při přetažení souborů do aplikace.",
+     "Húzza & ejtse visszaigazolás jelölőnégyzet: meghatározza, hogy megjelenjen-e visszaigazoló párbeszédablak, ha fájlokat húznak és ejtenek az alkalmazásba.",
+     "Casetă de selectare Confirmare drag & drop: determină dacă se afișează o casetă de dialog de confirmare când fișierele sunt trase și eliberate în aplicație."),
+
+                    ["Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application."] =
+    ("Case Menu contextuel : ajoute une option au menu contextuel de Windows pour un accès rapide.",
+     "Kontextmenü-CheckBox: Fügt dem Windows-Kontextmenü eine Option für schnellen Zugriff hinzu.",
+     "Casilla Menú contextual: añade una opción al menú contextual de Windows para acceso rápido.",
+     "Casella di controllo Menu contestuale: aggiunge un’opzione al menu contestuale di Windows per l’accesso rapido.",
+     "Caixa de verificação Menu contextual: adiciona uma opção ao menu de contexto do Windows para acesso rápido.",
+     "Caixa de seleção Menu contextual: adiciona uma opção ao menu de contexto do Windows para acesso rápido.",
+     "Aanvinkvakje Contextmenu: voegt een optie toe aan het Windows-contextmenu voor snelle toegang tot de toepassing.",
+     "Kryssruta Snabbmeny: lägger till ett alternativ i Windows snabbmeny för snabb åtkomst till programmet.",
+     "Avkrysningsboks Hurtigmeny: legger til et alternativ i Windows hurtigmeny for rask tilgang til programmet.",
+     "Markeringsfelt Hurtigmenu: tilføjer en mulighed til Windows-hurtigmenuen for hurtig adgang til programmet.",
+     "Valintaruutu Pikavalikko: lisää vaihtoehdon Windowsin pikavalikkoon, jotta sovellukseen pääsee nopeasti.",
+     "Pole wyboru Menu kontekstowe: dodaje opcję do menu kontekstowego systemu Windows dla szybkiego dostępu do aplikacji.",
+     "Zaškrtávací pole Kontextové menu: přidává možnost do kontextového menu Windows pro rychlý přístup k aplikaci.",
+     "Helyi menü jelölőnégyzet: hozzáad egy lehetőséget a Windows helyi menüjéhez az alkalmazás gyors eléréséhez.",
+     "Casetă de selectare Meniu contextual: adaugă o opțiune la meniul contextual Windows pentru acces rapid la aplicație."),
+
+                    ["Skins & Language Group Box: This group box contains settings related to the application's appearance and language preferences."] =
+    ("Groupe Apparence & Langue : contient les réglages d’apparence et de langue de l’application.",
+     "Design-&-Sprache-Gruppe: Enthält Einstellungen zum Erscheinungsbild und zur Sprache der Anwendung.",
+     "Grupo Aspecto e idioma: contiene ajustes de apariencia e idioma de la aplicación.",
+     "Gruppo Aspetto e lingua: contiene le impostazioni relative all’aspetto e alla lingua dell’applicazione.",
+     "Grupo Aspeto e idioma: contém as definições relacionadas com o aspeto e o idioma da aplicação.",
+     "Grupo Aparência e idioma: contém as configurações relacionadas à aparência e ao idioma do aplicativo.",
+     "Groep Vormgeving & taal: bevat instellingen voor het uiterlijk en de taal van de toepassing.",
+     "Grupp Utseende & språk: innehåller inställningar för programmets utseende och språk.",
+     "Gruppe Utseende & språk: inneholder innstillinger for programmets utseende og språk.",
+     "Gruppe Udseende & sprog: indeholder indstillinger for programmets udseende og sprog.",
+     "Ulkoasu ja kieli -ryhmä: sisältää sovelluksen ulkonäköön ja kieliasetuksiin liittyvät asetukset.",
+     "Grupa Wygląd i język: zawiera ustawienia dotyczące wyglądu i języka aplikacji.",
+     "Skupina Vzhled a jazyk: obsahuje nastavení související s vzhledem a jazykem aplikace.",
+     "Megjelenés és nyelv csoport: tartalmazza az alkalmazás megjelenésével és nyelvi beállításaival kapcsolatos beállításokat.",
+     "Grup Aspect și limbă: conține setări legate de aspectul și limba aplicației."),
+
+                    ["Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface."] =
+    ("ComboBox Langue : permet de choisir la langue de l’interface utilisateur.",
+     "Sprache-ComboBox: Ermöglicht die Auswahl der Sprache der Benutzeroberfläche.",
+     "ComboBox Idioma: permite elegir el idioma de la interfaz de usuario.",
+     "ComboBox Lingua: consente di selezionare la lingua dell’interfaccia utente.",
+     "ComboBox Idioma: permite escolher o idioma da interface do utilizador.",
+     "ComboBox Idioma: permite escolher o idioma da interface do usuário.",
+     "ComboBox Taal: hiermee selecteert u de taal voor de gebruikersinterface van de toepassing.",
+     "ComboBox Språk: låter dig välja språk för programmets användargränssnitt.",
+     "ComboBox Språk: lar deg velge språk for brukergrensesnittet til programmet.",
+     "ComboBox Sprog: lader dig vælge sproget for programmets brugergrænseflade.",
+     "ComboBox Kieli: mahdollistaa sovelluksen käyttöliittymän kielen valinnan.",
+     "ComboBox Język: pozwala wybrać język interfejsu użytkownika aplikacji.",
+     "ComboBox Jazyk: umožňuje vybrat jazyk uživatelského rozhraní aplikace.",
+     "Nyelv ComboBox: lehetővé teszi az alkalmazás felhasználói felületének nyelvének kiválasztását.",
+     "ComboBox Limbă: permite selectarea limbii pentru interfața utilizatorului aplicației."),
+
+
+
+
+                    ["Set MB/GB Over Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to larger files."] =
+    ("Zone numérique Définir MB/GB au-dessus : définit le seuil en mégaoctets pour appliquer le multi-thread aux gros fichiers.",
+     "MB/GB-über-Numeric-Up-Down: Legt die Größenschwelle in Megabytes fest, ab der Multithreading für größere Dateien angewendet wird.",
+     "Control numérico Establecer MB/GB sobre: define el umbral en megabytes para aplicar multi-hilo a archivos grandes.",
+     "Controllo numerico Imposta MB/GB oltre: definisce la soglia in megabyte per applicare il multi-threading ai file più grandi.",
+     "Controlo numérico Definir MB/GB acima: define o limiar em megabytes para aplicar multi-threading a ficheiros maiores.",
+     "Controle numérico Definir MB/GB acima: define o limite em megabytes para aplicar multi-threading a arquivos maiores.",
+     "Numerieke instelling MB/GB boven: stelt de drempelwaarde in megabytes in voor het toepassen van multi-threading op grotere bestanden.",
+     "Numerisk kontroll Ställ in MB/GB över: definierar tröskelvärdet i megabyte för att tillämpa multi-threading på större filer.",
+     "Numerisk kontroll Sett MB/GB over: definerer terskelverdi i megabyte for å bruke multi-threading på større filer.",
+     "Numerisk kontrol Indstil MB/GB over: definerer tærskelværdi i megabyte for at anvende multi-threading på større filer.",
+     "Numeerinen säätö Aseta MB/GB yli: määrittää kynnysarvon megatavuina monisäikeistyksen soveltamiseen suurempiin tiedostoihin.",
+     "Kontrolka numeryczna Ustaw MB/GB powyżej: określa próg w megabajtach do stosowania wielowątkowości dla większych plików.",
+     "Číselné pole Nastavit MB/GB nad: definuje prahovou hodnotu v megabajtech pro použití vícevláknového zpracování u větších souborů.",
+     "Numerikus vezérlő MB/GB feletti beállítás: meghatározza a küszöbértéket megabájtban a többszálúság alkalmazásához nagyobb fájlokhoz.",
+     "Control numeric Setare MB/GB peste: definește pragul în megaocteți pentru aplicarea multi-threading la fișiere mai mari."),
+
+                    ["File/Directory Settings Group Box: This group box contains settings related to how files and directories are exported or zipped (before) for the copy or move operations."] =
+    ("Groupe Paramètres Fichiers/Dossiers : contient les réglages sur l'export ou la compression avant copie/déplacement.",
+     "Datei/Ordner-Einstellungen-Gruppe: Enthält Einstellungen zum Exportieren oder Komprimieren (vorher) von Dateien und Ordnern für Kopier-/Verschiebe-Operationen.",
+     "Grupo Ajustes Archivos/Carpetas: contiene ajustes sobre exportar o comprimir (antes) archivos y carpetas para operaciones de copiar/mover.",
+     "Gruppo Impostazioni File/Cartelle: contiene impostazioni relative all'esportazione o compressione (prima) di file e cartelle per operazioni di copia/spostamento.",
+     "Grupo Definições Ficheiros/Pastas: contém definições relacionadas com a exportação ou compressão (antes) de ficheiros e pastas para operações de cópia/movimentação.",
+     "Grupo Configurações Arquivos/Pastas: contém configurações relacionadas à exportação ou compactação (antes) de arquivos e pastas para operações de cópia/movimentação.",
+     "Groepsvak Bestands-/Mapinstellingen: bevat instellingen met betrekking tot het exporteren of comprimeren (vooraf) van bestanden en mappen voor kopieer-/verplaatsoperaties.",
+     "Gruppfält Fil-/Mappinställningar: innehåller inställningar relaterade till exportering eller komprimering (före) av filer och mappar för kopierings-/flyttoperationer.",
+     "Gruppeboks Fil-/Mappinnstillinger: inneholder innstillinger knyttet til eksportering eller komprimering (før) av filer og mapper for kopierings-/flyttoperasjoner.",
+     "Gruppefelt Fil-/Mappeindstillinger: indeholder indstillinger relateret til eksport eller komprimering (før) af filer og mapper til kopierings-/flytoperationer.",
+     "Ryhmäruutu Tiedosto-/Kansioasetukset: sisältää asetuksia, jotka liittyvät tiedostojen ja kansioiden viemiseen tai pakkaamiseen (ennen) kopioi-/siirrä-toimintoja varten.",
+     "Pole grupy Ustawienia Plików/Katalogów: zawiera ustawienia związane z eksportowaniem lub kompresją (przed) plików i katalogów do operacji kopiowania/przenoszenia.",
+     "Skupina Nastavení Souborů/Složek: obsahuje nastavení týkající se exportu nebo komprese (před) souborů a složek pro operace kopírování/přesunu.",
+     "Csoportmező Fájl-/Mappabeállítások: tartalmazza a fájlok és mappák exportálásához vagy tömörítéséhez (előtte) kapcsolódó beállításokat másolási/áthelyezési műveletekhez.",
+     "Casetă de grup Setări Fișiere/Directoare: conține setări legate de exportul sau comprimarea (înainte) fișierelor și directoarelor pentru operații de copiere/mutare."),
+
+                    ["Only Names CheckBox: This checkbox determines whether to export only the names of files and directories without their full paths."] =
+    ("Case Noms seulement : exporte uniquement les noms sans les chemins complets.",
+     "Nur Namen-CheckBox: Exportiert nur die Namen ohne vollständige Pfade.",
+     "Casilla Solo nombres: exporta solo los nombres sin rutas completas.",
+     "Casella Solo nomi: esporta solo i nomi senza i percorsi completi.",
+     "Caixa Apenas nomes: exporta apenas os nomes sem os caminhos completos.",
+     "Caixa Apenas nomes: exporta apenas os nomes sem os caminhos completos.",
+     "Selectievakje Alleen namen: exporteert alleen de namen zonder volledige paden.",
+     "Kryssruta Endast namn: exporterar endast namnen utan fullständiga sökvägar.",
+     "Avmerkingsboks Kun navn: eksporterer kun navnene uten fullstendige stier.",
+     "Afkrydsningsfelt Kun navne: eksporterer kun navnene uden fulde stier.",
+     "Valintaruutu Vain nimet: vie vain nimet ilman täydellisiä polkuja.",
+     "Pole wyboru Tylko nazwy: eksportuje tylko nazwy bez pełnych ścieżek.",
+     "Zaškrtávací políčko Pouze názvy: exportuje pouze názvy bez úplných cest.",
+     "Jelölőnégyzet Csak nevek: csak a neveket exportálja teljes elérési utak nélkül.",
+     "Casetă Doar nume: exportă doar numele fără căile complete."),
+
+                    ["Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories."] =
+    ("Case Chemins complets : exporte les chemins complets.",
+     "Vollständige Pfade-CheckBox: Exportiert die vollständigen Pfade.",
+     "Casilla Rutas completas: exporta las rutas completas.",
+     "Casella Percorsi completi: esporta i percorsi completi.",
+     "Caixa Caminhos completos: exporta os caminhos completos.",
+     "Caixa Caminhos completos: exporta os caminhos completos.",
+     "Selectievakje Volledige paden: exporteert de volledige paden.",
+     "Kryssruta Fullständiga sökvägar: exporterar de fullständiga sökvägarna.",
+     "Avmerkingsboks Fullstendige stier: eksporterer de fullstendige stiene.",
+     "Afkrydsningsfelt Fulde stier: eksporterer de fulde stier.",
+     "Valintaruutu Täydelliset polut: vie täydelliset polut.",
+     "Pole wyboru Pełne ścieżki: eksportuje pełne ścieżki.",
+     "Zaškrtávací políčko Úplné cesty: exportuje úplné cesty.",
+     "Jelölőnégyzet Teljes elérési utak: exportálja a teljes elérési utakat.",
+     "Casetă Căi complete: exportă căile complete."),
+
+                    ["Export Button: This button exports the list of files and directories to a text file based on the selected settings (only names or full paths)."] =
+    ("Bouton Exporter : exporte la liste vers un fichier texte selon les réglages choisis (noms ou chemins complets).",
+     "Exportieren-Schaltfläche: Exportiert die Liste in eine Textdatei gemäß den gewählten Einstellungen (Namen oder vollständige Pfade).",
+     "Botón Exportar: exporta la lista a un archivo de texto según los ajustes elegidos (nombres o rutas completas).",
+     "Pulsante Esporta: esporta l'elenco in un file di testo in base alle impostazioni selezionate (solo nomi o percorsi completi).",
+     "Botão Exportar: exporta a lista para um ficheiro de texto com base nas definições selecionadas (apenas nomes ou caminhos completos).",
+     "Botão Exportar: exporta a lista para um arquivo de texto com base nas configurações selecionadas (apenas nomes ou caminhos completos).",
+     "Knop Exporteren: exporteert de lijst naar een tekstbestand op basis van de geselecteerde instellingen (alleen namen of volledige paden).",
+     "Knapp Exportera: exporterar listan till en textfil baserat på de valda inställningarna (endast namn eller fullständiga sökvägar).",
+     "Knapp Eksporter: eksporterer listen til en tekstfil basert på de valgte innstillingene (kun navn eller fullstendige stier).",
+     "Knap Eksporter: eksporterer listen til en tekstfil baseret på de valgte indstillinger (kun navne eller fulde stier).",
+     "Painike Vie: vie listan tekstitiedostoon valittujen asetusten perusteella (vain nimet tai täydelliset polut).",
+     "Przycisk Eksportuj: eksportuje listę do pliku tekstowego na podstawie wybranych ustawień (tylko nazwy lub pełne ścieżki).",
+     "Tlačítko Export: exportuje seznam do textového souboru na základě vybraných nastavení (pouze názvy nebo úplné cesty).",
+     "Gomb Exportálás: exportálja a listát egy szöveges fájlba a kiválasztott beállítások alapján (csak nevek vagy teljes elérési utak).",
+     "Buton Export: exportă lista într-un fișier text pe baza setărilor selectate (doar nume sau căi complete)."),
+
+                    ["Zip Separate CheckBox: This checkbox determines whether to create separate zip files for each file and directory before the copy or move operations."] =
+    ("Case Zip séparé : crée des fichiers zip séparés pour chaque élément avant copie/déplacement.",
+     "Getrennt zippen-CheckBox: Erstellt separate Zip-Dateien für jedes Element vor dem Kopieren/Verschieben.",
+     "Casilla Zip separado: crea archivos zip separados para cada elemento antes de copiar/mover.",
+     "Casella Zip separato: crea file zip separati per ogni elemento prima delle operazioni di copia/spostamento.",
+     "Caixa Zip separado: cria ficheiros zip separados para cada elemento antes das operações de cópia/movimentação.",
+     "Caixa Zip separado: cria arquivos zip separados para cada elemento antes das operações de cópia/movimentação.",
+     "Selectievakje Afzonderlijk zippen: maakt afzonderlijke zip-bestanden voor elk element vóór de kopieer-/verplaatsoperaties.",
+     "Kryssruta Zippa separat: skapar separata zip-filer för varje element före kopierings-/flyttoperationerna.",
+     "Avmerkingsboks Zip separat: oppretter separate zip-filer for hvert element før kopierings-/flyttoperasjonene.",
+     "Afkrydsningsfelt Zip separat: opretter separate zip-filer for hvert element før kopierings-/flytoperationerne.",
+     "Valintaruutu Pakkaa erikseen: luo erilliset zip-tiedostot jokaiselle kohteelle ennen kopioi-/siirrä-toimintoja.",
+     "Pole wyboru Osobny Zip: tworzy osobne pliki zip dla każdego elementu przed operacjami kopiowania/przenoszenia.",
+     "Zaškrtávací políčko Zip zvlášť: vytváří samostatné zip soubory pro každý prvek před operacemi kopírování/přesunu.",
+     "Jelölőnégyzet Külön zip: külön zip fájlokat hoz létre minden elemhez a másolási/áthelyezési műveletek előtt.",
+     "Casetă Zip separat: creează fișiere zip separate pentru fiecare element înainte de operațiile de copiere/mutare."),
+
+                    ["Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations."] =
+    ("Case Zip ensemble : crée un seul fichier zip contenant tous les éléments avant copie/déplacement.",
+     "Gemeinsam zippen-CheckBox: Erstellt eine einzelne Zip-Datei mit allen Elementen vor dem Kopieren/Verschieben.",
+     "Casilla Zip conjunto: crea un único archivo zip con todos los elementos antes de copiar/mover.",
+     "Casella Zip insieme: crea un singolo file zip contenente tutti gli elementi prima delle operazioni di copia/spostamento.",
+     "Caixa Zip em conjunto: cria um único ficheiro zip contendo todos os elementos antes das operações de cópia/movimentação.",
+     "Caixa Zip junto: cria um único arquivo zip contendo todos os elementos antes das operações de cópia/movimentação.",
+     "Selectievakje Samen zippen: maakt één enkel zip-bestand met alle elementen vóór de kopieer-/verplaatsoperaties.",
+     "Kryssruta Zippa tillsammans: skapar en enda zip-fil som innehåller alla element före kopierings-/flyttoperationerna.",
+     "Avmerkingsboks Zip sammen: oppretter en enkelt zip-fil som inneholder alle elementer før kopierings-/flyttoperasjonene.",
+     "Afkrydsningsfelt Zip sammen: opretter en enkelt zip-fil, der indeholder alle elementer før kopierings-/flytoperationerne.",
+     "Valintaruutu Pakkaa yhteen: luo yhden zip-tiedoston, joka sisältää kaikki kohteet ennen kopioi-/siirrä-toimintoja.",
+     "Pole wyboru Zip razem: tworzy pojedynczy plik zip zawierający wszystkie elementy przed operacjami kopiowania/przenoszenia.",
+     "Zaškrtávací políčko Zip dohromady: vytváří jediný zip soubor obsahující všechny prvky před operacemi kopírování/přesunu.",
+     "Jelölőnégyzet Zip együtt: egyetlen zip fájlt hoz létre, amely tartalmazza az összes elemet a másolási/áthelyezési műveletek előtt.",
+     "Casetă Zip împreună: creează un singur fișier zip conținând toate elementele înainte de operațiile de copiere/mutare."),
+
+                    ["Email Group Box: This group box contains settings related to exporting and emailing the file list for the application."] =
+    ("Groupe E-mail : contient les réglages pour exporter et envoyer la liste de fichiers par e-mail.",
+     "E-Mail-Gruppe: Enthält Einstellungen zum Exportieren und Versenden der Dateiliste per E-Mail.",
+     "Grupo Correo electrónico: contiene ajustes para exportar y enviar la lista de archivos por correo.",
+     "Gruppo E-mail: contiene impostazioni relative all'esportazione e all'invio della lista file tramite e-mail.",
+     "Grupo E-mail: contém definições relacionadas com a exportação e envio da lista de ficheiros por e-mail.",
+     "Grupo E-mail: contém configurações relacionadas à exportação e envio da lista de arquivos por e-mail.",
+     "Groepsvak E-mail: bevat instellingen met betrekking tot het exporteren en e-mailen van de bestandenlijst.",
+     "Gruppfält E-post: innehåller inställningar relaterade till exportering och e-postutskick av fillistan.",
+     "Gruppeboks E-post: inneholder innstillinger knyttet til eksportering og e-postutsendelse av fillisten.",
+     "Gruppefelt E-mail: indeholder indstillinger relateret til eksport og e-mail-afsendelse af fillisten.",
+     "Ryhmäruutu Sähköposti: sisältää asetuksia tiedostoluettelon viemiseen ja lähettämiseen sähköpostitse.",
+     "Pole grupy E-mail: zawiera ustawienia związane z eksportowaniem i wysyłaniem listy plików e-mailem.",
+     "Skupina E-mail: obsahuje nastavení týkající se exportu a zasílání seznamu souborů e-mailem.",
+     "Csoportmező E-mail: tartalmazza a fájllista exportálásához és e-mailben történő elküldéséhez kapcsolódó beállításokat.",
+     "Casetă de grup E-mail: conține setări legate de exportul și trimiterea prin e-mail a listei de fișiere."),
+
+                    ["SMS Group Box: This group box contains settings for configuring SMS notifications when operations complete."] =
+    ("Groupe SMS : contient les réglages pour configurer les notifications SMS à la fin des opérations.",
+     "SMS-Gruppe: Enthält Einstellungen zum Konfigurieren von SMS-Benachrichtigungen nach Abschluss von Operationen.",
+     "Grupo SMS: contiene ajustes para configurar notificaciones SMS al finalizar operaciones.",
+     "Gruppo SMS: contiene impostazioni per configurare le notifiche SMS al completamento delle operazioni.",
+     "Grupo SMS: contém definições para configurar notificações SMS quando as operações são concluídas.",
+     "Grupo SMS: contém configurações para configurar notificações SMS quando as operações são concluídas.",
+     "Groepsvak SMS: bevat instellingen voor het configureren van SMS-meldingen wanneer bewerkingen zijn voltooid.",
+     "Gruppfält SMS: innehåller inställningar för att konfigurera SMS-meddelanden när operationer är slutförda.",
+     "Gruppeboks SMS: inneholder innstillinger for å konfigurere SMS-varsler når operasjoner er fullført.",
+     "Gruppefelt SMS: indeholder indstillinger til at konfigurere SMS-meddelelser, når operationer er fuldført.",
+     "Ryhmäruutu SMS: sisältää asetuksia SMS-ilmoitusten määrittämiseen toimintojen valmistuttua.",
+     "Pole grupy SMS: zawiera ustawienia do konfigurowania powiadomień SMS po zakończeniu operacji.",
+     "Skupina SMS: obsahuje nastavení pro konfiguraci SMS upozornění po dokončení operací.",
+     "Csoportmező SMS: tartalmazza a műveletek befejezésekor történő SMS-értesítések konfigurálásához szükséges beállításokat.",
+     "Casetă de grup SMS: conține setări pentru configurarea notificărilor SMS la finalizarea operațiilor."),
+
+                    ["Set Up SMS Button: This button opens the SMS notification setup dialog, allowing you to configure SMS settings for operation completion notifications."] =
+    ("Bouton Configurer SMS : ouvre la boîte de dialogue de configuration des notifications SMS.",
+     "SMS einrichten-Schaltfläche: Öffnet den Dialog zur Konfiguration von SMS-Benachrichtigungen.",
+     "Botón Configurar SMS: abre el diálogo para configurar notificaciones SMS.",
+     "Pulsante Configura SMS: apre la finestra di dialogo per configurare le notifiche SMS.",
+     "Botão Configurar SMS: abre a caixa de diálogo de configuração de notificações SMS.",
+     "Botão Configurar SMS: abre a caixa de diálogo de configuração de notificações SMS.",
+     "Knop SMS instellen: opent het dialoogvenster voor het instellen van SMS-meldingen.",
+     "Knapp Konfigurera SMS: öppnar dialogrutan för konfiguration av SMS-meddelanden.",
+     "Knapp Sett opp SMS: åpner dialogboksen for konfigurering av SMS-varsler.",
+     "Knap Konfigurer SMS: åbner dialogboksen til konfiguration af SMS-meddelelser.",
+     "Painike Määritä SMS: avaa SMS-ilmoitusten asetusvalintaikkunan.",
+     "Przycisk Skonfiguruj SMS: otwiera okno dialogowe konfiguracji powiadomień SMS.",
+     "Tlačítko Nastavit SMS: otevírá dialogové okno nastavení SMS upozornění.",
+     "Gomb SMS beállítása: megnyitja az SMS-értesítések beállítási párbeszédpanelét.",
+     "Buton Configurare SMS: deschide dialogul de configurare a notificărilor SMS."),
+
+                    ["Set Up Email Button: This button opens the email setup dialog, allowing you to configure email settings for exporting and sending the file list."] =
+    ("Bouton Configurer e-mail : ouvre la boîte de dialogue de configuration de l'e-mail.",
+     "E-Mail einrichten-Schaltfläche: Öffnet den Dialog zur Konfiguration der E-Mail-Einstellungen.",
+     "Botón Configurar correo: abre el diálogo para configurar ajustes de correo electrónico.",
+     "Pulsante Configura e-mail: apre la finestra di dialogo per configurare le impostazioni e-mail.",
+     "Botão Configurar e-mail: abre a caixa de diálogo de configuração de e-mail.",
+     "Botão Configurar e-mail: abre a caixa de diálogo de configuração de e-mail.",
+     "Knop E-mail instellen: opent het dialoogvenster voor het instellen van e-mailinstellingen.",
+     "Knapp Konfigurera e-post: öppnar dialogrutan för konfiguration av e-postinställningar.",
+     "Knapp Sett opp e-post: åpner dialogboksen for konfigurering av e-postinnstillinger.",
+     "Knap Konfigurer e-mail: åbner dialogboksen til konfiguration af e-mail-indstillinger.",
+     "Painike Määritä sähköposti: avaa sähköpostiasetuksien määritysvalintaikkunan.",
+     "Przycisk Skonfiguruj e-mail: otwiera okno dialogowe konfiguracji ustawień e-mail.",
+     "Tlačítko Nastavit e-mail: otevírá dialogové okno nastavení e-mailu.",
+     "Gomb E-mail beállítása: megnyitja az e-mail beállításainak párbeszédpanelét.",
+     "Buton Configurare e-mail: deschide dialogul de configurare a setărilor de e-mail."),
+
+                    ["Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export."] =
+    ("Case Noms e-mail : n'inclut que les noms dans l'export e-mail.",
+     "E-Mail-Namen-CheckBox: Fügt dem E-Mail-Export nur Namen hinzu.",
+     "Casilla Nombres correo: incluye solo nombres en la exportación por correo.",
+     "Casella Nomi e-mail: include solo i nomi nell'esportazione e-mail.",
+     "Caixa Nomes e-mail: inclui apenas os nomes na exportação por e-mail.",
+     "Caixa Nomes e-mail: inclui apenas os nomes na exportação por e-mail.",
+     "Selectievakje E-mailnamen: voegt alleen namen toe aan de e-mailexport.",
+     "Kryssruta E-postnamn: inkluderar endast namn i e-postexporten.",
+     "Avmerkingsboks E-postnavn: inkluderer kun navn i e-posteksporten.",
+     "Afkrydsningsfelt E-mail-navne: inkluderer kun navne i e-mail-eksporten.",
+     "Valintaruutu Sähköpostinimet: sisältää vain nimet sähköpostiviennissä.",
+     "Pole wyboru Nazwy e-mail: zawiera tylko nazwy w eksporcie e-mail.",
+     "Zaškrtávací políčko E-mailové názvy: zahrnuje pouze názvy do e-mailového exportu.",
+     "Jelölőnégyzet E-mail nevek: csak a neveket tartalmazza az e-mail exportban.",
+     "Casetă Nume e-mail: include doar numele în exportul prin e-mail."),
+
+                    ["Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export."] =
+    ("Case Chemins e-mail : inclut les chemins complets dans l'export e-mail.",
+     "E-Mail-Pfade-CheckBox: Fügt dem E-Mail-Export vollständige Pfade hinzu.",
+     "Casilla Rutas correo: incluye rutas completas en la exportación por correo.",
+     "Casella Percorsi e-mail: include i percorsi completi nell'esportazione e-mail.",
+     "Caixa Caminhos e-mail: inclui os caminhos completos na exportação por e-mail.",
+     "Caixa Caminhos e-mail: inclui os caminhos completos na exportação por e-mail.",
+     "Selectievakje E-mailpaden: voegt volledige paden toe aan de e-mailexport.",
+     "Kryssruta E-postsökvägar: inkluderar fullständiga sökvägar i e-postexporten.",
+     "Avmerkingsboks E-poststier: inkluderer fullstendige stier i e-posteksporten.",
+     "Afkrydsningsfelt E-mail-stier: inkluderer fulde stier i e-mail-eksporten.",
+     "Valintaruutu Sähköpostipolut: sisältää täydelliset polut sähköpostiviennissä.",
+     "Pole wyboru Ścieżki e-mail: zawiera pełne ścieżki w eksporcie e-mail.",
+     "Zaškrtávací políčko E-mailové cesty: zahrnuje úplné cesty do e-mailového exportu.",
+     "Jelölőnégyzet E-mail elérési utak: tartalmazza a teljes elérési utakat az e-mail exportban.",
+     "Casetă Căi e-mail: include căile complete în exportul prin e-mail."),
+
+                    ["Other Settings Group Box: This group box contains miscellaneous settings for the application."] =
+    ("Groupe Autres réglages : contient divers réglages pour l'application.",
+     "Sonstige Einstellungen-Gruppe: Enthält verschiedene Einstellungen für die Anwendung.",
+     "Grupo Otros ajustes: contiene diversos ajustes para la aplicación.",
+     "Gruppo Altre impostazioni: contiene impostazioni varie per l'applicazione.",
+     "Grupo Outras definições: contém várias definições para a aplicação.",
+     "Grupo Outras configurações: contém várias configurações para a aplicação.",
+     "Groepsvak Overige instellingen: bevat diverse instellingen voor de applicatie.",
+     "Gruppfält Övriga inställningar: innehåller diverse inställningar för applikationen.",
+     "Gruppeboks Andre innstillinger: inneholder diverse innstillinger for applikasjonen.",
+     "Gruppefelt Andre indstillinger: indeholder diverse indstillinger for applikationen.",
+     "Ryhmäruutu Muut asetukset: sisältää sekalaisia asetuksia sovellukselle.",
+     "Pole grupy Inne ustawienia: zawiera różne ustawienia aplikacji.",
+     "Skupina Ostatní nastavení: obsahuje různá nastavení aplikace.",
+     "Csoportmező Egyéb beállítások: különféle beállításokat tartalmaz az alkalmazáshoz.",
+     "Casetă de grup Alte setări: conține diverse setări pentru aplicație."),
+
+                    ["Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs."] =
+    ("Case Fermer programme : détermine si l'application se ferme automatiquement en cas d'erreur.",
+     "Programm schließen-CheckBox: Legt fest, ob die Anwendung bei einem Fehler automatisch geschlossen wird.",
+     "Casilla Cerrar programa: determina si la aplicación se cierra automáticamente cuando ocurre un error.",
+     "Casella Chiudi programma: determina se chiudere automaticamente l'applicazione quando si verifica un errore.",
+     "Caixa Fechar programa: determina se a aplicação é fechada automaticamente quando ocorre um erro.",
+     "Caixa Fechar programa: determina se a aplicação é fechada automaticamente quando ocorre um erro.",
+     "Selectievakje Programma sluiten: bepaalt of de applicatie automatisch wordt gesloten wanneer er een fout optreedt.",
+     "Kryssruta Stäng program: avgör om applikationen automatiskt ska stängas när ett fel uppstår.",
+     "Avmerkingsboks Lukk program: avgjør om applikasjonen automatisk skal lukkes når det oppstår en feil.",
+     "Afkrydsningsfelt Luk program: bestemmer om applikationen automatisk skal lukkes, når der opstår en fejl.",
+     "Valintaruutu Sulje ohjelma: määrittää, suljetaanko sovellus automaattisesti virheen sattuessa.",
+     "Pole wyboru Zamknij program: określa, czy aplikacja ma być automatycznie zamykana w przypadku wystąpienia błędu.",
+     "Zaškrtávací políčko Zavřít program: určuje, zda se má aplikace automaticky zavřít při výskytu chyby.",
+     "Jelölőnégyzet Program bezárása: meghatározza, hogy a program automatikusan bezáródjon-e hiba esetén.",
+     "Casetă Închide program: determină dacă aplicația se închide automat când apare o eroare."),
+
+                    ["Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs."] =
+    ("Case Redémarrer : détermine si l'application redémarre automatiquement en cas d'erreur.",
+     "Neustart-CheckBox: Legt fest, ob die Anwendung bei einem Fehler automatisch neu startet.",
+     "Casilla Reiniciar: determina si la aplicación se reinicia automáticamente cuando ocurre un error.",
+     "Casella Riavvia: determina se riavviare automaticamente l'applicazione quando si verifica un errore.",
+     "Caixa Reiniciar: determina se a aplicação é reiniciada automaticamente quando ocorre um erro.",
+     "Caixa Reiniciar: determina se a aplicação é reiniciada automaticamente quando ocorre um erro.",
+     "Selectievakje Herstarten: bepaalt of de applicatie automatisch opnieuw wordt gestart wanneer er een fout optreedt.",
+     "Kryssruta Starta om: avgör om applikationen automatiskt ska startas om när ett fel uppstår.",
+     "Avmerkingsboks Start på nytt: avgjør om applikasjonen automatisk skal startes på nytt når det oppstår en feil.",
+     "Afkrydsningsfelt Genstart: bestemmer om applikationen automatisk skal genstartes, når der opstår en fejl.",
+     "Valintaruutu Käynnistä uudelleen: määrittää, käynnistetäänkö sovellus automaattisesti uudelleen virheen sattuessa.",
+     "Pole wyboru Uruchom ponownie: określa, czy aplikacja ma być automatycznie ponownie uruchamiana w przypadku wystąpienia błędu.",
+     "Zaškrtávací políčko Restartovat: určuje, zda se má aplikace automaticky restartovat při výskytu chyby.",
+     "Jelölőnégyzet Újraindítás: meghatározza, hogy a program automatikusan újrainduljon-e hiba esetén.",
+     "Casetă Repornire: determină dacă aplicația se repornește automat când apare o eroare."),
+
+                    ["Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts."] =
+    ("Case Lancer avec Windows : détermine si l'application démarre automatiquement avec Windows.",
+     "Mit Windows starten-CheckBox: Legt fest, ob die Anwendung automatisch mit Windows gestartet wird.",
+     "Casilla Iniciar con Windows: determina si la aplicación se inicia automáticamente con Windows.",
+     "Casella Avvia con Windows: determina se avviare automaticamente l'applicazione all'avvio di Windows.",
+     "Caixa Iniciar com Windows: determina se a aplicação é iniciada automaticamente quando o Windows é iniciado.",
+     "Caixa Iniciar com Windows: determina se a aplicação é iniciada automaticamente quando o Windows é iniciado.",
+     "Selectievakje Starten met Windows: bepaalt of de applicatie automatisch wordt gestart wanneer Windows start.",
+     "Kryssruta Starta med Windows: avgör om applikationen automatiskt ska startas när Windows startar.",
+     "Avmerkingsboks Start med Windows: avgjør om applikasjonen automatisk skal startes når Windows starter.",
+     "Afkrydsningsfelt Start med Windows: bestemmer om applikationen automatisk skal startes, når Windows starter.",
+     "Valintaruutu Käynnistä Windowsin kanssa: määrittää, käynnistetäänkö sovellus automaattisesti Windowsin käynnistyessä.",
+     "Pole wyboru Uruchom z systemem Windows: określa, czy aplikacja ma być automatycznie uruchamiana podczas startu systemu Windows.",
+     "Zaškrtávací políčko Spustit s Windows: určuje, zda se má aplikace automaticky spustit při startu Windows.",
+     "Jelölőnégyzet Indítás a Windows-szal: meghatározza, hogy a program automatikusan elindul-e a Windows indulásakor.",
+     "Casetă Pornire cu Windows: determină dacă aplicația se lansează automat când pornește Windows."),
+
+                    ["Serial Key Text Box: This text box allows you to enter your serial key to activate the application."] =
+    ("Zone de texte Clé série : permet de saisir votre clé de série pour activer l'application.",
+     "Seriennummer-Textbox: Ermöglicht die Eingabe Ihres Serienschlüssels zur Aktivierung der Anwendung.",
+     "Cuadro de texto Clave de serie: permite escribir su clave de serie para activar la aplicación.",
+     "Casella di testo Chiave seriale: consente di inserire la chiave seriale per attivare l'applicazione.",
+     "Caixa de texto Chave de série: permite introduzir a sua chave de série para ativar a aplicação.",
+     "Caixa de texto Chave serial: permite inserir sua chave serial para ativar a aplicação.",
+     "Tekstvak Serienummer: hiermee kunt u uw serienummer invoeren om de applicatie te activeren.",
+     "Textruta Serienyckel: låter dig ange din serienyckel för att aktivera applikationen.",
+     "Tekstboks Serienøkkel: lar deg angi serienøkkelen din for å aktivere applikasjonen.",
+     "Tekstfelt Serienøgle: giver dig mulighed for at indtaste din serienøgle for at aktivere applikationen.",
+     "Tekstikenttä Sarjanumero: avulla voit syöttää sarjanumerosi sovelluksen aktivoimiseksi.",
+     "Pole tekstowe Klucz seryjny: pozwala wprowadzić klucz seryjny w celu aktywacji aplikacji.",
+     "Textové pole Sériový klíč: umožňuje zadat sériový klíč pro aktivaci aplikace.",
+     "Szövegmező Sorozatszám: lehetővé teszi a sorozatszám megadását az alkalmazás aktiválásához.",
+     "Casetă de text Cheie serială: vă permite să introduceți cheia serială pentru a activa aplicația."),
+
+                    ["Register Button: This button submits the entered serial key for validation and activates the application if the key is valid."] =
+    ("Bouton Enregistrer : envoie la clé de série saisie pour validation et active l'application si la clé est valide.",
+     "Registrieren-Schaltfläche: Sendet den eingegebenen Serienschlüssel zur Validierung und aktiviert die Anwendung, falls der Schlüssel gültig ist.",
+     "Botón Registrar: envía la clave de serie introducida para validación y activa la aplicación si la clave es válida.",
+     "Pulsante Registra: invia la chiave seriale inserita per la convalida e attiva l'applicazione se la chiave è valida.",
+     "Botão Registar: envia a chave de série introduzida para validação e ativa a aplicação se a chave for válida.",
+     "Botão Registrar: envia a chave serial inserida para validação e ativa a aplicação se a chave for válida.",
+     "Knop Registreren: dient het ingevoerde serienummer in ter validatie en activeert de applicatie als het nummer geldig is.",
+     "Knapp Registrera: skickar den angivna serienyckel för validering och aktiverar applikationen om nyckeln är giltig.",
+     "Knapp Registrer: sender inn den angitte serienøkkelen for validering og aktiverer applikasjonen hvis nøkkelen er gyldig.",
+     "Knap Registrer: indsender den indtastede serienøgle til validering og aktiverer applikationen, hvis nøglen er gyldig.",
+     "Painike Rekisteröi: lähettää syötetyn sarjanumeron vahvistettavaksi ja aktivoi sovelluksen, jos avain on kelvollinen.",
+     "Przycisk Zarejestruj: przesyła wprowadzony klucz seryjny do walidacji i aktywuje aplikację, jeśli klucz jest prawidłowy.",
+     "Tlačítko Registrovat: odešle zadaný sériový klíč k ověření a aktivuje aplikaci, pokud je klíč platný.",
+     "Gomb Regisztráció: elküldi a megadott sorozatszámot ellenőrzésre és aktiválja az alkalmazást, ha a szám érvényes.",
+     "Buton Înregistrare: trimite cheia serială introdusă pentru validare și activează aplicația dacă cheia este validă."),
+
+                    ["Secure Passes Numeric Up-Down: This control allows you to specify the number of passes to use for securely deleting files."] =
+    ("Zone numérique Passages sécurisés : définit le nombre de passages pour la suppression sécurisée.",
+     "Sichere-Passwörter-Numeric-Up-Down: Legt die Anzahl der Überschreibungsdurchläufe für sicheres Löschen fest.",
+     "Control numérico Pasadas seguras: define la cantidad de pasadas para el borrado seguro.",
+     "Controllo numerico Passaggi sicuri: consente di specificare il numero di passaggi da utilizzare per l'eliminazione sicura dei file.",
+     "Controlo numérico Passagens seguras: permite especificar o número de passagens a utilizar para eliminar ficheiros de forma segura.",
+     "Controle numérico Passagens seguras: permite especificar o número de passagens a usar para excluir arquivos com segurança.",
+     "Numerieke instelling Beveiligde doorlopen: hiermee kunt u het aantal doorlopen opgeven voor het veilig verwijderen van bestanden.",
+     "Numerisk kontroll Säkra genomgångar: låter dig ange antalet genomgångar för säker radering av filer.",
+     "Numerisk kontroll Sikre passeringer: lar deg angi antall passeringer som skal brukes for sikker sletting av filer.",
+     "Numerisk kontrol Sikre gennemløb: giver dig mulighed for at angive antallet af gennemløb til sikker sletning af filer.",
+     "Numeerinen säätö Turvalliset kierrokset: avulla voit määrittää kierrosten määrän tiedostojen turvalliseen poistamiseen.",
+     "Kontrolka numeryczna Bezpieczne przejścia: pozwala określić liczbę przejść do bezpiecznego usuwania plików.",
+     "Číselné pole Bezpečné průchody: umožňuje zadat počet průchodů pro bezpečné mazání souborů.",
+     "Numerikus vezérlő Biztonságos felülírások: lehetővé teszi a fájlok biztonságos törléséhez használandó felülírások számának megadását.",
+     "Control numeric Treceri sigure: vă permite să specificați numărul de treceri pentru ștergerea securizată a fișierelor."),
+
+                    ["Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences."] =
+    ("Onglet Paramètres : permet de configurer divers réglages de l'application, y compris le comportement de la fenêtre, l'apparence, les performances et autres préférences.",
+     "Einstellungen-Tab: Ermöglicht die Konfiguration verschiedener Einstellungen der Anwendung, einschließlich Fensterverhalten, Erscheinungsbild, Leistung und andere Präferenzen.",
+     "Pestaña Ajustes: permite configurar varios ajustes de la aplicación, incluyendo comportamiento de ventana, apariencia, rendimiento y otras preferencias.",
+     "Scheda Impostazioni: consente di configurare varie impostazioni per l'applicazione, incluso il comportamento della finestra, l'aspetto, le prestazioni e altre preferenze.",
+     "Separador Definições: permite configurar várias definições para a aplicação, incluindo comportamento da janela, aparência, desempenho e outras preferências.",
+     "Aba Configurações: permite configurar várias configurações para a aplicação, incluindo comportamento da janela, aparência, desempenho e outras preferências.",
+     "Tabblad Instellingen: hiermee kunt u verschillende instellingen voor de applicatie configureren, waaronder venstergedrag, uiterlijk, prestaties en andere voorkeuren.",
+     "Flik Inställningar: låter dig konfigurera olika inställningar för applikationen, inklusive fönsterbeteende, utseende, prestanda och andra preferenser.",
+     "Fane Innstillinger: lar deg konfigurere forskjellige innstillinger for applikasjonen, inkludert vindusadferd, utseende, ytelse og andre preferanser.",
+     "Fane Indstillinger: giver dig mulighed for at konfigurere forskellige indstillinger for applikationen, herunder vinduesadfærd, udseende, ydeevne og andre præferencer.",
+     "Välilehti Asetukset: avulla voit määrittää sovelluksen eri asetuksia, mukaan lukien ikkunan käyttäytyminen, ulkoasu, suorituskyky ja muut asetukset.",
+     "Karta Ustawienia: umożliwia konfigurowanie różnych ustawień aplikacji, w tym zachowania okna, wyglądu, wydajności i innych preferencji.",
+     "Karta Nastavení: umožňuje konfigurovat různá nastavení aplikace, včetně chování okna, vzhledu, výkonu a dalších předvoleb.",
+     "Lap Beállítások: lehetővé teszi az alkalmazás különböző beállításainak konfigurálását, beleértve az ablak viselkedését, megjelenését, teljesítményét és egyéb preferenciákat.",
+     "Filă Setări: vă permite să configurați diverse setări pentru aplicație, inclusiv comportamentul ferestrei, aspectul, performanța și alte preferințe."),
+
+                    ["Move Application Label: This allows you to move the application to different parts of the screen."] =
+    ("Étiquette Déplacer application : permet de déplacer l'application vers différentes zones de l'écran.",
+     "Anwendung verschieben-Label: Ermöglicht das Verschieben der Anwendung an verschiedene Bildschirmbereiche.",
+     "Etiqueta Mover aplicación: permite mover la aplicación a diferentes zonas de la pantalla.",
+     "Etichetta Sposta applicazione: consente di spostare l'applicazione in diverse parti dello schermo.",
+     "Etiqueta Mover aplicação: permite mover a aplicação para diferentes partes do ecrã.",
+     "Rótulo Mover aplicação: permite mover a aplicação para diferentes partes da tela.",
+     "Label Applicatie verplaatsen: hiermee kunt u de applicatie naar verschillende delen van het scherm verplaatsen.",
+     "Etikett Flytta applikation: låter dig flytta applikationen till olika delar av skärmen.",
+     "Etikett Flytt applikasjon: lar deg flytte applikasjonen til forskjellige deler av skjermen.",
+     "Mærkat Flyt applikation: giver dig mulighed for at flytte applikationen til forskellige dele af skærmen.",
+     "Tunniste Siirrä sovellus: avulla voit siirtää sovelluksen näytön eri osiin.",
+     "Etykieta Przenieś aplikację: pozwala przenieść aplikację do różnych części ekranu.",
+     "Popisek Přesunout aplikaci: umožňuje přesunout aplikaci do různých částí obrazovky.",
+     "Címke Alkalmazás áthelyezése: lehetővé teszi az alkalmazás áthelyezését a képernyő különböző részeihez.",
+     "Etichetă Mutare aplicație: vă permite să mutați aplicația în diferite părți ale ecranului."),
+
+                    ["Copy History Data Grid View: This grid displays the history of file operations performed by the application, including details such as source and target paths, operation type, date, and status."] =
+    ("Grille Historique des copies : affiche l'historique des opérations avec chemins source/cible, type, date et état.",
+     "Kopie-Historie-DataGridView: Zeigt den Verlauf der Dateioperationen mit Quell-/Zielpfad, Typ, Datum und Status.",
+     "Cuadrícula Historial de copias: muestra el historial de operaciones con ruta origen/destino, tipo, fecha y estado.",
+     "Vista griglia Cronologia copie: visualizza la cronologia delle operazioni sui file eseguite dall'applicazione, inclusi dettagli come percorsi di origine e destinazione, tipo di operazione, data e stato.",
+     "Vista de grelha Histórico de cópias: apresenta o histórico das operações de ficheiros efetuadas pela aplicação, incluindo detalhes como caminhos de origem e destino, tipo de operação, data e estado.",
+     "Visualização de grade Histórico de cópias: exibe o histórico das operações de arquivos executadas pela aplicação, incluindo detalhes como caminhos de origem e destino, tipo de operação, data e status.",
+     "Gegevensraster Kopieergeschiedenis: toont de geschiedenis van bestandsbewerkingen uitgevoerd door de applicatie, inclusief details zoals bron- en doelpaden, bewerkingstype, datum en status.",
+     "Datarutnätsvy Kopieringshistorik: visar historiken över filoperationer som utförts av applikationen, inklusive detaljer som käll- och målsökvägar, operationstyp, datum och status.",
+     "Datarutenettsvisning Kopieringshistorikk: viser historikken over filoperasjoner utført av applikasjonen, inkludert detaljer som kilde- og målstier, operasjonstype, dato og status.",
+     "Datagittervisning Kopieringshistorik: viser historikken over filoperationer udført af applikationen, herunder detaljer som kilde- og målstier, operationstype, dato og status.",
+     "Tietorasterinäkymä Kopiointihistoria: näyttää sovelluksen suorittamien tiedostotoimintojen historian, mukaan lukien tiedot kuten lähde- ja kohdepolut, toimintatyyppi, päivämäärä ja tila.",
+     "Widok siatki danych Historia kopiowania: wyświetla historię operacji na plikach wykonanych przez aplikację, w tym szczegóły, takie jak ścieżki źródłowe i docelowe, typ operacji, data i status.",
+     "Zobrazení datové mřížky Historie kopírování: zobrazuje historii operací se soubory prováděných aplikací, včetně podrobností jako jsou zdrojové a cílové cesty, typ operace, datum a stav.",
+     "Adatrács nézet Másolási előzmények: megjeleníti az alkalmazás által végrehajtott fájlműveletek előzményeit, beleértve az olyan részleteket, mint a forrás- és célútvonalak, művelet típusa, dátum és állapot.",
+     "Vizualizare grilă date Istoric copieri: afișează istoricul operațiilor pe fișiere efectuate de aplicație, inclusiv detalii precum căile sursă și destinație, tipul operației, data și starea."),
+
+                    // TITLE STRINGS
+                    ["Copy That v1.0 Pro By: Havoc - Home"] =
+    ("Copy That v1.0 Pro Par: Havoc - Accueil",
+     "Copy That v1.0 Pro Von: Havoc - Startseite",
+     "Copy That v1.0 Pro Por: Havoc - Inicio",
+     "Copy That v1.0 Pro Di: Havoc - Home",
+     "Copy That v1.0 Pro Por: Havoc - Início",
+     "Copy That v1.0 Pro Por: Havoc - Início",
+     "Copy That v1.0 Pro Door: Havoc - Home",
+     "Copy That v1.0 Pro Av: Havoc - Hem",
+     "Copy That v1.0 Pro Av: Havoc - Hjem",
+     "Copy That v1.0 Pro Af: Havoc - Hjem",
+     "Copy That v1.0 Pro Tekijä: Havoc - Etusivu",
+     "Copy That v1.0 Pro Autor: Havoc - Strona główna",
+     "Copy That v1.0 Pro Od: Havoc - Domů",
+     "Copy That v1.0 Pro Készítő: Havoc - Főoldal",
+     "Copy That v1.0 Pro De: Havoc - Acasă"),
+
+                    ["Copy That v1.0 By: Havoc - Home"] =
+    ("Copy That v1.0 Par: Havoc - Accueil",
+     "Copy That v1.0 Von: Havoc - Startseite",
+     "Copy That v1.0 Por: Havoc - Inicio",
+     "Copy That v1.0 Di: Havoc - Home",
+     "Copy That v1.0 Por: Havoc - Início",
+     "Copy That v1.0 Por: Havoc - Início",
+     "Copy That v1.0 Door: Havoc - Home",
+     "Copy That v1.0 Av: Havoc - Hem",
+     "Copy That v1.0 Av: Havoc - Hjem",
+     "Copy That v1.0 Af: Havoc - Hjem",
+     "Copy That v1.0 Tekijä: Havoc - Etusivu",
+     "Copy That v1.0 Autor: Havoc - Strona główna",
+     "Copy That v1.0 Od: Havoc - Domů",
+     "Copy That v1.0 Készítő: Havoc - Főoldal",
+     "Copy That v1.0 De: Havoc - Acasă"),
 
                     ["Copy That v1.0 Pro By: Havoc - Multi-Threading"] =
     ("Copy That v1.0 Pro Par: Havoc - Multi-Thread",
      "Copy That v1.0 Pro Von: Havoc - Multi-Threading",
-     "Copy That v1.0 Pro Por: Havoc - Multi-Hilo"),
+     "Copy That v1.0 Pro Por: Havoc - Multi-Hilo",
+     "Copy That v1.0 Pro Di: Havoc - Multi-Threading",
+     "Copy That v1.0 Pro Por: Havoc - Multi-Threading",
+     "Copy That v1.0 Pro Por: Havoc - Multi-Threading",
+     "Copy That v1.0 Pro Door: Havoc - Multi-Threading",
+     "Copy That v1.0 Pro Av: Havoc - Multi-Threading",
+     "Copy That v1.0 Pro Av: Havoc - Multitråding",
+     "Copy That v1.0 Pro Af: Havoc - Multi-Threading",
+     "Copy That v1.0 Pro Tekijä: Havoc - Monisäikeistys",
+     "Copy That v1.0 Pro Autor: Havoc - Wielowątkowość",
+     "Copy That v1.0 Pro Od: Havoc - Vícevláknové zpracování",
+     "Copy That v1.0 Pro Készítő: Havoc - Többszálúság",
+     "Copy That v1.0 Pro De: Havoc - Multi-Threading"),
 
                     ["Copy That v1.0 By: Havoc - Multi-Threading"] =
     ("Copy That v1.0 Par: Havoc - Multi-Thread",
      "Copy That v1.0 Von: Havoc - Multi-Threading",
-     "Copy That v1.0 Por: Havoc - Multi-Hilo"),
+     "Copy That v1.0 Por: Havoc - Multi-Hilo",
+     "Copy That v1.0 Di: Havoc - Multi-Threading",
+     "Copy That v1.0 Por: Havoc - Multi-Threading",
+     "Copy That v1.0 Por: Havoc - Multi-Threading",
+     "Copy That v1.0 Door: Havoc - Multi-Threading",
+     "Copy That v1.0 Av: Havoc - Multi-Threading",
+     "Copy That v1.0 Av: Havoc - Multitråding",
+     "Copy That v1.0 Af: Havoc - Multi-Threading",
+     "Copy That v1.0 Tekijä: Havoc - Monisäikeistys",
+     "Copy That v1.0 Autor: Havoc - Wielowątkowość",
+     "Copy That v1.0 Od: Havoc - Vícevláknové zpracování",
+     "Copy That v1.0 Készítő: Havoc - Többszálúság",
+     "Copy That v1.0 De: Havoc - Multi-Threading"),
 
                     ["Copy That v1.0 Pro By: Havoc - Allow/Exclude"] =
     ("Copy That v1.0 Pro Par: Havoc - Autoriser/Exclure",
      "Copy That v1.0 Pro Von: Havoc - Erlauben/Ausschließen",
-     "Copy That v1.0 Pro Por: Havoc - Permitir/Excluir"),
+     "Copy That v1.0 Pro Por: Havoc - Permitir/Excluir",
+     "Copy That v1.0 Pro Di: Havoc - Consenti/Escludi",
+     "Copy That v1.0 Pro Por: Havoc - Permitir/Excluir",
+     "Copy That v1.0 Pro Por: Havoc - Permitir/Excluir",
+     "Copy That v1.0 Pro Door: Havoc - Toestaan/Uitsluiten",
+     "Copy That v1.0 Pro Av: Havoc - Tillåt/Exkludera",
+     "Copy That v1.0 Pro Av: Havoc - Tillat/Ekskluder",
+     "Copy That v1.0 Pro Af: Havoc - Tillad/Ekskluder",
+     "Copy That v1.0 Pro Tekijä: Havoc - Salli/Sulje pois",
+     "Copy That v1.0 Pro Autor: Havoc - Zezwól/Wyklucz",
+     "Copy That v1.0 Pro Od: Havoc - Povolit/Vyloučit",
+     "Copy That v1.0 Pro Készítő: Havoc - Engedélyez/Kizár",
+     "Copy That v1.0 Pro De: Havoc - Permite/Exclude"),
 
                     ["Copy That v1.0 By: Havoc - Allow/Exclude"] =
     ("Copy That v1.0 Par: Havoc - Autoriser/Exclure",
      "Copy That v1.0 Von: Havoc - Erlauben/Ausschließen",
-     "Copy That v1.0 Por: Havoc - Permitir/Excluir"),
+     "Copy That v1.0 Por: Havoc - Permitir/Excluir",
+     "Copy That v1.0 Di: Havoc - Consenti/Escludi",
+     "Copy That v1.0 Por: Havoc - Permitir/Excluir",
+     "Copy That v1.0 Por: Havoc - Permitir/Excluir",
+     "Copy That v1.0 Door: Havoc - Toestaan/Uitsluiten",
+     "Copy That v1.0 Av: Havoc - Tillåt/Exkludera",
+     "Copy That v1.0 Av: Havoc - Tillat/Ekskluder",
+     "Copy That v1.0 Af: Havoc - Tillad/Ekskluder",
+     "Copy That v1.0 Tekijä: Havoc - Salli/Sulje pois",
+     "Copy That v1.0 Autor: Havoc - Zezwól/Wyklucz",
+     "Copy That v1.0 Od: Havoc - Povolit/Vyloučit",
+     "Copy That v1.0 Készítő: Havoc - Engedélyez/Kizár",
+     "Copy That v1.0 De: Havoc - Permite/Exclude"),
 
                     ["Copy That v1.0 Pro By: Havoc - Skipped Files/Dirs."] =
     ("Copy That v1.0 Pro Par: Havoc - Fichiers/Dossiers ignorés",
      "Copy That v1.0 Pro Von: Havoc - Übersprungene Dateien/Ordner",
-     "Copy That v1.0 Pro Por: Havoc - Archivos/Carpetas omitidos"),
+     "Copy That v1.0 Pro Por: Havoc - Archivos/Carpetas omitidos",
+     "Copy That v1.0 Pro Di: Havoc - File/Cartelle saltati",
+     "Copy That v1.0 Pro Por: Havoc - Ficheiros/Pastas ignorados",
+     "Copy That v1.0 Pro Por: Havoc - Arquivos/Pastas ignorados",
+     "Copy That v1.0 Pro Door: Havoc - Overgeslagen bestanden/mappen",
+     "Copy That v1.0 Pro Av: Havoc - Överhoppade filer/mappar",
+     "Copy That v1.0 Pro Av: Havoc - Hoppet over filer/mapper",
+     "Copy That v1.0 Pro Af: Havoc - Oversprungne filer/mapper",
+     "Copy That v1.0 Pro Tekijä: Havoc - Ohitetut tiedostot/kansiot",
+     "Copy That v1.0 Pro Autor: Havoc - Pominięte pliki/katalogi",
+     "Copy That v1.0 Pro Od: Havoc - Přeskočené soubory/složky",
+     "Copy That v1.0 Pro Készítő: Havoc - Kihagyott fájlok/mappák",
+     "Copy That v1.0 Pro De: Havoc - Fișiere/Directoare omise"),
 
                     ["Copy That v1.0 By: Havoc - Skipped Files/Dirs."] =
     ("Copy That v1.0 Par: Havoc - Fichiers/Dossiers ignorés",
      "Copy That v1.0 Von: Havoc - Übersprungene Dateien/Ordner",
-     "Copy That v1.0 Por: Havoc - Archivos/Carpetas omitidos"),
+     "Copy That v1.0 Por: Havoc - Archivos/Carpetas omitidos",
+     "Copy That v1.0 Di: Havoc - File/Cartelle saltati",
+     "Copy That v1.0 Por: Havoc - Ficheiros/Pastas ignorados",
+     "Copy That v1.0 Por: Havoc - Arquivos/Pastas ignorados",
+     "Copy That v1.0 Door: Havoc - Overgeslagen bestanden/mappen",
+     "Copy That v1.0 Av: Havoc - Överhoppade filer/mappar",
+     "Copy That v1.0 Av: Havoc - Hoppet over filer/mapper",
+     "Copy That v1.0 Af: Havoc - Oversprungne filer/mapper",
+     "Copy That v1.0 Tekijä: Havoc - Ohitetut tiedostot/kansiot",
+     "Copy That v1.0 Autor: Havoc - Pominięte pliki/katalogi",
+     "Copy That v1.0 Od: Havoc - Přeskočené soubory/složky",
+     "Copy That v1.0 Készítő: Havoc - Kihagyott fájlok/mappák",
+     "Copy That v1.0 De: Havoc - Fișiere/Directoare omise"),
 
                     ["Copy That v1.0 Pro By: Havoc - Settings"] =
     ("Copy That v1.0 Pro Par: Havoc - Paramètres",
      "Copy That v1.0 Pro Von: Havoc - Einstellungen",
-     "Copy That v1.0 Pro Por: Havoc - Ajustes"),
+     "Copy That v1.0 Pro Por: Havoc - Ajustes",
+     "Copy That v1.0 Pro Di: Havoc - Impostazioni",
+     "Copy That v1.0 Pro Por: Havoc - Definições",
+     "Copy That v1.0 Pro Por: Havoc - Configurações",
+     "Copy That v1.0 Pro Door: Havoc - Instellingen",
+     "Copy That v1.0 Pro Av: Havoc - Inställningar",
+     "Copy That v1.0 Pro Av: Havoc - Innstillinger",
+     "Copy That v1.0 Pro Af: Havoc - Indstillinger",
+     "Copy That v1.0 Pro Tekijä: Havoc - Asetukset",
+     "Copy That v1.0 Pro Autor: Havoc - Ustawienia",
+     "Copy That v1.0 Pro Od: Havoc - Nastavení",
+     "Copy That v1.0 Pro Készítő: Havoc - Beállítások",
+     "Copy That v1.0 Pro De: Havoc - Setări"),
 
                     ["Copy That v1.0 By: Havoc - Settings"] =
     ("Copy That v1.0 Par: Havoc - Paramètres",
      "Copy That v1.0 Von: Havoc - Einstellungen",
-     "Copy That v1.0 Por: Havoc - Ajustes"),
+     "Copy That v1.0 Por: Havoc - Ajustes",
+     "Copy That v1.0 Di: Havoc - Impostazioni",
+     "Copy That v1.0 Por: Havoc - Definições",
+     "Copy That v1.0 Por: Havoc - Configurações",
+     "Copy That v1.0 Door: Havoc - Instellingen",
+     "Copy That v1.0 Av: Havoc - Inställningar",
+     "Copy That v1.0 Av: Havoc - Innstillinger",
+     "Copy That v1.0 Af: Havoc - Indstillinger",
+     "Copy That v1.0 Tekijä: Havoc - Asetukset",
+     "Copy That v1.0 Autor: Havoc - Ustawienia",
+     "Copy That v1.0 Od: Havoc - Nastavení",
+     "Copy That v1.0 Készítő: Havoc - Beállítások",
+     "Copy That v1.0 De: Havoc - Setări"),
 
                     ["Copy That v1.0 Pro By: Havoc - History"] =
     ("Copy That v1.0 Pro Par: Havoc - Historique",
      "Copy That v1.0 Pro Von: Havoc - Verlauf",
-     "Copy That v1.0 Pro Por: Havoc - Historial"),
+     "Copy That v1.0 Pro Por: Havoc - Historial",
+     "Copy That v1.0 Pro Di: Havoc - Cronologia",
+     "Copy That v1.0 Pro Por: Havoc - Histórico",
+     "Copy That v1.0 Pro Por: Havoc - Histórico",
+     "Copy That v1.0 Pro Door: Havoc - Geschiedenis",
+     "Copy That v1.0 Pro Av: Havoc - Historik",
+     "Copy That v1.0 Pro Av: Havoc - Historikk",
+     "Copy That v1.0 Pro Af: Havoc - Historik",
+     "Copy That v1.0 Pro Tekijä: Havoc - Historia",
+     "Copy That v1.0 Pro Autor: Havoc - Historia",
+     "Copy That v1.0 Pro Od: Havoc - Historie",
+     "Copy That v1.0 Pro Készítő: Havoc - Előzmények",
+     "Copy That v1.0 Pro De: Havoc - Istoric"),
 
                     ["Copy That v1.0 By: Havoc - History"] =
     ("Copy That v1.0 Par: Havoc - Historique",
      "Copy That v1.0 Von: Havoc - Verlauf",
-     "Copy That v1.0 Por: Havoc - Historial"),
+     "Copy That v1.0 Por: Havoc - Historial",
+     "Copy That v1.0 Di: Havoc - Cronologia",
+     "Copy That v1.0 Por: Havoc - Histórico",
+     "Copy That v1.0 Por: Havoc - Histórico",
+     "Copy That v1.0 Door: Havoc - Geschiedenis",
+     "Copy That v1.0 Av: Havoc - Historik",
+     "Copy That v1.0 Av: Havoc - Historikk",
+     "Copy That v1.0 Af: Havoc - Historik",
+     "Copy That v1.0 Tekijä: Havoc - Historia",
+     "Copy That v1.0 Autor: Havoc - Historia",
+     "Copy That v1.0 Od: Havoc - Historie",
+     "Copy That v1.0 Készítő: Havoc - Előzmények",
+     "Copy That v1.0 De: Havoc - Istoric"),
 
                     ["Copy That v1.0 Pro By: Havoc - About"] =
     ("Copy That v1.0 Pro Par: Havoc - À propos",
      "Copy That v1.0 Pro Von: Havoc - Über",
-     "Copy That v1.0 Pro Por: Havoc - Acerca de"),
+     "Copy That v1.0 Pro Por: Havoc - Acerca de",
+     "Copy That v1.0 Pro Di: Havoc - Informazioni",
+     "Copy That v1.0 Pro Por: Havoc - Acerca de",
+     "Copy That v1.0 Pro Por: Havoc - Sobre",
+     "Copy That v1.0 Pro Door: Havoc - Over",
+     "Copy That v1.0 Pro Av: Havoc - Om",
+     "Copy That v1.0 Pro Av: Havoc - Om",
+     "Copy That v1.0 Pro Af: Havoc - Om",
+     "Copy That v1.0 Pro Tekijä: Havoc - Tietoja",
+     "Copy That v1.0 Pro Autor: Havoc - O programie",
+     "Copy That v1.0 Pro Od: Havoc - O aplikaci",
+     "Copy That v1.0 Pro Készítő: Havoc - Névjegy",
+     "Copy That v1.0 Pro De: Havoc - Despre"),
 
                     ["Copy That v1.0 By: Havoc - About"] =
     ("Copy That v1.0 Par: Havoc - À propos",
      "Copy That v1.0 Von: Havoc - Über",
-     "Copy That v1.0 Por: Havoc - Acerca de"),
+     "Copy That v1.0 Por: Havoc - Acerca de",
+     "Copy That v1.0 Di: Havoc - Informazioni",
+     "Copy That v1.0 Por: Havoc - Acerca de",
+     "Copy That v1.0 Por: Havoc - Sobre",
+     "Copy That v1.0 Door: Havoc - Over",
+     "Copy That v1.0 Av: Havoc - Om",
+     "Copy That v1.0 Av: Havoc - Om",
+     "Copy That v1.0 Af: Havoc - Om",
+     "Copy That v1.0 Tekijä: Havoc - Tietoja",
+     "Copy That v1.0 Autor: Havoc - O programie",
+     "Copy That v1.0 Od: Havoc - O aplikaci",
+     "Copy That v1.0 Készítő: Havoc - Névjegy",
+     "Copy That v1.0 De: Havoc - Despre"),
 
-
-                    // ----  M E S S A G E   B O X E S  ----
+                    // MESSAGE BOXES
                     ["Skip Error"] =
     ("Erreur de saut",
      "Skip-Fehler",
-     "Error de omisión"),
+     "Error de omisión",
+     "Errore di salto",
+     "Erro ao ignorar",
+     "Erro ao ignorar",
+     "Overslafout",
+     "Hoppfel",
+     "Hopp over-feil",
+     "Spring over-fejl",
+     "Ohitusvirhe",
+     "Błąd pominięcia",
+     "Chyba přeskočení",
+     "Kihagyási hiba",
+     "Eroare de omitere"),
 
                     ["No destination folder selected. Cannot skip and log file with intended destination."] =
     ("Aucun dossier de destination sélectionné. Impossible de sauter et journaliser le fichier avec la destination prévue.",
      "Kein Zielordner ausgewählt. Datei kann nicht übersprungen und mit dem beabsichtigten Ziel protokolliert werden.",
-     "No se ha seleccionado carpeta de destino. No se puede omitir y registrar el archivo con el destino previsto."),
+     "No se ha seleccionado carpeta de destino. No se puede omitir y registrar el archivo con el destino previsto.",
+     "Nessuna cartella di destinazione selezionata. Impossibile saltare e registrare il file con la destinazione prevista.",
+     "Nenhuma pasta de destino selecionada. Não é possível ignorar e registar o ficheiro com o destino pretendido.",
+     "Nenhuma pasta de destino selecionada. Não é possível ignorar e registrar o arquivo com o destino pretendido.",
+     "Geen doelmap geselecteerd. Kan bestand niet overslaan en loggen met beoogde bestemming.",
+     "Ingen målmapp vald. Kan inte hoppa över och logga fil med avsedd destination.",
+     "Ingen destinasjonsmappe valgt. Kan ikke hoppe over og logge fil med tiltenkt destinasjon.",
+     "Ingen destinationsmappe valgt. Kan ikke springe over og logge fil med tilsigtet destination.",
+     "Kohdehakemistoa ei valittu. Ei voida ohittaa ja kirjata tiedostoa aiotulla kohteella.",
+     "Nie wybrano folderu docelowego. Nie można pominąć i zarejestrować pliku z zamierzonym miejscem docelowym.",
+     "Nebyla vybrána cílová složka. Nelze přeskočit a zaznamenat soubor s zamýšleným cílem.",
+     "Nincs célmappa kiválasztva. Nem lehet kihagyni és naplózni a fájlt a kívánt céllal.",
+     "Niciun folder de destinație selectat. Nu se poate omite și înregistra fișierul cu destinația dorită."),
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    /*  =========  M E S S A G E   B O X   L I T E R A L S  =========  */
-
-                    /* ----------  generic / small  ---------- */
+                    // GENERIC/SMALL MESSAGE BOX LITERALS
                     ["Error"] =
-    ("Erreur", "Fehler", "Error"),
+    ("Erreur", "Fehler", "Error", "Errore", "Erro", "Erro", "Fout", "Fel", "Feil", "Fejl", "Virhe", "Błąd", "Chyba", "Hiba", "Eroare"),
 
                     ["Warning"] =
-    ("Avertissement", "Warnung", "Advertencia"),
+    ("Avertissement", "Warnung", "Advertencia", "Avviso", "Aviso", "Aviso", "Waarschuwing", "Varning", "Advarsel", "Advarsel", "Varoitus", "Ostrzeżenie", "Varování", "Figyelmeztetés", "Avertisment"),
 
                     ["Information"] =
-    ("Information", "Information", "Información"),
+    ("Information", "Information", "Información", "Informazione", "Informação", "Informação", "Informatie", "Information", "Informasjon", "Information", "Tieto", "Informacja", "Informace", "Információ", "Informație"),
 
                     ["Question"] =
-    ("Question", "Frage", "Pregunta"),
+    ("Question", "Frage", "Pregunta", "Domanda", "Pergunta", "Pergunta", "Vraag", "Fråga", "Spørsmål", "Spørgsmål", "Kysymys", "Pytanie", "Otázka", "Kérdés", "Întrebare"),
 
                     ["Confirm Reset"] =
-    ("Confirmer la réinitialisation", "Zurücksetzen bestätigen", "Confirmar reinicio"),
+    ("Confirmer la réinitialisation", "Zurücksetzen bestätigen", "Confirmar reinicio", "Conferma ripristino", "Confirmar reinicialização", "Confirmar reinicialização", "Bevestig reset", "Bekräfta återställning", "Bekreft tilbakestilling", "Bekræft nulstilling", "Vahvista nollaus", "Potwierdź reset", "Potvrdit reset", "Visszaállítás megerősítése", "Confirmă resetarea"),
 
                     ["Updater"] =
-    ("Mise à jour", "Updater", "Actualizador"),
+    ("Mise à jour", "Updater", "Actualizador", "Aggiornamento", "Atualizador", "Atualizador", "Updater", "Uppdaterare", "Oppdaterer", "Opdaterer", "Päivittäjä", "Aktualizator", "Aktualizátor", "Frissítő", "Actualizator"),
 
                     ["Invalid Selection"] =
-    ("Sélection invalide", "Ungültige Auswahl", "Selección inválida"),
+    ("Sélection invalide", "Ungültige Auswahl", "Selección inválida", "Selezione non valida", "Seleção inválida", "Seleção inválida", "Ongeldige selectie", "Ogiltigt val", "Ugyldig valg", "Ugyldigt valg", "Virheellinen valinta", "Nieprawidłowy wybór", "Neplatný výběr", "Érvénytelen kiválasztás", "Selecție invalidă"),
 
                     ["Duplicate folder"] =
-    ("Dossier en double", "Doppelter Ordner", "Carpeta duplicada"),
+    ("Dossier en double", "Doppelter Ordner", "Carpeta duplicada", "Cartella duplicata", "Pasta duplicada", "Pasta duplicada", "Dubbele map", "Duplicerad mapp", "Duplisert mappe", "Duplikeret mappe", "Kaksoiskappaleen kansio", "Zduplikowany folder", "Duplicitní složka", "Duplikált mappa", "Folder duplicat"),
 
                     ["Scan Not Allowed"] =
-    ("Analyse non autorisée", "Scan nicht erlaubt", "Escaneo no permitido"),
+    ("Analyse non autorisée", "Scan nicht erlaubt", "Escaneo no permitido", "Scansione non consentita", "Análise não permitida", "Escaneamento não permitido", "Scannen niet toegestaan", "Skanning inte tillåten", "Skanning ikke tillatt", "Scanning ikke tilladt", "Skannaus ei sallittu", "Skanowanie niedozwolone", "Skenování není povoleno", "Vizsgálat nem engedélyezett", "Scanare nepermisă"),
 
                     ["Scan Error"] =
-    ("Erreur d’analyse", "Scan-Fehler", "Error de escaneo"),
+    ("Erreur d'analyse", "Scan-Fehler", "Error de escaneo", "Errore di scansione", "Erro de análise", "Erro de escaneamento", "Scanfout", "Skannfel", "Skanningsfeil", "Scanningsfejl", "Skannausvirhe", "Błąd skanowania", "Chyba skenování", "Vizsgálati hiba", "Eroare de scanare"),
 
                     ["Operation Complete"] =
-    ("Opération terminée", "Operation abgeschlossen", "Operación completada"),
+    ("Opération terminée", "Operation abgeschlossen", "Operación completada", "Operazione completata", "Operação concluída", "Operação concluída", "Bewerking voltooid", "Operation slutförd", "Operasjon fullført", "Operation fuldført", "Toiminto valmis", "Operacja ukończona", "Operace dokončena", "Művelet befejezve", "Operație completă"),
 
                     ["Operation Canceled"] =
-    ("Opération annulée", "Operation abgebrochen", "Operación cancelada"),
+    ("Opération annulée", "Operation abgebrochen", "Operación cancelada", "Operazione annullata", "Operação cancelada", "Operação cancelada", "Bewerking geannuleerd", "Operation avbruten", "Operasjon avbrutt", "Operation annulleret", "Toiminto peruutettu", "Operacja anulowana", "Operace zrušena", "Művelet megszakítva", "Operație anulată"),
 
-                    /* ----------  full sentences  ---------- */
+                    // FULL SENTENCES
                     ["Error changing language: {0}"] =
-    ("Erreur lors du changement de langue : {0}", "Fehler beim Ändern der Sprache: {0}", "Error al cambiar el idioma: {0}"),
+    ("Erreur lors du changement de langue : {0}",
+     "Fehler beim Ändern der Sprache: {0}",
+     "Error al cambiar el idioma: {0}",
+     "Errore durante il cambio lingua: {0}",
+     "Erro ao alterar o idioma: {0}",
+     "Erro ao alterar o idioma: {0}",
+     "Fout bij het wijzigen van de taal: {0}",
+     "Fel vid byte av språk: {0}",
+     "Feil ved endring av språk: {0}",
+     "Fejl ved ændring af sprog: {0}",
+     "Virhe kieltä vaihdettaessa: {0}",
+     "Błąd podczas zmiany języka: {0}",
+     "Chyba při změně jazyka: {0}",
+     "Hiba a nyelv módosításakor: {0}",
+     "Eroare la schimbarea limbii: {0}"),
 
                     ["Error exporting data: {0}"] =
-    ("Erreur lors de l’exportation des données : {0}", "Fehler beim Exportieren der Daten: {0}", "Error al exportar datos: {0}"),
+    ("Erreur lors de l'exportation des données : {0}",
+     "Fehler beim Exportieren der Daten: {0}",
+     "Error al exportar datos: {0}",
+     "Errore durante l'esportazione dei dati: {0}",
+     "Erro ao exportar dados: {0}",
+     "Erro ao exportar dados: {0}",
+     "Fout bij het exporteren van gegevens: {0}",
+     "Fel vid export av data: {0}",
+     "Feil ved eksport av data: {0}",
+     "Fejl ved eksport af data: {0}",
+     "Virhe tietoja vietäessä: {0}",
+     "Błąd podczas eksportowania danych: {0}",
+     "Chyba při exportu dat: {0}",
+     "Hiba az adatok exportálásakor: {0}",
+     "Eroare la exportarea datelor: {0}"),
 
                     ["Exported successfully to: {0}"] =
-    ("Exportation réussie vers : {0}", "Erfolgreich exportiert nach: {0}", "Exportado con éxito a: {0}"),
+    ("Exportation réussie vers : {0}",
+     "Erfolgreich exportiert nach: {0}",
+     "Exportado con éxito a: {0}",
+     "Esportato con successo in: {0}",
+     "Exportado com sucesso para: {0}",
+     "Exportado com sucesso para: {0}",
+     "Succesvol geëxporteerd naar: {0}",
+     "Exporterades framgångsrikt till: {0}",
+     "Eksportert vellykket til: {0}",
+     "Eksporteret med succes til: {0}",
+     "Viety onnistuneesti kohteeseen: {0}",
+     "Pomyślnie wyeksportowano do: {0}",
+     "Úspěšně exportováno do: {0}",
+     "Sikeresen exportálva ide: {0}",
+     "Exportat cu succes în: {0}"),
 
                     ["Unsupported file type."] =
-    ("Type de fichier non pris en charge.", "Nicht unterstützter Dateityp.", "Tipo de archivo no admitido."),
+    ("Type de fichier non pris en charge.",
+     "Nicht unterstützter Dateityp.",
+     "Tipo de archivo no admitido.",
+     "Tipo di file non supportato.",
+     "Tipo de ficheiro não suportado.",
+     "Tipo de arquivo não suportado.",
+     "Niet-ondersteund bestandstype.",
+     "Filtyp stöds inte.",
+     "Filtype støttes ikke.",
+     "Filtype understøttes ikke.",
+     "Tiedostotyyppiä ei tueta.",
+     "Nieobsługiwany typ pliku.",
+     "Nepodporovaný typ souboru.",
+     "Nem támogatott fájltípus.",
+     "Tip de fișier neacceptat."),
 
                     ["Please check either Full Paths or Only Names before exporting."] =
-    ("Veuillez cocher soit Chemins complets soit Noms seulement avant l’exportation.", "Bitte vor dem Exportieren entweder Vollständige Pfade oder Nur Namen aktivieren.", "Marque Rutas completas o Solo nombres antes de exportar."),
+    ("Veuillez cocher soit Chemins complets soit Noms seulement avant l'exportation.",
+     "Bitte vor dem Exportieren entweder Vollständige Pfade oder Nur Namen aktivieren.",
+     "Marque Rutas completas o Solo nombres antes de exportar.",
+     "Si prega di selezionare Percorsi completi o Solo nomi prima dell'esportazione.",
+     "Por favor, selecione Caminhos completos ou Apenas nomes antes de exportar.",
+     "Por favor, marque Caminhos completos ou Apenas nomes antes de exportar.",
+     "Selecteer Volledige paden of Alleen namen voordat u exporteert.",
+     "Markera antingen Fullständiga sökvägar eller Endast namn före export.",
+     "Vennligst merk enten Fullstendige stier eller Kun navn før eksport.",
+     "Marker venligst enten Fulde stier eller Kun navne før eksport.",
+     "Valitse joko Täydelliset polut tai Vain nimet ennen vientiä.",
+     "Zaznacz Pełne ścieżki lub Tylko nazwy przed eksportem.",
+     "Před exportem prosím zaškrtněte buď Úplné cesty nebo Pouze názvy.",
+     "Kérjük, jelölje be a Teljes elérési utak vagy a Csak nevek opciót exportálás előtt.",
+     "Vă rugăm să bifați fie Căi complete, fie Doar nume înainte de export."),
 
-                    ["Cancel the copy?\n\nChoosing ‘Yes’ will finish the current file and then stop."] =
-    ("Annuler la copie ?\n\nChoisir Oui terminera le fichier actuel puis s’arrêtera.", "Kopie abbrechen?\n\nWenn Ja gewählt wird, wird die aktuelle Datei fertiggestellt und dann gestoppt.", "¿Cancelar la copia?\n\nElegir Sí terminará el archivo actual y luego se detendrá."),
+                    ["Cancel the copy?\n\nChoosing 'Yes' will finish the current file and then stop."] =
+    ("Annuler la copie ?\n\nChoisir Oui terminera le fichier actuel puis s'arrêtera.",
+     "Kopie abbrechen?\n\nWenn Ja gewählt wird, wird die aktuelle Datei fertiggestellt und dann gestoppt.",
+     "¿Cancelar la copia?\n\nElegir Sí terminará el archivo actual y luego se detendrá.",
+     "Annullare la copia?\n\nScegliendo Sì, il file corrente verrà completato e poi si interromperà.",
+     "Cancelar a cópia?\n\nEscolher Sim terminará o ficheiro atual e depois irá parar.",
+     "Cancelar a cópia?\n\nEscolher Sim terminará o arquivo atual e depois irá parar.",
+     "Kopiëren annuleren?\n\nJa kiezen zal het huidige bestand voltooien en dan stoppen.",
+     "Avbryta kopieringen?\n\nAtt välja Ja kommer att slutföra den aktuella filen och sedan stoppa.",
+     "Avbryte kopieringen?\n\nÅ velge Ja vil fullføre den gjeldende filen og deretter stoppe.",
+     "Annuller kopieringen?\n\nAt vælge Ja vil afslutte den aktuelle fil og derefter stoppe.",
+     "Peruuta kopiointi?\n\nKyllä-valinta viimeistelee nykyisen tiedoston ja pysäyttää sitten.",
+     "Anulować kopiowanie?\n\nWybranie Tak zakończy bieżący plik, a następnie zatrzyma operację.",
+     "Zrušit kopírování?\n\nVolba Ano dokončí aktuální soubor a poté se zastaví.",
+     "Másolás megszakítása?\n\nAz Igen választása befejezi az aktuális fájlt, majd leáll.",
+     "Anulați copierea?\n\nAlegerea Da va finaliza fișierul curent și apoi se va opri."),
 
                     ["Confirm cancel"] =
-    ("Confirmer l’annulation", "Kopie abbrechen bestätigen", "Confirmar cancelación"),
+    ("Confirmer l'annulation",
+     "Kopie abbrechen bestätigen",
+     "Confirmar cancelación",
+     "Conferma annullamento",
+     "Confirmar cancelamento",
+     "Confirmar cancelamento",
+     "Bevestig annulering",
+     "Bekräfta avbryt",
+     "Bekreft avbryt",
+     "Bekræft annuller",
+     "Vahvista peruutus",
+     "Potwierdź anulowanie",
+     "Potvrdit zrušení",
+     "Megszakítás megerősítése",
+     "Confirmă anularea"),
 
                     ["Previous operation state found. Do you want to resume?"] =
-    ("État d’opération précédent trouvé. Voulez-vous reprendre ?", "Vorheriger Operationsstatus gefunden. Möchten Sie fortsetzen?", "Se encontró estado de operación anterior. ¿Desea reanudar?"),
+    ("État d'opération précédent trouvé. Voulez-vous reprendre ?",
+     "Vorheriger Operationsstatus gefunden. Möchten Sie fortsetzen?",
+     "Se encontró estado de operación anterior. ¿Desea reanudar?",
+     "Stato dell'operazione precedente trovato. Desidera riprendere?",
+     "Estado de operação anterior encontrado. Deseja retomar?",
+     "Estado de operação anterior encontrado. Deseja retomar?",
+     "Vorige bewerkingsstatus gevonden. Wilt u hervatten?",
+     "Tidigare operationsstatus hittades. Vill du återuppta?",
+     "Tidligere operasjonsstatus funnet. Vil du gjenoppta?",
+     "Tidligere operationsstatus fundet. Vil du genoptage?",
+     "Aiempi toimintatila löytyi. Haluatko jatkaa?",
+     "Znaleziono poprzedni stan operacji. Czy chcesz wznowić?",
+     "Nalezen předchozí stav operace. Chcete pokračovat?",
+     "Előző műveleti állapot található. Szeretné folytatni?",
+     "Stare de operație anterioară găsită. Doriți să reluați?"),
 
                     ["Resume Operation"] =
-    ("Reprendre l’opération", "Operation fortsetzen", "Reanudar operación"),
+    ("Reprendre l'opération",
+     "Operation fortsetzen",
+     "Reanudar operación",
+     "Riprendi operazione",
+     "Retomar operação",
+     "Retomar operação",
+     "Bewerking hervatten",
+     "Återuppta operation",
+     "Gjenoppta operasjon",
+     "Genoptag operation",
+     "Jatka toimintoa",
+     "Wznów operację",
+     "Pokračovat v operaci",
+     "Művelet folytatása",
+     "Reia operația"),
 
                     ["File verification completed."] =
-    ("Vérification de fichier terminée.", "Dateiüberprüfung abgeschlossen.", "Verificación de archivo completada."),
+    ("Vérification de fichier terminée.",
+     "Dateiüberprüfung abgeschlossen.",
+     "Verificación de archivo completada.",
+     "Verifica file completata.",
+     "Verificação de ficheiro concluída.",
+     "Verificação de arquivo concluída.",
+     "Bestandsverificatie voltooid.",
+     "Filverifiering slutförd.",
+     "Filverifisering fullført.",
+     "Filverificering fuldført.",
+     "Tiedoston varmennus valmis.",
+     "Weryfikacja pliku zakończona.",
+     "Ověření souboru dokončeno.",
+     "Fájlellenőrzés befejezve.",
+     "Verificarea fișierului completă."),
 
                     ["Verification Complete"] =
-    ("Vérification terminée", "Überprüfung abgeschlossen", "Verificación completada"),
+    ("Vérification terminée",
+     "Überprüfung abgeschlossen",
+     "Verificación completada",
+     "Verifica completata",
+     "Verificação concluída",
+     "Verificação concluída",
+     "Verificatie voltooid",
+     "Verifiering slutförd",
+     "Verifisering fullført",
+     "Verificering fuldført",
+     "Varmennus valmis",
+     "Weryfikacja zakończona",
+     "Ověření dokončeno",
+     "Ellenőrzés befejezve",
+     "Verificare completă"),
 
                     ["File verification cancelled."] =
-    ("Vérification de fichier annulée.", "Dateiüberprüfung abgebrochen.", "Verificación de archivo cancelada."),
+    ("Vérification de fichier annulée.",
+     "Dateiüberprüfung abgebrochen.",
+     "Verificación de archivo cancelada.",
+     "Verifica file annullata.",
+     "Verificação de ficheiro cancelada.",
+     "Verificação de arquivo cancelada.",
+     "Bestandsverificatie geannuleerd.",
+     "Filverifiering avbruten.",
+     "Filverifisering avbrutt.",
+     "Filverificering annulleret.",
+     "Tiedoston varmennus peruutettu.",
+     "Weryfikacja pliku anulowana.",
+     "Ověření souboru zrušeno.",
+     "Fájlellenőrzés megszakítva.",
+     "Verificarea fișierului anulată."),
 
                     ["Verification Cancelled"] =
-    ("Vérification annulée", "Überprüfung abgebrochen", "Verificación cancelada"),
+    ("Vérification annulée",
+     "Überprüfung abgebrochen",
+     "Verificación cancelada",
+     "Verifica annullata",
+     "Verificação cancelada",
+     "Verificação cancelada",
+     "Verificatie geannuleerd",
+     "Verifiering avbruten",
+     "Verifisering avbrutt",
+     "Verificering annulleret",
+     "Varmennus peruutettu",
+     "Weryfikacja anulowana",
+     "Ověření zrušeno",
+     "Ellenőrzés megszakítva",
+     "Verificare anulată"),
 
                     ["File verification completed with errors: {0}"] =
-    ("Vérification de fichier terminée avec des erreurs : {0}", "Dateiüberprüfung mit Fehlern abgeschlossen: {0}", "Verificación de archivo completada con errores: {0}"),
+    ("Vérification de fichier terminée avec des erreurs : {0}",
+     "Dateiüberprüfung mit Fehlern abgeschlossen: {0}",
+     "Verificación de archivo completada con errores: {0}",
+     "Verifica file completata con errori: {0}",
+     "Verificação de ficheiro concluída com erros: {0}",
+     "Verificação de arquivo concluída com erros: {0}",
+     "Bestandsverificatie voltooid met fouten: {0}",
+     "Filverifiering slutförd med fel: {0}",
+     "Filverifisering fullført med feil: {0}",
+     "Filverificering fuldført med fejl: {0}",
+     "Tiedoston varmennus valmis virheillä: {0}",
+     "Weryfikacja pliku zakończona z błędami: {0}",
+     "Ověření souboru dokončeno s chybami: {0}",
+     "Fájlellenőrzés befejezve hibákkal: {0}",
+     "Verificarea fișierului completă cu erori: {0}"),
 
                     ["Verification Error"] =
-    ("Erreur de vérification", "Überprüfungsfehler", "Error de verificación"),
+    ("Erreur de vérification",
+     "Überprüfungsfehler",
+     "Error de verificación",
+     "Errore di verifica",
+     "Erro de verificação",
+     "Erro de verificação",
+     "Verificatiefout",
+     "Verifieringsfel",
+     "Verifiseringsfeil",
+     "Verificeringsfejl",
+     "Varmennusvirhe",
+     "Błąd weryfikacji",
+     "Chyba ověření",
+     "Ellenőrzési hiba",
+     "Eroare de verificare"),
 
                     ["No destination folder selected. Cannot verify files."] =
-    ("Aucun dossier de destination sélectionné. Impossible de vérifier les fichiers.", "Kein Zielordner ausgewählt. Dateien können nicht überprüft werden.", "No se ha seleccionado carpeta de destino. No se pueden verificar los archivos."),
+    ("Aucun dossier de destination sélectionné. Impossible de vérifier les fichiers.",
+     "Kein Zielordner ausgewählt. Dateien können nicht überprüft werden.",
+     "No se ha seleccionado carpeta de destino. No se pueden verificar los archivos.",
+     "Nessuna cartella di destinazione selezionata. Impossibile verificare i file.",
+     "Nenhuma pasta de destino selecionada. Não é possível verificar os ficheiros.",
+     "Nenhuma pasta de destino selecionada. Não é possível verificar os arquivos.",
+     "Geen doelmap geselecteerd. Kan bestanden niet verifiëren.",
+     "Ingen målmapp vald. Kan inte verifiera filer.",
+     "Ingen destinasjonsmappe valgt. Kan ikke verifisere filer.",
+     "Ingen destinationsmappe valgt. Kan ikke verificere filer.",
+     "Kohdehakemistoa ei valittu. Tiedostoja ei voida varmennettaa.",
+     "Nie wybrano folderu docelowego. Nie można zweryfikować plików.",
+     "Nebyla vybrána cílová složka. Nelze ověřit soubory.",
+     "Nincs célmappa kiválasztva. A fájlok nem ellenőrizhetők.",
+     "Niciun folder de destinație selectat. Nu se pot verifica fișierele."),
 
-                    /* ----------  multi-thread summary  ---------- */
+                    // MULTI-THREAD SUMMARY
                     ["{0} Operation Summary ({1}) -\n\nFiles Copied: {2:N0}\nFiles Skipped: {3:N0}\nFiles Failed: {4:N0}\nTotal Files Processed: {5:N0} / {6:N0}\nTotal Bytes Processed: {7} / {8}"] =
-    ("Résumé de l’opération {0} ({1}) -\n\nFichiers copiés : {2:N0}\nFichiers ignorés : {3:N0}\nFichiers en échec : {4:N0}\nFichiers traités au total : {5:N0} / {6:N0}\nOctets traités au total : {7} / {8}",
+    ("Résumé de l'opération {0} ({1}) -\n\nFichiers copiés : {2:N0}\nFichiers ignorés : {3:N0}\nFichiers en échec : {4:N0}\nFichiers traités au total : {5:N0} / {6:N0}\nOctets traités au total : {7} / {8}",
      "{0} Operation-Zusammenfassung ({1}) -\n\nKopierte Dateien: {2:N0}\nÜbersprungene Dateien: {3:N0}\nFehlgeschlagene Dateien: {4:N0}\nGesamt bearbeitete Dateien: {5:N0} / {6:N0}\nGesamt bearbeitete Bytes: {7} / {8}",
-     "Resumen de operación {0} ({1}) -\n\nArchivos copiados: {2:N0}\nArchivos omitidos: {3:N0}\nArchivos fallidos: {4:N0}\nTotal archivos procesados: {5:N0} / {6:N0}\nTotal bytes procesados: {7} / {8}"),
+     "Resumen de operación {0} ({1}) -\n\nArchivos copiados: {2:N0}\nArchivos omitidos: {3:N0}\nArchivos fallidos: {4:N0}\nTotal archivos procesados: {5:N0} / {6:N0}\nTotal bytes procesados: {7} / {8}",
+     "Riepilogo operazione {0} ({1}) -\n\nFile copiati: {2:N0}\nFile saltati: {3:N0}\nFile falliti: {4:N0}\nTotale file elaborati: {5:N0} / {6:N0}\nTotale byte elaborati: {7} / {8}",
+     "Resumo da operação {0} ({1}) -\n\nFicheiros copiados: {2:N0}\nFicheiros ignorados: {3:N0}\nFicheiros falhados: {4:N0}\nTotal de ficheiros processados: {5:N0} / {6:N0}\nTotal de bytes processados: {7} / {8}",
+     "Resumo da operação {0} ({1}) -\n\nArquivos copiados: {2:N0}\nArquivos ignorados: {3:N0}\nArquivos falhados: {4:N0}\nTotal de arquivos processados: {5:N0} / {6:N0}\nTotal de bytes processados: {7} / {8}",
+     "{0} Bewerkingssamenvatting ({1}) -\n\nBestanden gekopieerd: {2:N0}\nBestanden overgeslagen: {3:N0}\nBestanden mislukt: {4:N0}\nTotaal verwerkte bestanden: {5:N0} / {6:N0}\nTotaal verwerkte bytes: {7} / {8}",
+     "{0} Operationssammanfattning ({1}) -\n\nKopierade filer: {2:N0}\nÖverhoppade filer: {3:N0}\nMisslyckade filer: {4:N0}\nTotalt bearbetade filer: {5:N0} / {6:N0}\nTotalt bearbetade bytes: {7} / {8}",
+     "{0} Operasjonssammendrag ({1}) -\n\nKopierte filer: {2:N0}\nHoppet over filer: {3:N0}\nMislykket filer: {4:N0}\nTotalt behandlede filer: {5:N0} / {6:N0}\nTotalt behandlede bytes: {7} / {8}",
+     "{0} Operationssammenfatning ({1}) -\n\nKopierede filer: {2:N0}\nOversprungne filer: {3:N0}\nMislykkedes filer: {4:N0}\nSamlet behandlede filer: {5:N0} / {6:N0}\nSamlet behandlede bytes: {7} / {8}",
+     "{0} Toiminnon yhteenveto ({1}) -\n\nKopioituja tiedostoja: {2:N0}\nOhitettuja tiedostoja: {3:N0}\nEpäonnistuneita tiedostoja: {4:N0}\nKäsiteltyjä tiedostoja yhteensä: {5:N0} / {6:N0}\nKäsiteltyjä tavuja yhteensä: {7} / {8}",
+     "{0} Podsumowanie operacji ({1}) -\n\nSkopiowane pliki: {2:N0}\nPominięte pliki: {3:N0}\nNieudane pliki: {4:N0}\nŁącznie przetworzonych plików: {5:N0} / {6:N0}\nŁącznie przetworzonych bajtów: {7} / {8}",
+     "{0} Souhrn operace ({1}) -\n\nZkopírované soubory: {2:N0}\nPřeskočené soubory: {3:N0}\nNeúspěšné soubory: {4:N0}\nCelkem zpracovaných souborů: {5:N0} / {6:N0}\nCelkem zpracovaných bajtů: {7} / {8}",
+     "{0} Művelet összefoglalása ({1}) -\n\nMásolt fájlok: {2:N0}\nKihagyott fájlok: {3:N0}\nSikertelen fájlok: {4:N0}\nÖsszes feldolgozott fájl: {5:N0} / {6:N0}\nÖsszes feldolgozott bájt: {7} / {8}",
+     "{0} Rezumat operație ({1}) -\n\nFișiere copiate: {2:N0}\nFișiere omise: {3:N0}\nFișiere eșuate: {4:N0}\nTotal fișiere procesate: {5:N0} / {6:N0}\nTotal octeți procesați: {7} / {8}"),
 
                     ["Operation {0}"] =
-    ("Opération {0}", "Operation {0}", "Operación {0}"),
+    ("Opération {0}",
+     "Operation {0}",
+     "Operación {0}",
+     "Operazione {0}",
+     "Operação {0}",
+     "Operação {0}",
+     "Bewerking {0}",
+     "Operation {0}",
+     "Operasjon {0}",
+     "Operation {0}",
+     "Toiminto {0}",
+     "Operacja {0}",
+     "Operace {0}",
+     "Művelet {0}",
+     "Operație {0}"),
 
-                    /* ----------  copy / move / secure-delete  ---------- */
+                    // COPY/MOVE/SECURE-DELETE
                     ["Copy operation cancelled by user."] =
-    ("Opération de copie annulée par l’utilisateur.", "Kopie-Operation vom Benutzer abgebrochen.", "Operación de copia cancelada por el usuario."),
+    ("Opération de copie annulée par l'utilisateur.",
+     "Kopie-Operation vom Benutzer abgebrochen.",
+     "Operación de copia cancelada por el usuario.",
+     "Operazione di copia annullata dall'utente.",
+     "Operação de cópia cancelada pelo utilizador.",
+     "Operação de cópia cancelada pelo usuário.",
+     "Kopieerbewerking geannuleerd door gebruiker.",
+     "Kopieringsoperation avbruten av användare.",
+     "Kopieringsoperasjon avbrutt av bruker.",
+     "Kopieringsoperation annulleret af bruger.",
+     "Kopiointitoiminto peruutettu käyttäjän toimesta.",
+     "Operacja kopiowania anulowana przez użytkownika.",
+     "Operace kopírování zrušena uživatelem.",
+     "Másolási művelet megszakítva a felhasználó által.",
+     "Operație de copiere anulată de utilizator."),
 
                     ["Operation Cancelled"] =
-    ("Opération annulée", "Operation abgebrochen", "Operación cancelada"),
+    ("Opération annulée",
+     "Operation abgebrochen",
+     "Operación cancelada",
+     "Operazione annullata",
+     "Operação cancelada",
+     "Operação cancelada",
+     "Bewerking geannuleerd",
+     "Operation avbruten",
+     "Operasjon avbrutt",
+     "Operation annulleret",
+     "Toiminto peruutettu",
+     "Operacja anulowana",
+     "Operace zrušena",
+     "Művelet megszakítva",
+     "Operație anulată"),
 
                     ["Copy operation completed with errors: {0}"] =
-    ("Opération de copie terminée avec des erreurs : {0}", "Kopie-Operation mit Fehlern abgeschlossen: {0}", "Operación de copia completada con errores: {0}"),
+    ("Opération de copie terminée avec des erreurs : {0}",
+     "Kopie-Operation mit Fehlern abgeschlossen: {0}",
+     "Operación de copia completada con errores: {0}",
+     "Operazione di copia completata con errori: {0}",
+     "Operação de cópia concluída com erros: {0}",
+     "Operação de cópia concluída com erros: {0}",
+     "Kopieerbewerking voltooid met fouten: {0}",
+     "Kopieringsoperation slutförd med fel: {0}",
+     "Kopieringsoperasjon fullført med feil: {0}",
+     "Kopieringsoperation fuldført med fejl: {0}",
+     "Kopiointitoiminto valmis virheillä: {0}",
+     "Operacja kopiowania zakończona z błędami: {0}",
+     "Operace kopírování dokončena s chybami: {0}",
+     "Másolási művelet befejezve hibákkal: {0}",
+     "Operație de copiere completă cu erori: {0}"),
 
                     ["Copy Error"] =
-    ("Erreur de copie", "Kopie-Fehler", "Error de copia"),
+    ("Erreur de copie",
+     "Kopie-Fehler",
+     "Error de copia",
+     "Errore di copia",
+     "Erro de cópia",
+     "Erro de cópia",
+     "Kopieerfout",
+     "Kopieringsfel",
+     "Kopieringsfeil",
+     "Kopieringsfejl",
+     "Kopiointivirhe",
+     "Błąd kopiowania",
+     "Chyba kopírování",
+     "Másolási hiba",
+     "Eroare de copiere"),
 
                     ["Secure Delete operation cancelled by user."] =
-    ("Suppression sécurisée annulée par l’utilisateur.", "Sicheres Löschen vom Benutzer abgebrochen.", "Borrado seguro cancelado por el usuario."),
+    ("Suppression sécurisée annulée par l'utilisateur.",
+     "Sicheres Löschen vom Benutzer abgebrochen.",
+     "Borrado seguro cancelado por el usuario.",
+     "Eliminazione sicura annullata dall'utente.",
+     "Eliminação segura cancelada pelo utilizador.",
+     "Exclusão segura cancelada pelo usuário.",
+     "Veilig verwijderen geannuleerd door gebruiker.",
+     "Säker radering avbruten av användare.",
+     "Sikker sletting avbrutt av bruker.",
+     "Sikker sletning annulleret af bruger.",
+     "Turvallinen poisto peruutettu käyttäjän toimesta.",
+     "Bezpieczne usuwanie anulowane przez użytkownika.",
+     "Bezpečné mazání zrušeno uživatelem.",
+     "Biztonságos törlés megszakítva a felhasználó által.",
+     "Ștergere securizată anulată de utilizator."),
 
                     ["Secure Delete operation completed with errors: {0}"] =
-    ("Suppression sécurisée terminée avec des erreurs : {0}", "Sicheres Löschen mit Fehlern abgeschlossen: {0}", "Borrado seguro completado con errores: {0}"),
+    ("Suppression sécurisée terminée avec des erreurs : {0}",
+     "Sicheres Löschen mit Fehlern abgeschlossen: {0}",
+     "Borrado seguro completado con errores: {0}",
+     "Eliminazione sicura completata con errori: {0}",
+     "Eliminação segura concluída com erros: {0}",
+     "Exclusão segura concluída com erros: {0}",
+     "Veilig verwijderen voltooid met fouten: {0}",
+     "Säker radering slutförd med fel: {0}",
+     "Sikker sletting fullført med feil: {0}",
+     "Sikker sletning fuldført med fejl: {0}",
+     "Turvallinen poisto valmis virheillä: {0}",
+     "Bezpieczne usuwanie zakończone z błędami: {0}",
+     "Bezpečné mazání dokončeno s chybami: {0}",
+     "Biztonságos törlés befejezve hibákkal: {0}",
+     "Ștergere securizată completă cu erori: {0}"),
 
                     ["Secure Delete Error"] =
-    ("Erreur de suppression sécurisée", "Fehler beim sicheren Löschen", "Error de borrado seguro"),
+    ("Erreur de suppression sécurisée",
+     "Fehler beim sicheren Löschen",
+     "Error de borrado seguro",
+     "Errore di eliminazione sicura",
+     "Erro de eliminação segura",
+     "Erro de exclusão segura",
+     "Fout bij veilig verwijderen",
+     "Säker raderingsfel",
+     "Sikker slettingsfeil",
+     "Sikker sletningsfejl",
+     "Turvallisen poiston virhe",
+     "Błąd bezpiecznego usuwania",
+     "Chyba bezpečného mazání",
+     "Biztonságos törlési hiba",
+     "Eroare de ștergere securizată"),
 
                     ["Move operation cancelled by user."] =
-    ("Déplacement annulé par l’utilisateur.", "Verschieben vom Benutzer abgebrochen.", "Operación de mover cancelada por el usuario."),
+    ("Déplacement annulé par l'utilisateur.",
+     "Verschieben vom Benutzer abgebrochen.",
+     "Operación de mover cancelada por el usuario.",
+     "Operazione di spostamento annullata dall'utente.",
+     "Operação de movimentação cancelada pelo utilizador.",
+     "Operação de movimentação cancelada pelo usuário.",
+     "Verplaatsbewerking geannuleerd door gebruiker.",
+     "Flyttoperation avbruten av användare.",
+     "Flyttoperasjon avbrutt av bruker.",
+     "Flytoperation annulleret af bruger.",
+     "Siirtotoiminto peruutettu käyttäjän toimesta.",
+     "Operacja przenoszenia anulowana przez użytkownika.",
+     "Operace přesunu zrušena uživatelem.",
+     "Áthelyezési művelet megszakítva a felhasználó által.",
+     "Operație de mutare anulată de utilizator."),
 
                     ["Move operation completed with errors: {0}"] =
-    ("Déplacement terminé avec des erreurs : {0}", "Verschieben mit Fehlern abgeschlossen: {0}", "Operación de mover completada con errores: {0}"),
+    ("Déplacement terminé avec des erreurs : {0}",
+     "Verschieben mit Fehlern abgeschlossen: {0}",
+     "Operación de mover completada con errores: {0}",
+     "Operazione di spostamento completata con errori: {0}",
+     "Operação de movimentação concluída com erros: {0}",
+     "Operação de movimentação concluída com erros: {0}",
+     "Verplaatsbewerking voltooid met fouten: {0}",
+     "Flyttoperation slutförd med fel: {0}",
+     "Flyttoperasjon fullført med feil: {0}",
+     "Flytoperation fuldført med fejl: {0}",
+     "Siirtotoiminto valmis virheillä: {0}",
+     "Operacja przenoszenia zakończona z błędami: {0}",
+     "Operace přesunu dokončena s chybami: {0}",
+     "Áthelyezési művelet befejezve hibákkal: {0}",
+     "Operație de mutare completă cu erori: {0}"),
 
                     ["Move Error"] =
-    ("Erreur de déplacement", "Verschiebe-Fehler", "Error de mover"),
+    ("Erreur de déplacement",
+     "Verschiebe-Fehler",
+     "Error de mover",
+     "Errore di spostamento",
+     "Erro de movimentação",
+     "Erro de movimentação",
+     "Verplaatsfout",
+     "Flyttfel",
+     "Flyttfeil",
+     "Flytfejl",
+     "Siirtovirhe",
+     "Błąd przenoszenia",
+     "Chyba přesunu",
+     "Áthelyezési hiba",
+     "Eroare de mutare"),
 
-                    /* ----------  confirmations / warnings  ---------- */
+                    // CONFIRMATIONS/WARNINGS
                     ["Secure deletion is about to take place on folder:\n\n{0}\n\nWould you like to continue?"] =
-    ("Une suppression sécurisée va avoir lieu sur le dossier :\n\n{0}\n\nVoulez-vous continuer ?", "Sicheres Löschen wird für Ordner ausgeführt:\n\n{0}\n\nMöchten Sie fortfahren?", "El borrado seguro se realizará en la carpeta:\n\n{0}\n\n¿Desea continuar?"),
+    ("Une suppression sécurisée va avoir lieu sur le dossier :\n\n{0}\n\nVoulez-vous continuer ?",
+     "Sicheres Löschen wird für Ordner ausgeführt:\n\n{0}\n\nMöchten Sie fortfahren?",
+     "El borrado seguro se realizará en la carpeta:\n\n{0}\n\n¿Desea continuar?",
+     "L'eliminazione sicura sta per essere eseguita sulla cartella:\n\n{0}\n\nDesidera continuare?",
+     "A eliminação segura está prestes a ser efetuada na pasta:\n\n{0}\n\nDeseja continuar?",
+     "A exclusão segura está prestes a ser efetuada na pasta:\n\n{0}\n\nDeseja continuar?",
+     "Veilig verwijderen gaat plaatsvinden op map:\n\n{0}\n\nWilt u doorgaan?",
+     "Säker radering kommer att utföras på mapp:\n\n{0}\n\nVill du fortsätta?",
+     "Sikker sletting er i ferd med å finne sted på mappe:\n\n{0}\n\nVil du fortsette?",
+     "Sikker sletning er ved at finde sted på mappe:\n\n{0}\n\nVil du fortsætte?",
+     "Turvallinen poisto on tapahtumassa kansiolle:\n\n{0}\n\nHaluatko jatkaa?",
+     "Bezpieczne usuwanie ma nastąpić w folderze:\n\n{0}\n\nCzy chcesz kontynuować?",
+     "Bezpečné mazání se chystá provést ve složce:\n\n{0}\n\nChcete pokračovat?",
+     "Biztonságos törlés hamarosan végrehajtásra kerül a mappában:\n\n{0}\n\nSzeretné folytatni?",
+     "Ștergerea securizată urmează să aibă loc în folderul:\n\n{0}\n\nDoriți să continuați?"),
 
                     ["Confirm Secure Delete"] =
-    ("Confirmer la suppression sécurisée", "Sicheres Löschen bestätigen", "Confirmar borrado seguro"),
+    ("Confirmer la suppression sécurisée",
+     "Sicheres Löschen bestätigen",
+     "Confirmar borrado seguro",
+     "Conferma eliminazione sicura",
+     "Confirmar eliminação segura",
+     "Confirmar exclusão segura",
+     "Bevestig veilig verwijderen",
+     "Bekräfta säker radering",
+     "Bekreft sikker sletting",
+     "Bekræft sikker sletning",
+     "Vahvista turvallinen poisto",
+     "Potwierdź bezpieczne usuwanie",
+     "Potvrdit bezpečné mazání",
+     "Biztonságos törlés megerősítése",
+     "Confirmă ștergerea securizată"),
 
                     ["Directory not found in the file list:\n{0}"] =
-    ("Répertoire non trouvé dans la liste de fichiers :\n{0}", "Verzeichnis in Dateiliste nicht gefunden:\n{0}", "Directorio no encontrado en la lista de archivos:\n{0}"),
+    ("Répertoire non trouvé dans la liste de fichiers :\n{0}",
+     "Verzeichnis in Dateiliste nicht gefunden:\n{0}",
+     "Directorio no encontrado en la lista de archivos:\n{0}",
+     "Cartella non trovata nell'elenco file:\n{0}",
+     "Diretório não encontrado na lista de ficheiros:\n{0}",
+     "Diretório não encontrado na lista de arquivos:\n{0}",
+     "Map niet gevonden in bestandenlijst:\n{0}",
+     "Mapp hittades inte i fillistan:\n{0}",
+     "Mappe ikke funnet i fillisten:\n{0}",
+     "Mappe ikke fundet i fillisten:\n{0}",
+     "Kansiota ei löytynyt tiedostoluettelosta:\n{0}",
+     "Katalog nie znaleziony na liście plików:\n{0}",
+     "Složka nebyla nalezena v seznamu souborů:\n{0}",
+     "Mappa nem található a fájllistában:\n{0}",
+     "Director negăsit în lista de fișiere:\n{0}"),
 
                     ["Directory Not Found"] =
-    ("Répertoire non trouvé", "Verzeichnis nicht gefunden", "Directorio no encontrado"),
+    ("Répertoire non trouvé",
+     "Verzeichnis nicht gefunden",
+     "Directorio no encontrado",
+     "Cartella non trovata",
+     "Diretório não encontrado",
+     "Diretório não encontrado",
+     "Map niet gevonden",
+     "Mapp hittades inte",
+     "Mappe ikke funnet",
+     "Mappe ikke fundet",
+     "Kansiota ei löytynyt",
+     "Katalog nie znaleziony",
+     "Složka nenalezena",
+     "Mappa nem található",
+     "Director negăsit"),
 
                     ["Failed to create directory:\n{0}\n\nPlease try a different name."] =
-    ("Échec de création du répertoire :\n{0}\n\nVeuillez essayer un autre nom.", "Verzeichnis erstellen fehlgeschlagen:\n{0}\n\nBitte einen anderen Namen versuchen.", "Error al crear directorio:\n{0}\n\nPruebe con otro nombre."),
+    ("Échec de création du répertoire :\n{0}\n\nVeuillez essayer un autre nom.",
+     "Verzeichnis erstellen fehlgeschlagen:\n{0}\n\nBitte einen anderen Namen versuchen.",
+     "Error al crear directorio:\n{0}\n\nPruebe con otro nombre.",
+     "Impossibile creare la cartella:\n{0}\n\nSi prega di provare un nome diverso.",
+     "Falha ao criar o diretório:\n{0}\n\nPor favor, tente um nome diferente.",
+     "Falha ao criar o diretório:\n{0}\n\nPor favor, tente um nome diferente.",
+     "Kan map niet maken:\n{0}\n\nProbeer een andere naam.",
+     "Misslyckades med att skapa mapp:\n{0}\n\nFörsök med ett annat namn.",
+     "Kunne ikke opprette mappe:\n{0}\n\nVennligst prøv et annet navn.",
+     "Kunne ikke oprette mappe:\n{0}\n\nPrøv venligst et andet navn.",
+     "Kansion luominen epäonnistui:\n{0}\n\nYritä toista nimeä.",
+     "Nie udało się utworzyć katalogu:\n{0}\n\nSpróbuj innej nazwy.",
+     "Nepodařilo se vytvořit složku:\n{0}\n\nZkuste jiný název.",
+     "Nem sikerült létrehozni a mappát:\n{0}\n\nKérjük, próbáljon másik nevet.",
+     "Eșec la crearea directorului:\n{0}\n\nVă rugăm să încercați un nume diferit."),
 
                     ["Directory Creation Failed"] =
-    ("Échec de création du répertoire", "Verzeichnis-Erstellung fehlgeschlagen", "Error al crear directorio"),
+    ("Échec de création du répertoire",
+     "Verzeichnis-Erstellung fehlgeschlagen",
+     "Error al crear directorio",
+     "Creazione cartella fallita",
+     "Falha na criação do diretório",
+     "Falha na criação do diretório",
+     "Map aanmaken mislukt",
+     "Mappskapande misslyckades",
+     "Opprettelse av mappe mislyktes",
+     "Mappeoprettelse mislykkedes",
+     "Kansion luominen epäonnistui",
+     "Tworzenie katalogu nieudane",
+     "Vytvoření složky selhalo",
+     "Mappa létrehozása sikertelen",
+     "Crearea directorului eșuată"),
 
                     ["Directory name contains invalid characters. Please try again."] =
-    ("Le nom du répertoire contient des caractères invalides. Veuillez réessayer.", "Verzeichnisname enthält ungültige Zeichen. Bitte erneut versuchen.", "El nombre del directorio contiene caracteres inválidos. Inténtelo de nuevo."),
+    ("Le nom du répertoire contient des caractères invalides. Veuillez réessayer.",
+     "Verzeichnisname enthält ungültige Zeichen. Bitte erneut versuchen.",
+     "El nombre del directorio contiene caracteres inválidos. Inténtelo de nuevo.",
+     "Il nome della cartella contiene caratteri non validi. Si prega di riprovare.",
+     "O nome do diretório contém caracteres inválidos. Por favor, tente novamente.",
+     "O nome do diretório contém caracteres inválidos. Por favor, tente novamente.",
+     "Mapnaam bevat ongeldige tekens. Probeer het opnieuw.",
+     "Mappnamn innehåller ogiltiga tecken. Försök igen.",
+     "Mappenavn inneholder ugyldige tegn. Vennligst prøv igjen.",
+     "Mappenavn indeholder ugyldige tegn. Prøv venligst igen.",
+     "Kansion nimi sisältää virheellisiä merkkejä. Yritä uudelleen.",
+     "Nazwa katalogu zawiera nieprawidłowe znaki. Spróbuj ponownie.",
+     "Název složky obsahuje neplatné znaky. Zkuste to prosím znovu.",
+     "A mappa neve érvénytelen karaktereket tartalmaz. Kérjük, próbálja újra.",
+     "Numele directorului conține caractere invalide. Vă rugăm să încercați din nou."),
 
                     ["Invalid Directory Name"] =
-    ("Nom de répertoire invalide", "Ungültiger Verzeichnisname", "Nombre de directorio inválido"),
+    ("Nom de répertoire invalide",
+     "Ungültiger Verzeichnisname",
+     "Nombre de directorio inválido",
+     "Nome cartella non valido",
+     "Nome de diretório inválido",
+     "Nome de diretório inválido",
+     "Ongeldige mapnaam",
+     "Ogiltigt mappnamn",
+     "Ugyldig mappenavn",
+     "Ugyldigt mappenavn",
+     "Virheellinen kansion nimi",
+     "Nieprawidłowa nazwa katalogu",
+     "Neplatný název složky",
+     "Érvénytelen mappanév",
+     "Nume de director invalid"),
+
+
+
+
+
+
+                    // Languages: English (original), French (fr), German (de), Spanish (es), 
+                    // Italian (it), Portuguese Portugal (pt-PT), Portuguese Brazil (pt-BR), 
+                    // Dutch (nl), Swedish (sv), Norwegian (no), Danish (da), Finnish (fi), 
+                    // Polish (pl), Czech (cs), Hungarian (hu), Romanian (ro)
 
                     ["No target paths available for custom directory creation."] =
-    ("Aucun chemin cible disponible pour la création de répertoire personnalisé.", "Keine Zielpfade für benutzerdefinierte Verzeichnis-Erstellung verfügbar.", "No hay rutas de destino disponibles para crear directorio personalizado."),
+    ("Aucun chemin cible disponible pour la création de répertoire personnalisé.",
+    "Keine Zielpfade für benutzerdefinierte Verzeichnis-Erstellung verfügbar.",
+    "No hay rutas de destino disponibles para crear directorio personalizado.",
+    "Nessun percorso di destinazione disponibile per la creazione di directory personalizzata.",
+    "Nenhum caminho de destino disponível para criação de diretório personalizado.",
+    "Nenhum caminho de destino disponível para criação de diretório personalizado.",
+    "Geen doelpaden beschikbaar voor het maken van aangepaste mappen.",
+    "Inga målsökvägar tillgängliga för att skapa anpassad katalog.",
+    "Ingen målstier tilgjengelig for tilpasset katalogoppretting.",
+    "Ingen destinationsstier tilgængelige for oprettelse af brugerdefinerede mapper.",
+    "Ei kohdekansioita saatavilla mukautetun hakemiston luomiseen.",
+    "Brak dostępnych ścieżek docelowych do tworzenia niestandardowych katalogów.",
+    "Nejsou k dispozici žádné cílové cesty pro vytvoření vlastního adresáře.",
+    "Nincsenek célútvonalak elérhetőek egyéni könyvtár létrehozásához.",
+    "Niciun drum țintă disponibil pentru crearea directorului personalizat."),
 
                     ["No data to export."] =
-    ("Aucune donnée à exporter.", "Keine Daten zum Exportieren.", "No hay datos para exportar."),
+    ("Aucune donnée à exporter.",
+    "Keine Daten zum Exportieren.",
+    "No hay datos para exportar.",
+    "Nessun dato da esportare.",
+    "Nenhum dado para exportar.",
+    "Nenhum dado para exportar.",
+    "Geen gegevens om te exporteren.",
+    "Ingen data att exportera.",
+    "Ingen data å eksportere.",
+    "Ingen data at eksportere.",
+    "Ei vientiä varten tietoja.",
+    "Brak danych do eksportu.",
+    "Žádná data k exportu.",
+    "Nincsenek adatok az exportáláshoz.",
+    "Niciun date de exportat."),
 
                     ["Failed to update startup setting: {0}"] =
-    ("Échec de mise à jour du paramètre de démarrage : {0}", "Fehler beim Aktualisieren der Start-Einstellung: {0}", "Error al actualizar configuración de inicio: {0}"),
+    ("Échec de mise à jour du paramètre de démarrage : {0}",
+    "Fehler beim Aktualisieren der Start-Einstellung: {0}",
+    "Error al actualizar configuración de inicio: {0}",
+    "Impossibile aggiornare l'impostazione di avvio: {0}",
+    "Falha ao atualizar a configuração de inicialização: {0}",
+    "Falha ao atualizar a configuração de inicialização: {0}",
+    "Bijwerken van opstartinstelling mislukt: {0}",
+    "Misslyckades att uppdatera startinställning: {0}",
+    "Kunne ikke oppdatere oppstartsinnstilling: {0}",
+    "Kunne ikke opdatere startindstilling: {0}",
+    "Käynnistysasetuksen päivitys epäonnistui: {0}",
+    "Nie udało się zaktualizować ustawienia startowego: {0}",
+    "Selhalo aktualizování nastavení spuštění: {0}",
+    "Nem sikerült frissíteni az indítási beállítást: {0}",
+    "Nu s-a putut actualiza setarea de pornire: {0}"),
 
                     ["Startup sync failed: {0}"] =
-    ("Échec de synchronisation au démarrage : {0}", "Start-Sync fehlgeschlagen: {0}", "Error de sincronización al inicio: {0}"),
+    ("Échec de synchronisation au démarrage : {0}",
+    "Start-Sync fehlgeschlagen: {0}",
+    "Error de sincronización al inicio: {0}",
+    "Sincronizzazione all'avvio non riuscita: {0}",
+    "Falha na sincronização de inicialização: {0}",
+    "Falha na sincronização de inicialização: {0}",
+    "Opstartsynchronisatie mislukt: {0}",
+    "Startsynkronisering misslyckades: {0}",
+    "Oppstartssynkronisering mislyktes: {0}",
+    "Startsynkronisering mislykkedes: {0}",
+    "Käynnistyssynkronointi epäonnistui: {0}",
+    "Synchronizacja startowa nie powiodła się: {0}",
+    "Spouštěcí synchronizace selhala: {0}",
+    "Indítási szinkronizáció sikertelen: {0}",
+    "Sincronizarea la pornire a eșuat: {0}"),
 
                     ["You may not have this form always on top if you add the context menu item."] =
-    ("Vous ne pouvez pas garder cette fenêtre toujours au premier plan si vous ajoutez l’élément du menu contextuel.", "Sie können dieses Fenster nicht immer im Vordergrund halten, wenn Sie das Kontextmenü-Element hinzufügen.", "No puede mantener este formulario siempre encima si agrega el elemento del menú contextual."),
+    ("Vous ne pouvez pas garder cette fenêtre toujours au premier plan si vous ajoutez l'élément du menu contextuel.",
+    "Sie können dieses Fenster nicht immer im Vordergrund halten, wenn Sie das Kontextmenü-Element hinzufügen.",
+    "No puede mantener este formulario siempre encima si agrega el elemento del menú contextual.",
+    "Potresti non avere questa finestra sempre in primo piano se aggiungi la voce del menu contestuale.",
+    "Pode não ter este formulário sempre no topo se adicionar o item do menu de contexto.",
+    "Você pode não ter este formulário sempre no topo se adicionar o item do menu de contexto.",
+    "U kunt dit formulier mogelijk niet altijd bovenaan houden als u het contextmenu-item toevoegt.",
+    "Du kanske inte kan ha detta formulär alltid överst om du lägger till kontextmenyalternativet.",
+    "Du kan ikke ha dette skjemaet alltid øverst hvis du legger til kontekstmenyelementet.",
+    "Du kan muligvis ikke have denne form altid øverst, hvis du tilføjer kontekstmenupunktet.",
+    "Et voi pitää tätä lomaketta aina päällimmäisenä, jos lisäät kontekstivalikkokohteen.",
+    "Możesz nie mieć tego formularza zawsze na wierzchu, jeśli dodasz element menu kontekstowego.",
+    "Toto okno nemusí zůstat vždy navrchu, pokud přidáte položku kontextové nabídky.",
+    "Lehet, hogy nem tudja ezt az űrlapot mindig legfelül tartani, ha hozzáadja a helyi menü elemet.",
+    "S-ar putea să nu puteți avea acest formular întotdeauna deasupra dacă adăugați elementul din meniul contextual."),
 
                     ["Error applying skin: {0}"] =
-    ("Erreur lors de l’application du thème : {0}", "Fehler beim Anwenden des Skins: {0}", "Error al aplicar tema: {0}"),
+    ("Erreur lors de l'application du thème : {0}",
+    "Fehler beim Anwenden des Skins: {0}",
+    "Error al aplicar tema: {0}",
+    "Errore durante l'applicazione della skin: {0}",
+    "Erro ao aplicar o tema: {0}",
+    "Erro ao aplicar o tema: {0}",
+    "Fout bij toepassen van skin: {0}",
+    "Fel vid tillämpning av utseende: {0}",
+    "Feil ved påføring av drakt: {0}",
+    "Fejl ved anvendelse af udseende: {0}",
+    "Virhe asetetta käyttöönottaessa: {0}",
+    "Błąd podczas stosowania skórki: {0}",
+    "Chyba při aplikování vzhledu: {0}",
+    "Hiba a kinézet alkalmazásakor: {0}",
+    "Eroare la aplicarea temei: {0}"),
 
                     ["Cannot display the file: ({0}). You may not have permission to read the file, or it may be corrupt.\n\nReported error: {1}"] =
-    ("Impossible d’afficher le fichier : ({0}). Vous n’avez peut-être pas la permission de le lire, ou il est corrompu.\n\nErreur signalée : {1}", "Datei kann nicht angezeigt werden: ({0}). Möglicherweise fehlt die Leseberechtigung oder die Datei ist beschädigt.\n\nGemeldeter Fehler: {1}", "No se puede mostrar el archivo: ({0}). Es posible que no tenga permiso para leerlo o esté dañado.\n\nError reportado: {1}"),
+    ("Impossible d'afficher le fichier : ({0}). Vous n'avez peut-être pas la permission de le lire, ou il est corrompu.\n\nErreur signalée : {1}",
+    "Datei kann nicht angezeigt werden: ({0}). Möglicherweise fehlt die Leseberechtigung oder die Datei ist beschädigt.\n\nGemeldeter Fehler: {1}",
+    "No se puede mostrar el archivo: ({0}). Es posible que no tenga permiso para leerlo o esté dañado.\n\nError reportado: {1}",
+    "Impossibile visualizzare il file: ({0}). Potresti non avere il permesso di leggere il file o potrebbe essere corrotto.\n\nErrore segnalato: {1}",
+    "Não é possível exibir o ficheiro: ({0}). Pode não ter permissão para ler o ficheiro ou este pode estar corrompido.\n\nErro reportado: {1}",
+    "Não é possível exibir o arquivo: ({0}). Você pode não ter permissão para ler o arquivo ou ele pode estar corrompido.\n\nErro reportado: {1}",
+    "Kan bestand niet weergeven: ({0}). Mogelijk heeft u geen toestemming om het bestand te lezen of het is beschadigd.\n\nGemelde fout: {1}",
+    "Kan inte visa filen: ({0}). Du kanske inte har behörighet att läsa filen, eller så kan den vara korrupt.\n\nRapporterat fel: {1}",
+    "Kan ikke vise filen: ({0}). Du har kanskje ikke tillatelse til å lese filen, eller den kan være skadet.\n\nRapportert feil: {1}",
+    "Kan ikke vise filen: ({0}). Du har muligvis ikke tilladelse til at læse filen, eller den kan være beskadiget.\n\nRapporteret fejl: {1}",
+    "Tiedostoa ei voi näyttää: ({0}). Sinulla ei ehkä ole oikeutta lukea tiedostoa tai se voi olla vioittunut.\n\nIlmoitettu virhe: {1}",
+    "Nie można wyświetlić pliku: ({0}). Możesz nie mieć uprawnień do odczytu pliku lub plik może być uszkodzony.\n\nZgłoszony błąd: {1}",
+    "Soubor nelze zobrazit: ({0}). Možná nemáte oprávnění ke čtení souboru nebo může být poškozen.\n\nNahlášená chyba: {1}",
+    "A fájl nem jeleníthető meg: ({0}). Lehet, hogy nincs jogosultsága a fájl olvasásához, vagy a fájl sérült.\n\nJelentett hiba: {1}",
+    "Nu se poate afișa fișierul: ({0}). S-ar putea să nu aveți permisiunea de a citi fișierul sau acesta poate fi corupt.\n\nEroare raportată: {1}"),
 
                     ["Security error!\n\nError message: {0}\n\nDetails:\n\n{1}"] =
-    ("Erreur de sécurité !\n\nMessage d’erreur : {0}\n\nDétails :\n\n{1}", "Sicherheitsfehler!\n\nFehlermeldung: {0}\n\nDetails:\n\n{1}", "¡Error de seguridad!\n\nMensaje de error: {0}\n\nDetalles:\n\n{1}"),
+    ("Erreur de sécurité !\n\nMessage d'erreur : {0}\n\nDétails :\n\n{1}",
+    "Sicherheitsfehler!\n\nFehlermeldung: {0}\n\nDetails:\n\n{1}",
+    "¡Error de seguridad!\n\nMensaje de error: {0}\n\nDetalles:\n\n{1}",
+    "Errore di sicurezza!\n\nMessaggio di errore: {0}\n\nDettagli:\n\n{1}",
+    "Erro de segurança!\n\nMensagem de erro: {0}\n\nDetalhes:\n\n{1}",
+    "Erro de segurança!\n\nMensagem de erro: {0}\n\nDetalhes:\n\n{1}",
+    "Beveiligingsfout!\n\nFoutmelding: {0}\n\nDetails:\n\n{1}",
+    "Säkerhetsfel!\n\nFelmeddelande: {0}\n\nDetaljer:\n\n{1}",
+    "Sikkerhetsfeil!\n\nFeilmelding: {0}\n\nDetaljer:\n\n{1}",
+    "Sikkerhedsfejl!\n\nFejlmeddelelse: {0}\n\nDetaljer:\n\n{1}",
+    "Turvallisuusvirhe!\n\nVirheilmoitus: {0}\n\nYksityiskohdat:\n\n{1}",
+    "Błąd zabezpieczeń!\n\nKomunikat o błędzie: {0}\n\nSzczegóły:\n\n{1}",
+    "Chyba zabezpečení!\n\nChybová zpráva: {0}\n\nPodrobnosti:\n\n{1}",
+    "Biztonsági hiba!\n\nHibaüzenet: {0}\n\nRészletek:\n\n{1}",
+    "Eroare de securitate!\n\nMesaj de eroare: {0}\n\nDetalii:\n\n{1}"),
 
                     ["File/Folder was already added to the file/folder list!"] =
-    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
+    ("Fichier/Dossier déjà ajouté à la liste !",
+    "Datei/Ordner wurde bereits zur Liste hinzugefügt!",
+    "¡El archivo/carpeta ya fue agregado a la lista!",
+    "File/Cartella già aggiunto all'elenco file/cartelle!",
+    "Ficheiro/Pasta já foi adicionado à lista de ficheiros/pastas!",
+    "Arquivo/Pasta já foi adicionado à lista de arquivos/pastas!",
+    "Bestand/Map is al toegevoegd aan de bestand/map-lijst!",
+    "Fil/Mapp var redan tillagd i fil/mapp-listan!",
+    "Fil/Mappe var allerede lagt til i fil/mappe-listen!",
+    "Fil/Mappe var allerede tilføjet til fil/mappe-listen!",
+    "Tiedosto/Kansio on jo lisätty tiedosto/kansio-listaan!",
+    "Plik/Folder został już dodany do listy plików/folderów!",
+    "Soubor/Složka již byl přidán do seznamu souborů/složek!",
+    "A fájl/mappa már hozzáadásra került a fájl/mappa listához!",
+    "Fișierul/Directorul a fost deja adăugat la lista de fișiere/directoare!"),
 
                     ["You cannot copy/move/delete the root directory!"] =
-    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
+    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !",
+    "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!",
+    "¡No puede copiar/mover/eliminar el directorio raíz!",
+    "Non puoi copiare/spostare/eliminare la directory radice!",
+    "Não pode copiar/mover/eliminar o diretório raiz!",
+    "Você não pode copiar/mover/excluir o diretório raiz!",
+    "U kunt de hoofdmap niet kopiëren/verplaatsen/verwijderen!",
+    "Du kan inte kopiera/flytta/radera rotkatalogen!",
+    "Du kan ikke kopiere/flytte/slette rotkatalogen!",
+    "Du kan ikke kopiere/flytte/slette rodmappen!",
+    "Et voi kopioida/siirtää/poistaa pääkansiota!",
+    "Nie możesz kopiować/przenosić/usuwać katalogu głównego!",
+    "Nelze kopírovat/přesouvat/mazat kořenový adresář!",
+    "Nem másolhat/áthelyezhet/törölhet gyökérmappát!",
+    "Nu puteți copia/muta/șterge directorul rădăcină!"),
 
                     ["Failed to load icon: {0}"] =
-    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
+    ("Échec du chargement de l'icône : {0}",
+    "Fehler beim Laden des Symbols: {0}",
+    "Error al cargar el icono: {0}",
+    "Impossibile caricare l'icona: {0}",
+    "Falha ao carregar o ícone: {0}",
+    "Falha ao carregar o ícone: {0}",
+    "Laden van pictogram mislukt: {0}",
+    "Misslyckades att ladda ikon: {0}",
+    "Kunne ikke laste ikon: {0}",
+    "Kunne ikke indlæse ikon: {0}",
+    "Kuvakkeen lataus epäonnistui: {0}",
+    "Nie udało się załadować ikony: {0}",
+    "Načtení ikony selhalo: {0}",
+    "Nem sikerült betölteni az ikont: {0}",
+    "Nu s-a putut încărca pictograma: {0}"),
 
                     ["You cannot scan an entire drive."] =
-    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
+    ("Vous ne pouvez pas analyser un lecteur entier.",
+    "Sie können kein ganzes Laufwerk scannen.",
+    "No puede escanear una unidad completa.",
+    "Non puoi scansionare un'intera unità.",
+    "Não pode analisar uma unidade inteira.",
+    "Você não pode escanear uma unidade inteira.",
+    "U kunt een volledige schijf niet scannen.",
+    "Du kan inte skanna en hel enhet.",
+    "Du kan ikke skanne en hel stasjon.",
+    "Du kan ikke scanne en hel drev.",
+    "Et voi skannata koko asemaa.",
+    "Nie możesz przeskanować całego dysku.",
+    "Nelze skenovat celou jednotku.",
+    "Nem tud letölteni egy teljes meghajtót.",
+    "Nu puteți scana un întreg disc."),
 
                     ["Invalid folder: {0}"] =
-    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
+    ("Dossier invalide : {0}",
+    "Ungültiger Ordner: {0}",
+    "Carpeta inválida: {0}",
+    "Cartella non valida: {0}",
+    "Pasta inválida: {0}",
+    "Pasta inválida: {0}",
+    "Ongeldige map: {0}",
+    "Ogiltig mapp: {0}",
+    "Ugyldig mappe: {0}",
+    "Ugyldig mappe: {0}",
+    "Virheellinen kansio: {0}",
+    "Nieprawidłowy folder: {0}",
+    "Neplatná složka: {0}",
+    "Érvénytelen mappa: {0}",
+    "Director invalid: {0}"),
 
                     ["Error: {0}"] =
-    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
+    ("Erreur : {0}",
+    "Fehler: {0}",
+    "Error: {0}",
+    "Errore: {0}",
+    "Erro: {0}",
+    "Erro: {0}",
+    "Fout: {0}",
+    "Fel: {0}",
+    "Feil: {0}",
+    "Fejl: {0}",
+    "Virhe: {0}",
+    "Błąd: {0}",
+    "Chyba: {0}",
+    "Hiba: {0}",
+    "Eroare: {0}"),
 
                     ["Please select a valid operation."] =
-    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
+    ("Veuillez sélectionner une opération valide.",
+    "Bitte einen gültigen Vorgang auswählen.",
+    "Seleccione una operación válida.",
+    "Seleziona un'operazione valida.",
+    "Selecione uma operação válida.",
+    "Selecione uma operação válida.",
+    "Selecteer een geldige bewerking.",
+    "Välj en giltig åtgärd.",
+    "Velg en gyldig operasjon.",
+    "Vælg en gyldig handling.",
+    "Valitse kelvollinen toiminto.",
+    "Wybierz prawidłową operację.",
+    "Vyberte platnou operaci.",
+    "Válasszon érvényes műveletet.",
+    "Vă rugăm să selectați o operație validă."),
 
                     ["Only one overwrite behaviour may be selected."] =
-    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
+    ("Un seul comportement d'écrasement peut être sélectionné.",
+    "Nur ein Überschreibverhalten kann ausgewählt werden.",
+    "Solo se puede seleccionar un comportamiento de sobrescritura.",
+    "Può essere selezionato solo un comportamento di sovrascrittura.",
+    "Apenas um comportamento de sobrescrita pode ser selecionado.",
+    "Apenas um comportamento de sobrescrita pode ser selecionado.",
+    "Er kan maar één overschrijfgedrag worden geselecteerd.",
+    "Endast ett skrivbeteende kan väljas.",
+    "Bare én overskrivingsatferd kan velges.",
+    "Kun én overskrivningsadfærd kan vælges.",
+    "Vain yksi ylikirjoituskäyttäytyminen voidaan valita.",
+    "Można wybrać tylko jedno zachowanie nadpisywania.",
+    "Lze vybrat pouze jedno chování přepsání.",
+    "Csak egy felülírási viselkedés választható ki.",
+    "Poate fi selectat un singur comportament de suprascriere."),
 
                     ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
+    ("Lors de la création d'un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).",
+    "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).",
+    "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías).",
+    "Quando si crea una directory personalizzata, è necessario selezionare almeno un'opzione di struttura della directory (Mantieni struttura directory, Copia solo file, Mantieni solo file o Mantieni cartelle vuote).",
+    "Ao criar um diretório personalizado, deve selecionar pelo menos uma opção de estrutura de diretório (Manter Estrutura de Diretório, Copiar Apenas Ficheiros, Manter Apenas Ficheiros ou Manter Pastas Vazias).",
+    "Ao criar um diretório personalizado, você deve selecionar pelo menos uma opção de estrutura de diretório (Manter Estrutura de Diretório, Copiar Apenas Arquivos, Manter Apenas Arquivos ou Manter Pastas Vazias).",
+    "Bij het maken van een aangepaste map moet u ten minste één mapstructuuromtie selecteren (Mapstructuur behouden, Alleen bestanden kopiëren, Alleen bestanden behouden of Lege mappen behouden).",
+    "När du skapar en anpassad katalog måste du välja minst ett katalogstrukturalternativ (Behåll katalogstruktur, Kopiera endast filer, Behåll endast filer eller Behåll tomma mappar).",
+    "Når du oppretter en tilpasset katalog, må du velge minst én katalogstrukturalternativ (Behold katalogstruktur, Kopier bare filer, Behold bare filer eller Behold tomme mapper).",
+    "Når du opretter en brugerdefineret mappe, skal du vælge mindst én mappestrukturoption (Behold mappestruktur, Kopier kun filer, Behold kun filer eller Behold tomme mapper).",
+    "Kun luot mukautetun hakemiston, sinun on valittava vähintään yksi hakemistorakennenvaihtoehto (Säilytä hakemistorakenne, Kopioi vain tiedostot, Säilytä vain tiedostot tai Säilytä tyhjät kansiot).",
+    "Podczas tworzenia niestandardowego katalogu należy wybrać co najmniej jedną opcję struktury katalogu (Zachowaj strukturę katalogu, Kopiuj tylko pliki, Zachowaj tylko pliki lub Zachowaj puste foldery).",
+    "Při vytváření vlastního adresáře musíte vybrat alespoň jednu možnost struktury adresáře (Zachovat strukturu adresáře, Kopírovat pouze soubory, Zachovat pouze soubory nebo Zachovat prázdné složky).",
+    "Egyéni könyvtár létrehozásakor legalább egy könyvtárszerkezeti opciót ki kell választania (Tartson meg könyvtárszerkezetet, Csak fájlokat másoljon, Csak fájlokat tartson meg vagy Tartson meg üres mappákat).",
+    "Când creați un director personalizat, trebuie să selectați cel puțin o opțiune de structură a directorului (Păstrați structura directorului, Copiați doar fișiere, Păstrați doar fișiere sau Păstrați foldere goale)."),
 
                     ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todo, No sobrescribir o Sobrescribir si es más reciente)."),
+    ("Lors de la création d'un répertoire personnalisé, vous devez sélectionner une option d'écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).",
+    "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).",
+    "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todo, No sobrescribir o Sobrescribir si es más reciente).",
+    "Quando si crea una directory personalizzata, è necessario selezionare un'opzione di sovrascrittura (Sovrascrivi tutto, Non sovrascrivere o Sovrascrivi se più recente).",
+    "Ao criar um diretório personalizado, deve selecionar uma opção de sobrescrita (Substituir Tudo, Não Substituir ou Substituir Se Mais Recente).",
+    "Ao criar um diretório personalizado, você deve selecionar uma opção de sobrescrita (Substituir Tudo, Não Substituir ou Substituir Se Mais Recente).",
+    "Bij het maken van een aangepaste map moet u een overschrijfoptie selecteren (Alles overschrijven, Niet overschrijven of Overschrijven indien nieuwer).",
+    "När du skapar en anpassad katalog måste du välja ett skrivalternativ (Skriv över allt, Skriv inte över eller Skriv över om nyare).",
+    "Når du oppretter en tilpasset katalog, må du velge en overskrivingsalternativ (Overskriv alle, Ikke overskriv eller Overskriv hvis nyere).",
+    "Når du opretter en brugerdefineret mappe, skal du vælge en overskrivningsindstilling (Overskriv alt, Overskriv ikke eller Overskriv hvis nyere).",
+    "Kun luot mukautetun hakemiston, sinun on valittava ylikirjoitusvaihtoehto (Korvaa kaikki, Älä korvaa tai Korvaa, jos uudempi).",
+    "Podczas tworzenia niestandardowego katalogu należy wybrać opcję nadpisywania (Nadpisz wszystko, Nie nadpisuj lub Nadpisz jeśli nowszy).",
+    "Při vytváření vlastního adresáře musíte vybrat možnost přepsání (Přepsat vše, Nepřepisovat nebo Přepsat, pokud je novější).",
+    "Egyéni könyvtár létrehozásakor ki kell választania egy felülírási opciót (Felülír mindent, Ne írjon felül vagy Felülír, ha újabb).",
+    "Când creați un director personalizat, trebuie să selectați o opțiune de suprascriere (Suprascrie tot, Nu suprascrie sau Suprascrie dacă este mai nou)."),
 
-                    ["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
-    ("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
+                    ["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] = (
+    "« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».",
+    "\"Nur leere Ordner behalten\" muss mit \"Verzeichnisstruktur beibehalten\" oder \"Nur Dateien kopieren\" verwendet werden.",
+    "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos».",
+    "'Mantieni solo cartelle vuote' deve essere utilizzato con 'Mantieni struttura directory' o 'Copia solo file'.",
+    "'Manter Apenas Pastas Vazias' deve ser usado com 'Manter Estrutura de Diretórios' ou 'Copiar Apenas Ficheiros'.",
+    "'Manter Apenas Pastas Vazias' deve ser usado com 'Manter Estrutura de Diretórios' ou 'Copiar Apenas Arquivos'.",
+    "'Alleen lege mappen behouden' moet worden gebruikt met 'Mapstructuur behouden' of 'Alleen bestanden kopiëren'.",
+    "'Behåll endast tomma mappar' måste användas med antingen 'Behåll katalogstruktur' eller 'Kopiera endast filer'.",
+    "'Behold bare tomme mapper' må brukes med enten 'Behold katalogstruktur' eller 'Kopier bare filer'.",
+    "'Behold kun tomme mapper' skal bruges med enten 'Behold mappestruktur' eller 'Kopier kun filer'.",
+    "'Säilytä vain tyhjät kansiot' on käytettävä joko vaihtoehdon 'Säilytä hakemistorakenne' tai 'Kopioi vain tiedostot' kanssa.",
+    "'Zachowuj tylko puste foldery' musi być używane z 'Zachowaj strukturę katalogów' lub 'Kopiuj tylko pliki'.",
+    "'Zachovat pouze prázdné složky' musí být použito s 'Zachovat strukturu adresářů' nebo 'Kopírovat pouze soubory'.",
+    "'Csak üres mappák megtartása' beállítást a 'Könyvtárszerkezet megtartása' vagy a 'Csak fájlok másolása' beállítással együtt kell használni.",
+    "'Păstrați doar dosare goale' trebuie utilizat fie cu 'Păstrați structura directoarelor', fie cu 'Copiați doar fișiere'."
+),
 
-                    ["{0}"] =   // for dynamic message built above
-    ("{0}", "{0}", "{0}"),
+                    ["{0}"] =
+    ("{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}", "{0}"),
 
                     ["Invalid Options"] =
-    ("Options invalides", "Ungültige Optionen", "Opciones inválidas"),
+    ("Options invalides",
+    "Ungültige Optionen",
+    "Opciones inválidas",
+    "Opzioni non valide",
+    "Opções Inválidas",
+    "Opções Inválidas",
+    "Ongeldige opties",
+    "Ogiltiga alternativ",
+    "Ugyldige alternativer",
+    "Ugyldige indstillinger",
+    "Virheelliset asetukset",
+    "Nieprawidłowe opcje",
+    "Neplatné možnosti",
+    "Érvénytelen beállítások",
+    "Opțiuni invalide"),
 
                     ["Low disk space"] =
-    ("Espace disque faible", "Wenig Speicherplatz", "Poco espacio en disco"),
+    ("Espace disque faible",
+    "Wenig Speicherplatz",
+    "Poco espacio en disco",
+    "Spazio disco insufficiente",
+    "Espaço em disco baixo",
+    "Espaço em disco baixo",
+    "Weinig schijfruimte",
+    "Lågt diskutrymme",
+    "Lite diskplass",
+    "Lav diskplads",
+    "Vähän levytilaa",
+    "Mało miejsca na dysku",
+    "Nízký místo na disku",
+    "Alacsony lemezterület",
+    "Spațiu pe disc redus"),
 
                     ["Drive {0} will have less than 100 MB free.\n\nOnly {1} will be copied so that around {2} remain.\n\nContinue?"] =
-    ("Le lecteur {0} aura moins de 100 Mo libres.\n\nSeulement {1} seront copiés afin qu’environ {2} restent.\n\nContinuer ?", "Laufwerk {0} wird weniger als 100 MB frei haben.\n\nEs werden nur {1} kopiert, damit etwa {2} verbleiben.\n\nFortfahren?", "La unidad {0} tendrá menos de 100 MB libres.\n\nSolo se copiarán {1} para que queden aproximadamente {2}.\n\n¿Continuar?"),
+    ("Le lecteur {0} aura moins de 100 Mo libres.\n\nSeulement {1} seront copiés afin qu'environ {2} restent.\n\nContinuer ?",
+    "Laufwerk {0} wird weniger als 100 MB frei haben.\n\nEs werden nur {1} kopiert, damit etwa {2} verbleiben.\n\nFortfahren?",
+    "La unidad {0} tendrá menos de 100 MB libres.\n\nSolo se copiarán {1} para que queden aproximadamente {2}.\n\n¿Continuar?",
+    "L'unità {0} avrà meno di 100 MB liberi.\n\nVerranno copiati solo {1} in modo che rimangano circa {2}.\n\nContinuare?",
+    "A unidade {0} terá menos de 100 MB livres.\n\nApenas {1} serão copiados para que restem cerca de {2}.\n\nContinuar?",
+    "A unidade {0} terá menos de 100 MB livres.\n\nApenas {1} serão copiados para que restem cerca de {2}.\n\nContinuar?",
+    "Station {0} heeft minder dan 100 MB vrij.\n\nAlleen {1} wordt gekopieerd zodat ongeveer {2} overblijft.\n\nDoorgaan?",
+    "Enhet {0} kommer att ha mindre än 100 MB ledigt.\n\nEndast {1} kommer att kopieras så att cirka {2} återstår.\n\nFortsätta?",
+    "Stasjon {0} vil ha mindre enn 100 MB ledig.\n\nBare {1} vil bli kopiert slik at omtrent {2} gjenstår.\n\nFortsette?",
+    "Drev {0} vil have mindre end 100 MB ledig.\n\nKun {1} vil blive kopieret, så der er omkring {2} tilbage.\n\nFortsætte?",
+    "Asema {0}:lla on alle 100 Mt vapaata tilaa.\n\nVain {1} kopioidaan, jotta noin {2} jää jäljelle.\n\nJatketaanko?",
+    "Dysk {0} będzie miał mniej niż 100 MB wolnego miejsca.\n\nTylko {1} zostanie skopiowane, aby pozostało około {2}.\n\nKontynuować?",
+    "Jednotka {0} bude mít méně než 100 MB volného místa.\n\nBudou zkopírovány pouze {1}, takže zůstane přibližně {2}.\n\nPokračovat?",
+    "A {0} meghajtón kevesebb mint 100 MB szabad terület lesz.\n\nCsak {1} másolódik, így körülbelül {2} marad.\n\nFolytatja?",
+    "Unitatea {0} va avea mai puțin de 100 MB liberi.\n\nDoar {1} vor fi copiați, astfel încât să rămână aproximativ {2}.\n\nContinuați?"),
 
                     ["Not enough space left on drive {0}."] =
-    ("Espace insuffisant sur le lecteur {0}.", "Nicht genügend Speicherplatz auf Laufwerk {0}.", "No hay suficiente espacio en la unidad {0}."),
+    ("Espace insuffisant sur le lecteur {0}.",
+    "Nicht genügend Speicherplatz auf Laufwerk {0}.",
+    "No hay suficiente espacio en la unidad {0}.",
+    "Spazio insufficiente sull'unità {0}.",
+    "Espaço insuficiente na unidade {0}.",
+    "Espaço insuficiente na unidade {0}.",
+    "Niet genoeg ruimte op station {0}.",
+    "Inte tillräckligt med utrymme kvar på enhet {0}.",
+    "Ikke nok plass på stasjon {0}.",
+    "Ikke nok plads tilbage på drev {0}.",
+    "Ei tarpeeksi tilaa asemalla {0}.",
+    "Niewystarczająca ilość miejsca na dysku {0}.",
+    "Na jednotce {0} není dostatek místa.",
+    "Nincs elég hely a {0} meghajtóon.",
+    "Spațiu insuficient pe unitatea {0}."),
 
                     ["Out of space"] =
-    ("Plus d’espace", "Kein Speicherplatz", "Sin espacio"),
+    ("Plus d'espace",
+    "Kein Speicherplatz",
+    "Sin espacio",
+    "Spazio esaurito",
+    "Sem espaço",
+    "Sem espaço",
+    "Geen ruimte",
+    "Slut på utrymme",
+    "Tom for plass",
+    "Ikke mere plads",
+    "Tila loppu",
+    "Brak miejsca",
+    "Došlo místo",
+    "Nincs hely",
+    "Spațiu insuficient"),
 
                     ["Please select at least one destination folder."] =
-    ("Veuillez sélectionner au moins un dossier de destination.", "Bitte mindestens einen Zielordner auswählen.", "Seleccione al menos una carpeta de destino."),
+    ("Veuillez sélectionner au moins un dossier de destination.",
+    "Bitte mindestens einen Zielordner auswählen.",
+    "Seleccione al menos una carpeta de destino.",
+    "Seleziona almeno una cartella di destinazione.",
+    "Selecione pelo menos uma pasta de destino.",
+    "Selecione pelo menos uma pasta de destino.",
+    "Selecteer ten minste één doelmap.",
+    "Välj minst en målmapp.",
+    "Velg minst én målmappe.",
+    "Vælg mindst én destinationsmappe.",
+    "Valitse vähintään yksi kohdekansio.",
+    "Wybierz co najmniej jeden folder docelowy.",
+    "Vyberte alespoň jeden cílový adresář.",
+    "Válasszon ki legalább egy célmappát.",
+    "Vă rugăm să selectați cel puțin un folder destinație."),
 
                     ["Operation cancelled: Custom directory not specified."] =
-    ("Opération annulée : répertoire personnalisé non spécifié.", "Operation abgebrochen: Benutzerdefiniertes Verzeichnis nicht angegeben.", "Operación cancelada: directorio personalizado no especificado."),
+    ("Opération annulée : répertoire personnalisé non spécifié.",
+    "Operation abgebrochen: Benutzerdefiniertes Verzeichnis nicht angegeben.",
+    "Operación cancelada: directorio personalizado no especificado.",
+    "Operazione annullata: directory personalizzata non specificata.",
+    "Operação cancelada: diretório personalizado não especificado.",
+    "Operação cancelada: diretório personalizado não especificado.",
+    "Bewerking geannuleerd: Aangepaste map niet opgegeven.",
+    "Åtgärd avbruten: Anpassad katalog inte angiven.",
+    "Operasjon avbrutt: Tilpasset katalog ikke spesifisert.",
+    "Handling annulleret: Brugerdefineret mappe ikke angivet.",
+    "Toiminto peruttu: Mukautettua hakemistoa ei ole määritetty.",
+    "Operacja anulowana: Niestandardowy katalog nie został określony.",
+    "Operace zrušena: Vlastní adresář nebyl zadán.",
+    "Művelet megszakítva: Egyéni könyvtár nincs megadva.",
+    "Operație anulată: Directorul personalizat nu este specificat."),
 
                     ["You must select files or folders to Copy/Move/Delete!"] =
-    ("Vous devez sélectionner des fichiers ou dossiers à copier/déplacer/supprimer !", "Sie müssen Dateien oder Ordner zum Kopieren/Verschieben/Löschen auswählen!", "¡Debe seleccionar archivos o carpetas para Copiar/Mover/Eliminar!"),
+    ("Vous devez sélectionner des fichiers ou dossiers à copier/déplacer/supprimer !",
+    "Sie müssen Dateien oder Ordner zum Kopieren/Verschieben/Löschen auswählen!",
+    "¡Debe seleccionar archivos o carpetas para Copiar/Mover/Eliminar!",
+    "Devi selezionare file o cartelle da Copiare/Spostare/Eliminare!",
+    "Deve selecionar ficheiros ou pastas para Copiar/Mover/Eliminar!",
+    "Você deve selecionar arquivos ou pastas para Copiar/Mover/Excluir!",
+    "U moet bestanden of mappen selecteren om te Kopiëren/Verplaatsen/Verwijderen!",
+    "Du måste välja filer eller mappar att Kopiera/Flytta/Radera!",
+    "Du må velge filer eller mapper å Kopiere/Flytte/Slette!",
+    "Du skal vælge filer eller mapper at Kopiere/Flytte/Slette!",
+    "Sinun on valittava tiedostoja tai kansioita Kopioitavaksi/Siirrettäväksi/Poistettavaksi!",
+    "Musisz wybrać pliki lub foldery do Kopiowania/Przenoszenia/Usuwania!",
+    "Musíte vybrat soubory nebo složky ke Kopírování/Přesunutí/Smazání!",
+    "Válassza ki a másoláshoz/áthelyezéshez/törléshez szükséges fájlokat vagy mappákat!",
+    "Trebuie să selectați fișiere sau foldere pentru a Copia/Muta/Șterge!"),
 
                     ["Do you want to add {0} file(s) to copy?"] =
-    ("Voulez-vous ajouter {0} fichier(s) à copier ?", "Möchten Sie {0} Datei(en) zum Kopieren hinzufügen?", "¿Desea agregar {0} archivo(s) para copiar?"),
+    ("Voulez-vous ajouter {0} fichier(s) à copier ?",
+    "Möchten Sie {0} Datei(en) zum Kopieren hinzufügen?",
+    "¿Desea agregar {0} archivo(s) para copiar?",
+    "Vuoi aggiungere {0} file da copiare?",
+    "Deseja adicionar {0} ficheiro(s) para copiar?",
+    "Deseja adicionar {0} arquivo(s) para copiar?",
+    "Wilt u {0} bestand(en) toevoegen om te kopiëren?",
+    "Vill du lägga till {0} fil(er) att kopiera?",
+    "Vil du legge til {0} fil(er) å kopiere?",
+    "Vil du tilføje {0} fil(er) at kopiere?",
+    "Haluatko lisätä {0} tiedosto(a) kopioitavaksi?",
+    "Czy chcesz dodać {0} plik(i) do skopiowania?",
+    "Chcete přidat {0} soubor(y) ke kopírování?",
+    "Hozzá szeretne adni {0} fájlt a másoláshoz?",
+    "Doriți să adăugați {0} fișier(e) pentru copiere?"),
 
                     ["Confirm Drag and Drop"] =
-    ("Confirmer le glisser-déposer", "Drag & Drop bestätigen", "Confirmar arrastrar y soltar"),
+    ("Confirmer le glisser-déposer",
+    "Drag & Drop bestätigen",
+    "Confirmar arrastrar y soltar",
+    "Conferma Trascina e Rilascia",
+    "Confirmar Arrastar e Largar",
+    "Confirmar Arrastar e Soltar",
+    "Bevestig Drag and Drop",
+    "Bekräfta Drag and Drop",
+    "Bekreft Drag and Drop",
+    "Bekræft Drag and Drop",
+    "Vahvista Vedä ja Pudota",
+    "Potwierdź Przeciągnij i Upuść",
+    "Potvrdit Přetažení",
+    "Erősítse meg a Drag and Drop műveletet",
+    "Confirmați Drag and Drop"),
 
-                    ["You dropped{0}"] =   // keep placeholder for file name
-    ("Vous avez déposé{0}", "Sie haben{0} abgelegt", "Solto{0}"),
-
-                    ["Sorry, but the directory or file couldn't be added."] =
-    ("Désolé, mais le répertoire ou le fichier n’a pas pu être ajouté.", "Es tut uns leid, aber das Verzeichnis oder die Datei konnte nicht hinzugefügt werden.", "Lo sentimos, pero no se pudo agregar el directorio o el archivo."),
-
-                    ["Copy That v1.0 By: Havoc - Error!"] =
-    ("Copy That v1.0 Par : Havoc - Erreur !", "Copy That v1.0 Von : Havoc - Fehler!", "Copy That v1.0 Por : Havoc - ¡Error!"),
-
-                    ["Dropping Drives is Not Allowed."] =
-    ("Le dépôt de lecteurs n’est pas autorisé.", "Das Ablegen von Laufwerken ist nicht erlaubt.", "No se permite soltar unidades."),
-
-                    ["File/Folder was already added to the file/folder list!"] =
-    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
-
-                    ["You cannot copy/move/delete the root directory!"] =
-    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
-
-                    ["Failed to load icon: {0}"] =
-    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
-
-                    ["You cannot scan an entire drive."] =
-    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
-
-                    ["Invalid folder: {0}"] =
-    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
-
-                    ["Error: {0}"] =
-    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
-
-                    ["Please select a valid operation."] =
-    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
-
-                    ["Only one overwrite behaviour may be selected."] =
-    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
-
-                    ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
-
-                    ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todo, No sobrescribir o Sobrescribir si es más reciente)."),
-
-                    ["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
-    ("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
-
-                    ["{0}"] =   // reusable dynamic placeholder
-    ("{0}", "{0}", "{0}"),
-
-                    ["Invalid Options"] =
-    ("Options invalides", "Ungültige Optionen", "Opciones inválidas"),
-
-                    ["Low disk space"] =
-    ("Espace disque faible", "Wenig Speicherplatz", "Poco espacio en disco"),
-
-                    ["Drive {0} will have less than 100 MB free.\n\nOnly {1} will be copied so that around {2} remain.\n\nContinue?"] =
-    ("Le lecteur {0} aura moins de 100 Mo libres.\n\nSeulement {1} seront copiés afin qu’environ {2} restent.\n\nContinuer ?", "Laufwerk {0} wird weniger als 100 MB frei haben.\n\nEs werden nur {1} kopiert, damit etwa {2} verbleiben.\n\nFortfahren?", "La unidad {0} tendrá menos de 100 MB libres.\n\nSolo se copiarán {1} para que queden aproximadamente {2}.\n\n¿Continuar?"),
-
-                    ["Not enough space left on drive {0}."] =
-    ("Espace insuffisant sur le lecteur {0}.", "Nicht genügend Speicherplatz auf Laufwerk {0}.", "No hay suficiente espacio en la unidad {0}."),
-
-                    ["Out of space"] =
-    ("Plus d’espace", "Kein Speicherplatz", "Sin espacio"),
-
-                    ["Please select at least one destination folder."] =
-    ("Veuillez sélectionner au moins un dossier de destination.", "Bitte mindestens einen Zielordner auswählen.", "Seleccione al menos una carpeta de destino."),
-
-                    ["Operation cancelled: Custom directory not specified."] =
-    ("Opération annulée : répertoire personnalisé non spécifié.", "Operation abgebrochen: Benutzerdefiniertes Verzeichnis nicht angegeben.", "Operación cancelada: directorio personalizado no especificado."),
-
-                    ["You must select files or folders to Copy/Move/Delete!"] =
-    ("Vous devez sélectionner des fichiers ou dossiers à copier/déplacer/supprimer !", "Sie müssen Dateien oder Ordner zum Kopieren/Verschieben/Löschen auswählen!", "¡Debe seleccionar archivos o carpetas para Copiar/Mover/Eliminar!"),
-
-                    ["Do you want to add {0} file(s) to copy?"] =
-    ("Voulez-vous ajouter {0} fichier(s) à copier ?", "Möchten Sie {0} Datei(en) zum Kopieren hinzufügen?", "¿Desea agregar {0} archivo(s) para copiar?"),
-
-                    ["Confirm Drag and Drop"] =
-    ("Confirmer le glisser-déposer", "Drag & Drop bestätigen", "Confirmar arrastrar y soltar"),
-
-                    ["You dropped{0}"] =   // keep placeholder for file name
-    ("Vous avez déposé{0}", "Sie haben{0} abgelegt", "Solto{0}"),
+                    ["You dropped{0}"] =
+    ("Vous avez déposé{0}",
+    "Sie haben{0} abgelegt",
+    "Solto{0}",
+    "Hai rilasciato{0}",
+    "Largou{0}",
+    "Você soltou{0}",
+    "U hebt{0} neergezet",
+    "Du släppte{0}",
+    "Du slapp{0}",
+    "Du slipede{0}",
+    "Pudotit{0}",
+    "Upuściłeś{0}",
+    "Pustil jste{0}",
+    "Elengedte{0}",
+    "Ați eliberat{0}"),
 
                     ["Sorry, but the directory or file couldn't be added."] =
-    ("Désolé, mais le répertoire ou le fichier n’a pas pu être ajouté.", "Es tut uns leid, aber das Verzeichnis oder die Datei konnte nicht hinzugefügt werden.", "Lo sentimos, pero no se pudo agregar el directorio o el archivo."),
+    ("Désolé, mais le répertoire ou le fichier n'a pas pu être ajouté.",
+    "Es tut uns leid, aber das Verzeichnis oder die Datei konnte nicht hinzugefügt werden.",
+    "Lo sentimos, pero no se pudo agregar el directorio o el archivo.",
+    "Spiacenti, ma la directory o il file non può essere aggiunto.",
+    "Desculpe, mas o diretório ou ficheiro não pôde ser adicionado.",
+    "Desculpe, mas o diretório ou arquivo não pôde ser adicionado.",
+    "Sorry, maar de map of het bestand kon niet worden toegevoegd.",
+    "Tyvärr, men katalogen eller filen kunde inte läggas till.",
+    "Beklager, men katalogen eller filen kunne ikke legges til.",
+    "Beklager, men mappen eller filen kunne ikke tilføjes.",
+    "Valitettavasti hakemistoa tai tiedostoa ei voitu lisätä.",
+    "Przepraszamy, ale katalog lub plik nie mógł zostać dodany.",
+    "Je nám líto, ale adresář nebo soubor nelze přidat.",
+    "Sajnáljuk, de a könyvtár vagy a fájl nem adható hozzá.",
+    "Ne pare rău, dar directorul sau fișierul nu a putut fi adăugat."),
 
                     ["Copy That v1.0 By: Havoc - Error!"] =
-    ("Copy That v1.0 Par : Havoc - Erreur !", "Copy That v1.0 Von : Havoc - Fehler!", "Copy That v1.0 Por : Havoc - ¡Error!"),
+    ("Copy That v1.0 Par : Havoc - Erreur !",
+    "Copy That v1.0 Von : Havoc - Fehler!",
+    "Copy That v1.0 Por : Havoc - ¡Error!",
+    "Copy That v1.0 Di: Havoc - Errore!",
+    "Copy That v1.0 Por: Havoc - Erro!",
+    "Copy That v1.0 Por: Havoc - Erro!",
+    "Copy That v1.0 Door: Havoc - Fout!",
+    "Copy That v1.0 Av: Havoc - Fel!",
+    "Copy That v1.0 Av: Havoc - Feil!",
+    "Copy That v1.0 Af: Havoc - Fejl!",
+    "Copy That v1.0 Tekijä: Havoc - Virhe!",
+    "Copy That v1.0 Autor: Havoc - Błąd!",
+    "Copy That v1.0 Od: Havoc - Chyba!",
+    "Copy That v1.0 Készítette: Havoc - Hiba!",
+    "Copy That v1.0 De: Havoc - Eroare!"),
 
                     ["Dropping Drives is Not Allowed."] =
-    ("Le dépôt de lecteurs n’est pas autorisé.", "Das Ablegen von Laufwerken ist nicht erlaubt.", "No se permite soltar unidades."),
-
-                    ["File/Folder was already added to the file/folder list!"] =
-    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
-
-                    ["You cannot copy/move/delete the root directory!"] =
-    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
-
-                    ["Failed to load icon: {0}"] =
-    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
-
-                    ["You cannot scan an entire drive."] =
-    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
-
-                    ["Invalid folder: {0}"] =
-    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
-
-                    ["Error: {0}"] =
-    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
-
-                    ["Please select a valid operation."] =
-    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
-
-                    ["Only one overwrite behaviour may be selected."] =
-    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
-
-                    ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
-
-                    ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todo, No sobrescribir o Sobrescribir si es más reciente)."),
-
-                    ["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
-    ("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
-
-                    ["{0}"] =   // reusable dynamic placeholder
-    ("{0}", "{0}", "{0}"),
-
-                    ["Invalid Options"] =
-    ("Options invalides", "Ungültige Optionen", "Opciones inválidas"),
-
-                    ["Low disk space"] =
-    ("Espace disque faible", "Wenig Speicherplatz", "Poco espacio en disco"),
-
-                    ["Drive {0} will have less than 100 MB free.\n\nOnly {1} will be copied so that around {2} remain.\n\nContinue?"] =
-    ("Le lecteur {0} aura moins de 100 Mo libres.\n\nSeulement {1} seront copiés afin qu’environ {2} restent.\n\nContinuer ?", "Laufwerk {0} wird weniger als 100 MB frei haben.\n\nEs werden nur {1} kopiert, damit etwa {2} verbleiben.\n\nFortfahren?", "La unidad {0} tendrá menos de 100 MB libres.\n\nSolo se copiarán {1} para que queden aproximadamente {2}.\n\n¿Continuar?"),
-
-                    ["Not enough space left on drive {0}."] =
-    ("Espace insuffisant sur le lecteur {0}.", "Nicht genügend Speicherplatz auf Laufwerk {0}.", "No hay suficiente espacio en la unidad {0}."),
-
-                    ["Out of space"] =
-    ("Plus d’espace", "Kein Speicherplatz", "Sin espacio"),
-
-                    ["Please select at least one destination folder."] =
-    ("Veuillez sélectionner au moins un dossier de destination.", "Bitte mindestens einen Zielordner auswählen.", "Seleccione al menos una carpeta de destino."),
-
-                    ["Operation cancelled: Custom directory not specified."] =
-    ("Opération annulée : répertoire personnalisé non spécifié.", "Operation abgebrochen: Benutzerdefiniertes Verzeichnis nicht angegeben.", "Operación cancelada: directorio personalizado no especificado."),
-
-                    ["You must select files or folders to Copy/Move/Delete!"] =
-    ("Vous devez sélectionner des fichiers ou dossiers à copier/déplacer/supprimer !", "Sie müssen Dateien oder Ordner zum Kopieren/Verschieben/Löschen auswählen!", "¡Debe seleccionar archivos o carpetas para Copiar/Mover/Eliminar!"),
-
-                    ["Do you want to add {0} file(s) to copy?"] =
-    ("Voulez-vous ajouter {0} fichier(s) à copier ?", "Möchten Sie {0} Datei(en) zum Kopieren hinzufügen?", "¿Desea agregar {0} archivo(s) para copiar?"),
-
-                    ["Confirm Drag and Drop"] =
-    ("Confirmer le glisser-déposer", "Drag & Drop bestätigen", "Confirmar arrastrar y soltar"),
-
-                    ["You dropped{0}"] =   // keep placeholder for file name
-    ("Vous avez déposé{0}", "Sie haben{0} abgelegt", "Solto{0}"),
-
-                    ["Sorry, but the directory or file couldn't be added."] =
-    ("Désolé, mais le répertoire ou le fichier n’a pas pu être ajouté.", "Es tut uns leid, aber das Verzeichnis oder die Datei konnte nicht hinzugefügt werden.", "Lo sentimos, pero no se pudo agregar el directorio o el archivo."),
-
-                    ["Copy That v1.0 By: Havoc - Error!"] =
-    ("Copy That v1.0 Par : Havoc - Erreur !", "Copy That v1.0 Von : Havoc - Fehler!", "Copy That v1.0 Por : Havoc - ¡Error!"),
-
-                    ["Dropping Drives is Not Allowed."] =
-    ("Le dépôt de lecteurs n’est pas autorisé.", "Das Ablegen von Laufwerken ist nicht erlaubt.", "No se permite soltar unidades."),
-
-                    ["File/Folder was already added to the file/folder list!"] =
-    ("Fichier/Dossier déjà ajouté à la liste !", "Datei/Ordner wurde bereits zur Liste hinzugefügt!", "¡El archivo/carpeta ya fue agregado a la lista!"),
-
-                    ["You cannot copy/move/delete the root directory!"] =
-    ("Vous ne pouvez pas copier/déplacer/supprimer le répertoire racine !", "Sie können das Stammverzeichnis nicht kopieren/verschieben/löschen!", "¡No puede copiar/mover/eliminar el directorio raíz!"),
-
-                    ["Failed to load icon: {0}"] =
-    ("Échec du chargement de l’icône : {0}", "Fehler beim Laden des Symbols: {0}", "Error al cargar el icono: {0}"),
-
-                    ["You cannot scan an entire drive."] =
-    ("Vous ne pouvez pas analyser un lecteur entier.", "Sie können kein ganzes Laufwerk scannen.", "No puede escanear una unidad completa."),
-
-                    ["Invalid folder: {0}"] =
-    ("Dossier invalide : {0}", "Ungültiger Ordner: {0}", "Carpeta inválida: {0}"),
-
-                    ["Error: {0}"] =
-    ("Erreur : {0}", "Fehler: {0}", "Error: {0}"),
-
-                    ["Please select a valid operation."] =
-    ("Veuillez sélectionner une opération valide.", "Bitte einen gültigen Vorgang auswählen.", "Seleccione una operación válida."),
-
-                    ["Only one overwrite behaviour may be selected."] =
-    ("Un seul comportement d’écrasement peut être sélectionné.", "Nur ein Überschreibverhalten kann ausgewählt werden.", "Solo se puede seleccionar un comportamiento de sobrescritura."),
-
-                    ["When creating a custom directory, you must select at least one directory structure option (Keep Directory Structure, Copy Files Only, Keep Only Files, or Keep Empty Folders)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner au moins une option de structure (Garder la structure, Copier uniquement les fichiers, Garder uniquement les fichiers ou Garder les dossiers vides).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss mindestens eine Strukturoption ausgewählt werden (Verzeichnisstruktur beibehalten, Nur Dateien kopieren, Nur Dateien behalten oder Leere Ordner behalten).", "Al crear un directorio personalizado, debe seleccionar al menos una opción de estructura (Mantener estructura de directorios, Copiar solo archivos, Mantener solo archivos o Mantener carpetas vacías)."),
-
-                    ["When creating a custom directory, you must select an overwrite option (Overwrite All, Do Not Overwrite, or Overwrite If Newer)."] =
-    ("Lors de la création d’un répertoire personnalisé, vous devez sélectionner une option d’écrasement (Remplacer tout, Ne pas remplacer ou Remplacer si plus récent).", "Beim Erstellen eines benutzerdefinierten Verzeichnisses muss eine Überschreiboption ausgewählt werden (Alles überschreiben, Nicht überschreiben oder Überschreiben wenn neuer).", "Al crear un directorio personalizado, debe seleccionar una opción de sobrescritura (Sobrescribir todoNo sobrescribir o Sobrescribir si es más reciente)."),
-["'Keep Empty Folders Only' must be used with either 'Keep Directory Structure' or 'Copy Files Only'."] =
-("« Garder uniquement les dossiers vides » doit être utilisé avec « Garder la structure des dossiers » ou « Copier uniquement les fichiers ».", "„Nur leere Ordner behalten“ muss mit „Verzeichnisstruktur beibehalten“ oder „Nur Dateien kopieren“ verwendet werden.", "«Mantener solo carpetas vacías» debe usarse con «Mantener estructura de directorios» o «Copiar solo archivos»."),
-
-
-
-
-
-
+    ("Le dépôt de lecteurs n'est pas autorisé.",
+    "Das Ablegen von Laufwerken ist nicht erlaubt.",
+    "No se permite soltar unidades.",
+    "Il rilascio di unità non è consentito.",
+    "Largar unidades não é permitido.",
+    "Soltar unidades não é permitido.",
+    "Het neerzetten van stations is niet toegestaan.",
+    "Att släppa enheter är inte tillåtet.",
+    "Å slippe stasjoner er ikke tillatt.",
+    "At slippe drev er ikke tilladt.",
+    "Asemien pudottaminen ei ole sallittua.",
+    "Upuszczanie napędów jest niedozwolone.",
+    "Pouštění jednotek není povoleno.",
+    "Meghajtók ejtése nem megengedett.",
+    "Eliberarea unităților nu este permisă."),
 
                     /* ----------  O P E R A T I O N   S U M M A R Y   T E M P L A T E S  ---------- */
 
                     ["----- {0} Operation Summary ({1}) -----\n\nTotal files considered: {2:N0}\nFiles copied: {3:N0} / {4:N0}\nFiles skipped (by filter/user): {5:N0}\nFiles failed (due to error): {6:N0}\n\nTotal bytes processed: {7}\n\nTotal bytes to process (estimated): {8}\n\n{0} {1}!"] =
-    ("----- Résumé de l’opération {0} ({1}) -----\n\nFichiers considérés au total : {2:N0}\nFichiers copiés : {3:N0} / {4:N0}\nFichiers ignorés (par filtre/utilisateur) : {5:N0}\nFichiers en échec (erreur) : {6:N0}\n\nOctets traités au total : {7}\n\nOctets à traiter (estimé) : {8}\n\n{0} {1} !",
+    ("----- Résumé de l'opération {0} ({1}) -----\n\nFichiers considérés au total : {2:N0}\nFichiers copiés : {3:N0} / {4:N0}\nFichiers ignorés (par filtre/utilisateur) : {5:N0}\nFichiers en échec (erreur) : {6:N0}\n\nOctets traités au total : {7}\n\nOctets à traiter (estimé) : {8}\n\n{0} {1} !",
      "----- {0} Operation-Zusammenfassung ({1}) -----\n\nGesamt berücksichtigte Dateien: {2:N0}\nKopierte Dateien: {3:N0} / {4:N0}\nÜbersprungene Dateien (durch Filter/Benutzer): {5:N0}\nFehlgeschlagene Dateien (Fehler): {6:N0}\n\nGesamtverarbeitete Bytes: {7}\n\nZu verarbeitende Bytes (geschätzt): {8}\n\n{0} {1}!",
-     "----- Resumen de operación {0} ({1}) -----\n\nArchivos considerados en total: {2:N0}\nArchivos copiados: {3:N0} / {4:N0}\nArchivos omitidos (por filtro/usuario): {5:N0}\nArchivos fallidos (por error): {6:N0}\n\nBytes procesados en total: {7}\n\nBytes a procesar (estimado): {8}\n\n¡{0} {1}!"),
+     "----- Resumen de operación {0} ({1}) -----\n\nArchivos considerados en total: {2:N0}\nArchivos copiados: {3:N0} / {4:N0}\nArchivos omitidos (por filtro/usuario): {5:N0}\nArchivos fallidos (por error): {6:N0}\n\nBytes procesados en total: {7}\n\nBytes a procesar (estimado): {8}\n\n¡{0} {1}!",
+     "----- Riepilogo operazione {0} ({1}) -----\n\nFile totali considerati: {2:N0}\nFile copiati: {3:N0} / {4:N0}\nFile saltati (da filtro/utente): {5:N0}\nFile non riusciti (a causa di errore): {6:N0}\n\nByte totali elaborati: {7}\n\nByte totali da elaborare (stimati): {8}\n\n{0} {1}!",
+     "----- Resumo da Operação {0} ({1}) -----\n\nTotal de ficheiros considerados: {2:N0}\nFicheiros copiados: {3:N0} / {4:N0}\nFicheiros ignorados (por filtro/utilizador): {5:N0}\nFicheiros falhados (devido a erro): {6:N0}\n\nTotal de bytes processados: {7}\n\nTotal de bytes a processar (estimado): {8}\n\n{0} {1}!",
+     "----- Resumo da Operação {0} ({1}) -----\n\nTotal de arquivos considerados: {2:N0}\nArquivos copiados: {3:N0} / {4:N0}\nArquivos ignorados (por filtro/usuário): {5:N0}\nArquivos com falha (devido a erro): {6:N0}\n\nTotal de bytes processados: {7}\n\nTotal de bytes a processar (estimado): {8}\n\n{0} {1}!",
+     "----- {0} Operation Samenvatting ({1}) -----\n\nTotaal bestanden overwogen: {2:N0}\nBestanden gekopieerd: {3:N0} / {4:N0}\nBestanden overgeslagen (door filter/gebruiker): {5:N0}\nBestanden mislukt (door fout): {6:N0}\n\nTotaal verwerkte bytes: {7}\n\nTotaal te verwerken bytes (geschat): {8}\n\n{0} {1}!",
+     "----- {0} Operationssammanfattning ({1}) -----\n\nTotalt antal filer beaktade: {2:N0}\nFiler kopierade: {3:N0} / {4:N0}\nFiler hoppades över (av filter/användare): {5:N0}\nFiler misslyckades (på grund av fel): {6:N0}\n\nTotalt antal bearbetade byte: {7}\n\nTotalt antal byte att bearbeta (uppskattat): {8}\n\n{0} {1}!",
+     "----- {0} Operasjonssammendrag ({1}) -----\n\nTotalt antall filer vurdert: {2:N0}\nFiler kopiert: {3:N0} / {4:N0}\nFiler hoppet over (av filter/bruker): {5:N0}\nFiler mislyktes (på grunn av feil): {6:N0}\n\nTotalt antall bytes behandlet: {7}\n\nTotalt antall bytes å behandle (estimert): {8}\n\n{0} {1}!",
+     "----- {0} Operation Resume ({1}) -----\n\nTotale filer overvejet: {2:N0}\nFiler kopieret: {3:N0} / {4:N0}\nFiler sprunget over (af filter/bruger): {5:N0}\nFiler mislykkedes (på grund af fejl): {6:N0}\n\nTotale bytes behandlet: {7}\n\nTotale bytes at behandle (estimeret): {8}\n\n{0} {1}!",
+     "----- {0} Toiminnon Yhteenveto ({1}) -----\n\nTiedostoja yhteensä harkittu: {2:N0}\nTiedostoja kopioitu: {3:N0} / {4:N0}\nTiedostoja ohitettu (suodattimen/käyttäjän toimesta): {5:N0}\nTiedostoja epäonnistui (virheen vuoksi): {6:N0}\n\nKäsiteltyjä tavuja yhteensä: {7}\n\nKäsiteltäviä tavuja yhteensä (arvio): {8}\n\n{0} {1}!",
+     "----- {0} Podsumowanie operacji ({1}) -----\n\nŁącznie rozpatrzonych plików: {2:N0}\nPliki skopiowane: {3:N0} / {4:N0}\nPliki pominięte (przez filtr/użytkownika): {5:N0}\nPliki nieudane (z powodu błędu): {6:N0}\n\nŁącznie przetworzonych bajtów: {7}\n\nŁącznie bajtów do przetworzenia (szacunkowo): {8}\n\n{0} {1}!",
+     "----- {0} Souhrn operace ({1}) -----\n\nCelkem zvažovaných souborů: {2:N0}\nZkopírované soubory: {3:N0} / {4:N0}\nPřeskočené soubory (filtrem/uživatelem): {5:N0}\nNeúspěšné soubory (kvůli chybě): {6:N0}\n\nCelkem zpracovaných bajtů: {7}\n\nCelkem bajtů ke zpracování (odhad): {8}\n\n{0} {1}!",
+     "----- {0} Művelet Összefoglaló ({1}) -----\n\nÖsszesen figyelembe vett fájl: {2:N0}\nMásolt fájlok: {3:N0} / {4:N0}\nKihagyott fájlok (szűrő/felhasználó által): {5:N0}\nSikertelen fájlok (hiba miatt): {6:N0}\n\nÖsszesen feldolgozott bájt: {7}\n\nFeldolgozandó bájtok összesen (becsült): {8}\n\n{0} {1}!",
+     "----- {0} Rezumat Operație ({1}) -----\n\nTotal fișiere luate în considerare: {2:N0}\nFișiere copiate: {3:N0} / {4:N0}\nFișiere omise (de filtru/utilizator): {5:N0}\nFișiere eșuate (din cauza erorii): {6:N0}\n\nTotal bytes procesați: {7}\n\nTotal bytes de procesat (estimat): {8}\n\n{0} {1}!"),
 
                     ["- {0} Operation Summary ({1}) -\n\nFiles Copied: {2:N0}\nFiles Skipped: {3:N0}\nFiles Failed: {4:N0}\nTotal Files Processed: {5:N0} / {6:N0}\nTotal Bytes Processed: {7} / {8}"] =
-    ("- Résumé de l’opération {0} ({1}) -\n\nFichiers copiés : {2:N0}\nFichiers ignorés : {3:N0}\nFichiers en échec : {4:N0}\nFichiers traités au total : {5:N0} / {6:N0}\nOctets traités au total : {7} / {8}",
+    ("- Résumé de l'opération {0} ({1}) -\n\nFichiers copiés : {2:N0}\nFichiers ignorés : {3:N0}\nFichiers en échec : {4:N0}\nFichiers traités au total : {5:N0} / {6:N0}\nOctets traités au total : {7} / {8}",
      "- {0} Operation-Zusammenfassung ({1}) -\n\nKopierte Dateien: {2:N0}\nÜbersprungene Dateien: {3:N0}\nFehlgeschlagene Dateien: {4:N0}\nGesamt bearbeitete Dateien: {5:N0} / {6:N0}\nGesamt bearbeitete Bytes: {7} / {8}",
-     "- Resumen de operación {0} ({1}) -\n\nArchivos copiados: {2:N0}\nArchivos omitidos: {3:N0}\nArchivos fallidos: {4:N0}\nTotal archivos procesados: {5:N0} / {6:N0}\nTotal bytes procesados: {7} / {8}"),
+     "- Resumen de operación {0} ({1}) -\n\nArchivos copiados: {2:N0}\nArchivos omitidos: {3:N0}\nArchivos fallidos: {4:N0}\nTotal archivos procesados: {5:N0} / {6:N0}\nTotal bytes procesados: {7} / {8}",
+     "- Riepilogo operazione {0} ({1}) -\n\nFile copiati: {2:N0}\nFile saltati: {3:N0}\nFile non riusciti: {4:N0}\nFile totali elaborati: {5:N0} / {6:N0}\nByte totali elaborati: {7} / {8}",
+     "- Resumo da Operação {0} ({1}) -\n\nFicheiros Copiados: {2:N0}\nFicheiros Ignorados: {3:N0}\nFicheiros Falhados: {4:N0}\nTotal de Ficheiros Processados: {5:N0} / {6:N0}\nTotal de Bytes Processados: {7} / {8}",
+     "- Resumo da Operação {0} ({1}) -\n\nArquivos Copiados: {2:N0}\nArquivos Ignorados: {3:N0}\nArquivos com Falha: {4:N0}\nTotal de Arquivos Processados: {5:N0} / {6:N0}\nTotal de Bytes Processados: {7} / {8}",
+     "- {0} Operation Samenvatting ({1}) -\n\nBestanden Gekopieerd: {2:N0}\nBestanden Overgeslagen: {3:N0}\nBestanden Mislukt: {4:N0}\nTotaal Bestanden Verwerkt: {5:N0} / {6:N0}\nTotaal Bytes Verwerkt: {7} / {8}",
+     "- {0} Operationssammanfattning ({1}) -\n\nFiler Kopierade: {2:N0}\nFiler Hoppades Över: {3:N0}\nFiler Misslyckades: {4:N0}\nTotalt Antal Filer Bearbetade: {5:N0} / {6:N0}\nTotalt Antal Byte Bearbetade: {7} / {8}",
+     "- {0} Operasjonssammendrag ({1}) -\n\nFiler Kopiert: {2:N0}\nFiler Hoppet Over: {3:N0}\nFiler Mislyktes: {4:N0}\nTotalt Antall Filer Behandlet: {5:N0} / {6:N0}\nTotalt Antall Bytes Behandlet: {7} / {8}",
+     "- {0} Operation Resume ({1}) -\n\nFiler Kopieret: {2:N0}\nFiler Sprunget Over: {3:N0}\nFiler Mislykkedes: {4:N0}\nTotale Filer Behandlet: {5:N0} / {6:N0}\nTotale Bytes Behandlet: {7} / {8}",
+     "- {0} Toiminnon Yhteenveto ({1}) -\n\nKopioidut Tiedostot: {2:N0}\nOhitetut Tiedostot: {3:N0}\nEpäonnistuneet Tiedostot: {4:N0}\nKäsiteltyjä Tiedostoja Yhteensä: {5:N0} / {6:N0}\nKäsiteltyjä Tavuja Yhteensä: {7} / {8}",
+     "- {0} Podsumowanie operacji ({1}) -\n\nPliki Skopiowane: {2:N0}\nPliki Pominięte: {3:N0}\nPliki Nieudane: {4:N0}\nŁącznie Przetworzonych Plików: {5:N0} / {6:N0}\nŁącznie Przetworzonych Bajtów: {7} / {8}",
+     "- {0} Souhrn operace ({1}) -\n\nZkopírované soubory: {2:N0}\nPřeskočené soubory: {3:N0}\nNeúspěšné soubory: {4:N0}\nCelkem zpracovaných souborů: {5:N0} / {6:N0}\nCelkem zpracovaných bajtů: {7} / {8}",
+     "- {0} Művelet Összefoglaló ({1}) -\n\nMásolt fájlok: {2:N0}\nKihagyott fájlok: {3:N0}\nSikertelen fájlok: {4:N0}\nÖsszesen feldolgozott fájl: {5:N0} / {6:N0}\nÖsszesen feldolgozott bájt: {7} / {8}",
+     "- {0} Rezumat Operație ({1}) -\n\nFișiere Copiate: {2:N0}\nFișiere Omitse: {3:N0}\nFișiere Eșuate: {4:N0}\nTotal Fișiere Procesate: {5:N0} / {6:N0}\nTotal Bytes Procesați: {7} / {8}"),
 
-                    ["Operation {0}"] =   // caption
-    ("Opération {0}", "Operation {0}", "Operación {0}"),
-
-
+                    ["Operation {0}"] =
+    ("Opération {0}",
+    "Operation {0}",
+    "Operación {0}",
+    "Operazione {0}",
+    "Operação {0}",
+    "Operação {0}",
+    "Bewerking {0}",
+    "Operation {0}",
+    "Operasjon {0}",
+    "Handling {0}",
+    "Toiminto {0}",
+    "Operacja {0}",
+    "Operace {0}",
+    "Művelet {0}",
+    "Operație {0}"),
 
                     ["The source folder cannot be added twice."] =
     ("Le dossier source ne peut pas être ajouté deux fois.",
      "Der Quellordner kann nicht zweimal hinzugefügt werden.",
-     "La carpeta de origen no puede agregarse dos veces."),
+     "La carpeta de origen no puede agregarse dos veces.",
+     "La cartella di origine non può essere aggiunta due volte.",
+     "A pasta de origem não pode ser adicionada duas vezes.",
+     "A pasta de origem não pode ser adicionada duas vezes.",
+     "De bronmap kan niet twee keer worden toegevoegd.",
+     "Källmappen kan inte läggas till två gånger.",
+     "Kildemappen kan ikke legges til to ganger.",
+     "Kildemappen kan ikke tilføjes to gange.",
+     "Lähdekansiota ei voi lisätä kahdesti.",
+     "Folder źródłowy nie może być dodany dwa razy.",
+     "Zdrojová složka nemůže být přidána dvakrát.",
+     "A forrásmappa nem adható hozzá kétszer.",
+     "Folderul sursă nu poate fi adăugat de două ori."),
 
                     ["The source folder cannot be the same as one of the target folders."] =
-    ("Le dossier source ne peut pas être identique à l’un des dossiers cibles.",
+    ("Le dossier source ne peut pas être identique à l'un des dossiers cibles.",
      "Der Quellordner darf nicht mit einem der Zielordner identisch sein.",
-     "La carpeta de origen no puede ser igual a una de las carpetas de destino."),
-
+     "La carpeta de origen no puede ser igual a una de las carpetas de destino.",
+     "La cartella di origine non può essere la stessa di una delle cartelle di destinazione.",
+     "A pasta de origem não pode ser a mesma que uma das pastas de destino.",
+     "A pasta de origem não pode ser a mesma que uma das pastas de destino.",
+     "De bronmap kan niet hetzelfde zijn als een van de doelmappen.",
+     "Källmappen får inte vara samma som en av målmapparna.",
+     "Kildemappen kan ikke være den samme som en av målmappene.",
+     "Kildemappen må ikke være den samme som en af destinationsmapperne.",
+     "Lähdekansio ei voi olla sama kuin yksi kohdekansioista.",
+     "Folder źródłowy nie może być taki sam jak jeden z folderów docelowych.",
+     "Zdrojová složka nemůže být stejná jako jedna z cílových složek.",
+     "A forrásmappa nem lehet ugyanaz, mint az egyik célmappa.",
+     "Folderul sursă nu poate fi același cu unul dintre folderele destinație."),
 
                     ["The target folder cannot be the same as one of the source folders."] =
-    ("Le dossier cible ne peut pas être identique à l’un des dossiers sources.",
+    ("Le dossier cible ne peut pas être identique à l'un des dossiers sources.",
      "Der Zielordner darf nicht mit einem der Quellordner identisch sein.",
-     "La carpeta de destino no puede ser igual a una de las carpetas de origen."),
+     "La carpeta de destino no puede ser igual a una de las carpetas de origen.",
+     "La cartella di destinazione non può essere la stessa di una delle cartelle di origine.",
+     "A pasta de destino não pode ser a mesma que uma das pastas de origem.",
+     "A pasta de destino não pode ser a mesma que uma das pastas de origem.",
+     "De doelmap kan niet hetzelfde zijn als een van de bronmappen.",
+     "Målmappen får inte vara samma som en av källmapparna.",
+     "Målmappen kan ikke være den samme som en av kildemappene.",
+     "Destinationsmappen må ikke være den samme som en af kildefolderne.",
+     "Kohdekansio ei voi olla sama kuin yksi lähdekansioista.",
+     "Folder docelowy nie może być taki sam jak jeden z folderów źródłowych.",
+     "Cílová složka nemůže být stejná jako jedna ze zdrojových složek.",
+     "A célmappa nem lehet ugyanaz, mint az egyik forrásmappa.",
+     "Folderul destinație nu poate fi același cu unul dintre folderele sursă."),
 
                     ["The target folder cannot be added twice."] =
     ("Le dossier cible ne peut pas être ajouté deux fois.",
      "Der Zielordner kann nicht zweimal hinzugefügt werden.",
-     "La carpeta de destino no puede agregarse dos veces."),
+     "La carpeta de destino no puede agregarse dos veces.",
+     "La cartella di destinazione non può essere aggiunta due volte.",
+     "A pasta de destino não pode ser adicionada duas vezes.",
+     "A pasta de destino não pode ser adicionada duas vezes.",
+     "De doelmap kan niet twee keer worden toegevoegd.",
+     "Målmappen kan inte läggas till två gånger.",
+     "Målmappen kan ikke legges til to ganger.",
+     "Destinationsmappen kan ikke tilføjes to gange.",
+     "Kohdekansiota ei voi lisätä kahdesti.",
+     "Folder docelowy nie może być dodany dwa razy.",
+     "Cílová složka nemůže být přidána dvakrát.",
+     "A célmappa nem adható hozzá kétszer.",
+     "Folderul destinație nu poate fi adăugat de două ori."),
 
+
+
+                    ["Update Group Box: This group box contains settings related to the application's update preferences."] =
+("Groupe de mise à jour : ce groupe contient les paramètres liés aux préférences de mise à jour de l'application.",
+ "Update-Gruppenfeld: Diese Gruppe enthält Einstellungen bezüglich der Update-Präferenzen der Anwendung.",
+ "Grupo Actualización: este grupo de opciones contiene configuraciones relacionadas con las preferencias de actualización de la aplicación.",
+ "Gruppo Aggiornamento: questo gruppo di opzioni contiene impostazioni relative alle preferenze di aggiornamento dell'applicazione.",
+ "Grupo Atualização: este grupo de opções contém configurações relacionadas às preferências de atualização da aplicação.",
+ "Grupo Atualização: este grupo de opções contém configurações relacionadas às preferências de atualização da aplicação.",
+ "Update Groep: deze groep bevat instellingen met betrekking tot de updatevoorkeuren van de applicatie.",
+ "Uppdateringsgrupp: den här gruppen innehåller inställningar relaterade till programmets uppdateringsinställningar.",
+ "Oppdateringsgruppe: denne gruppen inneholder innstillinger relatert til programmets oppdateringspreferanser.",
+ "Opdateringsgruppe: denne gruppe indeholder indstillinger relateret til programmets opdateringspræferencer.",
+ "Päivitysryhmä: tämä ryhmä sisältää sovelluksen päivitysasetuksia koskevat asetukset.",
+ "Grupa Aktualizacji: ta grupa opcji zawiera ustawienia związane z preferencjami aktualizacji aplikacji.",
+ "Skupina Aktualizace: tato skupina obsahuje nastavení týkající se předvoleb aktualizace aplikace.",
+ "Frissítési Csoport: ez a csoport tartalmazza az alkalmazás frissítési beállításaira vonatkozó beállításokat.",
+ "Grup Actualizare: acest grup conține setări legate de preferințele de actualizare ale aplicației."),
+
+                    ["Sounds Group Box: This group box contains settings related to the application's sound notifications for various events."] =
+("Groupe Sons : ce groupe contient les paramètres liés aux notifications sonores de l'application pour différents événements.",
+ "Sound-Gruppenfeld: Diese Gruppe enthält Einstellungen für die Tonbenachrichtigungen der Anwendung bei verschiedenen Ereignissen.",
+ "Grupo Sonidos: este grupo de opciones contiene configuraciones relacionadas con las notificaciones de sonido de la aplicación para varios eventos.",
+ "Gruppo Suoni: questo gruppo di opzioni contiene impostazioni relative alle notifiche sonore dell'applicazione per vari eventi.",
+ "Grupo Sons: este grupo de opções contém configurações relacionadas às notificações sonoras da aplicação para vários eventos.",
+ "Grupo Sons: este grupo de opções contém configurações relacionadas às notificações sonoras da aplicação para vários eventos.",
+ "Geluiden Groep: deze groep bevat instellingen met betrekking tot de geluidsmeldingen van de applicatie voor verschillende gebeurtenissen.",
+ "Ljudgrupp: den här gruppen innehåller inställningar relaterade till programmets ljudaviseringar för olika händelser.",
+ "Lydgruppe: denne gruppen inneholder innstillinger relatert til programmets lydvarsler for ulike hendelser.",
+ "Lydgruppe: denne gruppe indeholder indstillinger relateret til programmets lydmeddelelser for forskellige begivenheder.",
+ "Ääniryhmä: tämä ryhmä sisältää sovelluksen äänitiedoituksiin liittyvät asetukset eri tapahtumia varten.",
+ "Grupa Dźwięki: ta grupa opcji zawiera ustawienia związane z powiadomieniami dźwiękowymi aplikacji dla różnych zdarzeń.",
+ "Skupina Zvuky: tato skupina obsahuje nastavení týkající se zvukových oznámení aplikace pro různé události.",
+ "Hang Csoport: ez a csoport tartalmazza az alkalmazás hangértesítéseire vonatkozó beállításokat különböző eseményekhez.",
+ "Grup Sunete: acest grup conține setări legate de notificările sonore ale aplicației pentru diverse evenimente."),
+
+                    ["Performance Group Box: This group box contains settings related to the application's performance, such as buffer size and multi-threading options."] =
+("Groupe Performance : ce groupe contient les paramètres liés aux performances de l'application, tels que la taille du tampon et les options de multithreading.",
+ "Leistungs-Gruppenfeld: Diese Gruppe enthält Einstellungen bezüglich der Leistung der Anwendung, wie Puffergröße und Multi-Threading-Optionen.",
+ "Grupo Rendimiento: este grupo de opciones contiene configuraciones relacionadas con el rendimiento de la aplicación, como el tamaño del búfer y las opciones de multi-hilo.",
+ "Gruppo Prestazioni: questo gruppo di opzioni contiene impostazioni relative alle prestazioni dell'applicazione, come la dimensione del buffer e le opzioni di multi-threading.",
+ "Grupo Desempenho: este grupo de opções contém configurações relacionadas ao desempenho da aplicação, como tamanho do buffer e opções de multi-threading.",
+ "Grupo Desempenho: este grupo de opções contém configurações relacionadas ao desempenho da aplicação, como tamanho do buffer e opções de multi-threading.",
+ "Prestaties Groep: deze groep bevat instellingen met betrekking tot de prestaties van de applicatie, zoals buffergrootte en multi-threading opties.",
+ "Prestandagrupp: den här gruppen innehåller inställningar relaterade till programmets prestanda, såsom buffertstorlek och alternativ för flertrådning.",
+ "Ytelsesgruppe: denne gruppen inneholder innstillinger relatert til programmets ytelse, for eksempel bufferstørrelse og flertrådsalternativer.",
+ "Ydelsesgruppe: denne gruppe indeholder indstillinger relateret til programmets ydeevne, såsom bufferstørrelse og multi-threading muligheder.",
+ "Suorituskykyryhmä: tämä ryhmä sisältää sovelluksen suorituskykyyn liittyviä asetuksia, kuten puskurin koko ja monisäikeisyysvalinnat.",
+ "Grupa Wydajność: ta grupa opcji zawiera ustawienia związane z wydajnością aplikacji, takie jak rozmiar bufora i opcje wielowątkowości.",
+ "Skupina Výkon: tato skupina obsahuje nastavení týkající se výkonu aplikace, jako je velikost vyrovnávací paměti a možnosti multithreadingu.",
+ "Teljesítmény Csoport: ez a csoport tartalmazza az alkalmazás teljesítményével kapcsolatos beállításokat, például a puffer méretét és a többszálúsági lehetőségeket.",
+ "Grup Performanță: acest grup conține setări legate de performanța aplicației, cum ar fi dimensiunea buffer-ului și opțiunile de multi-threading."),
+
+                    ["Manual Update Check CheckBox: This checkbox determines whether the application should check for updates only when manually triggered by the user."] =
+("Case Vérification manuelle des mises à jour : détermine si l'application doit vérifier les mises à jour uniquement lorsque l'utilisateur le déclenche manuellement.",
+ "Manuelle Update-Überprüfung-CheckBox: Legt fest, ob die Anwendung nur dann nach Updates suchen soll, wenn sie manuell vom Benutzer ausgelöst wird.",
+ "Casilla Verificación Manual de Actualizaciones: determina si la aplicación debe buscar actualizaciones solo cuando el usuario lo activa manualmente.",
+ "Casella Controllo Aggiornamento Manuale: determina se l'applicazione deve controllare gli aggiornamenti solo quando attivato manualmente dall'utente.",
+ "Caixa Verificação Manual de Atualização: determina se a aplicação deve verificar atualizações apenas quando acionada manualmente pelo usuário.",
+ "Caixa Verificação Manual de Atualização: determina se a aplicação deve verificar atualizações apenas quando acionada manualmente pelo usuário.",
+ "Handmatige Update Controle Selectievakje: bepaalt of de applicatie alleen op updates moet controleren wanneer handmatig geactiveerd door de gebruiker.",
+ "Manuell uppdateringskontroll kryssruta: avgör om applikationen endast ska söka efter uppdateringar när den utlöses manuellt av användaren.",
+ "Manuell oppdateringskontroll avmerkingsboks: avgjør om programmet bare skal søke etter oppdateringer når det utløses manuelt av brukeren.",
+ "Manuel opdateringstjek afkrydsningsfelt: bestemmer om applikationen kun skal tjekke for opdateringer, når den udløses manuelt af brugeren.",
+ "Manuaalinen päivitysten tarkistus -valintaruutu: määrittää, tarkistaako sovellus päivitykset vain, kun käyttäjä käynnistää sen manuaalisesti.",
+ "Pole wyboru Ręczne sprawdzanie aktualizacji: określa, czy aplikacja ma sprawdzać aktualizacje tylko po ręcznym uruchomieniu przez użytkownika.",
+ "Zaškrtávací políčko Ruční kontrola aktualizací: určuje, zda má aplikace kontrolovat aktualizace pouze při ručním spuštění uživatelem.",
+ "Kézi Frissítés Ellenőrzés jelölőnégyzet: meghatározza, hogy az alkalmazás csak akkor ellenőrizze-e a frissítéseket, ha a felhasználó manuálisan indítja el.",
+ "Casetă Verificare Manuală Actualizare: determină dacă aplicația trebuie să verifice actualizările doar când este declanșată manual de utilizator."),
+
+                    ["Restart Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs."] =
+("Case Redémarrer le programme : détermine si l'application doit se fermer automatiquement lorsqu'une erreur se produit.",
+ "Programm neu starten-CheckBox: Legt fest, ob die Anwendung automatisch geschlossen werden soll, wenn ein Fehler auftritt.",
+ "Casilla Reiniciar Programa: determina si la aplicación debe cerrarse automáticamente cuando ocurre un error.",
+ "Casella Riavvia Programma: determina se l'applicazione deve chiudersi automaticamente quando si verifica un errore.",
+ "Caixa Reiniciar Programa: determina se a aplicação deve fechar automaticamente quando ocorre um erro.",
+ "Caixa Reiniciar Programa: determina se a aplicação deve fechar automaticamente quando ocorre um erro.",
+ "Programma Herstarten Selectievakje: bepaalt of de applicatie automatisch moet sluiten wanneer een fout optreedt.",
+ "Starta om program kryssruta: avgör om programmet automatiskt ska stängas när ett fel uppstår.",
+ "Start program på nytt avmerkingsboks: avgjør om programmet automatisk skal lukkes når en feil oppstår.",
+ "Genstart program afkrydsningsfelt: bestemmer om programmet automatisk skal lukkes, når der opstår en fejl.",
+ "Käynnistä ohjelma uudelleen -valintaruutu: määrittää, sulkeutuuko sovellus automaattisesti virheen sattuessa.",
+ "Pole wyboru Uruchom ponownie program: określa, czy aplikacja ma być automatycznie zamykana po wystąpieniu błędu.",
+ "Zaškrtávací políčko Restartovat program: určuje, zda se má aplikace automaticky zavřít při výskytu chyby.",
+ "Program Újraindítása jelölőnégyzet: meghatározza, hogy az alkalmazás automatikusan bezárul-e, ha hiba történik.",
+ "Casetă Repornește Programul: determină dacă aplicația trebuie să se închidă automat atunci când apare o eroare."),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    ["Check for Updates Button: This button manually checks for updates to the application."] =
+("Bouton Vérifier les mises à jour : permet de rechercher manuellement les mises à jour de l’application.",
+ "Schaltfläche „Auf Updates prüfen“: prüft manuell, ob Anwendungs-Updates vorliegen.",
+ "Botón Buscar actualizaciones: busca manualmente actualizaciones de la aplicación.",
+ "Pulsante Verifica aggiornamenti: controlla manualmente la presenza di aggiornamenti dell’applicazione.",
+ "Botão Verificar Atualizações: pesquisa manualmente por atualizações da aplicação.",
+ "Botão Verificar Atualizações: pesquisa manualmente por atualizações do aplicativo.",
+ "Knop Updates controleren: controleert handmatig op updates voor de toepassing.",
+ "Knappen Sök efter uppdateringar: söker manuellt efter uppdateringar till programmet.",
+ "Knapp Sjekk for oppdateringer: sjekker manuelt etter oppdateringer til programmet.",
+ "Knap Tjek for opdateringer: tjekker manuelt for opdateringer til programmet.",
+ "Päivitä-painike: tarkistaa manuaalisesti sovelluksen päivitykset.",
+ "Przycisk Sprawdź aktualizacje: ręcznie sprawdza dostępność aktualizacji aplikacji.",
+ "Tlačítko Zkontrolovat aktualizace: ručně zkontroluje aktualizace aplikace.",
+ "Frissítések gomb: manuálisan ellenőrzi az alkalmazás frissítéseit.",
+ "Buton Verifică actualizări: verifică manual existența actualizărilor pentru aplicație."),
+
+                    ["Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates."] =
+("Case à cocher Inclure les versions bêta : détermine si les versions bêta sont incluses lors de la recherche de mises à jour.",
+ "Kontrollkästchen Beta-Versionen einbeziehen: legt fest, ob Beta-Versionen bei der Update-Suche berücksichtigt werden.",
+ "Casilla Incluir versiones beta: determina si se incluyen versiones beta al buscar actualizaciones.",
+ "Check-box Includi versioni beta: determina se includere le versioni beta durante il controllo degli aggiornamenti.",
+ "Caixa de verificação Incluir Versões Beta: determina se incluir versões beta ao verificar atualizações.",
+ "Caixa de seleção Incluir versões beta: determina se incluir versões beta ao verificar atualizações.",
+ "Selectievakje Betaversies opnemen: bepaalt of bètaversies worden meegenomen bij het controleren op updates.",
+ "Kryssrutan Inkludera betaversioner: avgör om betaversioner ska ingå vid sökning efter uppdateringar.",
+ "Avkrysningsboksen Inkluder betaversjoner: bestemmer om betaversjoner skal inkluderes ved sjekk etter oppdateringer.",
+ "Checkboksen Inkluder betaversioner: bestemmer, om betaversioner skal inkluderes ved tjek for opdateringer.",
+ "Beta-versiot -valintaruutu: määrittää, otetaanko beetakohteet mukaan päivityksiä tarkistettaessa.",
+ "Pole wyboru Uwzględnij wersje beta: określa, czy podczas sprawdzania aktualizacji mają być uwzględniane wersje beta.",
+ "Zaškrtávací pole Zahrnout beta verze: určuje, zda se při kontrole aktualizací zahrnou beta verze.",
+ "Béta-verziók jelölőnégyzet: meghatározza, hogy a frissítések ellenőrzésekor béta verziók is szerepeljenek-e.",
+ "Caseta de selectare Includere versiuni beta: determină dacă se includ versiunile beta la verificarea actualizărilor."),
+
+                    ["Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration."] =
+("Bouton Effacer les paramètres : supprime tous les réglages utilisateur et rétablit la configuration par défaut de l’application.",
+ "Schaltfläche „Einstellungen löschen“: löscht alle benutzerdefinierten Einstellungen und stellt die Standardkonfiguration wieder her.",
+ "Botón Borrar configuración: borra todos los ajustes definidos por el usuario y devuelve la aplicación a su configuración predeterminada.",
+ "Pulsante Cancella impostazioni: cancella tutte le impostazioni definite dall’utente e ripristina la configurazione predefinita dell’applicazione.",
+ "Botão Limpar Definições: apaga todas as definições definidas pelo utilizador e regressa à configuração predefinida da aplicação.",
+ "Botão Limpar configurações: limpa todas as configurações definidas pelo usuário e restaura a configuração padrão do aplicativo.",
+ "Knop Instellingen wissen: wist alle door de gebruiker gedefinieerde instellingen en herstelt de standaardconfiguratie van de toepassing.",
+ "Knappen Rensa inställningar: tar bort alla användardefinierade inställningar och återställer programmets standardkonfiguration.",
+ "Knapp Tøm innstillinger: sletter alle brukerdefinerte innstillinger og gjenoppretter programmets standardkonfigurasjon.",
+ "Knap Ryd indstillinger: sletter alle brugerdefinerede indstillinger og gendanner programmets standardkonfiguration.",
+ "Tyhjennä asetukset -painike: poistaa kaikki käyttäjän määrittämät asetukset ja palauttaa sovelluksen oletusasetukset.",
+ "Przycisk Wyczyść ustawienia: usuwa wszystkie ustawienia zdefiniowane przez użytkownika i przywraca domyślną konfigurację aplikacji.",
+ "Tlačítko Vymazat nastavení: smaže všechna uživatelem definovaná nastavení a vrátí aplikaci do výchozí konfigurace.",
+ "Beállítások törlése gomb: törli az összes felhasználói beállítást, és visszaállítja az alkalmazás alapértelmezett konfigurációját.",
+ "Buton Ștergere setări: șterge toate setările definite de utilizator și restabilește configurația implicită a aplicației."),
+
+                    ["Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions."] =
+("Bouton Enregistrer les paramètres : enregistre les réglages actuels afin que les modifications soient conservées pour les prochaines sessions.",
+ "Schaltfläche „Einstellungen speichern“: speichert die aktuellen Einstellungen, damit Änderungen für zukünftige Sitzungen beibehalten werden.",
+ "Botón Guardar configuración: guarda la configuración actual para que los cambios se conserven en futuras sesiones.",
+ "Pulsante Salva impostazioni: salva le impostazioni correnti in modo che le modifiche vengano mantenute nelle sessioni future.",
+ "Botão Guardar Definições: guarda as definições atuais, garantindo que as alterações sejam mantidas para sessões futuras.",
+ "Botão Salvar configurações: salva as configurações atuais, garantindo que as alterações sejam mantidas para sessões futuras.",
+ "Knop Instellingen opslaan: slaat de huidige instellingen op, zodat wijzigingen behouden blijven voor toekomstige sessies.",
+ "Knappen Spara inställningar: sparar de aktuella inställningarna så att ändringar behålls för framtida sessioner.",
+ "Knapp Lagre innstillinger: lagrer de gjeldende innstillingene, slik at endringer beholdes for fremtidige økter.",
+ "Knap Gem indstillinger: gemmer de aktuelle indstillinger, så ændringer bevares til fremtidige sessioner.",
+ "Asetusten tallennus -painike: tallentaa nykyiset asetukset, jotta muutokset säilyvät tulevia istuntoja varten.",
+ "Przycisk Zapisz ustawienia: zapisuje bieżące ustawienia, aby wprowadzone zmiany były zachowane na przyszłe sesje.",
+ "Tlačítko Uložit nastavení: uloží aktuální nastavení, aby byly všechny změny zachovány pro budoucí relace.",
+ "Beállítások mentése gomb: elmenti a jelenlegi beállításokat, így a végrehajtott módosítások megmaradnak a későbbi munkamenetekhez.",
+ "Buton Salvare setări: salvează setările curente, asigurându-se că modificările sunt păstrate pentru sesiunile viitoare."),
+
+                    ["Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes."] =
+("Case à cocher Sous Mo : détermine si le multi-threading est appliqué uniquement aux fichiers plus petits que la taille spécifiée en mégaoctets.",
+ "Kontrollkästchen Unter MB: legt fest, ob Multi-Threading nur auf Dateien angewendet wird, die kleiner als die angegebene Größe in Megabyte sind.",
+ "Casilla Bajo MB: determina si se aplica multi-hilo sólo a archivos más pequeños que el tamaño especificado en megabytes.",
+ "Check-box Sotto MB: determina se applicare il multi-threading solo ai file più piccoli della dimensione specificata in megabyte.",
+ "Caixa de verificação Under MB: determina se o multi-threading é aplicado apenas a ficheiros menores do que o tamanho especificado em megabytes.",
+ "Caixa de seleção Abaixo de MB: determina se o multithreading é aplicado apenas a arquivos menores que o tamanho especificado em megabytes.",
+ "Selectievakje Onder MB: bepaalt of multi-threading alleen wordt toegepast op bestanden die kleiner zijn dan de opgegeven grootte in megabytes.",
+ "Kryssrutan Under MB: avgör om multi-threading endast ska tillämpas på filer som är mindre än den angivna storleken i megabyte.",
+ "Avkrysningsboksen Under MB: bestemmer om multi-tråding kun skal brukes på filer som er mindre enn den angitte størrelsen i megabyte.",
+ "Checkboksen Under MB: bestemmer, om multi-threading kun skal anvendes på filer, der er mindre end den angivne størrelse i megabyte.",
+ "Alle MB -valintaruutu: määrittää, käytetäänkö monisäikeisyyttä vain tiedostoille, jotka ovat pienempiä kuin määritetty koko megatavuina.",
+ "Pole wyboru Poniżej MB: określa, czy wielowątkowość ma być stosowana tylko do plików mniejszych niż określony rozmiar w megabajtach.",
+ "Zaškrtávací pole Pod MB: určuje, zda se má multi-threading použít pouze na soubory menší než zadaná velikost v megabajtech.",
+ "MB alatti jelölőnégyzet: meghatározza, hogy a többszálúság csak a megadott méretnél kisebb, megabájtban megadott fájlokra vonatkozzon.",
+ "Caseta de selectare Sub MB: determină dacă multi-threadingul se aplică numai fișierelor mai mici decât dimensiunea specificată în megabytes."),
+
+                    ["Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes."] =
+("Case à cocher Au-dessus de Mo : détermine si le multi-threading est appliqué uniquement aux fichiers plus grands que la taille spécifiée en mégaoctets.",
+ "Kontrollkästchen Über MB: legt fest, ob Multi-Threading nur auf Dateien angewendet wird, die größer als die angegebene Größe in Megabyte sind.",
+ "Casilla Sobre MB: determina si se aplica multi-hilo sólo a archivos más grandes que el tamaño especificado en megabytes.",
+ "Check-box Sopra MB: determina se applicare il multi-threading solo ai file più grandi della dimensione specificata in megabyte.",
+ "Caixa de verificação Over MB: determina se o multi-threading é aplicado apenas a ficheiros maiores do que o tamanho especificado em megabytes.",
+ "Caixa de seleção Acima de MB: determina se o multithreading é aplicado apenas a arquivos maiores que o tamanho especificado em megabytes.",
+ "Selectievakje Over MB: bepaalt of multi-threading alleen wordt toegepast op bestanden die groter zijn dan de opgegeven grootte in megabytes.",
+ "Kryssrutan Över MB: avgör om multi-threading endast ska tillämpas på filer som är större än den angivna storleken i megabyte.",
+ "Avkrysningsboksen Over MB: bestemmer om multi-tråding kun skal brukes på filer som er større enn den angitte størrelsen i megabyte.",
+ "Checkboksen Over MB: bestemmer, om multi-threading kun skal anvendes på filer, der er større end den angivne størrelse i megabyte.",
+ "Yli MB -valintaruutu: määrittää, käytetäänkö monisäikeisyyttä vain tiedostoille, jotka ovat suurempia kuin määritetty koko megatavuina.",
+ "Pole wyboru Powyżej MB: określa, czy wielowątkowość ma być stosowana tylko do plików większych niż określony rozmiar w megabajtach.",
+ "Zaškrtávací pole Nad MB: určuje, zda se má multi-threading použít pouze na soubory větší než zadaná velikost v megabajtech.",
+ "MB feletti jelölőnégyzet: meghatározza, hogy a többszálúság csak a megadott méretnél nagyobb, megabájtban megadott fájlokra vonatkozzon.",
+ "Caseta de selectare Peste MB: determină dacă multi-threadingul se aplică numai fișierelor mai mari decât dimensiunea specificată în megabytes."),
+
+                    ["Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance."] =
+("ComboBox Skins : permet de sélectionner différents skins ou thèmes pour l’apparence de l’application.",
+ "Skins-ComboBox: ermöglicht die Auswahl verschiedener Skins oder Designs für das Erscheinungsbild der Anwendung.",
+ "ComboBox Skins: permite seleccionar diferentes skins o temas para el aspecto de la aplicación.",
+ "ComboBox Skins: consente di selezionare diversi skin o temi per l’aspetto dell’applicazione.",
+ "ComboBox Skins: permite selecionar diferentes skins ou temas para a aparência da aplicação.",
+ "ComboBox Skins: permite selecionar diferentes skins ou temas para a aparência do aplicativo.",
+ "Skins-ComboBox: stelt u in staat verschillende skins of thema’s voor het uiterlijk van de toepassing te selecteren.",
+ "Skins ComboBox: låter dig välja olika skal eller teman för programmets utseende.",
+ "Skins ComboBox: lar deg velge forskjellige skall eller temaer for programmets utseende.",
+ "Skins ComboBox: lader dig vælge forskellige skins eller temaer til programmets udseende.",
+ "Skins-valintaruutu: mahdollistaa eri ulkoasujen tai teemojen valitsemisen sovelluksen näyttämiseksi.",
+ "ComboBox Skór: pozwala wybrać różne skórki lub motywy wyglądu aplikacji.",
+ "ComboBox Skins: umožňuje vybrat různé skiny nebo motivy vzhledu aplikace.",
+ "Skins ComboBox: lehetővé teszi különböző skinek vagy témák kiválasztását az alkalmazás megjelenéséhez.",
+ "ComboBox Skins: permite selectarea diferitelor skin-uri sau teme pentru aspectul aplicației."),
+
+                    ["On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes."] =
+("Case à cocher À la fin : détermine si une notification sonore est jouée lorsque l’opération sur les fichiers se termine.",
+ "Kontrollkästchen Bei Fertigstellung: legt fest, ob eine Tonbenachrichtigung beim Abschluss der Dateioperation wiedergegeben wird.",
+ "Casilla Al finalizar: determina si se reproduce una notificación sonora cuando finaliza la operación de archivos.",
+ "Check-box Al termine: determina se riprodurre una notifica sonora al termine dell’operazione sui file.",
+ "Caixa de verificação Ao Terminar: determina se é reproduzida uma notificação sonora quando a operação de ficheiros termina.",
+ "Caixa de seleção Ao finalizar: determina se uma notificação sonora será reproduzida quando a operação de arquivos for concluída.",
+ "Selectievakje Bij voltooien: bepaalt of een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking is voltooid.",
+ "Kryssrutan Vid slutförande: avgör om ett ljudmeddelande ska spelas upp när filåtgärden avslutas.",
+ "Avkrysningsboksen Ved ferdigstillelse: bestemmer om det skal spilles av en lydvarsling når filoperasjonen er fullført.",
+ "Checkboksen Ved færdiggørelse: bestemmer, om der skal afspilles en lydmeddelelse, når filhandlingen afsluttes.",
+ "Valmis-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminto päättyy.",
+ "Pole wyboru Po zakończeniu: określa, czy ma być odtwarzane powiadomienie dźwiękowe po zakończeniu operacji na plikach.",
+ "Zaškrtávací pole Při dokončení: určuje, zda se při dokončení operace se soubory přehraje zvukové upozornění.",
+ "Befejezéskor jelölőnégyzet: meghatározza, hogy a fájlművelet befejezésekor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La finalizare: determină dacă se redă o notificare sonoră când operațiunea de fișiere se finalizează."),
+
+                    ["On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled."] =
+("Case à cocher À l’annulation : détermine si une notification sonore est jouée lorsque l’opération sur les fichiers est annulée.",
+ "Kontrollkästchen Bei Abbruch: legt fest, ob eine Tonbenachrichtigung beim Abbrechen der Dateioperation wiedergegeben wird.",
+ "Casilla Al cancelar: determina si se reproduce una notificación sonora cuando se cancela la operación de archivos.",
+ "Check-box All’annullamento: determina se riprodurre una notifica sonora quando l’operazione sui file viene annullata.",
+ "Caixa de verificação Ao Cancelar: determina se é reproduzida uma notificação sonora quando a operação de ficheiros é cancelada.",
+ "Caixa de seleção Ao cancelar: determina se uma notificação sonora será reproduzida quando a operação de arquivos for cancelada.",
+ "Selectievakje Bij annuleren: bepaalt of een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking wordt geannuleerd.",
+ "Kryssrutan Vid avbrytande: avgör om ett ljudmeddelande ska spelas upp när filåtgärden avbryts.",
+ "Avkrysningsboksen Ved avbryting: bestemmer om det skal spilles av en lydvarsling når filoperasjonen avbrytes.",
+ "Checkboksen Ved annullering: bestemmer, om der skal afspilles en lydmeddelelse, når filhandlingen annulleres.",
+ "Peruutus-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminto peruutetaan.",
+ "Pole wyboru Po anulowaniu: określa, czy ma być odtwarzane powiadomienie dźwiękowe po anulowaniu operacji na plikach.",
+ "Zaškrtávací pole Při zrušení: určuje, zda se při zrušení operace se soubory přehraje zvukové upozornění.",
+ "Törléskor jelölőnégyzet: meghatározza, hogy a fájlművelet törlésekor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La anulare: determină dacă se redă o notificare sonoră când operațiunea de fișiere este anulată."),
+
+                    ["On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list."] =
+("Case à cocher À l’ajout de fichiers : détermine si une notification sonore est jouée lorsque des fichiers sont ajoutés à la liste d’opérations.",
+ "Kontrollkästchen Beim Hinzufügen von Dateien: legt fest, ob eine Tonbenachrichtigung wiedergegeben wird, wenn Dateien zur Vorgangsliste hinzugefügt werden.",
+ "Casilla Al añadir archivos: determina si se reproduce una notificación sonora cuando se añaden archivos a la lista de operaciones.",
+ "Check-box All’aggiunta di file: determina se riprodurre una notifica sonora quando i file vengono aggiunti all’elenco delle operazioni.",
+ "Caixa de verificação Ao Adicionar Ficheiros: determina se é reproduzida uma notificação sonora quando ficheiros são adicionados à lista de operações.",
+ "Caixa de seleção Ao adicionar arquivos: determina se uma notificação sonora será reproduzida quando arquivos forem adicionados à lista de operações.",
+ "Selectievakje Bij toevoegen bestanden: bepaalt of een geluidsmelding wordt afgespeeld wanneer bestanden aan de bewerkingslijst worden toegevoegd.",
+ "Kryssrutan Vid tillägg av filer: avgör om ett ljudmeddelande ska spelas upp när filer läggs till i åtgärdslistan.",
+ "Avkrysningsboksen Ved legg til filer: bestemmer om det skal spilles av en lydvarsling når filer legges til i operasjonslisten.",
+ "Checkboksen Ved tilføjelse af filer: bestemmer, om der skal afspilles en lydmeddelelse, når filer føjes til handlingslisten.",
+ "Tiedostojen lisäys -valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostoja lisätään toimintolistalle.",
+ "Pole wyboru Po dodaniu plików: określa, czy ma być odtwarzane powiadomienie dźwiękowe po dodaniu plików do listy operacji.",
+ "Zaškrtávací pole Při přidání souborů: určuje, zda se při přidání souborů do seznamu operací přehraje zvukové upozornění.",
+ "Fájlok hozzáadása jelölőnégyzet: meghatározza, hogy a fájlok a műveleti listához való hozzáadásakor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La adăugarea fișierelor: determină dacă va fi redată o notificare sonoră când fișierele sunt adăugate la lista de operații."),
+
+                    ["On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes."] =
+("Case à cocher À la fin : détermine si une notification sonore est jouée à la fin de l’opération sur les fichiers.",
+ "Kontrollkästchen Bei Fertigstellung: legt fest, ob ein Sound gespielt wird, wenn die Dateioperation beendet ist.",
+ "Casilla Al finalizar: determina si se reproduce una notificación sonora cuando finaliza la operación de archivos.",
+ "Check-box Al termine: determina se riprodurre una notifica sonora al termine dell’operazione sui file.",
+ "Caixa de verificação On Finish: determina se é reproduzida uma notificação sonora quando a operação de ficheiros termina.",
+ "Caixa de seleção Ao Finalizar: determina se uma notificação sonora será reproduzida ao finalizar a operação de arquivos.",
+ "Selectievakje Bij Voltooien: bepaalt of een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking is voltooid.",
+ "Kryssrutan Vid slutförande: avgör om ett ljud ska spelas upp när filoperationen avslutas.",
+ "Avkrysningsboksen Ved ferdigstillelse: bestemmer om det skal spilles av en lydvarsling når filoperasjonen er fullført.",
+ "Checkboksen Ved færdiggørelse: bestemmer, om der skal afspilles en lydmeddelelse, når filoperationen er afsluttet.",
+ "Valmiina-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminto päättyy.",
+ "Pole wyboru Po zakończeniu: określa, czy ma być odtwarzane powiadomienie dźwiękowe po zakończeniu operacji na plikach.",
+ "Zaškrtávací pole Při dokončení: určuje, zda se má při dokončení operace se soubory přehrát zvukové upozornění.",
+ "Befejezéskor jelölőnégyzet: meghatározza, hogy a fájlművelet befejezésekor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La finalizare: determină dacă va fi redată o notificare sonoră când operația de fișiere se finalizează."),
+
+                    ["On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled."] =
+("Case à cocher À l’annulation : détermine si une notification sonore est jouée lorsque l’opération est annulée.",
+ "Kontrollkästchen Bei Abbruch: legt fest, ob ein Sound gespielt wird, wenn die Dateioperation abgebrochen wird.",
+ "Casilla Al cancelar: determina si se reproduce una notificación sonora cuando se cancela la operación de archivos.",
+ "Check-box All’annullamento: determina se riprodurre una notifica sonora quando l’operazione sui file viene annullata.",
+ "Caixa de verificação On Cancel: determina se é reproduzida uma notificação sonora quando a operação de ficheiros é cancelada.",
+ "Caixa de seleção Ao Cancelar: determina se uma notificação sonora será reproduzida ao cancelar a operação de arquivos.",
+ "Selectievakje Bij Annuleren: bepaalt of een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking wordt geannuleerd.",
+ "Kryssrutan Vid avbrytning: avgör om ett ljud ska spelas upp när filoperationen avbryts.",
+ "Avkrysningsboksen Ved avbrytelse: bestemmer om det skal spilles av en lydvarsling når filoperasjonen avbrytes.",
+ "Checkboksen Ved annullering: bestemmer, om der skal afspilles en lydmeddelelse, når filoperationen annulleres.",
+ "Peruuta-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminto peruutetaan.",
+ "Pole wyboru Po anulowaniu: określa, czy ma być odtwarzane powiadomienie dźwiękowe po anulowaniu operacji na plikach.",
+ "Zaškrtávací pole Při zrušení: určuje, zda se má při zrušení operace se soubory přehrát zvukové upozornění.",
+ "Mégse jelölőnégyzet: meghatározza, hogy a fájlművelet megszakításakor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La anulare: determină dacă va fi redată o notificare sonoră când operația de fișiere este anulată."),
+
+                    ["On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list."] =
+("Case à cocher À l’ajout : détermine si une notification sonore est jouée quand des fichiers sont ajoutés à la liste.",
+ "Kontrollkästchen Bei Hinzufügen: legt fest, ob ein Sound gespielt wird, wenn Dateien zur Liste hinzugefügt werden.",
+ "Casilla Al añadir: determina si se reproduce una notificación sonora cuando se añaden archivos a la lista.",
+ "Check-box All’aggiunta: determina se riprodurre una notifica sonora quando i file vengono aggiunti all’elenco.",
+ "Caixa de verificação On Add Files: determina se é reproduzida uma notificação sonora quando ficheiros são adicionados à lista.",
+ "Caixa de seleção Ao Adicionar Arquivos: determina se uma notificação sonora será reproduzida ao adicionar arquivos à lista.",
+ "Selectievakje Bij Toevoegen: bepaalt of een geluidsmelding wordt afgespeeld wanneer bestanden aan de lijst worden toegevoegd.",
+ "Kryssrutan Vid tillägg: avgör om ett ljud ska spelas upp när filer läggs till i listan.",
+ "Avkrysningsboksen Ved legg til filer: bestemmer om det skal spilles av en lydvarsling når filer legges til i listen.",
+ "Checkboksen Ved tilføjelse: bestemmer, om der skal afspilles en lydmeddelelse, når filer tilføjes til listen.",
+ "Lisää tiedostot -valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostoja lisätään luetteloon.",
+ "Pole wyboru Po dodaniu plików: określa, czy ma być odtwarzane powiadomienie dźwiękowe po dodaniu plików do listy.",
+ "Zaškrtávací pole Při přidání souborů: určuje, zda se má při přidání souborů do seznamu přehrát zvukové upozornění.",
+ "Fájlok hozzáadása jelölőnégyzet: meghatározza, hogy a fájlok listához adásakor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La adăugare fișiere: determină dacă va fi redată o notificare sonoră când fișierele sunt adăugate la listă."),
+
+                    ["On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation."] =
+("Case à cocher En cas d’erreur : détermine si une notification sonore est jouée en cas d’erreur pendant l’opération.",
+ "Kontrollkästchen Bei Fehler: legt fest, ob ein Sound gespielt wird, wenn während der Dateioperation ein Fehler auftritt.",
+ "Casilla En caso de error: determina si se reproduce una notificación sonora cuando ocurre un error durante la operación.",
+ "Check-box In caso di errore: determina se riprodurre una notifica sonora quando si verifica un errore durante l’operazione.",
+ "Caixa de verificação On Error: determina se é reproduzida uma notificação sonora quando ocorre um erro durante a operação.",
+ "Caixa de seleção Em Caso de Erro: determina se uma notificação sonora será reproduzida quando ocorrer um erro durante a operação.",
+ "Selectievakje Bij Fout: bepaalt of een geluidsmelding wordt afgespeeld wanneer er een fout optreedt tijdens de bestandsbewerking.",
+ "Kryssrutan Vid fel: avgör om ett ljud ska spelas upp när ett fel inträffar under filoperationen.",
+ "Avkrysningsboksen Ved feil: bestemmer om det skal spilles av en lydvarsling når det oppstår en feil under filoperasjonen.",
+ "Checkboksen Ved fejl: bestemmer, om der skal afspilles en lydmeddelelse, når der opstår en fejl under filoperationen.",
+ "Virhe-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminnon aikana tapahtuu virhe.",
+ "Pole wyboru Przy błędzie: określa, czy ma być odtwarzane powiadomienie dźwiękowe, gdy podczas operacji na plikach wystąpi błąd.",
+ "Zaškrtávací pole Při chybě: určuje, zda se má při výskytu chyby během operace se soubory přehrát zvukové upozornění.",
+ "Hiba jelölőnégyzet: meghatározza, hogy a fájlművelet során fellépő hiba esetén lejátszódik-e hangértesítés.",
+ "Caseta de selectare La eroare: determină dacă va fi redată o notificare sonoră când apare o eroare în timpul operației de fișiere."),
+
+                    ["Export Files Data Grid View: This area displays the list of files to be processed, along with their details such as source and destination."] =
+("Grille d’export des fichiers : affiche la liste des fichiers à traiter ainsi que leurs détails (source et destination).",
+ "Export-Dateien-DataGridView: zeigt die Liste der zu verarbeitenden Dateien mit Details wie Quelle und Ziel an.",
+ "Vista de cuadrícula de exportación de archivos: muestra la lista de archivos a procesar junto con detalles como origen y destino.",
+ "Esporta file DataGridView: mostra l’elenco dei file da elaborare con dettagli come origine e destinazione.",
+ "Grelha de dados de exportação de ficheiros: apresenta a lista de ficheiros a processar, com detalhes como origem e destino.",
+ "Grade de dados de exportação de arquivos: exibe a lista de arquivos a serem processados, com detalhes como origem e destino.",
+ "Exportbestanden-DataGridView: geeft de lijst met te verwerken bestanden weer, inclusief details zoals bron en bestemming.",
+ "Exportfiler DataGridView: visar listan över filer som ska bearbetas, tillsammans med detaljer som källa och mål.",
+ "Eksporter filer DataGridView: viser listen over filer som skal behandles, med detaljer som kilde og destinasjon.",
+ "Eksportér filer DataGridView: viser listen over filer, der skal behandles, sammen med detaljer som kilde og destination.",
+ "Vie tiedostot -DataGridView: näyttää käsiteltävien tiedostojen luettelon yksityiskohtineen, kuten lähde ja kohde.",
+ "DataGridView eksportu plików: wyświetla listę plików do przetworzenia wraz z szczegółami, takimi jak źródło i miejsce docelowe.",
+ "Exportovat soubory DataGridView: zobrazuje seznam souborů k zpracování spolu s podrobnostmi, jako je zdroj a cíl.",
+ "Fájlok exportálása DataGridView: megjeleníti a feldolgozandó fájlok listáját forrás és cél részleteivel együtt.",
+ "Vizualizare date export fișiere: afișează lista fișierelor care urmează să fie procesate, împreună cu detalii precum sursa și destinația."),
+
+                    ["Register Button: This button allows you to register the application with a license key to unlock full features."] =
+("Bouton Enregistrer : permet d’enregistrer l’application avec une clé de licence pour débloquer toutes les fonctionnalités.",
+ "Registrieren-Schaltfläche: ermöglicht die Registrierung der Anwendung mit einem Lizenzschlüssel, um alle Funktionen freizuschalten.",
+ "Botón Registrar: permite registrar la aplicación con una clave de licencia para desbloquear todas las funciones.",
+ "Pulsante Registra: consente di registrare l’applicazione con un codice di licenza per sbloccare tutte le funzionalità.",
+ "Botão Registar: permite registar a aplicação com uma chave de licença para desbloquear todas as funcionalidades.",
+ "Botão Registrar: permite registrar o aplicativo com uma chave de licença para desbloquear todos os recursos.",
+ "Registreren-knop: stelt u in staat de toepassing met een licentiesleutel te registreren om alle functies vrij te geven.",
+ "Registrera-knapp: låter dig registrera programmet med en licensnyckel för att låsa upp alla funktioner.",
+ "Registrer-knapp: lar deg registrere applikasjonen med en lisensnøkkel for å låse opp alle funksjoner.",
+ "Registrér-knap: lader dig registrere programmet med en licensnøgle for at låse alle funktioner op.",
+ "Rekisteröi-painike: mahdollistaa sovelluksen rekisteröinnin lisenssiavaimella, jolloin kaikki ominaisuudet avautuvat.",
+ "Przycisk Zarejestruj: pozwala zarejestrować aplikację za pomocą klucza licencyjnego, aby odblokować pełne funkcje.",
+ "Tlačítko Registrovat: umožňuje zaregistrovat aplikaci pomocí licenčního klíče a odemknout tak všechny funkce.",
+ "Regisztráció gomb: lehetővé teszi az alkalmazás regisztrálását licenckulccsal, hogy a teljes funkcionalitás feloldódjon.",
+ "Buton Înregistrare: permite înregistrarea aplicației cu o cheie de licență pentru a debloca toate funcționalitățile."),
+
+                    ["File Progress Bar: Shows the current percentage of the file being processed"] =
+("Barre de progression du fichier : affiche le pourcentage actuel du fichier en cours de traitement.",
+ "Datei-Fortschrittsbalken: zeigt den aktuellen Prozentsatz der verarbeiteten Datei an.",
+ "Barra de progreso de archivo: muestra el porcentaje actual del archivo que se está procesando.",
+ "Barra di avanzamento file: mostra la percentuale attuale del file in elaborazione.",
+ "Barra de progresso do ficheiro: mostra a percentagem atual do ficheiro a ser processado.",
+ "Barra de progresso do arquivo: mostra a porcentagem atual do arquivo sendo processado.",
+ "Voortgangsbalk Bestand: toont het huidige percentage van het bestand dat wordt verwerkt.",
+ "Filförloppsindikator: visar den aktuella procentandelen av filen som bearbetas.",
+ "Filfremdriftslinje: viser den gjeldende prosentandelen av filen som behandles.",
+ "Filfremdriftslinje: viser den aktuelle procentdel af filen, der behandles.",
+ "Tiedoston edistymispalkki: näyttää parhaillaan käsiteltävän tiedoston nykyisen prosenttiosuuden.",
+ "Pasek postępu pliku: wyświetla bieżący procent pliku, który jest przetwarzany.",
+ "Ukazatel průběhu souboru: zobrazuje aktuální procento zpracovávaného souboru.",
+ "Fájlfolyamat-sáv: megjeleníti a feldolgozás alatt álló fájl jelenlegi százalékát.",
+ "Bară de progres fișier: arată procentul curent al fișierului care este procesat."),
+
+                    ["On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes."] =
+("Case à cocher À la fin : détermine si une notification sonore est jouée à la fin de l’opération sur les fichiers.",
+ "Kontrollkästchen Bei Fertigstellung: legt fest, ob ein Ton abgespielt wird, wenn die Dateioperation beendet ist.",
+ "Casilla Al finalizar: determina si se reproduce una notificación sonora cuando finaliza la operación de archivos.",
+ "Check-box Al termine: determina se riprodurre un suono di notifica al termine dell’operazione sui file.",
+ "Caixa de verificação Ao terminar: determina se é reproduzida uma notificação sonora ao terminar a operação de ficheiros.",
+ "Caixa de seleção Ao concluir: determina se uma notificação sonora será reproduzida ao concluir a operação de arquivos.",
+ "Selectievakje Bij voltooien: bepaalt of een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking is voltooid.",
+ "Kryssrutan Vid slutförande: avgör om ett ljud ska spelas upp när filåtgärden är klar.",
+ "Avkrysningsboksen Ved ferdigstillelse: bestemmer om det skal spilles av en lydvarsling når filoperasjonen er fullført.",
+ "Checkboksen Ved færdiggørelse: bestemmer, om der skal afspilles en lydmeddelelse, når filoperationen er afsluttet.",
+ "Valmiina-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminto on valmis.",
+ "Pole wyboru Po zakończeniu: określa, czy ma być odtwarzany dźwięk powiadomienia po zakończeniu operacji na plikach.",
+ "Zaškrtávací pole Při dokončení: určuje, zda se má při dokončení operace se soubory přehrát zvukové upozornění.",
+ "Befejezéskor jelölőnégyzet: meghatározza, hogy a fájlművelet befejezésekor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La finalizare: determină dacă va fi redată o notificare sonoră când operațiunea de fișiere se finalizează."),
+
+                    ["On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled."] =
+("Case à cocher À l’annulation : détermine si une notification sonore est jouée lorsque l’opération sur les fichiers est annulée.",
+ "Kontrollkästchen Bei Abbruch: legt fest, ob ein Ton abgespielt wird, wenn die Dateioperation abgebrochen wird.",
+ "Casilla Al cancelar: determina si se reproduce una notificación sonora cuando se cancela la operación de archivos.",
+ "Check-box All’annullamento: determina se riprodurre un suono di notifica all’annullamento dell’operazione sui file.",
+ "Caixa de verificação Ao cancelar: determina se é reproduzida uma notificação sonora ao cancelar a operação de ficheiros.",
+ "Caixa de seleção Ao cancelar: determina se uma notificação sonora será reproduzida ao cancelar a operação de arquivos.",
+ "Selectievakje Bij annuleren: bepaalt of een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking wordt geannuleerd.",
+ "Kryssrutan Vid avbrytning: avgör om ett ljud ska spelas upp när filåtgärden avbryts.",
+ "Avkrysningsboksen Ved avbrudd: bestemmer om det skal spilles av en lydvarsling når filoperasjonen avbrytes.",
+ "Checkboksen Ved annullering: bestemmer, om der skal afspilles en lydmeddelelse, når filoperationen annulleres.",
+ "Peruuta-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminto peruutetaan.",
+ "Pole wyboru Przy anulowaniu: określa, czy ma być odtwarzany dźwięk powiadomienia po anulowaniu operacji na plikach.",
+ "Zaškrtávací pole Při zrušení: určuje, zda se má při zrušení operace se soubory přehrát zvukové upozornění.",
+ "Megszakításkor jelölőnégyzet: meghatározza, hogy a fájlművelet megszakításakor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La anulare: determină dacă va fi redată o notificare sonoră când operațiunea de fișiere este anulată."),
+
+                    ["On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list."] =
+("Case à cocher À l’ajout de fichiers : détermine si une notification sonore est jouée quand des fichiers sont ajoutés à la liste d’opérations.",
+ "Kontrollkästchen Bei Dateien hinzufügen: legt fest, ob ein Ton abgespielt wird, wenn Dateien zur Vorgangsliste hinzugefügt werden.",
+ "Casilla Al añadir archivos: determina si se reproduce una notificación sonora cuando se añaden archivos a la lista de operaciones.",
+ "Check-box All’aggiunta file: determina se riprodurre un suono di notifica quando i file vengono aggiunti all’elenco operazioni.",
+ "Caixa de verificação Ao adicionar ficheiros: determina se é reproduzida uma notificação sonora ao adicionar ficheiros à lista de operações.",
+ "Caixa de seleção Ao adicionar arquivos: determina se uma notificação sonora será reproduzida ao adicionar arquivos à lista de operações.",
+ "Selectievakje Bij toevoegen bestanden: bepaalt of een geluidsmelding wordt afgespeeld wanneer bestanden aan de bewerkingslijst worden toegevoegd.",
+ "Kryssrutan Vid tillägg av filer: avgör om ett ljud ska spelas upp när filer läggs till i åtgärdslistan.",
+ "Avkrysningsboksen Ved legg til filer: bestemmer om det skal spilles av en lydvarsling når filer legges til i operasjonslisten.",
+ "Checkboksen Ved tilføjelse af filer: bestemmer, om der skal afspilles en lydmeddelelse, når filer tilføjes til handlingslisten.",
+ "Lisää tiedostot -valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostoja lisätään toimintolistalle.",
+ "Pole wyboru Podczas dodawania plików: określa, czy ma być odtwarzany dźwięk powiadomienia po dodaniu plików do listy operacji.",
+ "Zaškrtávací pole Při přidání souborů: určuje, zda se má při přidání souborů do seznamu operací přehrát zvukové upozornění.",
+ "Fájlok hozzáadásakor jelölőnégyzet: meghatározza, hogy a műveleti listához fájlok hozzáadásakor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La adăugarea fișierelor: determină dacă va fi redată o notificare sonoră când fișierele sunt adăugate la lista de operațiuni."),
+
+                    ["On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation."] =
+("Case à cocher En cas d’erreur : détermine si une notification sonore est jouée en cas d’erreur pendant l’opération sur les fichiers.",
+ "Kontrollkästchen Bei Fehler: legt fest, ob ein Ton abgespielt wird, wenn während der Dateioperation ein Fehler auftritt.",
+ "Casilla En caso de error: determina si se reproduce una notificación sonora cuando ocurre un error durante la operación de archivos.",
+ "Check-box In caso di errore: determina se riprodurre un suono di notifica quando si verifica un errore durante l’operazione sui file.",
+ "Caixa de verificação Em caso de erro: determina se é reproduzida uma notificação sonora quando ocorre um erro durante a operação de ficheiros.",
+ "Caixa de seleção Em caso de erro: determina se uma notificação sonora será reproduzida quando ocorrer um erro durante a operação de arquivos.",
+ "Selectievakje Bij fout: bepaalt of een geluidsmelding wordt afgespeeld wanneer er een fout optreedt tijdens de bestandsbewerking.",
+ "Kryssrutan Vid fel: avgör om ett ljud ska spelas upp när ett fel inträffar under filåtgärden.",
+ "Avkrysningsboksen Ved feil: bestemmer om det skal spilles av en lydvarsling når det oppstår en feil under filoperasjonen.",
+ "Checkboksen Ved fejl: bestemmer, om der skal afspilles en lydmeddelelse, når der opstår en fejl under filoperationen.",
+ "Virhe-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminnon aikana tapahtuu virhe.",
+ "Pole wyboru Przy błędzie: określa, czy ma być odtwarzany dźwięk powiadomienia, gdy podczas operacji na plikach wystąpi błąd.",
+ "Zaškrtávací pole Při chybě: určuje, zda se má při výskytu chyby během operace se soubory přehrát zvukové upozornění.",
+ "Hiba esetén jelölőnégyzet: meghatározza, hogy a fájlművelet során hiba történtekor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La eroare: determină dacă va fi redată o notificare sonoră când apare o eroare în timpul operațiunii de fișiere."),
+
+                    ["Export Files Data Grid View: This area displays the list of files to be processed, along with their details such as source and destination."] =
+("Grille de données d’exportation des fichiers : affiche la liste des fichiers à traiter ainsi que leurs détails, comme la source et la destination.",
+ "Export-Dateigrid-Ansicht: zeigt die Liste der zu verarbeitenden Dateien mit Details wie Quelle und Ziel an.",
+ "Vista de cuadrícula de datos de exportación de archivos: muestra la lista de archivos a procesar junto con detalles como origen y destino.",
+ "Esporta griglia dati file: visualizza l’elenco dei file da elaborare con dettagli come origine e destinazione.",
+ "Grelha de dados de exportação de ficheiros: apresenta a lista de ficheiros a processar, com detalhes como origem e destino.",
+ "Grade de dados de exportação de arquivos: exibe a lista de arquivos a serem processados, com detalhes como origem e destino.",
+ "Exportbestanden-DataGridView: toont de lijst met te verwerken bestanden inclusief details zoals bron en bestemming.",
+ "Exportfiler DataGridView: visar listan över filer som ska bearbetas, tillsammans med detaljer som källa och mål.",
+ "Eksporter filer DataGridView: viser listen over filer som skal behandles, med detaljer som kilde og destinasjon.",
+ "Eksportér filer DataGridView: viser listen over filer, der skal behandles, sammen med detaljer som kilde og destination.",
+ "Vie tiedostot -DataGridView: näyttää käsiteltävien tiedostojen luettelon yhdessä yksityiskohtien, kuten lähde ja kohde, kanssa.",
+ "DataGridView eksportu plików: wyświetla listę plików do przetworzenia wraz z szczegółami takimi jak źródło i cel.",
+ "Exportovat soubory DataGridView: zobrazuje seznam souborů k zpracování spolu s podrobnostmi, jako je zdroj a cíl.",
+ "Fájlok exportálása DataGridView: megjeleníti a feldolgozandó fájlok listáját forrás és cél részleteivel együtt.",
+ "Vizualizare tabel date export fișiere: afișează lista fișierelor care urmează a fi procesate, împreună cu detalii precum sursa și destinația."),
+
+                    ["Register Button: This button allows you to register the application with a license key to unlock full features."] =
+("Bouton Enregistrer : permet d’enregistrer l’application avec une clé de licence pour débloquer toutes les fonctionnalités.",
+ "Registrieren-Schaltfläche: ermöglicht es, die Anwendung mit einem Lizenzschlüssel zu registrieren, um alle Funktionen freizuschalten.",
+ "Botón Registrar: permite registrar la aplicación con una clave de licencia para desbloquear todas las funciones.",
+ "Pulsante Registra: consente di registrare l’applicazione con un codice di licenza per sbloccare tutte le funzionalità.",
+ "Botão Registar: permite registar a aplicação com uma chave de licença para desbloquear todas as funcionalidades.",
+ "Botão Registrar: permite registrar o aplicativo com uma chave de licença para desbloquear todos os recursos.",
+ "Registreren-knop: stelt u in staat de toepassing met een licentiesleutel te registreren om alle functies te ontgrendelen.",
+ "Registrera-knappen: låter dig registrera programmet med en licensnyckel för att låsa upp alla funktioner.",
+ "Registrer-knappen: lar deg registrere programmet med en lisensnøkkel for å låse opp alle funksjoner.",
+ "Registreringsknappen: lader dig registrere programmet med en licensnøgle for at låse alle funktioner op.",
+ "Rekisteröi-painike: mahdollistaa sovelluksen rekisteröinnin lisenssiavaimella, jolloin kaikki ominaisuudet avautuvat.",
+ "Przycisk Zarejestruj: pozwala zarejestrować aplikację za pomocą klucza licencyjnego, aby odblokować pełne funkcje.",
+ "Tlačítko Registrovat: umožňuje zaregistrovat aplikaci pomocí licenčního klíče a odemknout tak všechny funkce.",
+ "Regisztráció gomb: lehetővé teszi az alkalmazás regisztrálását licenckulccsal, hogy a teljes funkcionalitás feloldódjon.",
+ "Buton Înregistrare: permite înregistrarea aplicației cu o cheie de licență pentru a debloca toate funcționalitățile."),
+
+                    ["File Progress Bar: Shows the current percentage of the file being processed"] =
+("Barre de progression du fichier : affiche le pourcentage actuel du fichier en cours de traitement.",
+ "Datei-Fortschrittsbalken: zeigt den aktuellen Prozentsatz der verarbeiteten Datei an.",
+ "Barra de progreso de archivo: muestra el porcentaje actual del archivo que se está procesando.",
+ "Barra di avanzamento del file: mostra la percentuale attuale del file in elaborazione.",
+ "Barra de progresso do ficheiro: mostra a percentagem atual do ficheiro a ser processado.",
+ "Barra de progresso do arquivo: mostra a porcentagem atual do arquivo sendo processado.",
+ "Voortgangsbalk Bestand: toont het huidige percentage van het bestand dat wordt verwerkt.",
+ "Filförloppsindikator: visar den aktuella procentandelen av filen som bearbetas.",
+ "Filfremdriftslinje: viser den gjeldende prosentandelen av filen som behandles.",
+ "Filfremdriftslinje: viser den aktuelle procentdel af filen, der behandles.",
+ "Tiedoston edistymispalkki: näyttää parhaillaan käsiteltävän tiedoston nykyisen prosenttiosuuden.",
+ "Pasek postępu pliku: wyświetla bieżący procent pliku, który jest przetwarzany.",
+ "Ukazatel průběhu souboru: zobrazuje aktuální procento zpracovávaného souboru.",
+ "Fájlfolyamat-sáv: megjeleníti a feldolgozás alatt álló fájl jelenlegi százalékát.",
+ "Bară de progres fișier: arată procentul curent al fișierului care este procesat."),
+
+                    ["On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes."] =
+("Case à cocher À la fin : détermine si une notification sonore est jouée lorsque l’opération sur les fichiers se termine.",
+ "Kontrollkästchen Bei Fertigstellung: legt fest, ob eine Tonbenachrichtigung abgespielt wird, wenn die Dateioperation beendet ist.",
+ "Casilla Al finalizar: determina si se reproduce una notificación sonora cuando finaliza la operación de archivos.",
+ "Check-box Al termine: determina se riprodurre una notifica sonora al termine dell’operazione sui file.",
+ "Caixa de verificação Ao terminar: determina se é reproduzida uma notificação sonora quando a operação de ficheiros termina.",
+ "Caixa de seleção Ao finalizar: determina se uma notificação sonora será reproduzida quando a operação de arquivos for concluída.",
+ "Selectievakje Bij voltooien: bepaalt of er een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking is voltooid.",
+ "Kryssrutan Vid slutförande: avgör om ett ljud ska spelas upp när filoperationen avslutas.",
+ "Avkrysningsboksen Ved ferdigstillelse: bestemmer om det skal spilles av en lydvarsling når filoperasjonen er fullført.",
+ "Checkboksen Ved afslutning: bestemmer, om der skal afspilles en lydmeddelelse, når filoperationen er afsluttet.",
+ "Valmiina-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedosto-operaatio päättyy.",
+ "Pole wyboru Po zakończeniu: określa, czy ma być odtwarzane powiadomienie dźwiękowe po zakończeniu operacji plików.",
+ "Zaškrtávací pole Při dokončení: určuje, zda se má při dokončení operace se soubory přehrát zvukové upozornění.",
+ "Befejezéskor jelölőnégyzet: meghatározza, hogy a fájlművelet befejezésekor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La finalizare: determină dacă va fi redată o notificare sonoră când operația de fișiere se finalizează."),
+
+                    ["On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled."] =
+("Case à cocher À l’annulation : détermine si une notification sonore est jouée lorsque l’opération sur les fichiers est annulée.",
+ "Kontrollkästchen Bei Abbruch: legt fest, ob eine Tonbenachrichtigung abgespielt wird, wenn die Dateioperation abgebrochen wird.",
+ "Casilla Al cancelar: determina si se reproduce una notificación sonora cuando se cancela la operación de archivos.",
+ "Check-box All’annullamento: determina se riprodurre una notifica sonora quando l’operazione sui file viene annullata.",
+ "Caixa de verificação Ao cancelar: determina se é reproduzida uma notificação sonora quando a operação de ficheiros é cancelada.",
+ "Caixa de seleção Ao cancelar: determina se uma notificação sonora será reproduzida quando a operação de arquivos for cancelada.",
+ "Selectievakje Bij annuleren: bepaalt of er een geluidsmelding wordt afgespeeld wanneer de bestandsbewerking wordt geannuleerd.",
+ "Kryssrutan Vid avbrytande: avgör om ett ljud ska spelas upp när filoperationen avbryts.",
+ "Avkrysningsboksen Ved avbrytelse: bestemmer om det skal spilles av en lydvarsling når filoperasjonen avbrytes.",
+ "Checkboksen Ved annullering: bestemmer, om der skal afspilles en lydmeddelelse, når filoperationen annulleres.",
+ "Peruuta-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedosto-operaatio peruutetaan.",
+ "Pole wyboru Po anulowaniu: określa, czy ma być odtwarzane powiadomienie dźwiękowe po anulowaniu operacji plików.",
+ "Zaškrtávací pole Při zrušení: určuje, zda se má při zrušení operace se soubory přehrát zvukové upozornění.",
+ "Mégse jelölőnégyzet: meghatározza, hogy a fájlművelet megszakításakor lejátszódik-e hangértesítés.",
+ "Caseta de selectare La anulare: determină dacă va fi redată o notificare sonoră când operația de fișiere este anulată."),
+
+                    ["On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list."] =
+("Case à cocher À l’ajout de fichiers : détermine si une notification sonore est jouée lorsque des fichiers sont ajoutés à la liste d’opérations.",
+ "Kontrollkästchen Bei Hinzufügen von Dateien: legt fest, ob eine Tonbenachrichtigung abgespielt wird, wenn Dateien zur Vorgangsliste hinzugefügt werden.",
+ "Casilla Al agregar archivos: determina si se reproduce una notificación sonora cuando se agregan archivos a la lista de operaciones.",
+ "Check-box All’aggiunta di file: determina se riprodurre una notifica sonora quando i file vengono aggiunti all’elenco operazioni.",
+ "Caixa de verificação Ao adicionar ficheiros: determina se é reproduzida uma notificação sonora quando os ficheiros são adicionados à lista de operações.",
+ "Caixa de seleção Ao adicionar arquivos: determina se uma notificação sonora será reproduzida quando arquivos forem adicionados à lista de operações.",
+ "Selectievakje Bij toevoegen bestanden: bepaalt of er een geluidsmelding wordt afgespeeld wanneer bestanden aande bewerkingslijst worden toegevoegd.",
+"Kryssrutan Vid tillägg av filer: avgör om ett ljud ska spelas upp när filer läggs till i åtgärdslistan.",
+"Avkrysningsboksen Ved legg til filer: bestemmer om det skal spilles av en lydvarsling når filer legges til i operasjonslisten.",
+"Checkboksen Ved tilføjelse af filer: bestemmer, om der skal afspilles en lydmeddelelse, når filer føjes til handlingslisten.",
+"Lisää tiedostot -valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostoja lisätään toimintolistalle.",
+"Pole wyboru Podczas dodawania plików: określa, czy ma być odtwarzany dźwięk powiadomienia po dodaniu plików do listy operacji.",
+"Zaškrtávací pole Při přidání souborů: určuje, zda se má při přidání souborů do seznamu operací přehrát zvukové upozornění.",
+"Fájlok hozzáadása jelölőnégyzet: meghatározza, hogy a műveleti listához fájlok hozzáadásakor lejátszódik-e hangértesítés.",
+"Caseta de selectare La adăugarea fișierelor: determină dacă va fi redată o notificare sonoră când fișierele sunt adăugate la lista de operații."),
+                    ["On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation."] =
+("Case à cocher En cas d’erreur : détermine si une notification sonore est jouée en cas d’erreur pendant l’opération sur les fichiers.",
+"Kontrollkästchen Bei Fehler: legt fest, ob eine Tonbenachrichtigung abgespielt wird, wenn während der Dateioperation ein Fehler auftritt.",
+"Casilla En caso de error: determina si se reproduce una notificación sonora cuando ocurre un error durante la operación de archivos.",
+"Check-box In caso di errore: determina se riprodurre un suono di notifica quando si verifica un errore durante l’operazione sui file.",
+"Caixa de verificação Em caso de erro: determina se é reproduzida uma notificação sonora quando ocorre um erro durante a operação de ficheiros.",
+"Caixa de seleção Em caso de erro: determina se uma notificação sonora será reproduzida quando ocorrer um erro durante a operação de arquivos.",
+"Selectievakje Bij fout: bepaalt of er een geluidsmelding wordt afgespeeld wanneer er een fout optreedt tijdens de bestandsbewerking.",
+"Kryssrutan Vid fel: avgör om ett ljud ska spelas upp när ett fel inträffar under filåtgärden.",
+"Avkrysningsboksen Ved feil: bestemmer om det skal spilles av en lydvarsling når det oppstår en feil under filoperasjonen.",
+"Checkboksen Ved fejl: bestemmer, om der skal afspilles en lydmeddelelse, når der opstår en fejl under filoperationen.",
+"Virhe-valintaruutu: määrittää, toistetaanko äänimerkki, kun tiedostotoiminnon aikana tapahtuu virhe.",
+"Pole wyboru Przy błędzie: określa, czy ma być odtwarzany dźwięk powiadomienia, gdy podczas operacji na plikach wystąpi błąd.",
+"Zaškrtávací pole Při chybě: určuje, zda se má při výskytu chyby během operace se soubory přehrát zvukové upozornění.",
+"Hiba esetén jelölőnégyzet: meghatározza, hogy a fájlművelet során hiba történtekor lejátszódik-e hangértesítés.",
+"Caseta de selectare La eroare: determină dacă va fi redată o notificare sonoră când apare o eroare în timpul operației de fișiere."),
+                    ["File Progress Bar: Shows the current percentage of the file being processed"] =
+("Barre de progression du fichier : affiche le pourcentage actuel du fichier en cours de traitement.",
+"Datei-Fortschrittsbalken: zeigt den aktuellen Prozentsatz der verarbeiteten Datei an.",
+"Barra de progreso de archivo: muestra el porcentaje actual del archivo que se está procesando.",
+"Barra di avanzamento del file: mostra la percentuale attuale del file in elaborazione.",
+"Barra de progresso do ficheiro: mostra a percentagem atual do ficheiro a ser processado.",
+"Barra de progresso do arquivo: mostra a porcentagem atual do arquivo sendo processado.",
+"Voortgangsbalk Bestand: toont het huidige percentage van het bestand dat wordt verwerkt.",
+"Filförloppsindikator: visar den aktuella procentandelen av filen som bearbetas.",
+"Filfremdriftslinje: viser den gjeldende prosentandelen av filen som behandles.",
+"Filfremdriftslinje: viser den aktuelle procentdel af filen, der behandles.",
+"Tiedoston edistymispalkki: näyttää parhaillaan käsiteltävän tiedoston nykyisen prosenttiosuuden.",
+"Pasek postępu pliku: wyświetla bieżący procent pliku, który jest przetwarzany.",
+"Ukazatel průběhu souboru: zobrazuje aktuální procento zpracovávaného souboru.",
+"Fájlfolyamat-sáv: megjeleníti a feldolgozás alatt álló fájl jelenlegi százalékát.",
+"Bară de progres fișier: arată procentul curent al fișierului care este procesat."),
+                    ["Total Progress Bar: Shows the current percentage of the total of all files being processed"] =
+("Barre de progression totale : affiche le pourcentage actuel de l’ensemble des fichiers en cours de traitement.",
+"Gesamt-Fortschrittsbalken: zeigt den aktuellen Prozentsatz aller verarbeiteten Dateien insgesamt an.",
+"Barra de progreso total: muestra el porcentaje actual del total de todos los archivos que se están procesando.",
+"Barra di avanzamento totale: mostra la percentuale attuale del totale di tutti i file in elaborazione.",
+"Barra de progresso total: mostra a percentagem atual do total de todos os ficheiros a ser processados.",
+"Barra de progresso total: mostra a porcentagem atual do total de todos os arquivos sendo processados.",
+"Voortgangsbalk Totaal: toont het huidige percentage van het totaal van alle bestanden die worden verwerkt.",
+"Total förloppsindikator: visar den aktuella procentandelen av totalen av alla filer som bearbetas.",
+"Total fremdriftslinje: viser den gjeldende prosentandelen av totalen av alle filer som behandles.",
+"Samlet fremdriftslinje: viser den aktuelle procentdel af totalen af alle filer, der behandles.",
+"Yhteensä edistymispalkki: näyttää kaikkien parhaillaan käsiteltävien tiedostojen kokonaisprosentin.",
+"Pasek postępu całkowitego: wyświetla bieżący procent wszystkich plików, które są przetwarzane.",
+"Ukazatel celkového průběhu: zobrazuje aktuální procento ze všech zpracovávaných souborů.",
+"Teljes folyamat-sáv: megjeleníti az összes feldolgozás alatt álló fájl teljes százalékát.",
+"Bară de progres total: arată procentul curent din totalul tuturor fișierelor care sunt procesate."),
+                    ["Move to Top Button: This button moves the selected file to the top of the list, making it the first file to be processed in the operation."] =
+("Bouton Déplacer vers le haut : déplace le fichier sélectionné en haut de la liste, afin qu’il soit traité en premier.",
+"Schaltfläche „Nach oben verschieben“: verschiebt die ausgewählte Datei an den Anfang der Liste, sodass sie als erste verarbeitet wird.",
+"Botón Mover al principio: mueve el archivo seleccionado al principio de la lista para que sea el primero en procesarse.",
+"Pulsante Sposta in alto: sposta il file selezionato in cima all’elenco, in modo che venga elaborato per primo.",
+"Botão Mover para o Topo: move o ficheiro selecionado para o topo da lista, tornando-o o primeiro a ser processado.",
+"Botão Mover para o Topo: move o arquivo selecionado para o topo da lista, tornando-o o primeiro a ser processado.",
+"Knop Naar boven verplaatsen: verplaatst het geselecteerde bestand naar de bovenkant van de lijst, zodat het als eerste wordt verwerkt.",
+"Knappen Flytta överst: flyttar den markerade filen till toppen av listan så att den blir den första som bearbetas.",
+"Knapp Flytt til toppen: flytter den valgte filen til toppen av listen, slik at den blir den første som behandles.",
+"Knap Flyt til toppen: flytter den valgte fil til toppen af listen, så den bliver den første, der behandles.",
+"Siirrä alkuun -painike: siirtää valitun tiedoston luettelon alkuun, jolloin se käsitellään ensimmäisenä.",
+"Przycisk Przenieś na górę: przenosi wybrany plik na górę listy, aby był pierwszym przetwarzanym plikiem.",
+"Tlačítko Přesunout nahoru: přesune vybraný soubor na začátek seznamu, takže bude zpracován jako první.",
+"Fájl az elejére gomb: a kijelölt fájlt a lista elejére mozgatja, így az lesz az elsőként feldolgozandó fájl.",
+"Buton Mută în vârf: mută fișierul selectat în vârful listei, făcându-l primul fișier care va fi procesat."),
+                    ["Move to Bottom Button: This button moves the selected file to the bottom of the list, making it the last file to be processed in the operation."] =
+("Bouton Déplacer vers le bas : déplace le fichier sélectionné en bas de la liste, afin qu’il soit traité en dernier.",
+"Schaltfläche „Nach unten verschieben“: verschiebt die ausgewählte Datei an das Ende der Liste, sodass sie als letzte verarbeitet wird.",
+"Botón Mover al final: mueve el archivo seleccionado al final de la lista para que sea el último en procesarse.",
+"Pulsante Sposta in basso: sposta il file selezionato in fondo all’elenco, in modo che venga elaborato per ultimo.",
+"Botão Mover para o Fundo: move o ficheiro selecionado para o fundo da lista, tornando-o o último a ser processado.",
+"Botão Mover para o Final: move o arquivo selecionado para o final da lista, tornando-o o último a ser processado.",
+"Knop Naar beneden verplaatsen: verplaatst het geselecteerde bestand naar de onderkant van de lijst, zodat het als laatste wordt verwerkt.",
+"Knappen Flytta nederst: flyttar den markerade filen till botten av listan så att den blir den sista som bearbetas.",
+"Knapp Flytt til bunnen: flytter den valgte filen til bunnen av listen, slik at den blir den siste som behandles.",
+"Knap Flyt til bunden: flytter den valgte fil til bunden af listen, så den bliver den sidste, der behandles.",
+"Siirrä loppuun -painike: siirtää valitun tiedoston luettelon loppuun, jolloin se käsitellään viimeisenä.",
+"Przycisk Przenieś na dół: przenosi wybrany plik na koniec listy, aby był ostatnim przetwarzanym plikiem.",
+"Tlačítko Přesunout dolů: přesune vybraný soubor na konec seznamu, takže bude zpracován jako poslední.",
+"Fájl a végére gomb: a kijelölt fájlt a lista végére mozgatja, így az lesz az utolsóként feldolgozandó fájl.",
+"Buton Mută la bază: mută fișierul selectat la baza listei, făcându-l ultimul fișier care va fi procesat."),
+                    ["Files Data Grid View: This area displays the list of files to be processed, along with their details such as source and destination."] =
+("Grille de données des fichiers : affiche la liste des fichiers à traiter ainsi que leurs détails, comme la source et la destination.",
+"Datei-DataGridView: zeigt die Liste der zu verarbeitenden Dateien mit Details wie Quelle und Ziel an.",
+"Vista de cuadrícula de datos de archivos: muestra la lista de archivos a procesar junto con detalles como origen y destino.",
+"Griglia dati file: visualizza l’elenco dei file da elaborare con dettagli come origine e destinazione.",
+"Grelha de dados de ficheiros: apresenta a lista de ficheiros a processar, com detalhes como origem e destino.",
+"Grade de dados de arquivos: exibe a lista de arquivos a serem processados, com detalhes como origem e destino.",
+"Bestanden-DataGridView: toont de lijst met te verwerken bestanden inclusief details zoals bron en bestemming.",
+"Filer DataGridView: visar listan över filer som ska bearbetas, tillsammans med detaljer som källa och mål.",
+"Filer DataGridView: viser listen over filer som skal behandles, med detaljer som kilde og destinasjon.",
+"Filer DataGridView: viser listen over filer, der skal behandles, sammen med detaljer som kilde og destination.",
+"Tiedostot-DataGridView: näyttää käsiteltävien tiedostojen luettelon yhdessä yksityiskohtien, kuten lähde ja kohde, kanssa.",
+"DataGridView plików: wyświetla listę plików do przetworzenia wraz z szczegółami takimi jak źródło i miejsce docelowe.",
+"DataGridView souborů: zobrazuje seznam souborů k zpracování spolu s podrobnostmi, jako je zdroj a cíl.",
+"Fájlok DataGridView: megjeleníti a feldolgozandó fájlok listáját forrás és cél részleteivel együtt.",
+"Vizualizare tabel fișiere: afișează lista fișierelor care urmează a fi procesate, împreună cu detalii precum sursa și destinația."),
+                    ["Thread 1 Progress Bar: This progress bar shows the progress of the file being processed by thread 1."] =
+("Barre de progression du thread 1 : affiche l’avancement du fichier traité par le thread 1.",
+"Thread-1-Fortschrittsbalken: zeigt den Fortschritt der Datei an, die von Thread 1 verarbeitet wird.",
+"Barra de progreso del subproceso 1: muestra el avance del archivo procesado por el subproceso 1.",
+"Barra di avanzamento thread 1: mostra l’avanzamento del file elaborato dal thread 1.",
+"Barra de progresso da thread 1: mostra o progresso do ficheiro processado pela thread 1.",
+"Barra de progresso da thread 1: mostra o progresso do arquivo processado pela thread 1.",
+"Voortgangsbalk Thread 1: toont de voortgang van het bestand dat door thread 1 wordt verwerkt.",
+"Thread 1-förloppsindikator: visar framsteg för filen som bearbetas av tråd 1.",
+"Tråd 1 fremdriftslinje: viser fremdriften til filen som behandles av tråd 1.",
+"Tråd 1-fremdriftslinje: viser fremskridt for filen, der behandles af tråd 1.",
+"Säie 1 edistymispalkki: näyttää säikeen 1 käsittelemän tiedoston edistymisen.",
+"Pasek postępu wątku 1: pokazuje postęp pliku przetwarzanego przez wątek 1.",
+"Ukazatel průběhu vlákna 1: zobrazuje průběh souboru zpracovávaného vláknem 1.",
+"1. szál folyamat-sáv: megjeleníti az 1. szál által feldolgozott fájl állapotát.",
+"Bară de progres fir 1: arată progresul fișierului procesat de firul 1."),
+                    ["Thread 2 Progress Bar: This progress bar shows the progress of the file being processed by thread 2."] =
+("Barre de progression du thread 2 : affiche l’avancement du fichier traité par le thread 2.",
+"Thread-2-Fortschrittsbalken: zeigt den Fortschritt der Datei an, die von Thread 2 verarbeitet wird.",
+"Barra de progreso del subproceso 2: muestra el avance del archivo procesado por el subproceso 2.",
+"Barra di avanzamento thread 2: mostra l’avanzamento del file elaborato dal thread 2.",
+"Barra de progresso da thread 2: mostra o progresso do ficheiro processado pela thread 2.",
+"Barra de progresso da thread 2: mostra o progresso do arquivo processado pela thread 2.",
+"Voortgangsbalk Thread 2: toont de voortgang van het bestand dat door thread 2 wordt verwerkt.",
+"Thread 2-förloppsindikator: visar framsteg för filen som bearbetas av tråd 2.",
+"Tråd 2 fremdriftslinje: viser fremdriften til filen som behandles av tråd 2.",
+"Tråd 2-fremdriftslinje: viser fremskridt for filen, der behandles af tråd 2.",
+"Säie 2 edistymispalkki: näyttää säikeen 2 käsittelemän tiedoston edistymisen.",
+"Pasek postępu wątku 2: pokazuje postęp pliku przetwarzanego przez wątek 2.",
+"Ukazatel průběhu vlákna 2: zobrazuje průběh souboru zpracovávaného vláknem 2.",
+"2. szál folyamat-sáv: megjeleníti az 2. szál által feldolgozott fájl állapotát.",
+"Bară de progres fir 2: arată progresul fișierului procesat de firul 2."),
+                    ["Thread 3 Progress Bar: This progress bar shows the progress of the file being processed by thread 3."] =
+("Barre de progression du thread 3 : affiche l’avancement du fichier traité par le thread 3.",
+"Thread-3-Fortschrittsbalken: zeigt den Fortschritt der Datei an, die von Thread 3 verarbeitet wird.",
+"Barra de progreso del subproceso 3: muestra el avance del archivo procesado por el subproceso 3.",
+"Barra di avanzamento thread 3: mostra l’avanzamento del file elaborato dal thread 3.",
+"Barra de progresso da thread 3: mostra o progresso do ficheiro processado pela thread 3.",
+"Barra de progresso da thread 3: mostra o progresso do arquivo processado pela thread 3.",
+"Voortgangsbalk Thread 3: toont de voortgang van het bestand dat door thread 3 wordt verwerkt.",
+"Thread 3-förloppsindikator: visar framsteg för filen som bearbetas av tråd 3.",
+"Tråd 3 fremdriftslinje: viser fremdriften til filen som behandles av tråd 3.",
+"Tråd 3-fremdriftslinje: viser fremskridt for filen, der behandles af tråd 3.",
+"Säie 3 edistymispalkki: näyttää säikeen 3 käsittelemän tiedoston edistymisen.",
+"Pasek postępu wątku 3: pokazuje postęp pliku przetwarzanego przez wątek 3.",
+"Ukazatel průběhu vlákna 3: zobrazuje průběh souboru zpracovávaného vláknem 3.",
+"3. szál folyamat-sáv: megjeleníti az 3. szál által feldolgozott fájl állapotát.",
+"Bară de progres fir 3: arată progresul fișierului procesat de firul 3."),
+                    ["Thread 4 Progress Bar: This progress bar shows the progress of the file being processed by thread 4."] =
+("Barre de progression du thread 4 : affiche l’avancement du fichier traité par le thread 4.",
+"Thread-4-Fortschrittsbalken: zeigt den Fortschritt der Datei an, die von Thread 4 verarbeitet wird.",
+"Barra de progreso del subproceso 4: muestra el avance del archivo procesado por el subproceso 4.",
+"Barra di avanzamento thread 4: mostra l’avanzamento del file elaborato dal thread 4.",
+"Barra de progresso da thread 4: mostra o progresso do ficheiro processado pela thread 4.",
+"Barra de progresso da thread 4: mostra o progresso do arquivo processado pela thread 4.",
+"Voortgangsbalk Thread 4: toont de voortgang van het bestand dat door thread 4 wordt verwerkt.",
+"Thread 4-förloppsindikator: visar framsteg för filen som bearbetas av tråd 4.",
+"Tråd 4 fremdriftslinje: viser fremdriften til filen som behandles av tråd 4.",
+"Tråd 4-fremdriftslinje: viser fremskridt for filen, der behandles af tråd 4.",
+"Säie 4 edistymispalkki: näyttää säikeen 4 käsittelemän tiedoston edistymisen.",
+"Pasek postępu wątku 4: pokazuje postęp pliku przetwarzanego przez wątek 4.",
+"Ukazatel průběhu vlákna 4: zobrazuje průběh souboru zpracovávaného vláknem 4.",
+"4. szál folyamat-sáv: megjeleníti az 4. szál által feldolgozott fájl állapotát.",
+"Bară de progres fir 4: arată progresul fișierului procesat de firul 4."),
+                    ["Total Multi-Threaded Progress Bar: This progress bar shows the overall progress of all files being processed in the multi-threaded operation."] =
+("Barre de progression multithread totale : affiche la progression globale de tous les fichiers traités dans l’opération multithread.",
+"Gesamt-Multi-Thread-Fortschrittsbalken: zeigt den Gesamtfortschritt aller Dateien an, die in der Multi-Thread-Operation verarbeitet werden.",
+"Barra de progreso multi-hilo total: muestra el progreso general de todos los archivos procesados en la operación multi-hilo.",
+"Barra di avanzamento totale multi-thread: mostra l’avanzamento complessivo di tutti i file elaborati nell’operazione multi-thread.",
+"Barra de progresso total multi-thread: mostra o progresso geral de todos os ficheiros processados na operação multi-thread.",
+"Barra de progresso total multithread: mostra o progresso geral de todos os arquivos sendo processados na operação multithread.",
+"Totale multi-thread voortgangsbalk: toont de algehele voortgang van 1: toont de voortgang van het bestand dat door thread 1 wordt verwerkt.",
+"Förloppsindikator Tråd 1: visar framstegen för filen som bearbetas av tråd 1.",
+"Fremdriftslinje Tråd 1: viser fremdriften til filen som behandles av tråd 1.",
+"Fremdriftslinje Tråd 1: viser fremskridtet for den fil, der behandles af tråd 1.",
+"Säikeen 1 edistymispalkki: näyttää säikeen 1 käsittelemän tiedoston edistymisen.",
+"Pasek postępu wątku 1: pokazuje postęp przetwarzania pliku przez wątek 1.",
+"Ukazatel průběhu vlákna 1: zobrazuje průběh zpracování souboru vláknem 1.",
+"1. szál előrehaladás-sáv: megjeleníti az 1. szál által feldolgozott fájl előrehaladását.",
+"Bară de progres Thread 1: arată progresul fișierului procesat de Thread 1."),
+                    ["Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view."] =
+("Bouton Dérouler vers le haut : fait défiler le formulaire vers le haut afin de visualiser les fichiers non visibles dans la grille de données.",
+"Schaltfläche „Nach oben rollen“: scrollt das Formular nach oben, sodass Dateien sichtbar werden, die derzeit nicht in der Datenrasteransicht angezeigt werden.",
+"Botón Desplazar hacia arriba: desplaza el formulario hacia arriba para permitir ver archivos que no son visibles actualmente en la vista de cuadrícula de datos.",
+"Pulsante Arrotola su: scorre il form verso l’alto, consentendo di visualizzare i file attualmente non visibili nella griglia di dati.",
+"Botão Enrolar para Cima: faz scroll do formulário para cima, permitindo visualizar ficheiros que não estão visíveis na grelha de dados.",
+"Botão Rolar para Cima: faz rolagem do formulário para cima, permitindo visualizar arquivos que não estão visíveis na grade de dados.",
+"Knop Omhoog rollen: scrolt het formulier omhoog, zodat u bestanden kunt bekijken die momenteel niet zichtbaar zijn in de gegevensrasterweergave.",
+"Knappen Rulla upp: rullar formuläret uppåt så att du kan se filer som för närvarande inte är synliga i datavyns rutnät.",
+"Knapp Rull opp: ruller skjemaet opp, slik at du kan se filer som for øyeblikket ikke er synlige i dataene i rutenettvisningen.",
+"Knap Rul op: ruller formularen op, så du kan se filer, der i øjeblikket ikke er synlige i gittervisningen.",
+"Rullaa ylös -painike: vierittää lomaketta ylöspäin, jolloin voit tarkastella tiedostoja, jotka eivät tällä hetkellä näy ruudukkonäkymässä.",
+"Przycisk Zwijaj: przewija formularz w górę, umożliwiając wyświetlenie plików, które nie są obecnie widoczne w widoku siatki danych.",
+"Tlačítko Sbalit nahoru: posune formulář nahoru, takže můžete zobrazit soubory, které nejsou v současnosti viditelné v zobrazení datové mřížky.",
+"Felgörgetés gomb: felfelé görgeti az űrlapot, így megtekintheti azokat a fájlokat, amelyek jelenleg nem láthatók a rácsnézetben.",
+"Buton Derulează în sus: derulează formularul în sus, permițând vizualizarea fișierelor care nu sunt vizibile în prezent în vizualizarea tabelară."),
+                    ["Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view."] =
+("Bouton Dérouler vers le bas : fait défiler le formulaire vers le bas afin de visualiser les fichiers non visibles dans la grille de données.",
+"Schaltfläche „Nach unten rollen“: scrollt das Formular nach unten, sodass Dateien sichtbar werden, die derzeit nicht in der Datenrasteransicht angezeigt werden.",
+"Botón Desplazar hacia abajo: desplaza el formulario hacia abajo para permitir ver archivos que no son visibles actualmente en la vista de cuadrícula de datos.",
+"Pulsante Arrotola giù: scorre il form verso il basso, consentendo di visualizzare i file attualmente non visibili nella griglia di dati.",
+"Botão Enrolar para Baixo: faz scroll do formulário para baixo, permitindo visualizar ficheiros que não estão visíveis na grelha de dados.",
+"Botão Rolar para Baixo: faz rolagem do formulário para baixo, permitindo visualizar arquivos que não estão visíveis na grade de dados.",
+"Knop Omlaag rollen: scrolt het formulier omlaag, zodat u bestanden kunt bekijken die momenteel niet zichtbaar zijn in de gegevensrasterweergave.",
+"Knappen Rulla ned: rullar formuläret nedåt så att du kan se filer som för närvarande inte är synliga i datavyns rutnät.",
+"Knapp Rull ned: ruller skjemaet ned, slik at du kan se filer som for øyeblikket ikke er synlige i dataene i rutenettvisningen.",
+"Knap Rul ned: ruller formularen ned, så du kan se filer, der i øjeblikket ikke er synlige i gittervisningen.",
+"Rullaa alas -painike: vierittää lomaketta alaspäin, jolloin voit tarkastella tiedostoja, jotka eivät tällä hetkellä näy ruudukkonäkymässä.",
+"Przycisk Rozwiń: przewija formularz w dół, umożliwiając wyświetlenie plików, które nie są obecnie widoczne w widoku siatki danych.",
+"Tlačítko Sbalit dolů: posune formulář dolů, takže můžete zobrazit soubory, které nejsou v současnosti viditelné v zobrazení datové mřížky.",
+"Legörgetés gomb: lefelé görgeti az űrlapot, így megtekintheti azokat a fájlokat, amelyek jelenleg nem láthatók a rácsnézetben.",
+"Buton Derulează în jos: derulează formularul în jos, permițând vizualizarea fișierelor care nu sunt vizibile în prezent în vizualizarea tabelară."),
+
+
+
+
+
+                    ["Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences."] =
+("Bouton Paramètres : ouvre la boîte de dialogue des paramètres, permettant de configurer diverses options de l’application, telles que la taille du tampon, le multi-threading et les préférences d’opération.",
+ "Schaltfläche „Einstellungen“: öffnet den Einstellungsdialog, in dem Sie verschiedene Optionen für die Anwendung konfigurieren können, z. B. Puffergröße, Multi-Threading und Betriebspräferenzen.",
+ "Botón Configuración: abre el cuadro de diálogo de configuración, permitiéndole definir opciones varias de la aplicación, como tamaño de búfer, multi-hilo y preferencias de operación.",
+ "Pulsante Impostazioni: apre la finestra di dialogo delle impostazioni, consentendo di configurare varie opzioni dell’applicazione, quali dimensione del buffer, multi-threading e preferenze di operazione.",
+ "Botão Definições: abre a caixa de diálogo de definições, permitindo configurar várias opções da aplicação, como tamanho do buffer, multi-threading e preferências de operação.",
+ "Botão Configurações: abre a caixa de diálogo de configurações, permitindo configurar várias opções do aplicativo, como tamanho do buffer, multithreading e preferências de operação.",
+ "Knop Instellingen: opent het instellingendialoog, zodat u verschillende opties voor de toepassing kunt configureren, zoals buffergrootte, multi-threading en bedrijfsvoorkeuren.",
+ "Knappen Inställningar: öppnar inställningsdialogen och låter dig konfigurera olika alternativ för programmet, t.ex. bufferstorlek, multi-threading och åtgärdspreferenser.",
+ "Knapp Innstillinger: åpner innstillingsdialogen og lar deg konfigurere ulike alternativer for applikasjonen, som bufferstørrelse, multi-tråding og operasjonspreferanser.",
+ "Knap Indstillinger: åbner indstillingsdialogen og lader dig konfigurere forskellige indstillinger for programmet, såsom bufferstørrelse, multi-threading og handlingspræferencer.",
+ "Asetukset-painike: avaa asetusvalintaikkunan, jolloin voit määrittää sovelluksen eri asetuksia, kuten puskurin koon, monisäikeisyyden ja toiminta-asetukset.",
+ "Przycisk Ustawienia: otwiera okno dialogowe ustawień, pozwalając skonfigurować różne opcje aplikacji, takie jak rozmiar bufora, wielowątkowość i preferencje operacji.",
+ "Tlačítko Nastavení: otevře dialog nastavení a umožní vám nakonfigurovat různé možnosti aplikace, např. velikost vyrovnávací paměti, vícevláknovost a preference operací.",
+ "Beállítások gomb: megnyitja a beállítások párbeszédpanelt, lehetővé téve az alkalmazás különféle beállításainak – például pufferméret, többszálúság és műveleti beállítások – konfigurálását.",
+ "Buton Setări: deschide fereastra de dialog setări, permițându-vă să configurați diverse opțiuni ale aplicației, cum ar fi dimensiunea buffer-ului, multi-threading-ul și preferințele de operare."),
+
+                    ["About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer."] =
+("Bouton À propos : ouvre la boîte de dialogue « À propos », fournissant des informations sur l’application, sa version et le développeur.",
+ "Schaltfläche „Info“: öffnet den Dialog „Info“, der Informationen über die Anwendung, ihre Version und den Entwickler liefert.",
+ "Botón Acerca de: abre el cuadro de diálogo 'Acerca de', proporcionando información sobre la aplicación, su versión y el desarrollador.",
+ "Pulsante Informazioni: apre la finestra di dialogo 'Informazioni', fornendo informazioni sull’applicazione, la sua versione e lo sviluppatore.",
+ "Botão Acerca de: abre a caixa de diálogo 'Acerca de', fornecendo informações sobre a aplicação, a sua versão e o programador.",
+ "Botão Sobre: abre a caixa de diálogo 'Sobre', fornecendo informações sobre o aplicativo, sua versão e o desenvolvedor.",
+ "Knop Over: opent het dialoogvenster 'Over', met informatie over de toepassing, de versie en de ontwikkelaar.",
+ "Knappen Om: öppnar dialogrutan 'Om' och ger information om programmet, dess version och utvecklaren.",
+ "Knapp Om: åpner dialogboksen 'Om' og gir informasjon om applikasjonen, dens versjon og utvikleren.",
+ "Knap Om: åbner dialogboksen 'Om' og giver oplysninger om programmet, dets version og udvikleren.",
+ "Tietoja-painike: avaa Tietoja-valintaikkunan, joka näyttää tietoja sovelluksesta, sen versiosta ja kehittäjästä.",
+ "Przycisk O programie: otwiera okno dialogowe 'O programie', zawierające informacje o aplikacji, jej wersji i deweloperze.",
+ "Tlačítko O aplikaci: otevře dialog 'O aplikaci', který poskytuje informace o aplikaci, její verzi a vývojáři.",
+ "Névjegy gomb: megnyitja a 'Névjegy' párbeszédpanelt, amely információkat nyújt az alkalmazásról, annak verziójáról és a fejlesztőről.",
+ "Buton Despre: deschide fereastra de dialog 'Despre', oferind informații despre aplicație, versiunea sa și dezvoltator."),
+
+                    ["Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it."] =
+("Bouton Réduire : réduit l’application dans la barre des tâches ou la zone de notification, vous permettant de la laisser s’exécuter en arrière-plan sans la fermer.",
+ "Schaltfläche „Minimieren“: minimiert die Anwendung in die Taskleiste oder das Benachrichtigungsfeld, sodass Sie sie im Hintergrund weiter ausführen können, ohne sie zu schließen.",
+ "Botón Minimizar: minimiza la aplicación en la barra de tareas o la bandeja del sistema, permitiéndole mantenerla ejecutándose en segundo plano sin cerrarla.",
+ "Pulsante Minimizza: riduce l’applicazione nella barra delle applicazioni o nell’area di notifica, consentendovi di lasciarla in esecuzione in background senza chiuderla.",
+ "Botão Minimizar: minimiza a aplicação na barra de tarefas ou na bandeja do sistema, permitindo que continue a ser executada em segundo plano sem a fechar.",
+ "Botão Minimizar: minimiza o aplicativo na barra de tarefas ou na bandeja do sistema, permitindo que ele continue sendo executado em segundo plano sem ser fechado.",
+ "Knop Minimaliseren: minimaliseert de toepassing naar de taakbalk of het systeemvak, zodat u deze op de achtergrond kunt laten uitvoeren zonder deze te sluiten.",
+ "Knappen Minimera: minimerar programmet till aktivitetsfältet eller meddelandefältet, så att du kan låta det köras i bakgrunden utan att stänga det.",
+ "Knapp Minimer: minimerer applikasjonen til oppgavelinjen eller systemkurven, slik at du kan la den kjøre i bakgrunnen uten å lukke den.",
+ "Knap Minimér: minimerer programmet til proceslinjen eller systembakken, så du kan lade det køre i baggrunden uden at lukke det.",
+ "Pienennä-painike: pienentää sovelluksen tehtäväpalkkiin tai ilmoitusalueelle, jolloin se voi jäädä taustalle käyntiin sulkematta.",
+ "Przycisk Minimalizuj: minimalizuje aplikację do paska zadań lub zasobnika systemowego, pozwalając zachować jej działanie w tle bez zamykania.",
+ "Tlačítko Minimalizovat: minimalizuje aplikaci do hlavního panelu nebo oznamovací oblasti, což vám umožní ponechat ji spuštěnou na pozadí bez zavírání.",
+ "Kis méret gomb: minimalizálja az alkalmazást a tálcára vagy az értesítési területre, így a háttérben futtathatja anélkül, hogy bezárná.",
+ "Buton Minimizare: minimizează aplicația în bara de activități sau în zona de notificare, permițându-vă să o lăsați să ruleze în fundal fără a o închide."),
+
+                    ["Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it."] =
+("Bouton Quitter : ferme l’application. Si l’option « Réduire dans la barre des tâches » est activée, l’application sera minimisée au lieu d’être fermée.",
+ "Schaltfläche „Beenden“: schließt die Anwendung. Wenn die Option „In die Taskleiste minimieren“ aktiviert ist, wird die Anwendung minimiert anstatt sie zu schließen.",
+ "Botón Salir: cierra la aplicación. Si la opción 'Minimizar a la bandeja del sistema' está habilitada, minimizará la aplicación en lugar de cerrarla.",
+ "Pulsante Esci: chiude l’applicazione. Se l’opzione 'Minimizza nell’area di notifica' è abilitata, l’applicazione verrà minimizzata invece di essere chiusa.",
+ "Botão Sair: fecha a aplicação. Se a opção 'Minimizar para a Bandeja do Sistema' estiver ativada, a aplicação será minimizada em vez de ser fechada.",
+ "Botão Sair: fecha o aplicativo. Se a opção 'Minimizar para a Bandeja do Sistema' estiver ativada, o aplicativo será minimizado em vez de ser fechado.",
+ "Knop Afsluiten: sluit de toepassing. Als de optie 'Minimaliseren naar systeemvak' is ingeschakeld, wordt de toepassing geminimaliseerd in plaats van afgesloten.",
+ "Knappen Avsluta: stänger programmet. Om alternativet 'Minimera till meddelandefältet' är aktiverat minimeras programmet i stället för att stängas.",
+ "Knapp Avslutt: lukker applikasjonen. Hvis alternativet 'Minimer til systemkurven' er aktivert, minimeres applikasjonen i stedet for å lukkes.",
+ "Knap Afslut: lukker programmet. Hvis indstillingen 'Minimér til systembakken' er aktiveret, minimeres programmet i stedet for at blive lukket.",
+ "Lopeta-painike: sulkee sovelluksen. Jos 'Pienennä ilmoitusalueelle' -asetus on käytössä, sovellus pienennetään sen sulkemisen sijaan.",
+ "Przycisk Zakończ: zamyka aplikację. Jeśli opcja 'Minimalizuj do zasobnika systemowego' jest włączona, aplikacja zostanie zminimalizowana zamiast zamknięta.",
+ "Tlačítko Ukončit: ukončí aplikaci. Pokud je povolena možnost 'Minimalizovat do oznamovací oblasti', aplikace se minimalizuje místo toho, aby se zavřela.",
+ "Kilépés gomb: bezárja az alkalmazást. Ha a 'Kis méret a rendszertálcára' beállítás engedélyezve van, az alkalmazás kis méretre lesz állítva bezárás helyett.",
+ "Buton Ieșire: închide aplicația. Dacă opțiunea 'Minimizare în zona de notificare' este activată, aplicația va fi minimizată în loc să fie închisă."),
+
+                    ["Copy History Tab: This tab shows the history of file operations performed by the application, allowing you to review past activities."] =
+("Onglet Historique des copies : affiche l’historique des opérations sur les fichiers effectuées par l’application, vous permettant de consulter les activités passées.",
+ "Registerkarte Kopieverlauf: zeigt den Verlauf der von der Anwendung durchgeführten Dateioperationen an, sodass Sie frühere Aktivitäten überprüfen können.",
+ "Pestaña Historial de copias: muestra el historial de operaciones de archivos realizadas por la aplicación, permitiéndole revisar actividades pasadas.",
+ "Scheda Cronologia copie: mostra la cronologia delle operazioni sui file eseguite dall’applicazione, consentendovi di rivedere le attività passate.",
+ "Separador Histórico de Cópias: apresenta o histórico das operações de ficheiros efetuadas pela aplicação, permitindo rever atividades anteriores.",
+ "Aba Histórico de Cópias: exibe o histórico das operações de arquivos realizadas pelo aplicativo, permitindo revisar atividades passadas.",
+ "Tabblad Kopiegeschiedenis: toont de geschiedenis van bestandsbewerkingen die door de toepassing zijn uitgevoerd, zodat u eerdere activiteiten kunt bekijken.",
+ "Flik Kopieringshistorik: visar historiken över filåtgärder som utförts av programmet och låter dig granska tidigare aktiviteter.",
+ "Fane Kopieringshistorikk: viser historikken over filoperasjoner utført av applikasjonen, slik at du kan se gjennom tidligere aktiviteter.",
+ "Fane Kopiéringshistorik: viser historikken over filhandlinger, der er udført af programmet, så du kan gennemgå tidligere aktiviteter.",
+ "Kopioinnin historia -välilehti: näyttää sovelluksen suorittamien tiedostotoimintojen historian, jolloin voit tarkastella aiempia toimia.",
+ "Karta Historia kopiowania: wyświetla historię operacji na plikach wykonanych przez aplikację, pozwalając przeglądać wcześniejsze działania.",
+ "Karta Historie kopírování: zobrazuje historii operací se soubory provedených aplikací, což vám umožní zkontrolovat dřívější aktivity.",
+ "Másolás előzményei lap: megjeleníti az alkalmazás által végrehajtott fájlműveletek előzményeit, így áttekintheti a korábbi tevékenységeket.",
+ "Filă Istoric copiere: afișează istoricul operațiunilor de fișiere efectuate de aplicație, permițându-vă să revizuiți activitățile trecute."),
+
+                    ["Totals Tab: This tab provides a summary of the total files processed, total data transferred, and other relevant statistics for the operation."] =
+("Onglet Totaux : fournit un résumé du nombre total de fichiers traités, du volume total de données transférées et d’autres statistiques pertinentes de l’opération.",
+ "Registerkarte Summen: bietet eine Zusammenfassung der insgesamt verarbeiteten Dateien, der übertragenen Gesamtdaten und anderer relevanter Statistiken für den Vorgang.",
+ "Pestaña Totales: proporciona un resumen del total de archivos procesados, datos totales transferidos y otras estadísticas relevantes de la operación.",
+ "Scheda Totali: fornisce un riepilogo del numero totale di file elaborati, dei dati totali trasferiti e di altre statistiche pertinenti per l’operazione.",
+ "Separador Totais: fornece um resumo do total de ficheiros processados, dados totais transferidos e outras estatísticas relevantes da operação.",
+ "Aba Totais: fornece um resumo do total de arquivos processados, dados totais transferidos e outras estatísticas relevantes da operação.",
+ "Tabblad Totalen: biedt een overzicht van het totaal aantal verwerkte bestanden, de totaal overgedragen gegevens en andere relevante statistieken voor de bewerking.",
+ "Flik Totaler: ger en sammanfattning av totalt antal bearbetade filer, total överförd data och annan relevant statistik för åtgärden.",
+ "Fane Totaler: gir en oppsummering av totalt antall behandlede filer, total overført data og annen relevant statistikk for operasjonen.",
+ "Fane Totaler: giver et resumé af det samlede antal behandlede filer, de samlede overførte data og anden relevant statistik for handlingen.",
+ "Yhteenveto-välilehti: antaa yhteenvedon käsitellyistä tiedostoista yhteensä, siirretyistä tiedoista ja muista toimintoa koskevista tilastoista.",
+ "Karta Sumy: zawiera podsumowanie całkowitej liczby przetworzonych plików, całkowitej ilości przesłanych danych oraz innych istotnych statystyk operacji.",
+ "Karta Součty: poskytuje souhrn celkového počtu zpracovaných souborů, celkových přenesených dat a dalších relevantních statistik operace.",
+ "Összesítés lap: áttekintést nyújt az összes feldolgozott fájlról, az átivitt adatokról és a művelet egyéb fontos statisztikáiról.",
+ "Filă Totaluri: oferă un rezumat al fișierelor procesate în total, al datelor transferate și al altor statistici relevante pentru operațiune."),
+
+
+                    ["Copy That v1.0 Pro By: Havoc"] =
+("Copy That v1.0 Pro par Havoc",
+ "Copy That v1.0 Pro von Havoc",
+ "Copy That v1.0 Pro por Havoc",
+ "Copy That v1.0 Pro di Havoc",
+ "Copy That v1.0 Pro por Havoc",
+ "Copy That v1.0 Pro por Havoc",
+ "Copy That v1.0 Pro door Havoc",
+ "Copy That v1.0 Pro av Havoc",
+ "Copy That v1.0 Pro av Havoc",
+ "Copy That v1.0 Pro af Havoc",
+ "Copy That v1.0 Pro – Havoc",
+ "Copy That v1.0 Pro autorstwa Havoc",
+ "Copy That v1.0 Pro od Havoc",
+ "Copy That v1.0 Pro – készítette: Havoc",
+ "Copy That v1.0 Pro de Havoc"),
+
+
+
+                    ["Current tab page: Copy History Page."] =
+("Page d’onglet actuelle : Page Historique des copies.",
+ "Aktuelle Registerkarte: Kopieverlauf-Seite.",
+ "Página de pestaña actual: Página Historial de copias.",
+ "Pagina di scheda attuale: Pagina Cronologia copie.",
+ "Página de separador atual: Página Histórico de Cópias.",
+ "Página de aba atual: Página Histórico de Cópias.",
+ "Huidige tabbladpagina: Kopiegeschiedenis-pagina.",
+ "Aktuellt fliksidor: Kopieringshistoriksida.",
+ "Gjeldende fane side: Kopieringshistorikkside.",
+ "Aktuel fane side: Kopiéringshistorikside.",
+ "Nykyinen välilehti: Kopiointihistoriasivu.",
+ "Bieżąca strona karty: Strona Historia kopiowania.",
+ "Aktuální stránka karty: Stránka Historie kopírování.",
+ "Jelenlegi lap oldal: Másolás előzményei oldal.",
+ "Pagina curentă filă: Pagina Istoric copiere."),
+
+                    ["Current tab page: Exclusions Page."] =
+("Page d’onglet actuelle : Page Exclusions.",
+ "Aktuelle Registerkarte: Ausschlüsse-Seite.",
+ "Página de pestaña actual: Página Exclusiones.",
+ "Pagina di scheda attuale: Pagina Esclusioni.",
+ "Página de separador atual: Página Exclusões.",
+ "Página de aba atual: Página Exclusões.",
+ "Huidige tabbladpagina: Uitsluitingen-pagina.",
+ "Aktuellt fliksidor: Undantagssida.",
+ "Gjeldende fane side: Ekskluderingside.",
+ "Aktuel fane side: Ekskluderingsside.",
+ "Nykyinen välilehti: Poikkeukset-sivu.",
+ "Bieżąca strona karty: Strona Wykluczenia.",
+ "Aktuální stránka karty: Stránka Vyloučení.",
+ "Jelenlegi lap oldal: Kizárások oldal.",
+ "Pagina curentă filă: Pagina Excluderi."),
+
+                    ["Current tab page: Home Page."] =
+("Page d’onglet actuelle : Page d’accueil.",
+ "Aktuelle Registerkarte: Startseite.",
+ "Página de pestaña actual: Página Inicio.",
+ "Pagina di scheda attuale: Pagina Home.",
+ "Página de separador atual: Página Inicial.",
+ "Página de aba atual: Página Inicial.",
+ "Huidige tabbladpagina: Startpagina.",
+ "Aktuellt fliksidor: Startsida.",
+ "Gjeldende fane side: Hjemmeside.",
+ "Aktuel fane side: Hjemmeside.",
+ "Nykyinen välilehti: Aloitussivu.",
+ "Bieżąca strona karty: Strona główna.",
+ "Aktuální stránka karty: Domovská stránka.",
+ "Jelenlegi lap oldal: Főoldal.",
+ "Pagina curentă filă: Pagina Principală."),
+
+                    ["Current tab page: Settings Page."] =
+("Page d’onglet actuelle : Page Paramètres.",
+ "Aktuelle Registerkarte: Einstellungsseite.",
+ "Página de pestaña actual: Página Configuración.",
+ "Pagina di scheda attuale: Pagina Impostazioni.",
+ "Página de separador atual: Página Definições.",
+ "Página de aba atual: Página Configurações.",
+ "Huidige tabbladpagina: Instellingen-pagina.",
+ "Aktuellt fliksidor: Inställningssida.",
+ "Gjeldende fane side: Innstillinger-side.",
+ "Aktuel fane side: Indstillinger-side.",
+ "Nykyinen välilehti: Asetukset-sivu.",
+ "Bieżąca strona karty: Strona ustawień.",
+ "Aktuální stránka karty: Stránka nastavení.",
+ "Jelenlegi lap oldal: Beállítások oldal.",
+ "Pagina curentă filă: Pagina Setări."),
+
+                    ["Current tab page: Skipped Files Page."] =
+("Page d’onglet actuelle : Page Fichiers ignorés.",
+ "Aktuelle Registerkarte: Übersprungene Dateien-Seite.",
+ "Página de pestaña actual: Página Archivos omitidos.",
+ "Pagina di scheda attuale: Pagina File saltati.",
+ "Página de separador atual: Página Ficheiros Ignorados.",
+ "Página de aba atual: Página Arquivos Ignorados.",
+ "Huidige tabbladpagina: Overgeslagen bestanden-pagina.",
+ "Aktuellt fliksidor: Överhoppade filer-sida.",
+ "Gjeldende fane side: Hoppet over filer-side.",
+ "Aktuel fane side: Ignorerede filer-side.",
+ "Nykyinen välilehti: Ohitetut tiedostot -sivu.",
+ "Bieżąca strona karty: Strona Pominięte pliki.",
+ "Aktuální stránka karty: Stránka Přeskočené soubory.",
+ "Jelenlegi lap oldal: Kihagyott fájlok oldal.",
+ "Pagina curentă filă: Pagina Fișiere ignorate."),
+
+                    ["Current tab page: Multi-Thread Page."] =
+("Page d’onglet actuelle : Page Multi-thread.",
+ "Aktuelle Registerkarte: Multi-Thread-Seite.",
+ "Página de pestaña actual: Página Multi-hilo.",
+ "Pagina di scheda attuale: Pagina Multi-thread.",
+ "Página de separador atual: Página Multi-thread.",
+ "Página de aba atual: Página Multi-thread.",
+ "Huidige tabbladpagina: Multi-thread-pagina.",
+ "Aktuellt fliksidor: Multi-thread-sida.",
+ "Gjeldende fane side: Multi-tråd-side.",
+ "Aktuel fane side: Multi-thread-side.",
+ "Nykyinen välilehti: Monisäikeinen-sivu.",
+ "Bieżąca strona karty: Strona Wielowątkowe.",
+ "Aktuální stránka karty: Stránka Vícevlákno.",
+ "Jelenlegi lap oldal: Többszálúság oldal.",
+ "Pagina curentă filă: Pagina Multi-thread."),
+
+                    ["Current tab page: Allowed/Excluded Page."] =
+("Page d’onglet actuelle : Page Autorisés/Exclus.",
+ "Aktuelle Registerkarte: Zulässige/Ausgeschlossene-Seite.",
+ "Página de pestaña actual: Página Permitidos/Excluidos.",
+ "Pagina di scheda attuale: Pagina Consentiti/Esclusi.",
+ "Página de separador atual: Página Permitidos/Excluídos.",
+ "Página de aba atual: Página Permitidos/Excluídos.",
+ "Huidige tabbladpagina: Toegestaan/Uitgesloten-pagina.",
+ "Aktuellt fliksidor: Tillåtna/Exkluderade-sida.",
+ "Gjeldende fane side: Tillatte/Ekskluderte-side.",
+ "Aktuel fane side: Tilladte/Ekskluderede-side.",
+ "Nykyinen välilehti: Sallitut/Poissuljetut-sivu.",
+ "Bieżąca strona karty: Strona Dozwane/Wykluczone.",
+ "Aktuální stránka karty: Stránka Povolené/Vyloučené.",
+ "Jelenlegi lap oldal: Engedélyezettek/Kizártak oldal.",
+ "Pagina curentă filă: Pagina Permise/Excluse."),
                 };
 
 
@@ -15457,6 +20607,18 @@ namespace CopyThatProgram
                     "es" => pro
                         ? $"Copy That v1.0 Pro Por : Havoc - {suffix}"
                         : $"Copy That v1.0 Por : Havoc - {suffix}",
+                    "it" => pro ? $"Copy That v1.0 Pro Di: Havoc - {suffix}" : $"Copy That v1.0 Di: Havoc - {suffix}",
+                    "pt" => pro ? $"Copy That v1.0 Pro Por: Havoc - {suffix}" : $"Copy That v1.0 Por: Havoc - {suffix}",
+                    "ptBR" => pro ? $"Copy That v1.0 Pro Por: Havoc - {suffix}" : $"Copy That v1.0 Por: Havoc - {suffix}",
+                    "nl" => pro ? $"Copy That v1.0 Pro Door: Havoc - {suffix}" : $"Copy That v1.0 Door: Havoc - {suffix}",
+                    "sv" => pro ? $"Copy That v1.0 Pro Av: Havoc - {suffix}" : $"Copy That v1.0 Av: Havoc - {suffix}",
+                    "no" => pro ? $"Copy That v1.0 Pro Av: Havoc - {suffix}" : $"Copy That v1.0 Av: Havoc - {suffix}",
+                    "da" => pro ? $"Copy That v1.0 Pro Af: Havoc - {suffix}" : $"Copy That v1.0 Af: Havoc - {suffix}",
+                    "fi" => pro ? $"Copy That v1.0 Pro Tekijä: Havoc - {suffix}" : $"Copy That v1.0 Tekijä: Havoc - {suffix}",
+                    "pl" => pro ? $"Copy That v1.0 Pro Przez: Havoc - {suffix}" : $"Copy That v1.0 Przez: Havoc - {suffix}",
+                    "cs" => pro ? $"Copy That v1.0 Pro Od: Havoc - {suffix}" : $"Copy That v1.0 Od: Havoc - {suffix}",
+                    "hu" => pro ? $"Copy That v1.0 Pro Készítette: Havoc - {suffix}" : $"Copy That v1.0 Készítette: Havoc - {suffix}",
+                    "ro" => pro ? $"Copy That v1.0 Pro De: Havoc - {suffix}" : $"Copy That v1.0 De: Havoc - {suffix}",
                     _ => en
                 };
             }
@@ -15493,6 +20655,18 @@ namespace CopyThatProgram
                     "fr" => t.fr ?? english,
                     "de" => t.de ?? english,
                     "es" => t.es ?? english,
+                    "it" => t.it ?? english,
+                    "pt" => t.pt ?? english,   // Portugal
+                    "ptBR" => t.ptBR ?? english, // Brazil
+                    "nl" => t.nl ?? english,
+                    "sv" => t.sv ?? english,
+                    "no" => t.no ?? english,
+                    "da" => t.da ?? english,
+                    "fi" => t.fi ?? english,
+                    "pl" => t.pl ?? english,
+                    "cs" => t.cs ?? english,
+                    "hu" => t.hu ?? english,
+                    "ro" => t.ro ?? english,
                     _ => english
                 };
 
@@ -15500,7 +20674,7 @@ namespace CopyThatProgram
                 return result ?? english;  // ← Extra safety
             }
         };
-           
+
 
 
 
@@ -15511,13 +20685,24 @@ namespace CopyThatProgram
 
             try
             {
-
                 string key, culture;
                 switch (languageComboBox.SelectedIndex)
                 {
                     case 1: key = "French"; culture = "fr-FR"; break;
                     case 2: key = "German"; culture = "de-DE"; break;
                     case 3: key = "Spanish"; culture = "es-ES"; break;
+                    case 4: key = "Italian"; culture = "it-IT"; break;
+                    case 5: key = "Portuguese - Portugal"; culture = "pt-PT"; break;
+                    case 6: key = "Portuguese - Brazil"; culture = "pt-BR"; break;
+                    case 7: key = "Dutch"; culture = "nl-NL"; break;
+                    case 8: key = "Swedish"; culture = "sv-SE"; break;
+                    case 9: key = "Norwegian"; culture = "no"; break; // Use "no" instead of "nb-NO"
+                    case 10: key = "Danish"; culture = "da-DK"; break;
+                    case 11: key = "Finnish"; culture = "fi-FI"; break;
+                    case 12: key = "Polish"; culture = "pl-PL"; break;
+                    case 13: key = "Czech"; culture = "cs-CZ"; break;
+                    case 14: key = "Hungarian"; culture = "hu-HU"; break;
+                    case 15: key = "Romanian"; culture = "ro-RO"; break;
                     default: key = "English"; culture = "en-US"; break;
                 }
 
@@ -15534,10 +20719,22 @@ namespace CopyThatProgram
 
                 string[] items = key switch
                 {
-                    "Spanish" => new[] { "Inglés", "Francés", "Deutsch", "Español" },
-                    "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol" },
-                    "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch" },
-                    _ => new[] { "English", "French", "German", "Spanish" }
+                    "Spanish" => new[] { "Inglés", "Francés", "Deutsch", "Español", "Italiano", "Portugués (Portugal)", "Portugués (Brasil)", "Holandés", "Sueco", "Noruego", "Danés", "Finlandés", "Polaco", "Checo", "Húngaro", "Rumano" },
+                    "French" => new[] { "Anglais", "Français", "Allemand", "Espagnol", "Italien", "Portugais (Portugal)", "Portugais (Brésil)", "Néerlandais", "Suédois", "Norvégien", "Danois", "Finnois", "Polonais", "Tchèque", "Hongrois", "Roumain" },
+                    "German" => new[] { "Englisch", "Französisch", "Deutsch", "Spanisch", "Italienisch", "Portugiesisch (Portugal)", "Portugiesisch (Brasilien)", "Niederländisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Ungarisch", "Rumänisch" },
+                    "Italian" => new[] { "Inglese", "Francese", "Tedesco", "Spagnolo", "Italiano", "Portoghese (Portogallo)", "Portoghese (Brasile)", "Olandese", "Svedese", "Norvegese", "Danese", "Finlandese", "Polacco", "Ceco", "Ungherese", "Rumeno" },
+                    "Portuguese - Portugal" => new[] { "Inglês", "Francês", "Alemão", "Espanhol", "Italiano", "Português (Portugal)", "Português (Brasil)", "Holandês", "Sueco", "Norueguês", "Dinamarquês", "Finlandês", "Polaco", "Checo", "Húngaro", "Romeno" },
+                    "Portuguese - Brazil" => new[] { "Inglês", "Francês", "Alemão", "Espanhol", "Italiano", "Português (Portugal)", "Português (Brasil)", "Holandês", "Sueco", "Norueguês", "Dinamarquês", "Finlandês", "Polonês", "Tcheco", "Húngaro", "Romeno" },
+                    "Dutch" => new[] { "Engels", "Frans", "Duits", "Spaans", "Italiaans", "Portugees (Portugal)", "Portugees (Brazilië)", "Nederlands", "Zweeds", "Noors", "Deens", "Fins", "Pools", "Tsjechisch", "Hongaars", "Roemeens" },
+                    "Swedish" => new[] { "Engelska", "Franska", "Tyska", "Spanska", "Italienska", "Portugisiska (Portugal)", "Portugisiska (Brasilien)", "Nederländska", "Svenska", "Norska", "Danska", "Finska", "Polska", "Tjeckiska", "Ungerska", "Rumänska" },
+                    "Norwegian" => new[] { "Engelsk", "Fransk", "Tysk", "Spansk", "Italiensk", "Portugisisk (Portugal)", "Portugisisk (Brasil)", "Nederlandsk", "Svensk", "Norsk", "Dansk", "Finsk", "Polsk", "Tsjekkisk", "Ungarsk", "Rumensk" },
+                    "Danish" => new[] { "Engelsk", "Fransk", "Tysk", "Spansk", "Italiensk", "Portugisisk (Portugal)", "Portugisisk (Brasilien)", "Hollandsk", "Svensk", "Norsk", "Dansk", "Finsk", "Polsk", "Tjekkisk", "Ungarsk", "Rumænsk" },
+                    "Finnish" => new[] { "Englanti", "Ranska", "Saksa", "Espanja", "Italia", "Portugali (Portugali)", "Portugali (Brasilia)", "Hollanti", "Ruotsi", "Norja", "Tanska", "Suomi", "Puola", "Tšekki", "Unkari", "Romania" },
+                    "Polish" => new[] { "Angielski", "Francuski", "Niemiecki", "Hiszpański", "Włoski", "Portugalski (Portugalia)", "Portugalski (Brazylia)", "Holenderski", "Szwedzki", "Norweski", "Duński", "Fiński", "Polski", "Czeski", "Węgierski", "Rumuński" },
+                    "Czech" => new[] { "Angličtina", "Francouzština", "Němčina", "Španělština", "Italština", "Portugalština (Portugalsko)", "Portugalština (Brazílie)", "Nizozemština", "Švédština", "Norština", "Dánština", "Finština", "Polština", "Čeština", "Maďarština", "Rumunština" },
+                    "Hungarian" => new[] { "Angol", "Francia", "Német", "Spanyol", "Olasz", "Portugál (Portugália)", "Portugál (Brazília)", "Holland", "Svéd", "Norvég", "Dán", "Finn", "Lengyel", "Cseh", "Magyar", "Román" },
+                    "Romanian" => new[] { "Engleză", "Franceză", "Germană", "Spaniolă", "Italiană", "Portugheză (Portugalia)", "Portugheză (Brazilia)", "Olandeză", "Suedeză", "Norvegiană", "Daneză", "Finlandeză", "Poloneză", "Cehă", "Maghiară", "Română" },
+                    _ => new[] { "English", "French", "German", "Spanish", "Italian", "Portuguese - Portugal", "Portuguese - Brazil", "Dutch", "Swedish", "Norwegian", "Danish", "Finnish", "Polish", "Czech", "Hungarian", "Romanian" }
                 };
                 languageComboBox.Items.Clear();
                 languageComboBox.Items.AddRange(items);
@@ -15546,7 +20743,19 @@ namespace CopyThatProgram
                     (key == "English" && i == "English") ||
                     (key == "French" && i == "Français") ||
                     (key == "German" && i == "Deutsch") ||
-                    (key == "Spanish" && i == "Español")
+                    (key == "Spanish" && i == "Español") ||
+                    (key == "Italian" && i == "Italiano") ||
+                    (key == "Portuguese - Portugal" && i == "Português (Portugal)") ||
+                    (key == "Portuguese - Brazil" && i == "Português (Brasil)") ||
+                    (key == "Dutch" && i == "Nederlands") ||
+                    (key == "Swedish" && i == "Svenska") ||
+                    (key == "Norwegian" && i == "Norsk") ||
+                    (key == "Danish" && i == "Dansk") ||
+                    (key == "Finnish" && i == "Suomi") ||
+                    (key == "Polish" && i == "Polski") ||
+                    (key == "Czech" && i == "Čeština") ||
+                    (key == "Hungarian" && i == "Magyar") ||
+                    (key == "Romanian" && i == "Română")
                 ));
 
                 Translator.CurrentLanguage = key switch
@@ -15554,6 +20763,18 @@ namespace CopyThatProgram
                     "French" => "fr",
                     "German" => "de",
                     "Spanish" => "es",
+                    "Italian" => "it",
+                    "Portuguese - Portugal" => "pt-PT",
+                    "Portuguese - Brazil" => "pt-BR",
+                    "Dutch" => "nl",
+                    "Swedish" => "sv",
+                    "Norwegian" => "no",
+                    "Danish" => "da",
+                    "Finnish" => "fi",
+                    "Polish" => "pl",
+                    "Czech" => "cs",
+                    "Hungarian" => "hu",
+                    "Romanian" => "ro",
                     _ => "en"
                 };
                 var resMan = new ComponentResourceManager(typeof(mainForm));
@@ -15564,6 +20785,18 @@ namespace CopyThatProgram
                     case "Spanish": ApplyManualSpanishUpdates(); break;
                     case "French": ApplyManualFrenchUpdates(); break;
                     case "German": ApplyManualGermanUpdates(); break;
+                    case "Italian": ApplyManualItalianUpdates(); break;
+                    case "Portuguese - Portugal": ApplyManualPortuguesePortugalUpdates(); break;
+                    case "Portuguese - Brazil": ApplyManualPortugueseBrazilUpdates(); break;
+                    case "Dutch": ApplyManualDutchUpdates(); break;
+                    case "Swedish": ApplyManualSwedishUpdates(); break;
+                    case "Norwegian": ApplyManualNorwegianUpdates(); break;
+                    case "Danish": ApplyManualDanishUpdates(); break;
+                    case "Finnish": ApplyManualFinnishUpdates(); break;
+                    case "Polish": ApplyManualPolishUpdates(); break;
+                    case "Czech": ApplyManualCzechUpdates(); break;
+                    case "Hungarian": ApplyManualHungarianUpdates(); break;
+                    case "Romanian": ApplyManualRomanianUpdates(); break;
                     default: ApplyManualEnglishUpdates(); break;
                 }
 
@@ -15842,6 +21075,607 @@ namespace CopyThatProgram
             }
         }
 
+
+        // ==================  ITALIAN  ==================
+        private void ApplyManualItalianUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Nome del file";
+                dataGridView1.Columns[1].HeaderText = "Percorso del file";
+                dataGridView1.Columns[2].HeaderText = "Tipo";
+                dataGridView1.Columns[3].HeaderText = "Dimensione del file";
+                dataGridView1.Columns[4].HeaderText = "Stato";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Tipo di operazione";
+                copyHistoryDGV.Columns[1].HeaderText = "Percorso(i) file sorgente";
+                copyHistoryDGV.Columns[2].HeaderText = "Percorso(i) file destinazione";
+                copyHistoryDGV.Columns[3].HeaderText = "Dimensione totale directory";
+
+                skippedDataGridView.Columns[0].HeaderText = "Stato";
+                skippedDataGridView.Columns[1].HeaderText = "Percorso file sorgente";
+                skippedDataGridView.Columns[2].HeaderText = "Percorso file destinazione";
+                skippedDataGridView.Columns[3].HeaderText = "Nome del file";
+                skippedDataGridView.Columns[4].HeaderText = "Dimensione del file";
+
+                filesDataGridView.Columns[0].HeaderText = "Nome";
+                filesDataGridView.Columns[1].HeaderText = "Percorso";
+                filesDataGridView.Columns[2].HeaderText = "Tipo";
+                filesDataGridView.Columns[3].HeaderText = "Dimensione";
+                filesDataGridView.Columns[4].HeaderText = "Stato";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Inserisci il nome del file o della cartella da cercare...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Non fare nulla", "Sospendi", "Disconnetti", "Esci dal programma", "Spegni" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Non fare nulla", "Sospendi", "Disconnetti", "Esci dal programma", "Spegni" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Copia file", "Sposta file", "Eliminazione sicura" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Italian UI: {ex.Message}");
+            }
+        }
+
+        // ==================  PORTUGUESE - PORTUGAL  ==================
+        private void ApplyManualPortuguesePortugalUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Nome do ficheiro";
+                dataGridView1.Columns[1].HeaderText = "Caminho do ficheiro";
+                dataGridView1.Columns[2].HeaderText = "Tipo";
+                dataGridView1.Columns[3].HeaderText = "Tamanho do ficheiro";
+                dataGridView1.Columns[4].HeaderText = "Estado";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Tipo de operação";
+                copyHistoryDGV.Columns[1].HeaderText = "Caminho(s) de origem";
+                copyHistoryDGV.Columns[2].HeaderText = "Caminho(s) de destino";
+                copyHistoryDGV.Columns[3].HeaderText = "Tamanho total das pastas";
+
+                skippedDataGridView.Columns[0].HeaderText = "Estado";
+                skippedDataGridView.Columns[1].HeaderText = "Caminho do ficheiro de origem";
+                skippedDataGridView.Columns[2].HeaderText = "Caminho do ficheiro de destino";
+                skippedDataGridView.Columns[3].HeaderText = "Nome do ficheiro";
+                skippedDataGridView.Columns[4].HeaderText = "Tamanho do ficheiro";
+
+                filesDataGridView.Columns[0].HeaderText = "Nome";
+                filesDataGridView.Columns[1].HeaderText = "Caminho";
+                filesDataGridView.Columns[2].HeaderText = "Tipo";
+                filesDataGridView.Columns[3].HeaderText = "Tamanho";
+                filesDataGridView.Columns[4].HeaderText = "Estado";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Introduza o nome do ficheiro ou pasta a pesquisar...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Não fazer nada", "Suspender", "Terminar sessão", "Sair do programa", "Desligar" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Não fazer nada", "Suspender", "Terminar sessão", "Sair do programa", "Desligar" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Copiar ficheiros", "Mover ficheiros", "Eliminação segura" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Portuguese Portugal UI: {ex.Message}");
+            }
+        }
+
+        // ==================  PORTUGUESE - BRAZIL  ==================
+        private void ApplyManualPortugueseBrazilUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Nome do arquivo";
+                dataGridView1.Columns[1].HeaderText = "Caminho do arquivo";
+                dataGridView1.Columns[2].HeaderText = "Tipo";
+                dataGridView1.Columns[3].HeaderText = "Tamanho do arquivo";
+                dataGridView1.Columns[4].HeaderText = "Status";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Tipo de operação";
+                copyHistoryDGV.Columns[1].HeaderText = "Caminho(s) de origem";
+                copyHistoryDGV.Columns[2].HeaderText = "Caminho(s) de destino";
+                copyHistoryDGV.Columns[3].HeaderText = "Tamanho total das pastas";
+
+                skippedDataGridView.Columns[0].HeaderText = "Status";
+                skippedDataGridView.Columns[1].HeaderText = "Caminho do arquivo de origem";
+                skippedDataGridView.Columns[2].HeaderText = "Caminho do arquivo de destino";
+                skippedDataGridView.Columns[3].HeaderText = "Nome do arquivo";
+                skippedDataGridView.Columns[4].HeaderText = "Tamanho do arquivo";
+
+                filesDataGridView.Columns[0].HeaderText = "Nome";
+                filesDataGridView.Columns[1].HeaderText = "Caminho";
+                filesDataGridView.Columns[2].HeaderText = "Tipo";
+                filesDataGridView.Columns[3].HeaderText = "Tamanho";
+                filesDataGridView.Columns[4].HeaderText = "Status";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Digite o nome do arquivo ou pasta para pesquisar...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Não fazer nada", "Suspender", "Fazer logoff", "Sair do programa", "Desligar" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Não fazer nada", "Suspender", "Fazer logoff", "Sair do programa", "Desligar" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Copiar arquivos", "Mover arquivos", "Exclusão segura" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Portuguese Brazil UI: {ex.Message}");
+            }
+        }
+
+        // ==================  DUTCH  ==================
+        private void ApplyManualDutchUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Bestandsnaam";
+                dataGridView1.Columns[1].HeaderText = "Bestandspad";
+                dataGridView1.Columns[2].HeaderText = "Type";
+                dataGridView1.Columns[3].HeaderText = "Bestandsgrootte";
+                dataGridView1.Columns[4].HeaderText = "Status";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Bewerkingstype";
+                copyHistoryDGV.Columns[1].HeaderText = "Bronbestandspad(pen)";
+                copyHistoryDGV.Columns[2].HeaderText = "Doelbestandspad(pen)";
+                copyHistoryDGV.Columns[3].HeaderText = "Totale mapgrootte";
+
+                skippedDataGridView.Columns[0].HeaderText = "Status";
+                skippedDataGridView.Columns[1].HeaderText = "Bronbestandspad";
+                skippedDataGridView.Columns[2].HeaderText = "Doelbestandspad";
+                skippedDataGridView.Columns[3].HeaderText = "Bestandsnaam";
+                skippedDataGridView.Columns[4].HeaderText = "Bestandsgrootte";
+
+                filesDataGridView.Columns[0].HeaderText = "Naam";
+                filesDataGridView.Columns[1].HeaderText = "Pad";
+                filesDataGridView.Columns[2].HeaderText = "Type";
+                filesDataGridView.Columns[3].HeaderText = "Grootte";
+                filesDataGridView.Columns[4].HeaderText = "Status";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Voer bestands- of mapnaam in om te zoeken...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Niets doen", "Slaapstand", "Afmelden", "Programma afsluiten", "Afsluiten" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Niets doen", "Slaapstand", "Afmelden", "Programma afsluiten", "Afsluiten" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Bestanden kopiëren", "Bestanden verplaatsen", "Veilig verwijderen" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Dutch UI: {ex.Message}");
+            }
+        }
+
+        // ==================  SWEDISH  ==================
+        private void ApplyManualSwedishUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Filnamn";
+                dataGridView1.Columns[1].HeaderText = "Filsökväg";
+                dataGridView1.Columns[2].HeaderText = "Typ";
+                dataGridView1.Columns[3].HeaderText = "Filstorlek";
+                dataGridView1.Columns[4].HeaderText = "Status";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Operationstyp";
+                copyHistoryDGV.Columns[1].HeaderText = "Källfilsökväg(ar)";
+                copyHistoryDGV.Columns[2].HeaderText = "Målfilsökväg(ar)";
+                copyHistoryDGV.Columns[3].HeaderText = "Total mappstorlek";
+
+                skippedDataGridView.Columns[0].HeaderText = "Status";
+                skippedDataGridView.Columns[1].HeaderText = "Källfilsökväg";
+                skippedDataGridView.Columns[2].HeaderText = "Målfilsökväg";
+                skippedDataGridView.Columns[3].HeaderText = "Filnamn";
+                skippedDataGridView.Columns[4].HeaderText = "Filstorlek";
+
+                filesDataGridView.Columns[0].HeaderText = "Namn";
+                filesDataGridView.Columns[1].HeaderText = "Sökväg";
+                filesDataGridView.Columns[2].HeaderText = "Typ";
+                filesDataGridView.Columns[3].HeaderText = "Storlek";
+                filesDataGridView.Columns[4].HeaderText = "Status";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Ange fil- eller mappnamn att söka efter...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Gör ingenting", "Viloläge", "Logga ut", "Avsluta program", "Stäng av" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Gör ingenting", "Viloläge", "Logga ut", "Avsluta program", "Stäng av" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Kopiera filer", "Flytta filer", "Säker radering" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Swedish UI: {ex.Message}");
+            }
+        }
+
+        // ==================  NORWEGIAN  ==================
+        private void ApplyManualNorwegianUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Filnavn";
+                dataGridView1.Columns[1].HeaderText = "Filbane";
+                dataGridView1.Columns[2].HeaderText = "Type";
+                dataGridView1.Columns[3].HeaderText = "Filstørrelse";
+                dataGridView1.Columns[4].HeaderText = "Status";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Operasjonstype";
+                copyHistoryDGV.Columns[1].HeaderText = "Kilde filbane(r)";
+                copyHistoryDGV.Columns[2].HeaderText = "Mål filbane(r)";
+                copyHistoryDGV.Columns[3].HeaderText = "Total mappestørrelse";
+
+                skippedDataGridView.Columns[0].HeaderText = "Status";
+                skippedDataGridView.Columns[1].HeaderText = "Kilde filbane";
+                skippedDataGridView.Columns[2].HeaderText = "Mål filbane";
+                skippedDataGridView.Columns[3].HeaderText = "Filnavn";
+                skippedDataGridView.Columns[4].HeaderText = "Filstørrelse";
+
+                filesDataGridView.Columns[0].HeaderText = "Navn";
+                filesDataGridView.Columns[1].HeaderText = "Bane";
+                filesDataGridView.Columns[2].HeaderText = "Type";
+                filesDataGridView.Columns[3].HeaderText = "Størrelse";
+                filesDataGridView.Columns[4].HeaderText = "Status";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Skriv inn fil- eller mappenavn for å søke...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Gjør ingenting", "Hvilemodus", "Logg av", "Avslutt program", "Slå av" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Gjør ingenting", "Hvilemodus", "Logg av", "Avslutt program", "Slå av" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Kopier filer", "Flytt filer", "Sikker sletting" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Norwegian UI: {ex.Message}");
+            }
+        }
+
+        // ==================  DANISH  ==================
+        private void ApplyManualDanishUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Filnavn";
+                dataGridView1.Columns[1].HeaderText = "Filsti";
+                dataGridView1.Columns[2].HeaderText = "Type";
+                dataGridView1.Columns[3].HeaderText = "Filstørrelse";
+                dataGridView1.Columns[4].HeaderText = "Status";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Operationstype";
+                copyHistoryDGV.Columns[1].HeaderText = "Kilde filsti(e)";
+                copyHistoryDGV.Columns[2].HeaderText = "Destinations filsti(e)";
+                copyHistoryDGV.Columns[3].HeaderText = "Total mappestørrelse";
+
+                skippedDataGridView.Columns[0].HeaderText = "Status";
+                skippedDataGridView.Columns[1].HeaderText = "Kilde filsti";
+                skippedDataGridView.Columns[2].HeaderText = "Destinations filsti";
+                skippedDataGridView.Columns[3].HeaderText = "Filnavn";
+                skippedDataGridView.Columns[4].HeaderText = "Filstørrelse";
+
+                filesDataGridView.Columns[0].HeaderText = "Navn";
+                filesDataGridView.Columns[1].HeaderText = "Sti";
+                filesDataGridView.Columns[2].HeaderText = "Type";
+                filesDataGridView.Columns[3].HeaderText = "Størrelse";
+                filesDataGridView.Columns[4].HeaderText = "Status";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Indtast fil- eller mappenavn for at søge...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Gør intet", "Dvale", "Log af", "Afslut program", "Sluk" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Gør intet", "Dvale", "Log af", "Afslut program", "Sluk" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Kopier filer", "Flyt filer", "Sikker sletning" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Danish UI: {ex.Message}");
+            }
+        }
+
+        // ==================  FINNISH  ==================
+        private void ApplyManualFinnishUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Tiedoston nimi";
+                dataGridView1.Columns[1].HeaderText = "Tiedoston polku";
+                dataGridView1.Columns[2].HeaderText = "Tyyppi";
+                dataGridView1.Columns[3].HeaderText = "Tiedoston koko";
+                dataGridView1.Columns[4].HeaderText = "Tila";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Toimintotyyppi";
+                copyHistoryDGV.Columns[1].HeaderText = "Lähdetiedostopolku(t)";
+                copyHistoryDGV.Columns[2].HeaderText = "Kohdetiedostopolku(t)";
+                copyHistoryDGV.Columns[3].HeaderText = "Kansioiden kokonaiskoko";
+
+                skippedDataGridView.Columns[0].HeaderText = "Tila";
+                skippedDataGridView.Columns[1].HeaderText = "Lähdetiedoston polku";
+                skippedDataGridView.Columns[2].HeaderText = "Kohdetiedoston polku";
+                skippedDataGridView.Columns[3].HeaderText = "Tiedoston nimi";
+                skippedDataGridView.Columns[4].HeaderText = "Tiedoston koko";
+
+                filesDataGridView.Columns[0].HeaderText = "Nimi";
+                filesDataGridView.Columns[1].HeaderText = "Polku";
+                filesDataGridView.Columns[2].HeaderText = "Tyyppi";
+                filesDataGridView.Columns[3].HeaderText = "Koko";
+                filesDataGridView.Columns[4].HeaderText = "Tila";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Syötä etsittävän tiedoston tai kansion nimi...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Älä tee mitään", "Lepotila", "Kirjaudu ulos", "Lopeta ohjelma", "Sammuta" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Älä tee mitään", "Lepotila", "Kirjaudu ulos", "Lopeta ohjelma", "Sammuta" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Kopioi tiedostot", "Siirrä tiedostot", "Turvallinen poisto" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Finnish UI: {ex.Message}");
+            }
+        }
+
+        // ==================  POLISH  ==================
+        private void ApplyManualPolishUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Nazwa pliku";
+                dataGridView1.Columns[1].HeaderText = "Ścieżka pliku";
+                dataGridView1.Columns[2].HeaderText = "Typ";
+                dataGridView1.Columns[3].HeaderText = "Rozmiar pliku";
+                dataGridView1.Columns[4].HeaderText = "Status";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Typ operacji";
+                copyHistoryDGV.Columns[1].HeaderText = "Ścieżka(i) pliku źródłowego";
+                copyHistoryDGV.Columns[2].HeaderText = "Ścieżka(i) pliku docelowego";
+                copyHistoryDGV.Columns[3].HeaderText = "Całkowity rozmiar folderów";
+
+                skippedDataGridView.Columns[0].HeaderText = "Status";
+                skippedDataGridView.Columns[1].HeaderText = "Ścieżka pliku źródłowego";
+                skippedDataGridView.Columns[2].HeaderText = "Ścieżka pliku docelowego";
+                skippedDataGridView.Columns[3].HeaderText = "Nazwa pliku";
+                skippedDataGridView.Columns[4].HeaderText = "Rozmiar pliku";
+
+                filesDataGridView.Columns[0].HeaderText = "Nazwa";
+                filesDataGridView.Columns[1].HeaderText = "Ścieżka";
+                filesDataGridView.Columns[2].HeaderText = "Typ";
+                filesDataGridView.Columns[3].HeaderText = "Rozmiar";
+                filesDataGridView.Columns[4].HeaderText = "Status";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Wprowadź nazwę pliku lub folderu do wyszukania...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Nie rób nic", "Uśpij", "Wyloguj", "Zamknij program", "Wyłącz" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Nie rób nic", "Uśpij", "Wyloguj", "Zamknij program", "Wyłącz" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Kopiuj pliki", "Przenieś pliki", "Bezpieczne usuwanie" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Polish UI: {ex.Message}");
+            }
+        }
+
+        // ==================  CZECH  ==================
+        private void ApplyManualCzechUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Název souboru";
+                dataGridView1.Columns[1].HeaderText = "Cesta k souboru";
+                dataGridView1.Columns[2].HeaderText = "Typ";
+                dataGridView1.Columns[3].HeaderText = "Velikost souboru";
+                dataGridView1.Columns[4].HeaderText = "Stav";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Typ operace";
+                copyHistoryDGV.Columns[1].HeaderText = "Cesta(y) ke zdrojovému souboru";
+                copyHistoryDGV.Columns[2].HeaderText = "Cesta(y) k cílovému souboru";
+                copyHistoryDGV.Columns[3].HeaderText = "Celková velikost složek";
+
+                skippedDataGridView.Columns[0].HeaderText = "Stav";
+                skippedDataGridView.Columns[1].HeaderText = "Cesta ke zdrojovému souboru";
+                skippedDataGridView.Columns[2].HeaderText = "Cesta k cílovému souboru";
+                skippedDataGridView.Columns[3].HeaderText = "Název souboru";
+                skippedDataGridView.Columns[4].HeaderText = "Velikost souboru";
+
+                filesDataGridView.Columns[0].HeaderText = "Název";
+                filesDataGridView.Columns[1].HeaderText = "Cesta";
+                filesDataGridView.Columns[2].HeaderText = "Typ";
+                filesDataGridView.Columns[3].HeaderText = "Velikost";
+                filesDataGridView.Columns[4].HeaderText = "Stav";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Zadejte název souboru nebo složky k hledání...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Nedělat nic", "Režim spánku", "Odhlásit", "Ukončit program", "Vypnout" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Nedělat nic", "Režim spánku", "Odhlásit", "Ukončit program", "Vypnout" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Kopírovat soubory", "Přesunout soubory", "Bezpečné mazání" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Czech UI: {ex.Message}");
+            }
+        }
+
+        // ==================  HUNGARIAN  ==================
+        private void ApplyManualHungarianUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Fájl neve";
+                dataGridView1.Columns[1].HeaderText = "Fájl elérési útja";
+                dataGridView1.Columns[2].HeaderText = "Típus";
+                dataGridView1.Columns[3].HeaderText = "Fájl mérete";
+                dataGridView1.Columns[4].HeaderText = "Állapot";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Művelet típusa";
+                copyHistoryDGV.Columns[1].HeaderText = "Forrás fájl elérési út(jai)";
+                copyHistoryDGV.Columns[2].HeaderText = "Cél fájl elérési út(jai)";
+                copyHistoryDGV.Columns[3].HeaderText = "Mappák teljes mérete";
+
+                skippedDataGridView.Columns[0].HeaderText = "Állapot";
+                skippedDataGridView.Columns[1].HeaderText = "Forrás fájl elérési útja";
+                skippedDataGridView.Columns[2].HeaderText = "Cél fájl elérési útja";
+                skippedDataGridView.Columns[3].HeaderText = "Fájl neve";
+                skippedDataGridView.Columns[4].HeaderText = "Fájl mérete";
+
+                filesDataGridView.Columns[0].HeaderText = "Név";
+                filesDataGridView.Columns[1].HeaderText = "Elérési út";
+                filesDataGridView.Columns[2].HeaderText = "Típus";
+                filesDataGridView.Columns[3].HeaderText = "Méret";
+                filesDataGridView.Columns[4].HeaderText = "Állapot";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Adja meg a keresendő fájl vagy mappa nevét...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Ne csináljon semmit", "Alvó üzemmód", "Kijelentkezés", "Program bezárása", "Leállítás" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Ne csináljon semmit", "Alvó üzemmód", "Kijelentkezés", "Program bezárása", "Leállítás" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Fájlok másolása", "Fájlok áthelyezése", "Biztonságos törlés" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Hungarian UI: {ex.Message}");
+            }
+        }
+
+        // ==================  ROMANIAN  ==================
+        private void ApplyManualRomanianUpdates()
+        {
+            try
+            {
+                /* ---------- grid headers ---------- */
+                dataGridView1.Columns[0].HeaderText = "Numele fișierului";
+                dataGridView1.Columns[1].HeaderText = "Calea fișierului";
+                dataGridView1.Columns[2].HeaderText = "Tip";
+                dataGridView1.Columns[3].HeaderText = "Dimensiunea fișierului";
+                dataGridView1.Columns[4].HeaderText = "Stare";
+
+                copyHistoryDGV.Columns[0].HeaderText = "Tipul operației";
+                copyHistoryDGV.Columns[1].HeaderText = "Calea(ile) fișierului sursă";
+                copyHistoryDGV.Columns[2].HeaderText = "Calea(ile) fișierului destinație";
+                copyHistoryDGV.Columns[3].HeaderText = "Dimensiunea totală a dosarelor";
+
+                skippedDataGridView.Columns[0].HeaderText = "Stare";
+                skippedDataGridView.Columns[1].HeaderText = "Calea fișierului sursă";
+                skippedDataGridView.Columns[2].HeaderText = "Calea fișierului destinație";
+                skippedDataGridView.Columns[3].HeaderText = "Numele fișierului";
+                skippedDataGridView.Columns[4].HeaderText = "Dimensiunea fișierului";
+
+                filesDataGridView.Columns[0].HeaderText = "Nume";
+                filesDataGridView.Columns[1].HeaderText = "Cale";
+                filesDataGridView.Columns[2].HeaderText = "Tip";
+                filesDataGridView.Columns[3].HeaderText = "Dimensiune";
+                filesDataGridView.Columns[4].HeaderText = "Stare";
+
+                /* ---------- other controls ---------- */
+                searchTextBox.PlaceholderText = "Introduceți numele fișierului sau dosarului pentru căutare...";
+
+                onFinishComboBox.Items.Clear();
+                onFinishComboBox.Items.AddRange(new[] { "Nu face nimic", "Suspenda", "Deconectați", "Închideți programul", "Opriți" });
+                if (onFinishComboBox.SelectedIndex == -1) onFinishComboBox.SelectedIndex = 0;
+
+                onFinishMultiComboBox.Items.Clear();
+                onFinishMultiComboBox.Items.AddRange(new[] { "Nu face nimic", "Suspenda", "Deconectați", "Închideți programul", "Opriți" });
+                if (onFinishMultiComboBox.SelectedIndex == -1) onFinishMultiComboBox.SelectedIndex = 0;
+
+                copyMoveDeleteComboBox.Items.Clear();
+                copyMoveDeleteComboBox.Items.AddRange(new[] { "Copiați fișiere", "Mutați fișiere", "Ștergere sigură" });
+                if (copyMoveDeleteComboBox.SelectedIndex == -1) copyMoveDeleteComboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error updating Romanian UI: {ex.Message}");
+            }
+        }
+
         /// <summary>
         /// Recursively applies localized resources to a control and all of its child controls.
         /// Uses the control's <see cref="Control.Name"/> as the resource key so that
@@ -15864,20 +21698,6 @@ namespace CopyThatProgram
             foreach (System.Windows.Forms.Control child in ctrl.Controls)
                 ApplyResourcesToControl(res, child);
         }
-
-
-
-        /// <summary>
-        /// Applies a visual skin theme by its English key name.
-        /// </summary>
-        /// <param name="englishKey">The English key (e.g. "Light Mode").</param>
-        /// <param name="foreColor">Optional override for text color.</param>
-        /// <param name="backColor">Optional override for background color.</param>
-        /// 
-
-        /// <summary>
-        /// Applies a visual skin theme by its English key name.
-        /// </summary>
 
         private void rollUpLabel_MouseEnter(object sender, EventArgs e)
         {
@@ -16262,7 +22082,7 @@ namespace CopyThatProgram
             _sourcePaths.Add(fullPath);
 
             fromFilesDirLabel.Text = string.Join(", ",
-                _sourcePaths.Select(p => System.IO.Path.GetFileName(p))); 
+                _sourcePaths.Select(p => System.IO.Path.GetFileName(p)));
 
             UpdateDriveSpaceInfo();
         }
@@ -16325,7 +22145,7 @@ namespace CopyThatProgram
                     }
                     catch (Exception ex)
                     {
-                        fromFilesDirLabel.Text = $"Error: {ex.Message}";
+                        fromFilesDirLabel.Text = string.Format(Translator.Get("Error: {0}"), ex.Message);
                         MessageBox.Show(
                             Translator.Get($"An error occurred during scanning: {ex.Message}"),
                                         Translator.Get("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -16348,7 +22168,7 @@ namespace CopyThatProgram
                     PlaySound("FileAdded");
                 }
 
-                filePathLabel.Text = "Nothing";
+                filePathLabel.Text = Translator.Get("Nothing");
                 _bindingSource.ResetBindings(false);
             }
         }
@@ -16966,6 +22786,701 @@ Start-Process (Join-Path $final "{{newExeName}}")
                     totalElapsedTimeLabel, totalTargetTimeLabel,
                     resetTotalsButton // Pass the button reference
                 );
+            }
+        }
+
+        private void updateAutoCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup.");
+        }
+
+        private void updateBetaCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates.");
+        }
+
+        private void updateManuallyCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            //Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Manual Update Check CheckBox: This checkbox determines whether the application should check for updates only when manually triggered by the user.");
+        }
+
+        private void closeProgramCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs.");
+        }
+
+        private void restartCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs.");
+        }
+
+        private void startWithWindowsCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts.");
+        }
+
+        private void checkForUpdatesButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Check for Updates Button: This button manually checks for updates to the application.");
+        }
+
+        private void clearSettingsButton_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration.");
+        }
+
+        private void saveSettingsButton_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions.");
+        }
+
+        private void emailNamesCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export.");
+        }
+
+        private void emailPathsCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export.");
+        }
+
+        private void zipTogetherCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations.");
+        }
+
+        private void fullPathsCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories.");
+        }
+
+        private void overMBCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes.");
+        }
+
+        private void underMBCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes.");
+        }
+
+        private void multithreadCheckBox_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void alwaysOnTopCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows.");
+        }
+
+        private void confirmDragDropCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application.");
+        }
+
+        private void contextMenuCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application.");
+        }
+
+        private void languageComboBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface.");
+        }
+
+        private void skinsComboBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance.");
+        }
+
+        private void onFinishCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes.");
+        }
+
+        private void onCancelCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled.");
+        }
+
+        private void onAddFilesCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list.");
+        }
+
+        private void onErrorCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation.");
+        }
+
+        private void dataGridView1_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Export Files Data Grid View: This area displays the list of files to be processed, along with their details such as source and destination.");
+        }
+
+        private void registerButton_MouseEnter_1(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSettings' to a descriptive message.
+            toolStripSettings.Text = Translator.Get("Register Button: This button allows you to register the application with a license key to unlock full features.");
+        }
+
+        private void registerButton_MouseHover(object sender, EventArgs e)
+        {
+            toolStripSettings.Text = Translator.Get("Register Button: This button allows you to register the application with a license key to unlock full features.");
+        }
+
+        private void addAllowedButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Add Allowed Button: This button adds a new allowed file or directory to the allowed list.");
+        }
+
+        private void removeAllowedButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Remove Allowed Button: This button removes the selected allowed file or directory from the allowed list.");
+        }
+
+        private void clearAllowedButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Clear Allowed Button: This button clears the entire list of allowed files and directories.");
+        }
+
+        private void allowedTextBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Allowed Text Box: This text box allows you to enter file or directory paths to be added to the allowed list.");
+        }
+
+        private void allowedExtListBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Allowed List Box: This list box displays the list of allowed files and directories that will be included in the operation.");
+        }
+
+        private void addExcludedButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Add Excluded Button: This button adds a new excluded file or directory to the exclusions list.");
+        }
+
+        private void removeExcludedButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Clear Excluded Button: This button clears the entire list of excluded files and directories.");
+        }
+
+        private void clearExcludedButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Clear Excluded Button: This button clears the entire list of excluded files and directories.");
+        }
+
+        private void excludedTextBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Excluded Text Box: This text box allows you to enter file or directory paths to be added to the exclusions list.");
+        }
+
+        private void excludedExtListBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripExclusions' to a descriptive message.
+            toolStripExclusions.Text = Translator.Get("Excluded List Box: This list box displays the list of excluded files and directories that will be skipped during the operation.");
+        }
+
+        private void cloneButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
+            toolStripCopyHistory.Text = Translator.Get("Clone Button: This button clones the selected operation from the history list, allowing you to quickly repeat a previous operation.");
+        }
+
+        private void deleteEntryButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
+            toolStripCopyHistory.Text = Translator.Get("Delete Entry Button: This button deletes the selected entry from the operation history list.");
+        }
+
+        private void clearHistoryButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
+            toolStripCopyHistory.Text = Translator.Get("Clear History Button: This button clears the entire operation history list.");
+        }
+
+        private void copyHistoryDGV_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripCopyHistory' to a descriptive message.
+            toolStripCopyHistory.Text = Translator.Get("Copy History Data Grid View: This grid displays the history of file operations performed by the application, including details such as source and target paths, operation type, date, and status.");
+        }
+
+        private void goToInExplorerButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSkipped' to a descriptive message.
+            toolStripSkipped.Text = Translator.Get("Go To In Explorer Button: This button opens the selected file's location in Windows Explorer.");
+        }
+
+        private void clearSkippedListButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSkipped' to a descriptive message.
+            toolStripSkipped.Text = Translator.Get("Clear Skipped List Button: This button clears the list of skipped files.");
+        }
+
+        private void skippedDataGridView_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripSkipped' to a descriptive message.
+            toolStripSkipped.Text = Translator.Get("Skipped Data Grid View: This grid displays the list of files that were skipped during the operation, including their names, paths, sizes, and reasons for skipping.");
+        }
+
+        private void filesNameLabel1_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Files Name Label 1: This label shows the name of the file being processed by thread 1, along with the percentage and speed.");
+        }
+
+        private void filesNameLabel2_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Files Name Label 2: This label shows the name of the file being processed by thread 2, along with the percentage and speed.");
+        }
+
+        private void filesNameLabel3_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Files Name Label 3: This label shows the name of the file being processed by thread 3, along with the percentage and speed.");
+        }
+
+        private void filesNameLabel4_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Files Name Label 4: This label shows the name of the file being processed by thread 4, along with the percentage and speed.");
+        }
+
+        private void fileCountMultiLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("File Count Multi Label: This label shows the number of files processed out of the total number of files in the multi-threaded operation.");
+        }
+
+        private void speedMultiLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Speed Multi Label: This label shows the current speed of the multi-threaded operation in bytes per second.");
+        }
+
+        private void totalTimeMultiLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Total Time Multi Label: This label shows the elapsed time out of the estimated target time for the multi-threaded operation.");
+        }
+
+        private void totalCMDMultiLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Total C/M/D Label: This label shows the total space processed out of the total space for all files.");
+        }
+
+        private void totalSpaceMultiLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'toolStripMulti' to a descriptive message.
+            toolStripMulti.Text = Translator.Get("Total Space Left Label: This label shows the total hard drive used out of the total hard drive space left on the target drive for the multi-threaded operation.");
+        }
+
+        private void fileIconPicBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the file icon picture box.
+            statusLabel.Text = Translator.Get("File's Icon PictureBox: The file's icon which reflect the current file will be shown here.");
+        }
+
+        private void sourceDirectoryLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse hovers over the sourceDirectoryLabel.
+            // It updates the status bar's text to provide a tooltip description for the source directory button.
+            statusLabel.Text = Translator.Get("Source Directory Button: This is the button to select your source directory from which files will be copied/moved/securely deleted.");
+        }
+
+        private void targetDirectoryLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse hoveers over the targetDirectoryLabel.
+            // It updates the status bar's text to provide a tooltip description for the target directory button.
+            statusLabel.Text = Translator.Get("Target Directory Button: This is the button to select your target directory to which your files will be copied/moved.");
+        }
+
+        private void copyMoveDeleteComboBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the operation dropdown.
+            statusLabel.Text = Translator.Get("Copy/Move/Secure Delete ComboBox: This dropdown combobox is to select the operation of Copy/Move/Secure Delete.");
+        }
+
+        private void onFinishComboBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the "on finish" dropdown.
+            statusLabel.Text = Translator.Get("On Finish ComboBox: This dropdown combobox is to select the action to perform when the operation finishes.");
+        }
+
+        private void startButton_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the start button.
+            statusLabel.Text = Translator.Get("Start Button: This button starts the operation of Copy/Move/Secure Delete.");
+        }
+
+        private void pauseResumeButton_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the pause/resume button.
+            statusLabel.Text = Translator.Get("Pause/Resume Button: This button pauses/resumes the current operation.");
+        }
+
+        private void cancelButton_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the cancel button.
+            statusLabel.Text = Translator.Get("Cancel Button: This button cancels the current operation.");
+        }
+
+        private void skipButton_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the skip button.
+            statusLabel.Text = Translator.Get("This button skips the current file and moves to the next one in the operation.");
+        }
+
+        private void addFileButton_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the add file button.
+            statusLabel.Text = Translator.Get("Add File Button: This button adds files to the list for the current operation.");
+        }
+
+        private void removeFileButton_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the remove file button.
+            statusLabel.Text = Translator.Get("Remove File Button: This button removes the selected file from the list for the current operation.");
+        }
+
+        private void clearFileListButton_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the clear file list button.
+            statusLabel.Text = Translator.Get("Clear File List Button: This button clears the entire file list for the current operation.");
+        }
+
+        private void fileCountOnLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the file count label.
+            statusLabel.Text = Translator.Get("File Count Label: This label shows the total number of files in the current operation.");
+        }
+
+        private void elapsedAndTargetTimeLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the elapsed and target time label.
+            statusLabel.Text = Translator.Get("Elapsed Out of Target Time Label: This label shows the elapsed time and the estimated target time for the current operation.");
+        }
+
+        private void fileProcessedLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the file processed label.
+            statusLabel.Text = Translator.Get("File Processed Label: This label shows the number of converted bytes that have been processed in the current operation.");
+        }
+
+        private void speedLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the speed label.
+            statusLabel.Text = Translator.Get("Speed Label: This label shows the current speed of the operation in bytes per second.");
+        }
+
+        private void totalCopiedProgressLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the total copied progress label.
+            statusLabel.Text = Translator.Get("Total Copied Progress Label: This label shows the total bytes processed and the total bytes to process in the current operation.");
+        }
+
+        private void totalHDSpaceLeftLabel_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the total hard drive space left label.
+            statusLabel.Text = Translator.Get("Total HD Space Left Label: This label shows the total hard drive space left on the target drive.");
+        }
+
+        private void keepDirStructCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the keep directory structure checkbox.
+            statusLabel.Text = Translator.Get("Keep Directory Structure CheckBox: This checkbox determines whether to keep the directory structure of the source files in the target directory.");
+        }
+
+        private void overwriteAllCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the overwrite all checkbox.
+            statusLabel.Text = Translator.Get("Overwrite All CheckBox: This checkbox determines whether to overwrite all files in the target directory without checking their timestamps.");
+        }
+
+        private void createCustomDirCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the create custom directory checkbox.
+            statusLabel.Text = Translator.Get("Create Custom Directory Prior CheckBox: This checkbox determines whether to create a custom directory structure in the target directory based on the source files.");
+        }
+
+        private void doNotOverwriteCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the do not overwrite checkbox.
+            statusLabel.Text = Translator.Get("Do Not Overwrite CheckBox: This checkbox determines whether to skip files that already exist in the target directory.");
+        }
+
+        private void copyFilesDirsCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the copy files and directories checkbox.
+            statusLabel.Text = Translator.Get("Copy Only Files CheckBox: This checkbox determines whether to copy files and no directories from the source directory to the target directory.");
+        }
+
+        private void keepOnlyFilesCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the keep only files checkbox.
+            statusLabel.Text = Translator.Get("Keep Only Files CheckBox: This checkbox determines whether to keep ONLY files inside the main directory.");
+        }
+
+        private void modernFile_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the keep only files checkbox.
+            statusLabel.Text = Translator.Get("File Progress Bar: Shows the current percentage of the file being processed");
+        }
+
+        private void modernTotal_MouseHover(object sender, EventArgs e)
+        {
+            // Updates the status label with a description of the keep only files checkbox.
+            statusLabel.Text = Translator.Get("Total Progress Bar: Shows the current percentage of the total of all files being processed");
+        }
+
+        private void searchTextBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'searchTextBox'.
+            statusLabel.Text = Translator.Get("Search Text Box: This text box allows you to search for specific files in the file list. Type a keyword to filter the displayed files.");
+        }
+
+        private void clearTextButton_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'clearTextButton'.
+            statusLabel.Text = Translator.Get("Clear Text Button: This button clears the text in the search box, allowing you to reset the search filter and view all files in the list.");
+        }
+
+        private void moveFileUpLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse hovers over the moveFileUpLabel.
+            // It updates the status bar with a tooltip describing the button's function.
+            statusLabel.Text = Translator.Get("Files Up Button: This button allows you to move the selected file up in the list, changing its order in the operation sequence.");
+        }
+
+        private void moveFileDownLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse hovers over the moveFileDownLabel.
+            // It updates the status bar with a tooltip describing the button's function.
+            statusLabel.Text = Translator.Get("Files Down Button: This button allows you to move the selected file down in the list, changing its order in the operation sequence.");
+        }
+
+        private void moveToTopLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse hovers over the moveToTopLabel.
+            // It updates the status bar with a tooltip describing the button's function.
+            statusLabel.Text = Translator.Get("Move to Top Button: This button moves the selected file to the top of the list, making it the first file to be processed in the operation.");
+        }
+
+        private void moveToBottomLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse hovers over the moveToBottomLabel.
+            // It updates the status bar with a tooltip describing the button's function.
+            statusLabel.Text = Translator.Get("Move to Bottom Button: This button moves the selected file to the bottom of the list, making it the last file to be processed in the operation.");
+        }
+
+        private void autoScrollCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'autoScrollCheckBox'.
+            statusLabel.Text = Translator.Get("Auto-Scroll CheckBox: This checkbox enables or disables automatic scrolling of the files data grid view while files are being processed.");
+        }
+
+        private void verifyCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'verifyCheckBox'.
+            statusLabel.Text = Translator.Get("Verify After Transfer CheckBox: This checkbox determines whether to verify the integrity of files after they have been copied or moved.");
+        }
+
+        private void filesDataGridView_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'filesDataGridView'.
+            statusLabel.Text = Translator.Get("Files Data Grid View: This area displays the list of files to be processed, along with their details such as source and destination.");
+        }
+
+        private void progressBarMulti1_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'progressBarMulti1'.
+            statusLabel.Text = Translator.Get("Thread 1 Progress Bar: This progress bar shows the progress of the file being processed by thread 1.");
+        }
+
+        private void progressBarMulti2_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'progressBarMulti2'.
+            statusLabel.Text = Translator.Get("Thread 2 Progress Bar: This progress bar shows the progress of the file being processed by thread 2.");
+        }
+
+        private void progressBarMulti3_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'progressBarMulti3'.
+            statusLabel.Text = Translator.Get("Thread 3 Progress Bar: This progress bar shows the progress of the file being processed by thread 3.");
+        }
+
+        private void progressBarMulti4_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'progressBarMulti4'.
+            statusLabel.Text = Translator.Get("Thread 4 Progress Bar: This progress bar shows the progress of the file being processed by thread 4.");
+        }
+
+        private void progressBarMultiTotal_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the status label to describe the 'progressBarMultiTotal'.
+            statusLabel.Text = Translator.Get("Total Multi-Threaded Progress Bar: This progress bar shows the overall progress of all files being processed in the multi-threaded operation.");
+        }
+
+        private void rollUpLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse pointer hovers over the area of the 'rollUpLabel'.
+            // It updates the text of multiple ToolStripStatusLabels to provide a tooltip description.
+            statusLabel.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripCopyHistory.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripExclusions.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripMulti.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSettings.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSkipped.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+        }
+
+        private void rollDownLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse pointer hovers over the 'rollDownLabel'.
+            // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the roll-down button.
+            statusLabel.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripCopyHistory.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripExclusions.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripMulti.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSettings.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            toolStripSkipped.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+        }
+
+        private void settingsLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse pointer hovers over the 'settingsLabel'.
+            // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the settings button.
+            statusLabel.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripCopyHistory.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripExclusions.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripMulti.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripSettings.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            toolStripSkipped.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+        }
+
+        private void allAboutLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse pointer hovers over the 'allAboutLabel'.
+            // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the about button.
+            statusLabel.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripCopyHistory.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripExclusions.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripMulti.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripSettings.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            toolStripSkipped.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+        }
+
+        private void minimizeLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse pointer hovers over the 'minimizeLabel'.
+            // It updates the text of multiple ToolStripStatusLabels with a tooltip description.
+            statusLabel.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripCopyHistory.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripExclusions.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripMulti.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripSettings.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            toolStripSkipped.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+        }
+
+        private void exitLabel_MouseHover(object sender, EventArgs e)
+        {
+            // This event handler is triggered when the mouse pointer hovers over the 'exitLabel'.
+            // It updates the text of multiple ToolStripStatusLabels with a tooltip description for the exit button.
+            statusLabel.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripCopyHistory.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripExclusions.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripMulti.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripSettings.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            toolStripSkipped.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+        }
+
+        private void cmdHomePage_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statusLabel' to a descriptive message when the mouse enters the 'cmdHomePage' button.
+            statusLabel.Text = Translator.Get("Home Page Tab: This tab contains the main interface for file operations such as copy, move, and secure delete.");
+        }
+
+        private void cmdMultithread_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statusLabel' to a descriptive message.
+            statusLabel.Text = Translator.Get("Multi-Thread Tab: This tab allows you to configure and monitor multi-threaded operations for copying or moving files.");
+        }
+
+        private void cmdSkipPage_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statusLabel' to a descriptive message.
+            statusLabel.Text = Translator.Get("Skipped Tab: This tab displays the list of files that were skipped during the operation, along with options to manage the skipped files.");
+        }
+
+        private void cmdCopyHistory_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statusLabel' to a descriptive message.
+            statusLabel.Text = Translator.Get("Copy History Tab: This tab shows the history of file operations performed by the application, allowing you to review past activities.");
+        }
+
+        private void cmdExclusions_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statusLabel' to a descriptive message.
+            statusLabel.Text = Translator.Get("Exclusions Tab: This tab allows you to manage the lists of allowed and excluded files and directories for the operation.");
+        }
+
+        private void cmdTotals_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statusLabel' to a descriptive message.
+            statusLabel.Text = Translator.Get("Totals Tab: This tab provides a summary of the total files processed, total data transferred, and other relevant statistics for the operation.");
+        }
+
+        private void cmdSettingsPage_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statusLabel' to a descriptive message.
+            statusLabel.Text = Translator.Get("Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.");
+        }
+
+        private void mainForm_MouseHover(object sender, EventArgs e)
+        {
+            statusLabel.Text = Translator.Get(proVersion
+    ? "Copy That v1.0 Pro By: Havoc"
+    : "Copy That v1.0 By: Havoc");
+        }
+
+        private void pauseResumeButton_Click(object sender, EventArgs e)
+        {
+            _isPaused = !_isPaused;
+
+            if (_isPaused)
+            {
+                _pauseEvent.Reset();
+                pauseResumeButton.Text = Translator.Get("Resume");
+                StopElapsedTimer();
+            }
+            else
+            {
+                _pauseEvent.Set();
+                pauseResumeButton.Text = Translator.Get("Pause");
+                StartElapsedTimer();
             }
         }
     }

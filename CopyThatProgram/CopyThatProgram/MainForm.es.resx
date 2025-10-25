@@ -150,7 +150,8 @@
   <data name="startButton.Text" xml:space="preserve">
     <value>Iniciar</value>
   </data>
-  <data name="pauseResumeButton.Text" xml:space="preserve">
+  <data name="
+		Button.Text" xml:space="preserve">
     <value>Pausar</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
@@ -165,23 +166,8 @@
   <data name="cancelMultiButton.Text" xml:space="preserve">
     <value>Cancelar</value>
   </data>
-  <data name="fileCountOnLabel.Text" xml:space="preserve">
-    <value>Cantidad de Archivos:</value>
-  </data>
-  <data name="fileProcessedLabel.Text" xml:space="preserve">
-    <value>Archivo Procesado:</value>
-  </data>
-  <data name="totalCopiedProgressLabel.Text" xml:space="preserve">
-    <value>Total C/M/E:</value>
-  </data>
-  <data name="speedLabel.Text" xml:space="preserve">
-    <value>Velocidad:</value>
-  </data>
   <data name="elapsedAndTargetTimeLabel.Text" xml:space="preserve">
-    <value>Tiempo Transcurrido / Estimado:</value>
-  </data>
-  <data name="totalHDSpaceLeftLabel.Text" xml:space="preserve">
-    <value>Espacio en Disco:</value>
+    <value>Tiempo Transcurrido / Estimado: 00:00:00 / 00:00:00</value>
   </data>
   <data name="filePathLabel.Text" xml:space="preserve">
     <value>Sin Archivo Seleccionado</value>
@@ -197,21 +183,6 @@
   </data>
   <data name="totalProgressLabel.Text" xml:space="preserve">
     <value>0.00 %</value>
-  </data>
-  <data name="fileCountMultiLabel.Text" xml:space="preserve">
-    <value>Cantidad de Archivos:</value>
-  </data>
-  <data name="totalTimeMultiLabel.Text" xml:space="preserve">
-    <value>Tiempo Transcurrido / Estimado:</value>
-  </data>
-  <data name="speedMultiLabel.Text" xml:space="preserve">
-    <value>Velocidad:</value>
-  </data>
-  <data name="totalCMDMultiLabel.Text" xml:space="preserve">
-    <value>Total C/M/E:</value>
-  </data>
-  <data name="totalSpaceMultiLabel.Text" xml:space="preserve">
-    <value>Espacio Usado:</value>
   </data>
   <data name="copyMoveDeleteComboBox.Items" xml:space="preserve">
     <value>Copiar Archivos
@@ -711,9 +682,6 @@ Francés</value>
   <data name="bufferNumUpDown.AccessibleName" xml:space="preserve">
     <value>Tamaño del Búfer (KB)</value>
   </data>
-  <data name="setMBGBOverNumUpDown.AccessibleName" xml:space="preserve">
-    <value>Límite Superior (MB)</value>
-  </data>
   <data name="securePassesNumUpDown.AccessibleName" xml:space="preserve">
     <value>Pases de Eliminación Segura</value>
   </data>
@@ -728,9 +696,6 @@ Francés</value>
   </data>
   <data name="setUpSMSButton.Text" xml:space="preserve">
     <value>Configurar SMS</value>
-  </data>
-  <data name="fontNumUpDown.AccessibleName" xml:space="preserve">
-    <value>Tamaño de fuente</value>
   </data>
   <data name="cmdTotals.Text" xml:space="preserve">
     <value>- Totales Acumulados</value>
@@ -786,12 +751,6 @@ Francés</value>
   <data name="resetTotalsButton.Text" xml:space="preserve">
     <value>Restablecer Todos los Totales en Ejecución</value>
   </data>
-  <data name="logDaysNumUpDown.AccessibleName" xml:space="preserve">
-    <value>Días de Retención de Registros</value>
-  </data>
-  <data name="setMBGBUnderNumUpDown.AccessibleName" xml:space="preserve">
-    <value>Límite Inferior (MB)</value>
-  </data>
   <data name="thread1Label.Text" xml:space="preserve">
     <value>Hilo 1 – Progreso / Estadísticas:</value>
   </data>
@@ -803,5 +762,17 @@ Francés</value>
   </data>
   <data name="thread4Label.Text" xml:space="preserve">
     <value>Hilo 4 – Progreso / Estadísticas:</value>
+  </data>
+  <data name="setMBGBOverNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Límite Superior (MB)</value>
+  </data>
+  <data name="fontNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Tamaño de fuente</value>
+  </data>
+  <data name="logDaysNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Días de Retención de Registros</value>
+  </data>
+  <data name="setMBGBUnderNumUpDown.AccessibleName" xml:space="preserve">
+    <value>Límite Inferior (MB)</value>
   </data>
 </root>

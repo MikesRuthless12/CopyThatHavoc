@@ -11,7 +11,19 @@
     "en",
     "es",
     "de",
-    "fr"
+    "fr",
+    "it",
+    "pt-PT",
+    "pt-BR",
+    "nl",
+    "sv",
+    "no",
+    "da",
+    "fi",
+    "pl",
+    "cs",
+    "hu",
+    "ro"
   ],
   "VisibleColumnKeys": [
     "name",

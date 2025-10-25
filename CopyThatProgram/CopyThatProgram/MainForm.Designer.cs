@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             tabControl1 = new TabControl();
             cmdHomePage = new TabPage();
-            modernTotal = new CustomControls.ModernCircularProgressBar();
-            modernFile = new CustomControls.ModernCircularProgressBar();
             fileOverAllProgressLabel = new Label();
             moveToBottomLabel = new Label();
             moveToTopLabel = new Label();
@@ -89,11 +87,6 @@
             targetLabel = new Label();
             fromLabel = new Label();
             cmdMultithread = new TabPage();
-            progressBarMultiTotal = new CustomControls.ModernCircularProgressBar();
-            progressBarMulti4 = new CustomControls.ModernCircularProgressBar();
-            progressBarMulti3 = new CustomControls.ModernCircularProgressBar();
-            progressBarMulti2 = new CustomControls.ModernCircularProgressBar();
-            progressBarMulti1 = new CustomControls.ModernCircularProgressBar();
             thread4Label = new Label();
             thread3Label = new Label();
             thread2Label = new Label();
@@ -349,8 +342,6 @@
             // cmdHomePage
             // 
             cmdHomePage.BorderStyle = BorderStyle.FixedSingle;
-            cmdHomePage.Controls.Add(modernTotal);
-            cmdHomePage.Controls.Add(modernFile);
             cmdHomePage.Controls.Add(fileOverAllProgressLabel);
             cmdHomePage.Controls.Add(moveToBottomLabel);
             cmdHomePage.Controls.Add(moveToTopLabel);
@@ -413,42 +404,7 @@
             cmdHomePage.Text = "- Home";
             cmdHomePage.UseVisualStyleBackColor = true;
             cmdHomePage.MouseEnter += cmdHomePage_MouseEnter;
-            // 
-            // modernTotal
-            // 
-            modernTotal.BackColor = Color.Transparent;
-            modernTotal.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            modernTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            modernTotal.ForeColor = Color.White;
-            modernTotal.LineWidth = 12;
-            modernTotal.Location = new Point(1165, 459);
-            modernTotal.Maximum = 10000;
-            modernTotal.Minimum = 0;
-            modernTotal.Name = "modernTotal";
-            modernTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            modernTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            modernTotal.Size = new Size(132, 129);
-            modernTotal.TabIndex = 191;
-            modernTotal.Text = "modernCircularProgressBar2";
-            modernTotal.Value = 0;
-            // 
-            // modernFile
-            // 
-            modernFile.BackColor = Color.Transparent;
-            modernFile.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            modernFile.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            modernFile.ForeColor = Color.White;
-            modernFile.LineWidth = 12;
-            modernFile.Location = new Point(218, 457);
-            modernFile.Maximum = 10000;
-            modernFile.Minimum = 0;
-            modernFile.Name = "modernFile";
-            modernFile.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            modernFile.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            modernFile.Size = new Size(132, 129);
-            modernFile.TabIndex = 190;
-            modernFile.Text = "modernCircularProgressBar1";
-            modernFile.Value = 0;
+            cmdHomePage.MouseHover += cmdHomePage_MouseHover;
             // 
             // fileOverAllProgressLabel
             // 
@@ -472,6 +428,7 @@
             moveToBottomLabel.TextAlign = ContentAlignment.MiddleCenter;
             moveToBottomLabel.Click += moveToBottomLabel_Click;
             moveToBottomLabel.MouseEnter += moveToBottomLabel_MouseEnter;
+            moveToBottomLabel.MouseHover += moveToBottomLabel_MouseHover;
             // 
             // moveToTopLabel
             // 
@@ -484,6 +441,7 @@
             moveToTopLabel.TextAlign = ContentAlignment.MiddleCenter;
             moveToTopLabel.Click += moveToTopLabel_Click;
             moveToTopLabel.MouseEnter += moveToTopLabel_MouseEnter;
+            moveToTopLabel.MouseHover += moveToTopLabel_MouseHover;
             // 
             // moveFileDownLabel
             // 
@@ -496,6 +454,7 @@
             moveFileDownLabel.TextAlign = ContentAlignment.MiddleCenter;
             moveFileDownLabel.Click += moveFileDownLabel_Click;
             moveFileDownLabel.MouseEnter += moveFileDownLabel_MouseEnter;
+            moveFileDownLabel.MouseHover += moveFileDownLabel_MouseHover;
             // 
             // moveFileUpLabel
             // 
@@ -508,6 +467,7 @@
             moveFileUpLabel.TextAlign = ContentAlignment.MiddleCenter;
             moveFileUpLabel.Click += moveFileUpLabel_Click;
             moveFileUpLabel.MouseEnter += moveFileUpLabel_MouseEnter;
+            moveFileUpLabel.MouseHover += moveFileUpLabel_MouseHover;
             // 
             // targetDirectoryLabel
             // 
@@ -520,6 +480,7 @@
             targetDirectoryLabel.TextAlign = ContentAlignment.MiddleCenter;
             targetDirectoryLabel.Click += targetDirectoryLabel_Click;
             targetDirectoryLabel.MouseEnter += targetDirectoryLabel_MouseEnter;
+            targetDirectoryLabel.MouseHover += targetDirectoryLabel_MouseHover;
             // 
             // sourceDirectoryLabel
             // 
@@ -532,6 +493,7 @@
             sourceDirectoryLabel.TextAlign = ContentAlignment.MiddleCenter;
             sourceDirectoryLabel.Click += sourceDirectoryLabel_Click;
             sourceDirectoryLabel.MouseEnter += sourceDirectoryLabel_MouseEnter;
+            sourceDirectoryLabel.MouseHover += sourceDirectoryLabel_MouseHover;
             // 
             // filesDataGridView
             // 
@@ -548,6 +510,7 @@
             filesDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             filesDataGridView.Size = new Size(1490, 292);
             filesDataGridView.TabIndex = 178;
+            filesDataGridView.MouseHover += filesDataGridView_MouseHover;
             // 
             // fileOptionsLabel
             // 
@@ -590,6 +553,7 @@
             keepOnlyFilesCheckBox.UseVisualStyleBackColor = false;
             keepOnlyFilesCheckBox.CheckedChanged += keepOnlyFilesCheckBox_CheckedChanged;
             keepOnlyFilesCheckBox.MouseEnter += keepOnlyFilesCheckBox_MouseEnter;
+            keepOnlyFilesCheckBox.MouseHover += keepOnlyFilesCheckBox_MouseHover;
             // 
             // leaveEmptyFoldersCheckBox
             // 
@@ -615,7 +579,7 @@
             autoScrollCheckBox.TextAlign = ContentAlignment.TopLeft;
             autoScrollCheckBox.UseVisualStyleBackColor = true;
             autoScrollCheckBox.CheckedChanged += autoScrollCheckBox_CheckedChanged;
-            autoScrollCheckBox.MouseEnter += autoScrollCheckBox_MouseEnter;
+            autoScrollCheckBox.MouseHover += autoScrollCheckBox_MouseHover;
             // 
             // fileNameLabel
             // 
@@ -638,6 +602,7 @@
             verifyCheckBox.TextAlign = ContentAlignment.TopLeft;
             verifyCheckBox.UseVisualStyleBackColor = false;
             verifyCheckBox.MouseEnter += verifyCheckBox_MouseEnter;
+            verifyCheckBox.MouseHover += verifyCheckBox_MouseHover;
             // 
             // copyFilesDirsCheckBox
             // 
@@ -651,6 +616,7 @@
             copyFilesDirsCheckBox.UseVisualStyleBackColor = false;
             copyFilesDirsCheckBox.CheckedChanged += copyFilesDirsCheckBox_CheckedChanged;
             copyFilesDirsCheckBox.MouseEnter += copyFilesDirsCheckBox_MouseEnter;
+            copyFilesDirsCheckBox.MouseHover += copyFilesDirsCheckBox_MouseHover;
             // 
             // createCustomDirCheckBox
             // 
@@ -665,6 +631,7 @@
             createCustomDirCheckBox.UseVisualStyleBackColor = false;
             createCustomDirCheckBox.CheckedChanged += createCustomDirCheckBox_CheckedChanged;
             createCustomDirCheckBox.MouseEnter += createCustomDirCheckBox_MouseEnter;
+            createCustomDirCheckBox.MouseHover += createCustomDirCheckBox_MouseHover;
             // 
             // keepDirStructCheckBox
             // 
@@ -681,6 +648,7 @@
             keepDirStructCheckBox.UseVisualStyleBackColor = false;
             keepDirStructCheckBox.CheckedChanged += keepDirStructCheckBox_CheckedChanged;
             keepDirStructCheckBox.MouseEnter += keepDirStructCheckBox_MouseEnter;
+            keepDirStructCheckBox.MouseHover += keepDirStructCheckBox_MouseHover;
             // 
             // totalHDSpaceLeftLabel
             // 
@@ -693,6 +661,7 @@
             totalHDSpaceLeftLabel.TabIndex = 166;
             totalHDSpaceLeftLabel.Text = "Total Space Used: 0 Bytes / 0 Bytes";
             totalHDSpaceLeftLabel.MouseEnter += totalHDSpaceLeftLabel_MouseEnter;
+            totalHDSpaceLeftLabel.MouseHover += totalHDSpaceLeftLabel_MouseHover;
             // 
             // doNotOverwriteCheckBox
             // 
@@ -707,6 +676,7 @@
             doNotOverwriteCheckBox.UseVisualStyleBackColor = false;
             doNotOverwriteCheckBox.CheckedChanged += doNotOverwriteCHKBOX_CheckedChanged;
             doNotOverwriteCheckBox.MouseEnter += doNotOverwriteCheckBox_MouseEnter;
+            doNotOverwriteCheckBox.MouseHover += doNotOverwriteCheckBox_MouseHover;
             // 
             // overwriteAllCheckBox
             // 
@@ -721,6 +691,7 @@
             overwriteAllCheckBox.UseVisualStyleBackColor = false;
             overwriteAllCheckBox.CheckedChanged += overwriteAllCHKBOX_CheckedChanged;
             overwriteAllCheckBox.MouseEnter += overwriteAllCheckBox_MouseEnter;
+            overwriteAllCheckBox.MouseHover += overwriteAllCheckBox_MouseHover;
             // 
             // overwriteIfNewerCheckBox
             // 
@@ -751,6 +722,7 @@
             removeFileButton.UseVisualStyleBackColor = false;
             removeFileButton.Click += removeFileButton_Click;
             removeFileButton.MouseEnter += removeFileButton_MouseEnter;
+            removeFileButton.MouseHover += removeFileButton_MouseHover;
             // 
             // addFileButton
             // 
@@ -764,6 +736,7 @@
             addFileButton.UseVisualStyleBackColor = false;
             addFileButton.Click += addFileButton_Click;
             addFileButton.MouseEnter += addFileButton_MouseEnter;
+            addFileButton.MouseHover += addFileButton_MouseHover;
             // 
             // clearFileListButton
             // 
@@ -777,6 +750,7 @@
             clearFileListButton.UseVisualStyleBackColor = false;
             clearFileListButton.Click += clearFileListButton_Click;
             clearFileListButton.MouseEnter += clearFileListButton_MouseEnter;
+            clearFileListButton.MouseHover += clearFileListButton_MouseHover;
             // 
             // moveBottomLabel
             // 
@@ -826,6 +800,7 @@
             clearTextButton.UseVisualStyleBackColor = false;
             clearTextButton.Click += clearTextButton_Click;
             clearTextButton.MouseEnter += clearTextButton_MouseEnter;
+            clearTextButton.MouseHover += clearTextButton_MouseHover;
             // 
             // searchTextBox
             // 
@@ -837,6 +812,7 @@
             searchTextBox.TabIndex = 149;
             searchTextBox.TextChanged += searchTextBox_TextChanged;
             searchTextBox.MouseEnter += searchTextBox_MouseEnter;
+            searchTextBox.MouseHover += searchTextBox_MouseHover;
             // 
             // searchFileFolderLabel
             // 
@@ -890,6 +866,7 @@
             onFinishComboBox.TabIndex = 144;
             onFinishComboBox.SelectedIndexChanged += onFinishComboBox_SelectedIndexChanged;
             onFinishComboBox.MouseEnter += onFinishComboBox_MouseEnter;
+            onFinishComboBox.MouseHover += onFinishComboBox_MouseHover;
             // 
             // skipButton
             // 
@@ -904,6 +881,7 @@
             skipButton.UseVisualStyleBackColor = false;
             skipButton.Click += skipButton_Click;
             skipButton.MouseEnter += skipButton_MouseEnter;
+            skipButton.MouseHover += skipButton_MouseHover;
             // 
             // speedLabel
             // 
@@ -916,6 +894,7 @@
             speedLabel.TabIndex = 141;
             speedLabel.Text = "Speed: 0 Mb/Sec.";
             speedLabel.MouseEnter += speedLabel_MouseEnter;
+            speedLabel.MouseHover += speedLabel_MouseHover;
             // 
             // fileProcessedLabel
             // 
@@ -928,6 +907,7 @@
             fileProcessedLabel.TabIndex = 140;
             fileProcessedLabel.Text = "File Processed: 0 Bytes /  0 Bytes";
             fileProcessedLabel.MouseEnter += fileProcessedLabel_MouseEnter;
+            fileProcessedLabel.MouseHover += fileProcessedLabel_MouseHover;
             // 
             // copyMoveDeleteComboBox
             // 
@@ -939,6 +919,7 @@
             copyMoveDeleteComboBox.TabIndex = 139;
             copyMoveDeleteComboBox.SelectedIndexChanged += copyMoveDeleteComboBox_SelectedIndexChanged;
             copyMoveDeleteComboBox.MouseEnter += copyMoveDeleteComboBox_MouseEnter;
+            copyMoveDeleteComboBox.MouseHover += copyMoveDeleteComboBox_MouseHover;
             // 
             // totalCopiedProgressLabel
             // 
@@ -951,6 +932,7 @@
             totalCopiedProgressLabel.TabIndex = 138;
             totalCopiedProgressLabel.Text = "Total C/M/D: 0 Bytes /  0 Bytes";
             totalCopiedProgressLabel.MouseEnter += totalCopiedProgressLabel_MouseEnter;
+            totalCopiedProgressLabel.MouseHover += totalCopiedProgressLabel_MouseHover;
             // 
             // fileCountOnLabel
             // 
@@ -963,6 +945,7 @@
             fileCountOnLabel.TabIndex = 137;
             fileCountOnLabel.Text = "File Count: 0 Out of 0";
             fileCountOnLabel.MouseEnter += fileCountOnLabel_MouseEnter;
+            fileCountOnLabel.MouseHover += fileCountOnLabel_MouseHover;
             // 
             // elapsedAndTargetTimeLabel
             // 
@@ -976,6 +959,7 @@
             elapsedAndTargetTimeLabel.Text = "Elapsed / Target Time: 00:00:00 / 00:00:00";
             elapsedAndTargetTimeLabel.TextAlign = ContentAlignment.TopCenter;
             elapsedAndTargetTimeLabel.MouseEnter += elapsedAndTargetTimeLabel_MouseEnter;
+            elapsedAndTargetTimeLabel.MouseHover += elapsedAndTargetTimeLabel_MouseHover;
             // 
             // pauseResumeButton
             // 
@@ -990,6 +974,7 @@
             pauseResumeButton.UseVisualStyleBackColor = false;
             pauseResumeButton.Click += pauseResumeButton_Click;
             pauseResumeButton.MouseEnter += pauseResumeButton_MouseEnter;
+            pauseResumeButton.MouseHover += pauseResumeButton_MouseHover;
             // 
             // overallProgressLabel
             // 
@@ -1015,6 +1000,7 @@
             cancelButton.UseVisualStyleBackColor = false;
             cancelButton.Click += cancelButton_Click;
             cancelButton.MouseEnter += cancelButton_MouseEnter;
+            cancelButton.MouseHover += cancelButton_MouseHover;
             // 
             // startButton
             // 
@@ -1028,6 +1014,7 @@
             startButton.UseVisualStyleBackColor = false;
             startButton.Click += startButton_Click;
             startButton.MouseEnter += startButton_MouseEnter;
+            startButton.MouseHover += startButton_MouseHover;
             // 
             // fileIconPicBox
             // 
@@ -1040,6 +1027,7 @@
             fileIconPicBox.TabIndex = 122;
             fileIconPicBox.TabStop = false;
             fileIconPicBox.MouseEnter += fileNamePicBox_MouseEnter;
+            fileIconPicBox.MouseHover += fileIconPicBox_MouseHover;
             // 
             // targetDirLabel
             // 
@@ -1101,11 +1089,6 @@
             // 
             // cmdMultithread
             // 
-            cmdMultithread.Controls.Add(progressBarMultiTotal);
-            cmdMultithread.Controls.Add(progressBarMulti4);
-            cmdMultithread.Controls.Add(progressBarMulti3);
-            cmdMultithread.Controls.Add(progressBarMulti2);
-            cmdMultithread.Controls.Add(progressBarMulti1);
             cmdMultithread.Controls.Add(thread4Label);
             cmdMultithread.Controls.Add(thread3Label);
             cmdMultithread.Controls.Add(thread2Label);
@@ -1132,96 +1115,7 @@
             cmdMultithread.Text = "- Multithreading";
             cmdMultithread.UseVisualStyleBackColor = true;
             cmdMultithread.MouseEnter += cmdMultithread_MouseEnter;
-            // 
-            // progressBarMultiTotal
-            // 
-            progressBarMultiTotal.BackColor = Color.Transparent;
-            progressBarMultiTotal.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMultiTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMultiTotal.ForeColor = Color.White;
-            progressBarMultiTotal.LineWidth = 12;
-            progressBarMultiTotal.Location = new Point(309, 794);
-            progressBarMultiTotal.Maximum = 10000;
-            progressBarMultiTotal.Minimum = 0;
-            progressBarMultiTotal.Name = "progressBarMultiTotal";
-            progressBarMultiTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMultiTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMultiTotal.Size = new Size(132, 129);
-            progressBarMultiTotal.TabIndex = 208;
-            progressBarMultiTotal.Text = "modernCircularProgressBar7";
-            progressBarMultiTotal.Value = 0;
-            // 
-            // progressBarMulti4
-            // 
-            progressBarMulti4.BackColor = Color.Transparent;
-            progressBarMulti4.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMulti4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMulti4.ForeColor = Color.White;
-            progressBarMulti4.LineWidth = 12;
-            progressBarMulti4.Location = new Point(309, 601);
-            progressBarMulti4.Maximum = 10000;
-            progressBarMulti4.Minimum = 0;
-            progressBarMulti4.Name = "progressBarMulti4";
-            progressBarMulti4.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMulti4.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti4.Size = new Size(132, 129);
-            progressBarMulti4.TabIndex = 207;
-            progressBarMulti4.Text = "modernCircularProgressBar6";
-            progressBarMulti4.Value = 0;
-            // 
-            // progressBarMulti3
-            // 
-            progressBarMulti3.BackColor = Color.Transparent;
-            progressBarMulti3.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMulti3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMulti3.ForeColor = Color.White;
-            progressBarMulti3.LineWidth = 12;
-            progressBarMulti3.Location = new Point(309, 408);
-            progressBarMulti3.Maximum = 10000;
-            progressBarMulti3.Minimum = 0;
-            progressBarMulti3.Name = "progressBarMulti3";
-            progressBarMulti3.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMulti3.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti3.Size = new Size(132, 129);
-            progressBarMulti3.TabIndex = 206;
-            progressBarMulti3.Text = "modernCircularProgressBar5";
-            progressBarMulti3.Value = 0;
-            // 
-            // progressBarMulti2
-            // 
-            progressBarMulti2.BackColor = Color.Transparent;
-            progressBarMulti2.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMulti2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMulti2.ForeColor = Color.White;
-            progressBarMulti2.LineWidth = 12;
-            progressBarMulti2.Location = new Point(309, 215);
-            progressBarMulti2.Maximum = 10000;
-            progressBarMulti2.Minimum = 0;
-            progressBarMulti2.Name = "progressBarMulti2";
-            progressBarMulti2.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMulti2.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti2.Size = new Size(132, 129);
-            progressBarMulti2.TabIndex = 205;
-            progressBarMulti2.Text = "modernCircularProgressBar4";
-            progressBarMulti2.Value = 0;
-            // 
-            // progressBarMulti1
-            // 
-            progressBarMulti1.BackColor = Color.Transparent;
-            progressBarMulti1.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
-            progressBarMulti1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            progressBarMulti1.ForeColor = Color.White;
-            progressBarMulti1.LineWidth = 12;
-            progressBarMulti1.Location = new Point(309, 22);
-            progressBarMulti1.Maximum = 10000;
-            progressBarMulti1.Minimum = 0;
-            progressBarMulti1.Name = "progressBarMulti1";
-            progressBarMulti1.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
-            progressBarMulti1.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
-            progressBarMulti1.Size = new Size(132, 129);
-            progressBarMulti1.TabIndex = 204;
-            progressBarMulti1.Text = "modernCircularProgressBar1";
-            progressBarMulti1.Value = 0;
+            cmdMultithread.MouseHover += cmdMultithread_MouseHover;
             // 
             // thread4Label
             // 
@@ -1298,6 +1192,7 @@
             filesNameLabel4.TabIndex = 183;
             filesNameLabel4.Text = "Nothing";
             filesNameLabel4.MouseEnter += filesNameLabel4_MouseEnter;
+            filesNameLabel4.MouseHover += filesNameLabel4_MouseHover;
             // 
             // filesNameLabel3
             // 
@@ -1309,6 +1204,7 @@
             filesNameLabel3.TabIndex = 181;
             filesNameLabel3.Text = "Nothing";
             filesNameLabel3.MouseEnter += filesNameLabel3_MouseEnter;
+            filesNameLabel3.MouseHover += filesNameLabel3_MouseHover;
             // 
             // filesNameLabel2
             // 
@@ -1320,6 +1216,7 @@
             filesNameLabel2.TabIndex = 179;
             filesNameLabel2.Text = "Nothing";
             filesNameLabel2.MouseEnter += filesNameLabel2_MouseEnter;
+            filesNameLabel2.MouseHover += filesNameLabel2_MouseHover;
             // 
             // filesNameLabel1
             // 
@@ -1331,6 +1228,7 @@
             filesNameLabel1.TabIndex = 177;
             filesNameLabel1.Text = "Nothing";
             filesNameLabel1.MouseEnter += filesNameLabel1_MouseEnter;
+            filesNameLabel1.MouseHover += filesNameLabel1_MouseHover;
             // 
             // onFinishMultiLabel
             // 
@@ -1393,6 +1291,7 @@
             totalSpaceMultiLabel.TabIndex = 172;
             totalSpaceMultiLabel.Text = "Total Space Used: 0 Bytes / 0 Bytes";
             totalSpaceMultiLabel.MouseEnter += totalSpaceMultiLabel_MouseEnter;
+            totalSpaceMultiLabel.MouseHover += totalSpaceMultiLabel_MouseHover;
             // 
             // speedMultiLabel
             // 
@@ -1405,6 +1304,7 @@
             speedMultiLabel.TabIndex = 171;
             speedMultiLabel.Text = "Speed: 0 Mb/Sec.";
             speedMultiLabel.MouseEnter += speedMultiLabel_MouseEnter;
+            speedMultiLabel.MouseHover += speedMultiLabel_MouseHover;
             // 
             // totalCMDMultiLabel
             // 
@@ -1417,6 +1317,7 @@
             totalCMDMultiLabel.TabIndex = 169;
             totalCMDMultiLabel.Text = "Total C/M/D: 0 Bytes /  0 Bytes";
             totalCMDMultiLabel.MouseEnter += totalCMDMultiLabel_MouseEnter;
+            totalCMDMultiLabel.MouseHover += totalCMDMultiLabel_MouseHover;
             // 
             // fileCountMultiLabel
             // 
@@ -1429,6 +1330,7 @@
             fileCountMultiLabel.TabIndex = 168;
             fileCountMultiLabel.Text = "File Count: 0 Out of 0";
             fileCountMultiLabel.MouseEnter += fileCountMultiLabel_MouseEnter;
+            fileCountMultiLabel.MouseHover += fileCountMultiLabel_MouseHover;
             // 
             // totalTimeMultiLabel
             // 
@@ -1441,6 +1343,7 @@
             totalTimeMultiLabel.TabIndex = 167;
             totalTimeMultiLabel.Text = "Elapsed / Target Time: 00:00:00 / 00:00:00";
             totalTimeMultiLabel.MouseEnter += totalTimeMultiLabel_MouseEnter;
+            totalTimeMultiLabel.MouseHover += totalTimeMultiLabel_MouseHover;
             // 
             // cmdSkipPage
             // 
@@ -1456,6 +1359,7 @@
             cmdSkipPage.Text = "- Skipped Files";
             cmdSkipPage.UseVisualStyleBackColor = true;
             cmdSkipPage.MouseEnter += cmdSkipPage_MouseEnter;
+            cmdSkipPage.MouseHover += cmdSkipPage_MouseHover;
             // 
             // statusBarSkipped
             // 
@@ -1497,6 +1401,7 @@
             clearSkippedListButton.UseVisualStyleBackColor = false;
             clearSkippedListButton.Click += btnClearSkippedList_Click;
             clearSkippedListButton.MouseEnter += clearSkippedListButton_MouseEnter;
+            clearSkippedListButton.MouseHover += clearSkippedListButton_MouseHover;
             // 
             // goToInExplorerButton
             // 
@@ -1509,6 +1414,7 @@
             goToInExplorerButton.UseVisualStyleBackColor = false;
             goToInExplorerButton.Click += btnGoToInExplorer_Click;
             goToInExplorerButton.MouseEnter += goToInExplorerButton_MouseEnter;
+            goToInExplorerButton.MouseHover += goToInExplorerButton_MouseHover;
             // 
             // skippedDataGridView
             // 
@@ -1534,6 +1440,7 @@
             skippedDataGridView.Size = new Size(1441, 507);
             skippedDataGridView.TabIndex = 86;
             skippedDataGridView.MouseEnter += skippedDataGridView_MouseEnter;
+            skippedDataGridView.MouseHover += skippedDataGridView_MouseHover;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1585,6 +1492,7 @@
             cmdCopyHistory.TabIndex = 3;
             cmdCopyHistory.Text = "- Copy History";
             cmdCopyHistory.UseVisualStyleBackColor = true;
+            cmdCopyHistory.MouseHover += cmdCopyHistory_MouseHover;
             // 
             // copyHistoryDGV
             // 
@@ -1610,6 +1518,7 @@
             copyHistoryDGV.Size = new Size(1441, 507);
             copyHistoryDGV.TabIndex = 191;
             copyHistoryDGV.MouseEnter += copyHistoryDGV_MouseEnter;
+            copyHistoryDGV.MouseHover += copyHistoryDGV_MouseHover;
             // 
             // Operation
             // 
@@ -1667,6 +1576,7 @@
             deleteEntryButton.Text = "Delete Entry";
             deleteEntryButton.UseVisualStyleBackColor = false;
             deleteEntryButton.MouseEnter += deleteEntryButton_MouseEnter;
+            deleteEntryButton.MouseHover += deleteEntryButton_MouseHover;
             // 
             // totalHistoryLabel
             // 
@@ -1690,6 +1600,7 @@
             clearHistoryButton.UseVisualStyleBackColor = false;
             clearHistoryButton.Click += clearHistoryButton_Click;
             clearHistoryButton.MouseEnter += clearHistoryButton_MouseEnter;
+            clearHistoryButton.MouseHover += clearHistoryButton_MouseHover;
             // 
             // cloneButton
             // 
@@ -1701,6 +1612,7 @@
             cloneButton.Text = "Rescan && Clone";
             cloneButton.UseVisualStyleBackColor = false;
             cloneButton.MouseEnter += cloneButton_MouseEnter;
+            cloneButton.MouseHover += cloneButton_MouseHover;
             // 
             // cmdExclusions
             // 
@@ -1724,6 +1636,7 @@
             cmdExclusions.Text = "- Exclusions";
             cmdExclusions.UseVisualStyleBackColor = true;
             cmdExclusions.MouseEnter += cmdExclusions_MouseEnter;
+            cmdExclusions.MouseHover += cmdExclusions_MouseHover;
             // 
             // statusBarExclusions
             // 
@@ -1755,6 +1668,7 @@
             clearExcludedButton.UseVisualStyleBackColor = false;
             clearExcludedButton.Click += btnClearExcluded_Click;
             clearExcludedButton.MouseEnter += clearExcludedButton_MouseEnter;
+            clearExcludedButton.MouseHover += clearExcludedButton_MouseHover;
             // 
             // removeExcludedButton
             // 
@@ -1768,6 +1682,7 @@
             removeExcludedButton.UseVisualStyleBackColor = false;
             removeExcludedButton.Click += btnRemoveExcluded_Click;
             removeExcludedButton.MouseEnter += removeExcludedButton_MouseEnter;
+            removeExcludedButton.MouseHover += removeExcludedButton_MouseHover;
             // 
             // addExcludedButton
             // 
@@ -1781,6 +1696,7 @@
             addExcludedButton.UseVisualStyleBackColor = false;
             addExcludedButton.Click += btnAddExcluded_Click;
             addExcludedButton.MouseEnter += addExcludedButton_MouseEnter;
+            addExcludedButton.MouseHover += addExcludedButton_MouseHover;
             // 
             // clearAllowedButton
             // 
@@ -1794,6 +1710,7 @@
             clearAllowedButton.UseVisualStyleBackColor = false;
             clearAllowedButton.Click += btnClearAllowed_Click;
             clearAllowedButton.MouseEnter += clearAllowedButton_MouseEnter;
+            clearAllowedButton.MouseHover += clearAllowedButton_MouseHover;
             // 
             // removeAllowedButton
             // 
@@ -1807,6 +1724,7 @@
             removeAllowedButton.UseVisualStyleBackColor = false;
             removeAllowedButton.Click += btnRemoveAllowed_Click;
             removeAllowedButton.MouseEnter += removeAllowedButton_MouseEnter;
+            removeAllowedButton.MouseHover += removeAllowedButton_MouseHover;
             // 
             // addAllowedButton
             // 
@@ -1820,6 +1738,7 @@
             addAllowedButton.UseVisualStyleBackColor = false;
             addAllowedButton.Click += btnAddAllowed_Click;
             addAllowedButton.MouseEnter += addAllowedButton_MouseEnter;
+            addAllowedButton.MouseHover += addAllowedButton_MouseHover;
             // 
             // excludedTextBox
             // 
@@ -1832,6 +1751,7 @@
             excludedTextBox.KeyDown += excludedTextBox_KeyDown;
             excludedTextBox.KeyPress += excludedTextBox_KeyPress;
             excludedTextBox.MouseEnter += excludedTextBox_MouseEnter;
+            excludedTextBox.MouseHover += excludedTextBox_MouseHover;
             // 
             // allowedTextBox
             // 
@@ -1844,6 +1764,7 @@
             allowedTextBox.KeyDown += allowedTextBox_KeyDown;
             allowedTextBox.KeyPress += allowedTextBox_KeyPress;
             allowedTextBox.MouseEnter += allowedTextBox_MouseEnter;
+            allowedTextBox.MouseHover += allowedTextBox_MouseHover;
             // 
             // excludedLabel
             // 
@@ -1875,6 +1796,7 @@
             excludedExtListBox.Size = new Size(574, 379);
             excludedExtListBox.TabIndex = 77;
             excludedExtListBox.MouseEnter += excludedExtListBox_MouseEnter;
+            excludedExtListBox.MouseHover += excludedExtListBox_MouseHover;
             // 
             // allowedExtListBox
             // 
@@ -1887,6 +1809,7 @@
             allowedExtListBox.Size = new Size(574, 379);
             allowedExtListBox.TabIndex = 76;
             allowedExtListBox.MouseEnter += allowedExtListBox_MouseEnter;
+            allowedExtListBox.MouseHover += allowedExtListBox_MouseHover;
             // 
             // cmdTotals
             // 
@@ -1929,6 +1852,7 @@
             cmdTotals.TabIndex = 7;
             cmdTotals.Text = "Running Totals";
             cmdTotals.UseVisualStyleBackColor = true;
+            cmdTotals.MouseHover += cmdTotals_MouseHover;
             // 
             // resetTotalsButton
             // 
@@ -2271,6 +2195,7 @@
             cmdSettingsPage.Text = "- Settings";
             cmdSettingsPage.UseVisualStyleBackColor = true;
             cmdSettingsPage.MouseEnter += cmdSettingsPage_MouseEnter_1;
+            cmdSettingsPage.MouseHover += cmdSettingsPage_MouseHover;
             // 
             // dataGridView1
             // 
@@ -2294,6 +2219,7 @@
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(1493, 201);
             dataGridView1.TabIndex = 193;
+            dataGridView1.MouseHover += dataGridView1_MouseHover;
             // 
             // statusBarSettings
             // 
@@ -2457,6 +2383,7 @@
             clearSettingsButton.UseVisualStyleBackColor = false;
             clearSettingsButton.Click += clearSettingsButton_Click;
             clearSettingsButton.MouseEnter += clearSettingsButton_MouseEnter;
+            clearSettingsButton.MouseHover += clearSettingsButton_MouseHover;
             // 
             // saveSettingsButton
             // 
@@ -2470,6 +2397,7 @@
             saveSettingsButton.UseVisualStyleBackColor = false;
             saveSettingsButton.Click += saveSettingsButton_Click;
             saveSettingsButton.MouseEnter += saveSettingsButton_MouseEnter;
+            saveSettingsButton.MouseHover += saveSettingsButton_MouseHover;
             // 
             // emailGroupBox
             // 
@@ -2494,7 +2422,7 @@
             setUpSMSButton.ForeColor = Color.Black;
             setUpSMSButton.Location = new Point(178, 71);
             setUpSMSButton.Name = "setUpSMSButton";
-            setUpSMSButton.Size = new Size(157, 42);
+            setUpSMSButton.Size = new Size(158, 42);
             setUpSMSButton.TabIndex = 90;
             setUpSMSButton.Text = "Set Up SMS Notifications";
             setUpSMSButton.UseVisualStyleBackColor = false;
@@ -2527,6 +2455,7 @@
             emailPathsCheckBox.UseVisualStyleBackColor = true;
             emailPathsCheckBox.CheckedChanged += emailPathsCheckBox_CheckedChanged;
             emailPathsCheckBox.MouseEnter += emailPathsCheckBox_MouseEnter;
+            emailPathsCheckBox.MouseHover += emailPathsCheckBox_MouseHover;
             // 
             // emailNamesCheckBox
             // 
@@ -2539,6 +2468,7 @@
             emailNamesCheckBox.UseVisualStyleBackColor = true;
             emailNamesCheckBox.CheckedChanged += emailNamesCheckBox_CheckedChanged;
             emailNamesCheckBox.MouseEnter += emailNamesCheckBox_MouseEnter;
+            emailNamesCheckBox.MouseHover += emailNamesCheckBox_MouseHover;
             // 
             // whenEmailingLabel
             // 
@@ -2576,6 +2506,7 @@
             updateManuallyCheckBox.Text = "Update Manually";
             updateManuallyCheckBox.UseVisualStyleBackColor = true;
             updateManuallyCheckBox.CheckedChanged += updateManuallyCheckBox_CheckedChanged;
+            updateManuallyCheckBox.MouseHover += updateManuallyCheckBox_MouseHover;
             // 
             // checkForUpdatesButton
             // 
@@ -2589,17 +2520,19 @@
             checkForUpdatesButton.UseVisualStyleBackColor = false;
             checkForUpdatesButton.Click += checkForUpdatesButton_Click;
             checkForUpdatesButton.MouseEnter += checkForUpdatesButton_MouseEnter;
+            checkForUpdatesButton.MouseHover += checkForUpdatesButton_MouseHover;
             // 
             // updateBetaCheckBox
             // 
             updateBetaCheckBox.Location = new Point(12, 117);
             updateBetaCheckBox.Name = "updateBetaCheckBox";
-            updateBetaCheckBox.Size = new Size(349, 58);
+            updateBetaCheckBox.Size = new Size(349, 86);
             updateBetaCheckBox.TabIndex = 81;
             updateBetaCheckBox.Text = "Check for Beta (Pro)";
             updateBetaCheckBox.UseVisualStyleBackColor = true;
             updateBetaCheckBox.CheckedChanged += updateBetaCheckBox_CheckedChanged;
             updateBetaCheckBox.MouseEnter += updateBetaCheckBox_MouseEnter;
+            updateBetaCheckBox.MouseHover += updateBetaCheckBox_MouseHover;
             // 
             // updateAutoCheckBox
             // 
@@ -2611,6 +2544,7 @@
             updateAutoCheckBox.UseVisualStyleBackColor = true;
             updateAutoCheckBox.CheckedChanged += updateAutoCheckBox_CheckedChanged;
             updateAutoCheckBox.MouseEnter += updateAutoCheckBox_MouseEnter;
+            updateAutoCheckBox.MouseHover += updateAutoCheckBox_MouseHover;
             // 
             // performanceGroupBox
             // 
@@ -2659,15 +2593,16 @@
             multithreadCheckBox.UseVisualStyleBackColor = true;
             multithreadCheckBox.CheckedChanged += multithreadCheckBox_CheckedChanged;
             multithreadCheckBox.MouseEnter += multithreadCheckBox_MouseEnter;
+            multithreadCheckBox.MouseHover += multithreadCheckBox_MouseHover;
             // 
             // cmOnlyIfLabel
             // 
-            cmOnlyIfLabel.AutoSize = true;
-            cmOnlyIfLabel.Location = new Point(6, 91);
+            cmOnlyIfLabel.Location = new Point(6, 82);
             cmOnlyIfLabel.Name = "cmOnlyIfLabel";
-            cmOnlyIfLabel.Size = new Size(66, 25);
+            cmOnlyIfLabel.Size = new Size(120, 52);
             cmOnlyIfLabel.TabIndex = 78;
             cmOnlyIfLabel.Text = "C/M If:";
+            cmOnlyIfLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // overMBCheckBox
             // 
@@ -2679,6 +2614,7 @@
             overMBCheckBox.Text = "Over MB";
             overMBCheckBox.UseVisualStyleBackColor = true;
             overMBCheckBox.MouseEnter += overMBCheckBox_MouseEnter;
+            overMBCheckBox.MouseHover += overMBCheckBox_MouseHover;
             // 
             // underMBCheckBox
             // 
@@ -2690,6 +2626,7 @@
             underMBCheckBox.Text = "Under MB";
             underMBCheckBox.UseVisualStyleBackColor = true;
             underMBCheckBox.MouseEnter += underMBCheckBox_MouseEnter;
+            underMBCheckBox.MouseHover += underMBCheckBox_MouseHover;
             // 
             // setMBGBOLabel
             // 
@@ -2947,6 +2884,7 @@
             startWithWindowsCheckBox.UseVisualStyleBackColor = true;
             startWithWindowsCheckBox.CheckedChanged += startWithWindowsCheckBox_CheckedChanged;
             startWithWindowsCheckBox.MouseEnter += startWithWindowsCheckBox_MouseEnter;
+            startWithWindowsCheckBox.MouseHover += startWithWindowsCheckBox_MouseHover;
             // 
             // serialMaskedTextBox
             // 
@@ -2967,6 +2905,8 @@
             registerButton.Text = "Register Serial #";
             registerButton.UseVisualStyleBackColor = false;
             registerButton.Click += registerButton_Click;
+            registerButton.MouseEnter += registerButton_MouseEnter_1;
+            registerButton.MouseHover += registerButton_MouseHover;
             // 
             // serialNumberLabel
             // 
@@ -2999,6 +2939,7 @@
             restartCheckBox.UseVisualStyleBackColor = true;
             restartCheckBox.CheckedChanged += restartCheckBox_CheckedChanged;
             restartCheckBox.MouseEnter += restartCheckBox_MouseEnter;
+            restartCheckBox.MouseHover += restartCheckBox_MouseHover;
             // 
             // closeProgramCheckBox
             // 
@@ -3011,6 +2952,7 @@
             closeProgramCheckBox.UseVisualStyleBackColor = true;
             closeProgramCheckBox.CheckedChanged += closeProgramCheckBox_CheckedChanged;
             closeProgramCheckBox.MouseEnter += closeProgramCheckBox_MouseEnter;
+            closeProgramCheckBox.MouseHover += closeProgramCheckBox_MouseHover;
             // 
             // fileDirSettingsGroupBox
             // 
@@ -3064,6 +3006,7 @@
             zipTogetherCheckBox.UseVisualStyleBackColor = true;
             zipTogetherCheckBox.CheckedChanged += zipTogetherCheckBox_CheckedChanged;
             zipTogetherCheckBox.MouseEnter += zipTogetherCheckBox_MouseEnter;
+            zipTogetherCheckBox.MouseHover += zipTogetherCheckBox_MouseHover;
             // 
             // zipSeparateCheckBox
             // 
@@ -3099,6 +3042,7 @@
             fullPathsCheckBox.UseVisualStyleBackColor = true;
             fullPathsCheckBox.CheckedChanged += fullPathsCheckBox_CheckedChanged;
             fullPathsCheckBox.MouseEnter += fullPathsCheckBox_MouseEnter;
+            fullPathsCheckBox.MouseHover += fullPathsCheckBox_MouseHover;
             // 
             // onlyNamesCheckBox
             // 
@@ -3139,6 +3083,7 @@
             onAddFilesCheckBox.UseVisualStyleBackColor = true;
             onAddFilesCheckBox.CheckedChanged += onAddFilesCheckBox_CheckedChanged;
             onAddFilesCheckBox.MouseEnter += onAddFilesCheckBox_MouseEnter;
+            onAddFilesCheckBox.MouseHover += onAddFilesCheckBox_MouseHover;
             // 
             // onErrorCheckBox
             // 
@@ -3153,6 +3098,7 @@
             onErrorCheckBox.UseVisualStyleBackColor = true;
             onErrorCheckBox.CheckedChanged += onErrorCheckBox_CheckedChanged;
             onErrorCheckBox.MouseEnter += onErrorCheckBox_MouseEnter;
+            onErrorCheckBox.MouseHover += onErrorCheckBox_MouseHover;
             // 
             // onCancelCheckBox
             // 
@@ -3167,6 +3113,7 @@
             onCancelCheckBox.UseVisualStyleBackColor = true;
             onCancelCheckBox.CheckedChanged += onCancelCheckBox_CheckedChanged;
             onCancelCheckBox.MouseEnter += onCancelCheckBox_MouseEnter;
+            onCancelCheckBox.MouseHover += onCancelCheckBox_MouseHover;
             // 
             // onFinishCheckBox
             // 
@@ -3181,6 +3128,7 @@
             onFinishCheckBox.UseVisualStyleBackColor = true;
             onFinishCheckBox.CheckedChanged += onFinishCheckBox_CheckedChanged;
             onFinishCheckBox.MouseEnter += onFinishCheckBox_MouseEnter;
+            onFinishCheckBox.MouseHover += onFinishCheckBox_MouseHover;
             // 
             // skinsLanguageGoupBox
             // 
@@ -3210,6 +3158,7 @@
             skinsComboBox.TabIndex = 70;
             skinsComboBox.SelectedIndexChanged += skinsComboBox_SelectedIndexChanged;
             skinsComboBox.MouseEnter += skinsComboBox_MouseEnter;
+            skinsComboBox.MouseHover += skinsComboBox_MouseHover;
             // 
             // skinsLabel
             // 
@@ -3231,6 +3180,7 @@
             languageComboBox.TabIndex = 68;
             languageComboBox.SelectedIndexChanged += languageComboBox_SelectedIndexChanged;
             languageComboBox.MouseEnter += languageComboBox_MouseEnter;
+            languageComboBox.MouseHover += languageComboBox_MouseHover;
             // 
             // languageLabel
             // 
@@ -3271,6 +3221,7 @@
             contextMenuCheckBox.UseVisualStyleBackColor = true;
             contextMenuCheckBox.CheckedChanged += contextMenuCheckBox_CheckedChanged;
             contextMenuCheckBox.MouseEnter += contextMenuCheckBox_MouseEnter;
+            contextMenuCheckBox.MouseHover += contextMenuCheckBox_MouseHover;
             // 
             // minimizeSystemTrayCheckBox
             // 
@@ -3299,6 +3250,7 @@
             alwaysOnTopCheckBox.UseVisualStyleBackColor = true;
             alwaysOnTopCheckBox.CheckedChanged += alwaysOnTopCheckBox_CheckedChanged;
             alwaysOnTopCheckBox.MouseEnter += alwaysOnTopCheckBox_MouseEnter;
+            alwaysOnTopCheckBox.MouseHover += alwaysOnTopCheckBox_MouseHover;
             // 
             // confirmDragDropCheckBox
             // 
@@ -3312,6 +3264,7 @@
             confirmDragDropCheckBox.UseVisualStyleBackColor = true;
             confirmDragDropCheckBox.CheckedChanged += confirmDragDropCheckBox_CheckedChanged;
             confirmDragDropCheckBox.MouseEnter += confirmDragDropCheckBox_MouseEnter;
+            confirmDragDropCheckBox.MouseHover += confirmDragDropCheckBox_MouseHover;
             // 
             // cmdAboutPage
             // 
@@ -3415,6 +3368,7 @@
             rollUpLabel.TextAlign = ContentAlignment.MiddleCenter;
             rollUpLabel.Click += rollUpLabel_Click;
             rollUpLabel.MouseEnter += rollUpLabel_MouseEnter;
+            rollUpLabel.MouseHover += rollUpLabel_MouseHover;
             // 
             // rollDownLabel
             // 
@@ -3427,6 +3381,7 @@
             rollDownLabel.TextAlign = ContentAlignment.MiddleCenter;
             rollDownLabel.Click += rollDownLabel_Click;
             rollDownLabel.MouseEnter += rollDownLabel_MouseEnter;
+            rollDownLabel.MouseHover += rollDownLabel_MouseHover;
             // 
             // settingsLabel
             // 
@@ -3439,6 +3394,7 @@
             settingsLabel.TextAlign = ContentAlignment.MiddleCenter;
             settingsLabel.Click += settingsLabel_Click;
             settingsLabel.MouseEnter += settingsLabel_MouseEnter;
+            settingsLabel.MouseHover += settingsLabel_MouseHover;
             // 
             // allAboutLabel
             // 
@@ -3451,6 +3407,7 @@
             allAboutLabel.TextAlign = ContentAlignment.MiddleCenter;
             allAboutLabel.Click += allAboutLabel_Click;
             allAboutLabel.MouseEnter += allAboutLabel_MouseEnter;
+            allAboutLabel.MouseHover += allAboutLabel_MouseHover;
             // 
             // minimizeLabel
             // 
@@ -3463,6 +3420,7 @@
             minimizeLabel.TextAlign = ContentAlignment.MiddleCenter;
             minimizeLabel.Click += minimizeLabel_Click;
             minimizeLabel.MouseEnter += minimizeLabel_MouseEnter;
+            minimizeLabel.MouseHover += minimizeLabel_MouseHover;
             // 
             // exitLabel
             // 
@@ -3475,6 +3433,7 @@
             exitLabel.TextAlign = ContentAlignment.MiddleCenter;
             exitLabel.Click += exitLabel_Click;
             exitLabel.MouseEnter += exitLabel_MouseEnter;
+            exitLabel.MouseHover += exitLabel_MouseHover;
             // 
             // mainForm
             // 

@@ -150,7 +150,9 @@
   <data name="startButton.Text" xml:space="preserve">
     <value>Start</value>
   </data>
-  <data name="pauseResumeButton.Text" xml:space="preserve">
+  <data name="
+		
+  Button.Text" xml:space="preserve">
     <value>Pause</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
@@ -164,24 +166,6 @@
   </data>
   <data name="cancelMultiButton.Text" xml:space="preserve">
     <value>Cancel</value>
-  </data>
-  <data name="fileCountOnLabel.Text" xml:space="preserve">
-    <value>File Count:</value>
-  </data>
-  <data name="fileProcessedLabel.Text" xml:space="preserve">
-    <value>File Processed:</value>
-  </data>
-  <data name="totalCopiedProgressLabel.Text" xml:space="preserve">
-    <value>Total C/M/D:</value>
-  </data>
-  <data name="speedLabel.Text" xml:space="preserve">
-    <value>Speed:</value>
-  </data>
-  <data name="elapsedAndTargetTimeLabel.Text" xml:space="preserve">
-    <value>Elapsed / Target Time:</value>
-  </data>
-  <data name="totalHDSpaceLeftLabel.Text" xml:space="preserve">
-    <value>Drive Space:</value>
   </data>
   <data name="filePathLabel.Text" xml:space="preserve">
     <value>No File Selected</value>
@@ -197,21 +181,6 @@
   </data>
   <data name="totalProgressLabel.Text" xml:space="preserve">
     <value>0.00 %</value>
-  </data>
-  <data name="fileCountMultiLabel.Text" xml:space="preserve">
-    <value>File Count:</value>
-  </data>
-  <data name="totalTimeMultiLabel.Text" xml:space="preserve">
-    <value>Elapsed / Target Time:</value>
-  </data>
-  <data name="speedMultiLabel.Text" xml:space="preserve">
-    <value>Speed:</value>
-  </data>
-  <data name="totalCMDMultiLabel.Text" xml:space="preserve">
-    <value>Total C/M/D:</value>
-  </data>
-  <data name="totalSpaceMultiLabel.Text" xml:space="preserve">
-    <value>Total Space Used:</value>
   </data>
   <data name="copyMoveDeleteComboBox.Items" xml:space="preserve">
     <value>Copy Files
@@ -711,10 +680,6 @@ French</value>
   <data name="bufferNumUpDown.AccessibleName" xml:space="preserve">
     <value>Buffer Size (KB)</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="setMBGBOverNumUpDown.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="securePassesNumUpDown.AccessibleName" xml:space="preserve">
     <value>Secure Delete Passes</value>
   </data>
@@ -729,9 +694,6 @@ French</value>
   </data>
   <data name="setUpSMSButton.Text" xml:space="preserve">
     <value>Set Up SMS</value>
-  </data>
-  <data name="fontNumUpDown.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="cmdTotals.Text" xml:space="preserve">
     <value>- Running Totals</value>
@@ -798,5 +760,12 @@ French</value>
   </data>
   <data name="thread4Label.Text" xml:space="preserve">
     <value>Thread 4 - Progress / Stats:</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="setMBGBOverNumUpDown.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="fontNumUpDown.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

@@ -24,6 +24,12 @@
           "CTv1.0.dll": {}
         },
         "resources": {
+          "cs/CTv1.0.resources.dll": {
+            "locale": "cs"
+          },
+          "da/CTv1.0.resources.dll": {
+            "locale": "da"
+          },
           "de/CTv1.0.resources.dll": {
             "locale": "de"
           },
@@ -33,8 +39,38 @@
           "es/CTv1.0.resources.dll": {
             "locale": "es"
           },
+          "fi/CTv1.0.resources.dll": {
+            "locale": "fi"
+          },
           "fr/CTv1.0.resources.dll": {
             "locale": "fr"
+          },
+          "hu/CTv1.0.resources.dll": {
+            "locale": "hu"
+          },
+          "it/CTv1.0.resources.dll": {
+            "locale": "it"
+          },
+          "nl/CTv1.0.resources.dll": {
+            "locale": "nl"
+          },
+          "no/CTv1.0.resources.dll": {
+            "locale": "no"
+          },
+          "pl/CTv1.0.resources.dll": {
+            "locale": "pl"
+          },
+          "pt-BR/CTv1.0.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "pt-PT/CTv1.0.resources.dll": {
+            "locale": "pt-PT"
+          },
+          "ro/CTv1.0.resources.dll": {
+            "locale": "ro"
+          },
+          "sv/CTv1.0.resources.dll": {
+            "locale": "sv"
           }
         }
       },
