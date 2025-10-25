@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             tabControl1 = new TabControl();
             cmdHomePage = new TabPage();
+            modernTotal = new ModernProgress.ModernCircularProgressBar();
+            modernFile = new ModernProgress.ModernCircularProgressBar();
             fileOverAllProgressLabel = new Label();
             moveToBottomLabel = new Label();
             moveToTopLabel = new Label();
@@ -87,6 +89,11 @@
             targetLabel = new Label();
             fromLabel = new Label();
             cmdMultithread = new TabPage();
+            progressBarMultiTotal = new ModernProgress.ModernCircularProgressBar();
+            progressBarMulti4 = new ModernProgress.ModernCircularProgressBar();
+            progressBarMulti3 = new ModernProgress.ModernCircularProgressBar();
+            progressBarMulti2 = new ModernProgress.ModernCircularProgressBar();
+            progressBarMulti1 = new ModernProgress.ModernCircularProgressBar();
             thread4Label = new Label();
             thread3Label = new Label();
             thread2Label = new Label();
@@ -182,7 +189,7 @@
             cmdSettingsPage = new TabPage();
             dataGridView1 = new DataGridView();
             statusBarSettings = new StatusStrip();
-            toolStripSettings = new ToolStripStatusLabel();
+            statsBarSettingsLabel = new ToolStripStatusLabel();
             retentionLabel = new Label();
             logDaysNumUpDown = new NumericUpDown();
             exportFileListLabel = new Label();
@@ -268,6 +275,7 @@
             aboutCTLabel = new Label();
             havocSoftwarePB = new PictureBox();
             copyThatPB = new PictureBox();
+            toolStripSettings = new ToolStripStatusLabel();
             titleLabel = new Label();
             scrollTimer = new System.Windows.Forms.Timer(components);
             openFileDialog = new OpenFileDialog();
@@ -342,6 +350,8 @@
             // cmdHomePage
             // 
             cmdHomePage.BorderStyle = BorderStyle.FixedSingle;
+            cmdHomePage.Controls.Add(modernTotal);
+            cmdHomePage.Controls.Add(modernFile);
             cmdHomePage.Controls.Add(fileOverAllProgressLabel);
             cmdHomePage.Controls.Add(moveToBottomLabel);
             cmdHomePage.Controls.Add(moveToTopLabel);
@@ -405,6 +415,42 @@
             cmdHomePage.UseVisualStyleBackColor = true;
             cmdHomePage.MouseEnter += cmdHomePage_MouseEnter;
             cmdHomePage.MouseHover += cmdHomePage_MouseHover;
+            // 
+            // modernTotal
+            // 
+            modernTotal.BackColor = Color.Transparent;
+            modernTotal.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            modernTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            modernTotal.ForeColor = Color.Black;
+            modernTotal.LineWidth = 12;
+            modernTotal.Location = new Point(1167, 468);
+            modernTotal.Maximum = 10000;
+            modernTotal.Minimum = 0;
+            modernTotal.Name = "modernTotal";
+            modernTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            modernTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            modernTotal.Size = new Size(130, 120);
+            modernTotal.TabIndex = 191;
+            modernTotal.Text = "modernCircularProgressBar1";
+            modernTotal.Value = 0;
+            // 
+            // modernFile
+            // 
+            modernFile.BackColor = Color.Transparent;
+            modernFile.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            modernFile.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            modernFile.ForeColor = Color.Black;
+            modernFile.LineWidth = 12;
+            modernFile.Location = new Point(218, 463);
+            modernFile.Maximum = 10000;
+            modernFile.Minimum = 0;
+            modernFile.Name = "modernFile";
+            modernFile.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            modernFile.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            modernFile.Size = new Size(130, 120);
+            modernFile.TabIndex = 190;
+            modernFile.Text = "modernCircularProgressBar1";
+            modernFile.Value = 0;
             // 
             // fileOverAllProgressLabel
             // 
@@ -538,7 +584,6 @@
             // 
             statusLabel.Name = "statusLabel";
             statusLabel.Size = new Size(0, 35);
-            statusLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // keepOnlyFilesCheckBox
             // 
@@ -1089,6 +1134,11 @@
             // 
             // cmdMultithread
             // 
+            cmdMultithread.Controls.Add(progressBarMultiTotal);
+            cmdMultithread.Controls.Add(progressBarMulti4);
+            cmdMultithread.Controls.Add(progressBarMulti3);
+            cmdMultithread.Controls.Add(progressBarMulti2);
+            cmdMultithread.Controls.Add(progressBarMulti1);
             cmdMultithread.Controls.Add(thread4Label);
             cmdMultithread.Controls.Add(thread3Label);
             cmdMultithread.Controls.Add(thread2Label);
@@ -1117,38 +1167,128 @@
             cmdMultithread.MouseEnter += cmdMultithread_MouseEnter;
             cmdMultithread.MouseHover += cmdMultithread_MouseHover;
             // 
+            // progressBarMultiTotal
+            // 
+            progressBarMultiTotal.BackColor = Color.Transparent;
+            progressBarMultiTotal.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMultiTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMultiTotal.ForeColor = Color.Black;
+            progressBarMultiTotal.LineWidth = 12;
+            progressBarMultiTotal.Location = new Point(312, 799);
+            progressBarMultiTotal.Maximum = 10000;
+            progressBarMultiTotal.Minimum = 0;
+            progressBarMultiTotal.Name = "progressBarMultiTotal";
+            progressBarMultiTotal.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMultiTotal.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMultiTotal.Size = new Size(130, 120);
+            progressBarMultiTotal.TabIndex = 208;
+            progressBarMultiTotal.Text = "modernCircularProgressBar1";
+            progressBarMultiTotal.Value = 0;
+            // 
+            // progressBarMulti4
+            // 
+            progressBarMulti4.BackColor = Color.Transparent;
+            progressBarMulti4.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti4.ForeColor = Color.Black;
+            progressBarMulti4.LineWidth = 12;
+            progressBarMulti4.Location = new Point(312, 604);
+            progressBarMulti4.Maximum = 10000;
+            progressBarMulti4.Minimum = 0;
+            progressBarMulti4.Name = "progressBarMulti4";
+            progressBarMulti4.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti4.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti4.Size = new Size(130, 120);
+            progressBarMulti4.TabIndex = 207;
+            progressBarMulti4.Text = "modernCircularProgressBar1";
+            progressBarMulti4.Value = 0;
+            // 
+            // progressBarMulti3
+            // 
+            progressBarMulti3.BackColor = Color.Transparent;
+            progressBarMulti3.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti3.ForeColor = Color.Black;
+            progressBarMulti3.LineWidth = 12;
+            progressBarMulti3.Location = new Point(312, 400);
+            progressBarMulti3.Maximum = 10000;
+            progressBarMulti3.Minimum = 0;
+            progressBarMulti3.Name = "progressBarMulti3";
+            progressBarMulti3.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti3.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti3.Size = new Size(130, 120);
+            progressBarMulti3.TabIndex = 206;
+            progressBarMulti3.Text = "modernCircularProgressBar1";
+            progressBarMulti3.Value = 0;
+            // 
+            // progressBarMulti2
+            // 
+            progressBarMulti2.BackColor = Color.Transparent;
+            progressBarMulti2.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti2.ForeColor = Color.Black;
+            progressBarMulti2.LineWidth = 12;
+            progressBarMulti2.Location = new Point(312, 210);
+            progressBarMulti2.Maximum = 10000;
+            progressBarMulti2.Minimum = 0;
+            progressBarMulti2.Name = "progressBarMulti2";
+            progressBarMulti2.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti2.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti2.Size = new Size(130, 120);
+            progressBarMulti2.TabIndex = 205;
+            progressBarMulti2.Text = "modernCircularProgressBar1";
+            progressBarMulti2.Value = 0;
+            // 
+            // progressBarMulti1
+            // 
+            progressBarMulti1.BackColor = Color.Transparent;
+            progressBarMulti1.BackgroundRingColor = Color.FromArgb(80, 80, 80, 80);
+            progressBarMulti1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            progressBarMulti1.ForeColor = Color.Black;
+            progressBarMulti1.LineWidth = 12;
+            progressBarMulti1.Location = new Point(312, 27);
+            progressBarMulti1.Maximum = 10000;
+            progressBarMulti1.Minimum = 0;
+            progressBarMulti1.Name = "progressBarMulti1";
+            progressBarMulti1.ProgressEndColor = Color.FromArgb(200, 0, 191, 255);
+            progressBarMulti1.ProgressStartColor = Color.FromArgb(200, 123, 104, 238);
+            progressBarMulti1.Size = new Size(130, 120);
+            progressBarMulti1.TabIndex = 204;
+            progressBarMulti1.Text = "modernCircularProgressBar1";
+            progressBarMulti1.Value = 0;
+            // 
             // thread4Label
             // 
-            thread4Label.Location = new Point(18, 649);
+            thread4Label.Location = new Point(18, 636);
             thread4Label.Name = "thread4Label";
-            thread4Label.Size = new Size(278, 25);
+            thread4Label.Size = new Size(278, 51);
             thread4Label.TabIndex = 203;
             thread4Label.Text = "Thread 4 - Progress / Stats:";
             thread4Label.TextAlign = ContentAlignment.MiddleRight;
             // 
             // thread3Label
             // 
-            thread3Label.Location = new Point(18, 455);
+            thread3Label.Location = new Point(18, 442);
             thread3Label.Name = "thread3Label";
-            thread3Label.Size = new Size(278, 25);
+            thread3Label.Size = new Size(278, 51);
             thread3Label.TabIndex = 202;
             thread3Label.Text = "Thread 3 - Progress / Stats:";
             thread3Label.TextAlign = ContentAlignment.MiddleRight;
             // 
             // thread2Label
             // 
-            thread2Label.Location = new Point(18, 261);
+            thread2Label.Location = new Point(18, 248);
             thread2Label.Name = "thread2Label";
-            thread2Label.Size = new Size(273, 25);
+            thread2Label.Size = new Size(273, 51);
             thread2Label.TabIndex = 201;
             thread2Label.Text = "Thread 2- Progress / Stats:";
             thread2Label.TextAlign = ContentAlignment.MiddleRight;
             // 
             // thread1Label
             // 
-            thread1Label.Location = new Point(13, 67);
+            thread1Label.Location = new Point(13, 54);
             thread1Label.Name = "thread1Label";
-            thread1Label.Size = new Size(278, 25);
+            thread1Label.Size = new Size(278, 51);
             thread1Label.TabIndex = 200;
             thread1Label.Text = "Thread 1 - Progress / Stats:";
             thread1Label.TextAlign = ContentAlignment.MiddleRight;
@@ -1175,9 +1315,9 @@
             // 
             totalProgressMultiLabel.BackColor = Color.Transparent;
             totalProgressMultiLabel.ForeColor = Color.Black;
-            totalProgressMultiLabel.Location = new Point(18, 843);
+            totalProgressMultiLabel.Location = new Point(18, 830);
             totalProgressMultiLabel.Name = "totalProgressMultiLabel";
-            totalProgressMultiLabel.Size = new Size(278, 25);
+            totalProgressMultiLabel.Size = new Size(278, 51);
             totalProgressMultiLabel.TabIndex = 187;
             totalProgressMultiLabel.Text = "Total Overall Progress:";
             totalProgressMultiLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -2226,18 +2366,18 @@
             statusBarSettings.AutoSize = false;
             statusBarSettings.Dock = DockStyle.None;
             statusBarSettings.ImageScalingSize = new Size(24, 24);
-            statusBarSettings.Items.AddRange(new ToolStripItem[] { toolStripSettings });
+            statusBarSettings.Items.AddRange(new ToolStripItem[] { statsBarSettingsLabel });
             statusBarSettings.Location = new Point(17, 1022);
             statusBarSettings.Name = "statusBarSettings";
             statusBarSettings.Size = new Size(1506, 42);
             statusBarSettings.TabIndex = 192;
             statusBarSettings.Text = "Status Label";
             // 
-            // toolStripSettings
+            // statsBarSettingsLabel
             // 
-            toolStripSettings.Name = "toolStripSettings";
-            toolStripSettings.Size = new Size(0, 35);
-            toolStripSettings.TextAlign = ContentAlignment.MiddleLeft;
+            statsBarSettingsLabel.Name = "statsBarSettingsLabel";
+            statsBarSettingsLabel.Size = new Size(179, 35);
+            statsBarSettingsLabel.Text = "toolStripStatusLabel1";
             // 
             // retentionLabel
             // 
@@ -2293,6 +2433,7 @@
             opacityTrackBar.Value = 100;
             opacityTrackBar.Scroll += opacityTrackBar_Scroll;
             opacityTrackBar.MouseEnter += opacityTrackBar_MouseEnter;
+            opacityTrackBar.MouseHover += opacityTrackBar_MouseHover;
             // 
             // logFileCheckBox
             // 
@@ -2307,6 +2448,7 @@
             logFileCheckBox.UseVisualStyleBackColor = false;
             logFileCheckBox.CheckedChanged += logFileCheckBox_CheckedChanged;
             logFileCheckBox.MouseEnter += logFileCheckBox_MouseEnter;
+            logFileCheckBox.MouseHover += logFileCheckBox_MouseHover;
             // 
             // priorityLabel
             // 
@@ -2330,6 +2472,7 @@
             priorityTrackBar.Value = 2;
             priorityTrackBar.Scroll += priorityTrackBar_Scroll;
             priorityTrackBar.MouseEnter += priorityTrackBar_MouseEnter;
+            priorityTrackBar.MouseHover += priorityTrackBar_MouseHover;
             // 
             // saveAutoCheckBox
             // 
@@ -3162,10 +3305,9 @@
             // 
             // skinsLabel
             // 
-            skinsLabel.AutoSize = true;
-            skinsLabel.Location = new Point(50, 91);
+            skinsLabel.Location = new Point(14, 88);
             skinsLabel.Name = "skinsLabel";
-            skinsLabel.Size = new Size(57, 25);
+            skinsLabel.Size = new Size(115, 39);
             skinsLabel.TabIndex = 69;
             skinsLabel.Text = "Skins:";
             skinsLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -3184,10 +3326,9 @@
             // 
             // languageLabel
             // 
-            languageLabel.AutoSize = true;
-            languageLabel.Location = new Point(14, 27);
+            languageLabel.Location = new Point(6, 24);
             languageLabel.Name = "languageLabel";
-            languageLabel.Size = new Size(93, 25);
+            languageLabel.Size = new Size(123, 39);
             languageLabel.TabIndex = 67;
             languageLabel.Text = "Language:";
             languageLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -3315,6 +3456,13 @@
             copyThatPB.SizeMode = PictureBoxSizeMode.StretchImage;
             copyThatPB.TabIndex = 0;
             copyThatPB.TabStop = false;
+            // 
+            // toolStripSettings
+            // 
+            toolStripSettings.Margin = new Padding(0, 3, 0, 2);
+            toolStripSettings.Name = "toolStripSettings";
+            toolStripSettings.Size = new Size(0, 35);
+            toolStripSettings.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // titleLabel
             // 
@@ -3511,7 +3659,6 @@
             soundsGroupBox.ResumeLayout(false);
             soundsGroupBox.PerformLayout();
             skinsLanguageGoupBox.ResumeLayout(false);
-            skinsLanguageGoupBox.PerformLayout();
             windowGroupBox.ResumeLayout(false);
             windowGroupBox.PerformLayout();
             cmdAboutPage.ResumeLayout(false);
@@ -3766,12 +3913,13 @@
         private Label secureDeleteLabel;
         private Label aboutCTLabel;
         private PictureBox copyThatPB;
-        private CustomControls.ModernCircularProgressBar modernTotal;
-        private CustomControls.ModernCircularProgressBar modernFile;
-        private CustomControls.ModernCircularProgressBar progressBarMultiTotal;
-        private CustomControls.ModernCircularProgressBar progressBarMulti4;
-        private CustomControls.ModernCircularProgressBar progressBarMulti3;
-        private CustomControls.ModernCircularProgressBar progressBarMulti2;
-        private CustomControls.ModernCircularProgressBar progressBarMulti1;
+        private ModernProgress.ModernCircularProgressBar modernTotal;
+        private ModernProgress.ModernCircularProgressBar modernFile;
+        private ModernProgress.ModernCircularProgressBar progressBarMultiTotal;
+        private ModernProgress.ModernCircularProgressBar progressBarMulti4;
+        private ModernProgress.ModernCircularProgressBar progressBarMulti3;
+        private ModernProgress.ModernCircularProgressBar progressBarMulti2;
+        private ModernProgress.ModernCircularProgressBar progressBarMulti1;
+        private ToolStripStatusLabel statsBarSettingsLabel;
     }
 }

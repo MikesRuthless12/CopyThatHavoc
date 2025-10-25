@@ -1,6 +1,6 @@
 ﻿using ClosedXML.Excel; // Enables working with Excel files without Microsoft Office installed.
 using CopyThatProgram.Models;
-using CustomControls;
+using ModernProgress;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.EMMA;
@@ -1217,6 +1217,4307 @@ namespace CopyThatProgram
             { ".i00", "Parte Immagine Divisa DVD Decrypter 1" }
         }
     },
+    {
+    "pt-PT", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Documento Word" }, { ".doc", "Word 97-2003" },
+        { ".xlsx", "Livro Excel" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" }, { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Desenho Visio" }, { ".pub", "Documento Publisher" },
+        { ".one", "Caderno OneNote" },
+        { ".ost", "Outlook Offline" }, { ".pst", "Outlook Pessoal" },
+        { ".msg", "Mensagem Outlook" }, { ".eml", "Mensagem de Email" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "Documento HTML" }, { ".htm", "Documento HTML" },
+        { ".css", "Folha de Estilos CSS" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (Com Indentação)" }, { ".less", "Estilo Less" },
+        { ".js", "JavaScript" }, { ".jsx", "React JSX" },
+        { ".ts", "TypeScript" }, { ".tsx", "React TSX" },
+        { ".json", "Dados JSON" }, { ".xml", "Documento XML" },
+        { ".yml", "Configuração YAML" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "Código C#" }, { ".csx", "Script C#" },
+        { ".fs", "Código F#" }, { ".vb", "Código VB.NET" },
+        { ".il", "Assembly IL" }, { ".resx", "Recursos XML" },
+        { ".xaml", "Mark-up XAML" }, { ".sln", "Solução Visual Studio" },
+        { ".vbproj", "Projeto VB" },
+        { ".vcxproj", "Projeto C++" }, { ".props", "Propriedades MSBuild" },
+        { ".targets", "Targets MSBuild" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "Código C++" }, { ".cc", "Código C++" },
+        { ".cxx", "Código C++" }, { ".c", "Código C" },
+        { ".hpp", "Cabeçalho C++" }, { ".h", "Cabeçalho C/C++" },
+        { ".inl", "Inline C++" }, { ".idl", "Definição de Interface" },
+        { ".rc", "Script de Recursos" }, { ".manifest", "Manifesto da Aplicação" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Código Java" }, { ".class", "Classe Java" },
+        { ".jar", "Arquivo Java" }, { ".war", "Arquivo Web Java" },
+        { ".ear", "Arquivo Enterprise" }, { ".scala", "Código Scala" },
+        { ".groovy", "Código Groovy" }, { ".clj", "Código Clojure" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Script Python" }, { ".pyw", "Python (Sem Consola)" },
+        { ".pyi", "Stub Python" }, { ".pyc", "Bytecode Python" },
+        { ".pyo", "Python Otimizado" }, { ".pyd", "Extensão Python" },
+        { ".whl", "Wheel Python" }, { ".ipynb", "Caderno Jupyter" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Código Swift" }, { ".dart", "Código Dart" },
+        { ".kt", "Código Kotlin" }, { ".kts", "Script Kotlin" },
+        { ".gradle", "Script Gradle" }, { ".aar", "Arquivo Android" },
+        { ".apk", "Pacote Android" }, { ".aab", "Pacote de App Android" },
+        { ".ipa", "Pacote iOS" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Cena Unity" }, { ".prefab", "Prefab Unity" },
+        { ".uasset", "Recurso Unreal" }, { ".umap", "Mapa Unreal" },
+        { ".fbx", "Modelo 3D FBX" }, { ".obj", "Modelo 3D Wavefront" },
+        { ".gltf", "Modelo 3D glTF" }, { ".blend", "Projeto Blender" },
+        { ".dae", "Modelo Collada" }, { ".3ds", "Modelo 3D Studio" },
+        { ".stl", "Modelo STL" }, { ".dxf", "AutoCAD DXF" },
+
+        // ── Criativo / Adobe ----------------------------------------------
+        { ".psd", "Documento Photoshop" }, { ".psb", "Photoshop Grande" },
+        { ".ai", "Arte Illustrator" }, { ".indd", "Documento InDesign" },
+        { ".prproj", "Projeto Premiere" }, { ".aep", "After Effects" },
+        { ".xd", "Protótipo Adobe XD" }, { ".sketch", "Documento Sketch" },
+        { ".fig", "Documento Figma" },
+
+        // ── Áudio -----------------------------------------------------------
+        { ".mp3", "Áudio MP3" }, { ".wav", "Áudio Wave" },
+        { ".flac", "Áudio FLAC" }, { ".aac", "Áudio AAC" },
+        { ".ogg", "OGG Vorbis" }, { ".wma", "Áudio Windows" },
+        { ".opus", "Áudio Opus" }, { ".m4a", "Áudio MPEG-4" },
+        { ".midi", "Sequência MIDI" }, { ".aiff", "Áudio AIFF" },
+
+        // ── Vídeo -----------------------------------------------------------
+        { ".mp4", "Vídeo MP4" }, { ".mkv", "Vídeo Matroska" },
+        { ".avi", "Vídeo AVI" }, { ".mov", "Vídeo QuickTime" },
+        { ".wmv", "Vídeo Windows" }, { ".webm", "Vídeo WebM" },
+        { ".flv", "Vídeo Flash" }, { ".m4v", "Vídeo M4V" },
+        { ".m3u8", "Lista HLS" },
+        { ".ogv", "Vídeo OGG" }, { ".3gp", "Vídeo 3GP" },
+
+        // ── Imagens ----------------------------------------------------------
+        { ".jpg", "Imagem JPEG" }, { ".jpeg", "Imagem JPEG" },
+        { ".png", "Imagem PNG" }, { ".gif", "Imagem GIF" },
+        { ".bmp", "Imagem BMP" }, { ".tiff", "Imagem TIFF" },
+        { ".webp", "Imagem WebP" }, { ".ico", "Ícone" },
+        { ".svg", "Vector SVG" }, { ".eps", "PostScript Encapsulado" },
+        { ".raw", "Imagem RAW" },
+        { ".cr2", "RAW Canon" }, { ".nef", "RAW Nikon" },
+        { ".arw", "RAW Sony" }, { ".dng", "Negativo Digital" },
+
+        // ── Arquivos --------------------------------------------------------
+        { ".zip", "Arquivo ZIP" }, { ".rar", "Arquivo RAR" },
+        { ".7z", "Arquivo 7-Zip" }, { ".tar", "Arquivo Tar" },
+        { ".gz", "Arquivo GZip" }, { ".bz2", "Arquivo BZip2" },
+        { ".xz", "Arquivo XZ" }, { ".zst", "Arquivo Zstd" },
+        { ".lz4", "Arquivo LZ4" }, { ".cab", "Arquivo Cabinet" },
+        { ".iso", "Imagem de Disco" }, { ".dmg", "Imagem de Disco macOS" },
+        { ".img", "Imagem de Disco Raw" }, { ".vhd", "Disco Rígido Virtual" },
+        { ".vhdx", "Disco Hyper-V" }, { ".wim", "Imagem Windows" },
+
+        // ── Base de Dados --------------------------------------------------------
+        { ".sql", "Script SQL" }, { ".db", "Base de Dados" },
+        { ".sqlite", "Base de Dados SQLite" }, { ".mdb", "Base de Dados Access" },
+        { ".accdb", "Base de Dados Access" }, { ".mdf", "Base de Dados SQL Server" },
+        { ".ndf", "NDF SQL Server" }, { ".ldf", "Log SQL Server" },
+        { ".bak", "Backup SQL" }, { ".dmp", "Dump da Base de Dados" },
+
+        // ── Científico / Matemática ---------------------------------------------
+        { ".mat", "Dados MATLAB" }, { ".m", "Script MATLAB" },
+        { ".r", "Script R" }, { ".rdata", "Conjunto de Dados R" },
+        { ".csv", "Dados CSV" }, { ".tsv", "Dados TSV" },
+        { ".sas", "Programa SAS" }, { ".sav", "Conjunto de Dados SPSS" },
+        { ".por", "SPSS Portátil" },
+
+        // ── Cripto / Blockchain -------------------------------------------
+        { ".gpg", "Encriptado GPG" }, { ".pgp", "Encriptado PGP" },
+        { ".asc", "Assinatura PGP" }, { ".sig", "Assinatura Detachada" },
+        { ".wallet", "Carteira Cripto" }, { ".key", "Ficheiro de Chave" },
+        { ".pem", "Certificado PEM" }, { ".crt", "Certificado" },
+        { ".p12", "Keystore PKCS#12" }, { ".pfx", "Keystore Windows" },
+
+        // ── Emulação / ROMs ----------------------------------------------
+        { ".gba", "ROM Game Boy" }, { ".nds", "ROM Nintendo DS" },
+        { ".wbfs", "Backup Wii" },
+        { ".cia", "Instalador 3DS" }, { ".nsp", "Pacote Switch" },
+        { ".xci", "Cartucho Switch" }, { ".wad", "Canal Wii" },
+
+        // ── Diversos ------------------------------------------------------------
+        { ".exe", "Executável Windows" }, { ".msi", "Instalador Windows" },
+        { ".com", "Comando DOS" }, { ".bat", "Script Batch" },
+        { ".ps1", "Script PowerShell" }, { ".cmd", "Script de Comando" },
+        { ".reg", "Entrada do Registo" },
+        { ".url", "Atalho da Internet" }, { ".torrent", "BitTorrent" },
+        { ".log", "Ficheiro de Log" }, { ".ini", "Configuração INI" },
+        { ".cfg", "Ficheiro de Configuração" }, { ".conf", "Configuração" },
+        { ".yaml", "Configuração YAML" }, { ".toml", "Configuração TOML" },
+        { ".env", "Ficheiro de Ambiente" }, { ".gitignore", "Git Ignore" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "Código LaTeX" }, { ".bib", "Biblioteca BibTeX" },
+
+        // ── Adicionais / Diversos ---------------------------------------------
+        { ".dwp", "Web Part SharePoint" },
+        { ".fxp", "FoxPro Compilado" },
+        { ".asd", "AutoSave Word" },
+        { ".fsc", "Cache de Pesquisa Windows" },
+        { ".mid", "Sequência MIDI" },
+        { ".fst", "Estado FL Studio" },
+        { ".txt", "Ficheiro de Texto Simples" },
+        { ".pdb", "Base de Dados do Programa" },
+        { ".dll", "Biblioteca de Ligação Dinâmica" },
+        { ".resources", "Recursos .NET" },
+        { ".cache", "Ficheiro de Cache" },
+        { ".settings", "Definições XML" },
+        { ".csproj", "Projeto C#" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "Ficheiro KeePass" },
+        { ".nupkg", "Pacote NuGet" },
+        { ".p7s", "Assinatura PKCS #7" },
+        { ".map", "Ficheiro Source-Map" },
+        { ".flow", "Declaração Flow Type" },
+        { ".mjs", "ES Module (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES Module" },
+        { ".jst", "Template JavaScript" },
+        { ".markdown", "Documento Markdown" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Dados de Personagem Nintendo" },
+        { ".vital", "Predefinição Vital Synthesizer" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "Pacote ZippedWeb" },
+        { ".flp", "Projeto FL Studio" },
+        { ".flstheme", "Tema FL Studio" },
+        { ".nmsv", "Predefinição Native Instruments NMSV" },
+        { ".wav.256", "Variante WAV 256-bit" },
+        { ".pdf", "Formato de Documento Portátil" },
+        { ".config", "Configuração XML/JSON" },
+        { ".user", "Definições do Utilizador" },
+        { ".uptodate", "Flag de Cache Up2Date" },
+        { ".rtf", "Formato de Texto Rico" },
+        { ".buildwithskipanalyzers", "Flag MSBuild Skip-Analyzers" },
+        { ".node", "Módulo Binário Node.js" },
+        { ".snap", "Pacote Snapcraft" },
+        { ".def", "Ficheiro de Definição de Módulo" },
+        { ".bsd", "Licença/Configuração BSD" },
+        { ".babelrc", "Configuração Babel" },
+        { ".prettierrc", "Configuração Prettier" },
+        { ".npignore", "Regras de Ignorar NuGet" },
+        { ".php", "Script PHP" },
+        { ".eslintignore", "ESLint Ignore" },
+        { ".lic", "Ficheiro de Licença" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "Lista de Propriedades macOS" },
+        { ".mui", "Interface de Utilizador Multilingue" },
+        { ".efi", "Firmware UEFI" },
+        { ".cip", "Pacote Chrome CIP" },
+        { ".bin", "Dados Binários" },
+        { ".sdi", "Imagem de Implementação do Sistema" },
+        { ".ttf", "Fonte TrueType" },
+        { ".cur", "Cursor Windows" },
+        { ".ani", "Cursor Animado" },
+        { ".diagpkg", "Pacote de Diagnóstico Windows" },
+        { ".dat", "Ficheiro de Dados Genérico" },
+        { ".diffbase", "Instantâneo Base de Diff" },
+        { ".lm", "Modelo de Linguagem" },
+        { ".lm1", "Variante de Modelo de Linguagem 1" },
+        { ".lm2", "Variante de Modelo de Linguagem 2" },
+        { ".lm3", "Variante de Modelo de Linguagem 3" },
+        { ".lex", "Dados de Léxico" },
+        { ".res", "Recurso Windows" },
+        { ".nlt", "Dados NetLink Trust" },
+        { ".nls", "Suporte de Idioma Nacional" },
+        { ".chm", "Ajuda HTML Compilada" },
+        { ".fil", "Contentor de Lista de Ficheiros" },
+        { ".msixbundle", "Pacote MSIX" },
+        { ".p7x", "PKCS #7 Estendido" },
+        { ".pri", "Índice de Recursos do Pacote" },
+        { ".etl", "Log de Rastreio de Eventos" },
+        { ".nlp", "Dados do Processador de Linguagem Natural" },
+        { ".compositefont", "Fonte Composta WPF" },
+        { ".aspx", "Página ASP.NET" },
+        { ".ascx", "Controlo de Utilizador ASP.NET" },
+        { ".master", "Página Master ASP.NET" },
+        { ".browser", "Definição do Browser" },
+        { ".lnk", "Atalho Windows" },
+        { ".default", "Definições Predefinidas" },
+        { ".comments", "Metadados de Comentários" },
+        { ".rsp", "Ficheiro de Resposta" },
+        { ".tld", "Descrição da Biblioteca de Tags" },
+        { ".win32manifest", "Manifesto Win32" },
+        { ".man", "Página de Manual" },
+        { ".mof", "Formato de Objeto Gerido" },
+        { ".uninstall", "Script de Desinstalação" },
+        { ".tasks", "Tarefas MSBuild" },
+        { ".overridetasks", "Tarefas de Substituição MSBuild" },
+        { ".orp", "Dados ORP" },
+        { ".adml", "Linguagem de Modelo Administrativo" },
+        { ".ppkg", "Pacote de Provisionamento" },
+        { ".mstheme", "Tema Microsoft" },
+        { ".msstyles", "Estilo Windows" },
+        { ".mum", "Módulo de Atualização de Manifesto" },
+        { ".cat", "Catálogo de Segurança" },
+        { ".jfm", "Metadados da Base de Dados Jet" },
+        { ".rs", "Código Rust" },
+        { ".jll", "Bitcode LLVM Julia" },
+        { ".sys", "Driver do Sistema Windows" },
+        { ".p7b", "Cadeia de Certificados PKCS #7" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "Localização INF" },
+        { ".winmd", "Metadados Windows" },
+        { ".xbf", "Formato Binário XAML" },
+        { ".license", "Token de Licença" },
+        { ".fpie", "Executável Intermédio FPGA" },
+        { ".cso", "Objeto Shader Compilado" },
+        { ".sccd", "Dados de Configuração System Center" },
+        { ".bundle", "Pacote de Aplicação" },
+        { ".schema", "Schema JSON/XML" },
+        { ".csg", "Geometria Sólida Construtiva" },
+        { ".mun", "Rede Multi-Unidade" },
+        { ".uce", "Motor de Xadrez Universal" },
+        { ".cpl", "Applet do Painel de Controlo" },
+        { ".msc", "Consola de Gestão Microsoft" },
+        { ".ax", "Filtro DirectShow" },
+        { ".table", "Tabela de Pesquisa/Hash" },
+        { ".tsp", "Pacote/Script TSP" },
+        { ".tbl", "Dados de Tabela" },
+        { ".drv", "Driver de Dispositivo" },
+        { ".sep", "Ficheiro Separador" },
+        { ".ocx", "Controlo ActiveX" },
+        { ".msp", "Patch do Instalador Windows" },
+        { ".scr", "Protetor de Ecrã Windows" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Gramática XML" },
+        { ".xrm-ms", "Licença Microsoft" },
+        { ".rll", "Biblioteca de Ligação de Recursos" },
+        { ".mfl", "Ficheiro de Idioma MFL" },
+        { ".cdxml", "Definição de Cmdlet XML" },
+        { ".dtd", "Definição de Tipo de Documento" },
+        { ".psm1", "Script de Módulo PowerShell" },
+        { ".ps1xml", "Dados de Formatação PowerShell" },
+        { ".wprp", "Perfil do Gravador de Performance Windows" },
+        { ".xsl", "Folha de Estilos XSLT" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "Dados ReLoad" },
+        { ".job", "Tarefa Windows" },
+        { ".gypi", "Incluir GYP" },
+        { ".hlp", "Ajuda Windows" },
+        { ".gdl", "Linguagem de Descrição Genérica" },
+        { ".elf", "Formato Executável e de Ligação" },
+        { ".ppd", "Descrição de Impressora PostScript" },
+        { ".gpd", "Descrição de Impressora Genérica" },
+        { ".mbn", "Binário do Modem" },
+        { ".pak", "Arquivo PAK" },
+        { ".dgml", "Markup de Grafo Direcionado" },
+        { ".smp", "Ficheiro de Amostra" },
+        { ".lxa", "Áudio de Léxico Microsoft" },
+        { ".wwd", "Assistente Microsoft Works" },
+        { ".wsf", "Ficheiro de Script Windows" },
+        { ".cw", "Modelo CardWorks" },
+        { ".phn", "Cena de Física Phun" },
+        { ".am", "Ficheiro Automake" },
+        { ".fe", "Encriptador de Ficheiros" },
+        { ".mllr", "Regressão Linear de Máxima Verossimilhança" },
+        { ".ngr", "ROM NEOGEO" },
+        { ".sch", "Horário/Esquema" },
+        { ".adlm", "Gestor de Licenças Autodesk" },
+        { ".adxm", "XML Administrativo" },
+        { ".nmnl", "Minimal Normalizado" },
+        { ".propdesc", "Descrição de Propriedade" },
+        { ".nsl", "Biblioteca de Som Nokia" },
+        { ".ntf", "Formato de Transferência Nacional" },
+        { ".ntp", "Configuração NTP" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Manifesto de Runtime" },
+        { ".interop", "Dados de Interop COM" },
+        { ".frm", "Formulário Visual Basic" },
+        { ".bas", "Módulo Visual Basic" },
+        { ".dwb", "Pacote Drum Workshop" },
+        { ".npmignore", "Regras de Ignorar NPM" },
+        { ".rsrc", "Resource Fork macOS" },
+        { ".upd2date", "Flag de Cache Up2Date" },
+        { ".Up2Date", "Flag de Cache Up2Date" },
+        { ".jshintrc", "Configuração JSHint" },
+        { ".lock", "Bloqueio/Pin de Dependência" },
+        { ".nix", "Expressão Nix" },
+        { ".hr1", "Dados de Jogo HR1" },
+        { ".hr2", "Dados de Jogo HR2" },
+        { ".hr3", "Dados de Jogo HR3" },
+        { ".hr4", "Dados de Jogo HR4" },
+        { ".hr5", "Dados de Jogo HR5" },
+        { ".hr6", "Dados de Jogo HR6" },
+        { ".hr7", "Dados de Jogo HR7" },
+        { ".hr8", "Dados de Jogo HR8" },
+        { ".hr9", "Dados de Jogo HR9" },
+        { ".bnf", "Gramática Backus-Naur" },
+        { ".clb", "Catálogo COM+" },
+        { ".tlb", "Biblioteca de Tipos" },
+        { ".dic", "Dicionário/Léxico" },
+        { ".aux", "Ficheiro Auxiliar TeX" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Incluir/Incluir de Código" },
+        { ".cpx", "Tradução de Página de Código" },
+        { ".mdl", "Modelo/Ficheiro de Módulo" },
+        { ".dls", "Banco de Sons Transferível" },
+        { ".cdf-ms", "Manifesto de Implementação ClickOnce" },
+        { ".addin", "Add-in Visual Studio" },
+        { ".scp", "Componente de Script Windows" },
+        { ".wmz", "Skin Comprimido do Windows Media Player" },
+        { ".iec", "Base de Dados IEC" },
+        { ".wsc", "Componente de Script Windows" },
+        { ".vrg", "Script de Registo Visual Studio" },
+        { ".prx", "Auto-Configuração de Proxy" },
+        { ".nuspec", "Especificação NuGet" },
+        
+        // ── Arquivos Estendidos / Compressão --------------------------------
+        { ".zipx", "Arquivo ZIPX" },
+        { ".alz", "Arquivo ALZip" },
+        { ".eeg", "Comprimido EEG" },
+        { ".001", "Parte 1 do Arquivo Dividido" },
+        { ".arj", "Arquivo ARJ" },
+        { ".bh", "Arquivo BlakHole" },
+        { ".lha", "Arquivo LHA" },
+        { ".lzh", "Arquivo LHA/LZH" },
+        { ".pma", "Arquivo PMarc" },
+        { ".arc", "Arquivo ARC" },
+        { ".ace", "Arquivo ACE" },
+        { ".aes", "Ficheiro Encriptado AES" },
+        { ".zpak", "Arquivo ZPAQ" },
+        { ".zstd", "Arquivo Zstandard" },
+        { ".br", "Arquivo Brotli" },
+        { ".pea", "Arquivo PeaZip" },
+        { ".tbz", "Arquivo Tar.BZ" },
+        { ".tbz2", "Arquivo Tar.BZ2" },
+        { ".txz", "Arquivo Tar.XZ" },
+        { ".tlz", "Arquivo Tar.LZMA" },
+        { ".uu", "Ficheiro UUEncoded" },
+        { ".uue", "Ficheiro UUEncoded" },
+        { ".xxe", "Ficheiro XXEncoded" },
+        { ".z", "Unix Compress" },
+        { ".tgz", "Arquivo Tar.GZ" },
+        { ".isz", "Imagem ISO-Zipped" },
+        { ".udf", "Formato de Disco Universal" },
+        { ".i00", "Parte 1 da Imagem Dividida DVD Decrypter" }
+    }
+},
+    {
+    "pt-BR", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Documento do Word" }, { ".doc", "Word 97-2003" },
+        { ".xlsx", "Pasta do Excel" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" }, { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Desenho do Visio" }, { ".pub", "Documento do Publisher" },
+        { ".one", "Caderno do OneNote" },
+        { ".ost", "Outlook Offline" }, { ".pst", "Outlook Pessoal" },
+        { ".msg", "Mensagem do Outlook" }, { ".eml", "Mensagem de Email" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "Documento HTML" }, { ".htm", "Documento HTML" },
+        { ".css", "Folha de Estilo CSS" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (Com Indentação)" }, { ".less", "Estilo Less" },
+        { ".js", "JavaScript" }, { ".jsx", "React JSX" },
+        { ".ts", "TypeScript" }, { ".tsx", "React TSX" },
+        { ".json", "Dados JSON" }, { ".xml", "Documento XML" },
+        { ".yml", "Configuração YAML" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "Código C#" }, { ".csx", "Script C#" },
+        { ".fs", "Código F#" }, { ".vb", "Código VB.NET" },
+        { ".il", "Assembly IL" }, { ".resx", "Recursos XML" },
+        { ".xaml", "Mark-up XAML" }, { ".sln", "Solução do Visual Studio" },
+        { ".vbproj", "Projeto VB" },
+        { ".vcxproj", "Projeto C++" }, { ".props", "Propriedades MSBuild" },
+        { ".targets", "Targets MSBuild" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "Código C++" }, { ".cc", "Código C++" },
+        { ".cxx", "Código C++" }, { ".c", "Código C" },
+        { ".hpp", "Cabeçalho C++" }, { ".h", "Cabeçalho C/C++" },
+        { ".inl", "Inline C++" }, { ".idl", "Definição de Interface" },
+        { ".rc", "Script de Recursos" }, { ".manifest", "Manifesto do Aplicativo" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Código Java" }, { ".class", "Classe Java" },
+        { ".jar", "Arquivo Java" }, { ".war", "Arquivo Web Java" },
+        { ".ear", "Arquivo Enterprise" }, { ".scala", "Código Scala" },
+        { ".groovy", "Código Groovy" }, { ".clj", "Código Clojure" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Script Python" }, { ".pyw", "Python (Sem Console)" },
+        { ".pyi", "Stub Python" }, { ".pyc", "Bytecode Python" },
+        { ".pyo", "Python Otimizado" }, { ".pyd", "Extensão Python" },
+        { ".whl", "Wheel Python" }, { ".ipynb", "Caderno Jupyter" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Código Swift" }, { ".dart", "Código Dart" },
+        { ".kt", "Código Kotlin" }, { ".kts", "Script Kotlin" },
+        { ".gradle", "Script Gradle" }, { ".aar", "Arquivo Android" },
+        { ".apk", "Pacote Android" }, { ".aab", "Pacote de App Android" },
+        { ".ipa", "Pacote iOS" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Cena Unity" }, { ".prefab", "Prefab Unity" },
+        { ".uasset", "Recurso Unreal" }, { ".umap", "Mapa Unreal" },
+        { ".fbx", "Modelo 3D FBX" }, { ".obj", "Modelo 3D Wavefront" },
+        { ".gltf", "Modelo 3D glTF" }, { ".blend", "Projeto Blender" },
+        { ".dae", "Modelo Collada" }, { ".3ds", "Modelo 3D Studio" },
+        { ".stl", "Modelo STL" }, { ".dxf", "AutoCAD DXF" },
+
+        // ── Criativo / Adobe ----------------------------------------------
+        { ".psd", "Documento Photoshop" }, { ".psb", "Photoshop Grande" },
+        { ".ai", "Arte Illustrator" }, { ".indd", "Documento InDesign" },
+        { ".prproj", "Projeto Premiere" }, { ".aep", "After Effects" },
+        { ".xd", "Protótipo Adobe XD" }, { ".sketch", "Documento Sketch" },
+        { ".fig", "Documento Figma" },
+
+        // ── Áudio -----------------------------------------------------------
+        { ".mp3", "Áudio MP3" }, { ".wav", "Áudio Wave" },
+        { ".flac", "Áudio FLAC" }, { ".aac", "Áudio AAC" },
+        { ".ogg", "OGG Vorbis" }, { ".wma", "Áudio Windows" },
+        { ".opus", "Áudio Opus" }, { ".m4a", "Áudio MPEG-4" },
+        { ".midi", "Sequência MIDI" }, { ".aiff", "Áudio AIFF" },
+
+        // ── Vídeo -----------------------------------------------------------
+        { ".mp4", "Vídeo MP4" }, { ".mkv", "Vídeo Matroska" },
+        { ".avi", "Vídeo AVI" }, { ".mov", "Vídeo QuickTime" },
+        { ".wmv", "Vídeo Windows" }, { ".webm", "Vídeo WebM" },
+        { ".flv", "Vídeo Flash" }, { ".m4v", "Vídeo M4V" },
+        { ".m3u8", "Lista HLS" },
+        { ".ogv", "Vídeo OGG" }, { ".3gp", "Vídeo 3GP" },
+
+        // ── Imagens ----------------------------------------------------------
+        { ".jpg", "Imagem JPEG" }, { ".jpeg", "Imagem JPEG" },
+        { ".png", "Imagem PNG" }, { ".gif", "Imagem GIF" },
+        { ".bmp", "Imagem BMP" }, { ".tiff", "Imagem TIFF" },
+        { ".webp", "Imagem WebP" }, { ".ico", "Ícone" },
+        { ".svg", "Vetor SVG" }, { ".eps", "PostScript Encapsulado" },
+        { ".raw", "Imagem RAW" },
+        { ".cr2", "RAW Canon" }, { ".nef", "RAW Nikon" },
+        { ".arw", "RAW Sony" }, { ".dng", "Negativo Digital" },
+
+        // ── Arquivos --------------------------------------------------------
+        { ".zip", "Arquivo ZIP" }, { ".rar", "Arquivo RAR" },
+        { ".7z", "Arquivo 7-Zip" }, { ".tar", "Arquivo Tar" },
+        { ".gz", "Arquivo GZip" }, { ".bz2", "Arquivo BZip2" },
+        { ".xz", "Arquivo XZ" }, { ".zst", "Arquivo Zstd" },
+        { ".lz4", "Arquivo LZ4" }, { ".cab", "Arquivo Cabinet" },
+        { ".iso", "Imagem de Disco" }, { ".dmg", "Imagem de Disco macOS" },
+        { ".img", "Imagem de Disco Raw" }, { ".vhd", "Disco Rígido Virtual" },
+        { ".vhdx", "Disco Hyper-V" }, { ".wim", "Imagem Windows" },
+
+        // ── Banco de Dados --------------------------------------------------------
+        { ".sql", "Script SQL" }, { ".db", "Banco de Dados" },
+        { ".sqlite", "Banco de Dados SQLite" }, { ".mdb", "Banco de Dados Access" },
+        { ".accdb", "Banco de Dados Access" }, { ".mdf", "Banco de Dados SQL Server" },
+        { ".ndf", "NDF SQL Server" }, { ".ldf", "Log SQL Server" },
+        { ".bak", "Backup SQL" }, { ".dmp", "Dump do Banco de Dados" },
+
+        // ── Científico / Matemática ---------------------------------------------
+        { ".mat", "Dados MATLAB" }, { ".m", "Script MATLAB" },
+        { ".r", "Script R" }, { ".rdata", "Conjunto de Dados R" },
+        { ".csv", "Dados CSV" }, { ".tsv", "Dados TSV" },
+        { ".sas", "Programa SAS" }, { ".sav", "Conjunto de Dados SPSS" },
+        { ".por", "SPSS Portátil" },
+
+        // ── Cripto / Blockchain -------------------------------------------
+        { ".gpg", "Criptografado GPG" }, { ".pgp", "Criptografado PGP" },
+        { ".asc", "Assinatura PGP" }, { ".sig", "Assinatura Detachada" },
+        { ".wallet", "Carteira Cripto" }, { ".key", "Arquivo de Chave" },
+        { ".pem", "Certificado PEM" }, { ".crt", "Certificado" },
+        { ".p12", "Keystore PKCS#12" }, { ".pfx", "Keystore Windows" },
+
+        // ── Emulação / ROMs ----------------------------------------------
+        { ".gba", "ROM Game Boy" }, { ".nds", "ROM Nintendo DS" },
+        { ".wbfs", "Backup Wii" },
+        { ".cia", "Instalador 3DS" }, { ".nsp", "Pacote Switch" },
+        { ".xci", "Cartucho Switch" }, { ".wad", "Canal Wii" },
+
+        // ── Diversos ------------------------------------------------------------
+        { ".exe", "Executável Windows" }, { ".msi", "Instalador Windows" },
+        { ".com", "Comando DOS" }, { ".bat", "Script Batch" },
+        { ".ps1", "Script PowerShell" }, { ".cmd", "Script de Comando" },
+        { ".reg", "Entrada do Registro" },
+        { ".url", "Atalho da Internet" }, { ".torrent", "BitTorrent" },
+        { ".log", "Arquivo de Log" }, { ".ini", "Configuração INI" },
+        { ".cfg", "Arquivo de Configuração" }, { ".conf", "Configuração" },
+        { ".yaml", "Configuração YAML" }, { ".toml", "Configuração TOML" },
+        { ".env", "Arquivo de Ambiente" }, { ".gitignore", "Git Ignore" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "Código LaTeX" }, { ".bib", "Biblioteca BibTeX" },
+
+        // ── Adicionais / Diversos ---------------------------------------------
+        { ".dwp", "Web Part SharePoint" },
+        { ".fxp", "FoxPro Compilado" },
+        { ".asd", "AutoSave Word" },
+        { ".fsc", "Cache de Pesquisa Windows" },
+        { ".mid", "Sequência MIDI" },
+        { ".fst", "Estado FL Studio" },
+        { ".txt", "Arquivo de Texto Simples" },
+        { ".pdb", "Banco de Dados do Programa" },
+        { ".dll", "Biblioteca de Vínculo Dinâmico" },
+        { ".resources", "Recursos .NET" },
+        { ".cache", "Arquivo de Cache" },
+        { ".settings", "Configurações XML" },
+        { ".csproj", "Projeto C#" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "Arquivo KeePass" },
+        { ".nupkg", "Pacote NuGet" },
+        { ".p7s", "Assinatura PKCS #7" },
+        { ".map", "Arquivo Source-Map" },
+        { ".flow", "Declaração Flow Type" },
+        { ".mjs", "ES Module (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES Module" },
+        { ".jst", "Template JavaScript" },
+        { ".markdown", "Documento Markdown" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Dados de Personagem Nintendo" },
+        { ".vital", "Predefinição Vital Synthesizer" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "Pacote ZippedWeb" },
+        { ".flp", "Projeto FL Studio" },
+        { ".flstheme", "Tema FL Studio" },
+        { ".nmsv", "Predefinição Native Instruments NMSV" },
+        { ".wav.256", "Variante WAV 256-bit" },
+        { ".pdf", "Formato de Documento Portátil" },
+        { ".config", "Configuração XML/JSON" },
+        { ".user", "Configurações do Usuário" },
+        { ".uptodate", "Flag de Cache Up2Date" },
+        { ".rtf", "Formato de Texto Rico" },
+        { ".buildwithskipanalyzers", "Flag MSBuild Skip-Analyzers" },
+        { ".node", "Módulo Binário Node.js" },
+        { ".snap", "Pacote Snapcraft" },
+        { ".def", "Arquivo de Definição de Módulo" },
+        { ".bsd", "Licença/Configuração BSD" },
+        { ".babelrc", "Configuração Babel" },
+        { ".prettierrc", "Configuração Prettier" },
+        { ".npignore", "Regras de Ignorar NuGet" },
+        { ".php", "Script PHP" },
+        { ".eslintignore", "ESLint Ignore" },
+        { ".lic", "Arquivo de Licença" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "Lista de Propriedades macOS" },
+        { ".mui", "Interface do Usuário Multilíngue" },
+        { ".efi", "Firmware UEFI" },
+        { ".cip", "Pacote Chrome CIP" },
+        { ".bin", "Dados Binários" },
+        { ".sdi", "Imagem de Implantação do Sistema" },
+        { ".ttf", "Fonte TrueType" },
+        { ".cur", "Cursor Windows" },
+        { ".ani", "Cursor Animado" },
+        { ".diagpkg", "Pacote de Diagnóstico Windows" },
+        { ".dat", "Arquivo de Dados Genérico" },
+        { ".diffbase", "Instantâneo Base de Diff" },
+        { ".lm", "Modelo de Linguagem" },
+        { ".lm1", "Variante de Modelo de Linguagem 1" },
+        { ".lm2", "Variante de Modelo de Linguagem 2" },
+        { ".lm3", "Variante de Modelo de Linguagem 3" },
+        { ".lex", "Dados de Léxico" },
+        { ".res", "Recurso Windows" },
+        { ".nlt", "Dados NetLink Trust" },
+        { ".nls", "Suporte de Idioma Nacional" },
+        { ".chm", "Ajuda HTML Compilada" },
+        { ".fil", "Contêiner de Lista de Arquivos" },
+        { ".msixbundle", "Pacote MSIX" },
+        { ".p7x", "PKCS #7 Estendido" },
+        { ".pri", "Índice de Recursos do Pacote" },
+        { ".etl", "Log de Rastreamento de Eventos" },
+        { ".nlp", "Dados do Processador de Linguagem Natural" },
+        { ".compositefont", "Fonte Composta WPF" },
+        { ".aspx", "Página ASP.NET" },
+        { ".ascx", "Controle de Usuário ASP.NET" },
+        { ".master", "Página Master ASP.NET" },
+        { ".browser", "Definição do Navegador" },
+        { ".lnk", "Atalho Windows" },
+        { ".default", "Configurações Padrão" },
+        { ".comments", "Metadados de Comentários" },
+        { ".rsp", "Arquivo de Resposta" },
+        { ".tld", "Descrição da Biblioteca de Tags" },
+        { ".win32manifest", "Manifesto Win32" },
+        { ".man", "Página de Manual" },
+        { ".mof", "Formato de Objeto Gerenciado" },
+        { ".uninstall", "Script de Desinstalação" },
+        { ".tasks", "Tarefas MSBuild" },
+        { ".overridetasks", "Tarefas de Substituição MSBuild" },
+        { ".orp", "Dados ORP" },
+        { ".adml", "Linguagem de Modelo Administrativo" },
+        { ".ppkg", "Pacote de Provisionamento" },
+        { ".mstheme", "Tema Microsoft" },
+        { ".msstyles", "Estilo Windows" },
+        { ".mum", "Módulo de Atualização de Manifesto" },
+        { ".cat", "Catálogo de Segurança" },
+        { ".jfm", "Metadados do Banco de Dados Jet" },
+        { ".rs", "Código Rust" },
+        { ".jll", "Bitcode LLVM Julia" },
+        { ".sys", "Driver do Sistema Windows" },
+        { ".p7b", "Cadeia de Certificados PKCS #7" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "Localização INF" },
+        { ".winmd", "Metadados Windows" },
+        { ".xbf", "Formato Binário XAML" },
+        { ".license", "Token de Licença" },
+        { ".fpie", "Executável Intermediário FPGA" },
+        { ".cso", "Objeto Shader Compilado" },
+        { ".sccd", "Dados de Configuração System Center" },
+        { ".bundle", "Pacote de Aplicação" },
+        { ".schema", "Schema JSON/XML" },
+        { ".csg", "Geometria Sólida Construtiva" },
+        { ".mun", "Rede Multi-Unidade" },
+        { ".uce", "Motor de Xadrez Universal" },
+        { ".cpl", "Applet do Painel de Controle" },
+        { ".msc", "Console de Gerenciamento Microsoft" },
+        { ".ax", "Filtro DirectShow" },
+        { ".table", "Tabela de Pesquisa/Hash" },
+        { ".tsp", "Pacote/Script TSP" },
+        { ".tbl", "Dados de Tabela" },
+        { ".drv", "Driver de Dispositivo" },
+        { ".sep", "Arquivo Separador" },
+        { ".ocx", "Controle ActiveX" },
+        { ".msp", "Patch do Instalador Windows" },
+        { ".scr", "Protetor de Tela Windows" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Gramática XML" },
+        { ".xrm-ms", "Licença Microsoft" },
+        { ".rll", "Biblioteca de Vínculo de Recursos" },
+        { ".mfl", "Arquivo de Idioma MFL" },
+        { ".cdxml", "Definição de Cmdlet XML" },
+        { ".dtd", "Definição de Tipo de Documento" },
+        { ".psm1", "Script de Módulo PowerShell" },
+        { ".ps1xml", "Dados de Formatação PowerShell" },
+        { ".wprp", "Perfil do Gravador de Performance Windows" },
+        { ".xsl", "Folha de Estilos XSLT" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "Dados ReLoad" },
+        { ".job", "Tarefa Windows" },
+        { ".gypi", "Incluir GYP" },
+        { ".hlp", "Ajuda Windows" },
+        { ".gdl", "Linguagem de Descrição Genérica" },
+        { ".elf", "Formato Executável e de Vínculo" },
+        { ".ppd", "Descrição de Impressora PostScript" },
+        { ".gpd", "Descrição de Impressora Genérica" },
+        { ".mbn", "Binário do Modem" },
+        { ".pak", "Arquivo PAK" },
+        { ".dgml", "Markup de Grafo Direcionado" },
+        { ".smp", "Arquivo de Amostra" },
+        { ".lxa", "Áudio de Léxico Microsoft" },
+        { ".wwd", "Assistente Microsoft Works" },
+        { ".wsf", "Arquivo de Script Windows" },
+        { ".cw", "Modelo CardWorks" },
+        { ".phn", "Cena de Física Phun" },
+        { ".am", "Arquivo Automake" },
+        { ".fe", "Criptografador de Arquivos" },
+        { ".mllr", "Regressão Linear de Máxima Verossimilhança" },
+        { ".ngr", "ROM NEOGEO" },
+        { ".sch", "Cronograma/Esquema" },
+        { ".adlm", "Gerenciador de Licenças Autodesk" },
+        { ".adxm", "XML Administrativo" },
+        { ".nmnl", "Mínimo Normalizado" },
+        { ".propdesc", "Descrição de Propriedade" },
+        { ".nsl", "Biblioteca de Som Nokia" },
+        { ".ntf", "Formato de Transferência Nacional" },
+        { ".ntp", "Configuração NTP" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Manifesto de Runtime" },
+        { ".interop", "Dados de Interop COM" },
+        { ".frm", "Formulário Visual Basic" },
+        { ".bas", "Módulo Visual Basic" },
+        { ".dwb", "Pacote Drum Workshop" },
+        { ".npmignore", "Regras de Ignorar NPM" },
+        { ".rsrc", "Resource Fork macOS" },
+        { ".upd2date", "Flag de Cache Up2Date" },
+        { ".Up2Date", "Flag de Cache Up2Date" },
+        { ".jshintrc", "Configuração JSHint" },
+        { ".lock", "Bloqueio/Pin de Dependência" },
+        { ".nix", "Expressão Nix" },
+        { ".hr1", "Dados de Jogo HR1" },
+        { ".hr2", "Dados de Jogo HR2" },
+        { ".hr3", "Dados de Jogo HR3" },
+        { ".hr4", "Dados de Jogo HR4" },
+        { ".hr5", "Dados de Jogo HR5" },
+        { ".hr6", "Dados de Jogo HR6" },
+        { ".hr7", "Dados de Jogo HR7" },
+        { ".hr8", "Dados de Jogo HR8" },
+        { ".hr9", "Dados de Jogo HR9" },
+        { ".bnf", "Gramática Backus-Naur" },
+        { ".clb", "Catálogo COM+" },
+        { ".tlb", "Biblioteca de Tipos" },
+        { ".dic", "Dicionário/Léxico" },
+        { ".aux", "Arquivo Auxiliar TeX" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Incluir/Incluir de Código" },
+        { ".cpx", "Tradução de Página de Código" },
+        { ".mdl", "Modelo/Arquivo de Módulo" },
+        { ".dls", "Banco de Sons Transferível" },
+        { ".cdf-ms", "Manifesto de Implantação ClickOnce" },
+        { ".addin", "Add-in Visual Studio" },
+        { ".scp", "Componente de Script Windows" },
+        { ".wmz", "Skin Comprimido do Windows Media Player" },
+        { ".iec", "Banco de Dados IEC" },
+        { ".wsc", "Componente de Script Windows" },
+        { ".vrg", "Script de Registro Visual Studio" },
+        { ".prx", "Auto-Configuração de Proxy" },
+        { ".nuspec", "Especificação NuGet" },
+        
+        // ── Arquivos Estendidos / Compressão --------------------------------
+        { ".zipx", "Arquivo ZIPX" },
+        { ".alz", "Arquivo ALZip" },
+        { ".eeg", "Comprimido EEG" },
+        { ".001", "Parte 1 do Arquivo Dividido" },
+        { ".arj", "Arquivo ARJ" },
+        { ".bh", "Arquivo BlakHole" },
+        { ".lha", "Arquivo LHA" },
+        { ".lzh", "Arquivo LHA/LZH" },
+        { ".pma", "Arquivo PMarc" },
+        { ".arc", "Arquivo ARC" },
+        { ".ace", "Arquivo ACE" },
+        { ".aes", "Arquivo Criptografado AES" },
+        { ".zpak", "Arquivo ZPAQ" },
+        { ".zstd", "Arquivo Zstandard" },
+        { ".br", "Arquivo Brotli" },
+        { ".pea", "Arquivo PeaZip" },
+        { ".tbz", "Arquivo Tar.BZ" },
+        { ".tbz2", "Arquivo Tar.BZ2" },
+        { ".txz", "Arquivo Tar.XZ" },
+        { ".tlz", "Arquivo Tar.LZMA" },
+        { ".uu", "Arquivo UUEncoded" },
+        { ".uue", "Arquivo UUEncoded" },
+        { ".xxe", "Arquivo XXEncoded" },
+        { ".z", "Unix Compress" },
+        { ".tgz", "Arquivo Tar.GZ" },
+        { ".isz", "Imagem ISO-Zipped" },
+        { ".udf", "Formato de Disco Universal" },
+        { ".i00", "Parte 1 da Imagem Dividida DVD Decrypter" }
+    }
+},
+    {
+    "nl", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Word-document" },  { ".doc", "Word 97-2003" },
+        { ".xlsx", "Excel-werkmap" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" },     { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Visio-tekening" },  { ".pub", "Publisher-document" },
+        { ".one",  "OneNote-notitieblok" },
+        { ".ost", "Outlook Offline" }, { ".pst", "Outlook Persoonlijk" },
+        { ".msg", "Outlook-bericht" }, { ".eml", "E-mailbericht" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "HTML-document" },  { ".htm", "HTML-document" },
+        { ".css",  "CSS-stijlblad" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (Ingesprongen)" }, { ".less", "Less-stijl" },
+        { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+        { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+        { ".json", "JSON-gegevens" },       { ".xml", "XML-document" },
+        { ".yml",  "YAML-configuratie" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "C#-broncode" },         { ".csx", "C#-script" },
+        { ".fs", "F#-broncode" },         { ".vb", "VB.NET-broncode" },
+        { ".il", "IL-assembly" },       { ".resx", "Resource-XML" },
+        { ".xaml", "XAML-opmaak" },    { ".sln", "Visual Studio-oplossing" },
+        { ".vbproj", "VB-project" },
+        { ".vcxproj", "C++-project" },  { ".props", "MSBuild-eigenschappen" },
+        { ".targets", "MSBuild-doelen" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "C++-broncode" },       { ".cc", "C++-broncode" },
+        { ".cxx", "C++-broncode" },       { ".c", "C-broncode" },
+        { ".hpp", "C++-header" },       { ".h", "C/C++-header" },
+        { ".inl", "Inline C++" },       { ".idl", "Interface-definitie" },
+        { ".rc", "Resourcescript" },   { ".manifest", "Applicatiemanifest" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Java-broncode" },     { ".class", "Java-klasse" },
+        { ".jar", "Java-archief" },     { ".war", "Java Web-archief" },
+        { ".ear", "Enterprise-archief" }, { ".scala", "Scala-broncode" },
+        { ".groovy", "Groovy-broncode" }, { ".clj", "Clojure-broncode" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Pythonscript" },     { ".pyw", "Python (Zonder Console)" },
+        { ".pyi", "Python-stub" },      { ".pyc", "Python-bytecode" },
+        { ".pyo", "Python geoptimaliseerd" }, { ".pyd", "Python-extensie" },
+        { ".whl", "Python-wiel" },     { ".ipynb", "Jupyter-notitieblok" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Swift-broncode" },   { ".dart", "Dart-broncode" },
+        { ".kt", "Kotlin-broncode" },     { ".kts", "Kotlin-script" },
+        { ".gradle", "Gradle-script" }, { ".aar", "Android-archief" },
+        { ".apk", "Android-pakket" },  { ".aab", "Android App-bundel" },
+        { ".ipa", "iOS-pakket" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Unity-scène" },    { ".prefab", "Unity-prefab" },
+        { ".uasset", "Unreal-asset" },  { ".umap", "Unreal-kaart" },
+        { ".fbx", "FBX 3D-model" },     { ".obj", "Wavefront 3D" },
+        { ".gltf", "glTF 3D-model" },   { ".blend", "Blender-project" },
+        { ".dae", "Collada-model" },    { ".3ds", "3D Studio-model" },
+        { ".stl", "STL-model" },        { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Photoshop-document" }, { ".psb", "Photoshop Groot" },
+        { ".ai",  "Illustrator-tekening" },   { ".indd", "InDesign-document" },
+        { ".prproj", "Premiere-project" }, { ".aep", "After Effects" },
+        { ".xd",  "Adobe XD-prototype" }, { ".sketch", "Sketch-document" },
+        { ".fig", "Figma-document" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "MP3-audio" },        { ".wav", "Wave-audio" },
+        { ".flac", "FLAC-audio" },      { ".aac", "AAC-audio" },
+        { ".ogg", "OGG Vorbis" },       { ".wma", "Windows-audio" },
+        { ".opus", "Opus-audio" },      { ".m4a", "MPEG-4-audio" },
+        { ".midi", "MIDI-sequentie" },   { ".aiff", "AIFF-audio" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "MP4-video" },        { ".mkv", "Matroska-video" },
+        { ".avi", "AVI-video" },        { ".mov", "QuickTime-video" },
+        { ".wmv", "Windows-video" },    { ".webm", "WebM-video" },
+        { ".flv", "Flash-video" },      { ".m4v", "M4V-video" },
+        { ".m3u8", "HLS-afspeellijst" },
+        { ".ogv", "OGG-video" },        { ".3gp", "3GP-video" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "JPEG-afbeelding" },       { ".jpeg", "JPEG-afbeelding" },
+        { ".png", "PNG-afbeelding" },        { ".gif", "GIF-afbeelding" },
+        { ".bmp", "BMP-afbeelding" },        { ".tiff", "TIFF-afbeelding" },
+        { ".webp", "WebP-afbeelding" },      { ".ico", "Pictogram" },
+        { ".svg", "SVG-vector" },       { ".eps", "Encapsulated PostScript" },
+        { ".raw", "RAW-afbeelding" },
+        { ".cr2", "Canon RAW" },        { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" },         { ".dng", "Digital Negatief" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "ZIP-archief" },      { ".rar", "RAR-archief" },
+        { ".7z",  "7-Zip-archief" },    { ".tar", "Tar-archief" },
+        { ".gz",  "GZip-archief" },     { ".bz2", "BZip2-archief" },
+        { ".xz",  "XZ-archief" },       { ".zst", "Zstd-archief" },
+        { ".lz4", "LZ4-archief" },      { ".cab", "Cabinet-archief" },
+        { ".iso", "Schijfimage" },       { ".dmg", "macOS-schijfimage" },
+        { ".img", "Raw-schijfimage" },   { ".vhd", "Virtuele harde schijf" },
+        { ".vhdx","Hyper-V-schijf" },     { ".wim", "Windows-image" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "SQL-script" },       { ".db",  "Database" },
+        { ".sqlite", "SQLite-database" },     { ".mdb", "Access-database" },
+        { ".accdb", "Access-database" }, { ".mdf", "SQL Server-database" },
+        { ".ndf", "SQL Server NDF" },   { ".ldf", "SQL Server-log" },
+        { ".bak", "SQL-back-up" },       { ".dmp", "Database-dump" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "MATLAB-gegevens" },      { ".m", "MATLAB-script" },
+        { ".r", "R-script" },           { ".rdata", "R-dataset" },
+        { ".csv", "CSV-gegevens" },         { ".tsv", "TSV-gegevens" },
+        { ".sas", "SAS-programma" },      { ".sav", "SPSS-dataset" },
+        { ".por", "SPSS draagbaar" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "GPG-versleuteld" },    { ".pgp", "PGP-versleuteld" },
+        { ".asc", "PGP-handtekening" },    { ".sig", "Losse handtekening" },
+        { ".wallet", "Crypto-wallet" }, { ".key", "Sleutelbestand" },
+        { ".pem", "PEM-certificaat" },  { ".crt", "Certificaat" },
+        { ".p12", "PKCS#12-sleutelarchief" }, { ".pfx", "Windows-sleutelarchief" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "Game Boy-ROM" },     { ".nds", "Nintendo DS-ROM" },
+        { ".wbfs", "Wii-back-up" },
+        { ".cia", "3DS-installatie" },    { ".nsp", "Switch-pakket" },
+        { ".xci", "Switch-cartridge" }, { ".wad", "Wii-kanaal" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Windows uitvoerbaar" }, { ".msi", "Windows-installatie" },
+        { ".com", "DOS-commando" },      { ".bat", "Batch-script" },
+        { ".ps1", "PowerShell-script" }, { ".cmd", "Commando-script" },
+        { ".reg", "Registervermelding" },
+        { ".url", "Internet-snelkoppeling" }, { ".torrent", "BitTorrent" },
+        { ".log", "Logbestand" },         { ".ini", "INI-configuratie" },
+        { ".cfg", "Configuratiebestand" },      { ".conf", "Configuratie" },
+        { ".yaml", "YAML-configuratie" },     { ".toml", "TOML-configuratie" },
+        { ".env", "Omgevingsbestand" }, { ".gitignore", "Git negeren" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "LaTeX-broncode" },     { ".bib", "BibTeX-bibliotheek" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "SharePoint Web Part" },
+        { ".fxp", "FoxPro gecompileerd" },
+        { ".asd", "Word automatisch opslaan" },
+        { ".fsc", "Windows zoekcache" },
+        { ".mid", "MIDI-sequentie" },
+        { ".fst", "FL Studio-status" },
+        { ".txt", "Tekstbestand" },
+        { ".pdb", "Programmadatabase" },
+        { ".dll", "Dynamic-Link Library" },
+        { ".resources", ".NET-resources" },
+        { ".cache", "Cachebestand" },
+        { ".settings", "Instellingen XML" },
+        { ".csproj", "C#-project" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "KeePass-bestand" },
+        { ".nupkg", "NuGet-pakket" },
+        { ".p7s", "PKCS #7-handtekening" },
+        { ".map", "Source-map bestand" },
+        { ".flow", "Flow Type-declaratie" },
+        { ".mjs", "ES Module (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES Module" },
+        { ".jst", "JavaScript-sjabloon" },
+        { ".markdown", "Markdown-document" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Nintendo karaktergegevens" },
+        { ".vital", "Vital Synthesizer-preset" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "ZippedWeb-pakket" },
+        { ".flp", "FL Studio-project" },
+        { ".flstheme", "FL Studio-thema" },
+        { ".nmsv", "Native Instruments NMSV-preset" },
+        { ".wav.256", "256-bit WAV-variant" },
+        { ".pdf", "Portable Document Format" },
+        { ".config", "Configuratie XML/JSON" },
+        { ".user", "Gebruikersinstellingen" },
+        { ".uptodate", "Up2Date cache-vlag" },
+        { ".rtf", "Rich Text Format" },
+        { ".buildwithskipanalyzers", "MSBuild skip-analyzers vlag" },
+        { ".node", "Node.js binaire module" },
+        { ".snap", "Snapcraft-pakket" },
+        { ".def", "Module-definitiebestand" },
+        { ".bsd", "BSD-licentie/configuratie" },
+        { ".babelrc", "Babel-configuratie" },
+        { ".prettierrc", "Prettier-configuratie" },
+        { ".npignore", "NuGet negeerregels" },
+        { ".php", "PHP-script" },
+        { ".eslintignore", "ESLint negeren" },
+        { ".lic", "Licentiebestand" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "macOS-eigenschappenlijst" },
+        { ".mui", "Meertalige gebruikersinterface" },
+        { ".efi", "UEFI-firmware" },
+        { ".cip", "Chrome CIP-pakket" },
+        { ".bin", "Binaire gegevens" },
+        { ".sdi", "Systeemimplementatie-image" },
+        { ".ttf", "TrueType-lettertype" },
+        { ".cur", "Windows-cursor" },
+        { ".ani", "Geanimeerde cursor" },
+        { ".diagpkg", "Windows diagnostisch pakket" },
+        { ".dat", "Algemeen gegevensbestand" },
+        { ".diffbase", "Diff basis-momentopname" },
+        { ".lm", "Taalmodel" },
+        { ".lm1", "Taalmodel variant 1" },
+        { ".lm2", "Taalmodel variant 2" },
+        { ".lm3", "Taalmodel variant 3" },
+        { ".lex", "Lexicongegevens" },
+        { ".res", "Windows-resource" },
+        { ".nlt", "NetLink Trust-gegevens" },
+        { ".nls", "Nationale taalondersteuning" },
+        { ".chm", "Gecompileerde HTML-help" },
+        { ".fil", "Bestandslijstcontainer" },
+        { ".msixbundle", "MSIX-bundel" },
+        { ".p7x", "PKCS #7 uitgebreid" },
+        { ".pri", "Pakketresource-index" },
+        { ".etl", "Gebeurtenistracelog" },
+        { ".nlp", "Natural Language Processor-gegevens" },
+        { ".compositefont", "WPF-samenstellingslettertype" },
+        { ".aspx", "ASP.NET-pagina" },
+        { ".ascx", "ASP.NET-gebruikersbesturing" },
+        { ".master", "ASP.NET-hoofdpagina" },
+        { ".browser", "Browserdefinitie" },
+        { ".lnk", "Windows-snelkoppeling" },
+        { ".default", "Standaardinstellingen" },
+        { ".comments", "Commentaarmetadata" },
+        { ".rsp", "Antwoordbestand" },
+        { ".tld", "Tag Library Descriptor" },
+        { ".win32manifest", "Win32-manifest" },
+        { ".man", "Handleiding" },
+        { ".mof", "Managed Object Format" },
+        { ".uninstall", "Deïnstallatiescript" },
+        { ".tasks", "MSBuild-taken" },
+        { ".overridetasks", "MSBuild-overschrijftaken" },
+        { ".orp", "ORP-gegevens" },
+        { ".adml", "Administratief sjabloon taal" },
+        { ".ppkg", "Inrichtingspakket" },
+        { ".mstheme", "Microsoft-thema" },
+        { ".msstyles", "Windows-stijl" },
+        { ".mum", "Manifest-updatemodule" },
+        { ".cat", "Beveiligingscatalogus" },
+        { ".jfm", "Jet-databasemetadata" },
+        { ".rs", "Rust-broncode" },
+        { ".jll", "Julia LLVM-bitcode" },
+        { ".sys", "Windows-systeemstuurprogramma" },
+        { ".p7b", "PKCS #7-certificaathoudster" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "INF-localisatie" },
+        { ".winmd", "Windows-metadata" },
+        { ".xbf", "XAML-binair formaat" },
+        { ".license", "Licentietoken" },
+        { ".fpie", "FPGA-intermediair uitvoerbaar" },
+        { ".cso", "Gecompileerd shaderobject" },
+        { ".sccd", "System Center-configuratiegegevens" },
+        { ".bundle", "Applicatiebundel" },
+        { ".schema", "JSON/XML-schema" },
+        { ".csg", "Constructive Solid Geometry" },
+        { ".mun", "Multi-Unit Network" },
+        { ".uce", "Universal Chess Engine" },
+        { ".cpl", "Configuratiescherm-applet" },
+        { ".msc", "Microsoft Management Console" },
+        { ".ax", "DirectShow-filter" },
+        { ".table", "Lookup/Hash-tabel" },
+        { ".tsp", "TSP-pakket/script" },
+        { ".tbl", "Tabelgegevens" },
+        { ".drv", "Apparaatstuurprogramma" },
+        { ".sep", "Scheidingsbestand" },
+        { ".ocx", "ActiveX-besturing" },
+        { ".msp", "Windows Installer-patch" },
+        { ".scr", "Windows-bureaubladachtergrond" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Grammatica-XML" },
+        { ".xrm-ms", "Microsoft-licentie" },
+        { ".rll", "Resource Link Library" },
+        { ".mfl", "MFL-taalbestand" },
+        { ".cdxml", "Cmdlet-definitie XML" },
+        { ".dtd", "Document Type Definition" },
+        { ".psm1", "PowerShell-modulescript" },
+        { ".ps1xml", "PowerShell-opmaakgegevens" },
+        { ".wprp", "Windows Performance Recorder-profiel" },
+        { ".xsl", "XSLT-stijlblad" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "ReLoad-gegevens" },
+        { ".job", "Windows-taak" },
+        { ".gypi", "GYP-include" },
+        { ".hlp", "Windows-help" },
+        { ".gdl", "Generic Description Language" },
+        { ".elf", "Executable and Linkable Format" },
+        { ".ppd", "PostScript Printer Description" },
+        { ".gpd", "Generic Printer Description" },
+        { ".mbn", "Modem-binair" },
+        { ".pak", "PAK-archief" },
+        { ".dgml", "Directed Graph Markup" },
+        { ".smp", "Voorbeeldbestand" },
+        { ".lxa", "Microsoft Lexicon-audio" },
+        { ".wwd", "Microsoft Works-wizard" },
+        { ".wsf", "Windows Script File" },
+        { ".cw", "CardWorks-sjabloon" },
+        { ".phn", "Phun Physics-scène" },
+        { ".am", "Automake-bestand" },
+        { ".fe", "File Encryptor" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "NEOGEO-ROM" },
+        { ".sch", "Schema" },
+        { ".adlm", "Autodesk License Manager" },
+        { ".adxm", "Administratieve XML" },
+        { ".nmnl", "Genormaliseerd minimaal" },
+        { ".propdesc", "Eigenschapsbeschrijving" },
+        { ".nsl", "Nokia Sound Library" },
+        { ".ntf", "National Transfer Format" },
+        { ".ntp", "NTP-configuratie" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Runtime-manifest" },
+        { ".interop", "COM Interop-gegevens" },
+        { ".frm", "Visual Basic-formulier" },
+        { ".bas", "Visual Basic-module" },
+        { ".dwb", "Drum Workshop-bundel" },
+        { ".npmignore", "NPM negeerregels" },
+        { ".rsrc", "macOS-resourcefork" },
+        { ".upd2date", "Up2Date cache-vlag" },
+        { ".Up2Date", "Up2Date cache-vlag" },
+        { ".jshintrc", "JSHint-configuratie" },
+        { ".lock", "Vergrendeling/afhankelijkheidspin" },
+        { ".nix", "Nix-expressie" },
+        { ".hr1", "HR1-spelgegevens" },
+        { ".hr2", "HR2-spelgegevens" },
+        { ".hr3", "HR3-spelgegevens" },
+        { ".hr4", "HR4-spelgegevens" },
+        { ".hr5", "HR5-spelgegevens" },
+        { ".hr6", "HR6-spelgegevens" },
+        { ".hr7", "HR7-spelgegevens" },
+        { ".hr8", "HR8-spelgegevens" },
+        { ".hr9", "HR9-spelgegevens" },
+        { ".bnf", "Backus-Naur Form-grammatica" },
+        { ".clb", "COM+-catalogus" },
+        { ".tlb", "Typebibliotheek" },
+        { ".dic", "Woordenboek/lexicon" },
+        { ".aux", "Hulp-TeX-bestand" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Include/Broninclude" },
+        { ".cpx", "Codepaginavetaling" },
+        { ".mdl", "Model/Modulebestand" },
+        { ".dls", "Downloadable Sounds Bank" },
+        { ".cdf-ms", "ClickOnce-implementatiemanifest" },
+        { ".addin", "Visual Studio-add-in" },
+        { ".scp", "Windows Script Component" },
+        { ".wmz", "Gecomprimeerde Windows Media Player-skin" },
+        { ".iec", "IEC-database" },
+        { ".wsc", "Windows Script Component" },
+        { ".vrg", "Visual Studio-registerscript" },
+        { ".prx", "Proxy Auto-Config" },
+        { ".nuspec", "NuGet-specificatie" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "ZIPX-archief" },
+        { ".alz", "ALZip-archief" },
+        { ".eeg", "EEG gecomprimeerd" },
+        { ".001", "Gesplitst archief deel 1" },
+        { ".arj", "ARJ-archief" },
+        { ".bh",  "BlakHole-archief" },
+        { ".lha", "LHA-archief" },
+        { ".lzh", "LHA/LZH-archief" },
+        { ".pma", "PMarc-archief" },
+        { ".arc", "ARC-archief" },
+        { ".ace", "ACE-archief" },
+        { ".aes", "AES-versleuteld bestand" },
+        { ".zpak", "ZPAQ-archief" },
+        { ".zstd", "Zstandard-archief" },
+        { ".br",  "Brotli-archief" },
+        { ".pea", "PeaZip-archief" },
+        { ".tbz", "Tar.BZ-archief" },
+        { ".tbz2", "Tar.BZ2-archief" },
+        { ".txz", "Tar.XZ-archief" },
+        { ".tlz", "Tar.LZMA-archief" },
+        { ".uu",  "UUEncoded-bestand" },
+        { ".uue", "UUEncoded-bestand" },
+        { ".xxe", "XXEncoded-bestand" },
+        { ".z",   "Unix-compress" },
+        { ".tgz", "Tar.GZ-archief" },
+        { ".isz", "ISO-gezipte image" },
+        { ".udf", "Universal Disk Format" },
+        { ".i00", "DVD Decrypter gesplitste image deel 1" }
+    }
+},
+    {
+    "sv", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Word-dokument" },  { ".doc", "Word 97-2003" },
+        { ".xlsx", "Excel-arbetsbok" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" },     { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Visio-ritning" },  { ".pub", "Publisher-dokument" },
+        { ".one",  "OneNote-anteckningsbok" },
+        { ".ost", "Outlook Offline" }, { ".pst", "Outlook Personligt" },
+        { ".msg", "Outlook-meddelande" }, { ".eml", "E-postmeddelande" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "HTML-dokument" },  { ".htm", "HTML-dokument" },
+        { ".css",  "CSS-stilmall" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (Indragen)" }, { ".less", "Less-stil" },
+        { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+        { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+        { ".json", "JSON-data" },       { ".xml", "XML-dokument" },
+        { ".yml",  "YAML-konfiguration" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "C#-källkod" },         { ".csx", "C#-skript" },
+        { ".fs", "F#-källkod" },         { ".vb", "VB.NET-källkod" },
+        { ".il", "IL-assembly" },       { ".resx", "Resurs-XML" },
+        { ".xaml", "XAML-markup" },    { ".sln", "Visual Studio-lösning" },
+        { ".vbproj", "VB-projekt" },
+        { ".vcxproj", "C++-projekt" },  { ".props", "MSBuild-egenskaper" },
+        { ".targets", "MSBuild-mål" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "C++-källkod" },       { ".cc", "C++-källkod" },
+        { ".cxx", "C++-källkod" },       { ".c", "C-källkod" },
+        { ".hpp", "C++-header" },       { ".h", "C/C++-header" },
+        { ".inl", "Inline C++" },       { ".idl", "Gränssnittsdefinition" },
+        { ".rc", "Resursskript" },   { ".manifest", "Applikationsmanifest" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Java-källkod" },     { ".class", "Java-klass" },
+        { ".jar", "Java-arkiv" },     { ".war", "Java Web-arkiv" },
+        { ".ear", "Enterprise-arkiv" }, { ".scala", "Scala-källkod" },
+        { ".groovy", "Groovy-källkod" }, { ".clj", "Clojure-källkod" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Python-skript" },     { ".pyw", "Python (Ingen Konsol)" },
+        { ".pyi", "Python-stub" },      { ".pyc", "Python-bytekod" },
+        { ".pyo", "Python optimerad" }, { ".pyd", "Python-tillägg" },
+        { ".whl", "Python-hjul" },     { ".ipynb", "Jupyter-anteckningsbok" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Swift-källkod" },   { ".dart", "Dart-källkod" },
+        { ".kt", "Kotlin-källkod" },     { ".kts", "Kotlin-skript" },
+        { ".gradle", "Gradle-skript" }, { ".aar", "Android-arkiv" },
+        { ".apk", "Android-paket" },  { ".aab", "Android App Bundle" },
+        { ".ipa", "iOS-paket" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Unity-scen" },    { ".prefab", "Unity-prefab" },
+        { ".uasset", "Unreal-asset" },  { ".umap", "Unreal-karta" },
+        { ".fbx", "FBX 3D-modell" },     { ".obj", "Wavefront 3D" },
+        { ".gltf", "glTF 3D-modell" },   { ".blend", "Blender-projekt" },
+        { ".dae", "Collada-modell" },    { ".3ds", "3D Studio-modell" },
+        { ".stl", "STL-modell" },        { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Photoshop-dokument" }, { ".psb", "Photoshop Stor" },
+        { ".ai",  "Illustrator-teckning" },   { ".indd", "InDesign-dokument" },
+        { ".prproj", "Premiere-projekt" }, { ".aep", "After Effects" },
+        { ".xd",  "Adobe XD-prototyp" }, { ".sketch", "Sketch-dokument" },
+        { ".fig", "Figma-dokument" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "MP3-ljud" },        { ".wav", "Wave-ljud" },
+        { ".flac", "FLAC-ljud" },      { ".aac", "AAC-ljud" },
+        { ".ogg", "OGG Vorbis" },       { ".wma", "Windows-ljud" },
+        { ".opus", "Opus-ljud" },      { ".m4a", "MPEG-4-ljud" },
+        { ".midi", "MIDI-sekvens" },   { ".aiff", "AIFF-ljud" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "MP4-video" },        { ".mkv", "Matroska-video" },
+        { ".avi", "AVI-video" },        { ".mov", "QuickTime-video" },
+        { ".wmv", "Windows-video" },    { ".webm", "WebM-video" },
+        { ".flv", "Flash-video" },      { ".m4v", "M4V-video" },
+        { ".m3u8", "HLS-spellista" },
+        { ".ogv", "OGG-video" },        { ".3gp", "3GP-video" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "JPEG-bild" },       { ".jpeg", "JPEG-bild" },
+        { ".png", "PNG-bild" },        { ".gif", "GIF-bild" },
+        { ".bmp", "BMP-bild" },        { ".tiff", "TIFF-bild" },
+        { ".webp", "WebP-bild" },      { ".ico", "Ikon" },
+        { ".svg", "SVG-vektor" },       { ".eps", "Encapsulated PostScript" },
+        { ".raw", "RAW-bild" },
+        { ".cr2", "Canon RAW" },        { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" },         { ".dng", "Digital Negativ" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "ZIP-arkiv" },      { ".rar", "RAR-arkiv" },
+        { ".7z",  "7-Zip-arkiv" },    { ".tar", "Tar-arkiv" },
+        { ".gz",  "GZip-arkiv" },     { ".bz2", "BZip2-arkiv" },
+        { ".xz",  "XZ-arkiv" },       { ".zst", "Zstd-arkiv" },
+        { ".lz4", "LZ4-arkiv" },      { ".cab", "Cabinet-arkiv" },
+        { ".iso", "Skivavbildning" },       { ".dmg", "macOS-skivavbildning" },
+        { ".img", "Raw-skivavbildning" },   { ".vhd", "Virtuell hårddisk" },
+        { ".vhdx","Hyper-V-disk" },     { ".wim", "Windows-avbildning" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "SQL-skript" },       { ".db",  "Databas" },
+        { ".sqlite", "SQLite-databas" },     { ".mdb", "Access-databas" },
+        { ".accdb", "Access-databas" }, { ".mdf", "SQL Server-databas" },
+        { ".ndf", "SQL Server NDF" },   { ".ldf", "SQL Server-log" },
+        { ".bak", "SQL-säkerhetskopia" },       { ".dmp", "Databasdump" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "MATLAB-data" },      { ".m", "MATLAB-skript" },
+        { ".r", "R-skript" },           { ".rdata", "R-dataset" },
+        { ".csv", "CSV-data" },         { ".tsv", "TSV-data" },
+        { ".sas", "SAS-program" },      { ".sav", "SPSS-dataset" },
+        { ".por", "SPSS portabel" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "GPG-krypterad" },    { ".pgp", "PGP-krypterad" },
+        { ".asc", "PGP-signatur" },    { ".sig", "Fristående signatur" },
+        { ".wallet", "Krypto-plånbok" }, { ".key", "Nyckelfil" },
+        { ".pem", "PEM-certifikat" },  { ".crt", "Certifikat" },
+        { ".p12", "PKCS#12-nyckelförvar" }, { ".pfx", "Windows-nyckelförvar" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "Game Boy-ROM" },     { ".nds", "Nintendo DS-ROM" },
+        { ".wbfs", "Wii-säkerhetskopia" },
+        { ".cia", "3DS-installation" },    { ".nsp", "Switch-paket" },
+        { ".xci", "Switch-kassett" }, { ".wad", "Wii-kanal" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Windows körbar" }, { ".msi", "Windows-installation" },
+        { ".com", "DOS-kommando" },      { ".bat", "Batch-skript" },
+        { ".ps1", "PowerShell-skript" }, { ".cmd", "Kommandoskript" },
+        { ".reg", "Registerpost" },
+        { ".url", "Internet-genväg" }, { ".torrent", "BitTorrent" },
+        { ".log", "Loggfil" },         { ".ini", "INI-konfiguration" },
+        { ".cfg", "Konfigurationsfil" },      { ".conf", "Konfiguration" },
+        { ".yaml", "YAML-konfiguration" },     { ".toml", "TOML-konfiguration" },
+        { ".env", "Miljöfil" }, { ".gitignore", "Git ignorera" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "LaTeX-källkod" },     { ".bib", "BibTeX-bibliotek" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "SharePoint Web Part" },
+        { ".fxp", "FoxPro kompilerad" },
+        { ".asd", "Word automatiskt sparad" },
+        { ".fsc", "Windows-sökcache" },
+        { ".mid", "MIDI-sekvens" },
+        { ".fst", "FL Studio-tillstånd" },
+        { ".txt", "Textfil" },
+        { ".pdb", "Programdatabas" },
+        { ".dll", "Dynamic-Link Library" },
+        { ".resources", ".NET-resurser" },
+        { ".cache", "Cachefil" },
+        { ".settings", "Inställningar XML" },
+        { ".csproj", "C#-projekt" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "KeePass-fil" },
+        { ".nupkg", "NuGet-paket" },
+        { ".p7s", "PKCS #7-signatur" },
+        { ".map", "Källkods-kartfil" },
+        { ".flow", "Flow Type-deklaration" },
+        { ".mjs", "ES Module (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES Module" },
+        { ".jst", "JavaScript-mall" },
+        { ".markdown", "Markdown-dokument" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Nintendo karaktärsdata" },
+        { ".vital", "Vital Synthesizer-förinställning" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "ZippedWeb-paket" },
+        { ".flp", "FL Studio-projekt" },
+        { ".flstheme", "FL Studio-tema" },
+        { ".nmsv", "Native Instruments NMSV-förinställning" },
+        { ".wav.256", "256-bitars WAV-variant" },
+        { ".pdf", "Portable Document Format" },
+        { ".config", "Konfiguration XML/JSON" },
+        { ".user", "Användarinställningar" },
+        { ".uptodate", "Up2Date cache-flagga" },
+        { ".rtf", "Rich Text Format" },
+        { ".buildwithskipanalyzers", "MSBuild hoppa-över-analyzers flagga" },
+        { ".node", "Node.js binär modul" },
+        { ".snap", "Snapcraft-paket" },
+        { ".def", "Moduldefinitionsfil" },
+        { ".bsd", "BSD-licens/konfiguration" },
+        { ".babelrc", "Babel-konfiguration" },
+        { ".prettierrc", "Prettier-konfiguration" },
+        { ".npignore", "NuGet ignoreringsregler" },
+        { ".php", "PHP-skript" },
+        { ".eslintignore", "ESLint ignorera" },
+        { ".lic", "Licensfil" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "macOS-egenskapslista" },
+        { ".mui", "Flerspråkig användargränssnitt" },
+        { ".efi", "UEFI-firmware" },
+        { ".cip", "Chrome CIP-paket" },
+        { ".bin", "Binär data" },
+        { ".sdi", "Systemdistributionsavbildning" },
+        { ".ttf", "TrueType-teckensnitt" },
+        { ".cur", "Windows-markör" },
+        { ".ani", "Animerad markör" },
+        { ".diagpkg", "Windows-diagnostikpaket" },
+        { ".dat", "Generisk datafil" },
+        { ".diffbase", "Diff bas-ögonblicksbild" },
+        { ".lm", "Språkmodell" },
+        { ".lm1", "Språkmodell variant 1" },
+        { ".lm2", "Språkmodell variant 2" },
+        { ".lm3", "Språkmodell variant 3" },
+        { ".lex", "Lexikondata" },
+        { ".res", "Windows-resurs" },
+        { ".nlt", "NetLink Trust-data" },
+        { ".nls", "Nationellt språkstöd" },
+        { ".chm", "Kompilerad HTML-hjälp" },
+        { ".fil", "Fillistbehållare" },
+        { ".msixbundle", "MSIX-paket" },
+        { ".p7x", "PKCS #7 utökad" },
+        { ".pri", "Paketresursindex" },
+        { ".etl", "Händelsespårningslogg" },
+        { ".nlp", "Natural Language Processor-data" },
+        { ".compositefont", "WPF-sammansatt teckensnitt" },
+        { ".aspx", "ASP.NET-sida" },
+        { ".ascx", "ASP.NET-användarkontroll" },
+        { ".master", "ASP.NET-huvudsida" },
+        { ".browser", "Browserdefinition" },
+        { ".lnk", "Windows-genväg" },
+        { ".default", "Standardinställningar" },
+        { ".comments", "Kommentarsmetadata" },
+        { ".rsp", "Svarsfil" },
+        { ".tld", "Tag Library Descriptor" },
+        { ".win32manifest", "Win32-manifest" },
+        { ".man", "Manual" },
+        { ".mof", "Managed Object Format" },
+        { ".uninstall", "Avinstallationsskript" },
+        { ".tasks", "MSBuild-uppgifter" },
+        { ".overridetasks", "MSBuild-åsidosättningsuppgifter" },
+        { ".orp", "ORP-data" },
+        { ".adml", "Administrativ mall språk" },
+        { ".ppkg", "Etableringspaket" },
+        { ".mstheme", "Microsoft-tema" },
+        { ".msstyles", "Windows-stil" },
+        { ".mum", "Manifestuppdateringsmodul" },
+        { ".cat", "Säkerhetskatalog" },
+        { ".jfm", "Jet-databasmetadata" },
+        { ".rs", "Rust-källkod" },
+        { ".jll", "Julia LLVM-bitkod" },
+        { ".sys", "Windows-systemdrivrutin" },
+        { ".p7b", "PKCS #7-certifikatkedja" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "INF-lokalisering" },
+        { ".winmd", "Windows-metadata" },
+        { ".xbf", "XAML-binärt format" },
+        { ".license", "Licenstillstånd" },
+        { ".fpie", "FPGA-intermediär körbar" },
+        { ".cso", "Kompilerat shader-objekt" },
+        { ".sccd", "System Center-konfigurationsdata" },
+        { ".bundle", "Applikationspaket" },
+        { ".schema", "JSON/XML-schema" },
+        { ".csg", "Constructive Solid Geometry" },
+        { ".mun", "Multi-Unit Network" },
+        { ".uce", "Universal Chess Engine" },
+        { ".cpl", "Kontrollpanelsapplet" },
+        { ".msc", "Microsoft Management Console" },
+        { ".ax", "DirectShow-filter" },
+        { ".table", "Lookup/Hash-tabell" },
+        { ".tsp", "TSP-paket/skript" },
+        { ".tbl", "Tabelldata" },
+        { ".drv", "Enhetsdrivrutin" },
+        { ".sep", "Separatorfil" },
+        { ".ocx", "ActiveX-kontroll" },
+        { ".msp", "Windows Installer-patch" },
+        { ".scr", "Windows-skärmsläckare" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Grammatik-XML" },
+        { ".xrm-ms", "Microsoft-licens" },
+        { ".rll", "Resource Link Library" },
+        { ".mfl", "MFL-språkfil" },
+        { ".cdxml", "Cmdlet-definition XML" },
+        { ".dtd", "Document Type Definition" },
+        { ".psm1", "PowerShell-modulskript" },
+        { ".ps1xml", "PowerShell-formateringsdata" },
+        { ".wprp", "Windows Performance Recorder-profil" },
+        { ".xsl", "XSLT-stilmall" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "ReLoad-data" },
+        { ".job", "Windows-uppgift" },
+        { ".gypi", "GYP-include" },
+        { ".hlp", "Windows-hjälp" },
+        { ".gdl", "Generic Description Language" },
+        { ".elf", "Executable and Linkable Format" },
+        { ".ppd", "PostScript Printer Description" },
+        { ".gpd", "Generic Printer Description" },
+        { ".mbn", "Modem-binär" },
+        { ".pak", "PAK-arkiv" },
+        { ".dgml", "Directed Graph Markup" },
+        { ".smp", "Exempelfil" },
+        { ".lxa", "Microsoft Lexicon-ljud" },
+        { ".wwd", "Microsoft Works-guide" },
+        { ".wsf", "Windows Script File" },
+        { ".cw", "CardWorks-mall" },
+        { ".phn", "Phun Physics-scen" },
+        { ".am", "Automake-fil" },
+        { ".fe", "File Encryptor" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "NEOGEO-ROM" },
+        { ".sch", "Schema" },
+        { ".adlm", "Autodesk License Manager" },
+        { ".adxm", "Administrativ XML" },
+        { ".nmnl", "Normaliserad minimal" },
+        { ".propdesc", "Egenskapbeskrivning" },
+        { ".nsl", "Nokia Sound Library" },
+        { ".ntf", "National Transfer Format" },
+        { ".ntp", "NTP-konfiguration" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Runtime-manifest" },
+        { ".interop", "COM Interop-data" },
+        { ".frm", "Visual Basic-formulär" },
+        { ".bas", "Visual Basic-modul" },
+        { ".dwb", "Drum Workshop-paket" },
+        { ".npmignore", "NPM ignoreringsregler" },
+        { ".rsrc", "macOS-resursgaffel" },
+        { ".upd2date", "Up2Date cache-flagga" },
+        { ".Up2Date", "Up2Date cache-flagga" },
+        { ".jshintrc", "JSHint-konfiguration" },
+        { ".lock", "Lås/beroendepinne" },
+        { ".nix", "Nix-uttryck" },
+        { ".hr1", "HR1-speldata" },
+        { ".hr2", "HR2-speldata" },
+        { ".hr3", "HR3-speldata" },
+        { ".hr4", "HR4-speldata" },
+        { ".hr5", "HR5-speldata" },
+        { ".hr6", "HR6-speldata" },
+        { ".hr7", "HR7-speldata" },
+        { ".hr8", "HR8-speldata" },
+        { ".hr9", "HR9-speldata" },
+        { ".bnf", "Backus-Naur Form-grammatik" },
+        { ".clb", "COM+-katalog" },
+        { ".tlb", "Typbibliotek" },
+        { ".dic", "Ordlista/lexikon" },
+        { ".aux", "Hjälp-TeX-fil" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Include/Källkodsinclude" },
+        { ".cpx", "Kodsidöversättning" },
+        { ".mdl", "Modell/Modulfil" },
+        { ".dls", "Downloadable Sounds Bank" },
+        { ".cdf-ms", "ClickOnce-distributionsmanifest" },
+        { ".addin", "Visual Studio-tillägg" },
+        { ".scp", "Windows Script Component" },
+        { ".wmz", "Komprimerad Windows Media Player-skal" },
+        { ".iec", "IEC-databas" },
+        { ".wsc", "Windows Script Component" },
+        { ".vrg", "Visual Studio-registerskript" },
+        { ".prx", "Proxy Auto-Config" },
+        { ".nuspec", "NuGet-specifikation" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "ZIPX-arkiv" },
+        { ".alz", "ALZip-arkiv" },
+        { ".eeg", "EEG komprimerad" },
+        { ".001", "Delat arkiv del 1" },
+        { ".arj", "ARJ-arkiv" },
+        { ".bh",  "BlakHole-arkiv" },
+        { ".lha", "LHA-arkiv" },
+        { ".lzh", "LHA/LZH-arkiv" },
+        { ".pma", "PMarc-arkiv" },
+        { ".arc", "ARC-arkiv" },
+        { ".ace", "ACE-arkiv" },
+        { ".aes", "AES-krypterad fil" },
+        { ".zpak", "ZPAQ-arkiv" },
+        { ".zstd", "Zstandard-arkiv" },
+        { ".br",  "Brotli-arkiv" },
+        { ".pea", "PeaZip-arkiv" },
+        { ".tbz", "Tar.BZ-arkiv" },
+        { ".tbz2", "Tar.BZ2-arkiv" },
+        { ".txz", "Tar.XZ-arkiv" },
+        { ".tlz", "Tar.LZMA-arkiv" },
+        { ".uu",  "UUEncoded-fil" },
+        { ".uue", "UUEncoded-fil" },
+        { ".xxe", "XXEncoded-fil" },
+        { ".z",   "Unix-komprimera" },
+        { ".tgz", "Tar.GZ-arkiv" },
+        { ".isz", "ISO-zippad avbildning" },
+        { ".udf", "Universal Disk Format" },
+        { ".i00", "DVD Decrypter delad avbildning del 1" }
+    }
+},
+    {
+    "no", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Word-dokument" },  { ".doc", "Word 97-2003" },
+        { ".xlsx", "Excel-regneark" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" },     { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Visio-tegning" },  { ".pub", "Publisher-dokument" },
+        { ".one",  "OneNote-notatbok" },
+        { ".ost", "Outlook-offline" }, { ".pst", "Outlook-personlig" },
+        { ".msg", "Outlook-melding" }, { ".eml", "E-postmelding" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "HTML-dokument" },  { ".htm", "HTML-dokument" },
+        { ".css",  "CSS-stilark" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (innrykket)" }, { ".less", "Less-stil" },
+        { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+        { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+        { ".json", "JSON-data" },       { ".xml", "XML-dokument" },
+        { ".yml",  "YAML-konfig" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "C#-kildekode" },         { ".csx", "C#-skript" },
+        { ".fs", "F#-kildekode" },         { ".vb", "VB.NET-kildekode" },
+        { ".il", "IL-assembler" },       { ".resx", "Ressurs-XML" },
+        { ".xaml", "XAML-markup" },    { ".sln", "Visual Studio-løsning" },
+        { ".vbproj", "VB-prosjekt" },
+        { ".vcxproj", "C++-prosjekt" },  { ".props", "MSBuild-egenskaper" },
+        { ".targets", "MSBuild-mål" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "C++-kildekode" },       { ".cc", "C++-kildekode" },
+        { ".cxx", "C++-kildekode" },       { ".c", "C-kildekode" },
+        { ".hpp", "C++-header" },       { ".h", "C/C++-header" },
+        { ".inl", "Inline C++" },       { ".idl", "Grensesnittdefinisjon" },
+        { ".rc", "Ressursskript" },   { ".manifest", "Applikasjonsmanifest" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Java-kildekode" },     { ".class", "Java-klasse" },
+        { ".jar", "Java-arkiv" },     { ".war", "Java Web-arkiv" },
+        { ".ear", "Enterprise-arkiv" }, { ".scala", "Scala-kildekode" },
+        { ".groovy", "Groovy-kildekode" }, { ".clj", "Clojure-kildekode" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Python-skript" },     { ".pyw", "Python (uten konsoll)" },
+        { ".pyi", "Python-stub" },      { ".pyc", "Python-bytekode" },
+        { ".pyo", "Python-optimalisert" }, { ".pyd", "Python-utvidelse" },
+        { ".whl", "Python-wheel" },     { ".ipynb", "Jupyter-notatbok" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Swift-kildekode" },   { ".dart", "Dart-kildekode" },
+        { ".kt", "Kotlin-kildekode" },     { ".kts", "Kotlin-skript" },
+        { ".gradle", "Gradle-skript" }, { ".aar", "Android-arkiv" },
+        { ".apk", "Android-pakke" },  { ".aab", "Android App Bundle" },
+        { ".ipa", "iOS-pakke" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Unity-scene" },    { ".prefab", "Unity-prefab" },
+        { ".uasset", "Unreal-ressurs" },  { ".umap", "Unreal-kart" },
+        { ".fbx", "FBX 3D-modell" },     { ".obj", "Wavefront 3D" },
+        { ".gltf", "glTF 3D-modell" },   { ".blend", "Blender-prosjekt" },
+        { ".dae", "Collada-modell" },    { ".3ds", "3D Studio-modell" },
+        { ".stl", "STL-modell" },        { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Photoshop-dokument" }, { ".psb", "Photoshop-stort" },
+        { ".ai",  "Illustrator-kunst" },   { ".indd", "InDesign-dokument" },
+        { ".prproj", "Premiere-prosjekt" }, { ".aep", "After Effects" },
+        { ".xd",  "Adobe XD-prototype" }, { ".sketch", "Sketch-dokument" },
+        { ".fig", "Figma-dokument" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "MP3-lyd" },        { ".wav", "Wave-lyd" },
+        { ".flac", "FLAC-lyd" },      { ".aac", "AAC-lyd" },
+        { ".ogg", "OGG Vorbis" },       { ".wma", "Windows-lyd" },
+        { ".opus", "Opus-lyd" },      { ".m4a", "MPEG-4-lyd" },
+        { ".midi", "MIDI-sekvens" },   { ".aiff", "AIFF-lyd" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "MP4-video" },        { ".mkv", "Matroska-video" },
+        { ".avi", "AVI-video" },        { ".mov", "QuickTime-video" },
+        { ".wmv", "Windows-video" },    { ".webm", "WebM-video" },
+        { ".flv", "Flash-video" },      { ".m4v", "M4V-video" },
+        { ".m3u8", "HLS-spilleliste" },
+        { ".ogv", "OGG-video" },        { ".3gp", "3GP-video" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "JPEG-bilde" },       { ".jpeg", "JPEG-bilde" },
+        { ".png", "PNG-bilde" },        { ".gif", "GIF-bilde" },
+        { ".bmp", "BMP-bilde" },        { ".tiff", "TIFF-bilde" },
+        { ".webp", "WebP-bilde" },      { ".ico", "Ikon" },
+        { ".svg", "SVG-vektor" },       { ".eps", "Encapsulated PostScript" },
+        { ".raw", "RAW-bilde" },
+        { ".cr2", "Canon RAW" },        { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" },         { ".dng", "Digitalt negativ" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "ZIP-arkiv" },      { ".rar", "RAR-arkiv" },
+        { ".7z",  "7-Zip-arkiv" },    { ".tar", "Tar-arkiv" },
+        { ".gz",  "GZip-arkiv" },     { ".bz2", "BZip2-arkiv" },
+        { ".xz",  "XZ-arkiv" },       { ".zst", "Zstd-arkiv" },
+        { ".lz4", "LZ4-arkiv" },      { ".cab", "Cabinet-arkiv" },
+        { ".iso", "Platebilde" },       { ".dmg", "macOS-platebilde" },
+        { ".img", "Rått platebilde" },   { ".vhd", "Virtuell harddisk" },
+        { ".vhdx","Hyper-V-disk" },     { ".wim", "Windows-bilde" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "SQL-skript" },       { ".db",  "Database" },
+        { ".sqlite", "SQLite-database" },     { ".mdb", "Access-database" },
+        { ".accdb", "Access-database" }, { ".mdf", "SQL Server-database" },
+        { ".ndf", "SQL Server NDF" },   { ".ldf", "SQL Server-log" },
+        { ".bak", "SQL-sikkerhetskopi" },       { ".dmp", "Database-dump" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "MATLAB-data" },      { ".m", "MATLAB-skript" },
+        { ".r", "R-skript" },           { ".rdata", "R-datasett" },
+        { ".csv", "CSV-data" },         { ".tsv", "TSV-data" },
+        { ".sas", "SAS-program" },      { ".sav", "SPSS-datasett" },
+        { ".por", "SPSS-portabel" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "GPG-kryptert" },    { ".pgp", "PGP-kryptert" },
+        { ".asc", "PGP-signatur" },    { ".sig", "Frittstående signatur" },
+        { ".wallet", "Kryptolommebok" }, { ".key", "Nøkkelfil" },
+        { ".pem", "PEM-sertifikat" },  { ".crt", "Sertifikat" },
+        { ".p12", "PKCS#12-nøkkellager" }, { ".pfx", "Windows-nøkkellager" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "Game Boy-ROM" },     { ".nds", "Nintendo DS-ROM" },
+        { ".wbfs", "Wii-sikkerhetskopi" },
+        { ".cia", "3DS-installasjonsprogram" },    { ".nsp", "Switch-pakke" },
+        { ".xci", "Switch-kassett" }, { ".wad", "Wii-kanal" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Windows-program" }, { ".msi", "Windows-installasjonsprogram" },
+        { ".com", "DOS-kommando" },      { ".bat", "Batch-skript" },
+        { ".ps1", "PowerShell-skript" }, { ".cmd", "Kommando-skript" },
+        { ".reg", "Registeroppføring" },
+        { ".url", "Internett-snarvei" }, { ".torrent", "BitTorrent" },
+        { ".log", "Loggfil" },         { ".ini", "INI-konfigurasjon" },
+        { ".cfg", "Konfigurasjonsfil" },      { ".conf", "Konfigurasjon" },
+        { ".yaml", "YAML-konfig" },     { ".toml", "TOML-konfig" },
+        { ".env", "Miljøfil" }, { ".gitignore", "Git-ignorer" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "LaTeX-kildekode" },     { ".bib", "BibTeX-bibliotek" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "SharePoint Web Part" },
+        { ".fxp", "FoxPro-kompilert" },
+        { ".asd", "Word-autolagring" },
+        { ".fsc", "Windows-søkebuffer" },
+        { ".mid", "MIDI-sekvens" },
+        { ".fst", "FL Studio-tilstand" },
+        { ".txt", "Ren tekstfil" },
+        { ".pdb", "Programdatabase" },
+        { ".dll", "Dynamisk lenkebibliotek" },
+        { ".resources", ".NET-ressurser" },
+        { ".cache", "Bufferfil" },
+        { ".settings", "Innstillinger XML" },
+        { ".csproj", "C#-prosjekt" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "KeePass-fil" },
+        { ".nupkg", "NuGet-pakke" },
+        { ".p7s", "PKCS #7-signatur" },
+        { ".map", "Kildekart-fil" },
+        { ".flow", "Flow Type-deklarasjon" },
+        { ".mjs", "ES-modul (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES-modul" },
+        { ".jst", "JavaScript-mal" },
+        { ".markdown", "Markdown-dokument" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Nintendo-karakterdata" },
+        { ".vital", "Vital Synthesizer-forhåndsinnstilling" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "ZippedWeb-pakke" },
+        { ".flp", "FL Studio-prosjekt" },
+        { ".flstheme", "FL Studio-tema" },
+        { ".nmsv", "Native Instruments NMSV-forhåndsinnstilling" },
+        { ".wav.256", "256-bit WAV-variant" },
+        { ".pdf", "Portable Document Format" },
+        { ".config", "Konfigurasjon XML/JSON" },
+        { ".user", "Brukerinnstillinger" },
+        { ".uptodate", "Up2Date-bufferflagg" },
+        { ".rtf", "Rich Text Format" },
+        { ".buildwithskipanalyzers", "MSBuild Skip-Analyzers-flagg" },
+        { ".node", "Node.js-binærmodul" },
+        { ".snap", "Snapcraft-pakke" },
+        { ".def", "Moduldefinisjonsfil" },
+        { ".bsd", "BSD-lisens/konfigurasjon" },
+        { ".babelrc", "Babel-konfigurasjon" },
+        { ".prettierrc", "Prettier-konfigurasjon" },
+        { ".npignore", "NuGet-ignoreringsregler" },
+        { ".php", "PHP-skript" },
+        { ".eslintignore", "ESLint-ignorer" },
+        { ".lic", "Lisensfil" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "macOS-egenskapsliste" },
+        { ".mui", "Flerspråklig brukergrensesnitt" },
+        { ".efi", "UEFI-fastvare" },
+        { ".cip", "Chrome CIP-pakke" },
+        { ".bin", "Binærdata" },
+        { ".sdi", "System Deployment Image" },
+        { ".ttf", "TrueType-skrift" },
+        { ".cur", "Windows-markør" },
+        { ".ani", "Animasjonsmarkør" },
+        { ".diagpkg", "Windows-diagnostikkpakke" },
+        { ".dat", "Generisk datafil" },
+        { ".diffbase", "Diff-base-øyeblikksbilde" },
+        { ".lm", "Språkmodell" },
+        { ".lm1", "Språkmodell variant 1" },
+        { ".lm2", "Språkmodell variant 2" },
+        { ".lm3", "Språkmodell variant 3" },
+        { ".lex", "Leksikondata" },
+        { ".res", "Windows-ressurs" },
+        { ".nlt", "NetLink Trust-data" },
+        { ".nls", "Nasjonalt språkstøtte" },
+        { ".chm", "Kompilert HTML-hjelp" },
+        { ".fil", "Fillistebeholder" },
+        { ".msixbundle", "MSIX-pakkesamling" },
+        { ".p7x", "PKCS #7-utvidet" },
+        { ".pri", "Pakkeressursindeks" },
+        { ".etl", "Hendelsessporingslogg" },
+        { ".nlp", "Naturlig språkprosessordata" },
+        { ".compositefont", "WPF-sammensatt skrift" },
+        { ".aspx", "ASP.NET-side" },
+        { ".ascx", "ASP.NET-brukerkontroll" },
+        { ".master", "ASP.NET-hovedside" },
+        { ".browser", "Nettleserdefinisjon" },
+        { ".lnk", "Windows-snarvei" },
+        { ".default", "Standardinnstillinger" },
+        { ".comments", "Kommentarmetadata" },
+        { ".rsp", "Svarfil" },
+        { ".tld", "Tag Library Descriptor" },
+        { ".win32manifest", "Win32-manifest" },
+        { ".man", "Manualside" },
+        { ".mof", "Managed Object Format" },
+        { ".uninstall", "Avinstalleringsskript" },
+        { ".tasks", "MSBuild-oppgaver" },
+        { ".overridetasks", "MSBuild-overstyringsoppgaver" },
+        { ".orp", "ORP-data" },
+        { ".adml", "Administrative Template Language" },
+        { ".ppkg", "Provisioning-pakke" },
+        { ".mstheme", "Microsoft-tema" },
+        { ".msstyles", "Windows-stil" },
+        { ".mum", "Manifest Update Module" },
+        { ".cat", "Sikkerhetskatalog" },
+        { ".jfm", "Jet Database-metadata" },
+        { ".rs", "Rust-kildekode" },
+        { ".jll", "Julia LLVM-bytekode" },
+        { ".sys", "Windows-systemdriver" },
+        { ".p7b", "PKCS #7-sertifikatkjede" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "INF-lokalisering" },
+        { ".winmd", "Windows-metadata" },
+        { ".xbf", "XAML-binærformat" },
+        { ".license", "Lisensnøkkel" },
+        { ".fpie", "FPGA Intermediate Executable" },
+        { ".cso", "Compiled Shader Object" },
+        { ".sccd", "System Center Config Data" },
+        { ".bundle", "Applikasjonspakke" },
+        { ".schema", "JSON/XML-skjema" },
+        { ".csg", "Constructive Solid Geometry" },
+        { ".mun", "Multi-Unit Network" },
+        { ".uce", "Universal Chess Engine" },
+        { ".cpl", "Kontrollpanel-program" },
+        { ".msc", "Microsoft Management Console" },
+        { ".ax", "DirectShow-filter" },
+        { ".table", "Oppslag-/hashtabell" },
+        { ".tsp", "TSP-pakke/skript" },
+        { ".tbl", "Tabelldata" },
+        { ".drv", "Enhetsdriver" },
+        { ".sep", "Separatorfil" },
+        { ".ocx", "ActiveX-kontroll" },
+        { ".msp", "Windows Installer-patch" },
+        { ".scr", "Windows-skjermsparer" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Grammar XML" },
+        { ".xrm-ms", "Microsoft-lisens" },
+        { ".rll", "Resource Link Library" },
+        { ".mfl", "MFL-språkfil" },
+        { ".cdxml", "Cmdlet Definition XML" },
+        { ".dtd", "Document Type Definition" },
+        { ".psm1", "PowerShell-modulskript" },
+        { ".ps1xml", "PowerShell-formatdata" },
+        { ".wprp", "Windows Performance Recorder Profile" },
+        { ".xsl", "XSLT-stilark" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "ReLoad-data" },
+        { ".job", "Windows-oppgavejobb" },
+        { ".gypi", "GYP-include" },
+        { ".hlp", "Windows-hjelp" },
+        { ".gdl", "Generic Description Language" },
+        { ".elf", "Executable and Linkable Format" },
+        { ".ppd", "PostScript Printer Description" },
+        { ".gpd", "Generic Printer Description" },
+        { ".mbn", "Modem-binær" },
+        { ".pak", "PAK-arkiv" },
+        { ".dgml", "Directed Graph Markup" },
+        { ".smp", "Eksempelfil" },
+        { ".lxa", "Microsoft Lexicon Audio" },
+        { ".wwd", "Microsoft Works Wizard" },
+        { ".wsf", "Windows Script File" },
+        { ".cw", "CardWorks-mal" },
+        { ".phn", "Phun Physics Scene" },
+        { ".am", "Automake-fil" },
+        { ".fe", "File Encryptor" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "NEOGEO-ROM" },
+        { ".sch", "Timeplan/skjema" },
+        { ".adlm", "Autodesk License Manager" },
+        { ".adxm", "Administrative XML" },
+        { ".nmnl", "Normalized Minimal" },
+        { ".propdesc", "Property Description" },
+        { ".nsl", "Nokia Sound Library" },
+        { ".ntf", "National Transfer Format" },
+        { ".ntp", "NTP-konfigurasjon" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Runtime-manifest" },
+        { ".interop", "COM Interop-data" },
+        { ".frm", "Visual Basic-skjema" },
+        { ".bas", "Visual Basic-modul" },
+        { ".dwb", "Drum Workshop Bundle" },
+        { ".npmignore", "NPM-ignoreringsregler" },
+        { ".rsrc", "macOS-ressursgaffel" },
+        { ".upd2date", "Up2Date-bufferflagg" },
+        { ".Up2Date", "Up2Date-bufferflagg" },
+        { ".jshintrc", "JSHint-konfigurasjon" },
+        { ".lock", "Lås/avhengighetsfeste" },
+        { ".nix", "Nix-uttrykk" },
+        { ".hr1", "HR1-spilldata" },
+        { ".hr2", "HR2-spilldata" },
+        { ".hr3", "HR3-spilldata" },
+        { ".hr4", "HR4-spilldata" },
+        { ".hr5", "HR5-spilldata" },
+        { ".hr6", "HR6-spilldata" },
+        { ".hr7", "HR7-spilldata" },
+        { ".hr8", "HR8-spilldata" },
+        { ".hr9", "HR9-spilldata" },
+        { ".bnf", "Backus-Naur Form-grammatikk" },
+        { ".clb", "COM+-katalog" },
+        { ".tlb", "Typebibliotek" },
+        { ".dic", "Ordbok/leksikon" },
+        { ".aux", "Hjelpe-TeX-fil" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Inkluder/kildekodeinkludering" },
+        { ".cpx", "Kodesidetranslasjon" },
+        { ".mdl", "Modell/modulfil" },
+        { ".dls", "Downloadable Sounds Bank" },
+        { ".cdf-ms", "ClickOnce Deployment Manifest" },
+        { ".addin", "Visual Studio-tillegg" },
+        { ".scp", "Windows Script Component" },
+        { ".wmz", "Komprimert Windows Media Player-drakt" },
+        { ".iec", "IEC-database" },
+        { ".wsc", "Windows Script Component" },
+        { ".vrg", "Visual Studio Registry Script" },
+        { ".prx", "Proxy Auto-Config" },
+        { ".nuspec", "NuGet-spesifikasjon" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "ZIPX-arkiv" },
+        { ".alz", "ALZip-arkiv" },
+        { ".eeg", "EEG-komprimert" },
+        { ".001", "Delt arkiv del 1" },
+        { ".arj", "ARJ-arkiv" },
+        { ".bh",  "BlakHole-arkiv" },
+        { ".lha", "LHA-arkiv" },
+        { ".lzh", "LHA/LZH-arkiv" },
+        { ".pma", "PMarc-arkiv" },
+        { ".arc", "ARC-arkiv" },
+        { ".ace", "ACE-arkiv" },
+        { ".aes", "AES-kryptert fil" },
+        { ".zpak", "ZPAQ-arkiv" },
+        { ".zstd", "Zstandard-arkiv" },
+        { ".br",  "Brotli-arkiv" },
+        { ".pea", "PeaZip-arkiv" },
+        { ".tbz", "Tar.BZ-arkiv" },
+        { ".tbz2", "Tar.BZ2-arkiv" },
+        { ".txz", "Tar.XZ-arkiv" },
+        { ".tlz", "Tar.LZMA-arkiv" },
+        { ".uu",  "UUEncoded fil" },
+        { ".uue", "UUEncoded fil" },
+        { ".xxe", "XXEncoded fil" },
+        { ".z",   "Unix-komprimering" },
+        { ".tgz", "Tar.GZ-arkiv" },
+        { ".isz", "ISO-komprimert bilde" },
+        { ".udf", "Universal Disk Format" },
+        { ".i00", "DVD Decrypter delt bilde del 1" }
+    }
+},
+    {
+    "da", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Word-dokument" },  { ".doc", "Word 97-2003" },
+        { ".xlsx", "Excel-regneark" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" },     { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Visio-tegning" },  { ".pub", "Publisher-dokument" },
+        { ".one",  "OneNote-notatbog" },
+        { ".ost", "Outlook-offline" }, { ".pst", "Outlook-personlig" },
+        { ".msg", "Outlook-besked" }, { ".eml", "E-mail-besked" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "HTML-dokument" },  { ".htm", "HTML-dokument" },
+        { ".css",  "CSS-stilark" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (indrykket)" }, { ".less", "Less-stil" },
+        { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+        { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+        { ".json", "JSON-data" },       { ".xml", "XML-dokument" },
+        { ".yml",  "YAML-konfig" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "C#-kildekode" },         { ".csx", "C#-script" },
+        { ".fs", "F#-kildekode" },         { ".vb", "VB.NET-kildekode" },
+        { ".il", "IL-assembler" },       { ".resx", "Ressource-XML" },
+        { ".xaml", "XAML-markup" },    { ".sln", "Visual Studio-løsning" },
+        { ".vbproj", "VB-projekt" },
+        { ".vcxproj", "C++-projekt" },  { ".props", "MSBuild-egenskaber" },
+        { ".targets", "MSBuild-mål" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "C++-kildekode" },       { ".cc", "C++-kildekode" },
+        { ".cxx", "C++-kildekode" },       { ".c", "C-kildekode" },
+        { ".hpp", "C++-header" },       { ".h", "C/C++-header" },
+        { ".inl", "Inline C++" },       { ".idl", "Interface-definition" },
+        { ".rc", "Ressource-script" },   { ".manifest", "Applikationsmanifest" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Java-kildekode" },     { ".class", "Java-klasse" },
+        { ".jar", "Java-arkiv" },     { ".war", "Java Web-arkiv" },
+        { ".ear", "Enterprise-arkiv" }, { ".scala", "Scala-kildekode" },
+        { ".groovy", "Groovy-kildekode" }, { ".clj", "Clojure-kildekode" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Python-script" },     { ".pyw", "Python (uden konsol)" },
+        { ".pyi", "Python-stub" },      { ".pyc", "Python-bytekode" },
+        { ".pyo", "Python-optimeret" }, { ".pyd", "Python-udvidelse" },
+        { ".whl", "Python-wheel" },     { ".ipynb", "Jupyter-notatbog" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Swift-kildekode" },   { ".dart", "Dart-kildekode" },
+        { ".kt", "Kotlin-kildekode" },     { ".kts", "Kotlin-script" },
+        { ".gradle", "Gradle-script" }, { ".aar", "Android-arkiv" },
+        { ".apk", "Android-pakke" },  { ".aab", "Android App Bundle" },
+        { ".ipa", "iOS-pakke" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Unity-scene" },    { ".prefab", "Unity-prefab" },
+        { ".uasset", "Unreal-ressource" },  { ".umap", "Unreal-kort" },
+        { ".fbx", "FBX 3D-model" },     { ".obj", "Wavefront 3D" },
+        { ".gltf", "glTF 3D-model" },   { ".blend", "Blender-projekt" },
+        { ".dae", "Collada-model" },    { ".3ds", "3D Studio-model" },
+        { ".stl", "STL-model" },        { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Photoshop-dokument" }, { ".psb", "Photoshop-stor" },
+        { ".ai",  "Illustrator-kunst" },   { ".indd", "InDesign-dokument" },
+        { ".prproj", "Premiere-projekt" }, { ".aep", "After Effects" },
+        { ".xd",  "Adobe XD-prototype" }, { ".sketch", "Sketch-dokument" },
+        { ".fig", "Figma-dokument" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "MP3-lyd" },        { ".wav", "Wave-lyd" },
+        { ".flac", "FLAC-lyd" },      { ".aac", "AAC-lyd" },
+        { ".ogg", "OGG Vorbis" },       { ".wma", "Windows-lyd" },
+        { ".opus", "Opus-lyd" },      { ".m4a", "MPEG-4-lyd" },
+        { ".midi", "MIDI-sekvens" },   { ".aiff", "AIFF-lyd" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "MP4-video" },        { ".mkv", "Matroska-video" },
+        { ".avi", "AVI-video" },        { ".mov", "QuickTime-video" },
+        { ".wmv", "Windows-video" },    { ".webm", "WebM-video" },
+        { ".flv", "Flash-video" },      { ".m4v", "M4V-video" },
+        { ".m3u8", "HLS-afspilningsliste" },
+        { ".ogv", "OGG-video" },        { ".3gp", "3GP-video" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "JPEG-billede" },       { ".jpeg", "JPEG-billede" },
+        { ".png", "PNG-billede" },        { ".gif", "GIF-billede" },
+        { ".bmp", "BMP-billede" },        { ".tiff", "TIFF-billede" },
+        { ".webp", "WebP-billede" },      { ".ico", "Ikon" },
+        { ".svg", "SVG-vektor" },       { ".eps", "Encapsulated PostScript" },
+        { ".raw", "RAW-billede" },
+        { ".cr2", "Canon RAW" },        { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" },         { ".dng", "Digitalt negativ" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "ZIP-arkiv" },      { ".rar", "RAR-arkiv" },
+        { ".7z",  "7-Zip-arkiv" },    { ".tar", "Tar-arkiv" },
+        { ".gz",  "GZip-arkiv" },     { ".bz2", "BZip2-arkiv" },
+        { ".xz",  "XZ-arkiv" },       { ".zst", "Zstd-arkiv" },
+        { ".lz4", "LZ4-arkiv" },      { ".cab", "Cabinet-arkiv" },
+        { ".iso", "Disc-billede" },       { ".dmg", "macOS-diskbillede" },
+        { ".img", "Råt diskbillede" },   { ".vhd", "Virtuel harddisk" },
+        { ".vhdx","Hyper-V-disk" },     { ".wim", "Windows-billede" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "SQL-script" },       { ".db",  "Database" },
+        { ".sqlite", "SQLite-database" },     { ".mdb", "Access-database" },
+        { ".accdb", "Access-database" }, { ".mdf", "SQL Server-database" },
+        { ".ndf", "SQL Server NDF" },   { ".ldf", "SQL Server-log" },
+        { ".bak", "SQL-sikkerhedskopi" },       { ".dmp", "Database-dump" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "MATLAB-data" },      { ".m", "MATLAB-script" },
+        { ".r", "R-script" },           { ".rdata", "R-datasæt" },
+        { ".csv", "CSV-data" },         { ".tsv", "TSV-data" },
+        { ".sas", "SAS-program" },      { ".sav", "SPSS-datasæt" },
+        { ".por", "SPSS-portabel" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "GPG-krypteret" },    { ".pgp", "PGP-krypteret" },
+        { ".asc", "PGP-signatur" },    { ".sig", "Fristående signatur" },
+        { ".wallet", "Krypto-pung" }, { ".key", "Nøglefil" },
+        { ".pem", "PEM-certifikat" },  { ".crt", "Certifikat" },
+        { ".p12", "PKCS#12-nøgellager" }, { ".pfx", "Windows-nøgellager" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "Game Boy-ROM" },     { ".nds", "Nintendo DS-ROM" },
+        { ".wbfs", "Wii-sikkerhedskopi" },
+        { ".cia", "3DS-installationsprogram" },    { ".nsp", "Switch-pakke" },
+        { ".xci", "Switch-kassette" }, { ".wad", "Wii-kanal" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Windows-program" }, { ".msi", "Windows-installationsprogram" },
+        { ".com", "DOS-kommando" },      { ".bat", "Batch-script" },
+        { ".ps1", "PowerShell-script" }, { ".cmd", "Kommando-script" },
+        { ".reg", "Registerpost" },
+        { ".url", "Internet-genvej" }, { ".torrent", "BitTorrent" },
+        { ".log", "Logfil" },         { ".ini", "INI-konfiguration" },
+        { ".cfg", "Konfigurationsfil" },      { ".conf", "Konfiguration" },
+        { ".yaml", "YAML-konfig" },     { ".toml", "TOML-konfig" },
+        { ".env", "Miljøfil" }, { ".gitignore", "Git-ignorer" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "LaTeX-kildekode" },     { ".bib", "BibTeX-bibliotek" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "SharePoint Web Part" },
+        { ".fxp", "FoxPro-kompileret" },
+        { ".asd", "Word-autogem" },
+        { ".fsc", "Windows-søgecache" },
+        { ".mid", "MIDI-sekvens" },
+        { ".fst", "FL Studio-tilstand" },
+        { ".txt", "Almindelig tekstfil" },
+        { ".pdb", "Programdatabase" },
+        { ".dll", "Dynamisk linkbibliotek" },
+        { ".resources", ".NET-ressourcer" },
+        { ".cache", "Cache-fil" },
+        { ".settings", "Indstillinger XML" },
+        { ".csproj", "C#-projekt" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "KeePass-fil" },
+        { ".nupkg", "NuGet-pakke" },
+        { ".p7s", "PKCS #7-signatur" },
+        { ".map", "Kildekort-fil" },
+        { ".flow", "Flow Type-deklaration" },
+        { ".mjs", "ES-modul (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES-modul" },
+        { ".jst", "JavaScript-skabelon" },
+        { ".markdown", "Markdown-dokument" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Nintendo-karakterdata" },
+        { ".vital", "Vital Synthesizer-præsætning" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "ZippedWeb-pakke" },
+        { ".flp", "FL Studio-projekt" },
+        { ".flstheme", "FL Studio-tema" },
+        { ".nmsv", "Native Instruments NMSV-præsætning" },
+        { ".wav.256", "256-bit WAV-variant" },
+        { ".pdf", "Portable Document Format" },
+        { ".config", "Konfiguration XML/JSON" },
+        { ".user", "Brugerindstillinger" },
+        { ".uptodate", "Up2Date-cache-flag" },
+        { ".rtf", "Rich Text Format" },
+        { ".buildwithskipanalyzers", "MSBuild Skip-Analyzers-flag" },
+        { ".node", "Node.js-binærmodul" },
+        { ".snap", "Snapcraft-pakke" },
+        { ".def", "Moduldefinitionsfil" },
+        { ".bsd", "BSD-licens/konfiguration" },
+        { ".babelrc", "Babel-konfiguration" },
+        { ".prettierrc", "Prettier-konfiguration" },
+        { ".npignore", "NuGet-ignoreringsregler" },
+        { ".php", "PHP-script" },
+        { ".eslintignore", "ESLint-ignorer" },
+        { ".lic", "Licensfil" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "macOS-egenskabsliste" },
+        { ".mui", "Flersproget brugergrænseflade" },
+        { ".efi", "UEFI-firmware" },
+        { ".cip", "Chrome CIP-pakke" },
+        { ".bin", "Binærdata" },
+        { ".sdi", "System Deployment Image" },
+        { ".ttf", "TrueType-skrifttype" },
+        { ".cur", "Windows-markør" },
+        { ".ani", "Animeret markør" },
+        { ".diagpkg", "Windows-diagnostikpakke" },
+        { ".dat", "Generisk datafil" },
+        { ".diffbase", "Diff-base-øjebliksbillede" },
+        { ".lm", "Sprogmodel" },
+        { ".lm1", "Sprogmodel variant 1" },
+        { ".lm2", "Sprogmodel variant 2" },
+        { ".lm3", "Sprogmodel variant 3" },
+        { ".lex", "Leksikondata" },
+        { ".res", "Windows-ressource" },
+        { ".nlt", "NetLink Trust-data" },
+        { ".nls", "National Language Support" },
+        { ".chm", "Kompileret HTML-hjælp" },
+        { ".fil", "Filliste-container" },
+        { ".msixbundle", "MSIX-pakkesamling" },
+        { ".p7x", "PKCS #7-udvidet" },
+        { ".pri", "Pakkeressource-indeks" },
+        { ".etl", "Hændelsessporingslog" },
+        { ".nlp", "Natural Language Processor-data" },
+        { ".compositefont", "WPF-sammensat skrifttype" },
+        { ".aspx", "ASP.NET-side" },
+        { ".ascx", "ASP.NET-brugerkontrol" },
+        { ".master", "ASP.NET-hovedside" },
+        { ".browser", "Browser-definition" },
+        { ".lnk", "Windows-genvej" },
+        { ".default", "Standardindstillinger" },
+        { ".comments", "Kommentar-metadata" },
+        { ".rsp", "Svarfil" },
+        { ".tld", "Tag Library Descriptor" },
+        { ".win32manifest", "Win32-manifest" },
+        { ".man", "Manual-side" },
+        { ".mof", "Managed Object Format" },
+        { ".uninstall", "Afinstalleringsscript" },
+        { ".tasks", "MSBuild-opgaver" },
+        { ".overridetasks", "MSBuild-overstyringsopgaver" },
+        { ".orp", "ORP-data" },
+        { ".adml", "Administrative Template Language" },
+        { ".ppkg", "Provisioning-pakke" },
+        { ".mstheme", "Microsoft-tema" },
+        { ".msstyles", "Windows-stil" },
+        { ".mum", "Manifest Update Module" },
+        { ".cat", "Sikkerhedskatalog" },
+        { ".jfm", "Jet Database-metadata" },
+        { ".rs", "Rust-kildekode" },
+        { ".jll", "Julia LLVM-bytekode" },
+        { ".sys", "Windows-systemdriver" },
+        { ".p7b", "PKCS #7-certifikatkæde" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "INF-lokalisering" },
+        { ".winmd", "Windows-metadata" },
+        { ".xbf", "XAML-binærformat" },
+        { ".license", "Licensnøgle" },
+        { ".fpie", "FPGA Intermediate Executable" },
+        { ".cso", "Compiled Shader Object" },
+        { ".sccd", "System Center Config Data" },
+        { ".bundle", "Applikationspakke" },
+        { ".schema", "JSON/XML-skema" },
+        { ".csg", "Constructive Solid Geometry" },
+        { ".mun", "Multi-Unit Network" },
+        { ".uce", "Universal Chess Engine" },
+        { ".cpl", "Kontrolpanel-program" },
+        { ".msc", "Microsoft Management Console" },
+        { ".ax", "DirectShow-filter" },
+        { ".table", "Opslag-/hashtabel" },
+        { ".tsp", "TSP-pakke/script" },
+        { ".tbl", "Tabeldata" },
+        { ".drv", "Enhedsdriver" },
+        { ".sep", "Separatorfil" },
+        { ".ocx", "ActiveX-kontrol" },
+        { ".msp", "Windows Installer-patch" },
+        { ".scr", "Windows-pauseskærm" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Grammar XML" },
+        { ".xrm-ms", "Microsoft-licens" },
+        { ".rll", "Resource Link Library" },
+        { ".mfl", "MFL-sprogfil" },
+        { ".cdxml", "Cmdlet Definition XML" },
+        { ".dtd", "Document Type Definition" },
+        { ".psm1", "PowerShell-modulscript" },
+        { ".ps1xml", "PowerShell-formatdata" },
+        { ".wprp", "Windows Performance Recorder Profile" },
+        { ".xsl", "XSLT-stilark" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "ReLoad-data" },
+        { ".job", "Windows-opgavejob" },
+        { ".gypi", "GYP-include" },
+        { ".hlp", "Windows-hjælp" },
+        { ".gdl", "Generic Description Language" },
+        { ".elf", "Executable and Linkable Format" },
+        { ".ppd", "PostScript Printer Description" },
+        { ".gpd", "Generic Printer Description" },
+        { ".mbn", "Modem-binær" },
+        { ".pak", "PAK-arkiv" },
+        { ".dgml", "Directed Graph Markup" },
+        { ".smp", "Eksempelfil" },
+        { ".lxa", "Microsoft Lexicon Audio" },
+        { ".wwd", "Microsoft Works Wizard" },
+        { ".wsf", "Windows Script File" },
+        { ".cw", "CardWorks-skabelon" },
+        { ".phn", "Phun Physics Scene" },
+        { ".am", "Automake-fil" },
+        { ".fe", "File Encryptor" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "NEOGEO-ROM" },
+        { ".sch", "Tidsplan/skema" },
+        { ".adlm", "Autodesk License Manager" },
+        { ".adxm", "Administrative XML" },
+        { ".nmnl", "Normalized Minimal" },
+        { ".propdesc", "Property Description" },
+        { ".nsl", "Nokia Sound Library" },
+        { ".ntf", "National Transfer Format" },
+        { ".ntp", "NTP-konfiguration" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Runtime-manifest" },
+        { ".interop", "COM Interop-data" },
+        { ".frm", "Visual Basic-formular" },
+        { ".bas", "Visual Basic-modul" },
+        { ".dwb", "Drum Workshop Bundle" },
+        { ".npmignore", "NPM-ignoreringsregler" },
+        { ".rsrc", "macOS-ressourcegaffel" },
+        { ".upd2date", "Up2Date-cache-flag" },
+        { ".Up2Date", "Up2Date-cache-flag" },
+        { ".jshintrc", "JSHint-konfiguration" },
+        { ".lock", "Lås/afhængighedsfæstning" },
+        { ".nix", "Nix-udtryk" },
+        { ".hr1", "HR1-spildata" },
+        { ".hr2", "HR2-spildata" },
+        { ".hr3", "HR3-spildata" },
+        { ".hr4", "HR4-spildata" },
+        { ".hr5", "HR5-spildata" },
+        { ".hr6", "HR6-spildata" },
+        { ".hr7", "HR7-spildata" },
+        { ".hr8", "HR8-spildata" },
+        { ".hr9", "HR9-spildata" },
+        { ".bnf", "Backus-Naur Form-grammatik" },
+        { ".clb", "COM+-katalog" },
+        { ".tlb", "Typebibliotek" },
+        { ".dic", "Ordbog/leksikon" },
+        { ".aux", "Hjælpe-TeX-fil" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Inkluder/kildekodeinkludering" },
+        { ".cpx", "Kodesidetranslation" },
+        { ".mdl", "Model/modulfil" },
+        { ".dls", "Downloadable Sounds Bank" },
+        { ".cdf-ms", "ClickOnce Deployment Manifest" },
+        { ".addin", "Visual Studio-tilføjelse" },
+        { ".scp", "Windows Script Component" },
+        { ".wmz", "Komprimeret Windows Media Player-skin" },
+        { ".iec", "IEC-database" },
+        { ".wsc", "Windows Script Component" },
+        { ".vrg", "Visual Studio Registry Script" },
+        { ".prx", "Proxy Auto-Config" },
+        { ".nuspec", "NuGet-specifikation" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "ZIPX-arkiv" },
+        { ".alz", "ALZip-arkiv" },
+        { ".eeg", "EEG-komprimeret" },
+        { ".001", "Delt arkiv del 1" },
+        { ".arj", "ARJ-arkiv" },
+        { ".bh",  "BlakHole-arkiv" },
+        { ".lha", "LHA-arkiv" },
+        { ".lzh", "LHA/LZH-arkiv" },
+        { ".pma", "PMarc-arkiv" },
+        { ".arc", "ARC-arkiv" },
+        { ".ace", "ACE-arkiv" },
+        { ".aes", "AES-krypteret fil" },
+        { ".zpak", "ZPAQ-arkiv" },
+        { ".zstd", "Zstandard-arkiv" },
+        { ".br",  "Brotli-arkiv" },
+        { ".pea", "PeaZip-arkiv" },
+        { ".tbz", "Tar.BZ-arkiv" },
+        { ".tbz2", "Tar.BZ2-arkiv" },
+        { ".txz", "Tar.XZ-arkiv" },
+        { ".tlz", "Tar.LZMA-arkiv" },
+        { ".uu",  "UUEncoded fil" },
+        { ".uue", "UUEncoded fil" },
+        { ".xxe", "XXEncoded fil" },
+        { ".z",   "Unix-komprimering" },
+        { ".tgz", "Tar.GZ-arkiv" },
+        { ".isz", "ISO-komprimeret billede" },
+        { ".udf", "Universal Disk Format" },
+        { ".i00", "DVD Decrypter delt billede del 1" }
+    }
+},
+    {
+    "fi", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Word-asiakirja" },  { ".doc", "Word 97-2003" },
+        { ".xlsx", "Excel-työkirja" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" },     { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Visio-piirros" },  { ".pub", "Publisher-asiakirja" },
+        { ".one",  "OneNote-muistikirja" },
+        { ".ost", "Outlook-offline" }, { ".pst", "Outlook-henkilökohtainen" },
+        { ".msg", "Outlook-viesti" }, { ".eml", "Sähköpostiviesti" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "HTML-asiakirja" },  { ".htm", "HTML-asiakirja" },
+        { ".css",  "CSS-tyyliohje" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (sisennetty)" }, { ".less", "Less-tyyli" },
+        { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+        { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+        { ".json", "JSON-data" },       { ".xml", "XML-asiakirja" },
+        { ".yml",  "YAML-konfiguraatio" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "C#-lähdekoodi" },         { ".csx", "C#-skripti" },
+        { ".fs", "F#-lähdekoodi" },         { ".vb", "VB.NET-lähdekoodi" },
+        { ".il", "IL-konekieli" },       { ".resx", "Resurssi-XML" },
+        { ".xaml", "XAML-määritys" },    { ".sln", "Visual Studio -ratkaisu" },
+        { ".vbproj", "VB-projekti" },
+        { ".vcxproj", "C++-projekti" },  { ".props", "MSBuild-ominaisuudet" },
+        { ".targets", "MSBuild-kohteet" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "C++-lähdekoodi" },       { ".cc", "C++-lähdekoodi" },
+        { ".cxx", "C++-lähdekoodi" },       { ".c", "C-lähdekoodi" },
+        { ".hpp", "C++-otsake" },       { ".h", "C/C++-otsake" },
+        { ".inl", "Inline C++" },       { ".idl", "Rajapinnan määritys" },
+        { ".rc", "Resurssiskripti" },   { ".manifest", "Sovelluksen manifesti" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Java-lähdekoodi" },     { ".class", "Java-luokka" },
+        { ".jar", "Java-arkisto" },     { ".war", "Java Web -arkisto" },
+        { ".ear", "Enterprise-arkisto" }, { ".scala", "Scala-lähdekoodi" },
+        { ".groovy", "Groovy-lähdekoodi" }, { ".clj", "Clojure-lähdekoodi" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Python-skripti" },     { ".pyw", "Python (ei konsolia)" },
+        { ".pyi", "Python-tynkä" },      { ".pyc", "Python-tavuakoodi" },
+        { ".pyo", "Python-optimoitu" }, { ".pyd", "Python-laajennus" },
+        { ".whl", "Python-pyörä" },     { ".ipynb", "Jupyter-muistikirja" },
+
+        // ── Mobiili ----------------------------------------------------------
+        { ".swift", "Swift-lähdekoodi" },   { ".dart", "Dart-lähdekoodi" },
+        { ".kt", "Kotlin-lähdekoodi" },     { ".kts", "Kotlin-skripti" },
+        { ".gradle", "Gradle-skripti" }, { ".aar", "Android-arkisto" },
+        { ".apk", "Android-paketti" },  { ".aab", "Android-sovelluspaketti" },
+        { ".ipa", "iOS-paketti" },
+
+        // ── Pelikehitys / 3D ---------------------------------------------------
+        { ".unity", "Unity-skene" },    { ".prefab", "Unity-prefab" },
+        { ".uasset", "Unreal-asset" },  { ".umap", "Unreal-kartta" },
+        { ".fbx", "FBX 3D-malli" },     { ".obj", "Wavefront 3D" },
+        { ".gltf", "glTF 3D-malli" },   { ".blend", "Blender-projekti" },
+        { ".dae", "Collada-malli" },    { ".3ds", "3D Studio -malli" },
+        { ".stl", "STL-malli" },        { ".dxf", "AutoCAD DXF" },
+
+        // ── Luova / Adobe ----------------------------------------------
+        { ".psd", "Photoshop-asiakirja" }, { ".psb", "Photoshop (suuri)" },
+        { ".ai",  "Illustrator-taide" },   { ".indd", "InDesign-asiakirja" },
+        { ".prproj", "Premiere-projekti" }, { ".aep", "After Effects" },
+        { ".xd",  "Adobe XD-prototyyppi" }, { ".sketch", "Sketch-asiakirja" },
+        { ".fig", "Figma-asiakirja" },
+
+        // ── Ääni -----------------------------------------------------------
+        { ".mp3", "MP3-ääni" },        { ".wav", "Wave-ääni" },
+        { ".flac", "FLAC-ääni" },      { ".aac", "AAC-ääni" },
+        { ".ogg", "OGG Vorbis" },       { ".wma", "Windows-ääni" },
+        { ".opus", "Opus-ääni" },      { ".m4a", "MPEG-4 -ääni" },
+        { ".midi", "MIDI-sekvenssi" },   { ".aiff", "AIFF-ääni" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "MP4-video" },        { ".mkv", "Matroska-video" },
+        { ".avi", "AVI-video" },        { ".mov", "QuickTime-video" },
+        { ".wmv", "Windows-video" },    { ".webm", "WebM-video" },
+        { ".flv", "Flash-video" },      { ".m4v", "M4V-video" },
+        { ".m3u8", "HLS-soittolista" },
+        { ".ogv", "OGG-video" },        { ".3gp", "3GP-video" },
+
+        // ── Kuvat ----------------------------------------------------------
+        { ".jpg", "JPEG-kuva" },       { ".jpeg", "JPEG-kuva" },
+        { ".png", "PNG-kuva" },        { ".gif", "GIF-kuva" },
+        { ".bmp", "BMP-kuva" },        { ".tiff", "TIFF-kuva" },
+        { ".webp", "WebP-kuva" },      { ".ico", "Kuvake" },
+        { ".svg", "SVG-vektori" },       { ".eps", "Encapsulated PostScript" },
+        { ".raw", "RAW-kuva" },
+        { ".cr2", "Canon RAW" },        { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" },         { ".dng", "Digitaalinen negatiivi" },
+
+        // ── Arkistot --------------------------------------------------------
+        { ".zip", "ZIP-arkisto" },      { ".rar", "RAR-arkisto" },
+        { ".7z",  "7-Zip-arkisto" },    { ".tar", "Tar-arkisto" },
+        { ".gz",  "GZip-arkisto" },     { ".bz2", "BZip2-arkisto" },
+        { ".xz",  "XZ-arkisto" },       { ".zst", "Zstd-arkisto" },
+        { ".lz4", "LZ4-arkisto" },      { ".cab", "Cabinet-arkisto" },
+        { ".iso", "Levykuva" },       { ".dmg", "macOS-levykuva" },
+        { ".img", "Raaka-levykuva" },   { ".vhd", "Virtuaalikiintolevy" },
+        { ".vhdx","Hyper-V-levy" },     { ".wim", "Windows-kuva" },
+
+        // ── Tietokanta --------------------------------------------------------
+        { ".sql", "SQL-skripti" },       { ".db",  "Tietokanta" },
+        { ".sqlite", "SQLite-tietokanta" },     { ".mdb", "Access-tietokanta" },
+        { ".accdb", "Access-tietokanta" }, { ".mdf", "SQL Server -tietokanta" },
+        { ".ndf", "SQL Server NDF" },   { ".ldf", "SQL Server -loki" },
+        { ".bak", "SQL-varmuuskopio" },       { ".dmp", "Tietokantavedos" },
+
+        // ── Tiede / Matematiikka ---------------------------------------------
+        { ".mat", "MATLAB-data" },      { ".m", "MATLAB-skripti" },
+        { ".r", "R-skripti" },           { ".rdata", "R-datasetti" },
+        { ".csv", "CSV-data" },         { ".tsv", "TSV-data" },
+        { ".sas", "SAS-ohjelma" },      { ".sav", "SPSS-datasetti" },
+        { ".por", "SPSS-kannettava" },
+
+        // ── Krypto / Blockchain -------------------------------------------
+        { ".gpg", "GPG-salattu" },    { ".pgp", "PGP-salattu" },
+        { ".asc", "PGP-allekirjoitus" },    { ".sig", "Irrotettu allekirjoitus" },
+        { ".wallet", "Kryptolompakko" }, { ".key", "Avaintiedosto" },
+        { ".pem", "PEM-sertifikaatti" },  { ".crt", "Sertifikaatti" },
+        { ".p12", "PKCS#12-avainvarasto" }, { ".pfx", "Windows-avainvarasto" },
+
+        // ── Emulaatio / ROMit ----------------------------------------------
+        { ".gba", "Game Boy ROM" },     { ".nds", "Nintendo DS ROM" },
+        { ".wbfs", "Wii-varmuuskopio" },
+        { ".cia", "3DS-asennus" },    { ".nsp", "Switch-paketti" },
+        { ".xci", "Switch-pelikortti" }, { ".wad", "Wii-kanava" },
+
+        // ── Sekalaista ------------------------------------------------------------
+        { ".exe", "Windows-suoritettava" }, { ".msi", "Windows-asennus" },
+        { ".com", "DOS-komento" },      { ".bat", "Eräkäsikirjoitus" },
+        { ".ps1", "PowerShell-skripti" }, { ".cmd", "Komentoskripti" },
+        { ".reg", "Rekisterimerkintä" },
+        { ".url", "Internet-pikakuvake" }, { ".torrent", "BitTorrent" },
+        { ".log", "Lokitiedosto" },         { ".ini", "INI-konfiguraatio" },
+        { ".cfg", "Asetustiedosto" },      { ".conf", "Konfiguraatio" },
+        { ".yaml", "YAML-konfiguraatio" },     { ".toml", "TOML-konfiguraatio" },
+        { ".env", "Ympäristötiedosto" }, { ".gitignore", "Git-ohitus" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "LaTeX-lähde" },     { ".bib", "BibTeX-kirjasto" },
+
+        // ── Lisä / Sekalaista ---------------------------------------------
+        { ".dwp", "SharePoint-verkkososa" },
+        { ".fxp", "FoxPro-käännetty" },
+        { ".asd", "Word-automaattitalletus" },
+        { ".fsc", "Windows-hakuvälimuisti" },
+        { ".mid", "MIDI-sekvenssi" },
+        { ".fst", "FL Studio -tila" },
+        { ".txt", "Tekstitiedosto" },
+        { ".pdb", "Ohjelmatietokanta" },
+        { ".dll", "Dynamisesti linkitetty kirjasto" },
+        { ".resources", ".NET-resurssit" },
+        { ".cache", "Välimuistitiedosto" },
+        { ".settings", "Asetukset XML" },
+        { ".csproj", "C#-projekti" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "KeePass-tiedosto" },
+        { ".nupkg", "NuGet-paketti" },
+        { ".p7s", "PKCS #7 -allekirjoitus" },
+        { ".map", "Lähdekarttatiedosto" },
+        { ".flow", "Flow-tyypin määritys" },
+        { ".mjs", "ES-moduuli (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES-moduuli" },
+        { ".jst", "JavaScript-malli" },
+        { ".markdown", "Markdown-asiakirja" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Nintendo-hahmodata" },
+        { ".vital", "Vital-syntetisaattoriasetus" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "Pakattu verkkopaketti" },
+        { ".flp", "FL Studio -projekti" },
+        { ".flstheme", "FL Studio -teema" },
+        { ".nmsv", "Native Instruments NMSV-asetus" },
+        { ".wav.256", "256-bittinen WAV-variantti" },
+        { ".pdf", "Kannettava asiakirjamuoto" },
+        { ".config", "Konfiguraatio XML/JSON" },
+        { ".user", "Käyttäjäasetukset" },
+        { ".uptodate", "Up2Date-välimuistimerkki" },
+        { ".rtf", "Rikastettu tekstimuoto" },
+        { ".buildwithskipanalyzers", "MSBuild Skip-Analyzers -merkki" },
+        { ".node", "Node.js-binaarimoduuli" },
+        { ".snap", "Snapcraft-paketti" },
+        { ".def", "Moduulin määritystiedosto" },
+        { ".bsd", "BSD-lisenssi/konfiguraatio" },
+        { ".babelrc", "Babel-konfiguraatio" },
+        { ".prettierrc", "Prettier-konfiguraatio" },
+        { ".npignore", "NuGet-ohitussäännöt" },
+        { ".php", "PHP-skripti" },
+        { ".eslintignore", "ESLint-ohitus" },
+        { ".lic", "Lisenssitiedosto" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "macOS-ominaisuusluettelo" },
+        { ".mui", "Monikielinen käyttöliittymä" },
+        { ".efi", "UEFi-laiteohjelmisto" },
+        { ".cip", "Chrome CIP-paketti" },
+        { ".bin", "Binaaridata" },
+        { ".sdi", "Järjestelmän käyttöönotto-kuva" },
+        { ".ttf", "TrueType-fontti" },
+        { ".cur", "Windows-osoitin" },
+        { ".ani", "Animoitu osoitin" },
+        { ".diagpkg", "Windows-diagnostiikkapaketti" },
+        { ".dat", "Yleinen datatiedosto" },
+        { ".diffbase", "Erojen perustilanne" },
+        { ".lm", "Kielimalli" },
+        { ".lm1", "Kielimalli variantti 1" },
+        { ".lm2", "Kielimalli variantti 2" },
+        { ".lm3", "Kielimalli variantti 3" },
+        { ".lex", "Leksikkodata" },
+        { ".res", "Windows-resurssi" },
+        { ".nlt", "NetLink Trust -data" },
+        { ".nls", "Kansallinen kielituki" },
+        { ".chm", "Käännetty HTML-ohje" },
+        { ".fil", "Tiedostoluettelosäilö" },
+        { ".msixbundle", "MSIX-paketti" },
+        { ".p7x", "PKCS #7 -laajennettu" },
+        { ".pri", "Pakettiresurssihakemisto" },
+        { ".etl", "Tapahtumajäljitysloki" },
+        { ".nlp", "Luonnollisen kielen käsittelydata" },
+        { ".compositefont", "WPF-yhdistelmäfontti" },
+        { ".aspx", "ASP.NET-sivu" },
+        { ".ascx", "ASP.NET-käyttäjäohjaus" },
+        { ".master", "ASP.NET-pääsivu" },
+        { ".browser", "Selaimen määritys" },
+        { ".lnk", "Windows-pikakuvake" },
+        { ".default", "Oletusasetukset" },
+        { ".comments", "Kommenttimetatiedot" },
+        { ".rsp", "Vastaustiedosto" },
+        { ".tld", "Tag-kirjaston kuvailija" },
+        { ".win32manifest", "Win32-manifesti" },
+        { ".man", "Manuaalisivu" },
+        { ".mof", "Hallittu objektimuoto" },
+        { ".uninstall", "Poistoskripti" },
+        { ".tasks", "MSBuild-tehtävät" },
+        { ".overridetasks", "MSBuild-korvaustehtävät" },
+        { ".orp", "ORP-data" },
+        { ".adml", "Hallintamallin kieli" },
+        { ".ppkg", "Valmistelupaketti" },
+        { ".mstheme", "Microsoft-teema" },
+        { ".msstyles", "Windows-tyyli" },
+        { ".mum", "Manifestin päivitysmoduuli" },
+        { ".cat", "Turvallisuuskatalogi" },
+        { ".jfm", "Jet-tietokannan metatiedot" },
+        { ".rs", "Rust-lähde" },
+        { ".jll", "Julia LLVM -bittikoodi" },
+        { ".sys", "Windows-järjestelmäohjain" },
+        { ".p7b", "PKCS #7 -sertifikaattiketju" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "INF-lokalisointi" },
+        { ".winmd", "Windows-metatiedot" },
+        { ".xbf", "XAML-binaarimuoto" },
+        { ".license", "Lisenssimerkki" },
+        { ".fpie", "FPGA-välikäyttöjärjestelmä" },
+        { ".cso", "Käännetty varjostinobjekti" },
+        { ".sccd", "System Center -konfiguraatiodata" },
+        { ".bundle", "Sovelluspaketti" },
+        { ".schema", "JSON/XML-skeema" },
+        { ".csg", "Konstruktiivinen kiinteä geometria" },
+        { ".mun", "Moniyksikköverkko" },
+        { ".uce", "Universaali shakkimoottori" },
+        { ".cpl", "Ohjauspaneelisovellus" },
+        { ".msc", "Microsoft Management Console" },
+        { ".ax", "DirectShow-suodatin" },
+        { ".table", "Hakutaulu/hajautustaulu" },
+        { ".tsp", "TSP-paketti/skripti" },
+        { ".tbl", "Taulukkotiedot" },
+        { ".drv", "Laiteohjain" },
+        { ".sep", "Erotintiedosto" },
+        { ".ocx", "ActiveX-ohjaus" },
+        { ".msp", "Windows-asennuskorjaus" },
+        { ".scr", "Windows-näytönsäästäjä" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Kielioppi-XML" },
+        { ".xrm-ms", "Microsoft-lisenssi" },
+        { ".rll", "Resurssilinkkikirjasto" },
+        { ".mfl", "MFL-kielitiedosto" },
+        { ".cdxml", "Cmdlet-määritys XML" },
+        { ".dtd", "Asiakirjatyypin määritys" },
+        { ".psm1", "PowerShell-moduuliskripti" },
+        { ".ps1xml", "PowerShell-muotodata" },
+        { ".wprp", "Windows Performance Recorder -profiili" },
+        { ".xsl", "XSLT-tyyliohje" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "ReLoad-data" },
+        { ".job", "Windows-tehtävä" },
+        { ".gypi", "GYP-include" },
+        { ".hlp", "Windows-ohje" },
+        { ".gdl", "Yleinen kuvauskieli" },
+        { ".elf", "Suoritettava ja linkitettävä muoto" },
+        { ".ppd", "PostScript-tulostimen kuvaus" },
+        { ".gpd", "Yleinen tulostimen kuvaus" },
+        { ".mbn", "Modeemin binaari" },
+        { ".pak", "PAK-arkisto" },
+        { ".dgml", "Suunnattu graafimerkintä" },
+        { ".smp", "Näytetiedosto" },
+        { ".lxa", "Microsoft-leksikonääni" },
+        { ".wwd", "Microsoft Works -avustaja" },
+        { ".wsf", "Windows-skriptitiedosto" },
+        { ".cw", "CardWorks-malli" },
+        { ".phn", "Phun-fysiikkaskene" },
+        { ".am", "Automake-tiedosto" },
+        { ".fe", "Tiedoston salaus" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "NEOGEO ROM" },
+        { ".sch", "Aikataulu/skeema" },
+        { ".adlm", "Autodesk License Manager" },
+        { ".adxm", "Hallinnollinen XML" },
+        { ".nmnl", "Normalisoitu minimaalinen" },
+        { ".propdesc", "Ominaisuuden kuvaus" },
+        { ".nsl", "Nokia Sound Library" },
+        { ".ntf", "National Transfer Format" },
+        { ".ntp", "NTP-konfiguraatio" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Runtime-manifesti" },
+        { ".interop", "COM-interop-data" },
+        { ".frm", "Visual Basic -lomake" },
+        { ".bas", "Visual Basic -moduuli" },
+        { ".dwb", "Drum Workshop -paketti" },
+        { ".npmignore", "NPM-ohitussäännöt" },
+        { ".rsrc", "macOS-resurssihaara" },
+        { ".upd2date", "Up2Date-välimuistimerkki" },
+        { ".Up2Date", "Up2Date-välimuistimerkki" },
+        { ".jshintrc", "JSHint-konfiguraatio" },
+        { ".lock", "Lukko/riippuvuuden kiinnitys" },
+        { ".nix", "Nix-lauseke" },
+        { ".hr1", "HR1-pelidata" },
+        { ".hr2", "HR2-pelidata" },
+        { ".hr3", "HR3-pelidata" },
+        { ".hr4", "HR4-pelidata" },
+        { ".hr5", "HR5-pelidata" },
+        { ".hr6", "HR6-pelidata" },
+        { ".hr7", "HR7-pelidata" },
+        { ".hr8", "HR8-pelidata" },
+        { ".hr9", "HR9-pelidata" },
+        { ".bnf", "Backus-Naur -muodon kielioppi" },
+        { ".clb", "COM+-katalogi" },
+        { ".tlb", "Tyypinkirjasto" },
+        { ".dic", "Sanakirja/leksikko" },
+        { ".aux", "TeX-aputiedosto" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Include/lähdeinclude" },
+        { ".cpx", "Koodisivun käännös" },
+        { ".mdl", "Malli/moduulitiedosto" },
+        { ".dls", "Ladattava äänipankki" },
+        { ".cdf-ms", "ClickOnce-käyttöönoton manifesti" },
+        { ".addin", "Visual Studio -laajennus" },
+        { ".scp", "Windows-skriptikomponentti" },
+        { ".wmz", "Pakattu Windows Media Player -teema" },
+        { ".iec", "IEC-tietokanta" },
+        { ".wsc", "Windows-skriptikomponentti" },
+        { ".vrg", "Visual Studio -rekisteriskripti" },
+        { ".prx", "Proxy Auto-Config" },
+        { ".nuspec", "NuGet-määritys" },
+        
+        // ── Laajennetut arkistot / pakkaus --------------------------------
+        { ".zipx", "ZIPX-arkisto" },
+        { ".alz", "ALZip-arkisto" },
+        { ".eeg", "EEG-pakattu" },
+        { ".001", "Jaettu arkisto osa 1" },
+        { ".arj", "ARJ-arkisto" },
+        { ".bh",  "BlakHole-arkisto" },
+        { ".lha", "LHA-arkisto" },
+        { ".lzh", "LHA/LZH-arkisto" },
+        { ".pma", "PMarc-arkisto" },
+        { ".arc", "ARC-arkisto" },
+        { ".ace", "ACE-arkisto" },
+        { ".aes", "AES-salattu tiedosto" },
+        { ".zpak", "ZPAQ-arkisto" },
+        { ".zstd", "Zstandard-arkisto" },
+        { ".br",  "Brotli-arkisto" },
+        { ".pea", "PeaZip-arkisto" },
+        { ".tbz", "Tar.BZ-arkisto" },
+        { ".tbz2", "Tar.BZ2-arkisto" },
+        { ".txz", "Tar.XZ-arkisto" },
+        { ".tlz", "Tar.LZMA-arkisto" },
+        { ".uu",  "UU-koodattu tiedosto" },
+        { ".uue", "UU-koodattu tiedosto" },
+        { ".xxe", "XX-koodattu tiedosto" },
+        { ".z",   "Unix-pakkaus" },
+        { ".tgz", "Tar.GZ-arkisto" },
+        { ".isz", "ISO-pakattu kuva" },
+        { ".udf", "Universal Disk Format" },
+        { ".i00", "DVD Decrypter jaettu kuva osa 1" }
+    }
+},
+    {
+    "pl", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Dokument Word" },  { ".doc", "Word 97-2003" },
+        { ".xlsx", "Skoroszyt Excel" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint" },     { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Rysunek Visio" },  { ".pub", "Dokument Publisher" },
+        { ".one",  "Notatnik OneNote" },
+        { ".ost", "Outlook offline" }, { ".pst", "Plik osobisty Outlook" },
+        { ".msg", "Wiadomość Outlook" }, { ".eml", "Wiadomość e-mail" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "Dokument HTML" },  { ".htm", "Dokument HTML" },
+        { ".css",  "Arkusz stylów CSS" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (wcięty)" }, { ".less", "Styl Less" },
+        { ".js",   "JavaScript" },      { ".jsx", "React JSX" },
+        { ".ts",   "TypeScript" },      { ".tsx", "React TSX" },
+        { ".json", "Dane JSON" },       { ".xml", "Dokument XML" },
+        { ".yml",  "Konfiguracja YAML" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "Kod źródłowy C#" },         { ".csx", "Skrypt C#" },
+        { ".fs", "Kod źródłowy F#" },         { ".vb", "Kod źródłowy VB.NET" },
+        { ".il", "Asembler IL" },       { ".resx", "Zasoby XML" },
+        { ".xaml", "Znacznik XAML" },    { ".sln", "Rozwiązanie Visual Studio" },
+        { ".vbproj", "Projekt VB" },
+        { ".vcxproj", "Projekt C++" },  { ".props", "Właściwości MSBuild" },
+        { ".targets", "Cele MSBuild" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "Kod źródłowy C++" },       { ".cc", "Kod źródłowy C++" },
+        { ".cxx", "Kod źródłowy C++" },       { ".c", "Kod źródłowy C" },
+        { ".hpp", "Nagłówek C++" },       { ".h", "Nagłówek C/C++" },
+        { ".inl", "Inline C++" },       { ".idl", "Definicja interfejsu" },
+        { ".rc", "Skrypt zasobów" },   { ".manifest", "Manifest aplikacji" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Kod źródłowy Java" },     { ".class", "Klasa Java" },
+        { ".jar", "Archiwum Java" },     { ".war", "Archiwum web Java" },
+        { ".ear", "Archiwum Enterprise" }, { ".scala", "Kod źródłowy Scala" },
+        { ".groovy", "Kod źródłowy Groovy" }, { ".clj", "Kod źródłowy Clojure" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Skrypt Python" },     { ".pyw", "Python (bez konsoli)" },
+        { ".pyi", "Plik szkieletowy Python" },      { ".pyc", "Bajtkod Python" },
+        { ".pyo", "Python zoptymalizowany" }, { ".pyd", "Rozszerzenie Python" },
+        { ".whl", "Python Wheel" },     { ".ipynb", "Notatnik Jupyter" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Kod źródłowy Swift" },   { ".dart", "Kod źródłowy Dart" },
+        { ".kt", "Kod źródłowy Kotlin" },     { ".kts", "Skrypt Kotlin" },
+        { ".gradle", "Skrypt Gradle" }, { ".aar", "Archiwum Android" },
+        { ".apk", "Pakiet Android" },  { ".aab", "Pakiet aplikacji Android" },
+        { ".ipa", "Pakiet iOS" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Scena Unity" },    { ".prefab", "Prefab Unity" },
+        { ".uasset", "Zasób Unreal" },  { ".umap", "Mapa Unreal" },
+        { ".fbx", "Model 3D FBX" },     { ".obj", "Wavefront 3D" },
+        { ".gltf", "Model 3D glTF" },   { ".blend", "Projekt Blender" },
+        { ".dae", "Model Collada" },    { ".3ds", "Model 3D Studio" },
+        { ".stl", "Model STL" },        { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Dokument Photoshop" }, { ".psb", "Photoshop duży" },
+        { ".ai",  "Sztuka Illustrator" },   { ".indd", "Dokument InDesign" },
+        { ".prproj", "Projekt Premiere" }, { ".aep", "After Effects" },
+        { ".xd",  "Prototyp Adobe XD" }, { ".sketch", "Dokument Sketch" },
+        { ".fig", "Dokument Figma" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "Audio MP3" },        { ".wav", "Audio Wave" },
+        { ".flac", "Audio FLAC" },      { ".aac", "Audio AAC" },
+        { ".ogg", "OGG Vorbis" },       { ".wma", "Audio Windows" },
+        { ".opus", "Audio Opus" },      { ".m4a", "Audio MPEG-4" },
+        { ".midi", "Sekwencja MIDI" },   { ".aiff", "Audio AIFF" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "Wideo MP4" },        { ".mkv", "Wideo Matroska" },
+        { ".avi", "Wideo AVI" },        { ".mov", "Wideo QuickTime" },
+        { ".wmv", "Wideo Windows" },    { ".webm", "Wideo WebM" },
+        { ".flv", "Wideo Flash" },      { ".m4v", "Wideo M4V" },
+        { ".m3u8", "Lista odtwarzania HLS" },
+        { ".ogv", "Wideo OGG" },        { ".3gp", "Wideo 3GP" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "Obraz JPEG" },       { ".jpeg", "Obraz JPEG" },
+        { ".png", "Obraz PNG" },        { ".gif", "Obraz GIF" },
+        { ".bmp", "Obraz BMP" },        { ".tiff", "Obraz TIFF" },
+        { ".webp", "Obraz WebP" },      { ".ico", "Ikona" },
+        { ".svg", "Wektor SVG" },       { ".eps", "Encapsulated PostScript" },
+        { ".raw", "Obraz RAW" },
+        { ".cr2", "Canon RAW" },        { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" },         { ".dng", "Cyfrowy negatyw" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "Archiwum ZIP" },      { ".rar", "Archiwum RAR" },
+        { ".7z",  "Archiwum 7-Zip" },    { ".tar", "Archiwum Tar" },
+        { ".gz",  "Archiwum GZip" },     { ".bz2", "Archiwum BZip2" },
+        { ".xz",  "Archiwum XZ" },       { ".zst", "Archiwum Zstd" },
+        { ".lz4", "Archiwum LZ4" },      { ".cab", "Archiwum Cabinet" },
+        { ".iso", "Obraz dysku" },       { ".dmg", "Obraz dysku macOS" },
+        { ".img", "Surovy obraz dysku" },   { ".vhd", "Wirtualny dysk twardy" },
+        { ".vhdx","Dysk Hyper-V" },     { ".wim", "Obraz Windows" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "Skrypt SQL" },       { ".db",  "Baza danych" },
+        { ".sqlite", "Baza SQLite" },     { ".mdb", "Baza Access" },
+        { ".accdb", "Baza danych Access" }, { ".mdf", "Baza SQL Server" },
+        { ".ndf", "SQL Server NDF" },   { ".ldf", "Log SQL Server" },
+        { ".bak", "Kopia zapasowa SQL" },       { ".dmp", "Zrzut bazy danych" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "Dane MATLAB" },      { ".m", "Skrypt MATLAB" },
+        { ".r", "Skrypt R" },           { ".rdata", "Zbiór danych R" },
+        { ".csv", "Dane CSV" },         { ".tsv", "Dane TSV" },
+        { ".sas", "Program SAS" },      { ".sav", "Zbiór danych SPSS" },
+        { ".por", "SPSS przenośny" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "Zaszyfrowany GPG" },    { ".pgp", "Zaszyfrowany PGP" },
+        { ".asc", "Podpis PGP" },    { ".sig", "Podpis odłączony" },
+        { ".wallet", "Portfel kryptowalut" }, { ".key", "Plik klucza" },
+        { ".pem", "Certyfikat PEM" },  { ".crt", "Certyfikat" },
+        { ".p12", "Magazyn kluczy PKCS#12" }, { ".pfx", "Magazyn kluczy Windows" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "ROM Game Boy" },     { ".nds", "ROM Nintendo DS" },
+        { ".wbfs", "Kopia zapasowa Wii" },
+        { ".cia", "Instalator 3DS" },    { ".nsp", "Pakiet Switch" },
+        { ".xci", "Kartridż Switch" }, { ".wad", "Kanał Wii" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Plik wykonywalny Windows" }, { ".msi", "Instalator Windows" },
+        { ".com", "Polecenie DOS" },      { ".bat", "Skrypt wsadowy" },
+        { ".ps1", "Skrypt PowerShell" }, { ".cmd", "Skrypt poleceń" },
+        { ".reg", "Wpis rejestru" },
+        { ".url", "Skrót internetowy" }, { ".torrent", "BitTorrent" },
+        { ".log", "Plik dziennika" },         { ".ini", "Konfiguracja INI" },
+        { ".cfg", "Plik konfiguracyjny" },      { ".conf", "Konfiguracja" },
+        { ".yaml", "Konfiguracja YAML" },     { ".toml", "Konfiguracja TOML" },
+        { ".env", "Plik środowiskowy" }, { ".gitignore", "Ignorowanie Git" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "Kod źródłowy LaTeX" },     { ".bib", "Biblioteka BibTeX" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "Element sieciowy SharePoint" },
+        { ".fxp", "Skompilowany FoxPro" },
+        { ".asd", "Autozapis Word" },
+        { ".fsc", "Pamięć podręczna wyszukiwania Windows" },
+        { ".mid", "Sekwencja MIDI" },
+        { ".fst", "Stan FL Studio" },
+        { ".txt", "Plik tekstowy" },
+        { ".pdb", "Baza danych programu" },
+        { ".dll", "Biblioteka dołączana dynamicznie" },
+        { ".resources", "Zasoby .NET" },
+        { ".cache", "Plik pamięci podręcznej" },
+        { ".settings", "Ustawienia XML" },
+        { ".csproj", "Projekt C#" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "Plik KeePass" },
+        { ".nupkg", "Pakiet NuGet" },
+        { ".p7s", "Podpis PKCS #7" },
+        { ".map", "Plik mapy źródłowej" },
+        { ".flow", "Deklaracja typu Flow" },
+        { ".mjs", "Moduł ES (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "Moduł ES TypeScript" },
+        { ".jst", "Szablon JavaScript" },
+        { ".markdown", "Dokument Markdown" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Dane postaci Nintendo" },
+        { ".vital", "Preset syntezatora Vital" },
+        { ".ds_store", "macOS Desktop Services Store" },
+        { ".zpw", "Pakiet ZippedWeb" },
+        { ".flp", "Projekt FL Studio" },
+        { ".flstheme", "Motyw FL Studio" },
+        { ".nmsv", "Preset Native Instruments NMSV" },
+        { ".wav.256", "Wariant WAV 256-bitowy" },
+        { ".pdf", "Przenośny format dokumentu" },
+        { ".config", "Konfiguracja XML/JSON" },
+        { ".user", "Ustawienia użytkownika" },
+        { ".uptodate", "Flaga pamięci podręcznej Up2Date" },
+        { ".rtf", "Format tekstu sformatowanego" },
+        { ".buildwithskipanalyzers", "Flaga MSBuild Skip-Analyzers" },
+        { ".node", "Moduł binarny Node.js" },
+        { ".snap", "Pakiet Snapcraft" },
+        { ".def", "Plik definicji modułu" },
+        { ".bsd", "Licencja/konfiguracja BSD" },
+        { ".babelrc", "Konfiguracja Babel" },
+        { ".prettierrc", "Konfiguracja Prettier" },
+        { ".npignore", "Reguły ignorowania NuGet" },
+        { ".php", "Skrypt PHP" },
+        { ".eslintignore", "Ignorowanie ESLint" },
+        { ".lic", "Plik licencji" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "Lista właściwości macOS" },
+        { ".mui", "Wielojęzyczny interfejs użytkownika" },
+        { ".efi", "Oprogramowanie firmware UEFI" },
+        { ".cip", "Pakiet Chrome CIP" },
+        { ".bin", "Dane binarne" },
+        { ".sdi", "Obraz wdrażania systemu" },
+        { ".ttf", "Czcionka TrueType" },
+        { ".cur", "Kursor Windows" },
+        { ".ani", "Animowany kursor" },
+        { ".diagpkg", "Pakiet diagnostyczny Windows" },
+        { ".dat", "Ogólny plik danych" },
+        { ".diffbase", "Migawka bazowa różnic" },
+        { ".lm", "Model języka" },
+        { ".lm1", "Wariant modelu języka 1" },
+        { ".lm2", "Wariant modelu języka 2" },
+        { ".lm3", "Wariant modelu języka 3" },
+        { ".lex", "Dane leksykonu" },
+        { ".res", "Zasób Windows" },
+        { ".nlt", "Dane NetLink Trust" },
+        { ".nls", "Obsługa języków narodowych" },
+        { ".chm", "Skompilowana pomoc HTML" },
+        { ".fil", "Kontener listy plików" },
+        { ".msixbundle", "Pakiet MSIX" },
+        { ".p7x", "PKCS #7 rozszerzony" },
+        { ".pri", "Indeks zasobów pakietu" },
+        { ".etl", "Dziennik śledzenia zdarzeń" },
+        { ".nlp", "Dane procesora języka naturalnego" },
+        { ".compositefont", "Czcionka złożona WPF" },
+        { ".aspx", "Strona ASP.NET" },
+        { ".ascx", "Kontrolka użytkownika ASP.NET" },
+        { ".master", "Strona wzorcowa ASP.NET" },
+        { ".browser", "Definicja przeglądarki" },
+        { ".lnk", "Skrót Windows" },
+        { ".default", "Ustawienia domyślne" },
+        { ".comments", "Metadane komentarzy" },
+        { ".rsp", "Plik odpowiedzi" },
+        { ".tld", "Deskryptor biblioteki tagów" },
+        { ".win32manifest", "Manifest Win32" },
+        { ".man", "Strona podręcznika" },
+        { ".mof", "Zarządzany format obiektu" },
+        { ".uninstall", "Skrypt dezinstalacji" },
+        { ".tasks", "Zadania MSBuild" },
+        { ".overridetasks", "Zadania zastępujące MSBuild" },
+        { ".orp", "Dane ORP" },
+        { ".adml", "Język szablonu administracyjnego" },
+        { ".ppkg", "Pakiet inicjowania" },
+        { ".mstheme", "Motyw Microsoft" },
+        { ".msstyles", "Styl Windows" },
+        { ".mum", "Moduł aktualizacji manifestu" },
+        { ".cat", "Katalog zabezpieczeń" },
+        { ".jfm", "Metadane bazy danych Jet" },
+        { ".rs", "Kod źródłowy Rust" },
+        { ".jll", "Bitcode LLVM Julia" },
+        { ".sys", "Sterownik systemowy Windows" },
+        { ".p7b", "Łańcuch certyfikatów PKCS #7" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "Lokalizacja INF" },
+        { ".winmd", "Metadane Windows" },
+        { ".xbf", "Format binarny XAML" },
+        { ".license", "Token licencji" },
+        { ".fpie", "Plik wykonywalny pośredni FPGA" },
+        { ".cso", "Skompilowany obiekt shadera" },
+        { ".sccd", "Dane konfiguracyjne System Center" },
+        { ".bundle", "Pakiet aplikacji" },
+        { ".schema", "Schemat JSON/XML" },
+        { ".csg", "Konstruktywna geometria bryły" },
+        { ".mun", "Sieć wielojednostkowa" },
+        { ".uce", "Uniwersalna szachowa maszyna" },
+        { ".cpl", "Aplet Panelu sterowania" },
+        { ".msc", "Microsoft Management Console" },
+        { ".ax", "Filtr DirectShow" },
+        { ".table", "Tabela przeglądowa/haszująca" },
+        { ".tsp", "Pakiet/skrypt TSP" },
+        { ".tbl", "Dane tabeli" },
+        { ".drv", "Sterownik urządzenia" },
+        { ".sep", "Plik separatora" },
+        { ".ocx", "Kontrolka ActiveX" },
+        { ".msp", "Łata instalatora Windows" },
+        { ".scr", "Wygaszacz ekranu Windows" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Gramatyka XML" },
+        { ".xrm-ms", "Licencja Microsoft" },
+        { ".rll", "Biblioteka łącza zasobów" },
+        { ".mfl", "Plik języka MFL" },
+        { ".cdxml", "Definicja polecenia cmdlet XML" },
+        { ".dtd", "Definicja typu dokumentu" },
+        { ".psm1", "Skrypt modułu PowerShell" },
+        { ".ps1xml", "Dane formatowania PowerShell" },
+        { ".wprp", "Profil rejestratora wydajności Windows" },
+        { ".xsl", "Arkusz stylów XSLT" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "Dane ReLoad" },
+        { ".job", "Zadanie Windows" },
+        { ".gypi", "Dołącznik GYP" },
+        { ".hlp", "Pomoc Windows" },
+        { ".gdl", "Język opisu ogólnego" },
+        { ".elf", "Format wykonywalny i linkowalny" },
+        { ".ppd", "Opis drukarki PostScript" },
+        { ".gpd", "Ogólny opis drukarki" },
+        { ".mbn", "Binaria modemu" },
+        { ".pak", "Archiwum PAK" },
+        { ".dgml", "Znacznik grafu skierowanego" },
+        { ".smp", "Plik przykładowy" },
+        { ".lxa", "Audio leksykonu Microsoft" },
+        { ".wwd", "Kreator Microsoft Works" },
+        { ".wsf", "Plik skryptu Windows" },
+        { ".cw", "Szablon CardWorks" },
+        { ".phn", "Scena fizyki Phun" },
+        { ".am", "Plik Automake" },
+        { ".fe", "Szyfrator plików" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "ROM NEOGEO" },
+        { ".sch", "Harmonogram/schemat" },
+        { ".adlm", "Menedżer licencji Autodesk" },
+        { ".adxm", "XML administracyjny" },
+        { ".nmnl", "Znormalizowany minimalny" },
+        { ".propdesc", "Opis właściwości" },
+        { ".nsl", "Biblioteka dźwięków Nokia" },
+        { ".ntf", "National Transfer Format" },
+        { ".ntp", "Konfiguracja NTP" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Manifest środowiska uruchomieniowego" },
+        { ".interop", "Dane COM Interop" },
+        { ".frm", "Formularz Visual Basic" },
+        { ".bas", "Moduł Visual Basic" },
+        { ".dwb", "Pakiet Drum Workshop" },
+        { ".npmignore", "Reguły ignorowania NPM" },
+        { ".rsrc", "Widelec zasobów macOS" },
+        { ".upd2date", "Flaga pamięci podręcznej Up2Date" },
+        { ".Up2Date", "Flaga pamięci podręcznej Up2Date" },
+        { ".jshintrc", "Konfiguracja JSHint" },
+        { ".lock", "Blokada/przypisanie zależności" },
+        { ".nix", "Wyrażenie Nix" },
+        { ".hr1", "Dane gry HR1" },
+        { ".hr2", "Dane gry HR2" },
+        { ".hr3", "Dane gry HR3" },
+        { ".hr4", "Dane gry HR4" },
+        { ".hr5", "Dane gry HR5" },
+        { ".hr6", "Dane gry HR6" },
+        { ".hr7", "Dane gry HR7" },
+        { ".hr8", "Dane gry HR8" },
+        { ".hr9", "Dane gry HR9" },
+        { ".bnf", "Gramatyka formy Backus-Naur" },
+        { ".clb", "Katalog COM+" },
+        { ".tlb", "Biblioteka typów" },
+        { ".dic", "Słownik/leksykon" },
+        { ".aux", "Plik pomocniczy TeX" },
+        { ".ds", "DataStore/DS_Store" },
+        { ".inc", "Dołącznik źródłowy" },
+        { ".cpx", "Tłumaczenie strony kodowej" },
+        { ".mdl", "Plik modelu/modułu" },
+        { ".dls", "Bank dźwięków do pobrania" },
+        { ".cdf-ms", "Manifest wdrożenia ClickOnce" },
+        { ".addin", "Dodatek Visual Studio" },
+        { ".scp", "Komponent skryptu Windows" },
+        { ".wmz", "Skórka Windows Media Player skompresowana" },
+        { ".iec", "Baza danych IEC" },
+        { ".wsc", "Komponent skryptu Windows" },
+        { ".vrg", "Skrypt rejestru Visual Studio" },
+        { ".prx", "Proxy Auto-Config" },
+        { ".nuspec", "Specyfikacja NuGet" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "Archiwum ZIPX" },
+        { ".alz", "Archiwum ALZip" },
+        { ".eeg", "Skompresowany EEG" },
+        { ".001", "Podzielone archiwum część 1" },
+        { ".arj", "Archiwum ARJ" },
+        { ".bh",  "Archiwum BlakHole" },
+        { ".lha", "Archiwum LHA" },
+        { ".lzh", "Archiwum LHA/LZH" },
+        { ".pma", "Archiwum PMarc" },
+        { ".arc", "Archiwum ARC" },
+        { ".ace", "Archiwum ACE" },
+        { ".aes", "Plik zaszyfrowany AES" },
+        { ".zpak", "Archiwum ZPAQ" },
+        { ".zstd", "Archiwum Zstandard" },
+        { ".br",  "Archiwum Brotli" },
+        { ".pea", "Archiwum PeaZip" },
+        { ".tbz", "Archiwum Tar.BZ" },
+        { ".tbz2", "Archiwum Tar.BZ2" },
+        { ".txz", "Archiwum Tar.XZ" },
+        { ".tlz", "Archiwum Tar.LZMA" },
+        { ".uu",  "Plik zakodowany UU" },
+        { ".uue", "Plik zakodowany UU" },
+        { ".xxe", "Plik zakodowany XX" },
+        { ".z",   "Kompresja Unix" },
+        { ".tgz", "Archiwum Tar.GZ" },
+        { ".isz", "Obraz ISO skompresowany" },
+        { ".udf", "Uniwersalny format dysku" },
+        { ".i00", "Obraz podzielony DVD Decrypter część 1" }
+    }
+},
+    {
+    "cs", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Dokument Word" }, { ".doc", "Word 97-2003" },
+        { ".xlsx", "Sešit Excel" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "Prezentace PowerPoint" }, { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Kresba Visio" }, { ".pub", "Dokument Publisher" },
+        { ".one", "Poznámkový blok OneNote" },
+        { ".ost", "Offline data Outlook" }, { ".pst", "Osobní soubory Outlook" },
+        { ".msg", "Zpráva Outlook" }, { ".eml", "E-mailová zpráva" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "HTML dokument" }, { ".htm", "HTML dokument" },
+        { ".css", "CSS styl" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (odsazený)" }, { ".less", "Less styl" },
+        { ".js", "JavaScript" }, { ".jsx", "React JSX" },
+        { ".ts", "TypeScript" }, { ".tsx", "React TSX" },
+        { ".json", "JSON data" }, { ".xml", "XML dokument" },
+        { ".yml", "YAML konfigurace" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "Zdrojový kód C#" }, { ".csx", "Skript C#" },
+        { ".fs", "Zdrojový kód F#" }, { ".vb", "Zdrojový kód VB.NET" },
+        { ".il", "IL assembler" }, { ".resx", "XML zdrojů" },
+        { ".xaml", "XAML značky" }, { ".sln", "Řešení Visual Studio" },
+        { ".vbproj", "VB projekt" },
+        { ".vcxproj", "C++ projekt" }, { ".props", "Vlastnosti MSBuild" },
+        { ".targets", "Cíle MSBuild" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "Zdrojový kód C++" }, { ".cc", "Zdrojový kód C++" },
+        { ".cxx", "Zdrojový kód C++" }, { ".c", "Zdrojový kód C" },
+        { ".hpp", "Hlavička C++" }, { ".h", "Hlavička C/C++" },
+        { ".inl", "Inline C++" }, { ".idl", "Definice rozhraní" },
+        { ".rc", "Skript zdrojů" }, { ".manifest", "Manifest aplikace" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Zdrojový kód Java" }, { ".class", "Třída Java" },
+        { ".jar", "Archiv Java" }, { ".war", "Webový archiv Java" },
+        { ".ear", "Enterprise archiv" }, { ".scala", "Zdrojový kód Scala" },
+        { ".groovy", "Zdrojový kód Groovy" }, { ".clj", "Zdrojový kód Clojure" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Skript Python" }, { ".pyw", "Python (bez konzole)" },
+        { ".pyi", "Zástupný soubor Python" }, { ".pyc", "Bytecode Python" },
+        { ".pyo", "Optimalizovaný Python" }, { ".pyd", "Rozšíření Python" },
+        { ".whl", "Python Wheel" }, { ".ipynb", "Jupyter Notebook" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Zdrojový kód Swift" }, { ".dart", "Zdrojový kód Dart" },
+        { ".kt", "Zdrojový kód Kotlin" }, { ".kts", "Skript Kotlin" },
+        { ".gradle", "Skript Gradle" }, { ".aar", "Android archiv" },
+        { ".apk", "Balíček Android" }, { ".aab", "Sada aplikací Android" },
+        { ".ipa", "Balíček iOS" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Scéna Unity" }, { ".prefab", "Prefab Unity" },
+        { ".uasset", "Asset Unreal" }, { ".umap", "Mapa Unreal" },
+        { ".fbx", "3D model FBX" }, { ".obj", "3D model Wavefront" },
+        { ".gltf", "3D model glTF" }, { ".blend", "Projekt Blender" },
+        { ".dae", "Model Collada" }, { ".3ds", "Model 3D Studio" },
+        { ".stl", "Model STL" }, { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Dokument Photoshop" }, { ".psb", "Velký Photoshop" },
+        { ".ai", "Ilustrace Illustrator" }, { ".indd", "Dokument InDesign" },
+        { ".prproj", "Projekt Premiere" }, { ".aep", "After Effects" },
+        { ".xd", "Prototyp Adobe XD" }, { ".sketch", "Dokument Sketch" },
+        { ".fig", "Dokument Figma" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "Audio MP3" }, { ".wav", "Audio Wave" },
+        { ".flac", "Audio FLAC" }, { ".aac", "Audio AAC" },
+        { ".ogg", "OGG Vorbis" }, { ".wma", "Audio Windows" },
+        { ".opus", "Audio Opus" }, { ".m4a", "Audio MPEG-4" },
+        { ".midi", "Sekvence MIDI" }, { ".aiff", "Audio AIFF" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "Video MP4" }, { ".mkv", "Video Matroska" },
+        { ".avi", "Video AVI" }, { ".mov", "Video QuickTime" },
+        { ".wmv", "Video Windows" }, { ".webm", "Video WebM" },
+        { ".flv", "Video Flash" }, { ".m4v", "Video M4V" },
+        { ".m3u8", "Seznam HLS" },
+        { ".ogv", "Video OGG" }, { ".3gp", "Video 3GP" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "Obrázek JPEG" }, { ".jpeg", "Obrázek JPEG" },
+        { ".png", "Obrázek PNG" }, { ".gif", "Obrázek GIF" },
+        { ".bmp", "Obrázek BMP" }, { ".tiff", "Obrázek TIFF" },
+        { ".webp", "Obrázek WebP" }, { ".ico", "Ikona" },
+        { ".svg", "Vektor SVG" }, { ".eps", "Encapsulated PostScript" },
+        { ".raw", "RAW obrázek" },
+        { ".cr2", "Canon RAW" }, { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" }, { ".dng", "Digital Negative" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "ZIP archiv" }, { ".rar", "RAR archiv" },
+        { ".7z", "7-Zip archiv" }, { ".tar", "Tar archiv" },
+        { ".gz", "GZip archiv" }, { ".bz2", "BZip2 archiv" },
+        { ".xz", "XZ archiv" }, { ".zst", "Zstd archiv" },
+        { ".lz4", "LZ4 archiv" }, { ".cab", "Cabinet archiv" },
+        { ".iso", "Image disku" }, { ".dmg", "Diskový image macOS" },
+        { ".img", "Raw disk image" }, { ".vhd", "Virtuální pevný disk" },
+        { ".vhdx", "Hyper-V disk" }, { ".wim", "Windows image" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "SQL skript" }, { ".db", "Databáze" },
+        { ".sqlite", "SQLite DB" }, { ".mdb", "Access DB" },
+        { ".accdb", "Access databáze" }, { ".mdf", "SQL Server DB" },
+        { ".ndf", "SQL Server NDF" }, { ".ldf", "Log SQL Server" },
+        { ".bak", "Záloha SQL" }, { ".dmp", "Výpis databáze" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "Data MATLAB" }, { ".m", "Skript MATLAB" },
+        { ".r", "Skript R" }, { ".rdata", "Dataset R" },
+        { ".csv", "Data CSV" }, { ".tsv", "Data TSV" },
+        { ".sas", "Program SAS" }, { ".sav", "Dataset SPSS" },
+        { ".por", "Přenosný SPSS" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "Šifrovaný GPG" }, { ".pgp", "Šifrovaný PGP" },
+        { ".asc", "Podpis PGP" }, { ".sig", "Oddělený podpis" },
+        { ".wallet", "Krypto peněženka" }, { ".key", "Soubor klíče" },
+        { ".pem", "Certifikát PEM" }, { ".crt", "Certifikát" },
+        { ".p12", "Úložiště klíčů PKCS#12" }, { ".pfx", "Úložiště klíčů Windows" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "ROM Game Boy" }, { ".nds", "ROM Nintendo DS" },
+        { ".wbfs", "Záloha Wii" },
+        { ".cia", "Instalátor 3DS" }, { ".nsp", "Balíček Switch" },
+        { ".xci", "Kazeta Switch" }, { ".wad", "Kanál Wii" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Spustitelný soubor Windows" }, { ".msi", "Instalátor Windows" },
+        { ".com", "Příkaz DOS" }, { ".bat", "Dávkový soubor" },
+        { ".ps1", "Skript PowerShell" }, { ".cmd", "Příkazový skript" },
+        { ".reg", "Záznam registru" },
+        { ".url", "Internetová zkratka" }, { ".torrent", "BitTorrent" },
+        { ".log", "Log soubor" }, { ".ini", "INI konfigurace" },
+        { ".cfg", "Konfigurační soubor" }, { ".conf", "Konfigurace" },
+        { ".yaml", "YAML konfigurace" }, { ".toml", "TOML konfigurace" },
+        { ".env", "Soubor prostředí" }, { ".gitignore", "Git ignore" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "Zdrojový kód LaTeX" }, { ".bib", "Knihovna BibTeX" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "Webová část SharePoint" },
+        { ".fxp", "Kompilovaný FoxPro" },
+        { ".asd", "Automatické uložení Word" },
+        { ".fsc", "Mezipaměť vyhledávání Windows" },
+        { ".mid", "Sekvence MIDI" },
+        { ".fst", "Stav FL Studio" },
+        { ".txt", "Prostý textový soubor" },
+        { ".pdb", "Programová databáze" },
+        { ".dll", "Dynamická knihovna" },
+        { ".resources", "Prostředky .NET" },
+        { ".cache", "Soubor mezipaměti" },
+        { ".settings", "Nastavení XML" },
+        { ".csproj", "C# projekt" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "Soubor KeePass" },
+        { ".nupkg", "Balíček NuGet" },
+        { ".p7s", "Podpis PKCS #7" },
+        { ".map", "Source-Map soubor" },
+        { ".flow", "Deklarace typu Flow" },
+        { ".mjs", "ES Module (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES Module" },
+        { ".jst", "Šablona JavaScript" },
+        { ".markdown", "Dokument Markdown" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Data postav Nintendo" },
+        { ".vital", "Přednastavení syntezátoru Vital" },
+        { ".ds_store", "Úložiště služeb macOS" },
+        { ".zpw", "Balíček ZippedWeb" },
+        { ".flp", "Projekt FL Studio" },
+        { ".flstheme", "Téma FL Studio" },
+        { ".nmsv", "Přednastavení Native Instruments NMSV" },
+        { ".wav.256", "Varianta WAV 256-bit" },
+        { ".pdf", "Portable Document Format" },
+        { ".config", "Konfigurace XML/JSON" },
+        { ".user", "Uživatelská nastavení" },
+        { ".uptodate", "Příznak mezipaměti Up2Date" },
+        { ".rtf", "Rich Text Format" },
+        { ".buildwithskipanalyzers", "Příznak MSBuild Skip-Analyzers" },
+        { ".node", "Binární modul Node.js" },
+        { ".snap", "Balíček Snapcraft" },
+        { ".def", "Soubor definice modulu" },
+        { ".bsd", "Licence/Konfigurace BSD" },
+        { ".babelrc", "Konfigurace Babel" },
+        { ".prettierrc", "Konfigurace Prettier" },
+        { ".npignore", "Pravidla ignorování NuGet" },
+        { ".php", "Skript PHP" },
+        { ".eslintignore", "ESLint ignore" },
+        { ".lic", "Licenční soubor" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "Seznam vlastností macOS" },
+        { ".mui", "Vícejazyčné uživatelské rozhraní" },
+        { ".efi", "Firmware UEFI" },
+        { ".cip", "Balíček Chrome CIP" },
+        { ".bin", "Binární data" },
+        { ".sdi", "Image systémového nasazení" },
+        { ".ttf", "TrueType font" },
+        { ".cur", "Kurzor Windows" },
+        { ".ani", "Animovaný kurzor" },
+        { ".diagpkg", "Diagnostický balíček Windows" },
+        { ".dat", "Obecný datový soubor" },
+        { ".diffbase", "Snímek základny rozdílů" },
+        { ".lm", "Jazykový model" },
+        { ".lm1", "Varianta jazykového modelu 1" },
+        { ".lm2", "Varianta jazykového modelu 2" },
+        { ".lm3", "Varianta jazykového modelu 3" },
+        { ".lex", "Data lexikonu" },
+        { ".res", "Prostředek Windows" },
+        { ".nlt", "Data důvěry NetLink" },
+        { ".nls", "Podpora národních jazyků" },
+        { ".chm", "Kompilovaná nápověda HTML" },
+        { ".fil", "Kontejner seznamu souborů" },
+        { ".msixbundle", "Balíček MSIX" },
+        { ".p7x", "Rozšířený PKCS #7" },
+        { ".pri", "Index prostředků balíčku" },
+        { ".etl", "Log trasování událostí" },
+        { ".nlp", "Data procesoru přirozeného jazyka" },
+        { ".compositefont", "Kompozitní font WPF" },
+        { ".aspx", "Stránka ASP.NET" },
+        { ".ascx", "Uživatelský ovladač ASP.NET" },
+        { ".master", "Hlavní stránka ASP.NET" },
+        { ".browser", "Definice prohlížeče" },
+        { ".lnk", "Zástupce Windows" },
+        { ".default", "Výchozí nastavení" },
+        { ".comments", "Metadata komentářů" },
+        { ".rsp", "Response soubor" },
+        { ".tld", "Deskriptor knihovny tagů" },
+        { ".win32manifest", "Manifest Win32" },
+        { ".man", "Manuálová stránka" },
+        { ".mof", "Managed Object Format" },
+        { ".uninstall", "Odinstalační skript" },
+        { ".tasks", "Úlohy MSBuild" },
+        { ".overridetasks", "Přepsané úlohy MSBuild" },
+        { ".orp", "Data ORP" },
+        { ".adml", "Jazyk administrativní šablony" },
+        { ".ppkg", "Provisioning balíček" },
+        { ".mstheme", "Téma Microsoft" },
+        { ".msstyles", "Styl Windows" },
+        { ".mum", "Modul aktualizace manifestu" },
+        { ".cat", "Bezpečnostní katalog" },
+        { ".jfm", "Metadata databáze Jet" },
+        { ".rs", "Zdrojový kód Rust" },
+        { ".jll", "Bitcode Julia LLVM" },
+        { ".sys", "Systémový ovladač Windows" },
+        { ".p7b", "Řetěz certifikátů PKCS #7" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "Lokalizace INF" },
+        { ".winmd", "Metadata Windows" },
+        { ".xbf", "Binární formát XAML" },
+        { ".license", "Licenční token" },
+        { ".fpie", "Středně pokročilý spustitelný soubor FPGA" },
+        { ".cso", "Kompilovaný objekt shaderu" },
+        { ".sccd", "Data konfigurace System Center" },
+        { ".bundle", "Balíček aplikace" },
+        { ".schema", "Schéma JSON/XML" },
+        { ".csg", "Konstruktivní geometrie těles" },
+        { ".mun", "Multi-Unit síť" },
+        { ".uce", "Univerzální šachový engine" },
+        { ".cpl", "Apleť ovládacího panelu" },
+        { ".msc", "Konzola správy Microsoft" },
+        { ".ax", "Filtr DirectShow" },
+        { ".table", "Vyhledávací/hash tabulka" },
+        { ".tsp", "Balíček/skript TSP" },
+        { ".tbl", "Data tabulky" },
+        { ".drv", "Ovladač zařízení" },
+        { ".sep", "Soubor oddělovače" },
+        { ".ocx", "Ovládací prvek ActiveX" },
+        { ".msp", "Záplata instalátoru Windows" },
+        { ".scr", "Spořič obrazovky Windows" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Gramatika XML" },
+        { ".xrm-ms", "Licence Microsoft" },
+        { ".rll", "Knihovna odkazů na prostředky" },
+        { ".mfl", "Jazykový soubor MFL" },
+        { ".cdxml", "Definice cmdletu XML" },
+        { ".dtd", "Definice typu dokumentu" },
+        { ".psm1", "Skript modulu PowerShell" },
+        { ".ps1xml", "Data formátu PowerShell" },
+        { ".wprp", "Profil Windows Performance Recorder" },
+        { ".xsl", "Šablona XSLT" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "Data ReLoad" },
+        { ".job", "Úloha úloh Windows" },
+        { ".gypi", "GYP Include" },
+        { ".hlp", "Nápověda Windows" },
+        { ".gdl", "Generic Description Language" },
+        { ".elf", "Executable and Linkable Format" },
+        { ".ppd", "Popis tiskárny PostScript" },
+        { ".gpd", "Generic Printer Description" },
+        { ".mbn", "Modemový binární soubor" },
+        { ".pak", "PAK archiv" },
+        { ".dgml", "Directed Graph Markup" },
+        { ".smp", "Vzorkový soubor" },
+        { ".lxa", "Audio lexikonu Microsoft" },
+        { ".wwd", "Průvodce Microsoft Works" },
+        { ".wsf", "Skriptový soubor Windows" },
+        { ".cw", "Šablona CardWorks" },
+        { ".phn", "Fyzikální scéna Phun" },
+        { ".am", "Soubor Automake" },
+        { ".fe", "Šifrovač souborů" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "ROM NEOGEO" },
+        { ".sch", "Rozvrh/Schéma" },
+        { ".adlm", "Správce licencí Autodesk" },
+        { ".adxm", "Administrativní XML" },
+        { ".nmnl", "Normalizované minimální" },
+        { ".propdesc", "Popis vlastnosti" },
+        { ".nsl", "Zvuková knihovna Nokia" },
+        { ".ntf", "Národní přenosový formát" },
+        { ".ntp", "Konfigurace NTP" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Manifest runtime" },
+        { ".interop", "Data COM Interop" },
+        { ".frm", "Formulář Visual Basic" },
+        { ".bas", "Modul Visual Basic" },
+        { ".dwb", "Balíček Drum Workshop" },
+        { ".npmignore", "Pravidla ignorování NPM" },
+        { ".rsrc", "Vidlice prostředků macOS" },
+        { ".upd2date", "Příznak mezipaměti Up2Date" },
+        { ".Up2Date", "Příznak mezipaměti Up2Date" },
+        { ".jshintrc", "Konfigurace JSHint" },
+        { ".lock", "Zámek/Pin závislosti" },
+        { ".nix", "Výraz Nix" },
+        { ".hr1", "Herní data HR1" },
+        { ".hr2", "Herní data HR2" },
+        { ".hr3", "Herní data HR3" },
+        { ".hr4", "Herní data HR4" },
+        { ".hr5", "Herní data HR5" },
+        { ".hr6", "Herní data HR6" },
+        { ".hr7", "Herní data HR7" },
+        { ".hr8", "Herní data HR8" },
+        { ".hr9", "Herní data HR9" },
+        { ".bnf", "Gramatika Backus-Naur Form" },
+        { ".clb", "Katalog COM+" },
+        { ".tlb", "Knihovna typů" },
+        { ".dic", "Slovník/Lexikon" },
+        { ".aux", "Pomocný soubor TeX" },
+        { ".ds", "Úložiště dat/DS_Store" },
+        { ".inc", "Include/Zdrojový include" },
+        { ".cpx", "Překlad kódové stránky" },
+        { ".mdl", "Model/Modul souboru" },
+        { ".dls", "Banky stahovatelných zvuků" },
+        { ".cdf-ms", "Manifest nasazení ClickOnce" },
+        { ".addin", "Doplněk Visual Studio" },
+        { ".scp", "Komponenta skriptů Windows" },
+        { ".wmz", "Komprimovaný skin Windows Media Player" },
+        { ".iec", "Databáze IEC" },
+        { ".wsc", "Komponenta skriptů Windows" },
+        { ".vrg", "Skript registru Visual Studio" },
+        { ".prx", "Automatická konfigurace proxy" },
+        { ".nuspec", "Specifikace NuGet" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "Archiv ZIPX" },
+        { ".alz", "Archiv ALZip" },
+        { ".eeg", "Komprimovaný EEG" },
+        { ".001", "Rozdělený archiv část 1" },
+        { ".arj", "Archiv ARJ" },
+        { ".bh", "Archiv BlakHole" },
+        { ".lha", "Archiv LHA" },
+        { ".lzh", "Archiv LHA/LZH" },
+        { ".pma", "Archiv PMarc" },
+        { ".arc", "Archiv ARC" },
+        { ".ace", "Archiv ACE" },
+        { ".aes", "Šifrovaný soubor AES" },
+        { ".zpak", "Archiv ZPAQ" },
+        { ".zstd", "Archiv Zstandard" },
+        { ".br", "Archiv Brotli" },
+        { ".pea", "Archiv PeaZip" },
+        { ".tbz", "Archiv Tar.BZ" },
+        { ".tbz2", "Archiv Tar.BZ2" },
+        { ".txz", "Archiv Tar.XZ" },
+        { ".tlz", "Archiv Tar.LZMA" },
+        { ".uu", "UUEncoded soubor" },
+        { ".uue", "UUEncoded soubor" },
+        { ".xxe", "XXEncoded soubor" },
+        { ".z", "Unix Compress" },
+        { ".tgz", "Archiv Tar.GZ" },
+        { ".isz", "ISO-Zipped image" },
+        { ".udf", "Univerzální disk formát" },
+        { ".i00", "Rozdělený image DVD Decrypter část 1" }
+    }
+},
+    {
+    "hu", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Word dokumentum" }, { ".doc", "Word 97-2003" },
+        { ".xlsx", "Excel munkafüzet" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "PowerPoint prezentáció" }, { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Visio rajz" }, { ".pub", "Publisher dokumentum" },
+        { ".one", "OneNote jegyzetfüzet" },
+        { ".ost", "Outlook offline" }, { ".pst", "Outlook személyes" },
+        { ".msg", "Outlook üzenet" }, { ".eml", "E-mail üzenet" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "HTML dokumentum" }, { ".htm", "HTML dokumentum" },
+        { ".css", "CSS stíluslap" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (behúzott)" }, { ".less", "Less stílus" },
+        { ".js", "JavaScript" }, { ".jsx", "React JSX" },
+        { ".ts", "TypeScript" }, { ".tsx", "React TSX" },
+        { ".json", "JSON adat" }, { ".xml", "XML dokumentum" },
+        { ".yml", "YAML konfiguráció" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "C# forráskód" }, { ".csx", "C# szkript" },
+        { ".fs", "F# forráskód" }, { ".vb", "VB.NET forráskód" },
+        { ".il", "IL assembly" }, { ".resx", "Erőforrás XML" },
+        { ".xaml", "XAML jelölés" }, { ".sln", "Visual Studio megoldás" },
+        { ".vbproj", "VB projekt" },
+        { ".vcxproj", "C++ projekt" }, { ".props", "MSBuild tulajdonságok" },
+        { ".targets", "MSBuild célok" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "C++ forráskód" }, { ".cc", "C++ forráskód" },
+        { ".cxx", "C++ forráskód" }, { ".c", "C forráskód" },
+        { ".hpp", "C++ fejléc" }, { ".h", "C/C++ fejléc" },
+        { ".inl", "Inline C++" }, { ".idl", "Interfész definíció" },
+        { ".rc", "Erőforrás szkript" }, { ".manifest", "Alkalmazás jegyzék" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Java forráskód" }, { ".class", "Java osztály" },
+        { ".jar", "Java archívum" }, { ".war", "Java web archívum" },
+        { ".ear", "Enterprise archívum" }, { ".scala", "Scala forráskód" },
+        { ".groovy", "Groovy forráskód" }, { ".clj", "Clojure forráskód" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Python szkript" }, { ".pyw", "Python (konzol nélkül)" },
+        { ".pyi", "Python stub" }, { ".pyc", "Python bytecode" },
+        { ".pyo", "Python optimalizált" }, { ".pyd", "Python kiterjesztés" },
+        { ".whl", "Python Wheel" }, { ".ipynb", "Jupyter notebook" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Swift forráskód" }, { ".dart", "Dart forráskód" },
+        { ".kt", "Kotlin forráskód" }, { ".kts", "Kotlin szkript" },
+        { ".gradle", "Gradle szkript" }, { ".aar", "Android archívum" },
+        { ".apk", "Android csomag" }, { ".aab", "Android alkalmazás csomag" },
+        { ".ipa", "iOS csomag" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Unity jelenet" }, { ".prefab", "Unity prefab" },
+        { ".uasset", "Unreal asset" }, { ".umap", "Unreal térkép" },
+        { ".fbx", "FBX 3D modell" }, { ".obj", "Wavefront 3D" },
+        { ".gltf", "glTF 3D modell" }, { ".blend", "Blender projekt" },
+        { ".dae", "Collada modell" }, { ".3ds", "3D Studio modell" },
+        { ".stl", "STL modell" }, { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Photoshop dokumentum" }, { ".psb", "Photoshop nagy" },
+        { ".ai", "Illustrator művészet" }, { ".indd", "InDesign dokumentum" },
+        { ".prproj", "Premiere projekt" }, { ".aep", "After Effects" },
+        { ".xd", "Adobe XD prototípus" }, { ".sketch", "Sketch dokumentum" },
+        { ".fig", "Figma dokumentum" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "MP3 audio" }, { ".wav", "Wave audio" },
+        { ".flac", "FLAC audio" }, { ".aac", "AAC audio" },
+        { ".ogg", "OGG Vorbis" }, { ".wma", "Windows audio" },
+        { ".opus", "Opus audio" }, { ".m4a", "MPEG-4 audio" },
+        { ".midi", "MIDI szekvencia" }, { ".aiff", "AIFF audio" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "MP4 videó" }, { ".mkv", "Matroska videó" },
+        { ".avi", "AVI videó" }, { ".mov", "QuickTime videó" },
+        { ".wmv", "Windows videó" }, { ".webm", "WebM videó" },
+        { ".flv", "Flash videó" }, { ".m4v", "M4V videó" },
+        { ".m3u8", "HLS lejátszási lista" },
+        { ".ogv", "OGG videó" }, { ".3gp", "3GP videó" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "JPEG kép" }, { ".jpeg", "JPEG kép" },
+        { ".png", "PNG kép" }, { ".gif", "GIF kép" },
+        { ".bmp", "BMP kép" }, { ".tiff", "TIFF kép" },
+        { ".webp", "WebP kép" }, { ".ico", "Ikon" },
+        { ".svg", "SVG vektor" }, { ".eps", "Encapsulated PostScript" },
+        { ".raw", "RAW kép" },
+        { ".cr2", "Canon RAW" }, { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" }, { ".dng", "Digital Negative" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "ZIP archívum" }, { ".rar", "RAR archívum" },
+        { ".7z", "7-Zip archívum" }, { ".tar", "Tar archívum" },
+        { ".gz", "GZip archívum" }, { ".bz2", "BZip2 archívum" },
+        { ".xz", "XZ archívum" }, { ".zst", "Zstd archívum" },
+        { ".lz4", "LZ4 archívum" }, { ".cab", "Cabinet archívum" },
+        { ".iso", "Lemez kép" }, { ".dmg", "macOS lemezkép" },
+        { ".img", "Nyers lemezkép" }, { ".vhd", "Virtuális merevlemez" },
+        { ".vhdx", "Hyper-V lemez" }, { ".wim", "Windows kép" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "SQL szkript" }, { ".db", "Adatbázis" },
+        { ".sqlite", "SQLite DB" }, { ".mdb", "Access DB" },
+        { ".accdb", "Access adatbázis" }, { ".mdf", "SQL Server DB" },
+        { ".ndf", "SQL Server NDF" }, { ".ldf", "SQL Server napló" },
+        { ".bak", "SQL biztonsági mentés" }, { ".dmp", "Adatbázis dump" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "MATLAB adat" }, { ".m", "MATLAB szkript" },
+        { ".r", "R szkript" }, { ".rdata", "R adatkészlet" },
+        { ".csv", "CSV adat" }, { ".tsv", "TSV adat" },
+        { ".sas", "SAS program" }, { ".sav", "SPSS adatkészlet" },
+        { ".por", "SPSS hordozható" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "GPG titkosított" }, { ".pgp", "PGP titkosított" },
+        { ".asc", "PGP aláírás" }, { ".sig", "Leválasztott aláírás" },
+        { ".wallet", "Krypto pénztárca" }, { ".key", "Kulcs fájl" },
+        { ".pem", "PEM tanúsítvány" }, { ".crt", "Tanúsítvány" },
+        { ".p12", "PKCS#12 kulcstároló" }, { ".pfx", "Windows kulcstároló" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "Game Boy ROM" }, { ".nds", "Nintendo DS ROM" },
+        { ".wbfs", "Wii biztonsági mentés" },
+        { ".cia", "3DS telepítő" }, { ".nsp", "Switch csomag" },
+        { ".xci", "Switch kazetta" }, { ".wad", "Wii csatorna" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Windows végrehajtható" }, { ".msi", "Windows telepítő" },
+        { ".com", "DOS parancs" }, { ".bat", "Kötegelt szkript" },
+        { ".ps1", "PowerShell szkript" }, { ".cmd", "Parancs szkript" },
+        { ".reg", "Beállításjegyzék bejegyzés" },
+        { ".url", "Internetes parancsikon" }, { ".torrent", "BitTorrent" },
+        { ".log", "Naplófájl" }, { ".ini", "INI konfiguráció" },
+        { ".cfg", "Konfigurációs fájl" }, { ".conf", "Konfiguráció" },
+        { ".yaml", "YAML konfiguráció" }, { ".toml", "TOML konfiguráció" },
+        { ".env", "Környezeti fájl" }, { ".gitignore", "Git ignore" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "LaTeX forráskód" }, { ".bib", "BibTeX könyvtár" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "SharePoint web rész" },
+        { ".fxp", "FoxPro fordított" },
+        { ".asd", "Word automatikus mentés" },
+        { ".fsc", "Windows keresési gyorsítótár" },
+        { ".mid", "MIDI szekvencia" },
+        { ".fst", "FL Studio állapot" },
+        { ".txt", "Egyszerű szöveges fájl" },
+        { ".pdb", "Program adatbázis" },
+        { ".dll", "Dinamikus linkelésű könyvtár" },
+        { ".resources", ".NET erőforrások" },
+        { ".cache", "Gyorsítótár fájl" },
+        { ".settings", "Beállítások XML" },
+        { ".csproj", "C# projekt" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "KeePass fájl" },
+        { ".nupkg", "NuGet csomag" },
+        { ".p7s", "PKCS #7 aláírás" },
+        { ".map", "Source-Map fájl" },
+        { ".flow", "Flow típus deklaráció" },
+        { ".mjs", "ES Module (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES Module" },
+        { ".jst", "JavaScript sablon" },
+        { ".markdown", "Markdown dokumentum" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Nintendo karakter adat" },
+        { ".vital", "Vital szintetizátor előbeállítás" },
+        { ".ds_store", "macOS asztali szolgáltatások tároló" },
+        { ".zpw", "ZippedWeb csomag" },
+        { ".flp", "FL Studio projekt" },
+        { ".flstheme", "FL Studio téma" },
+        { ".nmsv", "Native Instruments NMSV előbeállítás" },
+        { ".wav.256", "256-bit WAR variáns" },
+        { ".pdf", "Portable Document Format" },
+        { ".config", "Konfiguráció XML/JSON" },
+        { ".user", "Felhasználói beállítások" },
+        { ".uptodate", "Up2Date gyorsítótár jelző" },
+        { ".rtf", "Rich Text Format" },
+        { ".buildwithskipanalyzers", "MSBuild Skip-Analyzers jelző" },
+        { ".node", "Node.js bináris modul" },
+        { ".snap", "Snapcraft csomag" },
+        { ".def", "Modul-definíciós fájl" },
+        { ".bsd", "BSD licenc/konfiguráció" },
+        { ".babelrc", "Babel konfiguráció" },
+        { ".prettierrc", "Prettier konfiguráció" },
+        { ".npignore", "NuGet ignore szabályok" },
+        { ".php", "PHP szkript" },
+        { ".eslintignore", "ESLint ignore" },
+        { ".lic", "Licenc fájl" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "macOS tulajdonság lista" },
+        { ".mui", "Többnyelvű felhasználói felület" },
+        { ".efi", "UEFI firmware" },
+        { ".cip", "Chrome CIP csomag" },
+        { ".bin", "Bináris adat" },
+        { ".sdi", "Rendszer telepítési kép" },
+        { ".ttf", "TrueType betűtípus" },
+        { ".cur", "Windows kurzor" },
+        { ".ani", "Animált kurzor" },
+        { ".diagpkg", "Windows diagnosztikai csomag" },
+        { ".dat", "Általános adatfájl" },
+        { ".diffbase", "Diff alap pillanatkép" },
+        { ".lm", "Nyelvi modell" },
+        { ".lm1", "Nyelvi modell variáns 1" },
+        { ".lm2", "Nyelvi modell variáns 2" },
+        { ".lm3", "Nyelvi modell variáns 3" },
+        { ".lex", "Lexikon adat" },
+        { ".res", "Windows erőforrás" },
+        { ".nlt", "NetLink trust adat" },
+        { ".nls", "Nemzeti nyelvi támogatás" },
+        { ".chm", "Kompilált HTML súgó" },
+        { ".fil", "Fájl lista tároló" },
+        { ".msixbundle", "MSIX csomag" },
+        { ".p7x", "PKCS #7 kiterjesztett" },
+        { ".pri", "Csomag erőforrás index" },
+        { ".etl", "Esemény nyomkövetési napló" },
+        { ".nlp", "Természetes nyelv feldolgozó adat" },
+        { ".compositefont", "WPF kompozit betűtípus" },
+        { ".aspx", "ASP.NET oldal" },
+        { ".ascx", "ASP.NET felhasználói vezérlő" },
+        { ".master", "ASP.NET főoldal" },
+        { ".browser", "Böngésző definíció" },
+        { ".lnk", "Windows parancsikon" },
+        { ".default", "Alapértelmezett beállítások" },
+        { ".comments", "Hozzászólás metaadatok" },
+        { ".rsp", "Válasz fájl" },
+        { ".tld", "Címke könyvtár leíró" },
+        { ".win32manifest", "Win32 jegyzék" },
+        { ".man", "Kézikönyv oldal" },
+        { ".mof", "Managed Object Format" },
+        { ".uninstall", "Eltávolítási szkript" },
+        { ".tasks", "MSBuild feladatok" },
+        { ".overridetasks", "MSBuild felülírt feladatok" },
+        { ".orp", "ORP adat" },
+        { ".adml", "Adminisztratív sablon nyelv" },
+        { ".ppkg", "Provisioning csomag" },
+        { ".mstheme", "Microsoft téma" },
+        { ".msstyles", "Windows stílus" },
+        { ".mum", "Jegyzék frissítési modul" },
+        { ".cat", "Biztonsági katalógus" },
+        { ".jfm", "Jet adatbázis metaadatok" },
+        { ".rs", "Rust forráskód" },
+        { ".jll", "Julia LLVM bitkód" },
+        { ".sys", "Windows rendszer illesztő" },
+        { ".p7b", "PKCS #7 tanúsítványlánc" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "INF lokalizáció" },
+        { ".winmd", "Windows metaadatok" },
+        { ".xbf", "XAML bináris formátum" },
+        { ".license", "Licenc token" },
+        { ".fpie", "FPGA köztes végrehajtható" },
+        { ".cso", "Kompilált shader objektum" },
+        { ".sccd", "System Center konfigurációs adat" },
+        { ".bundle", "Alkalmazás csomag" },
+        { ".schema", "JSON/XML séma" },
+        { ".csg", "Konstruktív szilárd test geometria" },
+        { ".mun", "Több egység hálózat" },
+        { ".uce", "Univerzális sakk motor" },
+        { ".cpl", "Vezérlőpult aplet" },
+        { ".msc", "Microsoft felügyeleti konzol" },
+        { ".ax", "DirectShow szűrő" },
+        { ".table", "Kereső/hash tábla" },
+        { ".tsp", "TSP csomag/szkript" },
+        { ".tbl", "Tábla adat" },
+        { ".drv", "Eszköz illesztő" },
+        { ".sep", "Elválasztó fájl" },
+        { ".ocx", "ActiveX vezérlő" },
+        { ".msp", "Windows telepítő javítás" },
+        { ".scr", "Windows képernyővédő" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Grammatika XML" },
+        { ".xrm-ms", "Microsoft licenc" },
+        { ".rll", "Erőforrás link könyvtár" },
+        { ".mfl", "MFL nyelvi fájl" },
+        { ".cdxml", "Cmdlet definíció XML" },
+        { ".dtd", "Dokumentum típus definíció" },
+        { ".psm1", "PowerShell modul szkript" },
+        { ".ps1xml", "PowerShell formátum adat" },
+        { ".wprp", "Windows Performance Recorder profil" },
+        { ".xsl", "XSLT stíluslap" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "ReLoad adat" },
+        { ".job", "Windows feladat munka" },
+        { ".gypi", "GYP include" },
+        { ".hlp", "Windows súgó" },
+        { ".gdl", "Generic Description Language" },
+        { ".elf", "Executable and Linkable Format" },
+        { ".ppd", "PostScript printer leírás" },
+        { ".gpd", "Generic Printer Description" },
+        { ".mbn", "Modem bináris" },
+        { ".pak", "PAK archívum" },
+        { ".dgml", "Directed Graph Markup" },
+        { ".smp", "Minta fájl" },
+        { ".lxa", "Microsoft lexikon audio" },
+        { ".wwd", "Microsoft Works varázsló" },
+        { ".wsf", "Windows szkript fájl" },
+        { ".cw", "CardWorks sablon" },
+        { ".phn", "Phun fizika jelenet" },
+        { ".am", "Automake fájl" },
+        { ".fe", "Fájl titkosító" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "NEOGEO ROM" },
+        { ".sch", "Ütemezés/Séma" },
+        { ".adlm", "Autodesk licenc kezelő" },
+        { ".adxm", "Adminisztratív XML" },
+        { ".nmnl", "Normalizált minimális" },
+        { ".propdesc", "Tulajdonság leírás" },
+        { ".nsl", "Nokia hang könyvtár" },
+        { ".ntf", "Nemzeti átviteli formátum" },
+        { ".ntp", "NTP konfiguráció" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Futási idő jegyzék" },
+        { ".interop", "COM Interop adat" },
+        { ".frm", "Visual Basic űrlap" },
+        { ".bas", "Visual Basic modul" },
+        { ".dwb", "Drum Workshop csomag" },
+        { ".npmignore", "NPM ignore szabályok" },
+        { ".rsrc", "macOS erőforrás elágazás" },
+        { ".upd2date", "Up2Date gyorsítótár jelző" },
+        { ".Up2Date", "Up2Date gyorsítótár jelző" },
+        { ".jshintrc", "JSHint konfiguráció" },
+        { ".lock", "Zár/Függőség pin" },
+        { ".nix", "Nix kifejezés" },
+        { ".hr1", "HR1 játék adat" },
+        { ".hr2", "HR2 játék adat" },
+        { ".hr3", "HR3 játék adat" },
+        { ".hr4", "HR4 játék adat" },
+        { ".hr5", "HR5 játék adat" },
+        { ".hr6", "HR6 játék adat" },
+        { ".hr7", "HR7 játék adat" },
+        { ".hr8", "HR8 játék adat" },
+        { ".hr9", "HR9 játék adat" },
+        { ".bnf", "Backus-Naur Form grammatika" },
+        { ".clb", "COM+ katalógus" },
+        { ".tlb", "Típus könyvtár" },
+        { ".dic", "Szótár/Lexikon" },
+        { ".aux", "Segéd TeX fájl" },
+        { ".ds", "Adattároló/DS_Store" },
+        { ".inc", "Include/Forrás include" },
+        { ".cpx", "Kódlap fordítás" },
+        { ".mdl", "Modul/Modell fájl" },
+        { ".dls", "Letölthető hangok bank" },
+        { ".cdf-ms", "ClickOnce telepítési jegyzék" },
+        { ".addin", "Visual Studio bővítmény" },
+        { ".scp", "Windows szkript komponens" },
+        { ".wmz", "Tömörített Windows Media Player skin" },
+        { ".iec", "IEC adatbázis" },
+        { ".wsc", "Windows szkript komponens" },
+        { ".vrg", "Visual Studio beállításjegyzék szkript" },
+        { ".prx", "Proxy automatikus konfiguráció" },
+        { ".nuspec", "NuGet specifikáció" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "ZIPX archívum" },
+        { ".alz", "ALZip archívum" },
+        { ".eeg", "EEG tömörített" },
+        { ".001", "Felosztott archívum rész 1" },
+        { ".arj", "ARJ archívum" },
+        { ".bh", "BlakHole archívum" },
+        { ".lha", "LHA archívum" },
+        { ".lzh", "LHA/LZH archívum" },
+        { ".pma", "PMarc archívum" },
+        { ".arc", "ARC archívum" },
+        { ".ace", "ACE archívum" },
+        { ".aes", "AES titkosított fájl" },
+        { ".zpak", "ZPAQ archívum" },
+        { ".zstd", "Zstandard archívum" },
+        { ".br", "Brotli archívum" },
+        { ".pea", "PeaZip archívum" },
+        { ".tbz", "Tar.BZ archívum" },
+        { ".tbz2", "Tar.BZ2 archívum" },
+        { ".txz", "Tar.XZ archívum" },
+        { ".tlz", "Tar.LZMA archívum" },
+        { ".uu", "UUEncoded fájl" },
+        { ".uue", "UUEncoded fájl" },
+        { ".xxe", "XXEncoded fájl" },
+        { ".z", "Unix Compress" },
+        { ".tgz", "Tar.GZ archívum" },
+        { ".isz", "ISO-Zipped kép" },
+        { ".udf", "Univerzális lemez formátum" },
+        { ".i00", "DVD Decrypter felosztott kép rész 1" }
+    }
+},
+    {
+    "ro", new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        // ── Microsoft / Office ---------------------------------------------
+        { ".docx", "Document Word" }, { ".doc", "Word 97-2003" },
+        { ".xlsx", "Caiet de lucru Excel" }, { ".xls", "Excel 97-2003" },
+        { ".pptx", "Prezentare PowerPoint" }, { ".ppt", "PowerPoint 97-2003" },
+        { ".vsdx", "Desen Visio" }, { ".pub", "Document Publisher" },
+        { ".one", "Caiet de note OneNote" },
+        { ".ost", "Date offline Outlook" }, { ".pst", "Date personale Outlook" },
+        { ".msg", "Mesaj Outlook" }, { ".eml", "Mesaj email" },
+
+        // ── Web / Mark-up ---------------------------------------------------
+        { ".html", "Document HTML" }, { ".htm", "Document HTML" },
+        { ".css", "Fișier de stil CSS" }, { ".scss", "Sass (SCSS)" },
+        { ".sass", "Sass (indentat)" }, { ".less", "Stil Less" },
+        { ".js", "JavaScript" }, { ".jsx", "React JSX" },
+        { ".ts", "TypeScript" }, { ".tsx", "React TSX" },
+        { ".json", "Date JSON" }, { ".xml", "Document XML" },
+        { ".yml", "Configurație YAML" },
+
+        // ── Microsoft / .NET ----------------------------------------------
+        { ".cs", "Cod sursă C#" }, { ".csx", "Script C#" },
+        { ".fs", "Cod sursă F#" }, { ".vb", "Cod sursă VB.NET" },
+        { ".il", "Asamblare IL" }, { ".resx", "Resurse XML" },
+        { ".xaml", "Marcaje XAML" }, { ".sln", "Soluție Visual Studio" },
+        { ".vbproj", "Proiect VB" },
+        { ".vcxproj", "Proiect C++" }, { ".props", "Proprietăți MSBuild" },
+        { ".targets", "Ținte MSBuild" },
+
+        // ── C / C++ --------------------------------------------------------
+        { ".cpp", "Cod sursă C++" }, { ".cc", "Cod sursă C++" },
+        { ".cxx", "Cod sursă C++" }, { ".c", "Cod sursă C" },
+        { ".hpp", "Antet C++" }, { ".h", "Antet C/C++" },
+        { ".inl", "Inline C++" }, { ".idl", "Definiție interfață" },
+        { ".rc", "Script resurse" }, { ".manifest", "Manifest aplicație" },
+
+        // ── Java / JVM ------------------------------------------------------
+        { ".java", "Cod sursă Java" }, { ".class", "Clasă Java" },
+        { ".jar", "Arhivă Java" }, { ".war", "Arhivă web Java" },
+        { ".ear", "Arhivă enterprise" }, { ".scala", "Cod sursă Scala" },
+        { ".groovy", "Cod sursă Groovy" }, { ".clj", "Cod sursă Clojure" },
+
+        // ── Python ----------------------------------------------------------
+        { ".py", "Script Python" }, { ".pyw", "Python (fără consolă)" },
+        { ".pyi", "Stub Python" }, { ".pyc", "Bytecode Python" },
+        { ".pyo", "Python optimizat" }, { ".pyd", "Extensie Python" },
+        { ".whl", "Python Wheel" }, { ".ipynb", "Jupyter Notebook" },
+
+        // ── Mobile ----------------------------------------------------------
+        { ".swift", "Cod sursă Swift" }, { ".dart", "Cod sursă Dart" },
+        { ".kt", "Cod sursă Kotlin" }, { ".kts", "Script Kotlin" },
+        { ".gradle", "Script Gradle" }, { ".aar", "Arhivă Android" },
+        { ".apk", "Pachet Android" }, { ".aab", "Pachet aplicație Android" },
+        { ".ipa", "Pachet iOS" },
+
+        // ── Game Dev / 3D ---------------------------------------------------
+        { ".unity", "Scenă Unity" }, { ".prefab", "Prefab Unity" },
+        { ".uasset", "Asset Unreal" }, { ".umap", "Hartă Unreal" },
+        { ".fbx", "Model 3D FBX" }, { ".obj", "Wavefront 3D" },
+        { ".gltf", "Model 3D glTF" }, { ".blend", "Proiect Blender" },
+        { ".dae", "Model Collada" }, { ".3ds", "Model 3D Studio" },
+        { ".stl", "Model STL" }, { ".dxf", "AutoCAD DXF" },
+
+        // ── Creative / Adobe ----------------------------------------------
+        { ".psd", "Document Photoshop" }, { ".psb", "Photoshop mare" },
+        { ".ai", "Artă Illustrator" }, { ".indd", "Document InDesign" },
+        { ".prproj", "Proiect Premiere" }, { ".aep", "After Effects" },
+        { ".xd", "Prototip Adobe XD" }, { ".sketch", "Document Sketch" },
+        { ".fig", "Document Figma" },
+
+        // ── Audio -----------------------------------------------------------
+        { ".mp3", "Audio MP3" }, { ".wav", "Audio Wave" },
+        { ".flac", "Audio FLAC" }, { ".aac", "Audio AAC" },
+        { ".ogg", "OGG Vorbis" }, { ".wma", "Audio Windows" },
+        { ".opus", "Audio Opus" }, { ".m4a", "Audio MPEG-4" },
+        { ".midi", "Secvență MIDI" }, { ".aiff", "Audio AIFF" },
+
+        // ── Video -----------------------------------------------------------
+        { ".mp4", "Video MP4" }, { ".mkv", "Video Matroska" },
+        { ".avi", "Video AVI" }, { ".mov", "Video QuickTime" },
+        { ".wmv", "Video Windows" }, { ".webm", "Video WebM" },
+        { ".flv", "Video Flash" }, { ".m4v", "Video M4V" },
+        { ".m3u8", "Listă de redare HLS" },
+        { ".ogv", "Video OGG" }, { ".3gp", "Video 3GP" },
+
+        // ── Images ----------------------------------------------------------
+        { ".jpg", "Imagine JPEG" }, { ".jpeg", "Imagine JPEG" },
+        { ".png", "Imagine PNG" }, { ".gif", "Imagine GIF" },
+        { ".bmp", "Imagine BMP" }, { ".tiff", "Imagine TIFF" },
+        { ".webp", "Imagine WebP" }, { ".ico", "Pictogramă" },
+        { ".svg", "Vector SVG" }, { ".eps", "Encapsulated PostScript" },
+        { ".raw", "Imagine RAW" },
+        { ".cr2", "Canon RAW" }, { ".nef", "Nikon RAW" },
+        { ".arw", "Sony RAW" }, { ".dng", "Digital Negative" },
+
+        // ── Archives --------------------------------------------------------
+        { ".zip", "Arhivă ZIP" }, { ".rar", "Arhivă RAR" },
+        { ".7z", "Arhivă 7-Zip" }, { ".tar", "Arhivă Tar" },
+        { ".gz", "Arhivă GZip" }, { ".bz2", "Arhivă BZip2" },
+        { ".xz", "Arhivă XZ" }, { ".zst", "Arhivă Zstd" },
+        { ".lz4", "Arhivă LZ4" }, { ".cab", "Arhivă Cabinet" },
+        { ".iso", "Imagine disc" }, { ".dmg", "Imagine disc macOS" },
+        { ".img", "Imagine disc brut" }, { ".vhd", "Disc virtual" },
+        { ".vhdx", "Disc Hyper-V" }, { ".wim", "Imagine Windows" },
+
+        // ── Database --------------------------------------------------------
+        { ".sql", "Script SQL" }, { ".db", "Bază de date" },
+        { ".sqlite", "SQLite DB" }, { ".mdb", "Access DB" },
+        { ".accdb", "Bază de date Access" }, { ".mdf", "SQL Server DB" },
+        { ".ndf", "SQL Server NDF" }, { ".ldf", "Jurnal SQL Server" },
+        { ".bak", "Backup SQL" }, { ".dmp", "Dump bază de date" },
+
+        // ── Scientific / Math ---------------------------------------------
+        { ".mat", "Date MATLAB" }, { ".m", "Script MATLAB" },
+        { ".r", "Script R" }, { ".rdata", "Set de date R" },
+        { ".csv", "Date CSV" }, { ".tsv", "Date TSV" },
+        { ".sas", "Program SAS" }, { ".sav", "Set de date SPSS" },
+        { ".por", "SPSS portabil" },
+
+        // ── Crypto / Blockchain -------------------------------------------
+        { ".gpg", "Criptat GPG" }, { ".pgp", "Criptat PGP" },
+        { ".asc", "Semnătură PGP" }, { ".sig", "Semnătură detașată" },
+        { ".wallet", "Portofel crypto" }, { ".key", "Fișier cheie" },
+        { ".pem", "Certificat PEM" }, { ".crt", "Certificat" },
+        { ".p12", "Depozit chei PKCS#12" }, { ".pfx", "Depozit chei Windows" },
+
+        // ── Emulation / ROMs ----------------------------------------------
+        { ".gba", "ROM Game Boy" }, { ".nds", "ROM Nintendo DS" },
+        { ".wbfs", "Backup Wii" },
+        { ".cia", "Instalator 3DS" }, { ".nsp", "Pachet Switch" },
+        { ".xci", "Cartuș Switch" }, { ".wad", "Canal Wii" },
+
+        // ── Misc ------------------------------------------------------------
+        { ".exe", "Executabil Windows" }, { ".msi", "Instalator Windows" },
+        { ".com", "Comandă DOS" }, { ".bat", "Script batch" },
+        { ".ps1", "Script PowerShell" }, { ".cmd", "Script comandă" },
+        { ".reg", "Intrare registru" },
+        { ".url", "Scurtătură internet" }, { ".torrent", "BitTorrent" },
+        { ".log", "Fișier log" }, { ".ini", "Configurație INI" },
+        { ".cfg", "Fișier config" }, { ".conf", "Configurație" },
+        { ".yaml", "Configurație YAML" }, { ".toml", "Configurație TOML" },
+        { ".env", "Fișier mediu" }, { ".gitignore", "Git ignore" },
+        { ".dockerfile", "Dockerfile" }, { ".md", "Markdown" },
+        { ".tex", "Cod sursă LaTeX" }, { ".bib", "Bibliotecă BibTeX" },
+
+        // ── Additional / Misc ---------------------------------------------
+        { ".dwp", "Parte web SharePoint" },
+        { ".fxp", "Compilat FoxPro" },
+        { ".asd", "Salvare automată Word" },
+        { ".fsc", "Cache căutare Windows" },
+        { ".mid", "Secvență MIDI" },
+        { ".fst", "Stare FL Studio" },
+        { ".txt", "Fișier text simplu" },
+        { ".pdb", "Bază de date program" },
+        { ".dll", "Bibliotecă dinamică" },
+        { ".resources", "Resurse .NET" },
+        { ".cache", "Fișier cache" },
+        { ".settings", "Setări XML" },
+        { ".csproj", "Proiect C#" },
+        { ".editorconfig", "EditorConfig" },
+        { ".kdbx", "Fișier KeePass" },
+        { ".nupkg", "Pachet NuGet" },
+        { ".p7s", "Semnătură PKCS #7" },
+        { ".map", "Fișier Source-Map" },
+        { ".flow", "Declarație tip Flow" },
+        { ".mjs", "ES Module (JavaScript)" },
+        { ".cjs", "CommonJS (JavaScript)" },
+        { ".cts", "TypeScript CommonJS" },
+        { ".mts", "TypeScript ES Module" },
+        { ".jst", "Șablon JavaScript" },
+        { ".markdown", "Document Markdown" },
+        { ".applescript", "AppleScript" },
+        { ".ch1", "Date personaje Nintendo" },
+        { ".vital", "Preset sintetizator Vital" },
+        { ".ds_store", "Magazin servicii desktop macOS" },
+        { ".zpw", "Pachet ZippedWeb" },
+        { ".flp", "Proiect FL Studio" },
+        { ".flstheme", "Temă FL Studio" },
+        { ".nmsv", "Preset Native Instruments NMSV" },
+        { ".wav.256", "Variantă WAV 256-bit" },
+        { ".pdf", "Portable Document Format" },
+        { ".config", "Configurație XML/JSON" },
+        { ".user", "Setări utilizator" },
+        { ".uptodate", "Indicator cache Up2Date" },
+        { ".rtf", "Rich Text Format" },
+        { ".buildwithskipanalyzers", "Indicator MSBuild Skip-Analyzers" },
+        { ".node", "Modul binar Node.js" },
+        { ".snap", "Pachet Snapcraft" },
+        { ".def", "Fișier definiție modul" },
+        { ".bsd", "Licență/Configurație BSD" },
+        { ".babelrc", "Configurație Babel" },
+        { ".prettierrc", "Configurație Prettier" },
+        { ".npignore", "Reguli ignorare NuGet" },
+        { ".php", "Script PHP" },
+        { ".eslintignore", "ESLint ignore" },
+        { ".lic", "Fișier licență" },
+        { ".nib", "NeXT Interface Builder" },
+        { ".plist", "Listă proprietăți macOS" },
+        { ".mui", "Interfață multilingvă" },
+        { ".efi", "Firmware UEFI" },
+        { ".cip", "Pachet Chrome CIP" },
+        { ".bin", "Date binare" },
+        { ".sdi", "Imagine implementare sistem" },
+        { ".ttf", "Font TrueType" },
+        { ".cur", "Cursor Windows" },
+        { ".ani", "Cursor animat" },
+        { ".diagpkg", "Pachet diagnostic Windows" },
+        { ".dat", "Fișier date generic" },
+        { ".diffbase", "Instantaneu bază diff" },
+        { ".lm", "Model lingvistic" },
+        { ".lm1", "Variantă model lingvistic 1" },
+        { ".lm2", "Variantă model lingvistic 2" },
+        { ".lm3", "Variantă model lingvistic 3" },
+        { ".lex", "Date lexic" },
+        { ".res", "Resursă Windows" },
+        { ".nlt", "Date încredere NetLink" },
+        { ".nls", "Suport limbă națională" },
+        { ".chm", "Ajutor HTML compilat" },
+        { ".fil", "Container listă fișiere" },
+        { ".msixbundle", "Pachet MSIX" },
+        { ".p7x", "PKCS #7 extins" },
+        { ".pri", "Index resurse pachet" },
+        { ".etl", "Jurnal urmărire evenimente" },
+        { ".nlp", "Date procesor limbaj natural" },
+        { ".compositefont", "Font compozit WPF" },
+        { ".aspx", "Pagină ASP.NET" },
+        { ".ascx", "Control utilizator ASP.NET" },
+        { ".master", "Pagină master ASP.NET" },
+        { ".browser", "Definiție browser" },
+        { ".lnk", "Scurtătură Windows" },
+        { ".default", "Setări implicite" },
+        { ".comments", "Metadate comentarii" },
+        { ".rsp", "Fișier răspuns" },
+        { ".tld", "Descriptor bibliotecă tag-uri" },
+        { ".win32manifest", "Manifest Win32" },
+        { ".man", "Pagină manual" },
+        { ".mof", "Managed Object Format" },
+        { ".uninstall", "Script dezinstalare" },
+        { ".tasks", "Sarcini MSBuild" },
+        { ".overridetasks", "Sarcini suprascrise MSBuild" },
+        { ".orp", "Date ORP" },
+        { ".adml", "Limbaj șablon administrativ" },
+        { ".ppkg", "Pachet de provisioning" },
+        { ".mstheme", "Temă Microsoft" },
+        { ".msstyles", "Stil Windows" },
+        { ".mum", "Modul actualizare manifest" },
+        { ".cat", "Catalog securitate" },
+        { ".jfm", "Metadate bază de date Jet" },
+        { ".rs", "Cod sursă Rust" },
+        { ".jll", "Bitcode Julia LLVM" },
+        { ".sys", "Driver sistem Windows" },
+        { ".p7b", "Lanț certificate PKCS #7" },
+        { ".wmfw", "Windows Media Framework" },
+        { ".inf_loc", "Localizare INF" },
+        { ".winmd", "Metadate Windows" },
+        { ".xbf", "Format binar XAML" },
+        { ".license", "Token licență" },
+        { ".fpie", "Executabil intermediar FPGA" },
+        { ".cso", "Obiect shader compilat" },
+        { ".sccd", "Date configurare System Center" },
+        { ".bundle", "Pachet aplicație" },
+        { ".schema", "Schemă JSON/XML" },
+        { ".csg", "Geometrie solidă constructivă" },
+        { ".mun", "Rețea multi-unitate" },
+        { ".uce", "Motor șah universal" },
+        { ".cpl", "Aplet panou de control" },
+        { ".msc", "Consolă management Microsoft" },
+        { ".ax", "Filtru DirectShow" },
+        { ".table", "Tabelă căutare/hash" },
+        { ".tsp", "Pachet/Script TSP" },
+        { ".tbl", "Date tabel" },
+        { ".drv", "Driver dispozitiv" },
+        { ".sep", "Fișier separator" },
+        { ".ocx", "Control ActiveX" },
+        { ".msp", "Patch instalator Windows" },
+        { ".scr", "Salvator de ecran Windows" },
+        { ".vbs", "VBScript" },
+        { ".grxml", "Gramatică XML" },
+        { ".xrm-ms", "Licență Microsoft" },
+        { ".rll", "Bibliotecă legături resurse" },
+        { ".mfl", "Fișier limbă MFL" },
+        { ".cdxml", "Definiție cmdlet XML" },
+        { ".dtd", "Definiție tip document" },
+        { ".psm1", "Script modul PowerShell" },
+        { ".ps1xml", "Date format PowerShell" },
+        { ".wprp", "Profil Windows Performance Recorder" },
+        { ".xsl", "Fișier de stil XSLT" },
+        { ".gyp", "Generate Your Projects" },
+        { ".rld", "Date ReLoad" },
+        { ".job", "Sarcină Windows" },
+        { ".gypi", "GYP Include" },
+        { ".hlp", "Ajutor Windows" },
+        { ".gdl", "Generic Description Language" },
+        { ".elf", "Executable and Linkable Format" },
+        { ".ppd", "Descriere imprimantă PostScript" },
+        { ".gpd", "Generic Printer Description" },
+        { ".mbn", "Binar modem" },
+        { ".pak", "Arhivă PAK" },
+        { ".dgml", "Directed Graph Markup" },
+        { ".smp", "Fișier eșantion" },
+        { ".lxa", "Audio lexic Microsoft" },
+        { ".wwd", "Expert Microsoft Works" },
+        { ".wsf", "Fișier script Windows" },
+        { ".cw", "Șablon CardWorks" },
+        { ".phn", "Scenă fizică Phun" },
+        { ".am", "Fișier Automake" },
+        { ".fe", "Criptor fișiere" },
+        { ".mllr", "Maximum Likelihood Linear Regression" },
+        { ".ngr", "ROM NEOGEO" },
+        { ".sch", "Program/Schemă" },
+        { ".adlm", "Manager licențe Autodesk" },
+        { ".adxm", "XML administrativ" },
+        { ".nmnl", "Minimal normalizat" },
+        { ".propdesc", "Descriere proprietate" },
+        { ".nsl", "Bibliotecă sunet Nokia" },
+        { ".ntf", "Format transfer național" },
+        { ".ntp", "Configurație NTP" },
+        { ".forms", "Windows Forms" },
+        { ".runtime", "Manifest runtime" },
+        { ".interop", "Date COM Interop" },
+        { ".frm", "Formular Visual Basic" },
+        { ".bas", "Modul Visual Basic" },
+        { ".dwb", "Pachet Drum Workshop" },
+        { ".npmignore", "Reguli ignorare NPM" },
+        { ".rsrc", "Furcă resurse macOS" },
+        { ".upd2date", "Indicator cache Up2Date" },
+        { ".Up2Date", "Indicator cache Up2Date" },
+        { ".jshintrc", "Configurație JSHint" },
+        { ".lock", "Blocare/Pin dependență" },
+        { ".nix", "Expresie Nix" },
+        { ".hr1", "Date joc HR1" },
+        { ".hr2", "Date joc HR2" },
+        { ".hr3", "Date joc HR3" },
+        { ".hr4", "Date joc HR4" },
+        { ".hr5", "Date joc HR5" },
+        { ".hr6", "Date joc HR6" },
+        { ".hr7", "Date joc HR7" },
+        { ".hr8", "Date joc HR8" },
+        { ".hr9", "Date joc HR9" },
+        { ".bnf", "Gramatică Backus-Naur Form" },
+        { ".clb", "Catalog COM+" },
+        { ".tlb", "Bibliotecă tip" },
+        { ".dic", "Dicționar/Lexic" },
+        { ".aux", "Fișier auxiliar TeX" },
+        { ".ds", "Stocare date/DS_Store" },
+        { ".inc", "Include/Include sursă" },
+        { ".cpx", "Traducere pagină cod" },
+        { ".mdl", "Fișier model/modul" },
+        { ".dls", "Bancă sunete descărcabile" },
+        { ".cdf-ms", "Manifest implementare ClickOnce" },
+        { ".addin", "Add-in Visual Studio" },
+        { ".scp", "Componentă script Windows" },
+        { ".wmz", "Skin comprimat Windows Media Player" },
+        { ".iec", "Bază de date IEC" },
+        { ".wsc", "Componentă script Windows" },
+        { ".vrg", "Script registru Visual Studio" },
+        { ".prx", "Configurație automată proxy" },
+        { ".nuspec", "Specificație NuGet" },
+        
+        // ── Extended Archive / Compression --------------------------------
+        { ".zipx", "Arhivă ZIPX" },
+        { ".alz", "Arhivă ALZip" },
+        { ".eeg", "Comprimat EEG" },
+        { ".001", "Arhivă divizată partea 1" },
+        { ".arj", "Arhivă ARJ" },
+        { ".bh", "Arhivă BlakHole" },
+        { ".lha", "Arhivă LHA" },
+        { ".lzh", "Arhivă LHA/LZH" },
+        { ".pma", "Arhivă PMarc" },
+        { ".arc", "Arhivă ARC" },
+        { ".ace", "Arhivă ACE" },
+        { ".aes", "Fișier criptat AES" },
+        { ".zpak", "Arhivă ZPAQ" },
+        { ".zstd", "Arhivă Zstandard" },
+        { ".br", "Arhivă Brotli" },
+        { ".pea", "Arhivă PeaZip" },
+        { ".tbz", "Arhivă Tar.BZ" },
+        { ".tbz2", "Arhivă Tar.BZ2" },
+        { ".txz", "Arhivă Tar.XZ" },
+        { ".tlz", "Arhivă Tar.LZMA" },
+        { ".uu", "Fișier UUEncoded" },
+        { ".uue", "Fișier UUEncoded" },
+        { ".xxe", "Fișier XXEncoded" },
+        { ".z", "Unix Compress" },
+        { ".tgz", "Arhivă Tar.GZ" },
+        { ".isz", "Imagine ISO-Zipped" },
+        { ".udf", "Format disc universal" },
+        { ".i00", "Imagine divizată DVD Decrypter partea 1" }
+    }
+}
 };
 
             public string ItemType
@@ -1675,7 +5976,8 @@ namespace CopyThatProgram
             /*  derive version from the EXE that is currently running  */
             var exe = System.IO.Path.GetFileNameWithoutExtension(Application.ExecutablePath);
             if (!exe.StartsWith("CTv") || !Version.TryParse(exe[3..], out _))
-                throw new InvalidDataException("Executable must be named CTvX.Y.exe");
+                throw new InvalidDataException(
+                    Translator.Get("Executable must be named CTvX.Y.exe"));
             _localVersion = exe[3..];        // "1.0"
             _localZip = exe + ".zip";    // "CTv1.0.zip"
 
@@ -2042,7 +6344,7 @@ namespace CopyThatProgram
             modernTotal.Text = "0.00%";
 
             // Reset the total progress label and bar.
-            fileProcessedLabel.Text = "File Processed: 0 Bytes / 0 Bytes";
+            fileProcessedLabel.Text = Translator.Get("Files Processed: 0 Bytes / 0 Bytes");
             totalCopiedProgressLabel.Text = string.Format(
                 Translator.Get("Total C/M/D: 0 Bytes / {0}"),
                 FormatBytes(_totalBytesToProcess));
@@ -2200,10 +6502,14 @@ namespace CopyThatProgram
 
             // Update running totals display
             if (totalElapsedTimeLabel != null && !totalElapsedTimeLabel.IsDisposed)
-                totalElapsedTimeLabel.Text = $"Total Elapsed Time: {TotalsManager.FormatTimeWithDaysAndYears(_grandElapsedTime)}";
-            if (totalTargetTimeLabel != null && !totalTargetTimeLabel.IsDisposed)
-                totalTargetTimeLabel.Text = $"Total Target Time: {TotalsManager.FormatTimeWithDaysAndYears(_grandTargetTime)}";
+                totalElapsedTimeLabel.Text = string.Format(
+                    Translator.Get("Total Elapsed Time: {0}"),
+                    TotalsManager.FormatTimeWithDaysAndYears(_grandElapsedTime));
 
+            if (totalTargetTimeLabel != null && !totalTargetTimeLabel.IsDisposed)
+                totalTargetTimeLabel.Text = string.Format(
+                    Translator.Get("Total Target Time: {0}"),
+                    TotalsManager.FormatTimeWithDaysAndYears(_grandTargetTime));
             // Store the current values for the next calculation.
             _lastProcessedBytesForSpeed = _totalBytesProcessed;
             _lastSpeedCalcTime = DateTime.Now;
@@ -2523,7 +6829,7 @@ namespace CopyThatProgram
                     IsDirectory = true,
                     BytesRaw = 0,
                     FileSize = "<DIR>",
-                    Status = "Pending"
+                    Status = Translator.Get("Pending")
                 });
                 Interlocked.Increment(ref _totalDirs);
             }
@@ -2544,7 +6850,7 @@ namespace CopyThatProgram
                     IsDirectory = entry.IsDirectory,
                     BytesRaw = entry.Length,
                     FileSize = entry.IsDirectory ? "<DIR>" : FormatBytes(entry.Length),
-                    Status = "Pending"
+                    Status = Translator.Get("Pending")
                 });
 
                 if (entry.IsDirectory)
@@ -2654,7 +6960,8 @@ namespace CopyThatProgram
         private void UpdateScanProgress(string currentPath, int currentCount, int totalCount)
         {
             // Update the status and file path labels.
-            statusLabel.Text = $"Scanning: {System.IO.Path.GetFileName(currentPath)}";
+            statusLabel.Text = string.Format(Translator.Get("Scanning: {0}"),
+                                             System.IO.Path.GetFileName(currentPath));
             filePathLabel.Text = currentPath;
         }
 
@@ -2678,7 +6985,8 @@ namespace CopyThatProgram
             // Update the status labels if it's not the final batch.
             if (!isFinalBatch)
             {
-                statusLabel.Text = $"Adding: {System.IO.Path.GetFileName(currentPath)}";
+                statusLabel.Text = string.Format(Translator.Get("Adding: {0}"),
+                                                 System.IO.Path.GetFileName(currentPath));
                 filePathLabel.Text = currentPath;
             }
         }
@@ -3099,15 +7407,14 @@ namespace CopyThatProgram
             if (fileItem.IsDirectory)
                 return;
 
-            // Calls a method to add the errored file to a log.
             AddToSkippedFiles(
-                "Error",
-                fileItem.FileName,
-                fileItem.BytesRaw,
-                fileItem.FilePath,
-                intendedTargetPath,
-                errorMessage
-            );
+    Translator.Get("Error"),
+    fileItem.FileName,
+    fileItem.BytesRaw,
+    fileItem.FilePath,
+    intendedTargetPath,
+    errorMessage
+);
         }
         /// <summary>
         /// Initializes the timer for a form animation.
@@ -3478,31 +7785,6 @@ namespace CopyThatProgram
                 skinsComboBox.SelectedIndexChanged += skinsComboBox_SelectedIndexChanged;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private static string FormatTime(double seconds)
         {
             if (seconds < 60)
@@ -4700,14 +8982,21 @@ namespace CopyThatProgram
 
             // Update current operation time display
             if (elapsedAndTargetTimeLabel != null && !elapsedAndTargetTimeLabel.IsDisposed)
-                elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: {elapsed:hh\\:mm\\:ss} / {target:hh\\:mm\\:ss}";
+                elapsedAndTargetTimeLabel.Text = string.Format(
+                    Translator.Get("Elapsed / Target Time: {0} / {1}"),
+                    elapsed.ToString(@"hh\:mm\:ss"),
+                    target.ToString(@"hh\:mm\:ss"));
 
-            // Update running totals display (showing what the totals WILL be when this operation completes)
+            // Update running totals display
             if (totalElapsedTimeLabel != null && !totalElapsedTimeLabel.IsDisposed)
-                totalElapsedTimeLabel.Text = $"Total Elapsed Time: {grandElapsedRunning:hh\\:mm\\:ss}";
+                totalElapsedTimeLabel.Text = string.Format(
+                    Translator.Get("Total Elapsed Time: {0}"),
+                    TotalsManager.FormatTimeWithDaysAndYears(_grandElapsedTime));
 
             if (totalTargetTimeLabel != null && !totalTargetTimeLabel.IsDisposed)
-                totalTargetTimeLabel.Text = $"Total Target Time: {grandTargetRunning:hh\\:mm\\:ss}";
+                totalTargetTimeLabel.Text = string.Format(
+                    Translator.Get("Total Target Time: {0}"),
+                    TotalsManager.FormatTimeWithDaysAndYears(_grandTargetTime));
 
             // Store the current values for the next calculation.
             _lastProcessedBytesForSpeed = _totalBytesProcessed;
@@ -4880,10 +9169,11 @@ namespace CopyThatProgram
             if (behaviourOptions > maxBehaviorOptions)
             {
                 string message = createCustomDirCheckBox.Checked
-                    ? "When creating a custom directory or keeping only empty folders, you may select up to 3 behavior options."
-                    : "Only one behaviour option may be selected at a time.";
+                    ? Translator.Get("When creating a custom directory or keeping only empty folders, you may select up to 3 behavior options.")
+                    : Translator.Get("Only one behaviour option may be selected at a time.");
 
                 MessageBox.Show(message, Translator.Get("Invalid Options"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
                 return;
             }
 
@@ -5005,7 +9295,7 @@ namespace CopyThatProgram
             InitializeProgressHandler();
 
             // Resets pause/resume button text.
-            pauseResumeMultiButton.Text = "Pause";
+            pauseResumeMultiButton.Text = Translator.Get("Pause");
 
             // Enables and disables buttons.
             startButton.Enabled = false;
@@ -5204,30 +9494,6 @@ namespace CopyThatProgram
                 _updateTimer.Stop(); // Stops the update timer.
             }
         }
-        private void
-
-
-
-
-            Button_Click(object sender, EventArgs e) // Event handler for the pause/resume button click.
-        {
-            _isPaused = !_isPaused; // Toggles the boolean state of the _isPaused variable.
-
-            if (_isPaused) // Checks if the application is now in a paused state.
-            {
-                _pauseEvent.Reset(); // Resets the pause event, effectively blocking a waiting thread.
-                pauseResumeButton.Text = "Resume"; // Changes the button's text to "Resume".
-
-                StopElapsedTimer(); // Calls the helper method to stop the timer.
-            }
-            else // If the application is not paused (it's resuming).
-            {
-                _pauseEvent.Set(); // Sets the pause event, allowing a blocked thread to continue.
-                pauseResumeButton.Text = "Pause"; // Changes the button's text to "Pause".
-
-                StartElapsedTimer(); // Calls the helper method to start the timer.
-            }
-        }
 
         /// <summary>
         /// Performs a secure file deletion based on U.S. Department of Defense (DoD) standards.
@@ -5305,8 +9571,8 @@ namespace CopyThatProgram
 
             openFileDialog.Multiselect = true; // Allows the user to select multiple files.
             openFileDialog.FileName = ""; // Clears the file name in the dialog.
-            openFileDialog.Title = "Select File(s) to Add"; // Sets the title of the file dialog.
-            long totalSizeBytesFile = 0; // Initializes a variable to track the total size of selected files.
+            openFileDialog.Title = Translator.Get("Select File(s) to Add");
+            long totalSizeBytesFile = 0; // Initializes a variable to track the total size of selected files.
 
             DialogResult dr = this.openFileDialog.ShowDialog(); // Opens the file dialog and stores the user's action.
 
@@ -5955,7 +10221,7 @@ namespace CopyThatProgram
             // Use a FolderBrowserDialog to allow the user to select a source folder.
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
             {
-                folderDialog.Description = "Select a source folder to copy/move/delete from:";
+                folderDialog.Description = Translator.Get("Select a source folder to copy/move/delete from:");
                 folderDialog.ShowNewFolderButton = false;
 
                 // Check if the user selected a folder and clicked OK.
@@ -6466,38 +10732,39 @@ namespace CopyThatProgram
             }
 
             // Set the program's priority.
+            // Set the program's priority.
             if (priority == "Below Normal")
             {
                 priorityTrackBar.Value = 0;
-                priorityLabel.Text = "Program Priority: \nBelow Normal";
+                priorityLabel.Text = Translator.Get("Program Priority:\nBelow Normal");
                 Properties.Settings.Default.Priority = "Below Normal";
                 using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.BelowNormal; }
             }
             else if (priority == "Normal")
             {
                 priorityTrackBar.Value = 1;
-                priorityLabel.Text = "Program Priority: \nNormal";
+                priorityLabel.Text = Translator.Get("Program Priority:\nNormal");
                 Properties.Settings.Default.Priority = "Normal";
                 using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.Normal; }
             }
             else if (priority == "Above Normal")
             {
                 priorityTrackBar.Value = 2;
-                priorityLabel.Text = "Program Priority: \nAbove Normal";
+                priorityLabel.Text = Translator.Get("Program Priority:\nAbove Normal");
                 Properties.Settings.Default.Priority = "Above Normal";
                 using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.AboveNormal; }
             }
             else if (priority == "High")
             {
                 priorityTrackBar.Value = 3;
-                priorityLabel.Text = "Program Priority: \nHigh";
+                priorityLabel.Text = Translator.Get("Program Priority:\nHigh");
                 Properties.Settings.Default.Priority = "High";
                 using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.High; }
             }
             else if (priority == "Real Time")
             {
                 priorityTrackBar.Value = 4;
-                priorityLabel.Text = "Program Priority: \nReal Time";
+                priorityLabel.Text = Translator.Get("Program Priority:\nReal Time");
                 Properties.Settings.Default.Priority = "Real Time";
                 using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.RealTime; }
             }
@@ -6507,7 +10774,7 @@ namespace CopyThatProgram
             opacityTrackBar.Value = opacity;
             double opacityValue = opacityTrackBar.Value / 100.0;
             int opacityText = Convert.ToInt32(opacityValue * 100);
-            opacityLabel.Text = "Opacity: \n" + opacityText.ToString() + "%";
+            opacityLabel.Text = Translator.Get("Opacity: \n" + opacityText.ToString() + "%");
             Properties.Settings.Default.Opacity = opacityText;
             this.Opacity = opacityValue;
 
@@ -6964,67 +11231,40 @@ namespace CopyThatProgram
 
         private void priorityTrackBar_Scroll(object sender, EventArgs e)
         {
-            // Checks the value of the track bar to set the process priority.
-            if (priorityTrackBar.Value == 0)
+            // Checks the value of the track bar to set the process priority.
+            if (priorityTrackBar.Value == 0)
             {
-                // Sets the label text and saves the setting.
-                priorityLabel.Text = "Program Priority: \nBelow Normal";
+                priorityLabel.Text = Translator.Get("Program Priority:\nBelow Normal");
                 Properties.Settings.Default.Priority = "Below Normal";
-                // Changes the priority of the current process.
-                using (Process p = Process.GetCurrentProcess())
-                {
-                    p.PriorityClass = ProcessPriorityClass.BelowNormal;
-                }
+                using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.BelowNormal; }
             }
             else if (priorityTrackBar.Value == 1)
             {
-                // Sets the label text and saves the setting.
-                priorityLabel.Text = "Program Priority: \nNormal";
+                priorityLabel.Text = Translator.Get("Program Priority:\nNormal");
                 Properties.Settings.Default.Priority = "Normal";
-                // Changes the priority of the current process.
-                using (Process p = Process.GetCurrentProcess())
-                {
-                    p.PriorityClass = ProcessPriorityClass.Normal;
-                }
+                using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.Normal; }
             }
             else if (priorityTrackBar.Value == 2)
             {
-                // Sets the label text and saves the setting.
-                priorityLabel.Text = "Program Priority: \nAbove Normal";
+                priorityLabel.Text = Translator.Get("Program Priority:\nAbove Normal");
                 Properties.Settings.Default.Priority = "Above Normal";
-                // Changes the priority of the current process.
-                using (Process p = Process.GetCurrentProcess())
-                {
-                    p.PriorityClass = ProcessPriorityClass.AboveNormal;
-                }
+                using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.AboveNormal; }
             }
             else if (priorityTrackBar.Value == 3)
             {
-                // Sets the label text and saves the setting.
-                priorityLabel.Text = "Program Priority: \nHigh";
+                priorityLabel.Text = Translator.Get("Program Priority:\nHigh");
                 Properties.Settings.Default.Priority = "High";
-                // Changes the priority of the current process.
-                using (Process p = Process.GetCurrentProcess())
-                {
-                    p.PriorityClass = ProcessPriorityClass.High;
-                }
+                using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.High; }
             }
             else if (priorityTrackBar.Value == 4)
             {
-                // Sets the label text and saves the setting.
-                priorityLabel.Text = "Program Priority: \nReal Time";
+                priorityLabel.Text = Translator.Get("Program Priority:\nReal Time");
                 Properties.Settings.Default.Priority = "Real Time";
-                // Changes the priority of the current process.
-                using (Process p = Process.GetCurrentProcess())
-                {
-                    p.PriorityClass = ProcessPriorityClass.RealTime;
-                }
+                using (Process p = Process.GetCurrentProcess()) { p.PriorityClass = ProcessPriorityClass.RealTime; }
             }
-            // If auto-save is enabled, saves the settings.
-            if (saveAutoCheckBox.Checked)
-            {
-                Properties.Settings.Default.Save();
-            }
+
+            // If auto-save is enabled, saves the settings.
+            if (saveAutoCheckBox.Checked) Properties.Settings.Default.Save();
         }
 
         private void opacityTrackBar_Scroll(object sender, EventArgs e)
@@ -7035,8 +11275,8 @@ namespace CopyThatProgram
             // Converts the opacity value to an integer percentage.
             int opacityText = Convert.ToInt32(opacityValue * 100);
 
-            // Updates the opacity label text.
-            opacityLabel.Text = "Opacity: \n" + opacityText.ToString() + "%";
+            // Updates the opacity label text.
+            opacityLabel.Text = string.Format(Translator.Get("Opacity:\n{0}%"), opacityText);
 
             // Saves the opacity setting.
             Properties.Settings.Default.Opacity = opacityText;
@@ -7877,8 +12117,8 @@ namespace CopyThatProgram
         {
             // Clears all rows from the skipped files DataGridView.
             skippedDataGridView.Rows.Clear();
-            // Resets the "Total Skipped Files" label to 0.
-            totalSkippedLabel.Text = "Total Skipped Files: 0";
+            // Resets the "Total Skipped Files" label to 0.
+            totalSkippedLabel.Text = string.Format(Translator.Get("Total Skipped Files: {0}"), 0);
         }
 
         private void clearHistoryButton_Click(object sender, EventArgs e)
@@ -7886,7 +12126,7 @@ namespace CopyThatProgram
             // Clears all rows from the copy history DataGridView.
             copyHistoryDGV.Rows.Clear();
             // Resets the "Total History Items" label to 0.
-            totalHistoryLabel.Text = "Total History Items: 0";
+            totalHistoryLabel.Text = string.Format(Translator.Get("Total History Items: {0}"), 0);
         }
 
         private void btnAddAllowed_Click(object sender, EventArgs e)
@@ -8411,13 +12651,13 @@ namespace CopyThatProgram
                 var trayIcon = new NotifyIcon
                 {
                     Icon = SystemIcons.Information,
-                    Text = "File Paste Monitor",
+                    Text = Translator.Get("File Paste Monitor"),
                     Visible = true
                 };
 
                 // Sets up a context menu for the tray icon with an "Exit" option.
                 trayIcon.ContextMenuStrip = new ContextMenuStrip();
-                trayIcon.ContextMenuStrip.Items.Add("Exit", null, (s, e) => System.Windows.Forms.Application.Exit());
+                trayIcon.ContextMenuStrip.Items.Add(Translator.Get("Exit"), null, (s, e) => Application.Exit());
             }
 
             /// <summary>
@@ -8683,8 +12923,8 @@ namespace CopyThatProgram
     Translator.Get("Skip Error"),
     MessageBoxButtons.OK,
     MessageBoxIcon.Error);
-                    // Update the status of the file in the list to "Skipped (No Target)".
-                    UpdateFileStatus(_fileList[_currentFileIndex], "Skipped (No Target)"); ;
+                    // Update the status of the file in the list to "Skipped (No Target)".
+                    UpdateFileStatus(_fileList[_currentFileIndex], Translator.Get("Skipped (No Target)"));
                     // Increment the counters for files processed and skipped.
                     System.Threading.Interlocked.Increment(ref _processedFiles);
                     System.Threading.Interlocked.Increment(ref _totalFilesSkipped);
@@ -8707,8 +12947,11 @@ namespace CopyThatProgram
                     }
                     catch (Exception delEx)
                     {
-                        // Log a warning if the secure deletion fails.
-                        LogWarning($"Could not securely delete partial file {intendedDestinationFile}: {delEx.Message}");
+                        // Log a warning if the secure deletion fails.
+                        LogWarning(string.Format(
+                            Translator.Get("Could not securely delete partial file {0}: {1}"),
+                            intendedDestinationFile,
+                            delEx.Message));
                     }
                 }
 
@@ -8716,29 +12959,28 @@ namespace CopyThatProgram
                 if (string.IsNullOrEmpty(intendedDestinationFile))
                 {
                     AddToSkippedFiles(
-                      "Skipped: No Destination",                                // reason
-                                  currentFileWrapper.FileName,                              // fileName
-                                  currentFileWrapper.BytesRaw,                              // rawFileSize
-                                  currentFileWrapper.FilePath,                              // sourcePath
-                                  "N/A (empty target)",                                     // targetPath
-                                  "Destination path not determined"                         // errorMessage
-                              );
+                        Translator.Get("Skipped: No Destination"),
+                        currentFileWrapper.FileName,
+                        currentFileWrapper.BytesRaw,
+                        currentFileWrapper.FilePath,
+                        Translator.Get("N/A (empty target)"),
+                        Translator.Get("Destination path not determined")
+                    );
                 }
-                // Otherwise, log a "Skipped By User" reason with the determined destination path.
-                else
+                else
                 {
                     AddToSkippedFiles(
-                      "Skipped By User",                                        // reason
-                                  currentFileWrapper.FileName,                              // fileName
-                                  currentFileWrapper.BytesRaw,                              // rawFileSize
-                                  currentFileWrapper.FilePath,                              // sourcePath
-                                  intendedDestinationFile,                                  // targetPath
-                                  ""                                                        // errorMessage
-                              );
+                        Translator.Get("Skipped By User"),
+                        currentFileWrapper.FileName,
+                        currentFileWrapper.BytesRaw,
+                        currentFileWrapper.FilePath,
+                        intendedDestinationFile,
+                        ""
+                    );
                 }
 
-                // Update the file status to "Skipped" in the UI.
-                UpdateFileStatus(_fileList[_currentFileIndex], "Skipped");
+                // Update the file status to "Skipped" in the UI.
+                UpdateFileStatus(_fileList[_currentFileIndex], Translator.Get("Skipped"));
                 // Increment the total files processed and skipped counters.
                 System.Threading.Interlocked.Increment(ref _processedFiles);
                 System.Threading.Interlocked.Increment(ref _totalFilesSkipped);
@@ -8780,9 +13022,11 @@ namespace CopyThatProgram
             // Increment the total number of skipped and failed files.
             _totalFilesSkipped++;
             // Update the UI label showing the total number of skipped files.
-            totalSkippedLabel.Text = "Total Skipped Files: " + _totalFilesSkipped.ToString("N0") + "";
-            // Update the file's status in the list to "Failed".
-            UpdateFileStatus(item, "Failed");
+            totalSkippedLabel.Text = string.Format(
+    Translator.Get("Total Skipped Files: {0}"),
+    _totalFilesSkipped.ToString("N0"));
+
+            UpdateFileStatus(item, Translator.Get("Failed"));
             _totalFilesFailed++;
         }
 
@@ -8889,21 +13133,20 @@ namespace CopyThatProgram
         private void LogError(string message, string sourcePath = "", string targetPath = "", string exceptionMessage = "")
         {
             // Create a timestamped log entry string with the provided message.
-            string logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ERROR: {message}";
+            string logEntry = string.Format(Translator.Get("[{0}] ERROR: {1}"),
+                                            DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                                            message);
+
             // Append source and target paths to the log entry if they are provided.
             if (!string.IsNullOrEmpty(sourcePath))
-            {
-                logEntry += $"\n  Source: {sourcePath}";
-            }
+                logEntry += string.Format(Translator.Get("  Source: {0}"), sourcePath);
+
             if (!string.IsNullOrEmpty(targetPath))
-            {
-                logEntry += $"\n  Target: {targetPath}";
-            }
+                logEntry += string.Format(Translator.Get("  Target: {0}"), targetPath);
+
             // Append exception details if they are provided.
             if (!string.IsNullOrEmpty(exceptionMessage))
-            {
-                logEntry += $"\n  Details: {exceptionMessage}";
-            }
+                logEntry += string.Format(Translator.Get("  Details: {0}"), exceptionMessage);
 
             // Define the path for the log file.
             string logFilePath = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "application_errors.log");
@@ -8927,7 +13170,7 @@ namespace CopyThatProgram
         private void ResetAllFileStatuses()
         {
             foreach (var f in _fileList)
-                f.Status = "Pending...";
+                f.Status = Translator.Get("Pending...");
 
             // Make sure the grid redraws with the new values
             Invoke(() =>
@@ -9038,7 +13281,7 @@ namespace CopyThatProgram
                     // If no drive roots are found, set the label to indicate an invalid path.
                     if (driveRoots.Count == 0)
                     {
-                        SetDriveInfoLabel("Invalid Target Path");
+                        SetDriveInfoLabel(Translator.Get("Invalid Target Path"));
                         return;
                     }
 
@@ -9076,7 +13319,7 @@ namespace CopyThatProgram
                         catch (Exception ex)
                         {
                             // Log an error if reading drive information fails.
-                            LogError($"Error reading drive '{root}': {ex.Message}");
+                            LogError(string.Format(Translator.Get("Error reading drive '{0}': {1}"), root, ex.Message));
                         }
                     }
 
@@ -9085,7 +13328,10 @@ namespace CopyThatProgram
                     {
                         string drivesCombined = string.Join(", ", driveNames);
                         string text =
-                            $"Total Space ({drivesCombined}): {FormatBytes(usedSpaceAll)} / {FormatBytes(totalSpaceAll)}";
+string.Format(Translator.Get("Total Space ({0}): {1} / {2}"),
+                                drivesCombined,
+                                FormatBytes(usedSpaceAll),
+                                FormatBytes(totalSpaceAll));
 
                         // Check and use InvokeRequired to update the labels safely.
                         if (totalHDSpaceLeftLabel != null)
@@ -9108,21 +13354,23 @@ namespace CopyThatProgram
                     // If no drive names were found, indicate that no drives are ready.
                     else
                     {
-                        SetDriveInfoLabel("No drives ready");
+                        SetDriveInfoLabel(Translator.Get("No drives ready"));
                     }
                 }
                 // If no target paths are set, prompt the user to select one.
                 else
                 {
-                    SetDriveInfoLabel("Select a Destination to see Drive Space");
+                    SetDriveInfoLabel(Translator.Get("Select a Destination to see Drive Space"));
                 }
             }
             catch (Exception ex)
             {
                 // Log any exceptions that occur during the process.
-                LogError($"Error updating drive space information: {ex.Message}");
+
+                LogError(string.Format(Translator.Get("Error updating drive space information: {0}"), ex.Message));
                 // Set the UI label to indicate an error.
-                SetDriveInfoLabel("Error Getting Drive Space");
+
+                SetDriveInfoLabel(Translator.Get("Error Getting Drive Space"));
             }
         }
 
@@ -9164,7 +13412,7 @@ namespace CopyThatProgram
             if (sourceDirs == null || !sourceDirs.Any() || targetDirs == null || !targetDirs.Any())
             {
                 // Log an error if the directory paths are not specified.
-                LogError("Cannot create target directory structure: Source or target directories are not specified.");
+                LogError(Translator.Get("Cannot create target directory structure: Source or target directories are not specified."));
                 return;
             }
 
@@ -9228,28 +13476,32 @@ namespace CopyThatProgram
                         }
                         catch (Exception ex)
                         {
-                            // Log an error if directory creation fails.
-                            LogError($"Failed to create directory '{currentTargetDir}': {ex.Message}");
+                            LogError(string.Format(
+                                Translator.Get("Failed to create directory '{0}': {1}"),
+                                currentTargetDir,
+                                ex.Message));
                         }
                     }
-
                     try
                     {
-                        // Get all subdirectories and push them onto the stack for processing.
                         foreach (string subDir in Directory.GetDirectories(currentSourceDir))
                         {
                             directoriesToProcess.Push(subDir);
                         }
                     }
-                    // Catch and log access denied exceptions.
                     catch (UnauthorizedAccessException ex)
                     {
-                        LogError($"Access denied to directory '{currentSourceDir}': {ex.Message}");
+                        LogError(string.Format(
+                            Translator.Get("Access denied to directory '{0}': {1}"),
+                            currentSourceDir,
+                            ex.Message));
                     }
-                    // Catch and log any other exceptions.
                     catch (Exception ex)
                     {
-                        LogError($"Error enumerating subdirectories in '{currentSourceDir}': {ex.Message}");
+                        LogError(string.Format(
+                            Translator.Get("Error enumerating subdirectories in '{0}': {1}"),
+                            currentSourceDir,
+                            ex.Message));
                     }
                 }
             }
@@ -9304,16 +13556,18 @@ namespace CopyThatProgram
             // If no errors or cancellations, show a summary of the completed operation.
             else
             {
-                // Create a summary message string with the results.
-                string summaryMessage = $"Copy Operation Completed!\n\n" +
-                    $"Files Copied: {_totalFilesCopied}\n" +
-                    $"Files Skipped: {_totalFilesSkipped}\n" +
-                    $"Files Failed: {_totalFilesFailed}\n" +
-                    $"Total Files Processed: {_processedFiles} / {_grandTotalFileCount:N0}\n" +
-                    $"Total Bytes Processed: {FormatBytes(_totalBytesProcessed)} / {FormatBytes(_totalBytesToProcess)}";
+                // Create a summary message string with the results.
+                string summaryMessage = string.Format(
+                    Translator.Get("Copy Operation Completed!\n\nFiles Copied: {0}\nFiles Skipped: {1}\nFiles Failed: {2}\nTotal Files Processed: {3} / {4}\nTotal Bytes Processed: {5} / {6}"),
+                    _totalFilesCopied,
+                    _totalFilesSkipped,
+                    _totalFilesFailed,
+                    _processedFiles,
+                    _grandTotalFileCount.ToString("N0"),
+                    FormatBytes(_totalBytesProcessed),
+                    FormatBytes(_totalBytesToProcess));
 
-                // Show the summary message box.
-                MessageBox.Show(summaryMessage, Translator.Get("Copy Operation Summary"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(summaryMessage, Translator.Get("Copy Operation Summary"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // If the verify checkbox is checked and the operation was "Copy Files", start file verification.
                 if (verifyCheckBox != null && verifyCheckBox.Checked && copyMoveDeleteComboBox != null && copyMoveDeleteComboBox.SelectedItem != null && copyMoveDeleteComboBox.SelectedItem.ToString() == "Copy Files")
@@ -9412,9 +13666,9 @@ namespace CopyThatProgram
                 {
                     // Call a method to handle the file error.
                     HandleErrorFile(
-            new FileInfoWrapper { FileName = System.IO.Path.GetFileName(path), FilePath = System.IO.Path.GetFullPath(path) },
-            $"Access denied: {ex.Message}",
-            path);
+                        new FileInfoWrapper { FileName = System.IO.Path.GetFileName(path), FilePath = System.IO.Path.GetFullPath(path) },
+                        string.Format(Translator.Get("Access denied: {0}"), ex.Message),
+                        path);
                     // Increment the total failed files counter and return null.
                     Interlocked.Increment(ref _totalFilesFailed);
                     return null;
@@ -9458,7 +13712,7 @@ namespace CopyThatProgram
                     // Call a method to handle the file error.
                     HandleErrorFile(
                         new FileInfoWrapper { FileName = System.IO.Path.GetFileName(path), FilePath = System.IO.Path.GetFullPath(path) },
-                        $"Access denied: {ex.Message}",
+                        string.Format(Translator.Get("Access denied: {0}"), ex.Message),
                         path);
                     // Increment the total failed files counter and return null.
                     Interlocked.Increment(ref _totalFilesFailed);
@@ -9525,7 +13779,9 @@ namespace CopyThatProgram
             while (true)
             {
                 // Show a custom dialog box to prompt for a directory name.
-                inputDir = Prompt.ShowDialog("Enter custom directory name:", "Custom Directory");
+                inputDir = Prompt.ShowDialog(
+    Translator.Get("Enter custom directory name:"),
+    Translator.Get("Custom Directory"));
 
                 // If the input is null or whitespace, return null to indicate cancellation.
                 if (string.IsNullOrWhiteSpace(inputDir))
@@ -9681,7 +13937,11 @@ namespace CopyThatProgram
                 catch (Exception ex)
                 {
                     // Log an error if there's an issue checking timestamps.
-                    LogError($"Error checking file timestamps for skipping: {ex.Message}", sourceFilePath, destinationFilePath, ex.Message);
+                    LogError(
+    string.Format(Translator.Get("Error checking file timestamps for skipping: {0}"), ex.Message),
+    sourceFilePath,
+    destinationFilePath,
+    ex.Message);
                     // Default to skipping the file on error to prevent data loss.
                     return true;
                 }
@@ -9902,25 +14162,23 @@ namespace CopyThatProgram
 
                         try
                         {
-                            // 3.  show which file we are about to copy
-                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Copying…", job.Src));
-
-                            // 4.  do the copy
+                            // 3. show which file we are about to copy
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, Translator.Get("Copying…"), job.Src));
+                            // 4. do the copy
                             await CopyFileWithSlotAsync(slot.Id, job.Src, job.Dest, token);
-
-                            // 5.  success
-                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Done", job.Src));
+                            // 5. success
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, Translator.Get("Done"), job.Src));
                             Interlocked.Increment(ref _totalFilesCopiedMulti);
                             System.Threading.Interlocked.Increment(ref _processedFiles);
                         }
                         catch (OperationCanceledException)
                         {
-                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Canceled", job.Src));
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, Translator.Get("Canceled"), job.Src));
                             Interlocked.Increment(ref _totalFilesSkipped);
                         }
                         catch (Exception ex)
                         {
-                            Invoke(() => UpdateMultiSlotStatus(slot.Id, "Failed", $"{job.Src} — {ex.Message}"));
+                            Invoke(() => UpdateMultiSlotStatus(slot.Id, Translator.Get("Failed"), $"{job.Src} — {ex.Message}"));
                             Interlocked.Increment(ref _totalFilesFailed);
                             System.Threading.Interlocked.Increment(ref _processedFiles);
                         }
@@ -9938,7 +14196,7 @@ namespace CopyThatProgram
                 {
                     progressBarMultiTotal.Value = 0;
                     progressBarMultiTotal.Text = "0.00%";
-                    fileCountMultiLabel.Text = "Files Processed: 0 Out of 0";
+                    fileCountMultiLabel.Text = Translator.Get("File Count: 0 Out of 0");
                     speedMultiLabel.Text = Translator.Get("Speed: 0 MB/s");
                     totalCMDMultiLabel.Text = Translator.Get("Total C/M/D: 0 Bytes / 0 Bytes");
                     totalTimeMultiLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
@@ -10012,7 +14270,7 @@ namespace CopyThatProgram
                 System.Diagnostics.Debug.WriteLine($"Applying progress bar colors - Background: {backgroundColor}, Contrasting: {contrastingColor}");
 
                 // Apply to single-threaded progress bars (if they exist)
-                if (this.Controls.Find("modernFile", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar fileBar)
+                if (this.Controls.Find("modernFile", true).FirstOrDefault() is ModernProgress.ModernCircularProgressBar fileBar)
                 {
                     fileBar.ForeColor = contrastingColor;
                     fileBar.ProgressStartColor = progressStart;
@@ -10021,7 +14279,7 @@ namespace CopyThatProgram
                     System.Diagnostics.Debug.WriteLine($"Applied to modernFile - ForeColor: {fileBar.ForeColor}");
                 }
 
-                if (this.Controls.Find("modernTotal", true).FirstOrDefault() is CustomControls.ModernCircularProgressBar totalBar)
+                if (this.Controls.Find("modernTotal", true).FirstOrDefault() is ModernProgress.ModernCircularProgressBar totalBar)
                 {
                     totalBar.ForeColor = contrastingColor;
                     totalBar.ProgressStartColor = progressStart;
@@ -10160,17 +14418,21 @@ namespace CopyThatProgram
             progressBarMultiTotal.Value = Math.Min((int)(totalPct * 100), 10000);
             progressBarMultiTotal.Text = $"{totalPct:F2}%";
 
-            fileCountMultiLabel.Text = $"Files Processed: {_multiThreadProcessedFiles:N0} Out of {_grandTotalFileCount:N0}";
+            fileCountMultiLabel.Text = string.Format(
+                Translator.Get("Files Processed: {0} Out of {1}"),
+                _multiThreadProcessedFiles.ToString("N0"),
+                _grandTotalFileCount.ToString("N0"));
+
             totalCMDMultiLabel.Text = string.Format(
     Translator.Get("Total C/M/D: {0} / {1}"),
     FormatBytes(_totalBytesProcessed),
     FormatBytes(_totalBytesToProcess));
             speedMultiLabel.Text = string.Format(Translator.Get("Speed: {0}"), FormatSpeed(bytesPerSec));
 
-totalTimeMultiLabel.Text = string.Format(
-    Translator.Get("Elapsed / Target Time: {0} / {1}"),
-    elapsed.ToString(@"hh\:mm\:ss"),
-    target.ToString(@"hh\:mm\:ss"));
+            totalTimeMultiLabel.Text = string.Format(
+                Translator.Get("Elapsed / Target Time: {0} / {1}"),
+                elapsed.ToString(@"hh\:mm\:ss"),
+                target.ToString(@"hh\:mm\:ss"));
         }
 
 
@@ -10193,18 +14455,18 @@ totalTimeMultiLabel.Text = string.Format(
 
                     if (_doNotOverwrite)
                     {
-                        Invoke(() => UpdateMultiSlotStatus(slotIndex, "Skipped (exists)", sourceFile));
+                        Invoke(() => UpdateMultiSlotStatus(slotIndex, Translator.Get("Skipped (exists)"), sourceFile));
                         Interlocked.Increment(ref _totalFilesSkipped);
-                        string reason = "File exists and 'Do Not Overwrite' is selected.";
+                        string reason = Translator.Get("File exists and 'Do Not Overwrite' is selected.");
                         var skippedItem = new FileInfoWrapper { FileName = srcInfo.Name, BytesRaw = totalBytes, FilePath = sourceFile };
                         HandleSkippedFile(skippedItem, reason, destinationFile);
                         return;
                     }
                     if (_overwriteIfNewer && srcInfo.LastWriteTime <= dstInfo.LastWriteTime)
                     {
-                        Invoke(() => UpdateMultiSlotStatus(slotIndex, "Skipped (not newer)", sourceFile));
+                        Invoke(() => UpdateMultiSlotStatus(slotIndex, Translator.Get("Skipped (not newer)"), sourceFile));
                         Interlocked.Increment(ref _totalFilesSkipped);
-                        string reason = "Destination file is newer or the same age.";
+                        string reason = Translator.Get("Destination file is newer or the same age.");
                         var skippedItem = new FileInfoWrapper { FileName = srcInfo.Name, BytesRaw = totalBytes, FilePath = sourceFile };
                         HandleSkippedFile(skippedItem, reason, destinationFile);
                         return;
@@ -10265,7 +14527,7 @@ totalTimeMultiLabel.Text = string.Format(
                     string currentFileName = System.IO.Path.GetFileName(sourceFile);
                     string processedStr = FormatBytes(bytesCopied);
                     string totalStr = FormatBytes(totalBytes);
-                    string speedStr = $"{speedMBps:F2} MB/Sec";
+                    string speedStr = $"{speedMBps:F2} MB/s";
 
                     string etaStr;
                     if (etaSeconds > 3600)
@@ -10275,7 +14537,13 @@ totalTimeMultiLabel.Text = string.Format(
                     else
                         etaStr = $"{etaSeconds:F1} Sec(s).";
 
-                    string displayText = $"File: {currentFileName} || Processed: {processedStr} / {totalStr} || Speed: {speedStr} || ETA: {etaStr}";
+                    string displayText = string.Format(
+    Translator.Get("File: {0} || Processed: {1} / {2} || Speed: {3} || ETA: {4}"),
+    currentFileName,
+    processedStr,
+    totalStr,
+    speedStr,
+    etaStr);
 
                     Invoke(() =>
                     {
@@ -10286,16 +14554,16 @@ totalTimeMultiLabel.Text = string.Format(
 
                 sw.Stop();
                 Interlocked.Increment(ref _multiThreadProcessedFiles);
-                Invoke(() => UpdateMultiSlotStatus(slotIndex, "Done", sourceFile));
+                Invoke(() => UpdateMultiSlotStatus(slotIndex, Translator.Get("Done"), sourceFile));
             }
             catch (OperationCanceledException)
             {
-                Invoke(() => UpdateMultiSlotStatus(slotIndex, "Canceled", sourceFile));
+                Invoke(() => UpdateMultiSlotStatus(slotIndex, Translator.Get("Canceled"), sourceFile));
                 Interlocked.Increment(ref _totalFilesSkipped);
             }
             catch (Exception ex)
             {
-                Invoke(() => UpdateMultiSlotStatus(slotIndex, "Failed", $"{sourceFile}\n{ex.Message}"));
+                Invoke(() => UpdateMultiSlotStatus(slotIndex, Translator.Get("Failed"), $"{sourceFile}\n{ex.Message}"));
                 Interlocked.Increment(ref _totalFilesFailed);
             }
         }
@@ -10316,7 +14584,7 @@ totalTimeMultiLabel.Text = string.Format(
 
         private void UpdateMultiSlotProgress(int slot, double percent, string fileName)
         {
-            CustomControls.ModernCircularProgressBar bar = slot switch
+            ModernProgress.ModernCircularProgressBar bar = slot switch
             {
                 1 => progressBarMulti1,
                 2 => progressBarMulti2,
@@ -10464,7 +14732,10 @@ totalTimeMultiLabel.Text = string.Format(
                 }
                 catch (Exception ex)
                 {
-                    LogWarning($"Failed to create directory {dirPath}: {ex.Message}");
+                    LogWarning(string.Format(
+                        Translator.Get("Failed to create directory {0}: {1}"),
+                        dirPath,
+                        ex.Message));
                 }
             }
 
@@ -10479,7 +14750,7 @@ totalTimeMultiLabel.Text = string.Format(
                                                         targetBase, _currentSourceRootPath);
                 if (string.IsNullOrEmpty(dstPath))
                 {
-                    LogAndSkip(item, "Could not compute destination path.");
+                    LogAndSkip(item, Translator.Get("Could not compute destination path."));
                     Interlocked.Increment(ref _processedFiles);
                     continue;
                 }
@@ -10648,7 +14919,7 @@ totalTimeMultiLabel.Text = string.Format(
                                                                 targetBase, _currentSourceRootPath);
                         // Creates the directory and updates the UI status
                         Directory.CreateDirectory(dstDir);
-                        Invoke(() => UpdateFileStatus(dirItem, "Folder Created..."));
+                        UpdateFileStatus(dirItem, Translator.Get("Folder Created..."));
                     }
 
                     // Loops through each file to be moved
@@ -11002,17 +15273,17 @@ totalTimeMultiLabel.Text = string.Format(
                                     : 100.0;
 
                 // Update the label with the bytes processed for the current file.
-                fileProcessedLabel.Text =
-                $"File Processed: {FormatBytes(fileBytesDone)} / {FormatBytes(fileSize)}";
+                fileProcessedLabel.Text = string.Format(
+                    Translator.Get("File Processed: {0} / {1}"),
+                    FormatBytes(fileBytesDone),
+                    FormatBytes(fileSize));
                 fileProcessedLabel.Refresh();
-
                 UpdateFileCountLabels();
-
                 Invoke(() =>
                 {
                     modernFile.Value = Math.Min((int)(filePct * 100), 10_000);
                     modernTotal.Value = Math.Min((int)(overallPct * 100), 10_000);
-                    UpdateFileStatus(item, $"{filePct:F2}% done");
+                    UpdateFileStatus(item, string.Format(Translator.Get("{0}% done"), filePct.ToString("F2")));
                 });
             }
         }
@@ -11053,7 +15324,7 @@ totalTimeMultiLabel.Text = string.Format(
                 // Displays a message box with the error message.
                 MessageBox.Show(Translator.Get($"Move operation completed with errors: {e.Error.Message}"), Translator.Get("Move Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // Logs the error.
-                LogError($"Move Worker Error: {e.Error}");
+                LogError(string.Format(Translator.Get("Move Worker Error: {0}"), e.Error));
                 // Invokes a delegate to show operation statistics and reset the UI.
                 Invoke(() =>
                 {
@@ -11104,27 +15375,27 @@ totalTimeMultiLabel.Text = string.Format(
             {
                 if (minimizeSystemTrayCheckBox.Checked)
                 {
-                    notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc || Double-Click To Open";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc || Double-Click To Open");
                 }
                 else
                 {
-                    notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc");
                 }
             }
             else
             {
                 if (minimizeSystemTrayCheckBox.Checked)
                 {
-                    notifyIcon1.Text = "Copy That v1.0 By: Havoc || Double-Click To Open";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc || Double-Click To Open");
                 }
                 else
                 {
-                    notifyIcon1.Text = "Copy That v1.0 By: Havoc";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc");
                 }
             }
 
             // Resets the text of the pause/resume button.
-            pauseResumeMultiButton.Text = "Pause";
+            pauseResumeMultiButton.Text = Translator.Get("Pause");
 
             // Enables and disables various UI controls after the operation.
             startButton.Enabled = true;
@@ -11139,12 +15410,12 @@ totalTimeMultiLabel.Text = string.Format(
             modernTotal.Value = 0;
             modernFile.Value = 0;
             // Resets various progress-related labels.
-            fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
+            fileProcessedLabel.Text = Translator.Get("Files Processed: 0 Bytes / 0 Bytes");
             totalCopiedProgressLabel.Text = string.Format(
     Translator.Get("Total C/M/D: 0 Bytes / {0}"),
     FormatBytes(_totalBytesToProcess));
             speedLabel.Text = Translator.Get("Speed: N/A");
-            elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
+            elapsedAndTargetTimeLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
 
             // Resets internal counters and variables.
             _totalBytesProcessed = 0;
@@ -11228,7 +15499,7 @@ totalTimeMultiLabel.Text = string.Format(
                 // Displays error message.
                 MessageBox.Show(Translator.Get($"Secure Delete operation completed with errors: {e.Error.Message}"), Translator.Get("Secure Delete Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // Logs the error.
-                LogError($"Secure Delete Worker Error: {e.Error}");
+                LogError(string.Format(Translator.Get("Secure Delete Worker Error: {0}"), e.Error));
                 // Invokes a method to show stats and reset UI.
                 Invoke(() =>
                 {
@@ -11276,27 +15547,27 @@ totalTimeMultiLabel.Text = string.Format(
             {
                 if (minimizeSystemTrayCheckBox.Checked)
                 {
-                    notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc || Double-Click To Open";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc || Double-Click To Open");
                 }
                 else
                 {
-                    notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc");
                 }
             }
             else
             {
                 if (minimizeSystemTrayCheckBox.Checked)
                 {
-                    notifyIcon1.Text = "Copy That v1.0 By: Havoc || Double-Click To Open";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc || Double-Click To Open");
                 }
                 else
                 {
-                    notifyIcon1.Text = "Copy That v1.0 By: Havoc";
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc");
                 }
             }
 
             // Resets the pause/resume button text.
-            pauseResumeMultiButton.Text = "Pause";
+            pauseResumeMultiButton.Text = Translator.Get("Pause");
 
             // Enables and disables buttons.
             startButton.Enabled = true;
@@ -11310,12 +15581,12 @@ totalTimeMultiLabel.Text = string.Format(
             modernTotal.Value = 0;
             modernFile.Value = 0;
             // Resets status labels.
-            fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
+            fileProcessedLabel.Text = Translator.Get("Files Processed: 0 Bytes / 0 Bytes");
             totalCopiedProgressLabel.Text = string.Format(
     Translator.Get("Total C/M/D: 0 Bytes / {0}"),
     FormatBytes(_totalBytesToProcess));
             speedLabel.Text = Translator.Get("Speed: N/A");
-            elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
+            elapsedAndTargetTimeLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
 
             // Resets internal state variables.
             _totalBytesProcessed = 0;
@@ -11818,7 +16089,7 @@ totalTimeMultiLabel.Text = string.Format(
                 status = "Error";
                 _stopwatch.Stop();
                 _updateTimer.Stop();
-                elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
+                elapsedAndTargetTimeLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
                 MessageBox.Show(Translator.Get($"Copy operation completed with errors: {isCancelled.Error.Message}"), Translator.Get("Copy Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LogError($"Copy Worker Error: {isCancelled.Error}");
                 if (onErrorCheckBox.Checked) PlayRes(Properties.Resources.OnError);
@@ -11829,7 +16100,7 @@ totalTimeMultiLabel.Text = string.Format(
                 status = "Cancelled";
                 _stopwatch.Stop();
                 _updateTimer.Stop();
-                elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
+                elapsedAndTargetTimeLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
                 MessageBox.Show(Translator.Get("Copy operation cancelled by user."), Translator.Get("Operation Cancelled"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (onCancelCheckBox.Checked) PlayRes(Properties.Resources.OnCancel);
                 ShowOperationStatisticsSummary(isMultiThreaded);
@@ -11857,7 +16128,7 @@ totalTimeMultiLabel.Text = string.Format(
                 Invoke(() => { ShowOperationStatisticsSummary(isMultiThreaded); ResetProgressUIAndVariables(); });
                 _stopwatch.Stop();
                 _updateTimer.Stop();
-                elapsedAndTargetTimeLabel.Text = $"Elapsed / Target Time: 00:00:00 / 00:00:00";
+                elapsedAndTargetTimeLabel.Text = Translator.Get("Elapsed / Target Time: 00:00:00 / 00:00:00");
             }
 
             UpdateDriveSpaceInfo();
@@ -11873,16 +16144,24 @@ totalTimeMultiLabel.Text = string.Format(
             if (proVersion)
             {
                 if (minimizeSystemTrayCheckBox.Checked)
-                    notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc || Double-Click To Open";
+                {
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc || Double-Click To Open");
+                }
                 else
-                    notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc";
+                {
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc");
+                }
             }
             else
             {
                 if (minimizeSystemTrayCheckBox.Checked)
-                    notifyIcon1.Text = "Copy That v1.0 By: Havoc || Double-Click To Open";
+                {
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc || Double-Click To Open");
+                }
                 else
-                    notifyIcon1.Text = "Copy That v1.0 By: Havoc";
+                {
+                    notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc");
+                }
             }
 
             Invoke((Delegate)(() =>
@@ -11895,7 +16174,7 @@ totalTimeMultiLabel.Text = string.Format(
                 modernTotal.Value = modernTotal.Minimum;
             }));
 
-            pauseResumeMultiButton.Text = "Pause";
+            pauseResumeMultiButton.Text = Translator.Get("Pause");
 
             startButton.Enabled = true;
             pauseResumeMultiButton.Enabled = false;
@@ -11907,7 +16186,7 @@ totalTimeMultiLabel.Text = string.Format(
             modernTotal.Value = 0;
             modernFile.Value = 0;
 
-            fileProcessedLabel.Text = $"File Processed: 0 Bytes / 0 Bytes";
+            fileProcessedLabel.Text = Translator.Get("Files Processed: 0 Bytes / 0 Bytes");
             totalCopiedProgressLabel.Text = string.Format(
     Translator.Get("Total C/M/D: 0 Bytes / {0}"),
     FormatBytes(_totalBytesToProcess));
@@ -12198,7 +16477,7 @@ totalTimeMultiLabel.Text = string.Format(
         /// </summary>
         /// <param name="index">The slot index (0-3)</param>
         /// <returns>The corresponding ModernCircularProgressBar control</returns>
-        private CustomControls.ModernCircularProgressBar GetProgressBar(int index) => index switch
+        private ModernProgress.ModernCircularProgressBar GetProgressBar(int index) => index switch
         {
             // Returns the correct progress bar based on the index.
             0 => progressBarMulti1,
@@ -12355,8 +16634,12 @@ totalTimeMultiLabel.Text = string.Format(
                 // Catches any exceptions during directory creation.
                 // Throws a new IOException with a custom error message and the original exception.
                 throw new IOException(
-                    $"Failed to create destination directory '{dir}' for file '{System.IO.Path.GetFileName(destinationFile)}'. Reason: {ex.Message}",
-                    ex);
+     string.Format(
+         Translator.Get("Failed to create destination directory '{0}' for file '{1}'. Reason: {2}"),
+         dir,
+         System.IO.Path.GetFileName(destinationFile),
+         ex.Message),
+     ex);
             }
         }
 
@@ -12526,10 +16809,10 @@ totalTimeMultiLabel.Text = string.Format(
         private void ResetMultiThreadedUI()
         {
             // Resets the text of all file name labels to "Nothing".
-            filesNameLabel1.Text = "Nothing";
-            filesNameLabel2.Text = "Nothing";
-            filesNameLabel3.Text = "Nothing";
-            filesNameLabel4.Text = "Nothing";
+            filesNameLabel1.Text = Translator.Get("Nothing");
+            filesNameLabel2.Text = Translator.Get("Nothing");
+            filesNameLabel3.Text = Translator.Get("Nothing");
+            filesNameLabel4.Text = Translator.Get("Nothing");
 
             // Resets the text of all percentage labels to "0.00%".
             //totalPCTMultiLabel1.Text = "0.00%";
@@ -12599,7 +16882,7 @@ totalTimeMultiLabel.Text = string.Format(
             else if (!multithreadCheckBox.Checked && !isMultiThreaded)
             {
                 // Prepends "Single-threaded" to the operation name.
-                operationName = "Single-Threaded " + operationName;
+                operationName = string.Format(Translator.Get("Single-Threaded {0}"), operationName);
 
                 string tmpl = Translator.Get("- {0} Operation Summary ({1}) -\n\n" +
                                       "Files Copied: {2:N0}\nFiles Skipped: {3:N0}\nFiles Failed: {4:N0}\n" +
@@ -12664,15 +16947,15 @@ totalTimeMultiLabel.Text = string.Format(
             string intendedDestination = System.IO.Path.Combine(_targetDirectories[0], fileName);
             // Adds the file to a list of skipped files with a reason.
             AddToSkippedFiles(
-                "Skipped",                  // The general reason for the operation status
-                fileName,                   // The name of the file
-                fileSizeRaw,                // The raw size of the file (long)
-                filePath,                   // The source path of the file
-                intendedDestination,        // The intended destination path
-                reason                      // The specific reason/error message provided
-            );
+      Translator.Get("Skipped"),  // The general reason for the operation status
+      fileName,                   // The name of the file
+      fileSizeRaw,                // The raw size of the file (long)
+      filePath,                   // The source path of the file
+      intendedDestination,        // The intended destination path
+      reason                      // The specific reason/error message provided
+  );
             // Updates the status of the file in a UI component (likely a DataGridView).
-            UpdateFileStatus(_fileList[fileIndex], "Skipped");
+            UpdateFileStatus(_fileList[fileIndex], Translator.Get("Skipped"));
 
             // Resets the retry count after the file has been handled as skipped.
             _retryCount = 0;
@@ -12910,88 +17193,73 @@ totalTimeMultiLabel.Text = string.Format(
                 // Iterates through each file in the list to verify.
                 foreach (FileInfoWrapper sourceFileWrapper in _fileList)
                 {
-                    // Checks if a cancellation is pending.
                     if (verifyWorker.CancellationPending)
                     {
-                        e.Cancel = true; // Sets the cancel flag.
-                        break; // Exits the loop.
+                        e.Cancel = true;
+                        break;
                     }
 
-                    // Gets the source file path.
                     string sourceFile = sourceFileWrapper.FilePath;
-
-                    // Determines the destination file path.
                     string destinationFile = GetTargetDirectory(sourceFile, targetRoot, sourceFileWrapper.IsDirectory, _currentSourceRootPath);
 
-                    // Checks if the destination path could not be determined.
                     if (string.IsNullOrEmpty(destinationFile))
                     {
-                        // Adds the file to the skipped list with a reason.
                         AddToSkippedFiles(
-                            "Verification Skipped",
+                            Translator.Get("Verification Skipped"),
                             System.IO.Path.GetFileName(sourceFile),
                             sourceFileWrapper.BytesRaw,
                             sourceFile,
-                            "N/A (empty target)",
-                            "Destination path not determined"
+                            Translator.Get("N/A (empty target)"),
+                            Translator.Get("Destination path not determined")
                         );
-                        continue; // Skips to the next file.
+                        continue;
                     }
 
-                    // Checks if the current item is a file (not a directory).
                     if (!sourceFileWrapper.IsDirectory)
                     {
-                        // Checks if the destination file exists.
                         if (File.Exists(destinationFile))
                         {
-                            // Verifies the integrity of the source and destination files.
                             if (VerifyFileIntegrity(sourceFile, destinationFile))
                             {
-                                verifiedFiles++; // Increments the verified files counter.
+                                verifiedFiles++;
                             }
                             else
                             {
-                                // Adds the file to the skipped list if integrity check fails.
                                 AddToSkippedFiles(
-                                    "Verification Failed",
+                                    Translator.Get("Verification Failed"),
                                     System.IO.Path.GetFileName(sourceFile),
                                     new FileInfo(sourceFile).Length,
                                     sourceFile,
                                     destinationFile,
-                                    "Integrity check failed"
+                                    Translator.Get("Integrity check failed")
                                 );
                             }
                         }
                         else
                         {
-                            // Adds the file to the skipped list if the destination file is not found.
                             AddToSkippedFiles(
-                                "Verification Failed",
+                                Translator.Get("Verification Failed"),
                                 System.IO.Path.GetFileName(sourceFile),
                                 sourceFileWrapper.BytesRaw,
                                 sourceFile,
                                 destinationFile,
-                                "Destination file not found"
+                                Translator.Get("Destination file not found")
                             );
                         }
                     }
                     else
                     {
-                        // Adds the directory to the skipped list with a reason.
                         AddToSkippedFiles(
-                            "Verification Skipped",
+                            Translator.Get("Verification Skipped"),
                             System.IO.Path.GetFileName(sourceFile),
                             0,
                             sourceFile,
                             destinationFile,
-                            "Is a Directory"
+                            Translator.Get("Is a Directory")
                         );
                     }
 
-
-                    // Calculates the current progress.
                     int progress = (int)((verifiedFiles * 100.0) / _grandTotalFileCount);
-                    // Reports the progress to the UI thread.
                     verifyWorker.ReportProgress(progress);
                 }
             };
@@ -13049,7 +17317,10 @@ totalTimeMultiLabel.Text = string.Format(
                     string logFile = System.IO.Path.Combine(logPath, $"CopyThat_{DateTime.Now:yyyyMMdd}.log");
 
                     // Formats the log entry string with the current timestamp, "ERROR:", the provided message, and a new line.
-                    string logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ERROR: {message}{Environment.NewLine}";
+                    string logEntry = string.Format(
+                        Translator.Get("[{0}] ERROR: {1}"),
+                        DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                        message) + Environment.NewLine;
                     // Appends the formatted log entry to the log file.
                     File.AppendAllText(logFile, logEntry);
 
@@ -13252,8 +17523,8 @@ totalTimeMultiLabel.Text = string.Format(
             modernFile.Minimum = 0;
             modernFile.Maximum = 10000;
             // Sets the initial text for the pause/resume buttons.
-            pauseResumeButton.Text = "Pause";
-            pauseResumeMultiButton.Text = "Pause";
+            pauseResumeButton.Text = Translator.Get("Pause");
+            pauseResumeMultiButton.Text = Translator.Get("Pause");
         }
 
         /// <summary>
@@ -14179,338 +18450,338 @@ totalTimeMultiLabel.Text = string.Format(
 
         private void windowGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Window Group Box: This group box contains settings related to the application's window behavior, such as minimizing to the system tray.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Window Group Box: This group box contains settings related to the application's window behavior, such as minimizing to the system tray.");
         }
 
         private void alwaysOnTopCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows.");
         }
 
         private void minimizeSystemTrayCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Minimize to System Tray CheckBox: This checkbox determines whether the application should minimize to the system tray instead of the taskbar.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Minimize to System Tray CheckBox: This checkbox determines whether the application should minimize to the system tray instead of the taskbar.");
         }
 
         private void confirmDragDropCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application.");
         }
 
         private void contextMenuCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application.");
         }
 
         private void skinsLanguageGoupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Skins & Language Group Box: This group box contains settings related to the application's appearance and language preferences.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Skins & Language Group Box: This group box contains settings related to the application's appearance and language preferences.");
         }
 
         private void languageComboBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface.");
         }
 
         private void skinsComboBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance.");
         }
 
         private void fontNumUpDown_Enter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Font Size Numeric Up-Down: This control allows you to adjust the font size used in the application's user interface.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Font Size Numeric Up-Down: This control allows you to adjust the font size used in the application's user interface.");
         }
 
         private void soundsGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Sounds Group Box: This group box contains settings related to the application's sound notifications for various events.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Sounds Group Box: This group box contains settings related to the application's sound notifications for various events.");
         }
 
         private void onFinishCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes.");
         }
 
         private void onCancelCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled.");
         }
 
         private void onAddFilesCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list.");
         }
 
         private void onErrorCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation.");
         }
 
         private void updateGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Update Group Box: This group box contains settings related to the application's update preferences.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Update Group Box: This group box contains settings related to the application's update preferences.");
         }
 
         private void updateAutoCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup.");
         }
 
         private void updateBetaCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates.");
         }
 
         private void checkForUpdatesButton_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Check for Updates Button: This button manually checks for updates to the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Check for Updates Button: This button manually checks for updates to the application.");
         }
 
         private void defaultSettingsButton_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Default Settings Button: This button resets all settings to their default values.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Default Settings Button: This button resets all settings to their default values.");
         }
 
         private void recSettingsButton_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Recommended Settings Button: This button applies a set of recommended settings for optimal performance and usability.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Recommended Settings Button: This button applies a set of recommended settings for optimal performance and usability.");
         }
 
         private void priorityTrackBar_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated.");
         }
 
         private void opacityTrackBar_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent.");
         }
 
         private void logFileCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application.");
         }
 
         private void logDaysNumUpDown_Enter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Log Days Numeric Up-Down: This control allows you to specify the number of days to retain log files before they are automatically deleted.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Log Days Numeric Up-Down: This control allows you to specify the number of days to retain log files before they are automatically deleted.");
         }
 
         private void saveAutoCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Auto Save Settings CheckBox: This checkbox determines whether to automatically save the current settings when the application is closed.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Auto Save Settings CheckBox: This checkbox determines whether to automatically save the current settings when the application is closed.");
         }
 
         private void clearSettingsButton_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration.");
         }
 
         private void saveSettingsButton_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions.");
         }
 
         private void performanceGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Performance Group Box: This group box contains settings related to the application's performance, such as buffer size and multi-threading options.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Performance Group Box: This group box contains settings related to the application's performance, such as buffer size and multi-threading options.");
         }
 
         private void bufferNumUpDown_Enter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Buffer Size Numeric Up-Down: This control allows you to adjust the buffer size used during file operations, which can affect performance.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Buffer Size Numeric Up-Down: This control allows you to adjust the buffer size used during file operations, which can affect performance.");
         }
 
         private void multithreadCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Multi-Thread CheckBox: This checkbox enables or disables multi-threaded file operations, allowing multiple files to be processed simultaneously for improved performance.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Multi-Thread CheckBox: This checkbox enables or disables multi-threaded file operations, allowing multiple files to be processed simultaneously for improved performance.");
         }
 
         private void underMBCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes.");
         }
 
         private void overMBCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes.");
         }
 
         private void setMBGBUnderNumUpDown_Enter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Set MB/GB Under Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to smaller files.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Set MB/GB Under Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to smaller files.");
         }
 
         private void setMBGBOverNumUpDown_Enter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Set MB/GB Over Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to larger files.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Set MB/GB Over Numeric Up-Down: This control allows you to specify the size threshold in megabytes for applying multi-threading to larger files.");
         }
 
         private void fileDirSettingsGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("File/Directory Settings Group Box: This group box contains settings related to how files and directories are exported or zipped (before) for the copy or move operations.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("File/Directory Settings Group Box: This group box contains settings related to how files and directories are exported or zipped (before) for the copy or move operations.");
         }
 
         private void onlyNamesCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Only Names CheckBox: This checkbox determines whether to export only the names of files and directories without their full paths.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Only Names CheckBox: This checkbox determines whether to export only the names of files and directories without their full paths.");
         }
 
         private void fullPathsCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories.");
         }
 
         private void exportButton_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Export Button: This button exports the list of files and directories to a text file based on the selected settings (only names or full paths).");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Export Button: This button exports the list of files and directories to a text file based on the selected settings (only names or full paths).");
         }
 
         private void zipSeparateCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Zip Separate CheckBox: This checkbox determines whether to create separate zip files for each file and directory before the copy or move operations.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Zip Separate CheckBox: This checkbox determines whether to create separate zip files for each file and directory before the copy or move operations.");
         }
 
         private void zipTogetherCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations.");
         }
 
         private void emailGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Email Group Box: This group box contains settings related to exporting and emailing the file list for the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Email Group Box: This group box contains settings related to exporting and emailing the file list for the application.");
         }
 
         private void smsGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("SMS Group Box: This group box contains settings for configuring SMS notifications when operations complete.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("SMS Group Box: This group box contains settings for configuring SMS notifications when operations complete.");
         }
 
         private void setUpSMSButton_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Set Up SMS Button: This button opens the SMS notification setup dialog, allowing you to configure SMS settings for operation completion notifications.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Set Up SMS Button: This button opens the SMS notification setup dialog, allowing you to configure SMS settings for operation completion notifications.");
         }
 
         private void setUpEmailButton_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Set Up Email Button: This button opens the email setup dialog, allowing you to configure email settings for exporting and sending the file list.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Set Up Email Button: This button opens the email setup dialog, allowing you to configure email settings for exporting and sending the file list.");
         }
 
         private void emailNamesCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export.");
         }
 
         private void emailPathsCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export.");
         }
 
         private void otherSettingsGroupBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Other Settings Group Box: This group box contains miscellaneous settings for the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Other Settings Group Box: This group box contains miscellaneous settings for the application.");
         }
 
         private void closeProgramCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs.");
         }
 
         private void restartCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs.");
         }
 
         private void startWithWindowsCheckBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts.");
         }
 
         private void serialMaskedTextBox_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Serial Key Text Box: This text box allows you to enter your serial key to activate the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Serial Key Text Box: This text box allows you to enter your serial key to activate the application.");
         }
 
         private void registerButton_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Register Button: This button submits the entered serial key for validation and activates the application if the key is valid.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Register Button: This button submits the entered serial key for validation and activates the application if the key is valid.");
         }
 
         private void securePassesNumUpDown_Enter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Secure Passes Numeric Up-Down: This control allows you to specify the number of passes to use for securely deleting files.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Secure Passes Numeric Up-Down: This control allows you to specify the number of passes to use for securely deleting files.");
         }
 
         private void cmdSettingsPage_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.");
         }
 
         private void seLabel_MouseEnter(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Move Application Label: This allows you to move the application to different parts of the screen.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Move Application Label: This allows you to move the application to different parts of the screen.");
         }
 
         private void cmdSettingsPage_MouseEnter_1(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Settings Tab: This tab allows you to configure various settings for the application, including window behavior, appearance, performance, and other preferences.");
         }
 
         private void copyHistoryDGV_MouseEnter(object sender, EventArgs e)
@@ -15107,6 +19378,1630 @@ totalTimeMultiLabel.Text = string.Format(
                 _map = new(StringComparer.OrdinalIgnoreCase)
                 {
 
+                    ["Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application."] =
+(
+    "Case à cocher du fichier journal : cette case détermine s’il faut créer un fichier journal enregistrant les détails des opérations de fichiers effectuées par l’application.", // French
+    "Protokolldatei-Checkbox: Dieses Kontrollkästchen legt fest, ob eine Protokolldatei erstellt wird, die Details der von der Anwendung durchgeführten Dateioperationen aufzeichnet.", // German
+    "Casilla de verificación de archivo de registro: esta casilla determina si se crea un archivo de registro que registre los detalles de las operaciones de archivos realizadas por la aplicación.", // Spanish
+    "Casella di controllo del file di registro: questa casella determina se creare un file di registro che registra i dettagli delle operazioni sui file eseguite dall’applicazione.", // Italian
+    "Caixa de seleção de ficheiro de registo: esta caixa determina se deve ser criado um ficheiro de registo que registe os detalhes das operações de ficheiros realizadas pela aplicação.", // Portuguese (Portugal)
+    "Caixa de seleção de arquivo de log: esta caixa determina se deve ser criado um arquivo de log que registre os detalhes das operações de arquivos realizadas pelo aplicativo.", // Portuguese (Brazil)
+    "Logboekselectievakje: dit selectievakje bepaalt of er een logboekbestand wordt aangemaakt dat de details van de bestandsbewerkingen die door de toepassing worden uitgevoerd, vastlegt.", // Dutch
+    "Loggfilkryssruta: den här kryssrutan avgör om en loggfil ska skapas som registrerar detaljer om filåtgärder som utförs av programmet.", // Swedish
+    "Loggfil-avkrysningsboks: denne boksen bestemmer om det skal opprettes en loggfil som registrerer detaljer om filoperasjonene som utføres av applikasjonen.", // Norwegian
+    "Logfil-afkrydsningsfelt: dette felt bestemmer, om der skal oprettes en logfil, der registrerer detaljer om filoperationerne, som programmet udfører.", // Danish
+    "Lokin valintaruutu: tämä valintaruutu määrittää, luodaanko lokitiedosto, joka tallentaa sovelluksen suorittamien tiedostotoimintojen tiedot.", // Finnish
+    "Pole wyboru pliku dziennika: to pole określa, czy ma zostać utworzony plik dziennika, który zapisuje szczegóły operacji plikowych wykonywanych przez aplikację.", // Polish
+    "Zaškrtávací políčko souboru protokolu: toto políčko určuje, zda se má vytvořit soubor protokolu, který zaznamenává podrobnosti o operacích se soubory prováděných aplikací.", // Czech
+    "Naplófájl jelölőnégyzet: ez a jelölőnégyzet határozza meg, hogy létrejöjjön-e egy naplófájl, amely rögzíti az alkalmazás által végrehajtott fájlműveletek részleteit.", // Hungarian
+    "Casetă de bifare fișier jurnal: această casetă determină dacă se creează un fișier jurnal care înregistrează detaliile operațiunilor de fișiere efectuate de aplicație." // Romanian
+),
+
+                    ["Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent."] =
+(
+    "Barre d’opacité : ce curseur permet d’ajuster le niveau d’opacité de la fenêtre de l’application, la rendant plus ou moins transparente.", // fr
+    "Deckkraftregler: Mit diesem Schieberegler können Sie die Deckkraft des Anwendungsfensters anpassen und es mehr oder weniger transparent machen.", // de
+    "Control de opacidad: esta barra permite ajustar el nivel de opacidad de la ventana de la aplicación, haciéndola más o menos transparente.", // es
+    "Barra di opacità: questa barra consente di regolare il livello di opacità della finestra dell'applicazione, rendendola più o meno trasparente.", // it
+    "Barra de opacidade: esta barra permite ajustar o nível de opacidade da janela da aplicação, tornando-a mais ou menos transparente.", // pt
+    "Barra de opacidade: esta barra permite ajustar o nível de opacidade da janela do aplicativo, tornando-a mais ou menos transparente.", // pt-BR
+    "Ondoorzichtigheidsbalk: met deze balk kunt u het doorzichtigheidsniveau van het toepassingsvenster aanpassen, zodat het meer of minder transparant wordt.", // nl
+    "Opacitetsreglage: det här reglaget låter dig justera applikationsfönstrets opacitetsnivå, så att det blir mer eller mindre genomskinligt.", // sv
+    "Gjennomsiktighetskontroll: denne kontrollen lar deg justere gjennomsiktighetsnivået til programvinduet, slik at det blir mer eller mindre gjennomsiktig.", // no
+    "Gennemsigtighedsskyder: denne skyder gør det muligt at justere gennemsigtighedsniveauet for applikationsvinduet, så det bliver mere eller mindre gennemsigtigt.", // da
+    "Läpinäkyvyyssäätö: tällä säätimellä voit muuttaa sovellusikkunan läpinäkyvyyttä, tehden siitä enemmän tai vähemmän läpinäkyvän.", // fi
+    "Suwak przezroczystości: ten suwak pozwala dostosować poziom przezroczystości okna aplikacji, czyniąc je bardziej lub mniej przezroczystym.", // pl
+    "Posuvník neprůhlednosti: tento posuvník umožňuje upravit úroveň neprůhlednosti okna aplikace, aby bylo více nebo méně průhledné.", // cs
+    "Átlátszóság csúszka: ez a csúszka lehetővé teszi az alkalmazásablak átlátszósági szintjének beállítását, átlátszóbbá vagy kevésbé átlátszóvá téve azt.", // hu
+    "Glisor de opacitate: acest glisor îți permite să ajustezi nivelul de opacitate al ferestrei aplicației, făcând-o mai mult sau mai puțin transparentă." // ro
+),
+
+
+                    ["Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated."] =
+(
+    "Curseur de priorité : ce curseur permet d’ajuster le niveau de priorité des opérations sur les fichiers, ce qui affecte la façon dont les ressources système sont allouées.", // fr
+    "Prioritätsregler: Mit diesem Schieberegler können Sie die Priorität der Dateioperationen einstellen, was beeinflusst, wie Systemressourcen zugewiesen werden.", // de
+    "Control de prioridad: esta barra permite ajustar el nivel de prioridad de las operaciones de archivos, afectando cómo se asignan los recursos del sistema.", // es
+    "Barra di priorità: questa barra consente di regolare il livello di priorità delle operazioni sui file, influenzando come vengono allocate le risorse di sistema.", // it
+    "Barra de prioridade: esta barra permite ajustar o nível de prioridade das operações de ficheiro, afetando a forma como os recursos do sistema são alocados.", // pt
+    "Barra de prioridade: esta barra permite ajustar o nível de prioridade das operações de arquivo, afetando como os recursos do sistema são alocados.", // pt-BR
+    "Prioriteitsbalk: met deze balk kunt u het prioriteitsniveau van bestandsbewerkingen aanpassen, wat invloed heeft op hoe systeembronnen worden toegewezen.", // nl
+    "Prioritetsreglage: det här reglaget låter dig justera prioriteten för filoperationer, vilket påverkar hur systemresurser tilldelas.", // sv
+    "Prioritetskontroll: denne kontrollen lar deg justere prioriteringsnivået for filoperasjoner, noe som påvirker hvordan systemressurser blir tildelt.", // no
+    "Prioritetsskyder: denne skyder gør det muligt at justere prioriteten for filoperationer, hvilket påvirker, hvordan systemressourcer tildeles.", // da
+    "Prioriteettisäädin: tällä säätimellä voit muuttaa tiedosto-operaatioiden prioriteettia, mikä vaikuttaa siihen, miten järjestelmäresursseja jaetaan.", // fi
+    "Suwak priorytetu: ten suwak pozwala dostosować poziom priorytetu operacji plikowych, wpływając na sposób przydzielania zasobów systemowych.", // pl
+    "Posuvník priority: tento posuvník umožňuje upravit úroveň priority operací se soubory, což ovlivňuje přidělování systémových prostředků.", // cs
+    "Prioritás csúszka: ez a csúszka lehetővé teszi a fájlműveletek prioritási szintjének beállítását, ami befolyásolja a rendszererőforrások elosztását.", // hu
+    "Glisor de prioritate: acest glisor îți permite să ajustezi nivelul de prioritate al operațiunilor cu fișiere, influențând modul în care sunt alocate resursele sistemului." // ro
+),
+
+
+
+
+                    ["Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup."] =
+("Case à cocher Vérifier automatiquement les mises à jour : cette case détermine si l'application doit vérifier automatiquement les mises à jour au démarrage.",
+ "Automatisch nach Updates suchen Kontrollkästchen: Dieses Kontrollkästchen bestimmt, ob die Anwendung beim Start automatisch nach Updates suchen soll.",
+ "Casilla de verificación Buscar actualizaciones automáticamente: esta casilla determina si la aplicación debe buscar actualizaciones automáticamente al iniciar.",
+ "Casella di controllo Verifica automaticamente aggiornamenti: questa casella determina se l'applicazione deve verificare automaticamente gli aggiornamenti all'avvio.",
+ "Caixa de seleção Verificar atualizações automaticamente: esta caixa determina se a aplicação deve verificar atualizações automaticamente ao iniciar.",
+ "Caixa de seleção Verificar atualizações automaticamente: esta caixa determina se o aplicativo deve verificar atualizações automaticamente ao iniciar.",
+ "Automatisch controleren op updates selectievakje: dit selectievakje bepaalt of de applicatie automatisch moet controleren op updates bij het opstarten.",
+ "Kryssruta Kontrollera automatiskt efter uppdateringar: denna kryssruta avgör om programmet ska kontrollera automatiskt efter uppdateringar vid start.",
+ "Avmerkingsboks Sjekk automatisk for oppdateringer: denne avmerkingsboksen bestemmer om applikasjonen skal sjekke automatisk for oppdateringer ved oppstart.",
+ "Afkrydsningsfelt Tjek automatisk for opdateringer: dette afkrydsningsfelt bestemmer om applikationen automatisk skal tjekke for opdateringer ved opstart.",
+ "Tarkista päivitykset automaattisesti -valintaruutu: tämä valintaruutu määrittää, tarkistaako sovellus automaattisesti päivitykset käynnistyksen yhteydessä.",
+ "Pole wyboru Automatycznie sprawdzaj aktualizacje: to pole wyboru określa, czy aplikacja powinna automatycznie sprawdzać aktualizacje przy uruchomieniu.",
+ "Zaškrtávací políčko Automaticky kontrolovat aktualizace: toto zaškrtávací políčko určuje, zda by aplikace měla automaticky kontrolovat aktualizace při spuštění.",
+ "Automatikus frissítéskeresés jelölőnégyzet: Ez a jelölőnégyzet határozza meg, hogy az alkalmazás automatikusan keressen-e frissítéseket indításkor.",
+ "Casetă de selectare Verifică automat actualizările: această casetă determină dacă aplicația trebuie să verifice automat actualizările la pornire."),
+
+                    ["Could not compute destination path."] =
+("Impossible de calculer le chemin de destination.",
+ "Zielpfad konnte nicht berechnet werden.",
+ "No se pudo calcular la ruta de destino.",
+ "Impossibile calcolare il percorso di destinazione.",
+ "Não foi possível calcular o caminho de destino.",
+ "Não foi possível calcular o caminho de destino.",
+ "Kan doelpad niet berekenen.",
+ "Kunde inte beräkna målsökväg.",
+ "Kunne ikke beregne målbane.",
+ "Kunne ikke beregne destinationsti.",
+ "Kohdepolkua ei voitu laskea.",
+ "Nie można obliczyć ścieżki docelowej.",
+ "Nelze vypočítat cílovou cestu.",
+ "Nem sikerült kiszámítani a célútvonalat.",
+ "Nu s-a putut calcula calea de destinație."),
+
+
+                    ["File Processed: {0} / {1}"] =
+("Fichier traité : {0} / {1}",
+ "Datei verarbeitet: {0} / {1}",
+ "Archivo procesado: {0} / {1}",
+ "File elaborato: {0} / {1}",
+ "Ficheiro processado: {0} / {1}",
+ "Arquivo processado: {0} / {1}",
+ "Bestand verwerkt: {0} / {1}",
+ "Fil bearbetad: {0} / {1}",
+ "Fil behandlet: {0} / {1}",
+ "Fil behandlet: {0} / {1}",
+ "Tiedosto käsitelty: {0} / {1}",
+ "Plik przetworzony: {0} / {1}",
+ "Soubor zpracován: {0} / {1}",
+ "Feldolgozott fájl: {0} / {1}",
+ "Fișier procesat: {0} / {1}"),
+
+                    ["{0}% done"] =
+("{0}% terminé",
+ "{0}% fertig",
+ "{0}% hecho",
+ "{0}% fatto",
+ "{0}% concluído",
+ "{0}% concluído",
+ "{0}% klaar",
+ "{0}% klart",
+ "{0}% ferdig",
+ "{0}% færdig",
+ "{0}% valmis",
+ "{0}% gotowe",
+ "{0}% hotovo",
+ "{0}% kész",
+ "{0}% gata"),
+
+                    ["Move Worker Error: {0}"] =
+("Erreur du processus de déplacement : {0}",
+ "Fehler beim Verschieben: {0}",
+ "Error del proceso de movimiento: {0}",
+ "Errore del processo di spostamento: {0}",
+ "Erro do processo de movimentação: {0}",
+ "Erro do processo de movimentação: {0}",
+ "Fout bij verplaatsingsproces: {0}",
+ "Fel i flyttningsprocess: {0}",
+ "Feil i flyttingsprosess: {0}",
+ "Fejl i flytteproces: {0}",
+ "Siirtoprosessin virhe: {0}",
+ "Błąd procesu przenoszenia: {0}",
+ "Chyba procesu přesouvání: {0}",
+ "Áthelyezési folyamat hibája: {0}",
+ "Eroare proces mutare: {0}"),
+
+                    ["Copy That v1.0 Pro By: Havoc || Double-Click To Open"] =
+("Copy That v1.0 Pro Par : Havoc || Double-cliquez pour ouvrir",
+ "Copy That v1.0 Pro Von: Havoc || Doppelklicken zum Öffnen",
+ "Copy That v1.0 Pro Por: Havoc || Haga doble clic para abrir",
+ "Copy That v1.0 Pro Di: Havoc || Doppio clic per aprire",
+ "Copy That v1.0 Pro Por: Havoc || Clique duas vezes para abrir",
+ "Copy That v1.0 Pro Por: Havoc || Clique duas vezes para abrir",
+ "Copy That v1.0 Pro Door: Havoc || Dubbelklik om te openen",
+ "Copy That v1.0 Pro Av: Havoc || Dubbelklicka för att öppna",
+ "Copy That v1.0 Pro Av: Havoc || Dobbeltklikk for å åpne",
+ "Copy That v1.0 Pro Af: Havoc || Dobbeltklik for at åbne",
+ "Copy That v1.0 Pro Tekijä: Havoc || Kaksoisnapsauta avataksesi",
+ "Copy That v1.0 Pro Autor: Havoc || Kliknij dwukrotnie, aby otworzyć",
+ "Copy That v1.0 Pro Autor: Havoc || Dvojklikem otevřete",
+ "Copy That v1.0 Pro Készítette: Havoc || Dupla kattintás a megnyitáshoz",
+ "Copy That v1.0 Pro De: Havoc || Faceți dublu clic pentru a deschide"),
+
+                    ["Secure Delete Worker Error: {0}"] =
+("Erreur du processus de suppression sécurisée : {0}",
+ "Fehler beim sicheren Löschen: {0}",
+ "Error del proceso de eliminación segura: {0}",
+ "Errore del processo di eliminazione sicura: {0}",
+ "Erro do processo de eliminação segura: {0}",
+ "Erro do processo de exclusão segura: {0}",
+ "Fout bij veilig verwijderingsproces: {0}",
+ "Fel i säker raderingsprocess: {0}",
+ "Feil i sikker slettingsprosess: {0}",
+ "Fejl i sikker sletningsproces: {0}",
+ "Turvallisen poistoprosessin virhe: {0}",
+ "Błąd procesu bezpiecznego usuwania: {0}",
+ "Chyba procesu bezpečného mazání: {0}",
+ "Biztonságos törlési folyamat hibája: {0}",
+ "Eroare proces ștergere securizată: {0}"),
+
+
+
+                    ["Failed to create destination directory '{0}' for file '{1}'. Reason: {2}"] =
+("Échec de la création du répertoire de destination '{0}' pour le fichier '{1}'. Raison : {2}",
+ "Fehler beim Erstellen des Zielverzeichnisses '{0}' für Datei '{1}'. Grund: {2}",
+ "Error al crear el directorio de destino '{0}' para el archivo '{1}'. Motivo: {2}",
+ "Impossibile creare la cartella di destinazione '{0}' per il file '{1}'. Motivo: {2}",
+ "Falha ao criar o diretório de destino '{0}' para o ficheiro '{1}'. Motivo: {2}",
+ "Falha ao criar o diretório de destino '{0}' para o arquivo '{1}'. Motivo: {2}",
+ "Kan doelmap '{0}' niet maken voor bestand '{1}'. Reden: {2}",
+ "Misslyckades med att skapa målkatalog '{0}' för fil '{1}'. Orsak: {2}",
+ "Kunne ikke opprette målkatalog '{0}' for fil '{1}'. Årsak: {2}",
+ "Kunne ikke oprette destinationsmappe '{0}' for fil '{1}'. Årsag: {2}",
+ "Kohdehakemiston '{0}' luominen tiedostolle '{1}' epäonnistui. Syy: {2}",
+ "Nie udało się utworzyć katalogu docelowego '{0}' dla pliku '{1}'. Powód: {2}",
+ "Nepodařilo se vytvořit cílový adresář '{0}' pro soubor '{1}'. Důvod: {2}",
+ "Nem sikerült létrehozni a(z) '{0}' célkönyvtárat a(z) '{1}' fájlhoz. Ok: {2}",
+ "Eșec la crearea directorului destinație '{0}' pentru fișierul '{1}'. Motiv: {2}"),
+
+                    ["Single-Threaded {0}"] =
+("Monothread {0}",
+ "Einfädig {0}",
+ "Monohilo {0}",
+ "Monothread {0}",
+ "Monothread {0}",
+ "Monothread {0}",
+ "Enkelvoudig {0}",
+ "Enkel-trådig {0}",
+ "Enkelttrådet {0}",
+ "Enkelt-trådet {0}",
+ "Yksisäikeinen {0}",
+ "Jednowątkowy {0}",
+ "Jednovláknový {0}",
+ "Egyszálú {0}",
+ "Mono-fir {0}"),
+                    ["Verification Skipped"] =
+("Vérification ignorée",
+ "Überprüfung übersprungen",
+ "Verificación omitida",
+ "Verifica saltata",
+ "Verificação ignorada",
+ "Verificação ignorada",
+ "Verificatie overgeslagen",
+ "Verifiering överhoppad",
+ "Verifisering hoppet over",
+ "Verificering sprunget over",
+ "Tarkistus ohitettu",
+ "Weryfikacja pominięta",
+ "Ověření přeskočeno",
+ "Ellenőrzés kihagyva",
+ "Verificare omisă"),
+
+                    ["N/A (empty target)"] =
+("N/D (cible vide)",
+ "N/V (leeres Ziel)",
+ "N/D (destino vacío)",
+ "N/D (destinazione vuota)",
+ "N/D (destino vazio)",
+ "N/D (destino vazio)",
+ "N/B (leeg doel)",
+ "Ej tillgänglig (tomt mål)",
+ "Ikke tilgjengelig (tomt mål)",
+ "Ikke tilgængelig (tomt mål)",
+ "Ei saatavilla (tyhjä kohde)",
+ "Niedostępne (pusty cel)",
+ "Nedostupné (prázdný cíl)",
+ "Nem elérhető (üres cél)",
+ "Indisponibil (destinație goală)"),
+
+                    ["Destination path not determined"] =
+("Chemin de destination non déterminé",
+ "Zielpfad nicht bestimmt",
+ "Ruta de destino no determinada",
+ "Percorso di destinazione non determinato",
+ "Caminho de destino não determinado",
+ "Caminho de destino não determinado",
+ "Doelpad niet bepaald",
+ "Destinationssökväg inte bestämd",
+ "Destinasjonsbane ikke bestemt",
+ "Destinationsti ikke bestemt",
+ "Kohdepolkua ei määritetty",
+ "Ścieżka docelowa nie została określona",
+ "Cílová cesta nebyla určena",
+ "Célútvonal nem meghatározott",
+ "Calea de destinație nu a fost determinată"),
+
+                    ["Verification Failed"] =
+("Vérification échouée",
+ "Überprüfung fehlgeschlagen",
+ "Verificación fallida",
+ "Verifica fallita",
+ "Verificação falhada",
+ "Verificação falhou",
+ "Verificatie mislukt",
+ "Verifiering misslyckades",
+ "Verifisering mislyktes",
+ "Verificering mislykkedes",
+ "Tarkistus epäonnistui",
+ "Weryfikacja nieudana",
+ "Ověření selhalo",
+ "Ellenőrzés sikertelen",
+ "Verificare eșuată"),
+
+                    ["Integrity check failed"] =
+("La vérification d'intégrité a échoué",
+ "Integritätsprüfung fehlgeschlagen",
+ "Verificación de integridad fallida",
+ "Controllo di integrità fallito",
+ "Verificação de integridade falhada",
+ "Verificação de integridade falhou",
+ "Integriteitscontrole mislukt",
+ "Integritetskontroll misslyckades",
+ "Integritetskontroll mislyktes",
+ "Integritetskontrol mislykkedes",
+ "Eheyden tarkistus epäonnistui",
+ "Sprawdzenie integralności nie powiodło się",
+ "Kontrola integrity selhala",
+ "Integritásellenőrzés sikertelen",
+ "Verificarea integrității a eșuat"),
+
+                    ["Destination file not found"] =
+("Fichier de destination introuvable",
+ "Zieldatei nicht gefunden",
+ "Archivo de destino no encontrado",
+ "File di destinazione non trovato",
+ "Ficheiro de destino não encontrado",
+ "Arquivo de destino não encontrado",
+ "Doelbestand niet gevonden",
+ "Målfil hittades inte",
+ "Målfil ikke funnet",
+ "Destinationsfil ikke fundet",
+ "Kohdetiedostoa ei löydy",
+ "Nie znaleziono pliku docelowego",
+ "Cílový soubor nenalezen",
+ "Célfájl nem található",
+ "Fișierul destinație nu a fost găsit"),
+
+                    ["Is a Directory"] =
+("Est un répertoire",
+ "Ist ein Verzeichnis",
+ "Es un directorio",
+ "È una cartella",
+ "É um diretório",
+ "É um diretório",
+ "Is een map",
+ "Är en katalog",
+ "Er en katalog",
+ "Er en mappe",
+ "On hakemisto",
+ "Jest katalogiem",
+ "Je adresář",
+ "Ez egy könyvtár",
+ "Este un director"),
+
+
+                    ["Select a source folder to copy/move/delete from:"] =
+("Sélectionnez un dossier source pour copier/déplacer/supprimer depuis :",
+ "Wählen Sie einen Quellordner zum Kopieren/Verschieben/Löschen aus:",
+ "Seleccione una carpeta de origen para copiar/mover/eliminar desde:",
+ "Seleziona una cartella di origine da cui copiare/spostare/eliminare:",
+ "Selecione uma pasta de origem para copiar/mover/eliminar de:",
+ "Selecione uma pasta de origem para copiar/mover/excluir de:",
+ "Selecteer een bronmap om van te kopiëren/verplaatsen/verwijderen:",
+ "Välj en källmapp att kopiera/flytta/radera från:",
+ "Velg en kildemappe å kopiere/flytte/slette fra:",
+ "Vælg en kildemappe at kopiere/flytte/slette fra:",
+ "Valitse lähdekansio, josta kopioidaan/siirretään/poistetaan:",
+ "Wybierz folder źródłowy, z którego chcesz kopiować/przenosić/usuwać:",
+ "Vyberte zdrojovou složku pro kopírování/přesouvání/mazání z:",
+ "Válasszon forráskönyvtárat a másoláshoz/áthelyezéshez/törléshez:",
+ "Selectați un folder sursă din care să copiați/mutați/ștergeți:"),
+
+
+                    ["New executable not found: {0}"] =
+("Nouvel exécutable introuvable : {0}",
+ "Neue ausführbare Datei nicht gefunden: {0}",
+ "Nuevo ejecutable no encontrado: {0}",
+ "Nuovo eseguibile non trovato: {0}",
+ "Novo executável não encontrado: {0}",
+ "Novo executável não encontrado: {0}",
+ "Nieuw uitvoerbaar bestand niet gevonden: {0}",
+ "Ny körbar fil hittades inte: {0}",
+ "Ny kjørbar fil ikke funnet: {0}",
+ "Ny eksekverbar fil ikke fundet: {0}",
+ "Uutta suoritettavaa tiedostoa ei löydy: {0}",
+ "Nowy plik wykonywalny nie został znaleziony: {0}",
+ "Nový spustitelný soubor nenalezen: {0}",
+ "Új végrehajtható fájl nem található: {0}",
+ "Executabil nou nu a fost găsit: {0}"),
+
+
+                    ["File: {0} || Processed: {1} / {2} || Speed: {3} || ETA: {4}"] =
+("Fichier : {0} || Traité : {1} / {2} || Vitesse : {3} || Temps restant : {4}",
+ "Datei: {0} || Verarbeitet: {1} / {2} || Geschwindigkeit: {3} || Verbleibend: {4}",
+ "Archivo: {0} || Procesado: {1} / {2} || Velocidad: {3} || Tiempo estimado: {4}",
+ "File: {0} || Elaborato: {1} / {2} || Velocità: {3} || Tempo stimato: {4}",
+ "Ficheiro: {0} || Processado: {1} / {2} || Velocidade: {3} || Tempo estimado: {4}",
+ "Arquivo: {0} || Processado: {1} / {2} || Velocidade: {3} || Tempo estimado: {4}",
+ "Bestand: {0} || Verwerkt: {1} / {2} || Snelheid: {3} || Geschatte tijd: {4}",
+ "Fil: {0} || Bearbetat: {1} / {2} || Hastighet: {3} || Återstående tid: {4}",
+ "Fil: {0} || Behandlet: {1} / {2} || Hastighet: {3} || Gjenstående tid: {4}",
+ "Fil: {0} || Behandlet: {1} / {2} || Hastighed: {3} || Resterende tid: {4}",
+ "Tiedosto: {0} || Käsitelty: {1} / {2} || Nopeus: {3} || Jäljellä: {4}",
+ "Plik: {0} || Przetworzono: {1} / {2} || Prędkość: {3} || Pozostały czas: {4}",
+ "Soubor: {0} || Zpracováno: {1} / {2} || Rychlost: {3} || Zbývající čas: {4}",
+ "Fájl: {0} || Feldolgozva: {1} / {2} || Sebesség: {3} || Hátralévő idő: {4}",
+ "Fișier: {0} || Procesat: {1} / {2} || Viteză: {3} || Timp estimat: {4}"),
+
+
+                    ["Failed to create directory {0}: {1}"] =
+("Échec de la création du répertoire {0} : {1}",
+ "Fehler beim Erstellen des Verzeichnisses {0}: {1}",
+ "Error al crear el directorio {0}: {1}",
+ "Impossibile creare la cartella {0}: {1}",
+ "Falha ao criar o diretório {0}: {1}",
+ "Falha ao criar o diretório {0}: {1}",
+ "Kan map {0} niet maken: {1}",
+ "Misslyckades med att skapa katalog {0}: {1}",
+ "Kunne ikke opprette katalog {0}: {1}",
+ "Kunne ikke oprette mappe {0}: {1}",
+ "Hakemiston {0} luominen epäonnistui: {1}",
+ "Nie udało się utworzyć katalogu {0}: {1}",
+ "Nepodařilo se vytvořit adresář {0}: {1}",
+ "Nem sikerült létrehozni a(z) {0} könyvtárat: {1}",
+ "Eșec la crearea directorului {0}: {1}"),
+
+                    ["Folder Created..."] =
+("Dossier créé...",
+ "Ordner erstellt...",
+ "Carpeta creada...",
+ "Cartella creata...",
+ "Pasta criada...",
+ "Pasta criada...",
+ "Map aangemaakt...",
+ "Mapp skapad...",
+ "Mappe opprettet...",
+ "Mappe oprettet...",
+ "Kansio luotu...",
+ "Folder utworzony...",
+ "Složka vytvořena...",
+ "Mappa létrehozva...",
+ "Folder creat..."),
+
+                    ["Copying – {0}"] =
+("Copie – {0}",
+ "Kopieren – {0}",
+ "Copiando – {0}",
+ "Copia – {0}",
+ "A copiar – {0}",
+ "Copiando – {0}",
+ "Kopiëren – {0}",
+ "Kopierar – {0}",
+ "Kopierer – {0}",
+ "Kopierer – {0}",
+ "Kopioidaan – {0}",
+ "Kopiowanie – {0}",
+ "Kopírování – {0}",
+ "Másolás – {0}",
+ "Se copiază – {0}"),
+
+
+                    ["Failed: Retry #{0}"] =
+("Échec : Nouvelle tentative n°{0}",
+ "Fehlgeschlagen: Versuch #{0}",
+ "Fallido: Reintento n.º {0}",
+ "Fallito: Tentativo n. {0}",
+ "Falhou: Tentativa n.º {0}",
+ "Falhou: Tentativa nº {0}",
+ "Mislukt: Poging #{0}",
+ "Misslyckades: Försök #{0}",
+ "Mislyktes: Forsøk #{0}",
+ "Mislykkedes: Forsøg #{0}",
+ "Epäonnistui: Yritys #{0}",
+ "Niepowodzenie: Próba #{0}",
+ "Selhalo: Pokus č. {0}",
+ "Sikertelen: Próbálkozás #{0}",
+ "Eșuat: Încercare #{0}"),
+
+                    ["Retry {0}/{1} – {2}"] =
+("Nouvelle tentative {0}/{1} – {2}",
+ "Versuch {0}/{1} – {2}",
+ "Reintento {0}/{1} – {2}",
+ "Tentativo {0}/{1} – {2}",
+ "Tentativa {0}/{1} – {2}",
+ "Tentativa {0}/{1} – {2}",
+ "Poging {0}/{1} – {2}",
+ "Försök {0}/{1} – {2}",
+ "Forsøk {0}/{1} – {2}",
+ "Forsøg {0}/{1} – {2}",
+ "Yritys {0}/{1} – {2}",
+ "Próba {0}/{1} – {2}",
+ "Pokus {0}/{1} – {2}",
+ "Próbálkozás {0}/{1} – {2}",
+ "Încercare {0}/{1} – {2}"),
+
+
+                    ["File Copied..."] =
+("Fichier copié...",
+ "Datei kopiert...",
+ "Archivo copiado...",
+ "File copiato...",
+ "Ficheiro copiado...",
+ "Arquivo copiado...",
+ "Bestand gekopieerd...",
+ "Fil kopierad...",
+ "Fil kopiert...",
+ "Fil kopieret...",
+ "Tiedosto kopioitu...",
+ "Plik skopiowany...",
+ "Soubor zkopírován...",
+ "Fájl másolva...",
+ "Fișier copiat..."),
+
+
+                    ["Moving – {0}"] =
+("Déplacement – {0}",
+ "Verschieben – {0}",
+ "Moviendo – {0}",
+ "Spostamento – {0}",
+ "A mover – {0}",
+ "Movendo – {0}",
+ "Verplaatsen – {0}",
+ "Flyttar – {0}",
+ "Flytter – {0}",
+ "Flytter – {0}",
+ "Siirretään – {0}",
+ "Przenoszenie – {0}",
+ "Přesouvání – {0}",
+ "Áthelyezés – {0}",
+ "Se mută – {0}"),
+
+                    ["Moved"] =
+("Déplacé",
+ "Verschoben",
+ "Movido",
+ "Spostato",
+ "Movido",
+ "Movido",
+ "Verplaatst",
+ "Flyttad",
+ "Flyttet",
+ "Flyttet",
+ "Siirretty",
+ "Przeniesiony",
+ "Přesunuto",
+ "Áthelyezve",
+ "Mutat"),
+
+
+                    ["Securely Deleted"] =
+("Supprimé de manière sécurisée",
+ "Sicher gelöscht",
+ "Eliminado de forma segura",
+ "Eliminato in modo sicuro",
+ "Eliminado de forma segura",
+ "Excluído de forma segura",
+ "Veilig verwijderd",
+ "Säkert raderad",
+ "Trygt slettet",
+ "Sikkert slettet",
+ "Poistettu turvallisesti",
+ "Bezpiecznie usunięty",
+ "Bezpečně smazáno",
+ "Biztonságosan törölve",
+ "Șters în siguranță"),
+
+                    ["Secure deleting – {0}"] =
+("Suppression sécurisée – {0}",
+ "Sicheres Löschen – {0}",
+ "Eliminación segura – {0}",
+ "Eliminazione sicura – {0}",
+ "Eliminação segura – {0}",
+ "Exclusão segura – {0}",
+ "Veilig verwijderen – {0}",
+ "Säker radering – {0}",
+ "Trygg sletting – {0}",
+ "Sikker sletning – {0}",
+ "Turvallinen poisto – {0}",
+ "Bezpieczne usuwanie – {0}",
+ "Bezpečné mazání – {0}",
+ "Biztonságos törlés – {0}",
+ "Ștergere securizată – {0}"),
+
+                    ["File exists and 'Do Not Overwrite' is selected."] =
+("Le fichier existe et 'Ne pas écraser' est sélectionné.",
+ "Datei existiert und 'Nicht überschreiben' ist ausgewählt.",
+ "El archivo existe y 'No sobrescribir' está seleccionado.",
+ "Il file esiste e 'Non sovrascrivere' è selezionato.",
+ "O ficheiro existe e 'Não substituir' está selecionado.",
+ "O arquivo existe e 'Não sobrescrever' está selecionado.",
+ "Bestand bestaat en 'Niet overschrijven' is geselecteerd.",
+ "Filen finns och 'Skriv inte över' är valt.",
+ "Filen finnes og 'Ikke overskriv' er valgt.",
+ "Filen findes og 'Overskriv ikke' er valgt.",
+ "Tiedosto on olemassa ja 'Älä korvaa' on valittu.",
+ "Plik istnieje i wybrano 'Nie nadpisuj'.",
+ "Soubor existuje a je vybrána možnost 'Nepřepisovat'.",
+ "A fájl létezik és a 'Ne írja felül' van kiválasztva.",
+ "Fișierul există și 'Nu suprascrie' este selectat."),
+
+                    ["Skipped (exists)"] =
+("Ignoré (existe)",
+ "Übersprungen (existiert)",
+ "Omitido (existe)",
+ "Saltato (esiste)",
+ "Ignorado (existe)",
+ "Ignorado (existe)",
+ "Overgeslagen (bestaat)",
+ "Överhoppad (finns)",
+ "Hoppet over (finnes)",
+ "Sprunget over (findes)",
+ "Ohitettu (on olemassa)",
+ "Pominięty (istnieje)",
+ "Přeskočeno (existuje)",
+ "Kihagyva (létezik)",
+ "Omis (există)"),
+
+                    ["Destination file is newer or the same age."] =
+("Le fichier de destination est plus récent ou du même âge.",
+ "Zieldatei ist neuer oder gleich alt.",
+ "El archivo de destino es más reciente o de la misma fecha.",
+ "Il file di destinazione è più recente o della stessa data.",
+ "O ficheiro de destino é mais recente ou da mesma data.",
+ "O arquivo de destino é mais recente ou da mesma data.",
+ "Doelbestand is nieuwer of even oud.",
+ "Målfilen är nyare eller lika gammal.",
+ "Målfilen er nyere eller like gammel.",
+ "Målfilen er nyere eller lige gammel.",
+ "Kohdetiedosto on uudempi tai saman ikäinen.",
+ "Plik docelowy jest nowszy lub tego samego wieku.",
+ "Cílový soubor je novější nebo stejně starý.",
+ "A célfájl újabb vagy ugyanolyan régi.",
+ "Fișierul destinație este mai nou sau de aceeași dată."),
+
+                    ["Skipped (not newer)"] =
+("Ignoré (pas plus récent)",
+ "Übersprungen (nicht neuer)",
+ "Omitido (no más reciente)",
+ "Saltato (non più recente)",
+ "Ignorado (não mais recente)",
+ "Ignorado (não mais recente)",
+ "Overgeslagen (niet nieuwer)",
+ "Överhoppad (inte nyare)",
+ "Hoppet over (ikke nyere)",
+ "Sprunget over (ikke nyere)",
+ "Ohitettu (ei uudempi)",
+ "Pominięty (nie nowszy)",
+ "Přeskočeno (není novější)",
+ "Kihagyva (nem újabb)",
+ "Omis (nu mai nou)"),
+
+
+
+                    ["Error reading drive '{0}': {1}"] =
+("Erreur de lecture du lecteur '{0}' : {1}",
+ "Fehler beim Lesen von Laufwerk '{0}': {1}",
+ "Error al leer la unidad '{0}': {1}",
+ "Errore nella lettura dell'unità '{0}': {1}",
+ "Erro ao ler a unidade '{0}': {1}",
+ "Erro ao ler a unidade '{0}': {1}",
+ "Fout bij lezen van station '{0}': {1}",
+ "Fel vid läsning av enhet '{0}': {1}",
+ "Feil ved lesing av stasjon '{0}': {1}",
+ "Fejl ved læsning af drev '{0}': {1}",
+ "Virhe luettaessa asemaa '{0}': {1}",
+ "Błąd odczytu dysku '{0}': {1}",
+ "Chyba při čtení jednotky '{0}': {1}",
+ "Hiba a(z) '{0}' meghajtó olvasásakor: {1}",
+ "Eroare la citirea unității '{0}': {1}"),
+
+                    ["Total Space ({0}): {1} / {2}"] =
+("Espace total ({0}) : {1} / {2}",
+ "Gesamtspeicher ({0}): {1} / {2}",
+ "Espacio total ({0}): {1} / {2}",
+ "Spazio totale ({0}): {1} / {2}",
+ "Espaço total ({0}): {1} / {2}",
+ "Espaço total ({0}): {1} / {2}",
+ "Totale ruimte ({0}): {1} / {2}",
+ "Totalt utrymme ({0}): {1} / {2}",
+ "Total plass ({0}): {1} / {2}",
+ "Samlet plads ({0}): {1} / {2}",
+ "Kokonaistila ({0}): {1} / {2}",
+ "Całkowite miejsce ({0}): {1} / {2}",
+ "Celkové místo ({0}): {1} / {2}",
+ "Teljes hely ({0}): {1} / {2}",
+ "Spațiu total ({0}): {1} / {2}"),
+
+                    ["No drives ready"] =
+("Aucun lecteur prêt",
+ "Keine Laufwerke bereit",
+ "No hay unidades listas",
+ "Nessuna unità pronta",
+ "Nenhuma unidade pronta",
+ "Nenhuma unidade pronta",
+ "Geen stations gereed",
+ "Inga enheter redo",
+ "Ingen stasjoner klar",
+ "Ingen drev klar",
+ "Ei asemia valmiina",
+ "Brak gotowych dysków",
+ "Žádné jednotky připraveny",
+ "Nincs kész meghajtó",
+ "Nicio unitate pregătită"),
+
+                    ["Select a Destination to see Drive Space"] =
+("Sélectionnez une destination pour voir l'espace disque",
+ "Wählen Sie ein Ziel aus, um den Speicherplatz anzuzeigen",
+ "Seleccione un destino para ver el espacio de la unidad",
+ "Seleziona una destinazione per vedere lo spazio su disco",
+ "Selecione um destino para ver o espaço da unidade",
+ "Selecione um destino para ver o espaço da unidade",
+ "Selecteer een bestemming om schijfruimte te zien",
+ "Välj en destination för att se diskutrymme",
+ "Velg en destinasjon for å se diskplass",
+ "Vælg en destination for at se diskplads",
+ "Valitse kohde nähdäksesi levytilan",
+ "Wybierz miejsce docelowe, aby zobaczyć miejsce na dysku",
+ "Vyberte cíl pro zobrazení místa na disku",
+ "Válasszon célt a lemezterület megtekintéséhez",
+ "Selectați o destinație pentru a vedea spațiul pe disc"),
+
+                    ["Error updating drive space information: {0}"] =
+("Erreur lors de la mise à jour des informations d'espace disque : {0}",
+ "Fehler beim Aktualisieren der Speicherplatzinformationen: {0}",
+ "Error al actualizar la información del espacio de la unidad: {0}",
+ "Errore nell'aggiornamento delle informazioni sullo spazio su disco: {0}",
+ "Erro ao atualizar as informações de espaço da unidade: {0}",
+ "Erro ao atualizar as informações de espaço da unidade: {0}",
+ "Fout bij bijwerken van schijfruimte-informatie: {0}",
+ "Fel vid uppdatering av diskutrymmesinformation: {0}",
+ "Feil ved oppdatering av diskplassinformasjon: {0}",
+ "Fejl ved opdatering af diskpladsinformation: {0}",
+ "Virhe päivitettäessä levytilan tietoja: {0}",
+ "Błąd aktualizacji informacji o miejscu na dysku: {0}",
+ "Chyba při aktualizaci informací o místu na disku: {0}",
+ "Hiba a lemezterület-információk frissítésekor: {0}",
+ "Eroare la actualizarea informațiilor despre spațiul pe disc: {0}"),
+
+                    ["Error Getting Drive Space"] =
+("Erreur lors de l'obtention de l'espace disque",
+ "Fehler beim Abrufen des Speicherplatzes",
+ "Error al obtener el espacio de la unidad",
+ "Errore nell'ottenere lo spazio su disco",
+ "Erro ao obter o espaço da unidade",
+ "Erro ao obter o espaço da unidade",
+ "Fout bij ophalen van schijfruimte",
+ "Fel vid hämtning av diskutrymme",
+ "Feil ved henting av diskplass",
+ "Fejl ved hentning af diskplads",
+ "Virhe haettaessa levytilaa",
+ "Błąd pobierania miejsca na dysku",
+ "Chyba při získávání místa na disku",
+ "Hiba a lemezterület lekérésekor",
+ "Eroare la obținerea spațiului pe disc"),
+
+
+                    ["Cannot create target directory structure: Source or target directories are not specified."] =
+("Impossible de créer la structure de répertoire cible : les répertoires source ou cible ne sont pas spécifiés.",
+ "Zielverzeichnisstruktur kann nicht erstellt werden: Quell- oder Zielverzeichnisse sind nicht angegeben.",
+ "No se puede crear la estructura del directorio de destino: los directorios de origen o destino no están especificados.",
+ "Impossibile creare la struttura della cartella di destinazione: le cartelle di origine o destinazione non sono specificate.",
+ "Não é possível criar a estrutura do diretório de destino: os diretórios de origem ou destino não estão especificados.",
+ "Não é possível criar a estrutura do diretório de destino: os diretórios de origem ou destino não estão especificados.",
+ "Kan doelmapstructuur niet maken: bron- of doelmappen zijn niet opgegeven.",
+ "Kan inte skapa målkatalogstruktur: käll- eller målkataloger har inte angetts.",
+ "Kan ikke opprette målkatalogstruktur: kilde- eller målkataloger er ikke spesifisert.",
+ "Kan ikke oprette måldirectory-struktur: kilde- eller måldirectorier er ikke angivet.",
+ "Kohdehakemistorakennetta ei voi luoda: lähde- tai kohdehakemistoja ei ole määritetty.",
+ "Nie można utworzyć struktury katalogu docelowego: katalogi źródłowe lub docelowe nie są określone.",
+ "Nelze vytvořit strukturu cílového adresáře: zdrojové nebo cílové adresáře nejsou specifikovány.",
+ "Nem hozható létre a célkönyvtár szerkezete: a forrás- vagy célkönyvtárak nincsenek megadva.",
+ "Nu se poate crea structura directorului țintă: directoarele sursă sau țintă nu sunt specificate."),
+
+
+                    ["Failed to create directory '{0}': {1}"] =
+("Échec de la création du répertoire '{0}' : {1}",
+ "Fehler beim Erstellen des Verzeichnisses '{0}': {1}",
+ "Error al crear el directorio '{0}': {1}",
+ "Impossibile creare la cartella '{0}': {1}",
+ "Falha ao criar o diretório '{0}': {1}",
+ "Falha ao criar o diretório '{0}': {1}",
+ "Kan map '{0}' niet maken: {1}",
+ "Misslyckades med att skapa katalog '{0}': {1}",
+ "Kunne ikke opprette katalog '{0}': {1}",
+ "Kunne ikke oprette mappe '{0}': {1}",
+ "Hakemiston '{0}' luominen epäonnistui: {1}",
+ "Nie udało się utworzyć katalogu '{0}': {1}",
+ "Nepodařilo se vytvořit adresář '{0}': {1}",
+ "Nem sikerült létrehozni a(z) '{0}' könyvtárat: {1}",
+ "Eșec la crearea directorului '{0}': {1}"),
+
+                    ["Access denied to directory '{0}': {1}"] =
+("Accès refusé au répertoire '{0}' : {1}",
+ "Zugriff auf Verzeichnis '{0}' verweigert: {1}",
+ "Acceso denegado al directorio '{0}': {1}",
+ "Accesso negato alla cartella '{0}': {1}",
+ "Acesso negado ao diretório '{0}': {1}",
+ "Acesso negado ao diretório '{0}': {1}",
+ "Toegang geweigerd tot map '{0}': {1}",
+ "Åtkomst nekad till katalog '{0}': {1}",
+ "Tilgang nektet til katalog '{0}': {1}",
+ "Adgang nægtet til mappe '{0}': {1}",
+ "Pääsy hakemistoon '{0}' estetty: {1}",
+ "Odmowa dostępu do katalogu '{0}': {1}",
+ "Přístup k adresáři '{0}' byl odepřen: {1}",
+ "Hozzáférés megtagadva a(z) '{0}' könyvtárhoz: {1}",
+ "Acces refuzat la directorul '{0}': {1}"),
+
+                    ["Error enumerating subdirectories in '{0}': {1}"] =
+("Erreur lors de l'énumération des sous-répertoires dans '{0}' : {1}",
+ "Fehler beim Aufzählen der Unterverzeichnisse in '{0}': {1}",
+ "Error al enumerar subdirectorios en '{0}': {1}",
+ "Errore nell'enumerazione delle sottocartelle in '{0}': {1}",
+ "Erro ao enumerar subdiretórios em '{0}': {1}",
+ "Erro ao enumerar subdiretórios em '{0}': {1}",
+ "Fout bij het opsommen van submappen in '{0}': {1}",
+ "Fel vid uppräkning av underkataloger i '{0}': {1}",
+ "Feil ved oppregning av underkataloger i '{0}': {1}",
+ "Fejl ved optælling af undermapper i '{0}': {1}",
+ "Virhe lueteltaessa alihakemistoja kohteessa '{0}': {1}",
+ "Błąd podczas wyliczania podkatalogów w '{0}': {1}",
+ "Chyba při výčtu podadresářů v '{0}': {1}",
+ "Hiba az alkönyvtárak felsorolásakor itt: '{0}': {1}",
+ "Eroare la enumerarea subdirectoarelor în '{0}': {1}"),
+
+
+
+                    ["Copy Operation Completed!\n\nFiles Copied: {0}\nFiles Skipped: {1}\nFiles Failed: {2}\nTotal Files Processed: {3} / {4}\nTotal Bytes Processed: {5} / {6}"] =
+("Opération de copie terminée !\n\nFichiers copiés : {0}\nFichiers ignorés : {1}\nFichiers échoués : {2}\nTotal de fichiers traités : {3} / {4}\nTotal d'octets traités : {5} / {6}",
+ "Kopiervorgang abgeschlossen!\n\nDateien kopiert: {0}\nDateien übersprungen: {1}\nDateien fehlgeschlagen: {2}\nGesamtzahl verarbeiteter Dateien: {3} / {4}\nGesamtzahl verarbeiteter Bytes: {5} / {6}",
+ "¡Operación de copia completada!\n\nArchivos copiados: {0}\nArchivos omitidos: {1}\nArchivos fallidos: {2}\nTotal de archivos procesados: {3} / {4}\nTotal de bytes procesados: {5} / {6}",
+ "Operazione di copia completata!\n\nFile copiati: {0}\nFile saltati: {1}\nFile falliti: {2}\nTotale file elaborati: {3} / {4}\nTotale byte elaborati: {5} / {6}",
+ "Operação de cópia concluída!\n\nFicheiros copiados: {0}\nFicheiros ignorados: {1}\nFicheiros falhados: {2}\nTotal de ficheiros processados: {3} / {4}\nTotal de bytes processados: {5} / {6}",
+ "Operação de cópia concluída!\n\nArquivos copiados: {0}\nArquivos ignorados: {1}\nArquivos falhados: {2}\nTotal de arquivos processados: {3} / {4}\nTotal de bytes processados: {5} / {6}",
+ "Kopieerbewerking voltooid!\n\nBestanden gekopieerd: {0}\nBestanden overgeslagen: {1}\nBestanden mislukt: {2}\nTotaal verwerkte bestanden: {3} / {4}\nTotaal verwerkte bytes: {5} / {6}",
+ "Kopieringsåtgärd slutförd!\n\nFiler kopierade: {0}\nFiler överhoppade: {1}\nFiler misslyckades: {2}\nTotalt antal bearbetade filer: {3} / {4}\nTotalt antal bearbetade byte: {5} / {6}",
+ "Kopieringsoperasjon fullført!\n\nFiler kopiert: {0}\nFiler hoppet over: {1}\nFiler mislyktes: {2}\nTotalt antall behandlede filer: {3} / {4}\nTotalt antall behandlede byte: {5} / {6}",
+ "Kopieringshandling færdig!\n\nFiler kopieret: {0}\nFiler sprunget over: {1}\nFiler mislykket: {2}\nSamlet antal behandlede filer: {3} / {4}\nSamlet antal behandlede byte: {5} / {6}",
+ "Kopiointitoiminto valmis!\n\nKopioituja tiedostoja: {0}\nOhitettuja tiedostoja: {1}\nEpäonnistuneita tiedostoja: {2}\nKäsiteltyjä tiedostoja yhteensä: {3} / {4}\nKäsiteltyjä tavuja yhteensä: {5} / {6}",
+ "Operacja kopiowania zakończona!\n\nPliki skopiowane: {0}\nPliki pominięte: {1}\nPliki nieudane: {2}\nŁącznie przetworzonych plików: {3} / {4}\nŁącznie przetworzonych bajtów: {5} / {6}",
+ "Operace kopírování dokončena!\n\nSoubory zkopírovány: {0}\nSoubory přeskočeny: {1}\nSoubory selhaly: {2}\nCelkový počet zpracovaných souborů: {3} / {4}\nCelkový počet zpracovaných bajtů: {5} / {6}",
+ "Másolási művelet befejezve!\n\nMásolt fájlok: {0}\nKihagyott fájlok: {1}\nSikertelen fájlok: {2}\nFeldolgozott fájlok összesen: {3} / {4}\nFeldolgozott bájtok összesen: {5} / {6}",
+ "Operațiune de copiere finalizată!\n\nFișiere copiate: {0}\nFișiere omise: {1}\nFișiere eșuate: {2}\nTotal fișiere procesate: {3} / {4}\nTotal octeți procesați: {5} / {6}"),
+
+                    ["Copy Operation Summary"] =
+("Résumé de l'opération de copie",
+ "Zusammenfassung des Kopiervorgangs",
+ "Resumen de la operación de copia",
+ "Riepilogo operazione di copia",
+ "Resumo da operação de cópia",
+ "Resumo da operação de cópia",
+ "Samenvatting kopieerbewerking",
+ "Sammanfattning av kopieringsåtgärd",
+ "Sammendrag av kopieringsoperasjon",
+ "Oversigt over kopieringshandling",
+ "Kopiointitoiminnon yhteenveto",
+ "Podsumowanie operacji kopiowania",
+ "Souhrn operace kopírování",
+ "Másolási művelet összefoglalása",
+ "Rezumat operațiune de copiere"),
+
+
+                    ["Access denied: {0}"] =
+("Accès refusé : {0}",
+ "Zugriff verweigert: {0}",
+ "Acceso denegado: {0}",
+ "Accesso negato: {0}",
+ "Acesso negado: {0}",
+ "Acesso negado: {0}",
+ "Toegang geweigerd: {0}",
+ "Åtkomst nekad: {0}",
+ "Tilgang nektet: {0}",
+ "Adgang nægtet: {0}",
+ "Pääsy estetty: {0}",
+ "Odmowa dostępu: {0}",
+ "Přístup odepřen: {0}",
+ "Hozzáférés megtagadva: {0}",
+ "Acces refuzat: {0}"),
+
+
+                    ["Enter custom directory name:"] =
+("Entrez le nom du répertoire personnalisé :",
+ "Geben Sie einen benutzerdefinierten Verzeichnisnamen ein:",
+ "Ingrese el nombre del directorio personalizado:",
+ "Inserisci il nome della cartella personalizzata:",
+ "Introduza o nome do diretório personalizado:",
+ "Insira o nome do diretório personalizado:",
+ "Voer aangepaste mapnaam in:",
+ "Ange anpassat katalognamn:",
+ "Skriv inn egendefinert katalognavn:",
+ "Indtast brugerdefineret mappenavn:",
+ "Kirjoita mukautettu hakemiston nimi:",
+ "Wprowadź niestandardową nazwę katalogu:",
+ "Zadejte vlastní název adresáře:",
+ "Adja meg az egyéni könyvtár nevét:",
+ "Introduceți numele directorului personalizat:"),
+
+                    ["Custom Directory"] =
+("Répertoire personnalisé",
+ "Benutzerdefiniertes Verzeichnis",
+ "Directorio personalizado",
+ "Cartella personalizzata",
+ "Diretório personalizado",
+ "Diretório personalizado",
+ "Aangepaste map",
+ "Anpassad katalog",
+ "Egendefinert katalog",
+ "Brugerdefineret mappe",
+ "Mukautettu hakemisto",
+ "Niestandardowy katalog",
+ "Vlastní adresář",
+ "Egyéni könyvtár",
+ "Director personalizat"),
+
+
+                    ["Error checking file timestamps for skipping: {0}"] =
+("Erreur lors de la vérification des horodatages de fichier pour ignorer : {0}",
+ "Fehler beim Überprüfen der Dateizeitstempel zum Überspringen: {0}",
+ "Error al verificar las marcas de tiempo del archivo para omitir: {0}",
+ "Errore nel controllo dei timestamp del file per saltare: {0}",
+ "Erro ao verificar os carimbos de data/hora do ficheiro para ignorar: {0}",
+ "Erro ao verificar os carimbos de data/hora do arquivo para ignorar: {0}",
+ "Fout bij controleren van bestandstijdstempels voor overslaan: {0}",
+ "Fel vid kontroll av filtidsstämplar för överhoppning: {0}",
+ "Feil ved kontroll av filtidsstempler for hopping over: {0}",
+ "Fejl ved kontrol af filtidsstempler for spring over: {0}",
+ "Virhe tarkistettaessa tiedoston aikaleimoja ohittamista varten: {0}",
+ "Błąd sprawdzania znaczników czasu pliku do pominięcia: {0}",
+ "Chyba při kontrole časových razítek souboru pro přeskočení: {0}",
+ "Hiba a fájl időbélyegzőinek ellenőrzésekor a kihagyáshoz: {0}",
+ "Eroare la verificarea marcajelor temporale ale fișierului pentru omitere: {0}"),
+
+
+                    ["Copying…"] =
+("Copie en cours…",
+ "Kopieren…",
+ "Copiando…",
+ "Copia in corso…",
+ "A copiar…",
+ "Copiando…",
+ "Kopiëren…",
+ "Kopierar…",
+ "Kopierer…",
+ "Kopierer…",
+ "Kopioidaan…",
+ "Kopiowanie…",
+ "Kopírování…",
+ "Másolás…",
+ "Se copiază…"),
+
+                    ["Done"] =
+("Terminé",
+ "Fertig",
+ "Hecho",
+ "Fatto",
+ "Concluído",
+ "Concluído",
+ "Klaar",
+ "Klar",
+ "Ferdig",
+ "Færdig",
+ "Valmis",
+ "Gotowe",
+ "Hotovo",
+ "Kész",
+ "Gata"),
+
+                    ["Canceled"] =
+("Annulé",
+ "Abgebrochen",
+ "Cancelado",
+ "Annullato",
+ "Cancelado",
+ "Cancelado",
+ "Geannuleerd",
+ "Avbruten",
+ "Avbrutt",
+ "Annulleret",
+ "Peruutettu",
+ "Anulowano",
+ "Zrušeno",
+ "Megszakítva",
+ "Anulat"),
+
+                    ["Failed"] =
+("Échoué",
+ "Fehlgeschlagen",
+ "Fallido",
+ "Fallito",
+ "Falhado",
+ "Falhou",
+ "Mislukt",
+ "Misslyckades",
+ "Mislyktes",
+ "Mislykkedes",
+ "Epäonnistui",
+ "Niepowodzenie",
+ "Selhalo",
+ "Sikertelen",
+ "Eșuat"),
+
+                    ["Files Processed: {0} Out of {1}"] =
+("Fichiers traités : {0} sur {1}",
+ "Dateien verarbeitet: {0} von {1}",
+ "Archivos procesados: {0} de {1}",
+ "File elaborati: {0} su {1}",
+ "Ficheiros processados: {0} de {1}",
+ "Arquivos processados: {0} de {1}",
+ "Bestanden verwerkt: {0} van {1}",
+ "Filer bearbetade: {0} av {1}",
+ "Filer behandlet: {0} av {1}",
+ "Filer behandlet: {0} ud af {1}",
+ "Tiedostoja käsitelty: {0} / {1}",
+ "Pliki przetworzone: {0} z {1}",
+ "Soubory zpracovány: {0} z {1}",
+ "Feldolgozott fájlok: {0} / {1}",
+ "Fișiere procesate: {0} din {1}"),
+
+                    ["Executable must be named CTvX.Y.exe"] =
+("L’exécutable doit être nommé CTvX.Y.exe",
+ "Die ausführbare Datei muss CTvX.Y.exe heißen.",
+ "El ejecutable debe llamarse CTvX.Y.exe.",
+ "Il file eseguibile deve essere denominato CTvX.Y.exe.",
+ "O executável deve chamar-se CTvX.Y.exe.",
+ "O executável deve se chamar CTvX.Y.exe.",
+ "Het uitvoerbare bestand moet CTvX.Y.exe heten.",
+ "Den körbara filen måste heta CTvX.Y.exe.",
+ "Den kjørbare filen må hete CTvX.Y.exe.",
+ "Den eksekverbare fil skal hedde CTvX.Y.exe.",
+ "Suoritettavan tiedoston on oltava nimeltään CTvX.Y.exe.",
+ "Plik wykonywalny musi mieć nazwę CTvX.Y.exe.",
+ "Spustitelný soubor musí být pojmenován CTvX.Y.exe.",
+ "A futtatható fájl neve CTvX.Y.exe kell legyen.",
+ "Executabilul trebuie să fie denumit CTvX.Y.exe."),
+
+
+                    ["Total Elapsed Time: {0}"] =
+("Temps écoulé total : {0}",
+ "Gesamte verstrichene Zeit: {0}",
+ "Tiempo transcurrido total: {0}",
+ "Tempo trascorso totale: {0}",
+ "Tempo decorrido total: {0}",
+ "Tempo decorrido total: {0}",
+ "Totale verstreken tijd: {0}",
+ "Total förfluten tid: {0}",
+ "Total forløpt tid: {0}",
+ "Total forløbet tid: {0}",
+ "Kulunut aika yhteensä: {0}",
+ "Całkowity czas, który upłynął: {0}",
+ "Celkový uplynulý čas: {0}",
+ "Eltelt idő összesen: {0}",
+ "Timp total scurs: {0}"),
+
+                    ["Total Target Time: {0}"] =
+("Temps cible total : {0}",
+ "Gesamte Zielzeit: {0}",
+ "Tiempo objetivo total: {0}",
+ "Tempo obiettivo totale: {0}",
+ "Tempo alvo total: {0}",
+ "Tempo alvo total: {0}",
+ "Totale doeltijd: {0}",
+ "Total måltid: {0}",
+ "Total måltid: {0}",
+ "Total måltid: {0}",
+ "Kohde-aika yhteensä: {0}",
+ "Całkowity czas docelowy: {0}",
+ "Celkový cílový čas: {0}",
+ "Cél idő összesen: {0}",
+ "Timp țintă total: {0}"),
+
+                    ["Pending"] =
+("En attente",
+ "Ausstehend",
+ "Pendiente",
+ "In attesa",
+ "Pendente",
+ "Pendente",
+ "In behandeling",
+ "Väntande",
+ "Ventende",
+ "Afventer",
+ "Odottaa",
+ "Oczekujący",
+ "Čekající",
+ "Függőben",
+ "În așteptare"),
+
+                    ["Scanning: {0}"] =
+("Analyse : {0}",
+ "Scannen: {0}",
+ "Escaneando: {0}",
+ "Scansione: {0}",
+ "A digitalizar: {0}",
+ "Digitalizando: {0}",
+ "Scannen: {0}",
+ "Skannar: {0}",
+ "Skanner: {0}",
+ "Scanner: {0}",
+ "Skannataan: {0}",
+ "Skanowanie: {0}",
+ "Skenování: {0}",
+ "Beolvasás: {0}",
+ "Scanare: {0}"),
+
+                    ["Adding: {0}"] =
+("Ajout : {0}",
+ "Hinzufügen: {0}",
+ "Agregando: {0}",
+ "Aggiunta: {0}",
+ "A adicionar: {0}",
+ "Adicionando: {0}",
+ "Toevoegen: {0}",
+ "Lägger till: {0}",
+ "Legger til: {0}",
+ "Tilføjer: {0}",
+ "Lisätään: {0}",
+ "Dodawanie: {0}",
+ "Přidávání: {0}",
+ "Hozzáadás: {0}",
+ "Adăugare: {0}"),
+
+
+                    ["Error"] =
+("Erreur",
+ "Fehler",
+ "Error",
+ "Errore",
+ "Erro",
+ "Erro",
+ "Fout",
+ "Fel",
+ "Feil",
+ "Fejl",
+ "Virhe",
+ "Błąd",
+ "Chyba",
+ "Hiba",
+ "Eroare"),
+
+                    ["Elapsed / Target Time: {0} / {1}"] =
+("Temps écoulé / cible : {0} / {1}",
+ "Verstrichene / Zielzeit: {0} / {1}",
+ "Tiempo transcurrido / objetivo: {0} / {1}",
+ "Tempo trascorso / obiettivo: {0} / {1}",
+ "Tempo decorrido / alvo: {0} / {1}",
+ "Tempo decorrido / alvo: {0} / {1}",
+ "Verstreken / doeltijd: {0} / {1}",
+ "Förfluten / måltid: {0} / {1}",
+ "Forløpt / måltid: {0} / {1}",
+ "Forløbet / måltid: {0} / {1}",
+ "Kulunut / kohde-aika: {0} / {1}",
+ "Czas, który upłynął / docelowy: {0} / {1}",
+ "Uplynulý / cílový čas: {0} / {1}",
+ "Eltelt / cél idő: {0} / {1}",
+ "Timp scurs / țintă: {0} / {1}"),
+
+
+                    ["When creating a custom directory or keeping only empty folders, you may select up to 3 behavior options."] =
+("Lors de la création d’un répertoire personnalisé ou du maintien uniquement des dossiers vides, vous pouvez sélectionner jusqu’à 3 options de comportement.",
+ "Beim Erstellen eines benutzerdefinierten Verzeichnisses oder beim Belassen nur leerer Ordner können Sie bis zu 3 Verhaltensoptionen auswählen.",
+ "Al crear un directorio personalizado o mantener solo carpetas vacías, puede seleccionar hasta 3 opciones de comportamiento.",
+ "Quando si crea una directory personalizzata o si mantengono solo cartelle vuote, è possibile selezionare fino a 3 opzioni di comportamento.",
+ "Ao criar um diretório personalizado ou manter apenas pastas vazias, pode selecionar até 3 opções de comportamento.",
+ "Ao criar um diretório personalizado ou manter apenas pastas vazias, você pode selecionar até 3 opções de comportamento.",
+ "Bij het maken van een aangepaste map of het behouden van alleen lege mappen kunt u maximaal 3 gedragsopties selecteren.",
+ "När du skapar en anpassad katalog eller behåller endast tomma mappar kan du välja upp till 3 beteendealternativ.",
+ "Når du oppretter en egendefinert mappe eller beholder bare tomme mapper, kan du velge opptil 3 atferdsalternativer.",
+ "Når du opretter en brugerdefineret mappe eller kun beholder tomme mapper, kan du vælge op til 3 adfærdsindstillinger.",
+ "Mukautetun kansion luomisen tai vain tyhjien kansioiden säilyttämisen yhteydessä voit valita enintään 3 käyttäytymisvaihtoehtoa.",
+ "Podczas tworzenia niestandardowego katalogu lub zachowywania tylko pustych folderów możesz wybrać maksymalnie 3 opcje zachowania.",
+ "Při vytváření vlastního adresáře nebo ponechání pouze prázdných složek můžete vybrat až 3 možnosti chování.",
+ "Egyéni könyvtár létrehozásakor vagy csak az üres mappák megtartásakor legfeljebb 3 viselkedési beállítást választhat.",
+ "La crearea unui director personalizat sau păstrarea doar a folderelor goale, puteți selecta până la 3 opțiuni de comportament."),
+
+                    ["Only one behaviour option may be selected at a time."] =
+("Une seule option de comportement peut être sélectionnée à la fois.",
+ "Es kann nur ein Verhaltensoption gleichzeitig ausgewählt werden.",
+ "Solo se puede seleccionar una opción de comportamiento a la vez.",
+ "È possibile selezionare solo un’opzione di comportamento alla volta.",
+ "Só pode ser selecionada uma opção de comportamento de cada vez.",
+ "Apenas uma opção de comportamento pode ser selecionada por vez.",
+ "Er kan slechts één gedragsoptie tegelijk worden geselecteerd.",
+ "Endast ett beteendealternativ kan väljas åt gången.",
+ "Kun ett atferdsalternativ kan velges om gangen.",
+ "Kun én adfærdsindstilling kan vælges ad gangen.",
+ "Vain yksi käyttäytymisvaihtoehto voidaan valita kerrallaan.",
+ "Tylko jedna opcja zachowania może być wybrana jednocześnie.",
+ "Současně lze vybrat pouze jednu možnost chování.",
+ "Egyszerre csak egy viselkedési beállítás választható ki.",
+ "Poate fi selectată doar o singură opțiune de comportament la un moment dat."),
+
+
+                    ["Select File(s) to Add"] =
+("Sélectionner le(s) fichier(s) à ajouter",
+ "Datei(en) zum Hinzufügen auswählen",
+ "Seleccionar archivo(s) para añadir",
+ "Seleziona file da aggiungere",
+ "Selecionar ficheiro(s) a adicionar",
+ "Selecionar arquivo(s) para adicionar",
+ "Selecteer bestand(en) om toe te voegen",
+ "Välj fil(er) som ska läggas till",
+ "Velg fil(er) som skal legges til",
+ "Vælg fil(er) der skal føjes til",
+ "Valitse lisättävät tiedostot",
+ "Wybierz plik(i) do dodania",
+ "Vybrat soubor(y) k přidání",
+ "Válassz hozzáadandó fájl(ok)at",
+ "Selectați fișier(ele) de adăugat"),
+
+
+                    ["Select a source folder to copy/move/delete from:"] =
+("Sélectionnez un dossier source à copier/déplacer/supprimer :",
+ "Wählen Sie einen Quellordner zum Kopieren/Verschieben/Löschen:",
+ "Seleccione una carpeta de origen para copiar/mover/eliminar:",
+ "Seleziona una cartella di origine da cui copiare/spostare/eliminare:",
+ "Selecione uma pasta de origem para copiar/mover/apagar:",
+ "Selecione uma pasta de origem para copiar/mover/excluir:",
+ "Selecteer een bronmap om uit te kopiëren/verplaatsen/verwijderen:",
+ "Välj en källmapp att kopiera/flytta/ta bort från:",
+ "Velg en kilde-mappe å kopiere/flytte/slette fra:",
+ "Vælg en kilde-mappe at kopiere/flytte/slette fra:",
+ "Valitse lähdekansio kopiointia/siirtoa/poistoa varten:",
+ "Wybierz folder źródłowy do kopiowania/przenoszenia/usuwania:",
+ "Vyberte zdrojovou složku ke kopírování/přesunutí/smazání:",
+ "Válasszon forrásmappát másoláshoz/áthelyezéshez/törléshez:",
+ "Selectați un folder sursă pentru a copia/muta/șterge de la:"),
+
+
+                    ["Program Priority:\nBelow Normal"] =
+("Priorité du programme :\nInférieure à la normale",
+ "Programmpriorität:\nUnter normal",
+ "Prioridad del programa:\nPor debajo de lo normal",
+ "Priorità del programma:\nSotto il normale",
+ "Prioridade do programa:\nAbaixo do normal",
+ "Prioridade do programa:\nAbaixo do normal",
+ "Prioriteit van programma:\nOnder normaal",
+ "Programprioritet:\nUnder normal",
+ "Programprioritet:\nUnder normal",
+ "Programprioritet:\nUnder normal",
+ "Ohjelman prioriteetti:\nNormaalin alapuolella",
+ "Priorytet programu:\nPoniżej normalnego",
+ "Priorita programu:\nPod normální",
+ "Program prioritás:\nNormál alatti",
+ "Prioritate program:\nSub normală"),
+
+                    ["Program Priority:\nNormal"] =
+("Priorité du programme :\nNormale",
+ "Programmpriorität:\nNormal",
+ "Prioridad del programa:\nNormal",
+ "Priorità del programma:\nNormale",
+ "Prioridade do programa:\nNormal",
+ "Prioridade do programa:\nNormal",
+ "Prioriteit van programma:\nNormaal",
+ "Programprioritet:\nNormal",
+ "Programprioritet:\nNormal",
+ "Programprioritet:\nNormal",
+ "Ohjelman prioriteetti:\nNormaali",
+ "Priorytet programu:\nNormalny",
+ "Priorita programu:\nNormální",
+ "Program prioritás:\nNormál",
+ "Prioritate program:\nNormală"),
+
+                    ["Program Priority:\nAbove Normal"] =
+("Priorité du programme :\nSupérieure à la normale",
+ "Programmpriorität:\nÜber normal",
+ "Prioridad del programa:\nPor encima de lo normal",
+ "Priorità del programma:\nSopra il normale",
+ "Prioridade do programa:\nAcima do normal",
+ "Prioridade do programa:\nAcima do normal",
+ "Prioriteit van programma:\nBoven normaal",
+ "Programprioritet:\nÖver normal",
+ "Programprioritet:\nOver normal",
+ "Programprioritet:\nOver normal",
+ "Ohjelman prioriteetti:\nNormaalin yläpuolella",
+ "Priorytet programu:\nPowyżej normalnego",
+ "Priorita programu:\nNad normální",
+ "Program prioritás:\nNormál felett",
+ "Prioritate program:\nPeste normală"),
+
+                    ["Program Priority:\nHigh"] =
+("Priorité du programme :\nÉlevée",
+ "Programmpriorität:\nHoch",
+ "Prioridad del programa:\nAlta",
+ "Priorità del programma:\nAlta",
+ "Prioridade do programa:\nAlta",
+ "Prioridade do programa:\nAlta",
+ "Prioriteit van programma:\nHoog",
+ "Programprioritet:\nHög",
+ "Programprioritet:\nHøy",
+ "Programprioritet:\nHøj",
+ "Ohjelman prioriteetti:\nKorkea",
+ "Priorytet programu:\nWysoki",
+ "Priorita programu:\nVysoká",
+ "Program prioritás:\nMagas",
+ "Prioritate program:\nRidicată"),
+
+                    ["Program Priority:\nReal Time"] =
+("Priorité du programme :\nTemps réel",
+ "Programmpriorität:\nEchtzeit",
+ "Prioridad del programa:\nTiempo real",
+ "Priorità del programma:\nTempo reale",
+ "Prioridade do programa:\nTempo real",
+ "Prioridade do programa:\nTempo real",
+ "Prioriteit van programma:\nReal-time",
+ "Programprioritet:\nRealtid",
+ "Programprioritet:\nReell tid",
+ "Programprioritet:\nRealtid",
+ "Ohjelman prioriteetti:\nReaaliaikainen",
+ "Priorytet programu:\nCzas rzeczywisty",
+ "Priorita programu:\nReálný čas",
+ "Program prioritás:\nValós idejű",
+ "Prioritate program:\nTimp real"),
+
+
+                    ["Opacity:\n{0}%"] =
+("Opacité :\n{0}%",
+ "Deckkraft:\n{0}%",
+ "Opacidad:\n{0}%",
+ "Opacità:\n{0}%",
+ "Opacidade:\n{0}%",
+ "Opacidade:\n{0}%",
+ "Ondoorzichtigheid:\n{0}%",
+ "Opacitet:\n{0}%",
+ "Opasitet:\n{0}%",
+ "Opacitet:\n{0}%",
+ "Läpinäkyvyys:\n{0}%",
+ "Nieprzezroczystość:\n{0}%",
+ "Neprůhlednost:\n{0}%",
+ "Átlátszatlanság:\n{0}%",
+ "Opacitate:\n{0}%"),
+
+                    ["Total Skipped Files: {0}"] =
+("Total des fichiers ignorés : {0}",
+ "Gesamt übersprungene Dateien: {0}",
+ "Total de archivos omitidos: {0}",
+ "Totale file saltati: {0}",
+ "Total de ficheiros ignorados: {0}",
+ "Total de arquivos ignorados: {0}",
+ "Totaal overgeslagen bestanden: {0}",
+ "Totalt antal överhoppade filer: {0}",
+ "Totalt antall hoppet over filer: {0}",
+ "Total antal ignorerede filer: {0}",
+ "Ohitettuja tiedostoja yhteensä: {0}",
+ "Całkowita liczba pominiętych plików: {0}",
+ "Celkový počet přeskočených souborů: {0}",
+ "Összes kihagyott fájl: {0}",
+ "Total fișiere ignorate: {0}"),
+
+                    ["Total History Items: {0}"] =
+("Total des éléments d’historique : {0}",
+ "Gesamte Verlaufselemente: {0}",
+ "Total de elementos del historial: {0}",
+ "Totale elementi cronologia: {0}",
+ "Total de itens do histórico: {0}",
+ "Total de itens do histórico: {0}",
+ "Totaal historische items: {0}",
+ "Totalt antal historikobjekt: {0}",
+ "Totalt antall historikkelementer: {0}",
+ "Total antal historikelementer: {0}",
+ "Historiakohdetta yhteensä: {0}",
+ "Całkowita liczba elementów historii: {0}",
+ "Celkový počet položek historie: {0}",
+ "Összes előzményelem: {0}",
+ "Total elemente istoric: {0}"),
+
+                    ["File Paste Monitor"] =
+("Moniteur de collage de fichiers",
+ "Datei-Einfügen-Monitor",
+ "Monitor de pegado de archivos",
+ "Monitor di incolla file",
+ "Monitor de colagem de ficheiros",
+ "Monitor de colagem de arquivos",
+ "Bestand-plakmonitor",
+ "Fil-klistermonitor",
+ "Fil-lim inn monitor",
+ "Fil-indsætningsmonitor",
+ "Tiedostoliittämisen valvoja",
+ "Monitor wklejania plików",
+ "Sledování vkládání souborů",
+ "Fájl-beillesztés figyelő",
+ "Monitor lipire fișiere"),
+
+                    ["Exit"] =
+("Quitter",
+ "Beenden",
+ "Salir",
+ "Esci",
+ "Sair",
+ "Sair",
+ "Afsluiten",
+ "Avsluta",
+ "Avslutt",
+ "Afslut",
+ "Lopeta",
+ "Zakończ",
+ "Ukončit",
+ "Kilépés",
+ "Ieșire"),
+
+                    ["Skipped (No Target)"] =
+("Ignoré (aucune cible)",
+ "Übersprungen (kein Ziel)",
+ "Omitido (sin destino)",
+ "Saltato (nessuna destinazione)",
+ "Ignorado (sem destino)",
+ "Ignorado (sem destino)",
+ "Overgeslagen (geen doel)",
+ "Överhoppad (inget mål)",
+ "Hoppet over (intet mål)",
+ "Sprunget over (intet mål)",
+ "Ohitettu (ei kohdetta)",
+ "Pominięto (brak celu)",
+ "Přeskočeno (žádný cíl)",
+ "Kihagyva (nincs cél)",
+ "Omis (fără țintă)"),
+
+                    ["Skipped: No Destination"] =
+("Ignoré : aucune destination",
+ "Übersprungen: Kein Ziel",
+ "Omitido: sin destino",
+ "Saltato: nessuna destinazione",
+ "Ignorado: sem destino",
+ "Ignorado: sem destino",
+ "Overgeslagen: geen bestemming",
+ "Överhoppad: ingen destination",
+ "Hoppet over: ingen destinasjon",
+ "Sprunget over: ingen destination",
+ "Ohitettu: ei kohdetta",
+ "Pominięto: brak celu",
+ "Přeskočeno: žádný cíl",
+ "Kihagyva: nincs úticél",
+ "Omis: fără destinație"),
+
+                    ["N/A (empty target)"] =
+("N/A (cible vide)",
+ "N/A (leeres Ziel)",
+ "N/D (destino vacío)",
+ "N/D (destinazione vuota)",
+ "N/D (destino vazio)",
+ "N/D (destino vazio)",
+ "N.v.t. (leeg doel)",
+ "N/A (tomt mål)",
+ "N/A (tomt mål)",
+ "N/A (tomt mål)",
+ "Ei saatavilla (tyhjä kohde)",
+ "N/D (pusty cel)",
+ "N/A (prázdný cíl)",
+ "N/A (üres cél)",
+ "N/A (țintă goală)"),
+
+                    ["Destination path not determined"] =
+("Chemin de destination non déterminé",
+ "Zielpfad nicht bestimmt",
+ "Ruta de destino no determinada",
+ "Percorso di destinazione non determinato",
+ "Caminho de destino não determinado",
+ "Caminho de destino não determinado",
+ "Doelpad niet bepaald",
+ "Destinationsväg inte bestämd",
+ "Destinasjonsbane ikke bestemt",
+ "Destinationssti ikke bestemt",
+ "Kohdepolkua ei määritetty",
+ "Ścieżka docelowa nie została określona",
+ "Cílová cesta nebyla stanovena",
+ "Cél útvonal nincs meghatározva",
+ "Calea de destinație nu a fost determinată"),
+
+                    ["Skipped By User"] =
+("Ignoré par l’utilisateur",
+ "Vom Benutzer übersprungen",
+ "Omitido por el usuario",
+ "Saltato dall’utente",
+ "Ignorado pelo utilizador",
+ "Ignorado pelo usuário",
+ "Door gebruiker overgeslagen",
+ "Överhoppad av användare",
+ "Hoppet over av bruker",
+ "Sprunget over af bruger",
+ "Käyttäjän ohittama",
+ "Pominięte przez użytkownika",
+ "Přeskočeno uživatelem",
+ "Felhasználó által kihagyva",
+ "Omis de utilizator"),
+
+
+
+                    ["Could not securely delete partial file {0}: {1}"] =
+("Impossible de supprimer en toute sécurité le fichier partiel {0} : {1}",
+ "Konnte die partielle Datei {0} nicht sicher löschen: {1}",
+ "No se pudo eliminar de forma segura el archivo parcial {0}: {1}",
+ "Impossibile eliminare in modo sicuro il file parziale {0}: {1}",
+ "Não foi possível apagar com segurança o ficheiro parcial {0}: {1}",
+ "Não foi possível excluir com segurança o arquivo parcial {0}: {1}",
+ "Kon het gedeeltelijke bestand {0} niet veilig verwijderen: {1}",
+ "Kunde inte ta bort den partiella filen {0} säkert: {1}",
+ "Kunne ikke slette den delvise filen {0} sikkert: {1}",
+ "Kunne ikke slette den delvise fil {0} sikkert: {1}",
+ "Osittaisen tiedoston {0} turvallinen poistaminen epäonnistui: {1}",
+ "Nie można bezpiecznie usunąć częściowego pliku {0}: {1}",
+ "Nelze bezpečně smazat částečný soubor {0}: {1}",
+ "Nem sikerült biztonságosan törölni a részleges fájlt {0}: {1}",
+ "Nu s-a putut șterge în siguranță fișierul parțial {0}: {1}"),
+
+                    ["Skipped"] =
+("Ignoré",
+ "Übersprungen",
+ "Omitido",
+ "Saltato",
+ "Ignorado",
+ "Ignorado",
+ "Overgeslagen",
+ "Överhoppad",
+ "Hoppet over",
+ "Sprunget over",
+ "Ohitettu",
+ "Pominięto",
+ "Přeskočeno",
+ "Kihagyva",
+ "Omis"),
+
+
+                    ["Total Skipped Files: {0}"] =
+("Total des fichiers ignorés : {0}",
+ "Gesamt übersprungene Dateien: {0}",
+ "Total de archivos omitidos: {0}",
+ "Totale file saltati: {0}",
+ "Total de ficheiros ignorados: {0}",
+ "Total de arquivos ignorados: {0}",
+ "Totaal overgeslagen bestanden: {0}",
+ "Totalt antal överhoppade filer: {0}",
+ "Totalt antall hoppet over filer: {0}",
+ "Total antal ignorerede filer: {0}",
+ "Ohitettuja tiedostoja yhteensä: {0}",
+ "Całkowita liczba pominiętych plików: {0}",
+ "Celkový počet přeskočených souborů: {0}",
+ "Összes kihagyott fájl: {0}",
+ "Total fișiere ignorate: {0}"),
+
+                    ["Failed"] =
+("Échec",
+ "Fehlgeschlagen",
+ "Fallido",
+ "Fallito",
+ "Falhado",
+ "Falhou",
+ "Mislukt",
+ "Misslyckades",
+ "Mislyktes",
+ "Mislykkedes",
+ "Epäonnistui",
+ "Niepowodzenie",
+ "Selhalo",
+ "Sikertelen",
+ "Eșuat"),
+
+                    ["[{0}] ERROR: {1}"] =
+("[{0}] ERREUR : {1}",
+ "[{0}] FEHLER: {1}",
+ "[{0}] ERROR: {1}",
+ "[{0}] ERRORE: {1}",
+ "[{0}] ERRO: {1}",
+ "[{0}] ERRO: {1}",
+ "[{0}] FOUT: {1}",
+ "[{0}] FEL: {1}",
+ "[{0}] FEIL: {1}",
+ "[{0}] FEJL: {1}",
+ "[{0}] VIRHE: {1}",
+ "[{0}] BŁĄD: {1}",
+ "[{0}] CHYBA: {1}",
+ "[{0}] HIBA: {1}",
+ "[{0}] EROARE: {1}"),
+
+                    ["  Source: {0}"] =
+("  Source : {0}",
+ "  Quelle: {0}",
+ "  Origen: {0}",
+ "  Origine: {0}",
+ "  Origem: {0}",
+ "  Origem: {0}",
+ "  Bron: {0}",
+ "  Källa: {0}",
+ "  Kilde: {0}",
+ "  Kilde: {0}",
+ "  Lähde: {0}",
+ "  Źródło: {0}",
+ "  Zdroj: {0}",
+ "  Forrás: {0}",
+ "  Sursă: {0}"),
+
+                    ["  Target: {0}"] =
+("  Cible : {0}",
+ "  Ziel: {0}",
+ "  Destino: {0}",
+ "  Destinazione: {0}",
+ "  Destino: {0}",
+ "  Destino: {0}",
+ "  Doel: {0}",
+ "  Mål: {0}",
+ "  Mål: {0}",
+ "  Mål: {0}",
+ "  Kohde: {0}",
+ "  Cel: {0}",
+ "  Cíl: {0}",
+ "  Cél: {0}",
+ "  Țintă: {0}"),
+
+                    ["  Details: {0}"] =
+("  Détails : {0}",
+ "  Details: {0}",
+ "  Detalles: {0}",
+ "  Dettagli: {0}",
+ "  Detalhes: {0}",
+ "  Detalhes: {0}",
+ "  Details: {0}",
+ "  Detaljer: {0}",
+ "  Detaljer: {0}",
+ "  Detaljer: {0}",
+ "  Tiedot: {0}",
+ "  Szczegóły: {0}",
+ "  Podrobnosti: {0}",
+ "  Részletek: {0}",
+ "  Detalii: {0}"),
+
+
+
+                    ["Pending..."] =
+("En attente...",
+ "Ausstehend...",
+ "Pendiente...",
+ "In attesa...",
+ "Pendente...",
+ "Pendente...",
+ "In behandeling...",
+ "Väntar...",
+ "Venter...",
+ "Afventer...",
+ "Odottaa...",
+ "Oczekuje...",
+ "Čeká...",
+ "Függőben...",
+ "În așteptare..."),
+
+
                     ["Total Space Used: 0 Bytes / 0 Bytes"] =
 ("Espace total utilisé : 0 octets / 0 octets",
  "Gesamter belegter Speicher: 0 Bytes / 0 Bytes",
@@ -15358,24 +21253,6 @@ totalTimeMultiLabel.Text = string.Format(
  "Másolás – {0}",
  "Se copiază – {0}"),
 
-
-
-                    ["Folder Created..."] =
-("Dossier créé...",
- "Ordner erstellt...",
- "Carpeta creada...",
- "Cartella creata...",
- "Pasta criada...",
- "Pasta criada...",
- "Map aangemaakt...",
- "Mapp skapad...",
- "Mappe opprettet...",
- "Mappe oprettet...",
- "Kansio luotu...",
- "Folder utworzony...",
- "Složka vytvořena...",
- "Mappa létrehozva...",
- "Folder creat..."),
 
 
 
@@ -20608,8 +26485,8 @@ totalTimeMultiLabel.Text = string.Format(
                         ? $"Copy That v1.0 Pro Por : Havoc - {suffix}"
                         : $"Copy That v1.0 Por : Havoc - {suffix}",
                     "it" => pro ? $"Copy That v1.0 Pro Di: Havoc - {suffix}" : $"Copy That v1.0 Di: Havoc - {suffix}",
-                    "pt" => pro ? $"Copy That v1.0 Pro Por: Havoc - {suffix}" : $"Copy That v1.0 Por: Havoc - {suffix}",
-                    "ptBR" => pro ? $"Copy That v1.0 Pro Por: Havoc - {suffix}" : $"Copy That v1.0 Por: Havoc - {suffix}",
+                    "pt-PT" => pro ? $"Copy That v1.0 Pro Por: Havoc - {suffix}" : $"Copy That v1.0 Por: Havoc - {suffix}",
+                    "pt-BR" => pro ? $"Copy That v1.0 Pro Por: Havoc - {suffix}" : $"Copy That v1.0 Por: Havoc - {suffix}",
                     "nl" => pro ? $"Copy That v1.0 Pro Door: Havoc - {suffix}" : $"Copy That v1.0 Door: Havoc - {suffix}",
                     "sv" => pro ? $"Copy That v1.0 Pro Av: Havoc - {suffix}" : $"Copy That v1.0 Av: Havoc - {suffix}",
                     "no" => pro ? $"Copy That v1.0 Pro Av: Havoc - {suffix}" : $"Copy That v1.0 Av: Havoc - {suffix}",
@@ -20656,8 +26533,8 @@ totalTimeMultiLabel.Text = string.Format(
                     "de" => t.de ?? english,
                     "es" => t.es ?? english,
                     "it" => t.it ?? english,
-                    "pt" => t.pt ?? english,   // Portugal
-                    "ptBR" => t.ptBR ?? english, // Brazil
+                    "pt-PT" => t.pt ?? english,   // Portugal
+                    "pt-BR" => t.ptBR ?? english, // Brazil
                     "nl" => t.nl ?? english,
                     "sv" => t.sv ?? english,
                     "no" => t.no ?? english,
@@ -20669,6 +26546,7 @@ totalTimeMultiLabel.Text = string.Format(
                     "ro" => t.ro ?? english,
                     _ => english
                 };
+
 
                 System.Diagnostics.Debug.WriteLine($"Returning: '{result ?? "NULL"}'");
                 return result ?? english;  // ← Extra safety
@@ -21707,7 +27585,7 @@ totalTimeMultiLabel.Text = string.Format(
             toolStripCopyHistory.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
             toolStripExclusions.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
             toolStripMulti.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
-            toolStripSettings.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            statsBarSettingsLabel.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
             toolStripSkipped.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
         }
 
@@ -21726,7 +27604,7 @@ totalTimeMultiLabel.Text = string.Format(
             toolStripCopyHistory.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
             toolStripExclusions.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
             toolStripMulti.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
-            toolStripSettings.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            statsBarSettingsLabel.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
             toolStripSkipped.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
         }
 
@@ -21776,7 +27654,7 @@ totalTimeMultiLabel.Text = string.Format(
             toolStripCopyHistory.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
             toolStripExclusions.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
             toolStripMulti.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
-            toolStripSettings.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            statsBarSettingsLabel.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
             toolStripSkipped.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
         }
 
@@ -21889,22 +27767,22 @@ totalTimeMultiLabel.Text = string.Format(
                 {
                     if (minimizeSystemTrayCheckBox.Checked)
                     {
-                        notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc || Double-Click To Open";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc || Double-Click To Open");
                     }
                     else
                     {
-                        notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc");
                     }
                 }
                 else
                 {
                     if (minimizeSystemTrayCheckBox.Checked)
                     {
-                        notifyIcon1.Text = "Copy That v1.0 By: Havoc || Double-Click To Open";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc || Double-Click To Open");
                     }
                     else
                     {
-                        notifyIcon1.Text = "Copy That v1.0 By: Havoc";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc");
                     }
                 }
             }
@@ -21921,22 +27799,22 @@ totalTimeMultiLabel.Text = string.Format(
                 {
                     if (minimizeSystemTrayCheckBox.Checked)
                     {
-                        notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc || Double-Click To Open";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc || Double-Click To Open");
                     }
                     else
                     {
-                        notifyIcon1.Text = "Copy That v1.0 Pro By: Havoc";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 Pro By: Havoc");
                     }
                 }
                 else
                 {
                     if (minimizeSystemTrayCheckBox.Checked)
                     {
-                        notifyIcon1.Text = "Copy That v1.0 By: Havoc || Double-Click To Open";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc || Double-Click To Open");
                     }
                     else
                     {
-                        notifyIcon1.Text = "Copy That v1.0 By: Havoc";
+                        notifyIcon1.Text = Translator.Get("Copy That v1.0 By: Havoc");
                     }
                 }
             }
@@ -21950,7 +27828,7 @@ totalTimeMultiLabel.Text = string.Format(
             toolStripCopyHistory.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
             toolStripExclusions.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
             toolStripMulti.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
-            toolStripSettings.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            statsBarSettingsLabel.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
             toolStripSkipped.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
         }
 
@@ -22050,7 +27928,7 @@ totalTimeMultiLabel.Text = string.Format(
             toolStripCopyHistory.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
             toolStripExclusions.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
             toolStripMulti.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
-            toolStripSettings.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            statsBarSettingsLabel.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
             toolStripSkipped.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
         }
 
@@ -22062,7 +27940,7 @@ totalTimeMultiLabel.Text = string.Format(
             toolStripCopyHistory.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
             toolStripExclusions.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
             toolStripMulti.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
-            toolStripSettings.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            statsBarSettingsLabel.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
             toolStripSkipped.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
         }
 
@@ -22093,7 +27971,7 @@ totalTimeMultiLabel.Text = string.Format(
 
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
             {
-                folderDialog.Description = "Select a source folder to copy/move/delete from:";
+                folderDialog.Description = Translator.Get("Select a source folder to copy/move/delete from:");
                 folderDialog.ShowNewFolderButton = false;
 
                 if (folderDialog.ShowDialog() == DialogResult.OK)
@@ -22598,7 +28476,8 @@ totalTimeMultiLabel.Text = string.Format(
 
                     // Verify the new executable exists
                     if (!File.Exists(newExePathInTemp))
-                        throw new FileNotFoundException($"New executable not found: {newExePathInTemp}");
+                        throw new FileNotFoundException(
+                            string.Format(Translator.Get("New executable not found: {0}"), newExePathInTemp));
 
                     // Copy new files into the application folder (overwrite if needed)
                     CopyDirectory(tempExtractFolder, appFolder, true);
@@ -22791,83 +28670,83 @@ Start-Process (Join-Path $final "{{newExeName}}")
 
         private void updateAutoCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup.");
+            statsBarSettingsLabel.Text = Translator.Get("Auto Check for Updates CheckBox: This checkbox determines whether the application should automatically check for updates on startup.");
         }
 
         private void updateBetaCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Include Beta Versions CheckBox: This checkbox determines whether to include beta versions when checking for updates.");
         }
 
         private void updateManuallyCheckBox_MouseHover(object sender, EventArgs e)
         {
-            //Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Manual Update Check CheckBox: This checkbox determines whether the application should check for updates only when manually triggered by the user.");
+            //Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Manual Update Check CheckBox: This checkbox determines whether the application should check for updates only when manually triggered by the user.");
         }
 
         private void closeProgramCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Close Program CheckBox: This checkbox determines whether to automatically close the application when an error occurs.");
         }
 
         private void restartCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Restart CheckBox: This checkbox determines whether to automatically restart the application when an error occurs.");
         }
 
         private void startWithWindowsCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Start with Windows CheckBox: This checkbox determines whether to launch the application automatically when Windows starts.");
         }
 
         private void checkForUpdatesButton_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Check for Updates Button: This button manually checks for updates to the application.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Check for Updates Button: This button manually checks for updates to the application.");
         }
 
         private void clearSettingsButton_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration.");
+            statsBarSettingsLabel.Text = Translator.Get("Clear Settings Button: This button clears all user-defined settings, reverting the application to its default configuration.");
         }
 
         private void saveSettingsButton_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions.");
+            statsBarSettingsLabel.Text = Translator.Get("Save Settings Button: This button saves the current settings, ensuring that any changes made are retained for future sessions.");
         }
 
         private void emailNamesCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export.");
+            statsBarSettingsLabel.Text = Translator.Get("Email Names CheckBox: This checkbox determines whether to include only the names of files and directories in the email export.");
         }
 
         private void emailPathsCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export.");
+            statsBarSettingsLabel.Text = Translator.Get("Email Paths CheckBox: This checkbox determines whether to include the full paths of files and directories in the email export.");
         }
 
         private void zipTogetherCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations.");
+            statsBarSettingsLabel.Text = Translator.Get("Zip Together CheckBox: This checkbox determines whether to create a single zip file containing all files and directories before the copy or move operations.");
         }
 
         private void fullPathsCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories.");
+            statsBarSettingsLabel.Text = Translator.Get("Full Paths CheckBox: This checkbox determines whether to export the full paths of files and directories.");
         }
 
         private void overMBCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes.");
+            statsBarSettingsLabel.Text = Translator.Get("Over MB CheckBox: This checkbox determines whether to apply multi-threading only to files larger than the specified size in megabytes.");
         }
 
         private void underMBCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes.");
+            statsBarSettingsLabel.Text = Translator.Get("Under MB CheckBox: This checkbox determines whether to apply multi-threading only to files smaller than the specified size in megabytes.");
         }
 
         private void multithreadCheckBox_MouseHover(object sender, EventArgs e)
@@ -22877,70 +28756,70 @@ Start-Process (Join-Path $final "{{newExeName}}")
 
         private void alwaysOnTopCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows.");
+            statsBarSettingsLabel.Text = Translator.Get("Always On Top CheckBox: This checkbox determines whether the application window should always stay on top of other windows.");
         }
 
         private void confirmDragDropCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application.");
+            statsBarSettingsLabel.Text = Translator.Get("Confirm Drag & Drop CheckBox: This checkbox determines whether to show a confirmation dialog when files are dragged and dropped into the application.");
         }
 
         private void contextMenuCheckBox_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application.");
+            statsBarSettingsLabel.Text = Translator.Get("Context Menu CheckBox: This checkbox determines whether to add an option to the Windows context menu for quick access to the application.");
         }
 
         private void languageComboBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Language ComboBox: This dropdown combobox allows you to select the language for the application's user interface.");
         }
 
         private void skinsComboBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Skins ComboBox: This dropdown combobox allows you to select different skins or themes for the application's appearance.");
         }
 
         private void onFinishCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Finish CheckBox: This checkbox determines whether to play a sound notification when the file operation finishes.");
         }
 
         private void onCancelCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Cancel CheckBox: This checkbox determines whether to play a sound notification when the file operation is canceled.");
         }
 
         private void onAddFilesCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Add Files CheckBox: This checkbox determines whether to play a sound notification when files are added to the operation list.");
         }
 
         private void onErrorCheckBox_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("On Error CheckBox: This checkbox determines whether to play a sound notification when an error occurs during the file operation.");
         }
 
         private void dataGridView1_MouseHover(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Export Files Data Grid View: This area displays the list of files to be processed, along with their details such as source and destination.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Export Files Data Grid View: This area displays the list of files to be processed, along with their details such as source and destination.");
         }
 
         private void registerButton_MouseEnter_1(object sender, EventArgs e)
         {
-            // Sets the text of the 'toolStripSettings' to a descriptive message.
-            toolStripSettings.Text = Translator.Get("Register Button: This button allows you to register the application with a license key to unlock full features.");
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Register Button: This button allows you to register the application with a license key to unlock full features.");
         }
 
         private void registerButton_MouseHover(object sender, EventArgs e)
         {
-            toolStripSettings.Text = Translator.Get("Register Button: This button allows you to register the application with a license key to unlock full features.");
+            statsBarSettingsLabel.Text = Translator.Get("Register Button: This button allows you to register the application with a license key to unlock full features.");
         }
 
         private void addAllowedButton_MouseHover(object sender, EventArgs e)
@@ -23353,7 +29232,7 @@ Start-Process (Join-Path $final "{{newExeName}}")
             toolStripCopyHistory.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
             toolStripExclusions.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
             toolStripMulti.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
-            toolStripSettings.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
+            statsBarSettingsLabel.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
             toolStripSkipped.Text = Translator.Get("Roll Up Button: This button scrolls the form up, allowing you to view files that are currently not visible in the data grid view.");
         }
 
@@ -23365,7 +29244,7 @@ Start-Process (Join-Path $final "{{newExeName}}")
             toolStripCopyHistory.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
             toolStripExclusions.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
             toolStripMulti.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
-            toolStripSettings.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
+            statsBarSettingsLabel.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
             toolStripSkipped.Text = Translator.Get("Roll Down Button: This button scrolls the form down, allowing you to view files that are currently not visible in the data grid view.");
         }
 
@@ -23377,7 +29256,7 @@ Start-Process (Join-Path $final "{{newExeName}}")
             toolStripCopyHistory.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
             toolStripExclusions.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
             toolStripMulti.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
-            toolStripSettings.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
+            statsBarSettingsLabel.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
             toolStripSkipped.Text = Translator.Get("Settings Button: This button opens the settings dialog, allowing you to configure various options for the application, such as buffer size, multi-threading, and operation preferences.");
         }
 
@@ -23389,7 +29268,7 @@ Start-Process (Join-Path $final "{{newExeName}}")
             toolStripCopyHistory.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
             toolStripExclusions.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
             toolStripMulti.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
-            toolStripSettings.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
+            statsBarSettingsLabel.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
             toolStripSkipped.Text = Translator.Get("About Button: This button opens the 'About' dialog, providing information about the application, its version, and the developer.");
         }
 
@@ -23401,7 +29280,7 @@ Start-Process (Join-Path $final "{{newExeName}}")
             toolStripCopyHistory.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
             toolStripExclusions.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
             toolStripMulti.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
-            toolStripSettings.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
+            statsBarSettingsLabel.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
             toolStripSkipped.Text = Translator.Get("Minimize Button: This button minimizes the application to the taskbar or the system tray, allowing you to keep it running in the background without closing it.");
         }
 
@@ -23413,7 +29292,7 @@ Start-Process (Join-Path $final "{{newExeName}}")
             toolStripCopyHistory.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
             toolStripExclusions.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
             toolStripMulti.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
-            toolStripSettings.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
+            statsBarSettingsLabel.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
             toolStripSkipped.Text = Translator.Get("Exit Button: This button closes the application. If the 'Minimize to System Tray' option is enabled, it will minimize the application instead of closing it.");
         }
 
@@ -23482,6 +29361,24 @@ Start-Process (Join-Path $final "{{newExeName}}")
                 pauseResumeButton.Text = Translator.Get("Pause");
                 StartElapsedTimer();
             }
+        }
+
+        private void logFileCheckBox_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Log File CheckBox: This checkbox determines whether to create a log file that records details of the file operations performed by the application.");
+        }
+
+        private void opacityTrackBar_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Opacity Track Bar: This track bar allows you to adjust the opacity level of the application window, making it more or less transparent.");
+        }
+
+        private void priorityTrackBar_MouseHover(object sender, EventArgs e)
+        {
+            // Sets the text of the 'statsBarSettingsLabel' to a descriptive message.
+            statsBarSettingsLabel.Text = Translator.Get("Priority Track Bar: This track bar allows you to adjust the priority level of the file operations, affecting how system resources are allocated.");
         }
     }
 }
